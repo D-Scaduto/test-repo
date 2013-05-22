@@ -1,4 +1,6 @@
 <?php
+#another git test for diff
+
 header('Content-type: text/html; charset=utf-8 ');
 header('X-Frame-Options: SAMEORIGIN');
 ?>
