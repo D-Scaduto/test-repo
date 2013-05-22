@@ -1,0 +1,120 @@
+
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+    .box {
+       background-color:white;
+       display:inline-block;
+       border-style:solid;
+       border-color:silver;
+       border-width:2px;
+    }
+
+    .bag {
+       display:inline-block;
+       margin:2px;
+       border-style:solid;
+       border-color:silver;
+       border-width:2px;
+    }
+
+
+
+@media screen and (min-width:600px) {
+     .logo {
+      float:left;
+      background-color:white;
+      width:350px;
+      max-width:350px;
+     }
+     .story {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       display:inline-block;
+       width:150px;
+     }
+}
+
+@media screen and (max-width:599px) {
+     .logo {
+      background-color:white;
+      width:350px;
+      max-width:350px;
+     }
+     .story {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       display:inline-block;
+       width:250px;
+     }
+
+}
+
+
+.spotd_on {
+border-color:silver;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+.spotd_mark {
+border-color:silver;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+
+.spotd_off {
+border-color:white;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+
+.spotl_on {
+border-color:white;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+.spotl_mark {
+border-color:white;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+
+.spotl_off {
+border-color:silver;
+border-style:solid;
+border-width:3px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+}
+
+
+

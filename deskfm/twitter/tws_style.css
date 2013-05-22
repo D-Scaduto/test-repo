@@ -1,0 +1,57 @@
+
+
+
+
+a:link{
+font-family: sans-serif;
+font-size:large; 
+color:gold; 
+text-decoration:none; }
+
+a:visited{
+font-family: sans-serif;
+font-size:large; 
+color:gold; 
+text-decoration:none;  }
+
+a:active{
+font-family: sans-serif;
+font-size:large; 
+color:gold; 
+text-decoration:none;  }
+
+
+
+
+
+.tws_block {
+
+  background-color: green; 
+  max-width: 200px; 
+
+}
+
+
+
+
+
+.tws_stored {
+
+  background-color: green; 
+
+}
+
+.tws_ignored {
+
+  background-color: red; 
+
+
+}
+
+.tws_none {
+
+  background-color: yellow; 
+
+
+}
+
