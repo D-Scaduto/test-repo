@@ -1,5 +1,4 @@
 
-
   var audio_on = false;
   var max_channel = 10;
   var key_toggler=false;
