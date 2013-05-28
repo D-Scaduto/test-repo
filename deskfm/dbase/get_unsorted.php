@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
+include 'names.php';
 class pfoo { 
    public $uname;
    public $group_id;
@@ -63,7 +67,11 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
+<<<<<<< HEAD
   $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+=======
+  $con = mysql_connect($Server, $username, $password);
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
   $where = "";
 

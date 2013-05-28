@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 
+=======
+include 'names.php';
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
  class foo { 
  
