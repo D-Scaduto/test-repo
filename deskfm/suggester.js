@@ -193,7 +193,7 @@ suggester.prototype.show_suggestions = function (asuggestions) {
     if (this.varname.substring(sl-8,sl) == "preseter") {
 
         var ti = new Image();
-        var src = "http://www.deskfm.com/pics/vman/2d/";
+        var src = "deskfm/images/vman/";
         src =src + asuggestions[i].preset; 
         src = src + ".jpg";
         ti.src = src;

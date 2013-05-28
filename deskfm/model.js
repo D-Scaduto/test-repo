@@ -31,7 +31,7 @@ function draw_main() {
            tmp = tmp + "</div>";
       }
 
-       tmp = tmp + "<span style='background-color:white;width:400px;float:left;border-style:solid;border-width:5px;border-color:silver;' >";
+       tmp = tmp + "<span style='background-color:white;width:500x;float:left;border-style:solid;border-width:5px;border-color:silver;' >";
 
        lbl = "logo_lbtn";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;float:left;vertical-align:top;' onclick='sal.change_vman();' >";
@@ -40,11 +40,10 @@ function draw_main() {
        tmp = tmp + "<span style='background-color:white;' >";
 
        lbl = "logo_spot";
-       tmp = tmp + "<div id='"+lbl+"' style='width:350px;max-width:350px;background-color:white;' >";
+       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='width:350px;max-width:350px;background-color:white;' >";
-
+       tmp = tmp + "<div style='background-color:white;width:450px;max-width:450px;' >";
        lbl = 'zoom_btn';
        cls = "spotd_off";
        ocl =  "daviewer.toggle_zoom();";
@@ -52,7 +51,6 @@ function draw_main() {
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
        tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
        tmp = tmp + "</span>";
-
        tmp=tmp+ "<span id='mobile_rail' style='vertical-align:top;background-color:white;' >";
        tmp=tmp+"</span>";
 
@@ -68,32 +66,25 @@ function draw_main() {
        lbl = 'nitro_img';
        tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
        tmp = tmp + "</span>";
-
        tmp = tmp + "</div>";
+
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<div style='clear:left;'></div>";
 
        lbl = "mobile_top";
-       tmp = tmp + "<div id='"+lbl+"' style='width:450px;float:left;background-color:white;border-style:solid;border-width:10px;border-color:silver;' >";
+       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:500px;max-width:500px;' >";
        tmp = tmp + "</div>";
 
        tmp = tmp + "</span>";
 
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span style='background-color:white;float:right;width:400px;margin-right:10px;' >";
-
-       tmp = tmp + "<div id='share_top' class='' style='' >";
-       tmp = tmp + "</div>";
-
-       tmp = tmp + "<div id='share_spot_rung_0' style='float:right;' >";
+     if (buddah == true) {
+       tmp = tmp + "<span class='shag' style='' >";
+       tmp = tmp + "<div id='share_spot_rung_0' class='box' >";
        tmp = tmp + "</div>";
        tmp = tmp + "<div style='clear:right;'></div>";
-
-//       tmp = tmp + "<div id='shop_spot' style='background-color:white;float:right;width:300px;margin-right:100px;' >";
-//       tmp = tmp + "</div>";
-
        tmp = tmp + "</span>";
-
-//       tmp = tmp + "<div style='clear:right;'></div>";
+     }
 
        tmp = tmp + "<div style='clear:left;'></div>";
 

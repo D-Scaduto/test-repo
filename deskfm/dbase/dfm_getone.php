@@ -1,7 +1,5 @@
 
 <?php
-
-
 include 'names.php';
  class foo { 
  
@@ -22,7 +20,7 @@ $listype = $_GET['listype'];
 $pid = $_GET['pid'];
 
 
-$con = mysql_connect($Server, $username, $password
+$con = mysql_connect($Server, $username, $password);
 
  if (!$con)
    {

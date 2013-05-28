@@ -1,7 +1,5 @@
 <?php
-
 include 'names.php';
- 
 class foo { 
    public $pid; 
    public $uname;

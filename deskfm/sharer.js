@@ -45,140 +45,23 @@ sharer.prototype.set_preset = function(tpreset) {
 
 sharer.prototype.show = function() {
 
-        this.newster.build_rung();
-        this.newster.draw_rung();
+     this.newster.build_rung();
+     this.newster.draw_rung();
 
-        this.draw_screen();
+     this.showing = true;
 
-        this.showing = true;
-}
+     cls = 'spotd_on';
+     lbl = 'share_toggle_btn';
 
-
-sharer.prototype.draw_screen = function() {
-
-       var tmp = "";
-       var lbl = "";
-       var ocl="";
-       var cls = "";
-       var moin = "";
-       var mout = "";
-       var cdx="";
-       var cdxe = "";
-       var stpid="";
-       var spid="";
-
-       lbl = this.spotid + "_reset_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-       ocl = "nicky.newster.toggle_btns();";
-       cls='spotd_off';
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-       tmp=tmp +"</span>";
-
-       lbl = "name_spot";
-       tmp = tmp + "<span  id='"+lbl+"' style='vertical-align:top;' >";
-       tmp=tmp +"</span>";
-
-       lbl = "tweetbtn_spot";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-       ocl = "";
-       cls='spotd_off';
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       var twparams='?count=none&url='+escape("http://deskfm.com");
-//       twparams = twparams + "&text="+escape(this.story);
-       tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
-       tmp=tmp +"</span>";
-
-/*
-       lbl = this.spotid + "_email_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-       cls='spotd_off';
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<img src='deskfm/images/icons/email_black.png' height='20px' >";
-       tmp=tmp +"</span>";
-*/
-/*
-       lbl = this.spotid + "_facebook_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-
-       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<span class='fb-send' data-href='http://www.deskfm.com'  >";
-//       tmp=tmp +"<div class='fb-like' data-send='true' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' >";
-       tmp=tmp +"<img src='deskfm/images/random/facebook-small.png' height='20px' >";
-       tmp=tmp +"</span>";
-*/
-
-/*
-       lbl = this.spotid +  "_google_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-       cls='';
-       ocl ="";
-       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<img src='deskfm/images/random/google-plus-icon.jpg' height='20px' >";
-       tmp=tmp +"<g:plusone></g:plusone>";
-       tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' style='display:inline;'>";
-       tmp=tmp +"</span>";
-*/
-
-     lbl = "share_top";
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
-          pobj.innerHTML = tmp;
-//          this.tweet_btn();
-
+       if (is_ie) {
+         pobj.className = cls;
+       } else {
+         pobj.setAttribute("class",cls);
+       }
      }
 
-//            this.fbsend_btn();
-//            this.gplus_render();
-}
-
-
-sharer.prototype.gplus_render = function() {
-
-    var po = document.createElement('script');
-    po.type='text/javascript';
-    po.async= true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(po,s);
-
-}
-
-
-sharer.prototype.fbsend_btn = function() {
-   var s="script";
-   var id="facebook-jssdk";
-   var js,fjs=document.getElementsByTagName(s)[0];
-
-   if(!document.getElementById(id)) {
-       js=document.createElement(s);
-       js.id=id;
-       js.src="//connect.facebook.net/en_US/all.js#xfbml=l";
-//       js.src="//connect.facebook.net/en_US/all.js#xfbml=l&appId=191528434226668";
-       fjs.parentNode.insertBefore(js,fjs);
-    }
-}
-
-
-sharer.prototype.tweet_btn = function() {
-/*
-    window.twttr = (function (d,s,id) {
-
-      var t, js, fjs = d.getElementsByTagName(s)[0];
-
-      if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-
-      js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-
-      return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-
-    } (document, "script", "twitter-wjs"));
-*/
 }
 
 
@@ -214,6 +97,23 @@ sharer.prototype.toggle = function() {
 sharer.prototype.hide = function() {
      this.newster.hide_rung(); 
      this.showing = false;
+
+       var tmp = "";
+       var lbl = "";
+       var cls = "";
+
+     cls = 'spotd_off';
+     lbl = 'share_toggle_btn';
+
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+       if (is_ie) {
+         pobj.className = cls;
+       } else {
+         pobj.setAttribute("class",cls);
+       }
+     }
+
 }
 
 
@@ -227,4 +127,62 @@ sharer.prototype.draw_debug = function() {
          pobj.innerHTML = tmp;
      }
 }
+
+sharer.prototype.gplus_render = function() {
+
+    var po = document.createElement('script');
+    po.type='text/javascript';
+    po.async= true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po,s);
+
+}
+
+
+sharer.prototype.fbsend_btn = function() {
+   var s="script";
+   var id="facebook-jssdk";
+   var js,fjs=document.getElementsByTagName(s)[0];
+
+   if(!document.getElementById(id)) {
+       js=document.createElement(s);
+       js.id=id;
+       js.src="//connect.facebook.net/en_US/all.js#xfbml=l";
+//       js.src="//connect.facebook.net/en_US/all.js#xfbml=l&appId=191528434226668";
+       fjs.parentNode.insertBefore(js,fjs);
+    }
+}
+
+/*
+       lbl = this.spotid + "_facebook_btn";
+       moin = "markyd(\""+lbl+"\");";
+       mout = "unmarkyd(\""+lbl+"\");";
+
+       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
+       tmp=tmp +"<span class='fb-send' data-href='http://www.deskfm.com'  >";
+//       tmp=tmp +"<div class='fb-like' data-send='true' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' >";
+       tmp=tmp +"<img src='deskfm/images/random/facebook-small.png' height='20px' >";
+       tmp=tmp +"</span>";
+*/
+
+/*
+       lbl = this.spotid +  "_google_btn";
+       moin = "markyd(\""+lbl+"\");";
+       mout = "unmarkyd(\""+lbl+"\");";
+       cls='';
+       ocl ="";
+       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
+       tmp=tmp +"<img src='deskfm/images/random/google-plus-icon.jpg' height='20px' >";
+       tmp=tmp +"<g:plusone></g:plusone>";
+       tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' style='display:inline;'>";
+       tmp=tmp +"</span>";
+*/
+
+
+//            this.fbsend_btn();
+//            this.gplus_render();
+
+
+
 

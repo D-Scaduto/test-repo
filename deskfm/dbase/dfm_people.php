@@ -1,9 +1,7 @@
 
 
 <?php
-
 include 'names.php';
-
 class foo { 
    public $uname;
    public $groupid;
@@ -45,7 +43,7 @@ if (isset($_GET['groupid'])) {
  $groupid = $_GET['groupid'];
 }
 
-$con = mysql_connect($Servr, $username, $password);
+$con = mysql_connect($Server, $username, $password);
 if (!$con) {
     echo('Could not connect: ' . mysql_error());
 }

@@ -52,8 +52,8 @@ viewer.prototype.draw_rail = function() {
     if ( pobj != null) {
         pobj.innerHTML = tmp;
         this.draw_chipbar();
-    //    this.draw_index();
       if (buddah == true) {
+        this.draw_index();
         this.draw_listmax();
       }
     }
@@ -66,11 +66,7 @@ viewer.prototype.draw_index = function() {
      var lbl = "";
      var tmp = "";
 
-     var sets = 0;
-     sets = this.listdex/this.top_end;
-     if (sets > 1) {
-        tmp = tmp + sets + "x ";
-     }  
+      tmp = this.listdex + " of ";
 
      lbl = this.screen + '_index';
      pobj = document.getElementById(lbl);

@@ -54,63 +54,56 @@ poster.prototype.get_link = function() {
      var pobj=null;
      var lbl = "";
 
-      if (this.link_shape == "link") {
-         tmpstr = tmpstr + "<span class='spotd_on' onclick='"+this.varname+".toggle_linkshow();' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
-      } else {
-         tmpstr = tmpstr + "<span class='spotd_off' onclick='"+this.varname+".set_linkshape(\"link\");' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
-      }
 
-     if (this.link_shape == "embed") {
-         tmpstr = tmpstr + "<span class='spotd_on' onclick='"+this.varname+".toggle_linkshow();' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
-     } else {
-         tmpstr = tmpstr + "<span class='spotd_off' onclick='"+this.varname+".set_linkshape(\"embed\");' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
+         lbl = this.spotid+"_"+tspot+"_link_addr";      
+         tmpstr = tmpstr + "<input id='"+lbl+"' value='"+tlink+"' onclick=''  >";    
+
+      if (this.shape == "embed") {
+
+         if (this.link_source == "youtube") {
+           cls = 'spotd_on';
+         } else {
+           cls = 'spotd_off';
+         }
+           tmpstr = tmpstr + "<span class='"+cls+"' onclick='"+this.varname+".set_linksource(\"youtube\");' >";  
+           tmpstr = tmpstr + "<img src='deskfm/images/icons/youtube.jpg' height='20px' >";
+           tmpstr = tmpstr + "</span>"; 
+
+        if (this.link_source == "sketchup") {
+           cls = 'spotd_onf';
+        } else {
+           cls = 'spotd_off';
+        }
+           tmpstr = tmpstr + "<span class='"+cls+"' onclick='"+this.varname+".set_linksource(\"sketchup\");' >";  
+           tmpstr = tmpstr + "<img src='deskfm/images/icons/sketchup.jpg' height='20px' >";
+           tmpstr = tmpstr + "</span>"; 
+
      }
 
-     lbl = this.spotid+"_"+tspot+"_link_addr";      
-     tmpstr = tmpstr + "<input id='"+lbl+"' value='"+tlink+"' onclick=''  >";    
 
-     if (this.link_shape == "embed") {
-         tmpstr = tmpstr + "<span class='spotd_off' onclick='"+this.varname+".set_linksource(\"sketchup\");' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/sketchup.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
-
-         tmpstr = tmpstr + "<span class='spotd_off' onclick='"+this.varname+".set_linksource(\"youtube\");' >";  
-         tmpstr = tmpstr + "<img src='deskfm/images/icons/youtube.jpg' height='20px' >";
-         tmpstr = tmpstr + "</span>"; 
+     lbl = this.rungster + '_work_spot';
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+        pobj.innerHTML = tmpstr;
      }
 
-     if ((this.linkurl == undefined) || (this.linkurl == "")) {      
-
-       if (this.parvar == "nicky") {
-           tmpstr = tmpstr + this.preseter.provider.preset_link(this.preset);
-       }
-
-     } else {
-         tlink = this.linkurl ;
-         if (tlink != "" ) {
-           if (tlink.substr(0,7) == "http://" ) {
-             tlink=tlink.substr(7);
+     if (this.linkshow == true) {
+       tmpstr = "";
+       if ((this.linkurl == undefined) || (this.linkurl == "")) {      
+         if (this.parvar == "nicky") {
+           if (this.link_source == "sketchup") {
+              tmpstr = this.preseter.provider.preset_link(this.preset);
            }
          }
-    }
-
-    lbl = this.spotid;
-    if (tspot != undefined) {
-      lbl = lbl +'_'+tspot;
-      lbl = lbl + '_link_spot';
-      pobj = document.getElementById(lbl);
-      if ( pobj != null) {
+       } else {
+           tmpstr = this.linkurl;
+       }
+       lbl = this.rungster + '_link_spot';
+       pobj = document.getElementById(lbl);
+       if ( pobj != null) {
          pobj.innerHTML = tmpstr;
-      }
-    }
+       }
+     } 
 }
 
 

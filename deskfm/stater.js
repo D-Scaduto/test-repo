@@ -24,8 +24,11 @@ stat.prototype.next_chunk = function() {
    return ret;
 }
 
-stat.prototype.draw = function() {
-
+stat.prototype.draw = function(pcls) {
+   var cls = "";
+   if (pcls != undefined) {
+     cls = pcls;
+   }
    var lbl = "";
    var tmp = "";
    var ocl1 = "";
@@ -34,36 +37,48 @@ stat.prototype.draw = function() {
 
     if (this.listype == "webits") {
               lbl = "subcat_stats_"+this.cat + "_"+this.subcat;
-              ocl1="amare.toggle_zonein();";
-              ocl1 = ocl1 + "amare.set_subcat(\""+this.cat+"\",\""+this.subcat+"\");";
+              if ((amare.cat == this.cat) && (amare.subcat == this.subcat)) {
+                 ocl1 = "amare.toggle_zonein();";
+               } else {
+                 ocl1 = "amare.zonein=true;";
+                 ocl1 = ocl1 + "amare.set_subcat(\""+this.cat+"\",\""+this.subcat+"\");";
+              }
               ocl2 = "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
     } else if (this.listype == "people") {
               lbl = "group_stats_"+this.groupid;
-              ocl1="amare.toggle_zonein();";
-              ocl1 = ocl1 + "amare.set_group(\""+this.groupid+"\");";
+              if (amare.groupid != this.groupid)  {
+                ocl1 = "amare.zonein=true;";
+                ocl1 = ocl1 + "amare.set_group(\""+this.groupid+"\");";
+              } else {
+                ocl1 = "amare.toggle_zonein();";
+              }
               ocl2 = "amare.get_group_list(\""+this.groupid+"\");";
     } else  if (this.listype == "products") {
               lbl = "prod_stats_"+this.prodid;
-              ocl1="amare.toggle_zonein();";
-              ocl1 = ocl1 + "amare.set_product(\""+this.prodid+"\");";
+              if (amare.prodid != this.prodid)  {
+                ocl1 = "amare.zonein=true;";
+                ocl1 = ocl1 + "amare.set_product(\""+this.prodid+"\");";
+              } else {
+                ocl1 = "amare.toggle_zonein();";
+              }
               ocl2 = "amare.get_prod_list(\""+this.prodid+"\");";
     } else {
     }
         tmp = tmp + "<div>";
-        tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl1+"' style='float:left;'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl1+"' style='float:left;'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
         tmp = tmp +  this.desc;
         tmp = tmp + "</span>";
 
         tmp = tmp + "<span style='float:right;'  >";
 
         lbl = lbl +"_lnum";
-        tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style=''  onclick=''  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick=''  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
         tst =  this.lnum ;  
         tmp = tmp + tst;
         tmp = tmp + "</span>";
 
         lbl = lbl +"_cnum";
-        tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style=''  onclick='"+ocl2+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl2+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
         tst =  " of " + this.cnum;  
         tmp = tmp + tst;
         tmp = tmp + "</span>";
@@ -83,7 +98,7 @@ function stater (pspotid) {
 
    this.spotid = pspotid;
    this.showing =false;
-   this.zonein = false;
+   this.zonein = true;
 
    this.key="";
 
@@ -106,54 +121,104 @@ stater.prototype.show = function() {
       this.draw_keystats();
 }
 
+
+
+stater.prototype.set_key = function (tkey) {
+
+  if (tkey != undefined) {
+    if (tkey == this.key) {
+       this.key = "";
+    } else {
+       this.key = tkey;
+    }
+  }
+  this.draw_keystats();
+}
+
+
 stater.prototype.draw_keystats = function() {
 
    var lbl = "";
    var tmp = "";
-   var ds = "";
+   var cls = "";
 
           tmp = tmp + "<div>";
+
           tmp = tmp + "<span>";
-          lbl = "stats_data_btn";
+          lbl = "search_toggle_btn";
           ocl = "wanda.toggle();";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          cls = 'spotd_off';
+          if (wanda.showing == true) {
+            cls= 'spotd_on';
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " search ";
           tmp = tmp + "</span>";
 
           tmp = tmp + "<span id='search_sog' >";
 
-          tmp = tmp + "<span>";
           lbl = "stats_products";
           ocl = "amare.set_key(\"products\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          cls = 'spotd_off';
+          if (this.key == "products") {
+            cls= 'spotd_on';
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " products ";
           tmp = tmp + "</span>";
 
           lbl = "stats_peopler";
           ocl = "amare.set_key(\"people\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          cls = 'spotd_off';
+          if (this.key == "people") {
+            cls= 'spotd_on';
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " people ";
           tmp = tmp + "</span>";
 /*
           lbl = "stats_providers";
           ocl = "amare.set_key(\"providers\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " providers ";
           tmp = tmp +  this.total_providers ;
           tmp = tmp + "</span>";
 */
           lbl = "stats_webits";
-          ocl = "amare.set_key(\"webits\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          if (this.key == "webits") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_key(\"webits\")";
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " webits ";
           tmp = tmp + "</span>";
 
           lbl = "stats_fill";
-          ocl = "amare.set_key(\"feeds\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          if (this.key == "feeds") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_key(\"feeds\")";
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
           tmp = tmp +  " feeds ";
           tmp = tmp + "</span>";
 
+          tmp = tmp + "</span>";
+
+          lbl = "share_toggle_btn";
+          ocl = "nicky.toggle()";
+          if (nicky.showing ==true) {
+            cls= 'spotd_on';
+          } else {
+            cls = 'spotd_off';
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  "share";
           tmp = tmp + "</span>";
 
        tmp = tmp + "</div>";
@@ -172,50 +237,6 @@ stater.prototype.draw_keystats = function() {
    }
 }
 
-stater.prototype.draw_cats = function() {
-
-   var tmp = "";
-
-          tmp = tmp + "<div>";
-          tmp = tmp + "<span>";
-          lbl = "stats_cat_who";
-          ocl = "amare.set_cat(\"who\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          tmp = tmp +  " who ";
-          tmp = tmp + "</span>";
-
-          tmp = tmp + "<span>";
-          lbl = "stats_cat_what";
-          ocl = "amare.set_cat(\"what\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          tmp = tmp +  " what ";
-          tmp = tmp + "</span>";
-
-          tmp = tmp + "<span>";
-          lbl = "stats_cat_why";
-          ocl = "amare.set_cat(\"why\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          tmp = tmp +  " why ";
-          tmp = tmp + "</span>";
-
-          tmp = tmp + "<span>";
-          lbl = "stats_cat_how";
-          ocl = "amare.set_cat(\"how\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          tmp = tmp +  " how ";
-          tmp = tmp + "</span>";
-
-          tmp = tmp + "<span>";
-          lbl = "stats_cat_sort";
-          ocl = "amare.set_cat(\"\")";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          tmp = tmp +  " unsorted ";
-          tmp = tmp + "</span>";
-
-
-     return tmp;
-
-}
 
 stater.prototype.draw_drillstats = function() {
 
@@ -228,20 +249,20 @@ stater.prototype.draw_drillstats = function() {
       if (this.key == "products") {
              ts = this.get_prodstat(this.prodid);
              if (ts != null) { 
-                   tmp = tmp + ts.draw();
+                   tmp = tmp + ts.draw('spotd_on');
              }
       } else if (this.key == "people") {
              ts = this.get_groupstat(this.groupid);
              if (ts != null) { 
-                   tmp = tmp + ts.draw();
+                   tmp = tmp + ts.draw('spotd_on');
              }
       } else if (this.key == "providers") {
 
       } else  if (this.key == "webits") {
-             tmp = tmp + this.draw_cats();
+             tmp = tmp + this.draw_cats('spotd_on');
              ts = this.get_catstat(this.cat,this.subcat);
              if (ts != null) { 
-                   tmp = tmp + ts.draw();
+                   tmp = tmp + ts.draw('spotd_on');
              }
      }
 
@@ -250,13 +271,13 @@ stater.prototype.draw_drillstats = function() {
       if (this.key == "products") {
              for  (j=0; (j < this.prodstats.length); j++) {
                 if (this.prodstats[j].prodid != this.prodid) {
-                   tmp = tmp + this.prodstats[j].draw();
+                   tmp = tmp + this.prodstats[j].draw('spotd_off');
                 }
              }
       } else if (this.key == "people") {
              for (j=0; (j < this.groupstats.length); j++) {
                 if (this.groupstats[j].groupid != this.groupid) {
-                    tmp = tmp + this.groupstats[j].draw();
+                    tmp = tmp + this.groupstats[j].draw('spotd_off');
                 }
              }
       } else if (this.key == "providers") {
@@ -264,7 +285,7 @@ stater.prototype.draw_drillstats = function() {
              for (j=0; (j < this.substats.length); j++) {
                 if (this.substats[j].cat == this.cat)  {
                   if ( this.substats[j].subcat != this.subcat) {
-                     tmp = tmp + this.substats[j].draw();
+                     tmp = tmp + this.substats[j].draw('spotd_off');
                   }
                 }
              } 
@@ -288,6 +309,120 @@ stater.prototype.draw_drillstats = function() {
            daviewer.draw_view();
       }
    }
+}
+
+stater.prototype.set_group = function (tgroupid) {
+  if (tgroupid != undefined) {
+    this.groupid = tgroupid;
+  }
+  this.draw_drillstats();
+}
+
+
+stater.prototype.set_product = function (tproduct) {
+  if (tproduct != undefined) {
+    this.prodid = tproduct;
+  }
+  this.draw_drillstats();
+}
+
+
+stater.prototype.set_cat = function (tcat) {
+  if (tcat != undefined) {
+    this.cat = tcat;
+  }
+  this.subcat = "";
+  this.draw_keystats();
+}
+
+
+
+stater.prototype.set_subcat = function (tcat,tsubcat) {
+  if (tcat != undefined) {
+    this.cat = tcat;
+  }
+  if (tsubcat != undefined) {
+    this.subcat = tsubcat;
+  }
+  this.draw_keystats();
+}
+
+
+stater.prototype.draw_cats = function() {
+
+          var tmp = "";
+          var cls = "";
+
+          tmp = tmp + "<div>";
+          tmp = tmp + "<span>";
+          lbl = "stats_cat_who";
+          if (this.cat == "who") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_cat(\"who\")";
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  "who";
+          tmp = tmp + "</span>";
+
+          tmp = tmp + "<span>";
+          lbl = "stats_cat_what";
+          if (this.cat == "what") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_cat(\"what\")";
+          }
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  "what";
+          tmp = tmp + "</span>";
+
+          tmp = tmp + "<span>";
+          lbl = "stats_cat_why";
+          cls = 'spotd_off';
+          if (this.cat == "why") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_cat(\"why\")";
+          }
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  "why";
+          tmp = tmp + "</span>";
+
+          tmp = tmp + "<span>";
+          lbl = "stats_cat_how";
+          if (this.cat == "how") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+            ocl = "amare.set_cat(\"how\")";
+          }
+         tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  " how ";
+          tmp = tmp + "</span>";
+
+          tmp = tmp + "<span>";
+          lbl = "stats_cat_sort";
+          if (this.cat == "") {
+            cls= 'spotd_on';
+            ocl = "amare.toggle_zonein()";
+          } else {
+            cls = 'spotd_off';
+          ocl = "amare.set_cat(\"\")";
+          }
+         tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          tmp = tmp +  " unsorted ";
+          tmp = tmp + "</span>";
+
+
+     return tmp;
+
 }
 
 function update_stats(statobj) {
@@ -439,53 +574,6 @@ stater.prototype.get_person_group = function(tname) {
     }
     return ret;
 }
-
-
-stater.prototype.set_group = function (tgroupid) {
-  if (tgroupid != undefined) {
-    this.groupid = tgroupid;
-  }
-  this.draw_drillstats();
-}
-
-
-stater.prototype.set_product = function (tproduct) {
-  if (tproduct != undefined) {
-    this.prodid = tproduct;
-  }
-  this.draw_drillstats();
-}
-
-
-stater.prototype.set_cat = function (tcat) {
-  if (tcat != undefined) {
-    this.cat = tcat;
-  }
-  this.subcat = "";
-  this.draw_drillstats();
-}
-
-
-
-stater.prototype.set_subcat = function (tcat,tsubcat) {
-  if (tcat != undefined) {
-    this.cat = tcat;
-  }
-  if (tsubcat != undefined) {
-    this.subcat = tsubcat;
-  }
-  this.draw_drillstats();
-}
-
-
-stater.prototype.set_key = function (tkey) {
-  if (tkey != undefined) {
-    this.key = tkey;
-  }
-  this.zonein = false;
-  this.draw_keystats();
-}
-
 
 
 

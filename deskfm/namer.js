@@ -1,7 +1,8 @@
   
 
-function namer (pspotid) {
-   this.spotid = pspotid;
+function namer () {
+
+   this.spotid = "";
    this.tmp_name = "";
    this.pname = "";
    this.name_source = "deskfm";
@@ -9,12 +10,14 @@ function namer (pspotid) {
 
 }
 
-namer.prototype.get_name = function() {
+namer.prototype.get_name = function(pspotid) {
+    if (pspotid != undefined) {
+      this.spotid = pspotid
+    }
     var tmp = "";
 
-
     tmp =tmp + "<span class=spotd_off  onclick='jesie.findme();' > ";
-    tmp = tmp + " hi, ";
+    tmp = tmp + "call me";
     tmp =tmp + "</span>";
 
     var tval =  "";
@@ -33,8 +36,11 @@ namer.prototype.get_name = function() {
 }
 
 
-namer.prototype.say_hi = function() {
-       var tmp = ""; 
+namer.prototype.say_hi = function(pspotid) {
+     if (pspotid != undefined) {
+      this.spotid = pspotid
+    }
+      var tmp = ""; 
        var ocl ="";
        var lbl = "";
 
@@ -80,7 +86,10 @@ namer.prototype.say_hi = function() {
 }
 
 
-namer.prototype.space_me = function() {
+namer.prototype.space_me = function(pspotid) {
+   if (pspotid != undefined) {
+      this.spotid = pspotid
+    }
 
      var tmpstr = "";
      var lbl = "";
@@ -96,7 +105,10 @@ namer.prototype.space_me = function() {
 }
 
 
-namer.prototype.amnesiate = function() {
+namer.prototype.amnesiate = function(pspotid) {
+    if (pspotid != undefined) {
+      this.spotid = pspotid
+    }
 
       this.pname="";
       this.tmp_name="";
@@ -129,6 +141,21 @@ namer.prototype.findme = function() {
 
 }
 
+namer.prototype.dejavu = function(pspotid) {
+     if (pspotid != undefined) {
+      this.spotid = pspotid
+    }
+
+
+     var tmpstr = "";
+     tmpstr = tmpstr + "been here before ?<br> ";
+     tmpstr = tmpstr + " <input  type='button' value='yes' onclick='jesie.whichone();'  >";
+     tmpstr = tmpstr + " <input  type='button' value='no' onclick='jesie.addName();'  >";
+
+     if (document.getElementById(this.spotid)!=null) {
+        document.getElementById(this.spotid).innerHTML= tmpstr;
+     } 
+}
 
 
 namer.prototype.suggest_names = function() {
@@ -150,32 +177,5 @@ namer.prototype.pname_toggle = function() {
      }
    }
 }
-
-namer.prototype.dejavu = function() {
-
-     var tmpstr = "";
-     tmpstr = tmpstr + "been here before ?<br> ";
-     tmpstr = tmpstr + " <input  type='button' value='yes' onclick='jesie.whichone();'  >";
-     tmpstr = tmpstr + " <input  type='button' value='no' onclick='jesie.addName();'  >";
-
-     if (document.getElementById(this.spotid)!=null) {
-        document.getElementById(this.spotid).innerHTML= tmpstr;
-     } 
-}
-
-
-namer.prototype.whichone = function() {
-
-    var tmpstr="";
-    // if find pname in cookie
-//    tmpnum = find_in_cookie(tmpname);
-   // else  show others
-
-       tmpstr = tmpstr + "which "+ this.tmp_name +" are you ?";
-       if (document.getElementById(this.spotid)!=null) {
-         document.getElementById(this.spotid).innerHTML= tmpstr;
-       } 
-}
-
 
 

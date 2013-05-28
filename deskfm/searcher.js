@@ -35,13 +35,26 @@ searcher.prototype.show = function() {
 
 
    lbl = this.spotid;
-//   lbl = "share_spot_rung_0";
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmpstr;
       this.draw_btns();
       this.showing = true;
    } 
-  sal.draw_vman();
+
+     cls = 'spotd_on';
+     lbl = 'search_toggle_btn';
+
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+       if (is_ie) {
+         pobj.className = cls;
+       } else {
+         pobj.setAttribute("class",cls);
+       }
+     }
+
+
+   sal.draw_vman();
 
    if (pname == "debug") {
      this.draw_debug();
@@ -121,6 +134,7 @@ searcher.prototype.hide = function() {
    var tmpstr = "";
    var pobj = null;
    var lbl = "";
+   var cls="";
 
    lbl = this.spotid;
 //   lbl = "share_spot_rung_0";
@@ -132,6 +146,19 @@ searcher.prototype.hide = function() {
        var se = this.boss + ".show();";
        eval(se);
    }
+
+     cls = 'spotd_off';
+     lbl = 'search_toggle_btn';
+
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+       if (is_ie) {
+         pobj.className = cls;
+       } else {
+         pobj.setAttribute("class",cls);
+       }
+     }
+
 }
 
 

@@ -1,6 +1,6 @@
 <?php
-
 include 'names.php';
+
  class foo { 
  
    public $pid; 
@@ -66,7 +66,7 @@ if (isset($_GET['uname'])) {
 }
 $chunk_start = $chunk * $limit;
 
-$con = mysql_connect($Server, $username,$passwrd);
+$con = mysql_connect($Server, $username, $password);
 
 $where = "";
 

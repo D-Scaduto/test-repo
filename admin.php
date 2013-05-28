@@ -1,6 +1,4 @@
 <?php
-#another git test for diff
-
 header('Content-type: text/html; charset=utf-8 ');
 header('X-Frame-Options: SAMEORIGIN');
 ?>
@@ -144,7 +142,7 @@ header('X-Frame-Options: SAMEORIGIN');
    store = new shoper("shop_spot");
    wanda = new searcher("search_sog","amare");
    nicky = new sharer("share_spot");
-   jesie = new namer("name_spot");
+   jesie = new namer();
    amare = new stater("stats_spot");
 
 
@@ -158,7 +156,6 @@ header('X-Frame-Options: SAMEORIGIN');
 
 
     nicky.show();
-    jesie.say_hi();
     sal.draw_vman();
     sal.draw_logo('logo_spot',35);
 

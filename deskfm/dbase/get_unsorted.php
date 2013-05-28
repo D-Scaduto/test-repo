@@ -1,6 +1,6 @@
 <?php
-include 'names.php';
 
+include 'names.php';
 class pfoo { 
    public $uname;
    public $group_id;
@@ -63,7 +63,7 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
-  $con = mysql_connect($Server, $username, $password)
+  $con = mysql_connect($Server, $username, $password);
 
   $where = "";
 

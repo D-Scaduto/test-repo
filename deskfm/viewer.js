@@ -176,6 +176,7 @@ viewer.prototype.draw_view = function() {
     var st = this.top_end;
  
     var cls='box';
+
 /*
     if (this.listype == "people") {
       cls='bag';
