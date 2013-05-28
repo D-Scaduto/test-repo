@@ -1,7 +1,11 @@
 
 
 <?php
+<<<<<<< HEAD
+
+=======
 include 'names.php';
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 class foo { 
    public $uname;
    public $groupid;
@@ -43,12 +47,16 @@ if (isset($_GET['groupid'])) {
  $groupid = $_GET['groupid'];
 }
 
+<<<<<<< HEAD
+$con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+=======
 $con = mysql_connect($Server, $username, $password);
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 if (!$con) {
     echo('Could not connect: ' . mysql_error());
 }
 
-   mysql_select_db($db_name, $con);
+   mysql_select_db('benman', $con);
   $sql = "";
   $where = "";
 

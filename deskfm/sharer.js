@@ -51,7 +51,7 @@ sharer.prototype.show = function() {
      this.showing = true;
 
      cls = 'spotd_on';
-     lbl = 'share_toggle_btn';
+     lbl = 'share_btn';
 
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
@@ -103,7 +103,7 @@ sharer.prototype.hide = function() {
        var cls = "";
 
      cls = 'spotd_off';
-     lbl = 'share_toggle_btn';
+     lbl = 'share_btn';
 
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

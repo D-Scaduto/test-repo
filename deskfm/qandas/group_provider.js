@@ -10,19 +10,19 @@ function group_provider() {
 
 group_provider.prototype.init = function () {
 
-     this.sealist.push({'text':'who does it ' ,'groupid':'stands'   });
-     this.sealist.push({'text':'who dances while they do it ' ,'groupid':'dances'  });
-     this.sealist.push({'text':'who works out at theirs ' ,'groupid':'workout'  });
-     this.sealist.push({'text':'who is curious about it ' ,'groupid':'curious'  });
-     this.sealist.push({'text':'who wants a standing desk ' ,'groupid':'curious'  });
-     this.sealist.push({'text':'who is trying it ' ,'groupid':'newbie'  });
-     this.sealist.push({'text':'who made their own  ' ,'groupid':'diy'  });
-     this.sealist.push({'text':'who shares about standing' ,'groupid':'sharer'  });
-     this.sealist.push({'text':'who is a big fan of it ' ,'groupid':'fanatic'  });
-     this.sealist.push({'text':'who recomends standing' ,'groupid':'recomends'  });
-     this.sealist.push({'text':'who is critic ' ,'groupid':'critic'  });
-     this.sealist.push({'text':'who is anti  ' ,'groupid':'anti'   });
-     this.sealist.push({'text':'who is a demo ' ,'groupid':'demo'  });
+     this.sealist.push({'text':'desk standers' ,'groupid':'stands'   });
+     this.sealist.push({'text':'desk dancers' ,'groupid':'dances'  });
+     this.sealist.push({'text':'desk workouters' ,'groupid':'workout'  });
+     this.sealist.push({'text':'curious' ,'groupid':'curious'  });
+     this.sealist.push({'text':'standing desk wanters' ,'groupid':'wants'  });
+     this.sealist.push({'text':'standing desk tryers' ,'groupid':'newbie'  });
+     this.sealist.push({'text':'made their own' ,'groupid':'diy'  });
+     this.sealist.push({'text':'manufacturer' ,'groupid':'makes'  });
+     this.sealist.push({'text':'marketer' ,'groupid':'markets'  });
+     this.sealist.push({'text':'sharer' ,'groupid':'shares'  });
+     this.sealist.push({'text':'likers' ,'groupid':'likes'  });
+     this.sealist.push({'text':'haters' ,'groupid':'anti'   });
+     this.sealist.push({'text':'to be deleted' ,'groupid':'junk'  });
 
 }
 

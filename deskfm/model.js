@@ -5,7 +5,7 @@
   var store = null;
   var nicky = null;
   var wanda = null;
-  var robby = null; 
+  var joe = null; 
   var amare = null;
   var sal = null;
 
@@ -44,6 +44,8 @@ function draw_main() {
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div style='background-color:white;width:450px;max-width:450px;' >";
+
+/*
        lbl = 'zoom_btn';
        cls = "spotd_off";
        ocl =  "daviewer.toggle_zoom();";
@@ -51,9 +53,12 @@ function draw_main() {
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
        tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
        tmp = tmp + "</span>";
-       tmp=tmp+ "<span id='mobile_rail' style='vertical-align:top;background-color:white;' >";
-       tmp=tmp+"</span>";
+*/
 
+       tmp=tmp+ "<span id='top_rail' style='vertical-align:top;background-color:white;' >";
+       tmp=tmp+"</span>";
+/*
+   if (buddah == true) {
        lbl = 'nitro_btn';
        cls = "spotd_off";
        ocl =  "daviewer.toggle_nitro();";
@@ -66,29 +71,46 @@ function draw_main() {
        lbl = 'nitro_img';
        tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
        tmp = tmp + "</span>";
+    }
+*/
        tmp = tmp + "</div>";
 
        tmp = tmp + "</span>";
 
        tmp = tmp + "<div style='clear:left;'></div>";
 
-       lbl = "mobile_top";
+       lbl = "main_top";
        tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:500px;max-width:500px;' >";
        tmp = tmp + "</div>";
 
        tmp = tmp + "</span>";
 
-     if (buddah == true) {
        tmp = tmp + "<span class='shag' style='' >";
-       tmp = tmp + "<div id='share_spot_rung_0' class='box' >";
-       tmp = tmp + "</div>";
-       tmp = tmp + "<div style='clear:right;'></div>";
+
+       tmp = tmp + "<div style='background-color:white;width:300px;' >";
+
+     if (buddah == true) {
+       tmp = tmp + "<span id='share_btn' onclick='nicky.toggle();' class='spotd_off' style='' onmouseover='markyd(\"share_btn\");' onmouseout='unmarkyd(\"share_btn\");'  >";
+       tmp = tmp + "share";
        tmp = tmp + "</span>";
      }
+       tmp = tmp + "<span id='search_btn' onclick='nicky.hide();wanda.toggle();' class='spotd_off' style='' onmouseover='markyd(\"search_btn\");' onmouseout='unmarkyd(\"search_btn\");'  >";
+        tmp = tmp + "search";
+       tmp = tmp + "</span>";
 
-       tmp = tmp + "<div style='clear:left;'></div>";
+       tmp = tmp + "<span id='search_spot'   >";
+        tmp = tmp + "</span>";
 
-       tmp = tmp + "<span id='mobile_view' style='background-color:silver;' >";
+       tmp = tmp + "</div>";
+
+       tmp = tmp + "<div id='share_spot_rung_0' class='' style='width:300px;' >";
+       tmp = tmp + "</div>";
+
+       tmp = tmp + "</span>";
+
+      tmp = tmp + "<div style='clear:left;'></div>";
+
+       tmp = tmp + "<span id='main_view' style='background-color:silver;' >";
        tmp = tmp + "</span>";
 
 
@@ -127,9 +149,6 @@ function update_providers(listobj) {
       }
        calls_out--; 
        if (calls_out <= 0) {
-           if (buddah == true) {
-             amare.show();
-           }
            sal.draw_vman();
        }
 }  
@@ -163,9 +182,6 @@ function update_prodlist(listobj) {
       }
        calls_out--; 
        if (calls_out <= 0) {
-           if (buddah == true) {
-             amare.show();
-           }
           sal.draw_vman();
       }
 }  
@@ -178,9 +194,6 @@ function add_unsorted_webits(listobj) {
        amare.count_lstats();
        calls_out--; 
        if (calls_out <= 0) {
-           if (buddah == true) {
-             amare.show();
-           }
            sal.draw_vman();
        }
 }  
@@ -215,13 +228,13 @@ function update_list(listobj) {
        amare.count_lstats();
        calls_out--; 
        if (calls_out <= 0) {
-           if (buddah == true) {
-             amare.show();
-           } else {
-             cater.redraw_view();
-           }
-           sal.draw_vman();
-       }
+          sal.draw_vman();
+          if (buddah == true) {
+            joe.redraw_view();
+          } else {
+            cater.redraw_view();
+          }
+      }
 }  
 
 
@@ -236,11 +249,10 @@ function add_unsorted_people(listobj) {
       calls_out--; 
       if (calls_out <= 0) {
            sal.draw_vman();
-           if (buddah == true) {
-             amare.show();
-           }
+          if (buddah == true) {
+            joe.redraw_view();
+          }
       }
-
 }  
 
 
@@ -276,15 +288,10 @@ function update_people(listobj) {
       calls_out--; 
       if (calls_out <= 0) {
            sal.draw_vman();
-
-           if (buddah == true) {
-             amare.show();
-           } else {
-             cater.redraw_view();
-           }
-
+          if (buddah == true) {
+            joe.redraw_view();
+          }
       }
-
 }  
 
 

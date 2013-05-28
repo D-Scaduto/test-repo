@@ -13,7 +13,7 @@ product_provider.prototype.init = function () {
      this.sealist.push({'text':'tall desks & tall chairs' ,'prodid':'tall' });
      this.sealist.push({'text':'adjustable height desks' , 'prodid':'adjustable' });
      this.sealist.push({'text':'hutches and lecturns' , 'prodid':'hutch' });
-     this.sealist.push({'text':'do it yourself solutions' , 'prodid':'diy'});
+//     this.sealist.push({'text':'do it yourself solutions' , 'prodid':'diy'});
      this.sealist.push({'text':'custom desk installation' , 'prodid':'custom'});
 //     this.sealist.push({'text':'footpads and mousepads' , 'prodid':'pads' });
 //     this.sealist.push({'text':'standing desk accesories', 'prodid':'accesories' });

@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
+
+=======
 include 'names.php';
+>>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 class foo { 
    public $pid; 
    public $uname;
@@ -55,8 +59,8 @@ $pid = uniqid();
 
 $picaddr = "";
 
-      $con = mysql_connect($Server, $username, $password);
-      mysql_select_db($db_name, $con);
+      $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+      mysql_select_db('benman', $con);
       $np = false;
 
       if ($uname == 'null' )  {

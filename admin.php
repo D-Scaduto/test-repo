@@ -60,13 +60,12 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/qandas/group_provider.js type="text/javascript" ></script>
 
 <script src=deskfm/namer.js type="text/javascript" ></script>
-
 <script src=deskfm/shoper.js type="text/javascript" ></script>
-<script src=deskfm/buyer.js type="text/javascript" ></script>
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
+<script src=deskfm/manager.js type="text/javascript" ></script>
 <script src=deskfm/header.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
@@ -136,13 +135,17 @@ header('X-Frame-Options: SAMEORIGIN');
 
    draw_main();
 
+
    sal = new logoman("logo_lbtn");
-   cater = new categor("mobile");
-   daviewer = new viewer("mobile","daviewer");
+   joe = new manager("main_top");
+   daviewer = new viewer("main_view","daviewer");
    store = new shoper("shop_spot");
-   wanda = new searcher("search_sog","amare");
+   wanda = new searcher("search_spot","joe");
    nicky = new sharer("share_spot");
+   joe = new manager("main_top");
+
    jesie = new namer();
+
    amare = new stater("stats_spot");
 
 
@@ -154,11 +157,12 @@ header('X-Frame-Options: SAMEORIGIN');
            daviewer.top_end = 100;
         }
 
-
+    joe.show();
     nicky.show();
+    wanda.show();
+
     sal.draw_vman();
     sal.draw_logo('logo_spot',35);
-
 
    amare.get_stats();
    amare.get_products();
@@ -166,6 +170,24 @@ header('X-Frame-Options: SAMEORIGIN');
    amare.get_webits();
    amare.get_people();
    amare.get_unsorted();
+
+
+    $(window).resize(function() {
+
+      var width = $(this).width();
+      var height = $(this).height();
+       if (width < 650) {
+         if (is_mobile != true) {
+           is_mobile = true;
+           nicky.hide();
+         }
+       } else {
+         if (is_mobile == true) {
+            is_mobile = false;
+         }
+       }
+
+    });
 
 
 /*

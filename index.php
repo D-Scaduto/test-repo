@@ -53,12 +53,10 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/namer.js type="text/javascript" ></script>
 
 <script src=deskfm/shoper.js type="text/javascript" ></script>
-<script src=deskfm/buyer.js type="text/javascript" ></script>
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
-<script src=deskfm/header.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
@@ -125,14 +123,14 @@ header('X-Frame-Options: SAMEORIGIN');
            draw_main();
 
            sal = new logoman("logo_lbtn");
-           daviewer = new viewer("mobile","daviewer");
+           daviewer = new viewer("main_view","daviewer");
            jesie = new namer("name_spot");
-           cater = new categor("mobile");
+           cater = new categor("main_top");
+
            store = new shoper("shop_spot");
            nicky = new sharer("share_spot");
-           wanda = new searcher("search_sog","cater");
+           wanda = new searcher("search_spot","cater");
            amare = new stater("stats_spot");
-
 
         if (is_mobile == true) {
            da_limit = 250;
@@ -146,6 +144,7 @@ header('X-Frame-Options: SAMEORIGIN');
       sal.draw_logo('logo_spot',35);
 
       cater.show();
+      wanda.show();
 
     amare.get_stats();
     amare.get_providers();

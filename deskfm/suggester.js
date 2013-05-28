@@ -337,22 +337,10 @@ suggester.prototype.hide_suggestions = function () {
    }
 
      var se = "";
-          if (this.varname == "cater.subcater") {
-             se = this.boss + ".show();";
-             eval(se);
-          } else if (this.varname == "nicky.preseter") {
 
-          } else if (this.varname == "store.producter") {
+      se = this.boss + ".show();";
+      eval(se);
 
-          } else {
-             var vnl = this.varname.length;
-             if (this.varname.substring(vnl-7,vnl) == "dacater") {
-             }
-             if (this.varname.substring(vnl-8,vnl) == "subcater") {
-             }
-             if (this.varname.substring(vnl-8,vnl) == "preseter") {
-             }
-          }
 }
 
 
@@ -361,6 +349,21 @@ suggester.prototype.click_suggestion = function () {
     var se = "";
     var oit = null;
     if (this.suggs[this.cur] != undefined) {
+
+        if (this.varname.substring(0,3) == "joe") {
+          if (this.varname == "joe.subcater") {
+             joe.set_subcat(this.suggs[this.cur].cat,this.suggs[this.cur].subcat);
+          } else if (this.varname == "joe.preseter") {
+             joe.set_preset(this.suggs[this.cur].preset);
+          } else if (this.varname == "joe.producter") {
+             joe.set_product(this.suggs[this.cur].prodid);
+          } else if (this.varname == "joe.dacater") {
+             joe.set_cat(this.suggs[this.cur].cat);
+          } else if (this.varname == "joe.grouper") {
+             joe.set_group(this.suggs[this.cur].groupid);
+          }
+
+        } else {
 
           if (this.varname == "cater.subcater") {
               se = this.boss + ".set_cats(\""+this.suggs[this.cur].cat+"\",\""+this.suggs[this.cur].subcat+"\");";
@@ -374,8 +377,6 @@ suggester.prototype.click_suggestion = function () {
           } else {
              var vnl = this.varname.length;
              if (this.varname.substring(vnl-7,vnl) == "dacater") {
-               se = this.varname.substring(0,vnl-7) + "subcater.request_suggestions(\""+ this.suggs[this.cur].cat+"\");";
-               eval(se);
                se = this.varname.substring(0,vnl-7) + "set_cat(\""+ this.suggs[this.cur].cat+"\");";
                eval(se);
              }
@@ -393,7 +394,9 @@ suggester.prototype.click_suggestion = function () {
              }
           }
 
-         this.hide_suggestions();
+       }
+
+       this.hide_suggestions();
 
     }
 }

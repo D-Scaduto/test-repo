@@ -6,23 +6,41 @@
           box-sizing: border-box;
 }
 
-    .bag {
-       display:inline-block;
-       margin:2px;
+    .mbox {
+       background-color:white;
+       display: -moz-inline-stack;
+       display: inline-block;
+       zoom: 1;
+       *display: inline;
+       overflow:auto;
        border-style:solid;
        border-color:silver;
        border-width:2px;
-    }
+       width:500px;
+       max-width:500px;
+       min-height:150px;
+
+     }
+
+    .cbox {
+       background-color:white;
+       display: block;
+       width:275px;
+       max-width:275px;
+       min-height:100px;
+     }
 
 
 
 @media screen and (min-width:650px) {
+
      .logo {
       float:left;
       background-color:white;
       width:350px;
       max-width:350px;
      }
+
      .story {
        font-family: sans-serif;
        font-weight:normal;
@@ -31,6 +49,7 @@
        display:inline-block;
        width:200px;
      }
+
      .getstory {
        font-family: sans-serif;
        font-weight:normal;
@@ -43,17 +62,25 @@
 
     .box {
        background-color:white;
-       display:inline-block;
+       display: -moz-inline-stack;
+       display: inline-block;
+       zoom: 1;
+       *display: inline;
+       overflow:auto;
+
        border-style:solid;
        border-color:silver;
        border-width:2px;
        width:300px;
+       max-width:300px;
+       min-height:150px;
     }
 
     .shag {
       background-color:white;
-      float:right;
       width:300px;
+      float:right;
+      max-width:300px;
       margin-right:10px;
     }
 }
@@ -62,11 +89,18 @@
 
     .box {
        background-color:white;
-       display:inline-block;
+       display: -moz-inline-stack;
+       display: inline-block;
+       zoom: 1;
+       *display: inline;
+       overflow:auto;
        border-style:solid;
        border-color:silver;
        border-width:2px;
        width:500px;
+       max-width:500px;
+       min-height:150px;
+
      }
 
 
@@ -98,7 +132,8 @@
     .shag {
       background-color:white;
       width:500px;
-      margin-right:10px;
+      max-width:500px;
+      min-height:150px;
     }
 
 

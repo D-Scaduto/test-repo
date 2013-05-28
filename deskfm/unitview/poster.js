@@ -22,7 +22,6 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
      this.mini_showing = true;
    }
 
-
    this.pid = "";
    this.story="";
    this.picurl ="";
@@ -38,7 +37,7 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.preseter = null; 
    this.preset = "sitonly";
    if (this.parvar == "nicky")  { 
-     this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.parvar);
+     this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.varname);
      this.link_source="sketchup";
      this.link_shape = "embed";
      if (is_mobile == false) {
@@ -120,36 +119,6 @@ poster.prototype.set_ppid = function(pdadex) {
   } else {
 //   alert("err: "+pdadex);
   }  
-}
-
- poster.prototype.sort_btns = function() {
-       var tmp = "";
-       var lbl = "";
-       var ocl="";
-       var cls = "";
-
-        cls = 'spotd_off';
-        if (this.shape ==  "sort") {
-           cls = 'spotd_on';
-        }
-        tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"sort\");' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/categories.png' height='20px' >";
-         tmp = tmp + "</span>"; 
-
-        cls = 'spotd_off';
-        if (this.shape ==  "group") {
-           cls = 'spotd_on';
-        }
-
-         tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"group\");' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-         tmp = tmp + "</span>"; 
-
-     lbl = this.rungster + '_sort_btns';
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-     }
 }
 
 
@@ -379,6 +348,11 @@ poster.prototype.redraw_rung = function() {
 }
 
 
+poster.prototype.show = function() {
+   this.redraw_rung();
+}
+
+
 poster.prototype.toggle_btns = function() {
   if (this.btnson == true) {
      this.btnson = false;
@@ -425,6 +399,7 @@ poster.prototype.clear = function() {
    this.picurl ="";
    this.cat ="";
    this.subcat ="";
+   this.groupid = "";
    this.prodid = "";
    this.price = -1;
    this.linkurl ="";

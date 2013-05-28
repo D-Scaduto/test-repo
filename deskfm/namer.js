@@ -17,7 +17,7 @@ namer.prototype.get_name = function(pspotid) {
     var tmp = "";
 
     tmp =tmp + "<span class=spotd_off  onclick='jesie.findme();' > ";
-    tmp = tmp + "call me";
+    tmp = tmp + "i am";
     tmp =tmp + "</span>";
 
     var tval =  "";
@@ -27,8 +27,11 @@ namer.prototype.get_name = function(pspotid) {
           val =  this.tmp_name;
         }
 
-    tmp =tmp + "<input size=8 value='"+tval+"' id='pname_box' > ";
+    tmp =tmp + "<input size=8 value='"+tval+"' id='pname_box' onclick='' > ";
 
+    tmp =tmp + "<span class=spotd_off  onclick='jesie.say_hi();' > ";
+    tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+    tmp =tmp + "</span>";
 
     if (document.getElementById(this.spotid)!=null) {
         document.getElementById(this.spotid).innerHTML=tmp; 
