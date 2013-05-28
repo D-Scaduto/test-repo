@@ -15,7 +15,8 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'who wants a standing desk ?', 'cat':'who','subcat':'wants' });
      this.sealist.push({'text':'who is trying a standing desk ?', 'cat':'who','subcat':'newbie' });
      this.sealist.push({'text':'who likes standing at their desk ?', 'cat':'who','subcat':'likes' });
-     this.sealist.push({'text':'who works out at their desk ?', 'cat':'who','subcat':'workout' });
+     this.sealist.push({'text':'who likes standing at their desk ?', 'cat':'who','subcat':'likes' });
+     this.sealist.push({'text':'who shares about standing desks ?', 'cat':'who','subcat':'shares' });
      this.sealist.push({'text':'who is curious about standing desks ?', 'cat':'who','subcat':'curious' });
      this.sealist.push({'text':'who made their own standing desk ? ', 'cat':'who','subcat':'diy' });
 

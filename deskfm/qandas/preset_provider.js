@@ -62,7 +62,7 @@ preset_provider.prototype.preset_pic = function (tpreset,twidth) {
     }
     var o = this.get_preset(tpreset);
     var tmp = "";
-    var src = "http://www.deskfm.com/pics/vman/2d/";
+    var src = "deskfm/images/vman/";
     src =src + o.preset; 
     src = src + ".jpg";
     tmp = "<img src='"+src+"' width='"+wd+"' >";
@@ -81,9 +81,9 @@ preset_provider.prototype.preset_link = function (tpreset) {
        src =o.sketch; 
        tmp = tmp + "<iframe src='http://sketchup.google.com/3dwarehouse/mini?mid=";
        tmp = tmp + src;
-       tmp = tmp + "&etyp=sw&width=400&height=300'";
+       tmp = tmp + "&etyp=sw&width=250&height=200'";
        tmp = tmp + " frameborder='0' scrolling='no' marginheight='0' marginwidth='0' ";
-       tmp = tmp + " width='350' height='250'></iframe> ";
+       tmp = tmp + " width='250' height='200'></iframe> ";
      }
 
      return tmp;

@@ -474,6 +474,17 @@ viewer.prototype.set_prodscreen = function(tprodid) {
 }
 
 
+viewer.prototype.set_groupscreen = function(tgroupid) {
+   if (tgroupid != undefined) {
+     if (tgroupid != "") {
+       this.groupid = trgoupid;
+     }
+   }
+   this.load_prodlist();
+   this.draw_screen();
+}
+
+
 viewer.prototype.set_providerscreen = function(tproviderid) {
    if (tproviderid != undefined) {
      if (tproviderid != "") {

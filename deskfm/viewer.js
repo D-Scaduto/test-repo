@@ -176,14 +176,18 @@ viewer.prototype.draw_view = function() {
     var st = this.top_end;
  
     var cls='box';
-/*
-    if (this.listype == "people") {
-      cls='bag';
+    if (is_mobile == true) {
+      cls='mbox';
     }
-*/    
+    if (this.is_mini == true) {
+      cls='cbox';
+    }
+
     if (this.zoom == true) {
       st = 1;
     }
+
+//    tmpstr=tmpstr+"<ul>";
 
     while (ct < st) {
       if (this.darungs[ct] != undefined) {
@@ -195,8 +199,9 @@ viewer.prototype.draw_view = function() {
        }
      ct = ct + 1;
     }
+//    tmpstr=tmpstr+"</ul>";
 
-    lbl = this.screen + "_view";
+    lbl = this.screen;
     if (document.getElementById(lbl)!= null) {
        document.getElementById(lbl).innerHTML=tmpstr;
        var ct = 0; 
@@ -320,7 +325,7 @@ viewer.prototype.set_zoom = function(pspot) {
  viewer.prototype.hide_screen = function() {
 
     var tmpstr = "";
-    var lbl = this.screen + "_view";
+    var lbl = this.screen;
     if (document.getElementById(lbl)!= null) {
         document.getElementById(lbl).innerHTML=tmpstr;
     }

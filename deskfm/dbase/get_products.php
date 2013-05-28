@@ -1,6 +1,6 @@
 <?php
 
-include 'names.php';
+
  class foo { 
  
    public $pid; 
@@ -27,14 +27,14 @@ include 'names.php';
  $rebar = new bar;
  
 
-  $con = mysql_connect($Server, $username, $password);
+  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
 
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db($db_name, $con);
+   mysql_select_db('benman', $con);
 
    $where =  " where prodid != '' ";
 

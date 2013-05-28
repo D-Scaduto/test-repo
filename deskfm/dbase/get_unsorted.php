@@ -1,5 +1,5 @@
 <?php
-include 'names.php';
+
 
 class pfoo { 
    public $uname;
@@ -63,14 +63,14 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
-  $con = mysql_connect($Server, $username, $password)
+  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
 
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db($db_name, $con);
+   mysql_select_db('benman', $con);
 
    $where =  " where cat = '' and subcat = ''  ";
 

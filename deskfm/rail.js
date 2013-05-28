@@ -31,31 +31,32 @@ viewer.prototype.draw_rail = function() {
     tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
     tmp = tmp + "</span>";
 
+/*
     lbl = this.screen + "_shuffle";
     cls = "spotd_off";
     ocl = this.varname + ".load_random_rungs();";
     tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='' onmouseout='' >";
     tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
     tmp = tmp + "</span>";
+*/
 
     lbl = this.screen + "_index";
-    ocl= this.varname+".toggle_trackshape();";
-    tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='' >";
+    tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
     tmp = tmp + "</span>";
 
     lbl = this.screen + "_listmax";
     tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
     tmp = tmp + "</span>";
 
-    lbl = "mobile_rail";
+    lbl = "top_rail";
     pobj = document.getElementById(lbl);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
         this.draw_chipbar();
-    //    this.draw_index();
-      if (buddah == true) {
-        this.draw_listmax();
-      }
+        if (buddah == true) {
+          this.draw_index();
+          this.draw_listmax();
+        }
     }
 }
 
@@ -65,14 +66,24 @@ viewer.prototype.draw_index = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
+     var cls= "";
+     var ocl = "";
 
-     var sets = 0;
-     sets = this.listdex/this.top_end;
-     if (sets > 1) {
-        tmp = tmp + sets + "x ";
-     }  
+      lbl = this.screen + '_indexbtn';
+       cls='spotd_off';
+       ocl = 'daviewer.toggle_zoom();';   
+    
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      var n = this.listdex + 1;
+       tmp = tmp + n;
+        tmp = tmp + "</span>";
+
+         tmp = tmp + "<span  class='spotd_off' >";
+        tmp = tmp + " of ";
+        tmp = tmp + "</span>";
 
      lbl = this.screen + '_index';
+
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
        pobj.innerHTML = tmp;
@@ -85,11 +96,23 @@ viewer.prototype.draw_listmax = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
-
-     tmp = tmp + this.dalist.length;
-
-    if (buddah == true) {
      var ts = null;
+
+     var ocl = '';
+      lbl = this.screen + '_chipbtn';
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+     tmp = tmp + this.dalist.length;
+        tmp = tmp + "</span>";
+
+     lbl = this.screen + '_chunkbtn';
+     if (this.listype == "webits") {
+       ocl = "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
+     } else if (this.listype == "people") {
+         ocl = "amare.get_group_list(\""+this.groupid+"\");";
+      } else if (this.listype == "webits") {
+         ocl = "amare.get_prod_list(\""+this.prodid+"\");";
+      }
+     tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
      if (this.listype == "people") {
        ts = amare.get_groupstat(this.groupid);
      }
@@ -99,7 +122,8 @@ viewer.prototype.draw_listmax = function() {
      if (ts != null) {
        tmp = tmp + " of " + ts.cnum;
      }
-    }
+     tmp = tmp + "</span>";
+
      lbl = this.screen + '_listmax';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

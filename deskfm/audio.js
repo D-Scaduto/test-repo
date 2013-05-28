@@ -1,4 +1,4 @@
-//Dillon was here
+
 
   var audio_on = false;
   var max_channel = 10;

@@ -1,5 +1,5 @@
 <?php
-include 'names.php';
+
  class foo { 
    public $pid; 
    public $uname;
@@ -63,9 +63,9 @@ if (isset($_GET['picode'])) {
 $pid = $_GET['pid'];
 $uname = $_GET['uname'];
 
- $con = mysql_connect($Server, $username, $password);
+ $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
 
- mysql_select_db($dn_name, $con);
+ mysql_select_db('benman',$con);
 
  $sql_upd="";
  $some = false;

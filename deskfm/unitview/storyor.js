@@ -55,7 +55,7 @@ poster.prototype.draw_story = function() {
 
       } else {
           if (this.parvar == "nicky") {
-             tmpstr = tmpstr + nicky.preseter.provider.preset_story(nicky.preset);
+             tmpstr = tmpstr + this.preseter.provider.preset_story(this.preset);
           }
       }
 
@@ -86,7 +86,7 @@ poster.prototype.get_story = function() {
             }
          }
          var oku = this.varname + ".update_story();";
-         tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' rows=4 cols=15 style='width:200px;' onkeyup='"+oku+"' >";
+         tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' class='getstory' onkeyup='"+oku+"' >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
 

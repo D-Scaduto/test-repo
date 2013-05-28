@@ -10,7 +10,7 @@
      ocl = this.varname + ".get_catsel();";
      tmp = tmp +"<span id='"+lbl+"' class='spotd_off' onclick='"+ocl+"' >";
      if (this.cat == "") {
-       tmp = tmp + "sort";
+       tmp = tmp + "<img src='deskfm/images/icons/categories.png' height=20px' > ";
      } else {
        tmp = tmp + this.cat;
      }
@@ -22,7 +22,7 @@
      tmp = tmp + this.subcat;
      tmp=tmp + "</span>"; 
 
-    lbl = this.spotid + '_' + this.rung + '_work_spot';
+    lbl = this.spotid + '_' + this.rung + '_sort_spot';
     pobj = document.getElementById(lbl);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
@@ -53,15 +53,15 @@
      var pobj=null;
      var lbl = "";
      lbl = this.spotid;
-     lbl = lbl + '_' + this.rung + '_work_spot';
+     lbl = lbl + '_' + this.rung + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
         pobj.innerHTML = tmp;
         if (this.dacater == null) {
-          this.dacater = new suggester(lb1,new cat_provider(),this.varname + ".dacater",this.parvar);
+          this.dacater = new suggester(lb1,new cat_provider(),this.varname + ".dacater",this.varname);
         }
         if (this.subcater == null) {
-          this.subcater = new suggester(lb2,new subcat_provider(),this.varname + ".subcater",this.parvar);
+          this.subcater = new suggester(lb2,new subcat_provider(),this.varname + ".subcater",this.varname);
         }
         this.dacater.request_suggestions(); 
      }
@@ -74,7 +74,7 @@ poster.prototype.set_cat = function(pcat) {
            this.cat = pcat;
            this.subcat = "";
            this.changed = true;
-           this.draw_catsel();
+           this.subcater.request_suggestions(this.cat); 
            this.change_btns();
       }
  
@@ -86,7 +86,7 @@ poster.prototype.set_subcat = function(psubcat) {
       if (psubcat != undefined) {
           this.subcat = psubcat;
           this.changed = true;
-          this.draw_catsel();
+         this.draw_catsel();
           this.change_btns();
       }
 
@@ -99,7 +99,7 @@ poster.prototype.hide_catsel = function() {
      var lbl = "";
      lbl = this.spotid;
      lbl = lbl +'_'+this.rung;
-     lbl = lbl + '_work_spot';
+     lbl = lbl + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmpstr;

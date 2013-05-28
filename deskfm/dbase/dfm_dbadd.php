@@ -1,7 +1,5 @@
 <?php
 
-include 'names.php';
- 
 class foo { 
    public $pid; 
    public $uname;
@@ -57,8 +55,8 @@ $pid = uniqid();
 
 $picaddr = "";
 
-      $con = mysql_connect($Server, $username, $password);
-      mysql_select_db($db_name, $con);
+      $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+      mysql_select_db('benman', $con);
       $np = false;
 
       if ($uname == 'null' )  {

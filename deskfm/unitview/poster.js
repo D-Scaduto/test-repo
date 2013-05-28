@@ -22,20 +22,28 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
      this.mini_showing = true;
    }
 
-   this.preseter = null; 
-   this.preset = "sitonly";
-   if (this.parvar == "nicky")  { 
-     this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.parvar);
-   }
-
    this.pid = "";
    this.story="";
    this.picurl ="";
-   this.linkurl ="";
-   this.link_shape = "link"; // embed 
-   this.link_source="";
 
+   this.linkurl ="";
+   this.link_shape = ""; // embed // link 
+   this.link_source="";
+   this.linkshow = false;
    this.urls = [];
+
+   this.shape = "";
+
+   this.preseter = null; 
+   this.preset = "sitonly";
+   if (this.parvar == "nicky")  { 
+     this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.varname);
+     this.link_source="sketchup";
+     this.link_shape = "embed";
+     if (is_mobile == false) {
+       this.linkshow = true;
+     }
+   }
 
    this.cat ="";
    this.subcat ="";
@@ -45,7 +53,7 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.dacater = null;
    this.subcater = null;
    this.grouper = null; 
-
+ 
    this.uname = "";
    this.groupid = "";
    this.emailaddr = "";
@@ -56,7 +64,6 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.source = "deskfm";
    this.dadex=0;
    this.piczoom = false;
-   this.shape = "";
    this.changed = false;
    this.color = "black";
 
@@ -115,22 +122,60 @@ poster.prototype.set_ppid = function(pdadex) {
 }
 
 
-poster.prototype.work_btns = function() {
+ poster.prototype.work_btns = function() {
+       var tmp = "";
+       var lbl = "";
+       var ocl="";
+       var cls = "";
+
+        cls = 'spotd_off';
+        if (this.shape ==  "link") {
+           cls = 'spotd_on';
+        }
+ 
+         tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"link\");' >";  
+         tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+         tmp = tmp + "</span>"; 
+ 
+        cls = 'spotd_off';
+        if (this.shape ==  "embed") {
+           cls = 'spotd_on';
+        }
+
+           tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"embed\");' >";  
+           tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+           tmp = tmp + "</span>"; 
+
+         cls = 'spotd_off';
+        if (this.shape ==  "getpic") {
+           cls = 'spotd_on';
+        }
+          tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"getpic\");' >";  
+           tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
+           tmp = tmp + "</span>"; 
+
+     lbl = this.spotid;
+     lbl = lbl +'_'+this.rung;
+     lbl = lbl + '_work_btns';
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+     }
+}
+
+
+
+poster.prototype.nav_btns = function() {
 
    var tmp = "";
    var lbl = "";
    var ocl = "";
    var tspot = this.rung;
 
-       if (this.parvar == "nicky") {
-            return;
-       }
-
        var se = eval(this.parvar);
 
          if (this.btnson == true) { 
 
-           if (this.rung != 0) { 
               lbl = this.spotid + "_" + tspot + "_editing_btn";
               cls='spotd_off';
               ocl = this.varname + ".toggle_btns();";
@@ -138,24 +183,24 @@ poster.prototype.work_btns = function() {
               tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
               tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
               tmp = tmp + "</span>";
-           }
-              lbl = this.spotid + "_" + tspot + "_zoom_btn";
-              cls='spotd_off';
-              if (this.rung == 0) {
 
-                if (se.zoom == true) {
-                  ocl = this.parvar + ".unset_zoom();";
+              if (this.parvar != "nicky" ) {
+                lbl = this.spotid + "_" + tspot + "_zoom_btn";
+                cls='spotd_off';
+                if (this.rung == 0) {
+                  if (se.zoom == true) {
+                    ocl = this.parvar + ".unset_zoom();";
+                  } else {
+                    ocl = this.parvar + ".set_zoom();";
+                  }
                 } else {
-                  ocl = this.parvar + ".set_zoom();";
+                  ocl = this.parvar + ".zoom=true;";
+                  ocl = ocl + this.parvar + ".to_top("+this.rung+");";
                 }
-
-              } else {
-                ocl = this.parvar + ".zoom=true;";
-                ocl = ocl + this.parvar + ".to_top("+this.rung+");";
+                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+                tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+                tmp = tmp + "</span>";
               }
-              tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-              tmp = tmp + "</span>";
 
           if (this.is_mini == true ) {
               cls='spotd_off';
@@ -211,11 +256,7 @@ poster.prototype.work_btns = function() {
 
               lbl = this.spotid + "_" + tspot + "_editing_btn";
               cls='spotd_off';
-              if (this.rung == 0) { 
-                 ocl = this.parvar + ".set_zoom();";
-              } else {
-                ocl = this.varname + ".toggle_btns();";
-              }
+              ocl = this.varname + ".toggle_btns();";
               var ilbl = this.spotid + "_" + tspot + "_editing_img";
               tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
               tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
@@ -223,11 +264,15 @@ poster.prototype.work_btns = function() {
 
        }
 
-         lbl = this.spotid + "_" + tspot + "_work_btns";
+         lbl = this.spotid + "_" + tspot + "_nav_btns";
          if (document.getElementById(lbl)!= null) {
              document.getElementById(lbl).innerHTML=tmp;
              if (this.btnson == true) {
-              twttr.widgets.load();
+               if (twttr != undefined) {
+                 if (twttr.widgets != undefined) {
+                   twttr.widgets.load();
+                 }
+               }
              }
          } 
 }
@@ -303,11 +348,16 @@ poster.prototype.redraw_rung = function() {
 }
 
 
+poster.prototype.show = function() {
+   this.redraw_rung();
+}
+
+
 poster.prototype.toggle_btns = function() {
   if (this.btnson == true) {
      this.btnson = false;
   } else {
-      this.btnson = true;
+     this.btnson = true;
   }
   this.redraw_rung();
 }
@@ -349,6 +399,7 @@ poster.prototype.clear = function() {
    this.picurl ="";
    this.cat ="";
    this.subcat ="";
+   this.groupid = "";
    this.prodid = "";
    this.price = -1;
    this.linkurl ="";

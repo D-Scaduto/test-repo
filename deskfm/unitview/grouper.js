@@ -13,13 +13,13 @@ poster.prototype.draw_groups = function() {
 
     tmp = tmp +"<span id='"+lbl+"' class='spotd_off' onclick='"+this.varname+".get_groups();' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
     if (this.groupid == "") {
-      tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
+      tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height=20px' > ";
     } else {
       tmp = tmp + this.groupid;
     }
     tmp=tmp + "</span>"; 
 
-    lbl = this.spotid + '_' + this.rung + '_group_btns';
+    lbl = this.spotid + '_' + this.rung + '_group_spot';
     pobj = document.getElementById(lbl);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
@@ -39,12 +39,12 @@ poster.prototype.get_groups = function() {
     tmp=tmp + "</span>"; 
 
     var pobj=null;
-    lb2 = this.spotid + '_' + this.rung + '_group_btns';
+    lb2 = this.spotid + '_' + this.rung + '_group_spot';
     pobj = document.getElementById(lb2);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
         if (this.grouper == null) {
-          this.grouper = new suggester(lb1,new group_provider(),this.varname + "grouper",this.parvar);
+          this.grouper = new suggester(lb1,new group_provider(),this.varname + "grouper",this.varname);
         }
         this.grouper.request_suggestions();
     }
@@ -93,7 +93,7 @@ poster.prototype.hide_groups = function() {
      var lbl = "";
      lbl = this.spotid;
      lbl = lbl +'_'+this.rung;
-     lbl = lbl + '_group_btns';
+     lbl = lbl + '_group_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmpstr;
