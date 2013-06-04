@@ -5,8 +5,7 @@ function sharer (pspotid) {
    this.varname="nicky";
    this.showing = false;
 
-   var s = this.spotid;
-   this.newster = new poster(s,0,this.varname,this.varname +".newster","webits",false); 
+   this.newster = new poster("share_spot",0,this.varname,this.varname +".newster","webits",false); 
    this.newster.btnson = true;
 
 }
@@ -18,9 +17,9 @@ sharer.prototype.show = function() {
     var lbl = "";
     var pobj = null;
     var tmp = "";
-    var lbl = this.spotid + "_rung_0";
+    var lbl = "";
 
-    tmp = tmp + "<div id='"+lbl+"' class='' style='width:300px;' >";
+    tmp = tmp + "<div id='share_spot_rung_0' class='' style='width:300px;' >";
     tmp = tmp + "</div>";
 
     lbl = this.spotid;
@@ -96,7 +95,7 @@ sharer.prototype.set_preset = function(tpreset) {
 }
 
 sharer.prototype.change = function() {
-
+   this.toggle();
 }
 
 sharer.prototype.toggle = function() {

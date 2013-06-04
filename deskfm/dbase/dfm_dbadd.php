@@ -1,5 +1,4 @@
 <?php
-
 include 'names.php';
 
 class foo { 
@@ -12,6 +11,7 @@ class foo {
    public $dfdate;
    public $picurl;
    public $linkurl;
+   public $embedurl;
    public $result;
    public $waspid;
    public $prodid;
@@ -49,6 +49,8 @@ if (isset($_GET['picode'])) {
 
 $linkurl = $_GET['linkcode']; 
 $story = $_GET['storycode']; 
+$embedurl = $_GET['embedcode']; 
+
 $source = $_GET['source']; 
 $prodid = $_GET['prodid']; 
 $price = $_GET['price']; 
@@ -57,8 +59,8 @@ $pid = uniqid();
 
 $picaddr = "";
 
-      $con = mysql_connect($Server, $username, $password);
-      mysql_select_db($dn_name, $con);
+     $con = mysql_connect($Server, $username, $password);
+      mysql_select_db($db_name, $con);
       $np = false;
 
       if ($uname == 'null' )  {
@@ -86,7 +88,7 @@ $picaddr = "";
           $picaddr = "http://www.deskfm.com/pics/keepers/" . $picfile;
       }
 
-     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() ,'" . $picaddr . "' ,'" . $linkurl . "','',''  )";
+     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() ,'" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);
@@ -111,8 +113,9 @@ $picaddr = "";
            $b2->cat = $row['cat'];
            $b2->subcat = $row['subcat'];
            $b2->dfdate = $row['twdate'];
-           $b2->picurl = $row['picurl'];;
-           $b2->linkurl = $row['linkurl'];;
+           $b2->picurl = $row['picurl'];
+           $b2->linkurl = $row['linkurl'];
+           $b2->embedurl = $row['embedurl'];
          }
         if ($source == 'twitter') {
            $b2->pid =    $row['webit_id'];
@@ -124,6 +127,7 @@ $picaddr = "";
            $b2->dfdate = $row['twdate'];
            $b2->picurl = $row['picurl'];;
            $b2->linkurl = $row['linkurl'];;
+           $b2->embedurl = $row['embedurl'];;
         }
 
      $b2->waspid = $wpid;

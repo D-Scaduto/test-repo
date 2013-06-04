@@ -1,5 +1,4 @@
 <?php
-
 include 'names.php';
 
  class foo { 

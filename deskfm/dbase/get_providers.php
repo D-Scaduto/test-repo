@@ -1,6 +1,6 @@
 <?php
-
 include 'names.php';
+
  class foo { 
  
    public $uname;
@@ -23,7 +23,7 @@ include 'names.php';
  $rebar = new bar;
  
 
-  $con = mysql_connect($Server, $username, $passsword);
+$con = mysql_connect($Server, $username, $password);
 
   $where = "";
 

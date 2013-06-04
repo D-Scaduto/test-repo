@@ -1,8 +1,6 @@
-
-
 <?php
-
 include 'names.php';
+
 class foo { 
    public $uname;
    public $groupid;
@@ -43,7 +41,6 @@ $groupid = "";
 if (isset($_GET['groupid'])) {
  $groupid = $_GET['groupid'];
 }
-
 
 $con = mysql_connect($Server, $username, $password);
 if (!$con) {

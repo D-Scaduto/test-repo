@@ -1,8 +1,7 @@
 <?php
-
 include 'names.php';
 
-class foo { 
+ class foo { 
    public $uname;
    public $source;
    public $picurl;
@@ -46,8 +45,7 @@ $uname = $_GET['uname'];
 
 $con = mysql_connect($Server, $username, $password);
 
-
- mysql_select_db($db_name,$con);
+   mysql_select_db($db_name, $con);
 
  $sql_upd="";
  $some = false;

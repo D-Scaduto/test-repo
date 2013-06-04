@@ -80,8 +80,9 @@ poster.prototype.update_link = function() {
         var tv = pobj.value;
         if ((tv != null) && (tv != undefined)) {
           this.linkurl = tv;
+           this.changed = true;
+           this.change_btns();
         }
-        this.change_btns();
         pobj.focus();
      }
 }

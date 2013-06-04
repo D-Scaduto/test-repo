@@ -1,5 +1,6 @@
 <?php
-include 'names.php'
+include 'names.php';
+
 
  class foo { 
  
@@ -12,7 +13,9 @@ include 'names.php'
    public $price;
    public $source;
    public $dfdate ;
+   public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype;
 
   }
@@ -44,8 +47,8 @@ if (isset($_GET['lim'])) {
 
 $chunk_start = $chunk * $limit;
 
-  $con = mysql_connect($Server, $username, $password);
-  
+$con = mysql_connect("localhost", "root", "");
+
   $where = "";
 
   if (!$con) {
@@ -87,9 +90,6 @@ $chunk_start = $chunk * $limit;
 
     $foodo->pid =    $row['webit_id'];
     $foodo->picurl = $row['picurl'];
-
-    $foodo->prodid = $row['prodid'];
-    $foodo->price = $row['price'];
  
     $foodo->uname = $row['owner_id'];
     $foodo->story  = $row['story'];
@@ -99,11 +99,10 @@ $chunk_start = $chunk * $limit;
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
+    $foodo->embedurl = $row['linkurl'];
+
     $foodo->urls = array();
-//    $foodo->urls[] = $row['linkurl'];
-//    if ($source != 'deskfm') {
-      $arr[] = $foodo;
-//     }
+    $arr[] = $foodo;
    }
    $rebar->dalist = $arr;
 

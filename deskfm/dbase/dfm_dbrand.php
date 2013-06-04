@@ -1,6 +1,6 @@
 <?php
+include 'names.php';
 
-include names.php
  class foo { 
  
    public $pid; 
@@ -14,6 +14,7 @@ include names.php
    public $dfdate ;
    public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype;
 
 }
@@ -32,7 +33,6 @@ $limit = 50;
 if (isset($_GET['lim'])) {
   $limit = $_GET['lim'];
 }
-
 $con = mysql_connect($Server, $username, $password);
 $where = "";
  if (!$con) {
@@ -76,6 +76,7 @@ $where = "";
     $foodo->subcat = $row['subcat'];
     $foodo->dfdate = $row['twdate'];
     $foodo->linkurl = $row['linkurl'];
+    $foodo->embedurl = $row['embedurl'];
     $foodo->urls = array();
 //    $foodo->urls[] = $row['linkurl'];
     $arr[] = $foodo;

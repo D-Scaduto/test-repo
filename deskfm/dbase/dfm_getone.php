@@ -1,7 +1,6 @@
-
 <?php
-
 include 'names.php';
+
  class foo { 
  
    public $pid; 
@@ -12,14 +11,16 @@ include 'names.php';
    public $source;
    public $dfdate ;
    public $linkurl;
- 
+   public $picurl;
+   public $embedurl;
+   public $listype; 
+
 }
 
 
 $uname = $_GET['uname'];
 $listype = $_GET['listype'];
 $pid = $_GET['pid'];
-
 
 
 $con = mysql_connect($Server, $username, $password);
@@ -60,7 +61,9 @@ $con = mysql_connect($Server, $username, $password);
     $bar->cat = $row['cat'];
     $bar->subcat = $row['subcat'];
     $bar->dfdate = $row['twdate'];
-    $bar->linkurl = $row['dfm_linkurl'];;
+    $bar->picurl = $row['picurl'];;
+    $bar->linkurl = $row['linkurl'];;
+    $bar->embedurl = $row['embedurl'];;
 
   } 
 

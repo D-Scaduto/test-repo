@@ -1,5 +1,6 @@
 <?php
 include 'names.php';
+
  class foo { 
    public $pid; 
    public $uname;
@@ -10,6 +11,7 @@ include 'names.php';
    public $dfdate ;
    public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype;
 }
 
@@ -45,6 +47,10 @@ if (isset($_GET['linkcode'])) {
   $linkurl = $_GET['linkcode'];
 }
 
+$embedurl = "null";
+if (isset($_GET['embedcode'])) {
+  $embedurl = $_GET['embedcode'];
+}
 $story = "null";
 if (isset($_GET['storycode'])) {
   $story = $_GET['storycode'];
@@ -64,7 +70,8 @@ $pid = $_GET['pid'];
 $uname = $_GET['uname'];
 
 $con = mysql_connect($Server, $username, $password);
- mysql_select_db($db_name,$con);
+
+   mysql_select_db($db_name, $con);
 
  $sql_upd="";
  $some = false;
@@ -99,6 +106,14 @@ $con = mysql_connect($Server, $username, $password);
        $some = true;
      }
  
+     if ($embedurl != "null") {
+       if ($some == true) {
+         $sql_upd = $sql_upd . " , ";
+       }
+       $sql_upd = $sql_upd . " embedurl = '" . $embedurl . "'"; 
+       $some = true;
+     }
+
   if ($some == true) {
 
     if ($source == "deskfm") {
@@ -142,7 +157,8 @@ $con = mysql_connect($Server, $username, $password);
            $b2->dfdate = $row['twdate'];
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
- 
+           $b2->embedurl = $row['embedurl'];
+
      if ($groupid != "null") {
         $sql_upd = "update dfm_people set group_id ='" . $groupid ."' where person_id = '" . $uname . "'"; 
         $result = mysql_query($sql_upd);

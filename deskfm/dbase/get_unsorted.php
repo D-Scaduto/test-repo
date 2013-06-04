@@ -1,6 +1,6 @@
 <?php
-
 include 'names.php';
+
 class pfoo { 
    public $uname;
    public $group_id;
@@ -22,7 +22,9 @@ class pfoo {
    public $price;
    public $source;
    public $dfdate ;
+   public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype; 
   }
 
@@ -63,8 +65,7 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
-
-  $con = mysql_connect($Server, $username, $password);
+$con = mysql_connect($Server, $username, $password);
 
   $where = "";
 
@@ -108,11 +109,11 @@ $pchunk_start = $pchunk * $limit;
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
+
     $foodo->urls = array();
-//    $foodo->urls[] = $row['linkurl'];
-//    if ($source != 'deskfm') {
-      $arr[] = $foodo;
-//     }
+    $foodo->embedurl = $row['embedurl'];
+
+     $arr[] = $foodo;
    }
    $rebar->dalist = $arr;
 

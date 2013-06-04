@@ -419,8 +419,8 @@ stater.prototype.get_csearch_list = function(tsterms) {
      url = url + "&sterms="+ tsterms;
      this.sterms = tsterms;
    } 
-   calls_out++;
 //   alert(url);
+   calls_out++;
    $.getJSON(url,function(json) {
       update_list(json);
    });   // end get json 
