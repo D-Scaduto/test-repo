@@ -290,6 +290,7 @@ function find_pos(obj) {
 
 
 suggester.prototype.create_drop_down = function () {
+
    this.layer = document.createElement("div");
    this.layer.id = this.sugg_id + "_pop"; 
    this.layer.className = "suggestions";
@@ -331,15 +332,13 @@ suggester.prototype.suggestions_showing = function () {
 
 
 suggester.prototype.hide_suggestions = function () {
-
    if (this.layer != null) {
       this.layer.style.visibility = "hidden";
    }
 
-     var se = "";
-
-      se = this.boss + ".show();";
-      eval(se);
+//     var se = "";
+//     se = this.boss + ".show();";
+//     eval(se);
 
 }
 

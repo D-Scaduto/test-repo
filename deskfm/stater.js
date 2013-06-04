@@ -189,43 +189,6 @@ stater.prototype.get_person_group = function(tname) {
 
 
 
-stater.prototype.check_feed = function() {
-
-   var lbl = "";
-   var tmp = "";
-   var s="";
-   lbl = 'feed_string';
-   if (document.getElementById(lbl)!= null) {
-      s = document.getElementById(lbl).value;
-      tws_get(s); 
-   }
-
-}
-
- 
-stater.prototype.draw_feedcon = function() {
-   var lbl = "";
-   var tmp = "";
-   var ds = "";
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "twitter";
-       tmp = tmp + "</span>";
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "<input id='feed_string' size='10' >";
-       tmp = tmp + "</span>";
-       tmp = tmp + "<span class='spotd_off' onclick='amare.check_feed();' >";
-       tmp = tmp + "check";
-       tmp = tmp + "</span>";
-       tmp = tmp + "<span id='feed_btns'  >";
-       tmp = tmp + "</span>";
-
-   lbl = 'stats_spot';
-   if (document.getElementById(lbl)!= null) {
-      document.getElementById(lbl).innerHTML=tmp;
-   }
-}
-
-
 stater.prototype.toggle_zonein = function () {
 
    if (this.zonein == true ) {
@@ -407,7 +370,7 @@ stater.prototype.get_random_list = function() {
        url = url + "&chunk="+ st.next_chunk();
     }
 
-//   alert(url);
+//  alert(url);
     calls_out++;
     $.getJSON(url,function(json) {
       update_list(json);

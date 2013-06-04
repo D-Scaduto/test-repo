@@ -26,23 +26,13 @@ poster.prototype.draw_story = function() {
           while ((urlts=exp2.exec(tiesto)) != null) {
              this.urls.push(urlts[0]);
              var s = urlts[0];
-             if (this.linkurl != s) {
+             if (this.linkurl == "") {
                this.linkurl = urlts[0];
                this.changed = true;
-/*
-               var sdex = this.parvar + ".darungs["+tspot+"].dadex";
-               var dex = eval(sdex);
-               sdex = this.parvar + ".dalist["+dex+"];";
-               dex = eval(sdex);
-               if (dalist[dex] != undefined) {
-                 var lobj = "dalist["+dex+"].linkurl = '" + this.linkurl + "'";
-                 eval(lobj);
-              }
-*/
             }
           } 
 
-          var    exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+          var  exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
           var pg =   tiesto.replace(exp," ");
           var ps = pg;
 /*
@@ -120,21 +110,12 @@ poster.prototype.update_story = function() {
           this.story = bill.replace(/[\n]{1}/gi,"<br>");
           this.changed = true;
           this.change_btns(); 
-    //    obj.focus();
+          obj.focus();
       }
 
 }
 
-
-poster.prototype.preset_story = function() { 
-    var tmp = "";
-    var pobj ="";
-    var lbl = "";
-
- //   tmp = "post text, pics, and links about standing desks ";
-
-    return  tmp;
-}  
+  
 
 
 

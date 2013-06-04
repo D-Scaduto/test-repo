@@ -368,7 +368,7 @@ viewer.prototype.load_unsorted_list = function() {
     var ro = null;
     var ok = false;
 
-     this.listype == "webits";
+     this.listype = "webits";
      this.dalist = [];
 
      mx = dalist.length;

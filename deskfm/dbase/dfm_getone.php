@@ -1,10 +1,6 @@
 
 <?php
-<<<<<<< HEAD
 
-=======
-include 'names.php';
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
  class foo { 
  
    public $pid; 
@@ -15,7 +11,10 @@ include 'names.php';
    public $source;
    public $dfdate ;
    public $linkurl;
- 
+   public $picurl;
+   public $embedurl;
+   public $listype; 
+
 }
 
 
@@ -24,11 +23,7 @@ $listype = $_GET['listype'];
 $pid = $_GET['pid'];
 
 
-<<<<<<< HEAD
 $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
-=======
-$con = mysql_connect($Server, $username, $password);
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
  if (!$con)
    {
@@ -66,7 +61,9 @@ $con = mysql_connect($Server, $username, $password);
     $bar->cat = $row['cat'];
     $bar->subcat = $row['subcat'];
     $bar->dfdate = $row['twdate'];
-    $bar->linkurl = $row['dfm_linkurl'];;
+    $bar->picurl = $row['picurl'];;
+    $bar->linkurl = $row['linkurl'];;
+    $bar->embedurl = $row['embedurl'];;
 
   } 
 

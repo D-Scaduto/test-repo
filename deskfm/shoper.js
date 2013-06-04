@@ -15,7 +15,7 @@ function shoper (pspotid) {
 }
 
 
-shoper.prototype.draw_screen = function() {
+shoper.prototype.show = function() {
     var tmpstr = "";
     var tstr1 = "";
     var lbl = "";
@@ -28,7 +28,7 @@ shoper.prototype.draw_screen = function() {
     var ts = "";
     var so = "";
 
-         ts = "";
+         ts = "products";
          if (this.prodid !="") {
              ts = this.producter.provider.get_desc(this.prodid);
          }
@@ -155,7 +155,7 @@ shoper.prototype.toggle = function () {
    if (this.showing == true ) {
        this.hide();
    } else {
-       this.draw_screen();
+       this.show();
    }
 }
 

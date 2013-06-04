@@ -31,12 +31,12 @@ categor.prototype.show = function() {
 
     if (this.cat == "") {
 
-        lbl = 'cat_zoombtn';
+        lbl = 'duh_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl="daviewer.toggle_zoom();";
+        ocl = "daviewer.next();";
         tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr=tmpstr+"<img src='deskfm/images/icons/grey_round.png' height='15px' >";
+        tmpstr = tmpstr + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
         tmpstr=tmpstr+"</span>";
 
         lbl = 'who_btn';
@@ -162,6 +162,11 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
     daviewer.set_catscreen(this.cat,this.subcat);
    
 }
+
+categor.prototype.change = function () {
+
+}
+
 
 categor.prototype.toggle = function () {
 

@@ -29,6 +29,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/unitview/storyor.js type="text/javascript" ></script>
 <script src=deskfm/unitview/pictor.js type="text/javascript" ></script>
 <script src=deskfm/unitview/linkster.js type="text/javascript" ></script>
+<script src=deskfm/unitview/embeder.js type="text/javascript" ></script>
 <script src=deskfm/unitview/pricer.js type="text/javascript" ></script>
 <script src=deskfm/unitview/namer.js type="text/javascript" ></script>
 <script src=deskfm/unitview/grouper.js type="text/javascript" ></script>
@@ -57,6 +58,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
+<script src=deskfm/header.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
@@ -124,32 +126,55 @@ header('X-Frame-Options: SAMEORIGIN');
 
            sal = new logoman("logo_lbtn");
            daviewer = new viewer("main_view","daviewer");
-           jesie = new namer("name_spot");
-           cater = new categor("main_top");
+           jesie = new namer();
+           cater = new categor("menu_bar");
+           store = new shoper("shop");
+           nicky = new sharer("share");
+           wanda = new searcher("menu_bar","cater");
+           amare = new stater();
 
-           store = new shoper("shop_spot");
-           nicky = new sharer("share_spot");
-           wanda = new searcher("search_spot","cater");
-           amare = new stater("stats_spot");
+      diego = new header("menu");
+      diego.add_mainspot("search","wanda");
+      diego.add_mainspot("browse","cater");
+      diego.main_shape = "browse";
 
         if (is_mobile == true) {
            da_limit = 250;
            daviewer.top_end = 25;
+
         } else {
            da_limit = 1000;
            daviewer.top_end = 100;
         }
 
+      diego.show();
+
       sal.draw_vman();
       sal.draw_logo('logo_spot',35);
-
-      cater.show();
-      wanda.show();
 
     amare.get_stats();
     amare.get_providers();
     amare.get_products();
     amare.get_webits();
+
+    $(window).resize(function() {
+
+      var width = $(this).width();
+      var height = $(this).height();
+       if (width < 650) {
+         if (is_mobile != true) {
+           is_mobile = true;
+           diego.show();
+         }
+       } else {
+         if (is_mobile == true) {
+            is_mobile = false;
+            diego.show();
+         }
+       }
+
+    });
+
 
 /*
 if (is_ie == false) {

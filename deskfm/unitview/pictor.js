@@ -161,6 +161,17 @@ poster.prototype.pic_progress = function() {
 
 
 
+poster.prototype.toggle_getpic = function() {
+
+    if (this.shape != "getpic") {
+       this.shape = "getpic";
+    } else {
+       this.shape = "";
+    }
+    this.redraw_rung();
+}
+
+
  poster.prototype.poke_pic = function() {
 
    var tmp="";

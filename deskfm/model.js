@@ -8,6 +8,8 @@
   var joe = null; 
   var amare = null;
   var sal = null;
+  var diego = null;
+  var mac  = null;
 
   var dalist = [];
   var prodlist = [];
@@ -31,93 +33,36 @@ function draw_main() {
            tmp = tmp + "</div>";
       }
 
-       tmp = tmp + "<span style='background-color:white;width:500x;float:left;border-style:solid;border-width:5px;border-color:silver;' >";
+       tmp = tmp + "<span style='background-color:white;width:400x;float:left;border-style:solid;border-width:5px;border-color:silver;' >";
 
        lbl = "logo_lbtn";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;float:left;vertical-align:top;' onclick='sal.change_vman();' >";
        tmp = tmp + "</span>";
 
        tmp = tmp + "<span style='background-color:white;' >";
-
        lbl = "logo_spot";
        tmp = tmp + "<div id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</div>";
-
-       tmp = tmp + "<div style='background-color:white;width:450px;max-width:450px;' >";
-
-/*
-       lbl = 'zoom_btn';
-       cls = "spotd_off";
-       ocl =  "daviewer.toggle_zoom();";
-       tsrc = "deskfm/images/icons/grey_round.png";
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
-       tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
+       tmp = tmp + "<div style='background-color:white;width:350px;max-width:450px;' >";
+       tmp = tmp+ "<span id='top_rail' style='vertical-align:top;background-color:white;' >";
+       tmp = tmp+"</span>";
+       tmp = tmp + "</div>";
        tmp = tmp + "</span>";
-*/
 
-       tmp=tmp+ "<span id='top_rail' style='vertical-align:top;background-color:white;' >";
-       tmp=tmp+"</span>";
-/*
-   if (buddah == true) {
-       lbl = 'nitro_btn';
-       cls = "spotd_off";
-       ocl =  "daviewer.toggle_nitro();";
-       tsrc = "deskfm/images/icons/fast_fwd.png";
-       if (this.metro_spd > 0 ) {
-         tsrc = "deskfm/images/icons/stop.png";
-         ocl = "daviewer.nitro_stop();";
+       tmp = tmp + "</span>";
+
+       lbl = "menu";
+       tmp = tmp + "<span id='"+lbl+"' style=''  >";
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<div id='main_view' style='' >";
+       tmp = tmp + "</div>";
+
+
+       var pobj = document.getElementById('main_spot');
+       if (pobj != null) {
+          pobj.innerHTML = tmp;
        }
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
-       lbl = 'nitro_img';
-       tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
-       tmp = tmp + "</span>";
-    }
-*/
-       tmp = tmp + "</div>";
-
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<div style='clear:left;'></div>";
-
-       lbl = "main_top";
-       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:500px;max-width:500px;' >";
-       tmp = tmp + "</div>";
-
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span class='shag' style='' >";
-
-       tmp = tmp + "<div style='background-color:white;width:300px;' >";
-
-     if (buddah == true) {
-       tmp = tmp + "<span id='share_btn' onclick='nicky.toggle();' class='spotd_off' style='' onmouseover='markyd(\"share_btn\");' onmouseout='unmarkyd(\"share_btn\");'  >";
-       tmp = tmp + "share";
-       tmp = tmp + "</span>";
-     }
-       tmp = tmp + "<span id='search_btn' onclick='nicky.hide();wanda.toggle();' class='spotd_off' style='' onmouseover='markyd(\"search_btn\");' onmouseout='unmarkyd(\"search_btn\");'  >";
-        tmp = tmp + "search";
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span id='search_spot'   >";
-        tmp = tmp + "</span>";
-
-       tmp = tmp + "</div>";
-
-       tmp = tmp + "<div id='share_spot_rung_0' class='' style='width:300px;' >";
-       tmp = tmp + "</div>";
-
-       tmp = tmp + "</span>";
-
-      tmp = tmp + "<div style='clear:left;'></div>";
-
-       tmp = tmp + "<span id='main_view' style='background-color:silver;' >";
-       tmp = tmp + "</span>";
-
-
-      var pobj = document.getElementById('main_spot');
-      if (pobj != null) {
-         pobj.innerHTML = tmp;
-      }
 }
 
 
@@ -219,9 +164,10 @@ function update_list(listobj) {
                   }
                } 
                if (found == true) {
-                  dalist.splice(found_at,1);
-               }
-              dalist.push(listobj.dalist[j]);
+                  dalist[found_at] = listobj.dalist[j];
+               } else {
+                 dalist.push(listobj.dalist[j]);
+               }             
             }
          }
       }

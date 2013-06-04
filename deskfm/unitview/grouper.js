@@ -19,7 +19,7 @@ poster.prototype.draw_groups = function() {
     }
     tmp=tmp + "</span>"; 
 
-    lbl = this.spotid + '_' + this.rung + '_group_spot';
+    lbl = this.spotid + '_' + this.rung + '_sort_spot';
     pobj = document.getElementById(lbl);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
@@ -39,7 +39,7 @@ poster.prototype.get_groups = function() {
     tmp=tmp + "</span>"; 
 
     var pobj=null;
-    lb2 = this.spotid + '_' + this.rung + '_group_spot';
+    lb2 = this.spotid + '_' + this.rung + '_sort_spot';
     pobj = document.getElementById(lb2);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
@@ -93,7 +93,7 @@ poster.prototype.hide_groups = function() {
      var lbl = "";
      lbl = this.spotid;
      lbl = lbl +'_'+this.rung;
-     lbl = lbl + '_group_spot';
+     lbl = lbl + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmpstr;

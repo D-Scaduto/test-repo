@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
-include 'names.php';
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
  class foo { 
    public $uname;
    public $source;
@@ -48,11 +44,7 @@ $uname = $_GET['uname'];
 
  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
 
-<<<<<<< HEAD
  mysql_select_db('benman',$con);
-=======
- mysql_select_db($db_name,$con);
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
  $sql_upd="";
  $some = false;

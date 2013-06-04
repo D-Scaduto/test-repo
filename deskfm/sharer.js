@@ -5,8 +5,42 @@ function sharer (pspotid) {
    this.varname="nicky";
    this.showing = false;
 
-   this.newster = new poster(this.spotid,0,this.varname,this.varname +".newster","webits",false); 
+   var s = this.spotid;
+   this.newster = new poster(s,0,this.varname,this.varname +".newster","webits",false); 
    this.newster.btnson = true;
+
+}
+
+
+
+sharer.prototype.show = function() {
+
+    var lbl = "";
+    var pobj = null;
+    var tmp = "";
+    var lbl = this.spotid + "_rung_0";
+
+    tmp = tmp + "<div id='"+lbl+"' class='' style='width:300px;' >";
+    tmp = tmp + "</div>";
+
+    lbl = this.spotid;
+    pobj = document.getElementById(lbl);
+    if (pobj != null) {
+      pobj.innerHTML = tmp;
+      this.showing = true;
+      this.newster.build_rung();
+      this.newster.draw_rung();
+   }
+ 
+   lbl = this.spotid + "_btn";
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
+       if (is_ie) {
+         pobj.className = "spotd_on";
+       } else {
+         pobj.setAttribute("class","spotd_on");
+       }
+   }
 
 }
 
@@ -34,37 +68,6 @@ sharer.prototype.add_one = function(pdex) {
    this.newster.redraw_rung();
 }
 
-sharer.prototype.set_preset = function(tpreset) {
-
-   this.preset = tpreset;
-   this.newster.build_rung();
-   this.newster.draw_rung();
-
-}
-
-
-sharer.prototype.show = function() {
-
-     this.newster.build_rung();
-     this.newster.draw_rung();
-
-     this.showing = true;
-
-     cls = 'spotd_on';
-     lbl = 'share_btn';
-
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-       if (is_ie) {
-         pobj.className = cls;
-       } else {
-         pobj.setAttribute("class",cls);
-       }
-     }
-
-}
-
-
 
 sharer.prototype.set_shape = function(jnk,pshape) {
    if (pshape != undefined) {
@@ -84,6 +87,17 @@ sharer.prototype.set_dex = function(tdex) {
 }
 
 
+sharer.prototype.set_preset = function(tpreset) {
+
+   this.preset = tpreset;
+   this.newster.build_rung();
+   this.newster.draw_rung();
+
+}
+
+sharer.prototype.change = function() {
+
+}
 
 sharer.prototype.toggle = function() {
    if (this.showing == true) {
@@ -100,19 +114,23 @@ sharer.prototype.hide = function() {
 
        var tmp = "";
        var lbl = "";
-       var cls = "";
 
-     cls = 'spotd_off';
-     lbl = 'share_btn';
-
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+    lbl = this.spotid;
+    pobj = document.getElementById(lbl);
+    if (pobj != null) {
+      pobj = tmp;
+    }
+ 
+ 
+   lbl = this.spotid + "_btn";
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
        if (is_ie) {
-         pobj.className = cls;
+         pobj.className = "spotd_off";
        } else {
-         pobj.setAttribute("class",cls);
+         pobj.setAttribute("class","spotd_off");
        }
-     }
+   }
 
 }
 

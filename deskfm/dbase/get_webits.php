@@ -12,7 +12,9 @@
    public $price;
    public $source;
    public $dfdate ;
+   public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype;
 
   }
@@ -99,11 +101,10 @@ $chunk_start = $chunk * $limit;
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
+    $foodo->embedurl = $row['linkurl'];
+
     $foodo->urls = array();
-//    $foodo->urls[] = $row['linkurl'];
-//    if ($source != 'deskfm') {
-      $arr[] = $foodo;
-//     }
+    $arr[] = $foodo;
    }
    $rebar->dalist = $arr;
 
