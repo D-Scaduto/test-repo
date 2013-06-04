@@ -1,6 +1,6 @@
 <?php
 
-
+include 'names.php';
 class pfoo { 
    public $uname;
    public $group_id;
@@ -22,9 +22,7 @@ class pfoo {
    public $price;
    public $source;
    public $dfdate ;
-   public $picurl;
    public $linkurl;
-   public $embedurl;
    public $listype; 
   }
 
@@ -65,14 +63,15 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
-  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+
+  $con = mysql_connect($Server, $username, $password);
 
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db('benman', $con);
+   mysql_select_db($db_name, $con);
 
    $where =  " where cat = '' and subcat = ''  ";
 
@@ -109,11 +108,11 @@ $pchunk_start = $pchunk * $limit;
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
-
     $foodo->urls = array();
-    $foodo->embedurl = $row['embedurl'];
-
-     $arr[] = $foodo;
+//    $foodo->urls[] = $row['linkurl'];
+//    if ($source != 'deskfm') {
+      $arr[] = $foodo;
+//     }
    }
    $rebar->dalist = $arr;
 

@@ -1,6 +1,6 @@
 <?php
 
-
+include names.php
  class foo { 
  
    public $pid; 
@@ -14,7 +14,6 @@
    public $dfdate ;
    public $picurl;
    public $linkurl;
-   public $embedurl;
    public $listype;
 
 }
@@ -33,13 +32,14 @@ $limit = 50;
 if (isset($_GET['lim'])) {
   $limit = $_GET['lim'];
 }
-$con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+
+$con = mysql_connect($Server, $username, $password);
 $where = "";
  if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
 
-   mysql_select_db('benman', $con);
+   mysql_select_db($db_name, $con);
 
    $some = false;
    $sql = "";
@@ -76,7 +76,6 @@ $where = "";
     $foodo->subcat = $row['subcat'];
     $foodo->dfdate = $row['twdate'];
     $foodo->linkurl = $row['linkurl'];
-    $foodo->embedurl = $row['embedurl'];
     $foodo->urls = array();
 //    $foodo->urls[] = $row['linkurl'];
     $arr[] = $foodo;

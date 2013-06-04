@@ -51,15 +51,15 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/nitro.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
-<script src=deskfm/suggester.js type="text/javascript" ></script>
-<script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/cat_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/price_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/product_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/servicer_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/preset_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/group_provider.js type="text/javascript" ></script>
+<script src='deskfm/suggester.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/search_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/cat_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/subcat_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/price_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/product_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/servicer_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/preset_provider.js' type="text/javascript" ></script>
+<script src='deskfm/qandas/group_provider.js' type="text/javascript" ></script>
 
 <script src=deskfm/namer.js type="text/javascript" ></script>
 <script src=deskfm/shoper.js type="text/javascript" ></script>

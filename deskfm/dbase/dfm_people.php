@@ -2,6 +2,7 @@
 
 <?php
 
+include 'names.php';
 class foo { 
    public $uname;
    public $groupid;
@@ -43,12 +44,13 @@ if (isset($_GET['groupid'])) {
  $groupid = $_GET['groupid'];
 }
 
-$con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+
+$con = mysql_connect($Server, $username, $password);
 if (!$con) {
     echo('Could not connect: ' . mysql_error());
 }
 
-   mysql_select_db('benman', $con);
+   mysql_select_db($db_name, $con);
   $sql = "";
   $where = "";
 

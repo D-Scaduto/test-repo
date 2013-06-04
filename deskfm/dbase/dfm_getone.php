@@ -1,6 +1,7 @@
 
 <?php
 
+include 'names.php';
  class foo { 
  
    public $pid; 
@@ -11,10 +12,7 @@
    public $source;
    public $dfdate ;
    public $linkurl;
-   public $picurl;
-   public $embedurl;
-   public $listype; 
-
+ 
 }
 
 
@@ -23,14 +21,15 @@ $listype = $_GET['listype'];
 $pid = $_GET['pid'];
 
 
-$con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+
+$con = mysql_connect($Server, $username, $password);
 
  if (!$con)
    {
     echo('Could not connect: ' . mysql_error());
   }
 
-   mysql_select_db('benman', $con);
+   mysql_select_db($db_name, $con);
 
   $sql="";
  
@@ -61,9 +60,7 @@ $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo12
     $bar->cat = $row['cat'];
     $bar->subcat = $row['subcat'];
     $bar->dfdate = $row['twdate'];
-    $bar->picurl = $row['picurl'];;
-    $bar->linkurl = $row['linkurl'];;
-    $bar->embedurl = $row['embedurl'];;
+    $bar->linkurl = $row['dfm_linkurl'];;
 
   } 
 

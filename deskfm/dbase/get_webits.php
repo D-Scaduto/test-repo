@@ -1,5 +1,5 @@
 <?php
-
+include 'names.php'
 
  class foo { 
  
@@ -12,9 +12,7 @@
    public $price;
    public $source;
    public $dfdate ;
-   public $picurl;
    public $linkurl;
-   public $embedurl;
    public $listype;
 
   }
@@ -46,14 +44,14 @@ if (isset($_GET['lim'])) {
 
 $chunk_start = $chunk * $limit;
 
-  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
-
+  $con = mysql_connect($Server, $username, $password);
+  
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db('benman', $con);
+   mysql_select_db($db_name, $con);
 
   $sql = "";
   $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM (";
@@ -101,10 +99,11 @@ $chunk_start = $chunk * $limit;
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
-    $foodo->embedurl = $row['linkurl'];
-
     $foodo->urls = array();
-    $arr[] = $foodo;
+//    $foodo->urls[] = $row['linkurl'];
+//    if ($source != 'deskfm') {
+      $arr[] = $foodo;
+//     }
    }
    $rebar->dalist = $arr;
 

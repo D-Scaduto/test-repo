@@ -1,6 +1,8 @@
 
 <?php
 
+include 'names.php';
+
  class foo { 
  
    public $pid; 
@@ -20,9 +22,9 @@ $pid = 'null';
 $pid = $_GET['pid'];
 
 
-$con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
+$con = mysql_connect($Server, $username, $password);
+ mysql_select_db($db_name,$con);
 
- mysql_select_db('benman',$con);
 
  $sql_upd="";
  $ret = new foo();
