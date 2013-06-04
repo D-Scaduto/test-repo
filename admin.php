@@ -38,6 +38,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/unitview/storyor.js type="text/javascript" ></script>
 <script src=deskfm/unitview/pictor.js type="text/javascript" ></script>
 <script src=deskfm/unitview/linkster.js type="text/javascript" ></script>
+<script src=deskfm/unitview/embeder.js type="text/javascript" ></script>
 <script src=deskfm/unitview/pricer.js type="text/javascript" ></script>
 <script src=deskfm/unitview/namer.js type="text/javascript" ></script>
 <script src=deskfm/unitview/person.js type="text/javascript" ></script>
@@ -48,6 +49,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/rail.js type="text/javascript" ></script>
 <script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/nitro.js type="text/javascript" ></script>
+<script src=deskfm/stater.js type="text/javascript" ></script>
 
 <script src=deskfm/suggester.js type="text/javascript" ></script>
 <script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
@@ -64,7 +66,8 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
-<script src=deskfm/stater.js type="text/javascript" ></script>
+<script src=deskfm/sorter.js type="text/javascript" ></script>
+<script src=deskfm/farmer.js type="text/javascript" ></script>
 <script src=deskfm/manager.js type="text/javascript" ></script>
 <script src=deskfm/header.js type="text/javascript" ></script>
 
@@ -137,29 +140,39 @@ header('X-Frame-Options: SAMEORIGIN');
 
 
    sal = new logoman("logo_lbtn");
-   joe = new manager("main_top");
    daviewer = new viewer("main_view","daviewer");
-   store = new shoper("shop_spot");
-   wanda = new searcher("search_spot","joe");
-   nicky = new sharer("share_spot");
-   joe = new manager("main_top");
-
    jesie = new namer();
+   amare = new stater();
 
-   amare = new stater("stats_spot");
+   joe = new manager("menu_bar");
+   wanda = new searcher("menu_bar");
+   store = new shoper("menu_bar");
+   mac = new farmer("menu_bar");
+   walt = new sorter("menu_bar");
 
+   nicky = new sharer("share");
+
+   diego = new header("menu");
+   diego.add_mainspot("search","wanda");
+   diego.add_mainspot("browse","joe");
+   diego.main_shape = "browse";
+   diego.add_mainspot("sort","walt");
+   diego.add_mainspot("shop","store");
+   diego.add_mainspot("farm","mac");
 
         if (is_mobile == true) {
+           diego.add_mainspot("share","nicky");
+           nicky.spotid = "menu_bar";
            da_limit = 250;
            daviewer.top_end = 25;
+
         } else {
            da_limit = 1000;
            daviewer.top_end = 100;
         }
 
-    joe.show();
-    nicky.show();
-    wanda.show();
+    diego.show();
+    nicky.show()
 
     sal.draw_vman();
     sal.draw_logo('logo_spot',35);
@@ -171,19 +184,27 @@ header('X-Frame-Options: SAMEORIGIN');
    amare.get_people();
    amare.get_unsorted();
 
-
     $(window).resize(function() {
 
       var width = $(this).width();
       var height = $(this).height();
-       if (width < 650) {
+       if (width < 750) {
          if (is_mobile != true) {
            is_mobile = true;
-           nicky.hide();
+           diego.add_mainspot("share","nicky");
+           nicky.spotid = "menu_bar";
+           nicky.newster.spotid = "menu_bar";
+           diego.show();
          }
        } else {
          if (is_mobile == true) {
             is_mobile = false;
+            diego.del_mainspot("share");
+            nicky.spotid = "share";
+            nicky.newster.spotid = "share";
+            diego.show();
+            nicky.show()
+            daviewer.next();
          }
        }
 

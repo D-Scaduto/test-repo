@@ -242,4 +242,20 @@ viewer.prototype.hide_rail = function() {
     }
 }
 
+/*
+   if (buddah == true) {
+       lbl = 'nitro_btn';
+       cls = "spotd_off";
+       ocl =  "daviewer.toggle_nitro();";
+       tsrc = "deskfm/images/icons/fast_fwd.png";
+       if (this.metro_spd > 0 ) {
+         tsrc = "deskfm/images/icons/stop.png";
+         ocl = "daviewer.nitro_stop();";
+       }
+       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
+       lbl = 'nitro_img';
+       tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
+       tmp = tmp + "</span>";
+    }
+*/
 

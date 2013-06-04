@@ -24,12 +24,16 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
 
    this.pid = "";
    this.story="";
+   this.story_tmp;
    this.picurl ="";
 
    this.linkurl ="";
-   this.link_shape = ""; // embed // link 
-   this.link_source="";
-   this.linkshow = false;
+   this.link_tmp;
+
+   this.embedurl = "";
+   this.embedshow = false;
+   this.embed_tmp;
+
    this.urls = [];
 
    this.shape = "";
@@ -38,11 +42,7 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.preset = "sitonly";
    if (this.parvar == "nicky")  { 
      this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.varname);
-     this.link_source="sketchup";
-     this.link_shape = "embed";
-     if (is_mobile == false) {
-       this.linkshow = true;
-     }
+     this.link_embed=true;
    }
 
    this.cat ="";
@@ -128,31 +128,24 @@ poster.prototype.set_ppid = function(pdadex) {
        var ocl="";
        var cls = "";
 
-        cls = 'spotd_off';
-        if (this.shape ==  "link") {
-           cls = 'spotd_on';
-        }
- 
-         tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"link\");' >";  
+    if (this.listype != "people") { 
+         cls = 'spotd_off';
+         ocl =  this.varname+".toggle_getlink();";
+         tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
          tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-         tmp = tmp + "</span>"; 
- 
-        cls = 'spotd_off';
-        if (this.shape ==  "embed") {
-           cls = 'spotd_on';
-        }
-
-           tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"embed\");' >";  
-           tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-           tmp = tmp + "</span>"; 
+         tmp = tmp + "</span>";
 
          cls = 'spotd_off';
-        if (this.shape ==  "getpic") {
-           cls = 'spotd_on';
-        }
-          tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".set_shape(\"getpic\");' >";  
-           tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
-           tmp = tmp + "</span>"; 
+         ocl =  this.varname+".toggle_getembed();";
+         tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
+         tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+         tmp = tmp + "</span>";
+
+    }
+       cls = 'spotd_off';
+       tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".toggle_getpic();' >";  
+       tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
+       tmp = tmp + "</span>"; 
 
      lbl = this.spotid;
      lbl = lbl +'_'+this.rung;
@@ -176,39 +169,27 @@ poster.prototype.nav_btns = function() {
 
          if (this.btnson == true) { 
 
-              lbl = this.spotid + "_" + tspot + "_editing_btn";
-              cls='spotd_off';
-              ocl = this.varname + ".toggle_btns();";
-              var ilbl = this.spotid + "_" + tspot + "_editing_img";
-              tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
-              tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
-              tmp = tmp + "</span>";
+           lbl = this.spotid + "_" + tspot + "_editing_btn";
+           cls='spotd_off';
+           ocl = this.varname + ".toggle_btns();";
+           var ilbl = this.spotid + "_" + tspot + "_editing_img";
+           tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
+           tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
+           tmp = tmp + "</span>";
 
-              if (this.parvar != "nicky" ) {
-                lbl = this.spotid + "_" + tspot + "_zoom_btn";
-                cls='spotd_off';
-                if (this.rung == 0) {
-                  if (se.zoom == true) {
-                    ocl = this.parvar + ".unset_zoom();";
-                  } else {
-                    ocl = this.parvar + ".set_zoom();";
-                  }
-                } else {
-                  ocl = this.parvar + ".zoom=true;";
-                  ocl = ocl + this.parvar + ".to_top("+this.rung+");";
-                }
-                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-                tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-                tmp = tmp + "</span>";
-              }
 
           if (this.is_mini == true ) {
+
               cls='spotd_off';
               ocl = this.parvar + ".del_rung("+this.rung+")";
               lbl = this.spotid + "_" + tspot + "_delfrom_mini_btn";
               tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</span>";
+
+          } else {
+
+
           }
 
           if (this.listype == "people") {
@@ -218,18 +199,19 @@ poster.prototype.nav_btns = function() {
                 tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
                 tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
                 tmp = tmp + "</span>";
-
+/*
                 cls='spotd_off';
                 ocl = "amare.get_cperson_list(\""+this.uname+"\");";
                 lbl = this.spotid + "_" + tspot + "_refresh_mini";
                 tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
                 tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='25px' >";
                 tmp = tmp + "</span>";
+*/
           }
  
           if (buddah==true) {
 
-              if (this.listype == "webits") {
+              if ((this.shape == "share") && (this.listype == "webits")) {
 
                 cls='spotd_off';
                 lbl = this.spotid + "_" + tspot + "_tweetbtn";
@@ -252,15 +234,27 @@ poster.prototype.nav_btns = function() {
               }
 
           }
-       }  else {  
 
-              lbl = this.spotid + "_" + tspot + "_editing_btn";
-              cls='spotd_off';
-              ocl = this.varname + ".toggle_btns();";
-              var ilbl = this.spotid + "_" + tspot + "_editing_img";
-              tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
-              tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
-              tmp = tmp + "</span>";
+              if ((this.parvar != "nicky" ) && (this.rung !=0)) {
+                lbl = this.spotid + "_" + tspot + "_totop_btn";
+                cls='spotd_off';
+                ocl = this.parvar + ".to_top("+this.rung+");";
+                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+                tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='15px' >";
+                tmp = tmp + "</span>";
+              }
+
+
+
+       }   else { 
+
+           lbl = this.spotid + "_" + tspot + "_editing_btn";
+           cls='spotd_off';
+           ocl = this.varname + ".toggle_btns();";
+           var ilbl = this.spotid + "_" + tspot + "_editing_img";
+           tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='imarkyd(\""+ilbl+"\");' onmouseout='unimarkyd(\""+ilbl+"\");'  >";
+           tmp = tmp + "<img id='"+ilbl+"' src='deskfm/images/icons/white_round.png' height='20px' >";
+           tmp = tmp + "</span>";
 
        }
 
@@ -283,39 +277,44 @@ poster.prototype.nav_btns = function() {
        var lbl = "";
        var ocl="";
        var omo = "";
-       var cdx="";
-       var cdxe = "";
-       var stpid="";
-       var spid="";
+       var omt = "";
 
-      if (this.changed == true) {
+     if (this.btnson == true) {
+       if (this.changed == true) {
               cls='spotd_off';
               ocl = this.varname + ".do_undo();";
               lbl = this.spotid + "_" + this.rung + "_undo_btn";
               tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
+//              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
+              tmp = tmp + "undo";
               tmp = tmp + "</span>";
 
-        if (this.listype == "webits") {
+         if (this.listype == "webits") {
+            lbl = this.spotid + "_" + this.rung + "_save_btn";
+            omo = "markyd(\""+lbl+"\");";
+            omt = "unmarkyd(\""+lbl+"\");";
             if (this.pid == "") {
               ocl = this.varname+".do_newpost();";
-              tmp=tmp + "<span class='spotd_off'  onClick='"+ocl+"' >";  
-              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp=tmp + "<span id='"+lbl+"' class='spotd_off'  onClick='"+ocl+"'  onmouseover='"+omo+"' onmouseout='"+omt+"' >";  
+//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp = tmp + "save";
               tmp = tmp + "</span>";
             } else {
+              lbl = this.spotid + "_" + this.rung + "_update_btn";
               ocl = this.varname+".update_webit();";
-              tmp=tmp + "<span class='spotd_off' onClick='"+ocl+"' >";  
-              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp=tmp + "<span id='"+lbl+"' class='spotd_off' onClick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";  
+//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp = tmp + "save";
               tmp = tmp + "</span>";
             }
-        } else if (this.listype = "people") {
+         } else if (this.listype = "people") {
               ocl = this.varname+".update_person();";
-              tmp=tmp + "<span class='spotd_off' onClick='"+ocl+"' >";  
-              tmp = tmp + " update";
+              tmp=tmp + "<span class='spotd_off' onClick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";  
+              tmp = tmp + "save";
               tmp = tmp + "</span>";
-        } 
-     } 
-
+         } 
+       } 
+     }
 
      lbl = this.spotid;
      lbl = lbl +'_'+this.rung;
@@ -417,6 +416,7 @@ poster.prototype.clear = function() {
      var linkcode = escape(this.linkurl);
      var storycode = escape(this.story);
      var picode = escape(this.picurl);
+     var embedcode = escape(this.embedurl);
 
      var prams = "?uname="+this.uname+"&source="+this.source;
 
@@ -425,6 +425,7 @@ poster.prototype.clear = function() {
      prams = prams + "&storycode="+storycode;
      prams = prams + "&linkcode="+linkcode;
      prams = prams + "&picode="+picode;
+     prams = prams + "&embedcode="+embedcode;
      prams = prams + "&groupid="+this.groupid;
 
      var url = "deskfm/dbase/dfm_dbadd.php"+prams;
@@ -442,6 +443,7 @@ poster.prototype.clear = function() {
      var linkcode = escape(this.linkurl);
      var storycode = escape(this.story);
      var picode = escape(this.picurl);
+     var embedcode = escape(this.embedurl);
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=webits";
@@ -449,6 +451,7 @@ poster.prototype.clear = function() {
      prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
      prams = prams + "&storycode="+storycode;
      prams = prams + "&linkcode="+linkcode;
+     prams = prams + "&embedcode="+embedcode;
      prams = prams + "&picode="+picode;
      prams = prams + "&groupid="+this.groupid;
 

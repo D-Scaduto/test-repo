@@ -17,7 +17,7 @@ namer.prototype.get_name = function(pspotid) {
     var tmp = "";
 
     tmp =tmp + "<span class=spotd_off  onclick='jesie.findme();' > ";
-    tmp = tmp + "i am";
+    tmp = tmp + "what\'s your name ?";
     tmp =tmp + "</span>";
 
     var tval =  "";
@@ -28,10 +28,6 @@ namer.prototype.get_name = function(pspotid) {
         }
 
     tmp =tmp + "<input size=8 value='"+tval+"' id='pname_box' onclick='' > ";
-
-    tmp =tmp + "<span class=spotd_off  onclick='jesie.say_hi();' > ";
-    tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-    tmp =tmp + "</span>";
 
     if (document.getElementById(this.spotid)!=null) {
         document.getElementById(this.spotid).innerHTML=tmp; 
@@ -47,7 +43,7 @@ namer.prototype.say_hi = function(pspotid) {
        var ocl ="";
        var lbl = "";
 
-       if (this.pname != "") {
+       if ( (this.pname != "") || (this.tmp_name != ""))  {
 
        lbl = "getname_btn";
        var moin = "markyd(\""+lbl+"\");";
@@ -74,11 +70,7 @@ namer.prototype.say_hi = function(pspotid) {
            ocl = "jesie.get_name();";
            var cls='spotd_off';
            tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-           if (this.tmp_name != "") {
-              tmp = tmp +  "hi, " + this.tmp_name;
-           } else {
-              tmp = tmp +  "hi, you";
-           }
+           tmp = tmp + "hi";
            tmp = tmp + "</span>";
         }
 

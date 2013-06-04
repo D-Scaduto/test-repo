@@ -136,7 +136,7 @@ function dfm_buildblocks()
 
         });  // end loop
 
-       $("#mobile_view").html(op);  
+       $("#main_view").html(op);  
 
 }
 

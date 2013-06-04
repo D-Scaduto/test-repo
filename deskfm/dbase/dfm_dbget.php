@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
-include 'names.php';
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
  class foo { 
  
@@ -16,6 +12,7 @@ include 'names.php';
    public $dfdate ;
    public $linkurl;
    public $picurl;
+   public $embedurl;
    public $listype; 
   }
 
@@ -70,11 +67,7 @@ if (isset($_GET['uname'])) {
 }
 $chunk_start = $chunk * $limit;
 
-<<<<<<< HEAD
 $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
-=======
-$con = mysql_connect($Server, $username, $password);
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
 $where = "";
 
@@ -227,7 +220,7 @@ if ($yr != "" ) {
  
     $source= $row['twitter'];
     $foodo->source = $source;
-    $foodo->listype = 'webit';
+    $foodo->listype = 'webits';
 
     $foodo->pid =    $row['webit_id'];
     $foodo->picurl = $row['picurl'];
@@ -241,6 +234,8 @@ if ($yr != "" ) {
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];
+    $foodo->embedurl = $row['embedurl'];
+
     $foodo->urls = array();
 //    $foodo->urls[] = $row['linkurl'];
 //    if ($source != 'deskfm') {

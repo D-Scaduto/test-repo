@@ -6,14 +6,16 @@
     var lbl = "";
     var pobj=null;
 
+     lbl = this.spotid+"_"+tspot+"_catbtn";
+     ocl = this.varname + ".get_catsel();";
+     tmp = tmp +"<span id='"+lbl+"' class='spotd_off' onclick='"+ocl+"' >";
+     tmp = tmp + "<img src='deskfm/images/icons/categories.png' height=20px' > ";
+     tmp=tmp + "</span>"; 
+
      lbl = this.spotid+"_"+tspot+"_catsog";
      ocl = this.varname + ".get_catsel();";
      tmp = tmp +"<span id='"+lbl+"' class='spotd_off' onclick='"+ocl+"' >";
-     if (this.cat == "") {
-       tmp = tmp + "<img src='deskfm/images/icons/categories.png' height=20px' > ";
-     } else {
-       tmp = tmp + this.cat;
-     }
+     tmp = tmp + this.cat;
      tmp=tmp + "</span>"; 
 
      lbl = this.spotid+"_"+tspot+"_subcatsog";
@@ -37,6 +39,13 @@
      var lbl = "";
      var lb1 = "";
      var lb2 = "";
+
+     lbl = this.spotid+"_"+tspot+"_catbtn";
+     ocl = this.varname + ".dacater.request_suggestions();";
+     tmp = tmp +"<span id='"+lbl+"' class='spotd_off' onclick='"+ocl+"' >";
+     tmp = tmp + "<img src='deskfm/images/icons/categories.png' height=20px' > ";
+     tmp=tmp + "</span>"; 
+
 
      lb1 = this.spotid+"_"+tspot+"_catsog";
      ocl = this.varname + ".dacater.request_suggestions();";
@@ -74,7 +83,12 @@ poster.prototype.set_cat = function(pcat) {
            this.cat = pcat;
            this.subcat = "";
            this.changed = true;
-           this.subcater.request_suggestions(this.cat); 
+           this.dacater.hide_suggestions(); 
+
+           if (this.cat != "junk") {
+             this.subcater.request_suggestions(this.cat); 
+           }
+           this.draw_catsel();
            this.change_btns();
       }
  
@@ -86,7 +100,7 @@ poster.prototype.set_subcat = function(psubcat) {
       if (psubcat != undefined) {
           this.subcat = psubcat;
           this.changed = true;
-         this.draw_catsel();
+          this.draw_catsel();
           this.change_btns();
       }
 

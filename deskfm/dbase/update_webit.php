@@ -10,6 +10,7 @@
    public $dfdate ;
    public $picurl;
    public $linkurl;
+   public $embedurl;
    public $listype;
 }
 
@@ -45,6 +46,10 @@ if (isset($_GET['linkcode'])) {
   $linkurl = $_GET['linkcode'];
 }
 
+$embedurl = "null";
+if (isset($_GET['embedcode'])) {
+  $embedurl = $_GET['embedcode'];
+}
 $story = "null";
 if (isset($_GET['storycode'])) {
   $story = $_GET['storycode'];
@@ -65,11 +70,7 @@ $uname = $_GET['uname'];
 
  $con = mysql_connect('benman.db.5241208.hostedresource.com', 'benman', 'Letsgo123');
 
-<<<<<<< HEAD
  mysql_select_db('benman',$con);
-=======
- mysql_select_db($db_name,$con);
->>>>>>> 2a502c387d7da59a00415b9e9120362d4fc756f4
 
  $sql_upd="";
  $some = false;
@@ -104,6 +105,14 @@ $uname = $_GET['uname'];
        $some = true;
      }
  
+     if ($embedurl != "null") {
+       if ($some == true) {
+         $sql_upd = $sql_upd . " , ";
+       }
+       $sql_upd = $sql_upd . " embedurl = '" . $embedurl . "'"; 
+       $some = true;
+     }
+
   if ($some == true) {
 
     if ($source == "deskfm") {
@@ -147,7 +156,8 @@ $uname = $_GET['uname'];
            $b2->dfdate = $row['twdate'];
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
- 
+           $b2->embedurl = $row['embedurl'];
+
      if ($groupid != "null") {
         $sql_upd = "update dfm_people set group_id ='" . $groupid ."' where person_id = '" . $uname . "'"; 
         $result = mysql_query($sql_upd);

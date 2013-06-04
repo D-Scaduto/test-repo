@@ -25,74 +25,39 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-      lbl = this.spotid + "_dasbox";
+     lbl = this.spotid + "_dasbox";
       ocl = this.varname+ ".check_local();";
 
-         tmpstr = tmpstr + "<input id='"+lbl+"' size=22  onkeyup='"+ocl+"' >";
+     tmpstr = tmpstr + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
 
-         tmpstr = tmpstr + "<span id='search_btns' >";
-         tmpstr = tmpstr + "</span>";
-
+     ocl= this.varname + ".check_central();";
+     tmpstr = tmpstr + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmpstr;
-      this.draw_btns();
       this.showing = true;
    } 
 
-     cls = 'spotd_on';
-     lbl = 'search_toggle_btn';
-
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+   lbl = this.spotid + "_btn";
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
        if (is_ie) {
-         pobj.className = cls;
+         pobj.className = "spotd_on";
        } else {
-         pobj.setAttribute("class",cls);
+         pobj.setAttribute("class","spotd_on");
        }
-     }
-
-
-   sal.draw_vman();
+   }
 
    if (pname == "debug") {
      this.draw_debug();
    }
 }
 
-searcher.prototype.draw_btns = function() {
 
-   var tmpstr = "";
-   var cls="";
-   var pobj = null;
-   var lbl = "";
-   var ocl="";
+searcher.prototype.change = function() {
 
-      lbl = 'search_central_btn';
-      ocl= this.varname + ".check_central();";
-      tmpstr = tmpstr + "<span  class='spotd_off' onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  style='vertical-align:top;' >";
-      tmpstr = tmpstr + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
-      tmpstr = tmpstr + "</span>";
-
-   lbl = this.spotid;
-   lbl = "search_btns";
-   if (document.getElementById(lbl) != null) {
-      document.getElementById(lbl).innerHTML=tmpstr;
-   } 
 }
-
-
-searcher.prototype.toggle_shape = function() {
-
-  if (this.shape == "on") {
-    this.shape = "off";
-  } else {
-     this.shape = "on";
-  }
-  this.show();
-}
-
 
 searcher.prototype.check_local = function() {
 
@@ -137,27 +102,22 @@ searcher.prototype.hide = function() {
    var cls="";
 
    lbl = this.spotid;
-//   lbl = "share_spot_rung_0";
 
    pobj = document.getElementById(lbl);
    if (pobj != null) {
        pobj.innerHTML=tmpstr; 
        this.showing = false;
-       var se = this.boss + ".show();";
-       eval(se);
    }
 
-     cls = 'spotd_off';
-     lbl = 'search_toggle_btn';
-
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+   lbl = this.spotid + "_btn";
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
        if (is_ie) {
-         pobj.className = cls;
+         pobj.className = "spotd_off";
        } else {
-         pobj.setAttribute("class",cls);
+         pobj.setAttribute("class","spotd_off");
        }
-     }
+   }
 
 }
 

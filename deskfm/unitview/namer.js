@@ -12,12 +12,6 @@ poster.prototype.draw_name = function() {
    var tlink = "";
    var s = "";
 
-   if (this.parvar == "nicky") {
-        s =  this.rungster+"_name_spot";
-        jesie.say_hi(s);
-
-   } else {
-
     tmp  = this.uname;
 
     if (this.source == "twitter") {
@@ -30,9 +24,7 @@ poster.prototype.draw_name = function() {
       if ( document.getElementById(lbl) != null ) {
         document.getElementById(lbl).innerHTML= tmp;
      }
-   }
-
- 
+     
 }
 
 
