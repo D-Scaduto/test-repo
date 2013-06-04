@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+  <session-config>
+    <session-timeout>   30     </session-timeout>
+  </session-config>
+  
+  <welcome-file-list>
+    <welcome-file> index.jsp </welcome-file>
+  </welcome-file-list>
+
+  <security-constraint>
+    <web-resource-collection>
+      <url-pattern>/admin2</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+       <role-name>user</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+
+  <security-role>
+    <role-name>user</role-name>
+  </security-role>  
+
+</web-app>
