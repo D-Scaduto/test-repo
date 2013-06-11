@@ -47,7 +47,7 @@ if (isset($_GET['lim'])) {
 
 $chunk_start = $chunk * $limit;
 
-$con = mysql_connect("localhost", "root", "");
+$con = mysql_connect("$Server", "$username", "$password");
 
   $where = "";
 
