@@ -52,8 +52,10 @@ poster.prototype.get_embed = function() {
      var pobj=null;
      var lbl = "";
 
-       if ((this.embedurl != undefined) && (this.embedurl == "")) {      
-           tlink = this.embedurl;
+       if ((this.embedurl != undefined) && (this.embedurl != "")) {      
+
+         tlink = this.embedurl;
+       }
 
          tmpstr = tmpstr + " <div> ";
          lbl = this.spotid+"_"+tspot+"_embed_addr";
@@ -71,7 +73,7 @@ poster.prototype.get_embed = function() {
            tmpstr = tmpstr + " </div> ";
          }
 
-       }
+       
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {

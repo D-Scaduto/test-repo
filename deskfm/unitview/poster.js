@@ -134,6 +134,7 @@ poster.prototype.set_ppid = function(pdadex) {
        var ocl="";
        var cls = "";
 
+
     if ((buddah == true) || (this.parvar == "nicky")) {
 
     if (this.listype != "people") { 

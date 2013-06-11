@@ -1,5 +1,5 @@
 <?php
-include 'names.php';
+include '../../config/names.php';
 
 class foo { 
    public $pid; 

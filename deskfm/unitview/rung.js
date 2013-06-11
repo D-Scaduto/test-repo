@@ -76,8 +76,12 @@
 
           }
 
+
       this.nav_btns();
+
+     if (this.btnson == true) {
       this.work_btns();
+     }
 
      if ((this.btnson == true) && (buddah == true))  {
        if (this.parvar != "nicky") {
