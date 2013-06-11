@@ -3,27 +3,6 @@
 
 
 
-a:link{
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium;
-text-decoration:none; 
-}
-
-a:visited{
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium;
-text-decoration:none;  
-}
-
-a:active{
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium; 
-text-decoration:none;  
-}
-
 
 .text_on {
 font-family: sans-serif;

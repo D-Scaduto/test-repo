@@ -1,7 +1,8 @@
 
 
 poster.prototype.draw_story = function() {
-   var tmpstr="";
+
+   var tmp="";
    var pobj=null;
    var lbl = "";
    var ocl = "";
@@ -10,16 +11,14 @@ poster.prototype.draw_story = function() {
    var tspot  = this.rung;
    var urlts= null;
 
-   if (this.story == undefined) {
-      return;
-   }
-
        var tiesto = this.story;
- 
-       if (this.story != "") {
+
+       ocl = this.varname + ".get_story();";
+       tmp = tmp + "<span onclick='"+ocl+"' onmouseover='' onmouseout='' >";
+
+       if ((this.story != "") && (this.story != null)) { 
 
          tiesto = this.story.replace(/<br>/gi,"\n");
-         ocl = "";
 
           var exp2 = new RegExp(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
           this.urls=[];
@@ -41,19 +40,21 @@ poster.prototype.draw_story = function() {
              ps = ps + " ... ";
           }
 */
-          tmpstr = tmpstr + ps;
+          tmp = tmp + ps;
 
       } else {
           if (this.parvar == "nicky") {
-             tmpstr = tmpstr + this.preseter.provider.preset_story(this.preset);
-          }
+               tmp = tmp + " share words, pics, and links about standing desks and healthy workspace ... ";
+          } else {
+	tmp = tmp + " " ;
+	  }
       }
 
-      lbl = this.spotid;
-      lbl = lbl +'_'+tspot;
-      lbl = lbl + '_story_spot';
+      tmp = tmp + "</span>";
+
+      lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
-         document.getElementById(lbl).innerHTML= tmpstr;
+         document.getElementById(lbl).innerHTML= tmp;
       }
 }
 
@@ -70,11 +71,6 @@ poster.prototype.get_story = function() {
      var tiesto = this.story;
 
          tiesto = this.story.replace(/<br>/gi,"\n");
-         if (tiesto == "") { 
-            if (this.parvar == "nicky") {
-              tiesto = this.preseter.provider.preset_story(this.preset);
-            }
-         }
          var oku = this.varname + ".update_story();";
          tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' class='getstory' onkeyup='"+oku+"' >";
          tmpstr = tmpstr + tiesto;
@@ -109,6 +105,7 @@ poster.prototype.update_story = function() {
           this.story = bill.replace(/["']{1}/gi,"");
           this.story = bill.replace(/[\n]{1}/gi,"<br>");
           this.changed = true;
+	  this.story_changed = true;
           this.change_btns(); 
           obj.focus();
       }

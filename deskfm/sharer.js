@@ -18,9 +18,11 @@ sharer.prototype.show = function() {
     var pobj = null;
     var tmp = "";
     var lbl = "";
+    var ocl = "";
 
-    tmp = tmp + "<div id='share_spot_rung_0' class='' style='width:300px;' >";
-    tmp = tmp + "</div>";
+    tmp = tmp + "<span id='share_spot_rung_0' class='sbox' style='' >";
+    tmp = tmp + "</span>";
+
 
     lbl = this.spotid;
     pobj = document.getElementById(lbl);
@@ -29,9 +31,10 @@ sharer.prototype.show = function() {
       this.showing = true;
       this.newster.build_rung();
       this.newster.draw_rung();
+//      jesie.say_hi('name_spot');
    }
  
-   lbl = this.spotid + "_btn";
+   lbl = "share_btn";
    pobj = document.getElementById(lbl);
    if (pobj != null) {
        if (is_ie) {
@@ -108,8 +111,9 @@ sharer.prototype.toggle = function() {
 
 
 sharer.prototype.hide = function() {
-     this.newster.hide_rung(); 
-     this.showing = false;
+
+//     this.newster.hide_rung(); 
+
 
        var tmp = "";
        var lbl = "";
@@ -117,11 +121,12 @@ sharer.prototype.hide = function() {
     lbl = this.spotid;
     pobj = document.getElementById(lbl);
     if (pobj != null) {
-      pobj = tmp;
+      pobj.innerHTML = tmp;
+      this.showing = false;
     }
  
  
-   lbl = this.spotid + "_btn";
+   lbl = "share_btn";
    pobj = document.getElementById(lbl);
    if (pobj != null) {
        if (is_ie) {
@@ -156,6 +161,27 @@ sharer.prototype.gplus_render = function() {
 
 }
 
+sharer.prototype.tweet_btn = function() {
+
+                cls='spotd_off';
+                lbl = this.spotid + "_" + tspot + "_tweetbtn";
+                moin = "markyd(\""+lbl+"\");";
+                mout = "unmarkyd(\""+lbl+"\");";
+                ocl='';
+                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
+                var twparams='?count=none';
+                twparams = twparams + "&text="+escape(this.story);
+/*
+                if (this.linkurl != "") {
+                  twparams = twparams + "&url="+escape(this.linkurl);
+                } else {
+                  twparams = twparams + "&url="+escape("http://deskfm.com");
+                }
+*/
+                tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
+                tmp = tmp + "</span>";
+}
+              
 
 sharer.prototype.fbsend_btn = function() {
    var s="script";

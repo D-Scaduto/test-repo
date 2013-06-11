@@ -164,7 +164,7 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
 }
 
 categor.prototype.change = function () {
-
+   this.show();
 }
 
 

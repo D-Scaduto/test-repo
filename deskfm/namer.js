@@ -1,8 +1,11 @@
   
 
-function namer () {
+function namer (pspotid) {
 
    this.spotid = "";
+   if (pspotid != undefined) {
+      this.spotid = pspotid;
+   }
    this.tmp_name = "";
    this.pname = "";
    this.name_source = "deskfm";
@@ -10,13 +13,80 @@ function namer () {
 
 }
 
-namer.prototype.get_name = function(pspotid) {
-    if (pspotid != undefined) {
-      this.spotid = pspotid
-    }
-    var tmp = "";
 
-    tmp =tmp + "<span class=spotd_off  onclick='jesie.findme();' > ";
+namer.prototype.show = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var moin = "";
+    var mout= "";
+
+    lbl = "name_talk";
+    ocl = "";
+    moin = "markyd(\""+lbl+"\");";
+    mout = "unmarkyd(\""+lbl+"\");";
+    tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='spotd_off' style='' >";
+    tmp = tmp + "";
+    tmp = tmp + "</span>";
+
+    lbl = "name_share";
+    tmp = tmp + "<span id='"+lbl+"'  style='vertical-align:top;' >";
+    tmp = tmp + "</span>";
+
+
+    if (document.getElementById(this.spotid)!=null) {
+        document.getElementById(this.spotid).innerHTML=tmp; 
+	this.say_hi();
+	this.share_btns();
+    } 
+}
+
+
+namer.prototype.share_btns = function() {
+
+	var tmp = "";
+	var lbl = "";
+	var moin = "";
+	var mout = ""
+        var cls = "";
+
+                var twparams='?count=none';
+                twparams = twparams + "&text="+escape(this.story);
+/*
+                if (this.linkurl != "") {
+                  twparams = twparams + "&url="+escape(this.linkurl);
+                } else {
+                  twparams = twparams + "&url="+escape("http://deskfm.com");
+                }
+*/
+                tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' style='vertical-align:top;' > </a>";
+
+//       tmp=tmp +"<span class='fb-send' data-href='http://www.deskfm.com' style='vertical-align:top;'  ></span>";
+       tmp=tmp +"<span class='fb-like' data-send='false' data-layout='button_count' data-width='90' data-show-faces='false' data-href='' ></span>";
+//       tmp=tmp +"<div class='fb-like' data-send='true' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' ></div>";
+//       tmp=tmp +"<img src='deskfm/images/random/facebook-small.png' height='20px' >";
+
+
+       lbl = this.spotid +  "_google_btn";
+//       tmp=tmp +"<g:plusone></g:plusone>";
+       tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' data-width='40'  >";
+       tmp=tmp +"</span>";
+
+     lbl = "name_share";
+     if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML= tmp;
+        this.fb_render();
+        this.gplus_render();
+     } 
+
+}
+              
+
+namer.prototype.get_name = function() {
+    var tmp = "";
+    var lbl = "";
+
+    tmp =tmp + "<span class='spotd_off'  onclick='jesie.findme();' > ";
     tmp = tmp + "what\'s your name ?";
     tmp =tmp + "</span>";
 
@@ -29,21 +99,19 @@ namer.prototype.get_name = function(pspotid) {
 
     tmp =tmp + "<input size=8 value='"+tval+"' id='pname_box' onclick='' > ";
 
-    if (document.getElementById(this.spotid)!=null) {
-        document.getElementById(this.spotid).innerHTML=tmp; 
+    lbl = "name_talk";
+    if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML=tmp; 
     } 
 }
 
 
-namer.prototype.say_hi = function(pspotid) {
-     if (pspotid != undefined) {
-      this.spotid = pspotid
-    }
+namer.prototype.say_hi = function() {
       var tmp = ""; 
-       var ocl ="";
-       var lbl = "";
+      var ocl ="";
+      var lbl = "";
 
-       if ( (this.pname != "") || (this.tmp_name != ""))  {
+      if ( (this.pname != "") || (this.tmp_name != ""))  {
 
        lbl = "getname_btn";
        var moin = "markyd(\""+lbl+"\");";
@@ -74,18 +142,14 @@ namer.prototype.say_hi = function(pspotid) {
            tmp = tmp + "</span>";
         }
 
-        lbl = this.spotid;
+        lbl = "name_talk";
         if (document.getElementById(lbl)!=null) {
            document.getElementById(lbl).innerHTML= tmp;
         } 
 }
 
 
-namer.prototype.space_me = function(pspotid) {
-   if (pspotid != undefined) {
-      this.spotid = pspotid
-    }
-
+namer.prototype.space_me = function() {
      var tmpstr = "";
      var lbl = "";
         tmpstr = tmpstr + "<span class='spotd_off'  onclick='jesie.say_hi();'  >";
@@ -93,7 +157,7 @@ namer.prototype.space_me = function(pspotid) {
         tmpstr = tmpstr + "</span>";
         tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.say_hi();' > y </span>";
         tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.amnesiate();' > n </span>";
-     lbl = this.spotid;
+     lbl = "name_talk";
      if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmpstr; 
      } 
@@ -137,18 +201,16 @@ namer.prototype.findme = function() {
 }
 
 namer.prototype.dejavu = function(pspotid) {
-     if (pspotid != undefined) {
-      this.spotid = pspotid
-    }
-
 
      var tmpstr = "";
+     var lbl = "";
      tmpstr = tmpstr + "been here before ?<br> ";
      tmpstr = tmpstr + " <input  type='button' value='yes' onclick='jesie.whichone();'  >";
      tmpstr = tmpstr + " <input  type='button' value='no' onclick='jesie.addName();'  >";
 
-     if (document.getElementById(this.spotid)!=null) {
-        document.getElementById(this.spotid).innerHTML= tmpstr;
+     lbl = "name_talk";
+     if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML= tmpstr;
      } 
 }
 
@@ -172,5 +234,40 @@ namer.prototype.pname_toggle = function() {
      }
    }
 }
+
+
+
+
+namer.prototype.gplus_render = function() {
+
+    var po = document.createElement('script');
+    po.type='text/javascript';
+    po.async= true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po,s);
+
+}
+
+
+namer.prototype.fb_render = function() {
+   var s="script";
+   var id="facebook-jssdk";
+   var js,fjs=document.getElementsByTagName(s)[0];
+
+   if(!document.getElementById(id)) {
+       js=document.createElement(s);
+       js.id=id;
+       js.src="//connect.facebook.net/en_US/all.js#xfbml=l";
+//       js.src="//connect.facebook.net/en_US/all.js#xfbml=l&appId=191528434226668";
+       fjs.parentNode.insertBefore(js,fjs);
+    }
+}
+
+
+
+
+
+
 
 

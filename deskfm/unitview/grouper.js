@@ -70,6 +70,7 @@ poster.prototype.update_groups = function() {
             if (this.groupid != tmpgrp) {
               this.groupid = tmpgrp;
               this.changed = true;
+	      this.group_changed = false;
             }
             this.change_btns();
         }
@@ -81,6 +82,7 @@ poster.prototype.set_group = function(pgroupid) {
       if (pgroupid != undefined) {
            this.groupid = pgroupid;
            this.changed = true;
+	   this.group_changed = false;
            this.draw_groups();
            this.change_btns();
       } 

@@ -1,4 +1,6 @@
 
+
+
 function menu_item (pbtn,pvar) {
   this.btn = "";
   this.varname = "";
@@ -19,6 +21,7 @@ function header (pspotid) {
 
    this.mainmenu = [];
    this.main_shape = "";
+   this.was_shape = "";
 
 }
 
@@ -30,42 +33,35 @@ header.prototype.show = function() {
      var omo = "";
      var omt = "";
      var cls = "";
-     var i =0;
 
 
-    if (is_mobile == true) { 
-
-       tmp = tmp + "<div style='clear:left;'></div>";
-
-       lbl = "menu_btns";
-       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:350px;' >";
-       tmp = tmp + "</div>";
-
-       lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:350px;' >";
-       tmp = tmp + "</div>";
-
-
-    } else { 
-
-       tmp = tmp + "<div id='share' class='' style='float:right;width:300px;' >";
-       tmp = tmp + "</div>";
-
-       lbl = "menu_btns";
-       tmp = tmp + "<span id='"+lbl+"' style='clear:left;float:left;background-color:white;min-width:350px;' >";
+       lbl = "search_btn";
+       ocl = this.varname + ".set_mainshape(\"\");";
+       ocl = ocl + "wanda.toggle();";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' class='spotd_off' style='background-color:white;' >";
+       tmp = tmp + "search";
        tmp = tmp + "</span>";
 
-       tmp = tmp + "<div style='clear:left;'></div>";
+       lbl = "menu_btns";
+       tmp = tmp + "<span id='"+lbl+"' class='' style='background-color:white;' >";
+       tmp = tmp + "</span>";
+
+       lbl = "share_btn";
+       ocl = this.varname + ".set_mainshape(\"\");";
+       ocl = ocl + "nicky.toggle();";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' class='spotd_off' style='background-color:white;' >";
+       tmp = tmp + "share";
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<br>"; 
 
        lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;width:350px;' >";
-       tmp = tmp + "</div>";
-
-
-       tmp = tmp + "<div style='clear:left;'></div>";
-
-
-    } 
+       tmp = tmp + "<span id='"+lbl+"' class='' style='background-color:white;width:350px;' >";
+       tmp = tmp + "</span>";
  
 
      lbl = this.spotid;
@@ -88,8 +84,6 @@ header.prototype.draw_mainmenu = function() {
      var cls = "";
      var i =0;
 
-   if (this.mainmenu.length > 1) {
-
       for (i=0;i<this.mainmenu.length;i++) {
           lbl = this.mainmenu[i].btn + "_btn";
           omo = "markyd(\""+lbl+"\");";
@@ -104,9 +98,6 @@ header.prototype.draw_mainmenu = function() {
           tmp = tmp + this.mainmenu[i].btn;
           tmp = tmp + "</span>";
       }
-
-
-   }
 
      lbl = "menu_btns";
      pobj = document.getElementById(lbl);
@@ -198,11 +189,18 @@ header.prototype.del_mainspot = function(pbtn) {
 
 
 header.prototype.set_mainshape = function(pstr) {
+  var tshape = "";
   if (pstr != undefined ) {
-    if (pstr != this.main_shape) {
+	 tshape = pstr;
+  }
+    if (tshape != this.main_shape) {
+       this.was_shape = this.main_shape;
        this.main_shape = pstr;
     }
-  }
+    if (this.main_shape != "" ) {
+	    nicky.hide();
+	    wanda.hide();
+    }
   this.draw_mainmenu();
 }
 

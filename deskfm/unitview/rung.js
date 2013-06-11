@@ -77,9 +77,9 @@
           }
 
       this.nav_btns();
+      this.work_btns();
 
      if ((this.btnson == true) && (buddah == true))  {
-       this.work_btns();
        if (this.parvar != "nicky") {
          if (this.listype == "webits") {
            this.draw_catsel();
@@ -126,7 +126,7 @@
 
            if (this.is_mini == true) {
 
-                tmpstr=tmpstr+"<div style='background-color:white;' >"; 
+                tmpstr=tmpstr+"<span style='background-color:white;' >"; 
 
                 lbl= this.spotid + "_" + lspot + "_nav_btns";
                 tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
@@ -169,14 +169,14 @@
                 tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off'  style=''  >"; 
     	        tmpstr=tmpstr+"</div>";
 
-    	        tmpstr=tmpstr+"</div>";
+    	        tmpstr=tmpstr+"</span>";
 
            } else {
 
 
               if (this.listype == "people") {
 
-                  tmpstr=tmpstr+"<div style='background-color:white;' >"; 
+                  tmpstr=tmpstr+"<span style='background-color:white;' >"; 
 
                   lbl= this.spotid + "_" + lspot + "_" + "name" + "_spot";
                   cls="spotd_off";
@@ -220,34 +220,36 @@
                   tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='display:inline-block;'  >"; 
                   tmpstr=tmpstr+"</div>";
 
-                  tmpstr=tmpstr+"</div>"; 
+                  tmpstr=tmpstr+"</span>"; 
 
                } else {
 
-                  tmpstr=tmpstr+"<div style='background-color:white;' >"; 
+                  tmpstr=tmpstr+"<span style='' >"; 
 
-                  tmpstr=tmpstr+"<div>";
-                  lbl= this.spotid + "_" + lspot + "_nav_btns";
-                  tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
-    	          tmpstr=tmpstr+"</span>";
 
-	          lbl= this.spotid + "_" + lspot + "_" + "send_btns";
-                  tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
-    	          tmpstr=tmpstr+"</span>";
+		  if (this.parvar != "nicky" ) {
+                    tmpstr=tmpstr+"<div>";
+                    lbl= this.spotid + "_" + lspot + "_nav_btns";
+                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
+      	            tmpstr=tmpstr+"</span>";
 
-                  if (this.listype == "products") {
-                    lbl= this.spotid + "_" + lspot + "_" + "buy"+ "_spot";
-                    tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style='float:right;' >"; 
-                    tmpstr=tmpstr+"</span>";
-                  } else {
-                    lbl= this.spotid + "_" + lspot + "_" + "name" + "_spot";
-                    cls="spotd_off";
-	            tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='float:right;' >"; 
-                    tmpstr=tmpstr+"</span>";
-                  }
-                  tmpstr=tmpstr+"</div>";
+	            lbl= this.spotid + "_" + lspot + "_" + "send_btns";
+                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
+    	            tmpstr=tmpstr+"</span>";
 
-                  tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+                    if (this.listype == "products") {
+                      lbl= this.spotid + "_" + lspot + "_" + "buy"+ "_spot";
+                      tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style='float:right;' >"; 
+                      tmpstr=tmpstr+"</span>";
+                    } else {
+                      lbl= this.spotid + "_" + lspot + "_" + "name" + "_spot";
+                      cls="spotd_off";
+	              tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='float:right;' >"; 
+                      tmpstr=tmpstr+"</span>";
+                    }
+                    tmpstr=tmpstr+"</div>";
+                    tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+		  }
 
                   lbl= this.spotid + "_" + lspot + "_" + "pic" + "_spot";
                   ocl=this.varname+".toggle_piczoom();";
@@ -311,7 +313,7 @@
                   tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off'  style='vertical-align:top;background-color:white;'  >"; 
     	          tmpstr=tmpstr+"</div>";
 
-    	          tmpstr=tmpstr+"</div>";
+    	          tmpstr=tmpstr+"</span>";
 
            } 
 

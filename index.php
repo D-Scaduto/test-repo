@@ -124,33 +124,32 @@ header('X-Frame-Options: SAMEORIGIN');
 
            draw_main();
 
-           sal = new logoman("logo_lbtn");
-           daviewer = new viewer("main_view","daviewer");
+           sal = new logoman("logo");
+           sal.show();
+	   
            jesie = new namer();
            cater = new categor("menu_bar");
-           store = new shoper("shop");
-           nicky = new sharer("share");
-           wanda = new searcher("menu_bar","cater");
+           store = new shoper("menu_bar");
+           nicky = new sharer("menu_bar");
+           wanda = new searcher("menu_bar");
            amare = new stater();
 
       diego = new header("menu");
-      diego.add_mainspot("search","wanda");
       diego.add_mainspot("browse","cater");
       diego.main_shape = "browse";
+      diego.show();
 
-        if (is_mobile == true) {
+      daviewer = new viewer("main_view","daviewer");
+
+       if (is_mobile == true) {
            da_limit = 250;
            daviewer.top_end = 25;
 
-        } else {
+       } else {
            da_limit = 1000;
            daviewer.top_end = 100;
-        }
-
-      diego.show();
-
-      sal.draw_vman();
-      sal.draw_logo('logo_spot',35);
+       }
+;
 
     amare.get_stats();
     amare.get_providers();
@@ -158,21 +157,17 @@ header('X-Frame-Options: SAMEORIGIN');
     amare.get_webits();
 
     $(window).resize(function() {
-
       var width = $(this).width();
       var height = $(this).height();
        if (width < 650) {
          if (is_mobile != true) {
            is_mobile = true;
-           diego.show();
          }
        } else {
          if (is_mobile == true) {
             is_mobile = false;
-            diego.show();
          }
        }
-
     });
 
 

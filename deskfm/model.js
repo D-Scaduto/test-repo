@@ -33,29 +33,25 @@ function draw_main() {
            tmp = tmp + "</div>";
       }
 
-       tmp = tmp + "<span style='background-color:white;width:400x;float:left;border-style:solid;border-width:5px;border-color:silver;' >";
-
-       lbl = "logo_lbtn";
-       tmp = tmp + "<span id='"+lbl+"' style='background-color:white;float:left;vertical-align:top;' onclick='sal.change_vman();' >";
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span style='background-color:white;' >";
-       lbl = "logo_spot";
-       tmp = tmp + "<div id='"+lbl+"' style='background-color:white;' >";
-       tmp = tmp + "</div>";
-       tmp = tmp + "<div style='background-color:white;width:350px;max-width:450px;' >";
-       tmp = tmp+ "<span id='top_rail' style='vertical-align:top;background-color:white;' >";
-       tmp = tmp+"</span>";
-       tmp = tmp + "</div>";
-       tmp = tmp + "</span>";
-
+       tmp = tmp + "<span  id='logo' style='background-color:white;width:400x;float:left;border-style:solid;border-width:5px;border-color:silver;padding:3px;' >";
        tmp = tmp + "</span>";
 
        lbl = "menu";
-       tmp = tmp + "<span id='"+lbl+"' style=''  >";
+       tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:3px;'  >";
        tmp = tmp + "</span>";
 
-       tmp = tmp + "<div id='main_view' style='' >";
+       lbl = "name_spot";
+       tmp = tmp + "<span id='"+lbl+"' style='padding:3px;width:250px;background-color:white;float:right;margin-right:50px;'  >";
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<div style='clear:left;clear:right;' ></div>";
+ 
+       tmp = tmp + "<span id='top_rail' style='float:right;width:300px;min-width:300px;background-color:white;border:3px solid grey;padding:3px;margin-right:50px;' >"
+       tmp = tmp + "</span>";
+      
+       tmp = tmp + "<span style='clear:right;' ></span>";
+
+       tmp = tmp + "<div id='main_view' class='mainlane' >";
        tmp = tmp + "</div>";
 
 

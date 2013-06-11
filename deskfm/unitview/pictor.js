@@ -8,32 +8,21 @@ poster.prototype.draw_pic = function() {
    var lbl = "";
    var wd ="75";
    var ps="";
-   var sty="";
+   
+   var cls="";
    var ocl = "";
+
       ps = this.picurl;
       if (ps != "") {
 
+	  cls = "piclip";
+	  if (is_mobile == true) {
+         	  cls = "picmobile";
+	  }
           if ((this.piczoom == true) || (daviewer.zoom == true))  {
-              wd = "200";
-              tmp=tmp + "<img src='"+ps+"'  width='"+wd+"px' style='"+sty+"'  >";
-          } else {
-              sty = "clip:rect(0px,100px,100px,0px);";
-              tmp=tmp + "<img src='"+ps+"'  width='"+wd+"px' style='"+sty+"'  >";
+              cls = "piczoom";
           }
-
-      } else {
-
-          if (this.parvar == "nicky") {
-              lbl= this.rungster+"_presog";
-              tmp=tmp + "<span id='"+lbl+"' class='spotd_off'  >";  
-              if (this.preseter != null) {
-                 ocl = this.varname + ".preseter.request_suggestions();"
-                 tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  >";  
-                 tmp = tmp + this.preseter.provider.preset_pic(this.preset);
-                 tmp = tmp + "</span>";
-              }
-              tmp = tmp + "</span>";
-          }
+          tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
 
       }
 
@@ -107,7 +96,8 @@ poster.prototype.get_pic = function() {
         eval(sobj);
 
         this.draw_pic();
-        this.changed = true;     
+        this.changed = true;
+	this.pic_changed = true;
         this.change_btns();
      }
    }
@@ -187,29 +177,6 @@ poster.prototype.toggle_getpic = function() {
 }
 
 
-poster.prototype.preset_pic = function(wdt) { 
-    var wd=50;
-    if (wdt != undefined) {
-      wd = wdt;
-    }
-    var tmpstr = "";
-    var pobj ="";
-    var lbl = "";
-
-    var s = this.parvar + ".preseto";
-    var e = eval(s);
-    if (e != null) {
-//alert(this.preseto.preset);
-       var tmpsrc = "http://www.deskfm.com/pics/vman/2d/";
-       tmpsrc = tmpsrc + e.preset; 
-       tmpsrc = tmpsrc + ".jpg";
-//     tmpsrc = tmpsrc + "-stand.jpg";
-//     var randomnumber=Math.floor(Math.random()*11);
-//     tmpsrc = tmpsrc +"?"+randomnumber;
-      tmpstr = "<img src='"+tmpsrc+"' width='"+wd+"px' >";
-    }
-    return  tmpstr;
-}  
 
 
 poster.prototype.toggle_piczoom = function() {
@@ -231,19 +198,5 @@ poster.prototype.set_piczoom = function(tbool) {
 }
 
 
-
-
-/* ****
-
-   if (this.dalist[tdex].source == "youtube") { 
-
-    imgstr=imgstr+"<iframe title='YouTube video player' class='youtube-player' type='text/html' ";
-       imgstr=imgstr+" width='"+wd+"' ";
-      imgstr=imgstr+" src='http://"+this.dalist[tdex].linkurl+"' ";
-      imgstr=imgstr+" frameborder='0'></iframe>";
-
-    } 
-
-****  */
 
 

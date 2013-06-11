@@ -11,7 +11,6 @@ header('X-Frame-Options: SAMEORIGIN');
 <title>deskfm.com</title>
 
 <script  type="text/javascript" >
-  var main_cols = 1;
   var is_ie = false;
   var is_mobile = false;
 </script>
@@ -107,6 +106,7 @@ header('X-Frame-Options: SAMEORIGIN');
   if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
     echo "<script  type='text/javascript' >";
     echo " is_ie = true; " ;
+    echo " is_mobile = true; ";
     echo "</script>";
   } else {
     echo " <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
@@ -126,7 +126,7 @@ header('X-Frame-Options: SAMEORIGIN');
   echo "</script>";
 ?>
 
-<div id='main_spot' style='background-color:silver;' >
+<div id='main_spot' style='background-color:silver;margin:0 auto;' >
 </div>
 
 <script type='text/javascript' >
@@ -138,31 +138,29 @@ header('X-Frame-Options: SAMEORIGIN');
 
    draw_main();
 
+   sal = new logoman("logo");
+   sal.show();
 
-   sal = new logoman("logo_lbtn");
-   daviewer = new viewer("main_view","daviewer");
-   jesie = new namer();
-   amare = new stater();
+   jesie = new namer("name_spot");
+   jesie.show();
 
    joe = new manager("menu_bar");
    wanda = new searcher("menu_bar");
    store = new shoper("menu_bar");
    mac = new farmer("menu_bar");
    walt = new sorter("menu_bar");
-
-   nicky = new sharer("share");
+   nicky = new sharer("menu_bar");
 
    diego = new header("menu");
-   diego.add_mainspot("search","wanda");
    diego.add_mainspot("browse","joe");
-   diego.main_shape = "browse";
    diego.add_mainspot("sort","walt");
    diego.add_mainspot("shop","store");
-   diego.add_mainspot("farm","mac");
+   diego.main_shape = "browse";
+   diego.show();
+
+   daviewer = new viewer("main_view","daviewer");
 
         if (is_mobile == true) {
-           diego.add_mainspot("share","nicky");
-           nicky.spotid = "menu_bar";
            da_limit = 250;
            daviewer.top_end = 25;
 
@@ -170,41 +168,28 @@ header('X-Frame-Options: SAMEORIGIN');
            da_limit = 1000;
            daviewer.top_end = 100;
         }
-
-    diego.show();
-    nicky.show()
-
-    sal.draw_vman();
-    sal.draw_logo('logo_spot',35);
-
-   amare.get_stats();
-   amare.get_products();
-   amare.get_providers();
-   amare.get_webits();
-   amare.get_people();
-   amare.get_unsorted();
+    
+    amare = new stater();
+    amare.get_stats();
+    amare.get_products();
+    amare.get_providers();
+    amare.get_webits();
+    amare.get_people();
+    amare.get_unsorted();
 
     $(window).resize(function() {
 
       var width = $(this).width();
       var height = $(this).height();
-       if (width < 750) {
+       if (width < 601) {
          if (is_mobile != true) {
-           is_mobile = true;
-           diego.add_mainspot("share","nicky");
-           nicky.spotid = "menu_bar";
-           nicky.newster.spotid = "menu_bar";
-           diego.show();
+		 is_mobile = true;
+		 daviewer.draw_screen();
          }
        } else {
-         if (is_mobile == true) {
-            is_mobile = false;
-            diego.del_mainspot("share");
-            nicky.spotid = "share";
-            nicky.newster.spotid = "share";
-            diego.show();
-            nicky.show()
-            daviewer.next();
+         if ((is_mobile == true) && (is_ie == false)) {
+		 is_mobile = false;
+		 daviewer.draw_screen();
          }
        }
 

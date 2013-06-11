@@ -187,19 +187,16 @@ viewer.prototype.draw_view = function() {
       st = 1;
     }
 
-//    tmpstr=tmpstr+"<ul>";
-
     while (ct < st) {
       if (this.darungs[ct] != undefined) {
          
           lbl = this.screen+"_rung_"+ct;
-          tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;'  >"; 
-          tmpstr=tmpstr+"</div>";
+          tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='vertical-align:top;'  >"; 
+          tmpstr=tmpstr+"</span>";
 
        }
      ct = ct + 1;
     }
-//    tmpstr=tmpstr+"</ul>";
 
     lbl = this.screen;
     if (document.getElementById(lbl)!= null) {

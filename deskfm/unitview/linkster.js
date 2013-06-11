@@ -13,12 +13,13 @@ poster.prototype.draw_link = function() {
        tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
        tmp = tmp + "link" 
        tmp = tmp + " </a> ";
+   }
        lbl = this.rungster + '_link_btn';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
          pobj.innerHTML = tmp;
        }
-   }
+   
 }
 
 
@@ -32,13 +33,8 @@ poster.prototype.get_link = function() {
      var pobj=null;
      var lbl = "";
 
-       if ((this.linkurl == undefined) || (this.linkurl == "")) {      
-         if (this.parvar == "nicky") {
-           tlink = this.preseter.provider.preset_link(this.preset);
-         }
-       } else {
+       if ((this.linkurl != undefined) || (this.linkurl != "")) {      
            tlink = this.linkurl;
-       }
 
          lbl = this.spotid+"_"+tspot+"_link_addr"; 
          ocl = this.varname + ".update_link();";
@@ -46,26 +42,14 @@ poster.prototype.get_link = function() {
          tmpstr = tmpstr + tlink;
          tmpstr = tmpstr + " </textarea> ";
 
-
+       }
        lbl = this.rungster + '_link_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
          pobj.innerHTML = tmpstr;
        }
-      
+       
 }
-
-
-poster.prototype.toggle_getlink = function() {
-
-    if (this.shape != "getlink") {
-       this.shape = "getlink";
-    } else {
-       this.shape = "";
-    }
-    this.redraw_rung();
-}
-
 
 
 
@@ -79,13 +63,27 @@ poster.prototype.update_link = function() {
      if (pobj != null ) {
         var tv = pobj.value;
         if ((tv != null) && (tv != undefined)) {
-          this.linkurl = tv;
+           this.linkurl = tv;
            this.changed = true;
+	   this.link_changed = true;
            this.change_btns();
         }
         pobj.focus();
      }
 }
+
+
+
+poster.prototype.toggle_getlink = function() {
+
+    if (this.shape != "getlink") {
+       this.shape = "getlink";
+    } else {
+       this.shape = "";
+    }
+    this.redraw_rung();
+}
+
 
 
 

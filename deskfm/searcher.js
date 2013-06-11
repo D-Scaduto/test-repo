@@ -39,7 +39,7 @@ searcher.prototype.show = function() {
       this.showing = true;
    } 
 
-   lbl = this.spotid + "_btn";
+   lbl =  "search_btn";
    pobj = document.getElementById(lbl);
    if (pobj != null) {
        if (is_ie) {
@@ -109,7 +109,7 @@ searcher.prototype.hide = function() {
        this.showing = false;
    }
 
-   lbl = this.spotid + "_btn";
+   lbl = "search_btn";
    pobj = document.getElementById(lbl);
    if (pobj != null) {
        if (is_ie) {

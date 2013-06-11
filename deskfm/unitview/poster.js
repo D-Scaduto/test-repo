@@ -64,8 +64,14 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.source = "deskfm";
    this.dadex=0;
    this.piczoom = false;
-   this.changed = false;
    this.color = "black";
+
+   this.changed = false;
+   this.pic_changed = false;
+   this.link_changed = false;
+   this.embed_changed = false;   
+   this.cat_changed = false;
+   this.group_changed = false;
 
 }
 
@@ -128,6 +134,8 @@ poster.prototype.set_ppid = function(pdadex) {
        var ocl="";
        var cls = "";
 
+    if ((buddah == true) || (this.parvar == "nicky")) {
+
     if (this.listype != "people") { 
          cls = 'spotd_off';
          ocl =  this.varname+".toggle_getlink();";
@@ -147,15 +155,13 @@ poster.prototype.set_ppid = function(pdadex) {
        tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
        tmp = tmp + "</span>"; 
 
-     lbl = this.spotid;
-     lbl = lbl +'_'+this.rung;
-     lbl = lbl + '_work_btns';
+    }
+     lbl = this.rungster + '_work_btns';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
      }
 }
-
 
 
 poster.prototype.nav_btns = function() {
@@ -421,13 +427,25 @@ poster.prototype.clear = function() {
      var prams = "?uname="+this.uname+"&source="+this.source;
 
      prams = prams + "&listype=webits";
-     prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
-     prams = prams + "&storycode="+storycode;
-     prams = prams + "&linkcode="+linkcode;
-     prams = prams + "&picode="+picode;
-     prams = prams + "&embedcode="+embedcode;
-     prams = prams + "&groupid="+this.groupid;
+     if (this.cat_changed == true) {
+       prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
+     }
+     if (this.story_changed == true) {
+       prams = prams + "&storycode="+storycode;
+     }
 
+     if (this.link_changed == true) {
+       prams = prams + "&linkcode="+linkcode;
+     }
+     if (this.pic_changed == true) {
+       prams = prams + "&picode="+picode;
+     }
+     if (this.embed_changed == true) {
+       prams = prams + "&embedcode="+embedcode;
+     }
+     if (this.group_changed == true) {
+       prams = prams + "&groupid="+this.groupid;
+     }
      var url = "deskfm/dbase/dfm_dbadd.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
@@ -448,12 +466,26 @@ poster.prototype.clear = function() {
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=webits";
      prams = prams + "&pid="+this.pid;
-     prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
-     prams = prams + "&storycode="+storycode;
-     prams = prams + "&linkcode="+linkcode;
-     prams = prams + "&embedcode="+embedcode;
-     prams = prams + "&picode="+picode;
-     prams = prams + "&groupid="+this.groupid;
+
+     if (this.cat_changed == true) {
+       prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
+     }
+     if (this.story_changed == true) {
+       prams = prams + "&storycode="+storycode;
+     }
+
+     if (this.link_changed == true) {
+       prams = prams + "&linkcode="+linkcode;
+     }
+     if (this.pic_changed == true) {
+       prams = prams + "&picode="+picode;
+     }
+     if (this.embed_changed == true) {
+       prams = prams + "&embedcode="+embedcode;
+     }
+     if (this.group_changed == true) {
+       prams = prams + "&groupid="+this.groupid;
+     }
 
      var url = "deskfm/dbase/update_webit.php"+prams;
 //     alert(url);

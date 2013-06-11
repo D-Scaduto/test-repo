@@ -10,7 +10,7 @@ poster.prototype.draw_embed = function() {
   var pobj=null;
   var lbl = "";
 
-   if ((this.embedurl != "") && (this.embedurl != undefined)) { 
+       if ((this.embedurl != "") && (this.embedurl != undefined)) { 
 
         cls = 'spotd_off';
         ocl =  ocl + this.varname+".toggle_embed();";
@@ -32,35 +32,12 @@ poster.prototype.draw_embed = function() {
            tmp = tmp + " </iframe> ";
            tmp = tmp + " </div> ";
          }
-
+       }
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
          pobj.innerHTML = tmp;
        }
-
-  
-   } else {
-
-       if (this.parvar == "nicky") {
-
-         if (this.link_embed == true ) {
-           tlink = this.preseter.provider.preset_embed(this.preset);
-           tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";
-           tmp = tmp + "<iframe src='"+tlink+"' style='width:250px;' ";
-           tmp = tmp + " scrolling='no'  width='250' height='200' > ";
-           tmp = tmp + " </iframe> ";
-           tmp = tmp + " </div> ";
-         }
-
-       }
-
-       lbl = this.rungster + '_embed_spot';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
-       }
-  }
    
 }
 
@@ -75,13 +52,8 @@ poster.prototype.get_embed = function() {
      var pobj=null;
      var lbl = "";
 
-       if ((this.linkurl == undefined) || (this.linkurl == "")) {      
-         if (this.parvar == "nicky") {
-            tlink = this.preseter.provider.preset_embed(this.preset);
-         }
-       } else {
+       if ((this.embedurl != undefined) && (this.embedurl == "")) {      
            tlink = this.embedurl;
-       }
 
          tmpstr = tmpstr + " <div> ";
          lbl = this.spotid+"_"+tspot+"_embed_addr";
@@ -99,12 +71,13 @@ poster.prototype.get_embed = function() {
            tmpstr = tmpstr + " </div> ";
          }
 
+       }
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
          pobj.innerHTML = tmpstr;
        }
-      
+
 }
 
 
@@ -120,6 +93,7 @@ poster.prototype.update_embed = function() {
         if ((tv != null) && (tv != undefined)) {
           this.embedurl = tv;
           this.changed = true;
+	  this.embed_changed = true;
           this.change_btns();
         }
         pobj.focus();

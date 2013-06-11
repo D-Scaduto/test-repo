@@ -2,10 +2,180 @@
 function logoman (pspot) {
 
   this.spotid = pspot;
+  this.varname= "sal";
+  this.shape="deskfm";
+
+  this.preset = "sitonly";
+  this.preseter = new suggester("logo_sog",new preset_provider(), this.varname +".preseter",this.varname);
+
+  this.show3d = true;
   this.flip =0;
-  this.logo_shape="standing";
 }
 
+
+logoman.prototype.show = function () {
+
+   var lbl = "";
+   var tmp = "";
+   var ocl = "";
+   var cls = "";
+
+       lbl = "logo_sog";
+       tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:4px;' >";
+       tmp = tmp + "</span>";
+
+       lbl = "logo_spot";
+       tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
+       tmp = tmp + "</span>";
+
+       lbl = "logo_story";
+       tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<div id='logo_3dview' class='' style='width:300px;' >";
+       tmp = tmp + "</div>";
+
+       tmp = tmp + "<div style='clear:left;' ></div>";
+
+   lbl = this.spotid;
+   if (document.getElementById(lbl) !=null) {
+         document.getElementById(lbl).innerHTML=tmp;
+
+	 this.draw_preman();
+      	 this.draw_vman();
+         this.draw_logo(35);
+         this.draw_story();
+	 if (this.show3d == true) {
+           this.draw_3dview();
+	 }
+   }
+}
+
+logoman.prototype.set_preset = function (tpreset) {
+   this.preset = tpreset;
+   this.draw_preman();
+   this.draw_story();
+	 if (this.show3d == true) {
+           this.draw_3dview();
+	 }
+}
+
+
+logoman.prototype.toggle_3dview = function () {
+
+     if (this.show3d == true) {
+          this.hide_3dview();
+     } else {
+	  this.draw_3dview();
+     }
+}
+
+logoman.prototype.draw_share = function () {
+
+     var lbl = "";
+     var tmp = "";
+     var twparams='?count=none';
+     twparams = twparams + "&text="+escape(this.story)
+     tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
+
+     lbl = "logo_share";
+     if (document.getElementById(lbl) !=null) {
+         document.getElementById(lbl).innerHTML=tmp;
+               if (twttr != undefined) {
+                 if (twttr.widgets != undefined) {
+                   twttr.widgets.load();
+                 }
+               }
+     }
+
+}
+
+
+logoman.prototype.draw_preman = function () {
+
+     var lbl = "";
+     var tmp = "";
+              if (this.preseter != null) {
+                 ocl = this.varname + ".preseter.request_suggestions();"
+                 tmp = tmp + "<span id='' onclick='"+ocl+"'  >";  
+                 tmp = tmp + this.preseter.provider.preset_pic(this.preset);
+                 tmp = tmp + "</span>";
+              }
+
+     lbl = "logo_sog";
+     if (document.getElementById(lbl) !=null) {
+         document.getElementById(lbl).innerHTML=tmp;
+     }
+
+}
+
+
+logoman.prototype.draw_story = function() {
+
+  var tmp = "";
+  var tlink = "";
+  var ocl="";
+  var pobj=null;
+  var lbl = "";
+
+       tmp = "";
+       tmp = tmp + " <div class='spotd_off' style='width:250px;margin:0 auto;' > ";
+       tmp = tmp +  this.preseter.provider.preset_story(this.preset);
+
+       tmp = tmp + " </div> ";
+
+       lbl = 'logo_story';
+       pobj = document.getElementById(lbl);
+       if ( pobj != null) {
+         pobj.innerHTML = tmp;
+       }
+}
+
+
+logoman.prototype.draw_3dview = function() {
+
+  var tmp = "";
+  var tlink = "";
+  var ocl="";
+  var pobj=null;
+  var lbl = "";
+
+       tmp = "";
+           tlink = this.preseter.provider.preset_embed(this.preset);
+           tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";
+           tmp = tmp + "<iframe src='"+tlink+"' style='width:250px;' ";
+           tmp = tmp + " scrolling='no'  width='250' height='200' > ";
+           tmp = tmp + " </iframe> ";
+           tmp = tmp + " </div> ";
+
+       lbl = 'logo_3dview';
+       pobj = document.getElementById(lbl);
+       if ( pobj != null) {
+         pobj.innerHTML = tmp;
+	 this.show3d = true;
+       }
+   
+}
+
+
+logoman.prototype.hide_3dview = function() {
+
+  var tmp = "";
+  var tlink = "";
+  var ocl="";
+  var pobj=null;
+  var lbl = "";
+
+       tmp = "";
+
+       lbl = 'logo_3dview';
+       pobj = document.getElementById(lbl);
+       if ( pobj != null) {
+         pobj.innerHTML = tmp;
+	 this.show3d = false
+       }
+   
+}
 
 logoman.prototype.change_vman = function () {
 
@@ -16,14 +186,10 @@ logoman.prototype.change_vman = function () {
    this.draw_vman();
 }
 
-logoman.prototype.draw_vman = function (papnd) {
+logoman.prototype.draw_vman = function () {
 
    var lbl = "";
-   lbl = this.spotid;
-
-   if (papnd != undefined) {
-      lbl = lbl + papnd;
-   }
+   
    var tmpstr = "";
    var tmpsrc = "";
    var vm = "";
@@ -59,16 +225,17 @@ logoman.prototype.draw_vman = function (papnd) {
      var ht = '';
      ht = '40px';
      tmpstr="<img src='"+tmpsrc+"' onClick='' height='"+ht+"' >";
-   if (document.getElementById(lbl) !=null) {
+
+     lbl = "logo_lbtn";
+     if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
-   }
+     }
 }
 
 
 logoman.prototype.waiting = function () {
 
    var lbl = "";
-   lbl = this.spotid;
 
    var tmpstr = "";
    var tmpsrc = "";
@@ -77,34 +244,54 @@ logoman.prototype.waiting = function () {
    tmpsrc = "deskfm/images/random/loading-go.gif";
    tmpstr="<img src='"+tmpsrc+"' height='40px' onClick='' >";
 
+   lbl = this.spotid + "_lbtn";
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
    }
 }
 
+logoman.prototype.set_shape = function (psz) {
+	this.shape = psz;
+	this.draw_logo();
+}
 
-logoman.prototype.draw_logo = function (plbl,psz) {
+logoman.prototype.draw_logo = function (psz) {
 
-  var sz = "35";
-  if (psz != undefined) {
+   var sz = "35";
+   if (psz != undefined) {
     sz= psz;
-  }
-  var tmpstr = "";
-  var lbl = "";
+   }
+   var tmpstr = "";
+   var lbl = "";
    var tmpsrc = "";
    var vm = "";
    var dt = new Date();
+   var ocl = "";
 
-
-            lbl = plbl + '_logo_lspot';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"standing");
+   if (this.shape == "deskfm") {
+            lbl = this.spotid + '_logo_lspot';
+    	    ocl = this.varname + ".set_shape(\"freedom\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"Desk");
             tmpstr=tmpstr+"</span>";
 
-            lbl = plbl + '_logo_rspot';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"desks");
+            lbl = this.spotid + '_logo_rspot';
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"FM");
             tmpstr=tmpstr+"</span>";
+   } 
+   if (this.shape == "freedom") {
+            lbl = this.spotid + '_logo_lspot';
+	    ocl = this.varname + ".set_shape(\"deskfm\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"Desk");
+            tmpstr=tmpstr+"</span>";
+
+            lbl = this.spotid + '_logo_rspot';
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"FreedoM");
+            tmpstr=tmpstr+"</span>";
+   } 
 
 
    lbl = "logo_spot";

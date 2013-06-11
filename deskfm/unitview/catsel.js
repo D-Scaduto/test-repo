@@ -83,6 +83,7 @@ poster.prototype.set_cat = function(pcat) {
            this.cat = pcat;
            this.subcat = "";
            this.changed = true;
+	   this.cat_changed = true;
            this.dacater.hide_suggestions(); 
 
            if (this.cat != "junk") {

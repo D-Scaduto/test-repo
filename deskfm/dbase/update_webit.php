@@ -28,7 +28,11 @@ class bar {
 
 $ret = new bar;
 
-$dfdate = $_GET['dfdate'];
+$dfdate = "null"; 
+if (isset($_GET['dfdate'])) {
+ $dfdate = $_GET['dfdate'];
+}
+
 $listype = 'webits';
 $source = $_GET['source'];
 
@@ -71,7 +75,7 @@ $uname = $_GET['uname'];
 
 $con = mysql_connect($Server, $username, $password);
 
-   mysql_select_db($db_name, $con);
+ mysql_select_db($db_name, $con);
 
  $sql_upd="";
  $some = false;
@@ -125,7 +129,8 @@ $con = mysql_connect($Server, $username, $password);
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
     }
 
-//      echo $sql_upd  . " \n <br> " ;
+    //      echo $sql_upd  . " \n <br> " ;
+    $result = "";
     $result = mysql_query($sql_upd);
     //  echo $result . " \n <br> ";
   }
@@ -168,11 +173,11 @@ $con = mysql_connect($Server, $username, $password);
 
         $ret->pobj = $b2;
 
-      if (($picsrc != "null" ) && ($picsrc != ""))  {
-          $prefix = "http://www.deskfm.com/pics/tmp/";
-          $picslice = substr($picsrc,strlen($prefix));
-          $cognopos = strrpos($picsrc,"."); 
-          $cognomen = substr($picsrc,$cognopos);
+      if (($picurl != "null" ) && ($picurl != ""))  {
+          $prefix = "http://" . $Server . "/pics/tmp/";
+          $picslice = substr($picurl,strlen($prefix));
+          $cognopos = strrpos($picurl,"."); 
+          $cognomen = substr($picurl,$cognopos);
           $ret->cognomen = $cognomen;
           $picfile = $pid . $cognomen; 
           $cpsrc = "../../pics/tmp/" . $picslice;
@@ -181,7 +186,7 @@ $con = mysql_connect($Server, $username, $password);
           $ret->cpdest = $cpdest;
           $res = copy ($cpsrc,$cpdest);
           $ret->resultcp = $res;
-          $picaddr = "http://www.deskfm.com/pics/keepers/" . $picfile;
+          $picaddr = $Server . "/pics/keepers/" . $picfile;
       }
 
 

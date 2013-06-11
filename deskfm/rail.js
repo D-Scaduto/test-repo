@@ -3,6 +3,8 @@ viewer.prototype.draw_rail = function() {
     var pobj=null;
     var lbl = "";
     var tmp = "";
+    var omo = "";
+    var omt = "";
 
 /*
     lbl = this.screen + "_set0";
@@ -14,9 +16,11 @@ viewer.prototype.draw_rail = function() {
 */
 
     lbl = this.screen + "_prev";
+    omo = "markyd(\""+lbl+"\");";
+    omt = "unmarkyd(\""+lbl+"\");";
     cls = "spotd_off";
     ocl = this.varname + ".prev();";
-    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='' onmouseout='' >";
+    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
     tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
     tmp = tmp + "</span>";
 
@@ -24,10 +28,12 @@ viewer.prototype.draw_rail = function() {
     tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
     tmp = tmp + "</span>";
 
-    lbl = this.screen + "_next";
+    lbl = this.screen + "_next"
+    omo = "markyd(\""+lbl+"\");";
+    omt = "unmarkyd(\""+lbl+"\");";
     cls = "spotd_off";
     ocl = this.varname + ".next();";
-    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='' onmouseout='' >";
+    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
     tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
     tmp = tmp + "</span>";
 
@@ -70,17 +76,17 @@ viewer.prototype.draw_index = function() {
      var ocl = "";
 
       lbl = this.screen + '_indexbtn';
-       cls='spotd_off';
-       ocl = 'daviewer.toggle_zoom();';   
+      cls='spotd_off';
+      ocl = 'daviewer.toggle_zoom();';   
     
-        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
       var n = this.listdex + 1;
-       tmp = tmp + n;
-        tmp = tmp + "</span>";
+      tmp = tmp + n;
+      tmp = tmp + "</span>";
 
-         tmp = tmp + "<span  class='spotd_off' >";
-        tmp = tmp + " of ";
-        tmp = tmp + "</span>";
+      tmp = tmp + "<span  class='spotd_off' >";
+      tmp = tmp + " of ";
+      tmp = tmp + "</span>";
 
      lbl = this.screen + '_index';
 

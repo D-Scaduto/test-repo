@@ -31,9 +31,15 @@ include 'names.php';
 
 $limit = 50;
 
+$yr = "null";
+if (isset($_GET['yr'])) {
+  $yr = $_GET['yr'];
+}
 
-$yr = $_GET['yr'];
-$mon = $_GET['mon'];
+$mon = "null";
+if (isset($_GET['on'])) {
+  $mon = $_GET['mon'];
+}
 
 $chunk = 0;
 if (isset($_GET['chunk'])) {
@@ -41,11 +47,17 @@ if (isset($_GET['chunk'])) {
 }
 $rebar->dachunk = $chunk;
 
-$sterms="";
-$sterms = $_GET['sterms'];
+$sterms = "";
+if (isset($_GET['sterms'])) { 
+  $sterms = $_GET['sterms'];
+}
 
-$week = $_GET['week'];
+$week = "null";
+if (isset($_GET['week'])) {
+	$week = $_GET['week'];
+}
 
+$limit = 100;
 if (isset($_GET['lim'])) {
   $limit = $_GET['lim'];
 }
@@ -97,13 +109,13 @@ $where = "";
   }
 
 
-  if ($mon != "" ) {
+  if ($mon != "null" ) {
 
       $where = $where . " and " ;
     $where = $where . " Month(twdate) = " . $mon . " ";
   }
 
-  if ($yr != "" ) { 
+  if ($yr != "null" ) { 
       $where = $where . " and " ;
     $where = $where . " Year(twdate) = 20" . $yr . " ";
   }
