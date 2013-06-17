@@ -1,23 +1,24 @@
 
 
-function searcher (pspotid,pboss) { 
+function searcher (pspotid) { 
 
    this.spotid = pspotid;
-   this.boss = pboss;
    this.varname = "wanda";
    this.showing = false;
-   this.shape = "off";
+   this.shape = "solo";  // menued
+
    this.sterms = "";
    this.full_check = false;
    this.cat = "";
    this.subcat = "";
-   this.prodid = ""; 
+   this.prodid = "";
+
 }
 
 
 searcher.prototype.show = function() {
 
-   var tmpstr = "";
+   var tmp = "";
    var cls="";
    var pobj = null;
    var lbl = "";
@@ -25,29 +26,36 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-     lbl = this.spotid + "_dasbox";
-      ocl = this.varname+ ".check_local();";
+     lbl = "search_btn";
+     tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='' >";
+     tmp = tmp + "search";
+     tmp = tmp + "</span>";
 
-     tmpstr = tmpstr + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
+     lbl = this.spotid + "_dasbox";
+     ocl = this.varname+ ".check_local();";
+
+     tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
 
      ocl= this.varname + ".check_central();";
-     tmpstr = tmpstr + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
+     tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
-      document.getElementById(lbl).innerHTML=tmpstr;
+      document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
    } 
 
-   lbl =  "search_btn";
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       if (is_ie) {
-         pobj.className = "spotd_on";
-       } else {
-         pobj.setAttribute("class","spotd_on");
-       }
-   }
+
+          lbl =  "search_btn";
+          pobj = document.getElementById(lbl);
+          if (pobj != null) {
+            if (is_ie) {
+              pobj.className = "spotd_on";
+            } else {
+              pobj.setAttribute("class","spotd_on");
+            }
+          }
+	
 
    if (pname == "debug") {
      this.draw_debug();

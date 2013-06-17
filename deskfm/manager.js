@@ -30,64 +30,6 @@ manager.prototype.show = function() {
      var omt = "";
      var s = "";
 
-     tmp = tmp + "<span id='mgr_topbar' onclick=''  class='spotd_off' >";
-
-     if (this.shape == "")  {
-       lbl = "mgr_webits_btn";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       ocl = "joe.set_shape(\"webits\");";
-       cls = "spotd_off";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "webits";
-       tmp = tmp + "</span>";
-
-       lbl = "mgr_people_btn";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       ocl = "joe.set_shape(\"people\");";
-       cls = "spotd_off";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "people";
-       tmp = tmp + "</span>";
-
-       lbl = "mgr_products_btn";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       ocl = "joe.set_shape(\"products\");";
-       cls = "spotd_off";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "products";
-       tmp = tmp + "</span>";
-     } else {
-
-       tmp = tmp + "<span id='' onclick='joe.set_shape(\"\");'  class='spotd_on' >";
-       tmp = tmp + this.shape;
-       tmp = tmp + "</span>";
-     }
-
-     tmp = tmp + "</span>";
-
-
-          if (this.shape == "webits") {
-
-            tmp = tmp + "<span id='cat_sog' >";
-            ocl = 'joe.dacater.request_suggestions(\"\");';
-            tmp = tmp + "<span onclick='"+ocl+"'  class='spotd_off' >";
-            tmp = tmp + this.cat;
-            tmp = tmp + "</span>";
-            tmp = tmp + "</span>";
-
-            tmp = tmp + "<span id='subcat_sog' >";
-            ocl = 'joe.subcater.request_suggestions(\"'+this.cat+'\");';
-            tmp = tmp + "<span onclick='"+ocl+"'  class='spotd_off' >";
-            s = this.subcater.provider.get_desc(this.cat,this.subcat);
-            tmp = tmp + s;
-            tmp = tmp + "</span>";
-            tmp = tmp + "</span>";
-          }
-
-          if (this.shape == "people") {
             tmp = tmp + "<span id='group_sog' >";
             ocl = 'joe.grouper.request_suggestions(\"\");';
             tmp = tmp + "<span onclick='"+ocl+"'  class='spotd_off' >";
@@ -95,19 +37,6 @@ manager.prototype.show = function() {
             tmp = tmp + s;
             tmp = tmp + "</span>";
             tmp = tmp + "</span>";
-          }
-
-          if (this.shape == "products") {
-            tmp = tmp + "<span id='prod_sog' >";
-            ocl = 'joe.producter.request_suggestions(\"\");';
-            tmp = tmp + "<span onclick='"+ocl+"' class='spotd_off'  >";
-            s = this.producter.provider.get_desc(this.prodid);
-            tmp = tmp + s;
-            tmp = tmp + "</span>";
-            tmp = tmp + "</span>";
-          }
-
-          tmp = tmp + "</span>";
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);

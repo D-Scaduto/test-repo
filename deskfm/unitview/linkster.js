@@ -9,17 +9,37 @@ poster.prototype.draw_link = function() {
   var ps = "";
   var pobj=null;
   var lbl = "";
+
    if ((this.linkurl != "") && (this.linkurl != undefined)) { 
        tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
        tmp = tmp + "link" 
        tmp = tmp + " </a> ";
-   }
+
        lbl = this.rungster + '_link_btn';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
          pobj.innerHTML = tmp;
        }
-   
+
+   } else {
+	/*
+        if (this.parvar == "nicky") {
+                 ocl = this.varname + ".set_shape(\"getlink\");";
+		 lbl = this.rungster + "_getlinkbtn";
+		 cls = "spotd_off";
+                 tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
+                 tmp = tmp + "share a link"
+                 tmp = tmp + "</span>";
+
+                 lbl = this.rungster + '_link_spot';
+                 pobj = document.getElementById(lbl);
+                 if ( pobj != null) {
+                   pobj.innerHTML = tmp;
+                 }
+	}
+	*/
+   }
+     
 }
 
 
@@ -33,6 +53,14 @@ poster.prototype.get_link = function() {
      var pobj=null;
      var lbl = "";
 
+        if (this.parvar == "nicky") {
+		 lbl = this.rungster + "_getlinkbtn";
+		 cls = "spotd_off";
+                 tmpstr = tmpstr + "<div id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
+                 tmpstr = tmpstr + "post a link";
+                 tmpstr = tmpstr + "</div>";
+        }
+
        if ((this.linkurl != undefined) || (this.linkurl != "")) {      
            tlink = this.linkurl;
 
@@ -42,7 +70,11 @@ poster.prototype.get_link = function() {
          tmpstr = tmpstr + tlink;
          tmpstr = tmpstr + " </textarea> ";
 
+       } else {
+
+  
        }
+
        lbl = this.rungster + '_link_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {

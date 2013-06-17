@@ -56,9 +56,7 @@ a:active{
        zoom: 1;
        *display: inline;
        overflow:auto;
-       border-style:solid;
-       border-color:silver;
-       border-width:2px;
+       min-width:350px;
      }
 
     .cbox {
@@ -81,42 +79,12 @@ a:active{
 	 width:100px;
      }
 
-
-
-@media screen and (min-width:600px) {
-
-     .mainlane {
-      margin:0 auto;
-     }
-
-    .box {
-       background-color:white;
-       display: -moz-inline-stack;
-       display: inline-block;
-       zoom: 1;
-       *display: inline;
-       overflow:auto;
-       border-style:solid;
-       border-color:silver;
-       border-width:2px;
-       min-height:150px;
-       width:550px;
-     }
-
-
-     .logo {
-      background-color:white;
-      width:550px;
-      max-width:550px;
-     }
-
      .story {
        font-family: sans-serif;
        font-weight:normal;
-       font-size:large;
+       font-size:medium;
        vertical-align:top;
-       display:inline-block;
-       width:350px;
+       width:250px;
      }
 
      .getstory {
@@ -124,16 +92,11 @@ a:active{
        font-weight:normal;
        font-size:medium;
        vertical-align:top;
-       display:inline-block;
-       width:350px;
-       height:100px;
+       width:250px;
+       height:50px;
      }
 
-
-}
-
-
-@media screen and (min-width:800px) {
+@media screen and (max-width:699px) {
      .mainlane {
 	margin:0 auto;
      }
@@ -142,27 +105,9 @@ a:active{
       float:left;
       background-color:white;
       width:400px;
-      max-width:400px;
      }
 
-     .story {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       display:inline-block;
-       width:250px;
-     }
 
-     .getstory {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       display:inline-block;
-       width:250px;
-       height:75px;
-     }
 
     .box {
        background-color:white;
@@ -175,14 +120,13 @@ a:active{
        border-style:solid;
        border-color:silver;
        border-width:2px;
-       width:350px;
-       max-width:350px;
+       min-width:600px;
        min-height:125px;
     }
 
 }
 
-@media screen and (min-width:1000px) {
+@media screen and (min-width:700px) {
      .mainlane {
 	margin:0 auto;
      }
@@ -194,24 +138,6 @@ a:active{
       max-width:400px;
      }
 
-     .story {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       display:inline-block;
-       width:150px;
-     }
-
-     .getstory {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       display:inline-block;
-       width:200px;
-       height:75px;
-     }
 
     .box {
        background-color:white;
@@ -224,8 +150,7 @@ a:active{
        border-style:solid;
        border-color:silver;
        border-width:2px;
-       width:275px;
-       max-width:275px;
+       width:300px;
        min-height:75px;
     }
 
@@ -250,7 +175,7 @@ font-weight:normal;
 font-size:medium;
 }
 
-
+   
 .spotd_off {
 border-color:white;
 border-style:solid;
@@ -320,6 +245,5 @@ font-size:medium;
   right: 0;
   top: 0;
   padding: 3px 0 0 3px;
-//  position:absolute;
 }
 

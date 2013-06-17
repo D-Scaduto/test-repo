@@ -59,10 +59,8 @@ viewer.prototype.draw_rail = function() {
     if ( pobj != null) {
         pobj.innerHTML = tmp;
         this.draw_chipbar();
-        if (buddah == true) {
-          this.draw_index();
-          this.draw_listmax();
-        }
+        this.draw_index();
+        this.draw_listmax();
     }
 }
 

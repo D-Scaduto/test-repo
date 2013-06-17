@@ -3,12 +3,16 @@ function logoman (pspot) {
 
   this.spotid = pspot;
   this.varname= "sal";
-  this.shape="deskfm";
+  this.shape="standing";
 
   this.preset = "sitonly";
   this.preseter = new suggester("logo_sog",new preset_provider(), this.varname +".preseter",this.varname);
 
   this.show3d = true;
+  if (is_mobile == true) {
+	  this.show3d = false;
+  }
+
   this.flip =0;
 }
 
@@ -20,6 +24,7 @@ logoman.prototype.show = function () {
    var ocl = "";
    var cls = "";
 
+   
        lbl = "logo_sog";
        tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:4px;' >";
        tmp = tmp + "</span>";
@@ -27,15 +32,32 @@ logoman.prototype.show = function () {
        lbl = "logo_spot";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
+ 
+      
 
        lbl = "logo_story";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
 
+
+
+       tmp = tmp + "<div class='elem' >";
+
+       lbl = "logo_btn3d";
+       ocl = "sal.toggle_3dview();";
+       cls = "endlabel";
+       moin = "";
+       mout = "";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' style='' >";
+       tmp = tmp + " 3D ";
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<p>";
        tmp = tmp + "<div id='logo_3dview' class='' style='width:300px;' >";
        tmp = tmp + "</div>";
+       tmp = tmp + "</p>";
+       tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='clear:left;' ></div>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -292,7 +314,18 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr = tmpstr + table_word(lbl,"FreedoM");
             tmpstr=tmpstr+"</span>";
    } 
+   if (this.shape == "standing") {
+            lbl = this.spotid + '_logo_lspot';
+//	    ocl = this.varname + ".set_shape(\"deskfm\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"Standing");
+            tmpstr=tmpstr+"</span>";
 
+            lbl = this.spotid + '_logo_rspot';
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"Desks");
+            tmpstr=tmpstr+"</span>";
+   } 
 
    lbl = "logo_spot";
    if (document.getElementById(lbl) !=null) {

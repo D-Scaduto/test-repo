@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8 ');
 header('X-Frame-Options: SAMEORIGIN');
 ?>
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
@@ -69,22 +69,18 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/farmer.js type="text/javascript" ></script>
 <script src=deskfm/manager.js type="text/javascript" ></script>
 <script src=deskfm/header.js type="text/javascript" ></script>
-
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
-
-
 <script src="deskfm/twitter/tws_front.js"></script>
 <script src="deskfm/twitter/tws_back.js"></script>
+
 
 <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 
 <!--
-
 <script src=deskfm/twitter/news.js type="text/javascript" ></script>
 <script src='http://widgets.twimg.com/j/2/widget.js' type="text/javascript"  ></script>
-
 -->
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
@@ -93,9 +89,30 @@ header('X-Frame-Options: SAMEORIGIN');
 
 <body style='background-color:silver;' >
 
-<div id="fb-root"></div> 
-<script src=deskfm/fbooker.js type="text/javascript" ></script>
+<div id="fb-root"></div>
+<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
+<script src=deskfm/fbooker.js type="text/javascript" >
+if (is_ie == false) {
+   FB.init({
+      appId  : '191528434226668',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true,  // parse XFBML
+      oauth  : true
+   });
 
+      // Load the SDK asynchronously
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+}
+
+</script>
 <?php 
   include 'deskfm/browsers.php';
   if (is_mobile()) {
@@ -109,8 +126,10 @@ header('X-Frame-Options: SAMEORIGIN');
     echo " is_mobile = true; ";
     echo "</script>";
   } else {
-    echo " <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
+
   }
+
+
   $phgname = "null";
   if (isset($_GET['pname'])) {
    $phgname = $_GET['pname'];
@@ -126,8 +145,20 @@ header('X-Frame-Options: SAMEORIGIN');
   echo "</script>";
 ?>
 
-<div id='main_spot' style='background-color:silver;margin:0 auto;' >
+<div >
+
+<div id='main_spot' style='background-color:silver;margin:0 auto;' >a
 </div>
+
+
+
+
+</div>
+<div style='clear:left;' ></div> 
+
+<div id='main_view' class='mainlane' >
+</div>
+
 
 <script type='text/javascript' >
 
@@ -136,38 +167,51 @@ header('X-Frame-Options: SAMEORIGIN');
 
    buddah=true;
 
-   draw_main();
 
    sal = new logoman("logo");
-   sal.show();
-
-   jesie = new namer("name_spot");
-   jesie.show();
-
-   joe = new manager("menu_bar");
-   wanda = new searcher("menu_bar");
-   store = new shoper("menu_bar");
-   mac = new farmer("menu_bar");
-   walt = new sorter("menu_bar");
-   nicky = new sharer("menu_bar");
-
-   diego = new header("menu");
-   diego.add_mainspot("browse","joe");
-   diego.add_mainspot("sort","walt");
-   diego.add_mainspot("shop","store");
-   diego.main_shape = "browse";
-   diego.show();
-
    daviewer = new viewer("main_view","daviewer");
+   jesie = new namer("name_spot");
 
-        if (is_mobile == true) {
+  
+   nicky = new sharer("share_spot");
+
+   if (is_mobile == true) {
+
            da_limit = 250;
            daviewer.top_end = 25;
 
-        } else {
+
+
+    } else {
+
            da_limit = 1000;
-           daviewer.top_end = 100;
-        }
+	   daviewer.top_end = 100;
+    }
+
+
+           joe = new farmer("menu_bar");
+           store = new shoper("menu_bar");
+           mac = new farmer("menu_bar");
+	   walt = new sorter("menu_bar");
+	   cater = new categor("menu_bar");
+	   wanda = new searcher("menu_bar");
+           joe = new manager("menu_bar");
+
+	   diego = new header("menu");
+	   diego.add_mainspot("search","wanda");
+	   diego.add_mainspot("browse","cater");
+           diego.add_mainspot("contact","joe");
+	   diego.add_mainspot("sort","walt");
+           diego.add_mainspot("farm","mac");
+           diego.add_mainspot("shop","store");
+	   diego.main_shape = "browse";
+
+	   draw_main();
+           sal.show();
+	   diego.show();
+
+    nicky.show();
+    jesie.show();
     
     amare = new stater();
     amare.get_stats();
@@ -181,14 +225,16 @@ header('X-Frame-Options: SAMEORIGIN');
 
       var width = $(this).width();
       var height = $(this).height();
-       if (width < 601) {
+       if (width < 700) {
          if (is_mobile != true) {
-		 is_mobile = true;
-		 daviewer.draw_screen();
+	      is_mobile = true;
+	      sal.hide_3dview();
+	      daviewer.draw_screen();
          }
        } else {
          if ((is_mobile == true) && (is_ie == false)) {
 		 is_mobile = false;
+		 sal.draw_3dview();
 		 daviewer.draw_screen();
          }
        }
@@ -196,17 +242,8 @@ header('X-Frame-Options: SAMEORIGIN');
     });
 
 
-/*
-if (is_ie == false) {
-   FB.init({
-      appId  : '191528434226668',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth  : true
-   });
-}
-*/
+
+
 
 </script>
 

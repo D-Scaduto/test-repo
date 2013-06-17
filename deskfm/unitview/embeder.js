@@ -4,34 +4,40 @@ poster.prototype.draw_embed = function() {
 
   var tspot = this.rung; 
   var tmp = "";
-  var tlink = "";
+  var elink = "";
   var ocl="";
   var ps = "";
   var pobj=null;
   var lbl = "";
 
+
        if ((this.embedurl != "") && (this.embedurl != undefined)) { 
+           elink = this.embedurl;
+       } else {
 
-        cls = 'spotd_off';
-        ocl =  ocl + this.varname+".toggle_embed();";
-        tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
-        tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-        tmp = tmp + "</span>";
+       }
 
-       lbl = this.rungster + '_embed_btn';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
+       if (elink != "") {
+       	  cls = 'spotd_off';
+          ocl =  ocl + this.varname+".toggle_embed();";
+          tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
+          tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+          tmp = tmp + "</span>";
+
+          lbl = this.rungster + '_embed_btn';
+          pobj = document.getElementById(lbl);
+          if ( pobj != null) {
+           pobj.innerHTML = tmp;
+         }
        }
  
        tmp = "";
-       if (this.embed_show == true ) {
+       if ((this.embed_show == true ) && (elink != "")) {
            tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";
-           tmp = tmp + "<iframe src='"+this.embedurl+"' style='width:250px;' ";
+           tmp = tmp + "<iframe src='"+elink +"' style='width:250px;' ";
            tmp = tmp + " scrolling='no'  width='250' height='200' > ";
            tmp = tmp + " </iframe> ";
            tmp = tmp + " </div> ";
-         }
        }
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
@@ -51,10 +57,18 @@ poster.prototype.get_embed = function() {
      var ps = "";
      var pobj=null;
      var lbl = "";
+      
+       if (this.parvar == "nicky") {
+		 lbl = this.rungster + "_getlinkbtn";
+		 cls = "spotd_off";
+                 tmpstr = tmpstr + "<div id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
+                 tmpstr = tmpstr + "embed media";
+                 tmpstr = tmpstr + "</div>";
+        }
 
        if ((this.embedurl != undefined) && (this.embedurl != "")) {      
-
          tlink = this.embedurl;
+       } else {
        }
 
          tmpstr = tmpstr + " <div> ";

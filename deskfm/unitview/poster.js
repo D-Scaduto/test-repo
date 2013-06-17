@@ -1,10 +1,10 @@
 
 
-function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) { 
+function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) { 
 
    this.spotid = idtogo;
    this.parvar = tparvar;
-   this.varname = tvarnam;
+   this.varname = tvarname;
    this.rung = trung;
    this.listype = tlistype;
    this.is_mini = false;
@@ -31,7 +31,7 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.link_tmp;
 
    this.embedurl = "";
-   this.embedshow = false;
+   this.embed_show = false;
    this.embed_tmp;
 
    this.urls = [];
@@ -42,7 +42,6 @@ function poster(idtogo,trung,tparvar,tvarnam,tlistype,bimini) {
    this.preset = "sitonly";
    if (this.parvar == "nicky")  { 
      this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.varname);
-     this.link_embed=true;
    }
 
    this.cat ="";
@@ -136,6 +135,11 @@ poster.prototype.set_ppid = function(pdadex) {
 
 
     if ((buddah == true) || (this.parvar == "nicky")) {
+
+       cls = 'spotd_off';
+       tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".toggle_getstory();' >";  
+       tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
+       tmp = tmp + "</span>"; 
 
     if (this.listype != "people") { 
          cls = 'spotd_off';

@@ -75,7 +75,6 @@ header('X-Frame-Options: SAMEORIGIN');
 </head>
 
 <body style='background-color:silver;' >
-
 <div id="fb-root"></div> 
 <script src=deskfm/fbooker.js type="text/javascript" ></script>
 
@@ -114,31 +113,38 @@ header('X-Frame-Options: SAMEORIGIN');
   echo "</script>";
 ?>
 
-<div id='main_spot' style='background-color:silver;' >
+<div id='main_spot' style='background-color:silver;margin:0 auto;' >
 </div>
+
+<div style='clear:left;' ></div> 
+
+<div id='main_view' class='mainlane' >
+</div>
+
 
 <script type='text/javascript' >
 
    do_preload();
 //   init_months();
 
-           draw_main();
+ 
 
            sal = new logoman("logo");
-           sal.show();
+            nicky = new sharer("share_spot");
 	   
-           jesie = new namer();
+           jesie = new namer("name_spot");
            cater = new categor("menu_bar");
            store = new shoper("menu_bar");
-           nicky = new sharer("menu_bar");
+
            wanda = new searcher("menu_bar");
            amare = new stater();
 
       diego = new header("menu");
       diego.add_mainspot("browse","cater");
+      diego.add_mainspot("search","wanda");
       diego.main_shape = "browse";
-      diego.show();
 
+   
       daviewer = new viewer("main_view","daviewer");
 
        if (is_mobile == true) {
@@ -149,7 +155,13 @@ header('X-Frame-Options: SAMEORIGIN');
            da_limit = 1000;
            daviewer.top_end = 100;
        }
-;
+
+    draw_main();
+    sal.show();
+    diego.show();
+    nicky.show();
+    jesie.show();
+
 
     amare.get_stats();
     amare.get_providers();
@@ -159,13 +171,17 @@ header('X-Frame-Options: SAMEORIGIN');
     $(window).resize(function() {
       var width = $(this).width();
       var height = $(this).height();
-       if (width < 650) {
+      if (width < 801) {
          if (is_mobile != true) {
-           is_mobile = true;
+	      is_mobile = true;
+	      sal.hide_3dview();
+	      daviewer.draw_screen();
          }
        } else {
-         if (is_mobile == true) {
-            is_mobile = false;
+         if ((is_mobile == true) && (is_ie == false)) {
+		 is_mobile = false;
+		 sal.draw_3dview();
+		 daviewer.draw_screen();
          }
        }
     });

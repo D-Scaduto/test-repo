@@ -35,34 +35,24 @@ header.prototype.show = function() {
      var cls = "";
 
 
-       lbl = "search_btn";
-       ocl = this.varname + ".set_mainshape(\"\");";
-       ocl = ocl + "wanda.toggle();";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' class='spotd_off' style='background-color:white;' >";
-       tmp = tmp + "search";
-       tmp = tmp + "</span>";
-
        lbl = "menu_btns";
-       tmp = tmp + "<span id='"+lbl+"' class='' style='background-color:white;' >";
-       tmp = tmp + "</span>";
-
-       lbl = "share_btn";
-       ocl = this.varname + ".set_mainshape(\"\");";
-       ocl = ocl + "nicky.toggle();";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' class='spotd_off' style='background-color:white;' >";
-       tmp = tmp + "share";
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<br>"; 
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
+       tmp = tmp + "</div>";
 
        lbl = "menu_bar";
-       tmp = tmp + "<span id='"+lbl+"' class='' style='background-color:white;width:350px;' >";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
+       tmp = tmp + "</div>";
+
+       tmp = tmp + "<div style='width:300px;min-width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
+
+       tmp = tmp + "<span id='nitro_img' onclick='daviewer.toggle_nitro();' style='padding:3px;' >";
+
+       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
        tmp = tmp + "</span>";
- 
+
+       tmp = tmp + "<span id='top_rail' style='' >";
+       tmp = tmp + "</span>";
+       tmp = tmp + "</div>";
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -94,7 +84,7 @@ header.prototype.draw_mainmenu = function() {
           cls = "spotd_on";
           ocl = this.varname + ".change_mainitem("+i+");";
         }
-          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' style='padding:2px;'  >";
           tmp = tmp + this.mainmenu[i].btn;
           tmp = tmp + "</span>";
       }
@@ -196,10 +186,6 @@ header.prototype.set_mainshape = function(pstr) {
     if (tshape != this.main_shape) {
        this.was_shape = this.main_shape;
        this.main_shape = pstr;
-    }
-    if (this.main_shape != "" ) {
-	    nicky.hide();
-	    wanda.hide();
     }
   this.draw_mainmenu();
 }

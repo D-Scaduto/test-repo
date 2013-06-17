@@ -24,13 +24,22 @@ poster.prototype.draw_pic = function() {
           }
           tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
 
+      } else {
+
+	   /*
+           if (this.parvar == "nicky") {
+                 ocl = this.varname + ".set_shape(\"getpic\");";
+		 lbl = this.rungster + "_getpicbtn";
+		 cls = "spotd_off";
+                 tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
+                 tmp = tmp + "share a picture"
+                 tmp = tmp + "</span>";
+	   }
+	   */
+
       }
 
-      lbl = this.spotid;
-      if (tspot != undefined) {
-        lbl = lbl +'_'+tspot;
-      }
-      lbl = lbl + '_pic_spot';
+      lbl = this.rungster + '_pic_spot';
       if (document.getElementById(lbl) != null) {
         document.getElementById(lbl).innerHTML=tmp;
       }
@@ -45,24 +54,43 @@ poster.prototype.get_pic = function() {
    var wd ="75";
    var ps="";
 
-   this.draw_pic();
+     ps = this.picurl;
+      if (ps != "") {
 
-   if ((tspot != undefined) && (tspot != null)) {
-        lbl = this.spotid;
-        lbl = lbl +"_"+tspot+"_upic_frame_name";
+	  cls = "piclip";
+	  if (is_mobile == true) {
+         	  cls = "picmobile";
+	  }
+          if ((this.piczoom == true) || (daviewer.zoom == true))  {
+              cls = "piczoom";
+          }
+          tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
+
+      } else {
+
+           if (this.parvar == "nicky") {
+		 tmp = tmp + "<span class='spotd_off' >";
+                 tmp = tmp + "upload a picture";
+		 tmp = tmp + "</span>";
+	   }
+
+      }
+
+      lbl = this.rungster + '_pic_spot';
+      if (document.getElementById(lbl) != null) {
+        document.getElementById(lbl).innerHTML=tmp;
+      }
+
+        tmp = "";
+        lbl = this.rungster + "_upic_frame_name";
 
         tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='pics/uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";
         tmp = tmp + "</form>";   
-        lbl = this.spotid;
-        if (tspot != undefined) {
-          lbl = lbl +'_'+tspot;
-        }
-        lbl = lbl + '_getpic';
+        lbl = this.rungster + '_getpic';
         if (document.getElementById(lbl) != null) {  
           document.getElementById(lbl).innerHTML=tmp;
         }
-   }
 }
 
 

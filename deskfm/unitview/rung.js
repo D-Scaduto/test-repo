@@ -237,9 +237,10 @@
                     tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
       	            tmpstr=tmpstr+"</span>";
 
-	            lbl= this.spotid + "_" + lspot + "_" + "send_btns";
-                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
-    	            tmpstr=tmpstr+"</span>";
+	           
+  		    lbl = this.spotid +'_'+lspot + '_work_btns';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
+                    tmpstr = tmpstr + "</span>"; 
 
                     if (this.listype == "products") {
                       lbl= this.spotid + "_" + lspot + "_" + "buy"+ "_spot";
@@ -253,14 +254,29 @@
                     }
                     tmpstr=tmpstr+"</div>";
                     tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+
+		  } else {
+                    tmpstr=tmpstr+"<div>";
+
+                    lbl= this.spotid + "_" + lspot + "_" + "send_btns";
+                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
+    	            tmpstr=tmpstr+"</span>";
+
+  		    lbl = this.spotid +'_'+lspot + '_work_btns';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style='float:right;'  >";
+                    tmpstr = tmpstr + "</span>"; 
+                    tmpstr=tmpstr+"</div>";
+                    tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+
 		  }
 
-                  lbl= this.spotid + "_" + lspot + "_" + "pic" + "_spot";
+		  lbl= this.spotid + "_" + lspot + "_" + "pic" + "_spot";
                   ocl=this.varname+".toggle_piczoom();";
 	          tmpstr=tmpstr+"<span id='"+lbl+"' style='float:right;' onclick='"+ocl+"' >"; 
                   tmpstr=tmpstr+"</span>";
- 
-                  tmpstr=tmpstr+"<span id=''  class='story'   style='float:left' >"; 
+                 
+                  tmpstr=tmpstr+"<span id=''  class='spotd_off'   style='' >"; 
+
                   lbl= this.spotid + "_" + lspot + "_" + "story" + "_spot";
                   cls = 'spotd_off';
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class='"+cls+"'   style='' >"; 
@@ -275,10 +291,11 @@
 	          tmpstr=tmpstr+"</span>";
 
 	          tmpstr=tmpstr+"</span>";
-
+		  
                   tmpstr=tmpstr+"<div style='clear:left;' ></div>";
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
+                  tmpstr = tmpstr + "<div style='' >";
                   lbl = this.spotid +'_'+lspot + '_sort_btns';
                   tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
                   tmpstr = tmpstr + "</span>";
@@ -287,9 +304,7 @@
                   tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
                   tmpstr = tmpstr + "</span>";
 
-                  lbl = this.spotid +'_'+lspot + '_work_btns';
-                  tmpstr = tmpstr + "<span id='"+lbl+"'  style='float:right;'  >";
-                  tmpstr = tmpstr + "</span>";
+                 
 
                   tmpstr = tmpstr + "</div>";
 

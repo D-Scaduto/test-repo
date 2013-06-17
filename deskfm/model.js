@@ -27,37 +27,47 @@ function draw_main() {
    var tmp = "";
    var lbl = "";
 
-      if (pname == "debug") {
+       if (pname == "debug") {
            lbl = "header_debug";
            tmp = tmp + "<div id='"+lbl+"'  >";
            tmp = tmp + "</div>";
-      }
+       }
 
-       tmp = tmp + "<span  id='logo' style='background-color:white;width:400x;float:left;border-style:solid;border-width:5px;border-color:silver;padding:3px;' >";
-       tmp = tmp + "</span>";
+          tmp = tmp + "<span id='' style='width:350px;float:right;background-color:white;'  >";
 
-       lbl = "menu";
-       tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:3px;'  >";
-       tmp = tmp + "</span>";
+          lbl = "name_spot";
+          tmp = tmp + "<div id='"+lbl+"' style='float:right;padding:3px;width:150px;background-color:white;'  >";
+          tmp = tmp + "</div>";
 
-       lbl = "name_spot";
-       tmp = tmp + "<span id='"+lbl+"' style='padding:3px;width:250px;background-color:white;float:right;margin-right:50px;'  >";
-       tmp = tmp + "</span>";
+          tmp = tmp + "<div id='network_btns' class='' style='min-width:150px;width:200px;background-color:white;' >";
+          tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='clear:left;clear:right;' ></div>";
- 
-       tmp = tmp + "<span id='top_rail' style='float:right;width:300px;min-width:300px;background-color:white;border:3px solid grey;padding:3px;margin-right:50px;' >"
-       tmp = tmp + "</span>";
-      
-       tmp = tmp + "<span style='clear:right;' ></span>";
+       	  lbl = "share_spot";
+          tmp = tmp + "<div id='"+lbl+"' style='background-color:white;'  >";
+          tmp = tmp + "</div>";
 
-       tmp = tmp + "<div id='main_view' class='mainlane' >";
-       tmp = tmp + "</div>";
+          tmp = tmp + "</span>"; 
+	  
+
+          tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;'  >";
+          tmp = tmp + "</span>"; 
+
+
+          tmp = tmp + "<div style='clear:right;' ></div>";
+
+          tmp = tmp + "<div id='menu' style='width:350px;padding:5px;background-color:white;border:solid;border-width:5px;border-color:black;float:left;'  >";
+          tmp = tmp + "</div>";
+        
+
+          tmp = tmp + "<div style='clear:left;' ></div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
+
 
 
        var pobj = document.getElementById('main_spot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
+	  nicky.network_btns();
        }
 }
 

@@ -43,11 +43,9 @@ poster.prototype.draw_story = function() {
           tmp = tmp + ps;
 
       } else {
-          if (this.parvar == "nicky") {
-               tmp = tmp + " share words, pics, and links about standing desks and healthy workspace ... ";
-          } else {
-	tmp = tmp + " " ;
-	  }
+           if (this.parvar == "nicky") {
+                 tmp = tmp + "tell us about your standing desk "
+	   }
       }
 
       tmp = tmp + "</span>";
@@ -65,13 +63,21 @@ poster.prototype.get_story = function() {
    var lbl = "";
    var tspot  = this.rung;
    var ocl = "";
+   var oku = "";
    var urlts= null;
+   var tiesto = "";
 
    if (this.story != null) {
-     var tiesto = this.story;
+	tiesto = this.story;
+        tiesto = this.story.replace(/<br>/gi,"\n");
+   } 
 
-         tiesto = this.story.replace(/<br>/gi,"\n");
-         var oku = this.varname + ".update_story();";
+   if ((tiesto == "" ) && (this.parvar == "nicky")) {
+        tiesto = "tell us about your desk ";
+   }
+
+       
+         oku = this.varname + ".update_story();";
          tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' class='getstory' onkeyup='"+oku+"' >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
@@ -82,7 +88,7 @@ poster.prototype.get_story = function() {
       if ( document.getElementById(lbl) != null ) {
          document.getElementById(lbl).innerHTML= tmpstr;
       }
-   }
+   
 }
 
 
@@ -114,6 +120,16 @@ poster.prototype.update_story = function() {
 
   
 
+
+poster.prototype.toggle_getstory = function() {
+
+    if (this.shape != "getstory") {
+       this.shape = "getstory";
+    } else {
+       this.shape = "";
+    }
+    this.redraw_rung();
+}
 
 
  poster.prototype.reset_story = function() {

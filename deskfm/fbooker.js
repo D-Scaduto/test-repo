@@ -18,6 +18,9 @@ function fb_getname() {
 
     }  else {
 
+
+
+	    /*
           FB.login(function(response){ 
 
            pname = response.first_name;
@@ -26,7 +29,7 @@ function fb_getname() {
            nicky.sharee.set_shape("facebook");
 
           });
-
+            */
      }
 
     });
