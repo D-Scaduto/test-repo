@@ -87,7 +87,7 @@ header('X-Frame-Options: SAMEORIGIN');
 
 </head>
 
-<body style='background-color:silver;' >
+<body style='background-color:white;' >
 
 <div id="fb-root"></div>
 <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
@@ -145,15 +145,11 @@ if (is_ie == false) {
   echo "</script>";
 ?>
 
-<div >
 
-<div id='main_spot' style='background-color:silver;margin:0 auto;' >a
+<div id='main_spot' style='background-color:white;padding:10px;' >";
 </div>
 
 
-
-
-</div>
 <div style='clear:left;' ></div> 
 
 <div id='main_view' class='mainlane' >

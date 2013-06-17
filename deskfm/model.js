@@ -33,7 +33,7 @@ function draw_main() {
            tmp = tmp + "</div>";
        }
 
-          tmp = tmp + "<span id='' style='width:350px;float:right;background-color:white;'  >";
+          tmp = tmp + "<span id='' style='width:350px;float:right;background-color:white;border-color:silver;border-style:solid;border-size:5px;'  >";
 
           lbl = "name_spot";
           tmp = tmp + "<div id='"+lbl+"' style='float:right;padding:3px;width:150px;background-color:white;'  >";
@@ -49,13 +49,13 @@ function draw_main() {
           tmp = tmp + "</span>"; 
 	  
 
-          tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;'  >";
+          tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;border-color:silver;border-style:solid;border-size:5px;'  >";
           tmp = tmp + "</span>"; 
 
 
           tmp = tmp + "<div style='clear:right;' ></div>";
 
-          tmp = tmp + "<div id='menu' style='width:350px;padding:5px;background-color:white;border:solid;border-width:5px;border-color:black;float:left;'  >";
+          tmp = tmp + "<div id='menu' style='width:350px;padding:10px;background-color:white;border:solid;border-width:5px;border-color:silver;float:left;'  >";
           tmp = tmp + "</div>";
         
 

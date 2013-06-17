@@ -78,6 +78,13 @@ a:active{
      .picmobile {
 	 width:100px;
      }
+     
+     .mainlane {
+	padding:10px;
+	border-width:10px;
+	border-style:solid;
+	border-color:silver;
+     }
 
      .story {
        font-family: sans-serif;
@@ -97,9 +104,7 @@ a:active{
      }
 
 @media screen and (max-width:699px) {
-     .mainlane {
-	margin:0 auto;
-     }
+    
 
      .logo {
       float:left;
@@ -127,9 +132,7 @@ a:active{
 }
 
 @media screen and (min-width:700px) {
-     .mainlane {
-	margin:0 auto;
-     }
+
 
      .logo {
       float:left;

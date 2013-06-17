@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8 ');
 header('X-Frame-Options: SAMEORIGIN');
 ?>
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
@@ -74,9 +74,31 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 </head>
 
-<body style='background-color:silver;' >
+<body style='background-color:white;' >
+
 <div id="fb-root"></div> 
-<script src=deskfm/fbooker.js type="text/javascript" ></script>
+<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
+<script src=deskfm/fbooker.js type="text/javascript" >
+//if (is_ie == false) {
+   FB.init({
+      appId  : '191528434226668',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true,  // parse XFBML
+      oauth  : true
+   });
+
+      // Load the SDK asynchronously
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+//}
+</script>
 
 <?php 
   include 'deskfm/browsers.php';
@@ -96,8 +118,8 @@ header('X-Frame-Options: SAMEORIGIN');
     echo " is_ie = true; " ;
     echo "</script>";
   } else {
-    echo " <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
   }
+
   $phgname = "null";
   if (isset($_GET['pname'])) {
    $phgname = $_GET['pname'];
@@ -113,7 +135,7 @@ header('X-Frame-Options: SAMEORIGIN');
   echo "</script>";
 ?>
 
-<div id='main_spot' style='background-color:silver;margin:0 auto;' >
+<div id='main_spot' style='background-color:white;padding:10px;' >
 </div>
 
 <div style='clear:left;' ></div> 
@@ -159,7 +181,7 @@ header('X-Frame-Options: SAMEORIGIN');
     draw_main();
     sal.show();
     diego.show();
-    nicky.show();
+//    nicky.show();
     jesie.show();
 
 
@@ -187,17 +209,7 @@ header('X-Frame-Options: SAMEORIGIN');
     });
 
 
-/*
-if (is_ie == false) {
-   FB.init({
-      appId  : '191528434226668',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth  : true
-    });
-}
-*/
+
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 
