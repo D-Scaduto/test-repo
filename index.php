@@ -181,7 +181,7 @@ header('X-Frame-Options: SAMEORIGIN');
     draw_main();
     sal.show();
     diego.show();
-//    nicky.show();
+    nicky.show();
     jesie.show();
 
 
