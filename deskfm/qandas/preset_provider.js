@@ -54,6 +54,29 @@ preset_provider.prototype.get_preset = function (tpreset) {
 }
 
 
+preset_provider.prototype.next_preset = function (tpreset) {
+   var rdex= 0;
+   var ret = null;
+ 
+   if (tpreset != undefined) {
+
+     for (var i=0; i<this.sealist.length;i++) {
+          if (this.sealist[i].preset == tpreset) {
+              rdex = i;
+          }
+     }
+   }
+
+   rdex = rdex + 1;
+   if (rdex >= this.sealist.length) {
+	   rdex = 0;
+   }
+     ret = this.sealist[rdex].preset;
+
+   return ret;
+}
+
+
 preset_provider.prototype.preset_pic = function (tpreset,twidth) {
 
     var wd = "50px";
@@ -87,7 +110,7 @@ preset_provider.prototype.preset_link = function (tpreset) {
 }
 
 
-preset_provider.prototype.preset_embed = function (tpreset) {
+preset_provider.prototype.preset_embed = function (tpreset,tzm) {
      var tmp = "";
      var o = null;
      o = this.get_preset(tpreset);
@@ -96,7 +119,12 @@ preset_provider.prototype.preset_embed = function (tpreset) {
        src =o.sketch; 
        tmp = tmp + "http://sketchup.google.com/3dwarehouse/mini?mid=";
        tmp = tmp + src;
-       tmp = tmp + "&etyp=sw&width=250&height=200'";
+       tmp = tmp + "&etyp=sw";
+       if (tzm == false) {
+         tmp = tmp + "&width=250&height=200'";
+       } else {
+         tmp = tmp + "&width=500&height=300'";
+       }
      }
      return tmp;
 }

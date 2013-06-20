@@ -27,8 +27,10 @@ viewer.prototype.goto_end = function() {
 viewer.prototype.to_top = function(trung) {
 
    this.redraw_rungs(trung);
-   this.darungs[0].postman.btnson = true;
-   this.darungs[0].postman.redraw_rung();
+   if (this.darungs[0] != undefined) {
+     this.darungs[0].postman.btnson = true;
+     this.darungs[0].postman.redraw_rung();
+   }
    window.scroll(0,0);
 
    var lbl=this.screen+"_rung_0";

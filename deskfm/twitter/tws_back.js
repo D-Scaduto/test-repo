@@ -7,7 +7,7 @@ var tws_limit= 20;
 
 function dfm_twsget(pyear,pmon,pweek)
  {
-   var url='http://www.deskfm.com/deskfm/twitter/dfm_dbget.php';
+   var url='deskfm/twitter/dfm_dbget.php';
    url = url + "?yr="+ pyear;
    url = url + "&mon="+ pmon;
    url = url + "&lim="+ tws_limit;
@@ -40,7 +40,7 @@ function dfm_twsget(pyear,pmon,pweek)
 function tws_store(i)
   {
 
-     var url='http://www.deskfm.com/deskfm/twitter/tws_store.php?';
+     var url='deskfm/twitter/tws_store.php?';
 
      url = url + "twid="+main_array[i].id_str;
 
@@ -75,7 +75,7 @@ function tws_store(i)
 function tws_unstore(i)
   {
 
-     var url='http://www.deskfm.com/deskfm/twitter/tws_unstore.php?';
+     var url='deskfm/twitter/tws_unstore.php?';
      url = url + "twid="+main_array[i].id_str;
 
     $.get(url, function(data) {
@@ -94,7 +94,7 @@ function tws_unstore(i)
  
 function tws_ignore(i)
   {
-     var url='http://www.deskfm.com/deskfm/twitter/tws_ignore.php?';
+     var url='deskfm/twitter/tws_ignore.php?';
      url = url + "twid="+main_array[i].id_str;
      url = url + "&twuser="+encodeURI(main_array[i].from_user);
 
@@ -188,13 +188,16 @@ function tws_get(qry_str)
        query ="?callback=?&q="+qe + "&rpp="+rpp;
      }
 
-     var url='http://search.twitter.com/search.json';
+     var url='';
+     url = 'deskfm/twitter/tws_search.php';
 
      var op = "";
      var cur_page = 0;
 
-      var s = url + query;
-//   alert(s);
+      var s = "";
+//      s = url + query;
+      s = url ;
+
      $.getJSON(s,function(json) {
 
         var np = json.next_page; 
@@ -202,7 +205,7 @@ function tws_get(qry_str)
         var rfsh = json.refresh_url +"&rpp=100";
 
         main_array = [];
-        main_array = json.results;
+        main_array = json.statuses;
 
         if (cur_page >1) {
              var prev_page = cur_page - 1;
@@ -251,7 +254,7 @@ function tws_check_state()
             }
           }
 
-     var url='http://www.deskfm.com/deskfm/twitter/tws_getids.php';
+     var url='deskfm/twitter/tws_getids.php';
       $.get(url, function(data) {  
 
          var stored_twids = [];
@@ -261,7 +264,7 @@ function tws_check_state()
                 tws_setstate(stored_twids[i],"stored");
           }
 
-         var url2='http://www.deskfm.com/deskfm/twitter/tws_getignids.php';
+         var url2='deskfm/twitter/tws_getignids.php';
 
           $.get(url2, function(data2) {  
             var ignored_twids = [];

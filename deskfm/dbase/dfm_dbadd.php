@@ -12,8 +12,6 @@ class foo {
    public $picurl;
    public $linkurl;
    public $embedurl;
-   public $result;
-   public $waspid;
    public $prodid;
    public $price;
 }
@@ -39,21 +37,50 @@ if (isset($_GET['uname'])) {
   $uname = $_GET['uname']; 
 }
 
-$cat = $_GET['cat']; 
-$subcat = $_GET['subcat']; 
+$cat = "";
+if (isset($_GET['cat'])) {
+  $cat = $_GET['cat']; 
+}
+
+$subcat = "";
+if (isset($_GET['subcat'])) {
+  $subcat = $_GET['subcat']; 
+}
 
 $picsrc = "";
 if (isset($_GET['picode'])) {
   $picsrc = $_GET['picode']; 
 }
 
-$linkurl = $_GET['linkcode']; 
-$story = $_GET['storycode']; 
-$embedurl = $_GET['embedcode']; 
+$linkurl = "";
+if (isset($_GET['linkcode'])) {
+   $linkurl = $_GET['linkcode'];
+}	
 
-$source = $_GET['source']; 
-$prodid = $_GET['prodid']; 
-$price = $_GET['price']; 
+$story = "";
+if (isset($_GET['storycode'])) {
+   $story = $_GET['storycode']; 
+}
+
+$embedurl = "";
+if (isset($_GET['embedcode'])) {
+  $embedurl = $_GET['embedcode']; 
+}
+
+$source = "";
+if (isset($_GET['source'])) {
+	$source = $_GET['source']; 
+}
+
+$prodid = "";
+if (isset($_GET['prodid'])) {
+	$prodid = $_GET['prodid']; 
+}
+
+$price = "";
+if (isset($_GET['price'])) {
+  $price = $_GET['price']; 
+}
 
 $pid = uniqid();
 
@@ -130,8 +157,8 @@ $picaddr = "";
            $b2->embedurl = $row['embedurl'];;
         }
 
-     $b2->waspid = $wpid;
      $ret->pobj = $b2;
+
      echo json_encode($ret); 
      mysql_close($con);
 ?>

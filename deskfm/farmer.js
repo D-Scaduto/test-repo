@@ -22,18 +22,23 @@ farmer.prototype.check_feed = function() {
 
  
 farmer.prototype.show = function() {
+
    var lbl = "";
    var tmp = "";
    var ds = "";
+
        tmp = tmp + "<span class='spotd_off' >";
        tmp = tmp + "twitter";
        tmp = tmp + "</span>";
+
        tmp = tmp + "<span class='spotd_off' >";
        tmp = tmp + "<input id='feed_string' size='10' >";
        tmp = tmp + "</span>";
+
        tmp = tmp + "<span class='spotd_off' onclick='mac.check_feed();' >";
        tmp = tmp + "check";
        tmp = tmp + "</span>";
+
        tmp = tmp + "<span id='feed_btns'  >";
        tmp = tmp + "</span>";
 

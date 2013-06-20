@@ -97,7 +97,7 @@ poster.prototype.set_ppid = function(pdadex) {
       this.source=pobj.source;
       this.picurl=pobj.picurl;
       this.linkurl=pobj.linkurl;
-      this.story=pobj.story;
+      this.story=pobj.story;         
 
       if (pobj.listype == "webits") {
         this.cat=pobj.cat;
@@ -117,7 +117,8 @@ poster.prototype.set_ppid = function(pdadex) {
       if (pobj.listype == "people") {
         this.groupid=pobj.groupid;
       }
-
+     
+      this.changed = false;
     } else {
 //      alert("err: "+pdadex);
     }
@@ -429,8 +430,8 @@ poster.prototype.clear = function() {
      var picode = escape(this.picurl);
      var embedcode = escape(this.embedurl);
 
-     var prams = "?uname="+this.uname+"&source="+this.source;
-
+     var prams = "?uname="+ jesie.pname;
+     prams = prams + "&source="+this.source;
      prams = prams + "&listype=webits";
      if (this.cat_changed == true) {
        prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;

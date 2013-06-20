@@ -185,7 +185,6 @@ if (is_ie == false) {
     }
 
 
-           joe = new farmer("menu_bar");
            store = new shoper("menu_bar");
            mac = new farmer("menu_bar");
 	   walt = new sorter("menu_bar");
@@ -207,7 +206,7 @@ if (is_ie == false) {
 	   diego.show();
 
     nicky.show();
-    jesie.show();
+ 
     
     amare = new stater();
     amare.get_stats();
@@ -225,12 +224,14 @@ if (is_ie == false) {
          if (is_mobile != true) {
 	      is_mobile = true;
 	      sal.hide_3dview();
+	      nicky.hide();
 	      daviewer.draw_screen();
          }
        } else {
          if ((is_mobile == true) && (is_ie == false)) {
 		 is_mobile = false;
 		 sal.draw_3dview();
+		 nicky.show();
 		 daviewer.draw_screen();
          }
        }

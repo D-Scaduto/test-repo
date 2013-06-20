@@ -33,13 +33,25 @@ function draw_main() {
            tmp = tmp + "</div>";
        }
 
-          tmp = tmp + "<span id='' style='width:350px;float:right;background-color:white;border-color:silver;border-style:solid;border-size:5px;'  >";
+          tmp = tmp + "<span id='' style='width:375px;float:right;background-color:white;border-color:silver;border-style:solid;border-size:5px;'  >";
+
+          tmp = tmp + "<div class='' style='background-color:white;' >";
+ 
+	  lbl = "network_btns";
+          tmp = tmp + "<span id='"+lbl+"' class='' style='min-width:150px;width:200px;background-color:white;' >";
+          tmp = tmp + "</span>";     
+
+	  lbl = "share_btn";
+	  ocl = 'nicky.toggle();';
+          tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='background-color:white;float:right;' >";
+          tmp = tmp + "share";  
+          tmp = tmp + "</span>";   
+
+      	  tmp = tmp + "</div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
 
           lbl = "name_spot";
           tmp = tmp + "<div id='"+lbl+"' style='float:right;padding:3px;width:150px;background-color:white;'  >";
-          tmp = tmp + "</div>";
-
-          tmp = tmp + "<div id='network_btns' class='' style='min-width:150px;width:200px;background-color:white;' >";
           tmp = tmp + "</div>";
 
        	  lbl = "share_spot";
@@ -51,9 +63,6 @@ function draw_main() {
 
           tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;border-color:silver;border-style:solid;border-size:5px;'  >";
           tmp = tmp + "</span>"; 
-
-
-          tmp = tmp + "<div style='clear:right;' ></div>";
 
           tmp = tmp + "<div id='menu' style='width:350px;padding:10px;background-color:white;border:solid;border-width:5px;border-color:silver;float:left;'  >";
           tmp = tmp + "</div>";
@@ -267,31 +276,32 @@ function get_one(dpid) {
 
 
 function new_webit(pobj) {
-      calls_out--; 
-      if (calls_out <= 0) {
-          sal.draw_vman();
-      }
 
+       sal.draw_vman();
        var t = dalist.push(pobj);
+
        nicky.new_one(t-1);
         
 }
 
 function update_webit(pobj) {
-      calls_out--; 
-      if (calls_out <= 0) {
-          sal.draw_vman();
-      }
+      
+      sal.draw_vman();
+
       var fnd = -1;
       if (pobj.listype == "webits") {
         for (var k=0; k<=dalist.length; k++) {
           if (dalist[k] != undefined) {
             if (dalist[k].pid == pobj.pid) {
                 dalist[k] = pobj;
+		fnd = k;
             }
           }
         }
-        daviewer.update_one(pobj.pid);
+	if (fnd != -1) {
+          daviewer.update_one(pobj.pid);
+    	  nicky.update_one(fnd);
+	}
       }
 
       if (pobj.groupid != "") {

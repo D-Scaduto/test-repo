@@ -32,6 +32,7 @@ sharer.prototype.show = function() {
       this.showing = true;
       this.newster.build_rung();
       this.newster.draw_rung();
+      jesie.show();
     }
  
 
@@ -119,6 +120,19 @@ sharer.prototype.add_one = function(pdex) {
 }
 
 
+
+sharer.prototype.update_one = function(pdex) {
+   var lbl = "";
+   if (this.showing == false) {
+       this.show();
+   }
+   if (pdex != undefined) { 
+       this.newster.set_ppid(pdex);
+   }
+   this.newster.redraw_rung();
+}
+
+
 sharer.prototype.set_shape = function(jnk,pshape) {
    if (pshape != undefined) {
       this.shape = pshape;
@@ -161,6 +175,7 @@ sharer.prototype.toggle = function() {
 sharer.prototype.hide = function() {
 
    this.newster.hide_rung(); 
+   jesie.hide();
 
    lbl = this.spotid;
    pobj = document.getElementById(lbl);

@@ -56,7 +56,7 @@ namer.prototype.get_name = function() {
           val =  this.tmp_name;
         }
 
-    tmp =tmp + "<input size=8 value='"+tval+"' id='pname_box' onclick='' > ";
+    tmp =tmp + "<input size=15 value='"+tval+"' id='pname_box' onclick='' > ";
 
     lbl = "name_talk";
     if (document.getElementById(lbl)!=null) {

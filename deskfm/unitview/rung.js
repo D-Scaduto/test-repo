@@ -232,11 +232,15 @@
 
 
 		  if (this.parvar != "nicky" ) {
+
                     tmpstr=tmpstr+"<div>";
                     lbl= this.spotid + "_" + lspot + "_nav_btns";
                     tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
       	            tmpstr=tmpstr+"</span>";
 
+		    lbl= this.spotid + "_" + lspot + "_" + "send_btns";
+                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
+    	            tmpstr=tmpstr+"</span>";
 	           
   		    lbl = this.spotid +'_'+lspot + '_work_btns';
                     tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
@@ -256,7 +260,12 @@
                     tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
 		  } else {
-                    tmpstr=tmpstr+"<div>";
+
+                    tmpstr=tmpstr+"<div style='' >";
+
+		    lbl= this.spotid + "_" + lspot + "_nav_btns";
+                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
+      	            tmpstr=tmpstr+"</span>";
 
                     lbl= this.spotid + "_" + lspot + "_" + "send_btns";
                     tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
@@ -265,8 +274,10 @@
   		    lbl = this.spotid +'_'+lspot + '_work_btns';
                     tmpstr = tmpstr + "<span id='"+lbl+"'  style='float:right;'  >";
                     tmpstr = tmpstr + "</span>"; 
-                    tmpstr=tmpstr+"</div>";
-                    tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+                    
+		    tmpstr=tmpstr+"</div>";
+
+                    tmpstr=tmpstr+"<div style='clear:both;' ></div>";
 
 		  }
 
