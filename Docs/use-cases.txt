@@ -1,0 +1,53 @@
+1. Use cases
+		  Create a new webit (added directly to DB?)
+
+                          upload and image 
+			Embed URL
+			link URL
+		       set category of webits
+                       
+
+
+                  edit existing webits 
+                        same as above 
+                        undo changes 
+
+
+		   Search  for webits 
+
+		
+		  Zoom into one webit 
+
+                  Turbo through webits 
+
+                 Next,prev button cycles correctly
+ 		and index counts are correct 
+                Load next sets 
+
+		
+		    load webits from twitter feed
+             
+
+		
+
+			
+		 Google 3d view (various situations)
+
+                
+
+
+ Test cases
+
+     21. Check every browser (IE, Chrome, Firefox, Opera, etc)
+
+
+
+  futures 
+
+     Home button to reset everything (logoman?)
+
+
+ Products
+                      add, del, buy, setup provider
+
+        Facebook, G+ integration

@@ -5,29 +5,6 @@
 3. Data gets sorted/changed (categories)
 4. Define/decide distinct tabs for website (how will it look i.e. two products tabs)
 5. Tester confirms new code with tools from Dev
-	1. Use cases
-		1. Create a new webit (added directly to DB?)
-		2. Sort  webits
-		3. Search
-		4. Products
-		5. Upload image per user (not post)
-		6. Embed URL
-		7. Link URL
-		8. editing post not on DB
-		9. editing post on DB
-		10. saving an edit
-		11. undoing an edit
-		12. Zoom button
-		13. 
-		14. Home button to reset everything (logoman?)
-		15. Next button cycles correctly
-		16. Turbo button performance
-		17. Twitter, Facebook, G+ integration
-		18. Load next 1000
-		19. confirm user view
-		20. Confirm admin view
-		21. Check every browser (IE, Chrome, Firefox, Opera, etc)
-		22. Google workbench (various situations)
-	2. Test cases
+	
 6. Formating (certain google workbench things change the formating)
 7. Config manager updates Live site.
