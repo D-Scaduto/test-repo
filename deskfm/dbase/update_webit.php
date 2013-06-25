@@ -13,6 +13,7 @@ include '../../config/names.php';
    public $linkurl;
    public $embedurl;
    public $listype;
+   public $change_date;
 }
 
 
@@ -70,6 +71,8 @@ if (isset($_GET['picode'])) {
   $picurl = $_GET['picode'];
 }
 
+
+
 $pid = $_GET['pid'];
 $uname = $_GET['uname'];
 
@@ -117,9 +120,16 @@ $con = mysql_connect($Server, $username, $password);
        $sql_upd = $sql_upd . " embedurl = '" . $embedurl . "'"; 
        $some = true;
      }
+     
+     if($some==true){
+       $sql_upd = $sql_upd . " , ";
+     }
+     $change_date = "now()";	
+     $sql_upd = $sql_upd . "change_date = " . $change_date;
+    
+
 
   if ($some == true) {
-
     if ($source == "deskfm") {
       $sql_upd = "update dfm_posts set " . $sql_upd;
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
@@ -163,6 +173,7 @@ $con = mysql_connect($Server, $username, $password);
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
            $b2->embedurl = $row['embedurl'];
+	   $b2->change_date = $row['change_date'];
 
      if ($groupid != "null") {
         $sql_upd = "update dfm_people set group_id ='" . $groupid ."' where person_id = '" . $uname . "'"; 
