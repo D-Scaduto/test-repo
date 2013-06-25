@@ -1,84 +1,48 @@
 
+function calendor (pspotid,pvarname) { 
 
-var ymons = ['','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
-var mini_mons = ['','j','f','m','a','m','j','j','a','s','o','n','d'];
-var wdays = ['mon','tue','wed','thu','fri','sat','sun'];
-var mini_days = ['m','t','w','t','f','s','s'];
-var denoms = ['all','year','qtr','month','week','day'];
+   this.spotid = pspotid;
+   this.showing = false;
+   this.varname = pvarname;
 
-var da_denom = "qtr";
-var da_year = 0;
-var da_qtr = "";
-var da_month = "";
-var da_week = 1;
-var da_day = "";
+   this.ymons = ['','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+   this.mini_mons = ['','j','f','m','a','m','j','j','a','s','o','n','d'];
+   this.wdays = ['mon','tue','wed','thu','fri','sat','sun'];
+   this.mini_days = ['m','t','w','t','f','s','s'];
+   this.denoms = ['all','year','qtr','month','week','day'];
 
-var cur_mon = new Object();
-var first_mon = new Object();
-var when_showing = false;
+   this.da_denom = "qtr";
+   this.da_year = 0;
+   this.da_qtr = "";
+   this.da_month = "";
+   this.da_week = 1;
+   this.da_day = "";
+
+   this.cur_mon = new Object();
+   this.first_mon = new Object();
+   this.init_months();
+}
 
 
-function init_months() {
+calendor.prototype.init_months = function() {
 
-   first_mon.month = 7;
-   first_mon.year = 11;
+   this.first_mon.month = 7;
+   this.first_mon.year = 11;
 
    var cur_time = new Date();
    var s = cur_time.getFullYear().toString();
-   cur_mon.year = s.substr(2);
-   cur_mon.month = cur_time.getMonth()+1;
+   this.cur_mon.year = s.substr(2);
+   this.cur_mon.month = cur_time.getMonth()+1;
 
-   da_month = cur_mon.month;
-   da_year = cur_mon.year;
+   this.da_month = this.cur_mon.month;
+   this.da_year = this.cur_mon.year;
 }
 
 
-function toggle_when() {
 
-   if (when_showing == true) { 
-      hide_month_header();
-   } else {
-      show_month_header();
-   }
-}
+calendor.prototype.show = function() {
 
-
-function hide_month_header() {
-
-  var t = "";
-  var lbl = "caldar_spot";
-  var obj = document.getElementById(lbl); 
-  if (obj != null) {
-      obj.innerHTML = t;
-  }
-  when_showing = false;
-}
-
-
-function set_denom(pstr) {
-   da_denom = pstr;
-   show_month_header();
-}
-
-
-function change_denom() {
-
-   if (da_denom == "month" ) {
-     da_denom = "qtr";
-   } else if (da_denom == "qtr") {
-     da_denom = "years";
-   } else if (da_denom == "years") {
-     da_denom = "month";
-   } else {
-     da_denom = "month";
-   } 
-   show_month_header();
-}
-
-
-function show_month_header() {
-
-   when_showing = true;
+   this.showing = true;
 
    var t = "";
    var lbl = "";
@@ -89,29 +53,29 @@ function show_month_header() {
     t=t +"<table cellspacing=1 cellpadding=1 border=0 bgcolor=white  >";
     t=t +"<tr>";
 
-       if (da_denom == "qtr") {  
+       if (this.da_denom == "qtr") {  
 
           var da_mon = new Object();
-          da_mon.month = da_month;
-          da_mon.year = da_year;
+          da_mon.month = this.da_month;
+          da_mon.year = this.da_year;
 
-          o=get_net_month(da_mon,-2);
+          o=this.get_net_month(da_mon,-2);
           if (o != null) {
               lbl = 'hdr_prevmon_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='scroll_months(-1);' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
+              t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname + ".scroll_months(-1);' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
               t=t+ " <";
               t = t + "</td>";
           }
 
-          o=get_net_month(da_mon,-1);
+          o=this.get_net_month(da_mon,-1);
           if (o != null) {
           lbl = 'hdr_month_btna';
-          t = t+ "<td  id='"+lbl+"'  onclick='set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
-          t=t+ " " +ymons[o.month];
+          t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname +".set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          t=t+ " " +this.ymons[o.month];
           t = t + "</td>";
           if (o.month == 12) {
               lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
+              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
               t=t+ " '" +o.year;
               t = t + "</td>";
               byrs = true;
@@ -119,44 +83,44 @@ function show_month_header() {
          }
 
           lbl = 'hdr_month_btnb';
-          t = t+ "<td   id='"+lbl+"' onclick='' class='spot_on'  onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");'  >";
-          t=t+ " " +ymons[da_month];
+          t = t+ "<td   id='"+lbl+"' onclick='' class='spot_on'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+          t=t+ " " +this.ymons[this.da_month];
           t = t + "</td>";
-           if (da_month == 12) {
+           if (this.da_month == 12) {
               lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
+              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
               t=t+ " '" +o.year;
               t = t + "</td>";
-                byrs = true;
+              byrs = true;
             }
 
-          o=get_net_month(da_mon,1);
+          o=this.get_net_month(da_mon,1);
           if (o != null) {
            lbl = 'hdr_month_btnc';
-           t = t+ "<td  id='"+lbl+"'  onclick='set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
-           t=t+ " " +ymons[o.month];
+           t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname + ".set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+           t=t+ " " +this.ymons[o.month];
            t = t + "</td>";
            if (o.month == 12) {
               lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
+              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
               t=t+ " '" +o.year;
               t = t + "</td>";
-               byrs = true;
+              byrs = true;
             }
           }
 
-          o=get_net_month(da_mon,2);
+          o=this.get_net_month(da_mon,2);
           if (o!=null) {
               lbl = 'hdr_nextmon_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='scroll_months(1);' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
+              t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname + ".scroll_months(1);' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
               t=t+ " >";
               t = t + "</td>";
           }
 
         if (byrs != true) {
           lbl = 'hdr_year_btn';
-          t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd\""+lbl+"\");' onmouseout='unmarkyd\""+lbl+"\");' >";
-          t = t + " '"+ da_year;
+          t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+          t = t + " '"+ this.da_year;
           t = t + "</td>";
         }
       }
@@ -164,70 +128,90 @@ function show_month_header() {
     t=t +"</tr>";
     t=t +"</table>";
   
-    lbl = "caldar_spot";
+    lbl = this.spotid;
     var obj = document.getElementById(lbl); 
     if (obj != null) {
       obj.innerHTML = t;
     }
 }
 
+calendor.prototype.set_demon = function(pstr) {
+   this.da_denom = pstr;
+   this.show();
+}
 
-function set_month(pmon,pyr) {
- 
-   da_month = pmon;
+calendor.prototype.change_demon = function() {
+
+   if (this.da_denom == "month" ) {
+     this.da_denom = "qtr";
+   } else if (this.da_denom == "qtr") {
+     this.da_denom = "years";
+   } else if (this.da_denom == "years") {
+     this.da_denom = "month";
+   } else {
+     this.da_denom = "month";
+   } 
+   this.show();
+}
+
+calendor.prototype.set_month = function(pmon,pyr) {
+
+   this.da_month = pmon;
    if (pyr != undefined) {     
-     da_year = pyr;
+     this.da_year = pyr;
    }
-  show_month_header(); 
+   this.show(); 
 }
 
 
-function set_week(pweek) {
+calendor.prototype.set_week = function(pweek) {
+
   if (pweek != undefined) {
-     da_week = pweek;
-     da_denom = "month";
-     show_month_header(); 
+     this.da_week = pweek;
+     this.da_denom = "month";
+     this.show(); 
   }
 }
 
-function set_day(pday) {
+
+calendor.prototype.set_day = function(pday) {
+
   if (pday != undefined) {
-     da_day = pday;
-     da_denom = "month";
-     show_month_header(); 
+     this.da_day = pday;
+     this.da_denom = "month";
+     this.show(); 
  }
 }
 
+calendor.prototype.set_qtr = function(pqtr) {
 
-function set_qtr(pqtr) {
  if (pqtr != undefined) {
-     da_qtr = pqtr;
-     var c = da_qtr * 3 - 1;
-     da_month =  c;
-     da_denom = "qtr";
-     show_month_header();
+     this.da_qtr = pqtr;
+     var c = this.da_qtr * 3 - 1;
+     this.da_month =  c;
+     this.da_denom = "qtr";
+     this.show();
   }
 }
 
+calendor.prototype.set_year = function(pyr) {
  
-function set_year(pyr) {
  if (pyr != undefined) {
-     da_year = pyr;
-     da_denom = "month";
-     show_month_header();
+     this.da_year = pyr;
+     this.da_denom = "month";
+     this.show();
   }
 }
 
 
+calendor.prototype.get_net_year = function(pdiff) {
 
-function get_net_year(pdiff) { 
-
-  var m = da_year; 
+  var m = this.da_year; 
 
   m =  m + pdiff ;
 
-  if (m>cur_mon.year) {
-    m = da_year;
+  if (m>this.cur_mon.year) {
+    m = this.da_year;
   }
 
   return m;
@@ -235,7 +219,8 @@ function get_net_year(pdiff) {
 }
 
 
-function get_net_months(from,to) { 
+calendor.prototype.get_net_months = function(from,to) {
+
 
   var m = 0; 
 
@@ -252,10 +237,7 @@ function get_net_months(from,to) {
 
 }
 
-
-function get_net_month(from,pnet) { 
-
-
+calendor.prototype.get_net_month = function(from,pnet) {
    var ret = {};
 
    // going up 
@@ -269,10 +251,10 @@ function get_net_month(from,pnet) {
             ret.year = ret.year+1;
         }
 
-         if (ret.year > cur_mon.year) {
+         if (ret.year > this.cur_mon.year) {
              ret = null;
-         } else if (ret.year == cur_mon.year) {
-             if (ret.month > cur_mon.month) {
+         } else if (ret.year == this.cur_mon.year) {
+             if (ret.month > this.cur_mon.month) {
                  ret = null;
              }
          }
@@ -288,8 +270,8 @@ function get_net_month(from,pnet) {
              ret.year = from.year;
          }
 
-       if (ret.year == first_mon.year) {
-          if (ret.month < first_mon.month) {
+       if (ret.year == this.first_mon.year) {
+          if (ret.month < this.first_mon.month) {
               ret = null;
           }
        } 
@@ -299,12 +281,12 @@ function get_net_month(from,pnet) {
 }
 
 
-function scroll_months(ppnet) {
+calendor.prototype.scroll_months = function(ppnet) {
 
    var pnet = parseInt(ppnet);
 
-   var r = da_month;
-   var y = da_year;
+   var r = this.da_month;
+   var y = this.da_year;
 
    // going up 
    if (pnet > 0) {
@@ -312,14 +294,14 @@ function scroll_months(ppnet) {
          // crossing year
          if ((r+ pnet)> 12) {
              y = y+1;
-             if (y <= cur_mon.year) {
-               da_month = r + pnet - 12;
-               da_year = y;
+             if (y <= this.cur_mon.year) {
+               this.da_month = r + pnet - 12;
+               this.da_year = y;
              }
          } else {
-             if ((y != cur_mon.year) || ((r+pnet) <= cur_mon.month)) {
-               da_month = r + pnet;
-               da_year = y;
+             if ((y != this.cur_mon.year) || ((r+pnet) <= this.cur_mon.month)) {
+               this.da_month = r + pnet;
+               this.da_year = y;
              }
          } 
 
@@ -329,21 +311,42 @@ function scroll_months(ppnet) {
          // crossing year
          if ((r+ pnet)< 1) {
              y = y-1;
-             if (y >= first_mon.year) {
-               da_month = r + pnet + 12;
-               da_year = y;
+             if (y >= this.first_mon.year) {
+               this.da_month = r + pnet + 12;
+               this.da_year = y;
              }
          } else {
-             if ((y != first_mon.year) || ((r+pnet) >= first_mon.month)) {
-               da_month = r + pnet;
-               da_year = y;
+             if ((y != this.first_mon.year) || ((r+pnet) >= this.first_mon.month)) {
+               this.da_month = r + pnet;
+               this.da_year = y;
              }
          } 
    }
  
-   show_month_header();
+   this.show();
 
 }
 
 
+
+calendor.prototype.toggle = function() {
+
+   if (this.showing == true) { 
+      this.hide();
+   } else {
+      this.show();
+   }
+}
+
+calendor.prototype.hide = function() {
+
+
+  var t = "";
+  var lbl = this.spotid;
+  var obj = document.getElementById(lbl); 
+  if (obj != null) {
+      obj.innerHTML = t;
+  }
+  this.showing = false;
+}
 

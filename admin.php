@@ -28,6 +28,9 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
 <script src=deskfm/logoman.js type="text/javascript" ></script>
+<script src=deskfm/audio.js type="text/javascript" ></script>
+<script src=deskfm/wheretor.js type="text/javascript" ></script>
+<script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/webit.js type="text/javascript" ></script>
 <script src=deskfm/unitview/poster.js type="text/javascript" ></script>
@@ -45,9 +48,11 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/unitview/debug.js type="text/javascript" ></script>
 <script src=deskfm/viewer.js type="text/javascript" ></script>
 <script src=deskfm/controller.js type="text/javascript" ></script>
+<script src=deskfm/loader.js type="text/javascript" ></script>
 <script src=deskfm/rail.js type="text/javascript" ></script>
-<script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/nitro.js type="text/javascript" ></script>
+
+<script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
 <script src='deskfm/suggester.js' type="text/javascript" ></script>
@@ -66,12 +71,9 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/sorter.js type="text/javascript" ></script>
-<script src=deskfm/farmer.js type="text/javascript" ></script>
 <script src=deskfm/manager.js type="text/javascript" ></script>
 <script src=deskfm/header.js type="text/javascript" ></script>
-<script src=deskfm/audio.js type="text/javascript" ></script>
-<script src=deskfm/wheretor.js type="text/javascript" ></script>
-<script src=deskfm/calendor.js type="text/javascript" ></script>
+
 <script src="deskfm/twitter/tws_front.js"></script>
 <script src="deskfm/twitter/tws_back.js"></script>
 
@@ -186,8 +188,7 @@ if (is_ie == false) {
 
 
            store = new shoper("menu_bar");
-           mac = new farmer("menu_bar");
-	   walt = new sorter("menu_bar");
+	   mac = new sorter("menu_bar");
 	   cater = new categor("menu_bar");
 	   wanda = new searcher("menu_bar");
            joe = new manager("menu_bar");
@@ -196,25 +197,25 @@ if (is_ie == false) {
 	   diego.add_mainspot("search","wanda");
 	   diego.add_mainspot("browse","cater");
            diego.add_mainspot("contact","joe");
-	   diego.add_mainspot("sort","walt");
-           diego.add_mainspot("farm","mac");
+	   diego.add_mainspot("sort","mac");
            diego.add_mainspot("shop","store");
 	   diego.main_shape = "browse";
 
 	   draw_main();
            sal.show();
 	   diego.show();
-
-    nicky.show();
+           nicky.show(); 
  
     
     amare = new stater();
     amare.get_stats();
+
     amare.get_products();
     amare.get_providers();
     amare.get_webits();
     amare.get_people();
     amare.get_unsorted();
+
 
     $(window).resize(function() {
 

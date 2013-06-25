@@ -121,27 +121,3 @@ poster.prototype.update_price = function() {
 }
 
 
- poster.prototype.set_price = function() {
-
-     var tspot = this.rung;
-     var lbl = "";
-     var tmp="";
-     var sobj=null;
-     var sdex = this.parvar + ".darungs["+tspot+"].dadex";
-     var dex = eval(sdex);
-
-     sdex = this.parvar + ".dalist["+dex+"]";
-     dex = eval(sdex);
- 
-     sobj = "dalist["+dex+"].prodid = '" + this.prodid + "'";
-     eval(sobj);
- 
-     sobj = "dalist["+dex+"].price = '" + this.price + "'";
-     eval(sobj);
-    
-     this.changed = true;
-     this.draw_price();
-     this.change_btns(); 
-}
-
-

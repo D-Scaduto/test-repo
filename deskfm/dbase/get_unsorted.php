@@ -35,8 +35,8 @@ class pfoo {
    public $dalist_len;
    public $dachunk;
    public $dalist;
-   public $peeplist;
-   public $peeplist_len;
+   public $peoplelist;
+   public $peoplelist_len;
  }
 
 
@@ -141,7 +141,7 @@ $con = mysql_connect($Server, $username, $password);
     $arr[] = $poodo;
   }
 
-  $rebar->peeplist = $arr;
+  $rebar->peoplelist = $arr;
 
 
    echo json_encode($rebar); 

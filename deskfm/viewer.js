@@ -12,6 +12,8 @@ function viewer (pscreen,pvarname) {
    this.prodids = [];
    this.price = -1;
    this.groupid = "";
+
+   this.stats = null;
    
    this.dalist=[];
    this.listdex = 0;
@@ -82,7 +84,7 @@ viewer.prototype.update_person = function(pname) {
 
 viewer.prototype.add_one = function(pdx) {
    var t = null;
-   if (dalist[pdx] == undefined) {
+   if (webitlist[pdx] == undefined) {
 //      alert("adderr " + pdx);
    } else {
          this.dalist.unshift(pdx);
@@ -114,9 +116,9 @@ viewer.prototype.del_webit = function(tpid) {
      this.del_rung(fnd_rung);
   } else {
     var fnd_le = -1;
-    for (var b=0; b<=this.dalist.length;b++) {
-         if (dalist[this.dalist[b]] != undefined) {
-           if (dalist[this.dalist[b].pid] == tpid) {
+    for (var b=0; b<=this.webitlist.length;b++) {
+         if (webitlist[this.webitlist[b]] != undefined) {
+           if (webitlist[this.webitlist[b].pid] == tpid) {
                 fnd_le = b;
            }
          }
@@ -158,20 +160,13 @@ viewer.prototype.del_person = function(puname) {
 }
 
 
-viewer.prototype.draw_screen = function() {
-
-       this.draw_view();
-
-       if (pname == "debug") {
-         this.draw_debug();
-       }
-}
-
-
 viewer.prototype.draw_view = function() {
+
     var tmpstr = "";
     var lbl = "";
     var ocl = "";
+    var moin = "";
+    var mout = "";
     var ct = 0; 
     var st = this.top_end;
  
@@ -191,7 +186,9 @@ viewer.prototype.draw_view = function() {
       if (this.darungs[ct] != undefined) {
          
           lbl = this.screen+"_rung_"+ct;
-          tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='vertical-align:top;'  >"; 
+//          moin = "markyd(\""+lbl+"\");";
+//	  mout = "unmarkyd(\""+lbl+"\");";
+          tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
           tmpstr=tmpstr+"</span>";
 
        }
@@ -204,7 +201,24 @@ viewer.prototype.draw_view = function() {
        var ct = 0; 
        while (ct <= st) {
          if (this.darungs[ct] != undefined) {
-           this.draw_rung(ct);
+           adex = this.darungs[ct].dadex;
+           if (this.dalist[adex] != null) {
+             p = this.dalist[adex];
+             if (this.darungs[ct].postman == undefined ) {
+               var s = this.varname + ".darungs["+ct+"].postman";
+               this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
+             }
+             this.darungs[ct].postman.set_ppid(p);
+           }
+           if (this.darungs[ct].postman != undefined) {
+
+   
+            if (this.listype == "unsorted") {
+              this.darungs[ct].postman.shape = "getsort";
+             }
+             this.darungs[ct].postman.build_rung(ct);
+             this.darungs[ct].postman.draw_rung(ct);
+           }
          }
          ct = ct + 1;
        }
@@ -214,46 +228,20 @@ viewer.prototype.draw_view = function() {
     this.draw_rail();
   }
 
+
+   if (debug == true) {
+       this.draw_debug();
+   }
+
 }
-
-
-   
-viewer.prototype.draw_rung = function(tspot) {
-
-   var p = null;
-   var adex = null;
-
-  if (this.darungs[tspot] != undefined ) {
-        adex = this.darungs[tspot].dadex;
-
-        if (this.dalist[adex] != null) {
-          p = this.dalist[adex];
-          if (this.darungs[tspot].postman == undefined ) {
-            var s = this.varname + ".darungs["+tspot+"].postman";
-            this.darungs[tspot].postman = new poster(this.screen,tspot,this.varname,s,this.listype,this.is_mini);
-          }
-          this.darungs[tspot].postman.set_ppid(p);
-        }
-
-        if (this.darungs[tspot].postman != undefined) {
-          this.darungs[tspot].postman.build_rung(tspot);
-          this.darungs[tspot].postman.draw_rung(tspot);
-        }
-
-   } else {
- //        alert("err:" + adex);
-   } 
-
-}   
-
 
 
 viewer.prototype.draw_debug = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
-     tmp = tmp + " dalist="+ dalist.length;
-     tmp = tmp + " catlist="+ this.dalist.length;
+     tmp = tmp + " webitlist="+ webitlist.length;
+     tmp = tmp + " viewerlist="+ this.dalist.length;
      tmp = tmp + " rungs="+ this.darungs.length;
      tmp = tmp + " topend="+ this.top_end;
 
@@ -263,33 +251,6 @@ viewer.prototype.draw_debug = function() {
          pobj.innerHTML = tmp;
      }
 }
-
-
-viewer.prototype.change_shape = function(tspot) {
-  if (this.darungs[tspot] !=null  ) {
-     if (this.darungs[tspot].shape=="") {
-        this.set_shape(tspot,"pic");
-     } else if (this.darungs[tspot].shape=="pic") {
-        this.set_shape(tspot,"link");
-     } else  if (this.darungs[tspot].shape=="link") {
-        this.set_shape(tspot,"story");
-     } else  if (this.darungs[tspot].shape=="story") {
-        this.set_shape(tspot,"");
-     }
-   }
-}
-
-
-viewer.prototype.set_shape = function(tspot,tshape) {
-
-   if (this.darungs[tspot] !=null  ) {
-        if (this.darungs[tspot].postman != undefined  ) {
-          this.darungs[tspot].postman.shape = tshape;
-          this.darungs[tspot].postman.redraw_rung();
-        }
-   }
-}
-
 
 
 viewer.prototype.toggle_zoom = function() {
@@ -332,31 +293,6 @@ viewer.prototype.set_zoom = function(pspot) {
 
 
 
-
- viewer.prototype.draw_date = function(tspot,tdex) {
-
-  var tmpstr = "";
-                 if (dalist[tdex]!= null) {
-                  if (dalist[tdex].dfdate != null) {
-                      var a =  dalist[tdex].dfdate.split(" ");
-                      var b =  a[0];
-                      var c = b.split("-");
-                      var m = c[1];
-                      var pi = parseInt(m,10);
-                      var nic =  ymons[pi] + " " +c[2] + " \'" + c[0].substr(2,2);
-                      var my =  ymons[pi] + " " + " \'" + c[0].substr(2,2);
-              //      tmpstr=tmpstr+ a + " ";
-                      tmpstr=tmpstr+ my;
-                   }
-                }
-
-  var lbl = this.screen +"_"+ tspot +"_date_spot";
-  if ( document.getElementById(lbl) != null ) {
-    document.getElementById(lbl).innerHTML= tmpstr;
-  }
-
-}
-
  viewer.prototype.draw_place = function(tspot,tdex) {
 
   var tmpstr = "";
@@ -368,38 +304,6 @@ viewer.prototype.set_zoom = function(pspot) {
   }
 
 }
-
-
-
- viewer.prototype.draw_name= function(tspot,tdex) {
-
-  var tmpstr = "";
-
-       if (dalist[tdex] != null ) {
-
-             if (dalist[tdex].source == 'twitter' ) {
-               turl = "http://twitter.com/Support/status/" + dalist[tdex].postnum;
-               tmpstr = tmpstr + "<a href='"+turl+"' target='_blank' >";
-               tmpstr = tmpstr + dalist[tdex].uname ;
-               tmpstr = tmpstr + "</a>";
-            }  else {	
-              if (dalist[tdex].linkurl != undefined) {
-               turl = dalist[tdex].linkurl;
- 	        tmpstr=tmpstr + "<a href='"+turl+"' target='_blank' >";
- 	        tmpstr=tmpstr + link_shrink(turl);
- 	       tmpstr=tmpstr + "</a>";
-              }
-            }
-
-        }
-
-  var lbl = this.screen +"_"+ tspot +"_name_spot";
-  if ( document.getElementById(lbl) != null ) {
-    document.getElementById(lbl).innerHTML= tmpstr;
-  }
-
-}
-
 
 
 

@@ -3,7 +3,7 @@ function logoman (pspot) {
 
   this.spotid = pspot;
   this.varname= "sal";
-  this.shape="standing";
+  this.shape="deskfm";
 
   this.preset = "sitonly";
   this.preseter = new suggester("logo_sog",new preset_provider(), this.varname +".preseter",this.varname);
@@ -329,26 +329,58 @@ logoman.prototype.draw_logo = function (psz) {
 
    if (this.shape == "deskfm") {
             lbl = this.spotid + '_logo_lspot';
-    	    ocl = this.varname + ".set_shape(\"freedom\");";
+	    ocl = this.varname + ".set_shape(\"freedom\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"Desk");
+            tmpstr = tmpstr + table_word(lbl,"D");
+            tmpstr=tmpstr+"</span>";
+           
+	    lbl = this.spotid + '_logo_lspot1';
+    	    ocl = this.varname + ".change_preset();";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"esk");
             tmpstr=tmpstr+"</span>";
 
             lbl = this.spotid + '_logo_rspot';
+	    ocl = this.varname + ".set_shape(\"freedom\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"FM");
+            tmpstr=tmpstr+"</span>";
+
+	    lbl = this.spotid + '_logo_rspot22';
+            ocl = this.varname + ".set_shape(\"freedom\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,".com");
             tmpstr=tmpstr+"</span>";
    } 
    if (this.shape == "freedom") {
             lbl = this.spotid + '_logo_lspot';
 	    ocl = this.varname + ".set_shape(\"deskfm\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"Desk");
+            tmpstr = tmpstr + table_word(lbl,"D");
+            tmpstr=tmpstr+"</span>";
+            
+	    lbl = this.spotid + '_logo_lspot1';
+    	    ocl = this.varname + ".change_preset();";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"esk");
+            tmpstr=tmpstr+"</span>"; 
+
+	    lbl = this.spotid + '_logo_rspot1';
+	    ocl = this.varname + ".set_shape(\"deskfm\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"F");
             tmpstr=tmpstr+"</span>";
 
-            lbl = this.spotid + '_logo_rspot';
+            lbl = this.spotid + '_logo_rspot2';
+    	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"FreedoM");
+            tmpstr = tmpstr + table_word(lbl,"reedo");
+            tmpstr=tmpstr+"</span>";
+
+            lbl = this.spotid + '_logo_rspot3';
+	    ocl = this.varname + ".set_shape(\"deskfm\");";
+            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
+            tmpstr = tmpstr + table_word(lbl,"M");
             tmpstr=tmpstr+"</span>";
    } 
    if (this.shape == "standing") {

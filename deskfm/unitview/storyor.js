@@ -21,9 +21,9 @@ poster.prototype.draw_story = function() {
          tiesto = this.story.replace(/<br>/gi,"\n");
 
           var exp2 = new RegExp(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
-          this.urls=[];
+
+          urlts=[];
           while ((urlts=exp2.exec(tiesto)) != null) {
-             this.urls.push(urlts[0]);
              var s = urlts[0];
              if (this.linkurl == "") {
                this.linkurl = urlts[0];
@@ -32,7 +32,8 @@ poster.prototype.draw_story = function() {
           } 
 
           var  exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-          var pg =   tiesto.replace(exp," ");
+          var pg =   tiesto;
+	  pg =  tiesto.replace(exp,"");
           var ps = pg;
 /*
           if (pg.length > 75) {
@@ -155,39 +156,5 @@ poster.prototype.toggle_getstory = function() {
 
 }
 
-
-
-/*
- poster.prototype.set_story = function() {
-
-     var tspot = this.rung;
-     var lbl = "";
-     lbl = this.spotid;
-     if (tspot != undefined) {
-       lbl = lbl +'_'+tspot;
-     }
-     lbl = lbl + '_story_area';
-
-        var tmpstr="";
-       if (document.getElementById(lbl) != null) {
-          var bill = document.getElementById(lbl).value;
-            this.story = bill.replace(/["']{1}/gi,"");
-	    this.story = bill.replace(/[\n]{1}/gi,"<br>");
-	}
-
-        var sdex = this.parvar + ".darungs["+tspot+"].dadex";
-        var dex = eval(sdex);
-        sdex = this.parvar + ".dalist["+dex+"]";
-        dex = eval(sdex);
- 
-        var sobj = "dalist["+dex+"].story = '" + this.story + "'";
-        eval(sobj);
-     
-        this.changed = true;
-        this.draw_story();
-        this.change_btns(); 
-
-}
-*/
 
 

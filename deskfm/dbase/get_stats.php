@@ -16,6 +16,11 @@ include '../../config/names.php';
     public $subs = array();
     public $prods = array();
     public $groups = array();
+    public $total_products;
+    public $total_people;
+    public $total_unsorted;
+    public $total_sorted;
+
     public $sql1 = "";
   }
 
@@ -28,7 +33,8 @@ $con = mysql_connect($Server, $username, $password);
   $baro = new bar;
 
   $sql = "";
-  $sql= " select dt.cat,dt.subcat,count(*) from dfm_tweets dt  ";
+  $sql= " select dt.cat,dt.subcat,count(*) from dfm_tweets dt ";
+  $sql = $sql . " where dt.cat != '' and dt.cat != 'junk' ";
   $sql = $sql . " group by dt.cat,dt.subcat ";
 
   $result = mysql_query($sql);
@@ -42,6 +48,7 @@ $con = mysql_connect($Server, $username, $password);
 
   $sql = "";
   $sql= $sql . " select dp.cat,dp.subcat,count(*) from dfm_posts dp  ";
+  $sql = $sql . " where dp.cat != '' and dp.cat != 'junk' "; 
   $sql = $sql . " group by dp.cat,dp.subcat ";
 
   $result = mysql_query($sql);
@@ -104,6 +111,33 @@ $con = mysql_connect($Server, $username, $password);
     $baro->total_people = $row[0];
   }
 
+  $sql = "";
+  $sql= " select count(*) from dfm_tweets where cat = ''; ";
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $baro->total_unsorted = $row[0];
+  }
+
+  $sql = "";
+  $sql= " select count(*) from dfm_posts where cat = ''; ";
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $baro->total_unsorted = $baro->total_unsorted + $row[0];
+  }
+
+  $sql = "";
+  $sql= " select count(*) from dfm_tweets where cat != '' and cat != 'junk'; ";
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $baro->total_sorted = $row[0];
+  }
+
+  $sql = "";
+  $sql= " select count(*) from dfm_posts where cat != '' and cat != 'junk'; ";
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $baro->total_sorted = $baro->total_sorted + $row[0];
+  }
   echo json_encode($baro); 
 
 ?>

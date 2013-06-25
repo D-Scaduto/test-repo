@@ -2,11 +2,6 @@
 
  poster.prototype.draw_rung = function(pspot) {
 
-     var tspot = this.rung;
-     if (pspot != undefined) {
-       tspot = pspot;
-     }
-
      if (this.dacater != null) {
        this.dacater.hide_suggestions();
      }
@@ -16,14 +11,17 @@
      if (this.grouper != null) {
        this.grouper.hide_suggestions();
      }
+  
 
        if (this.listype != "person") {
+
 
             if ((this.btnson == true) && (this.shape == "getstory" )) {
                this.get_story();
             } else {
                this.draw_story();
             }
+
 
             this.draw_price();
 
@@ -79,14 +77,12 @@
 
       this.nav_btns();
 
-     if (this.btnson == true) {
       this.work_btns();
-     }
 
-     if ((this.btnson == true) && (buddah == true))  {
+     if ((this.shape == "getsort") && (buddah == true))  {
        if (this.parvar != "nicky") {
-         if (this.listype == "webits") {
-           this.draw_catsel();
+         if ((this.listype == "webits") || (this.listype == "unsorted"))  {
+           this.get_catsel();
          }
          if (this.listype == "people") {
            this.draw_groups();
@@ -99,9 +95,9 @@
      }
 
 
-//     this.darungs[tspot].postman.set_price();
-//     this.draw_date(tspot,this.darungs[tspot].dadex);
-//     this.draw_place(tspot,this.darungs[tspot].dadex);
+//     this.darungs[pspot].postman.set_price();
+//     this.draw_date(pspot,this.darungs[tspot].dadex);
+//     this.draw_place(pspot,this.darungs[tspot].dadex);
 
         if (pname == "debug") {
           this.draw_debug();
@@ -128,12 +124,18 @@
        var mw = "";
        var sp ="";
 
+	  lbl = this.rungster + "_mark";
+	  moin = "markyd(\""+lbl+"\");";
+	  mout = "unmarkyd(\""+lbl+"\");";
+	  cls = "spotd_off";
+	  tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
+          moin = "";
+          mout= "";
+
            if (this.is_mini == true) {
 
-                tmpstr=tmpstr+"<span style='background-color:white;' >"; 
-
                 lbl= this.spotid + "_" + lspot + "_nav_btns";
-                tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style=''  >"; 
+	 	tmpstr=tmpstr+"<span id='"+lbl+"' style='vertical-align:top;' >"; 
     	        tmpstr=tmpstr+"</span>";
 
                 if (this.listype == "products") {
@@ -173,14 +175,10 @@
                 tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off'  style=''  >"; 
     	        tmpstr=tmpstr+"</div>";
 
-    	        tmpstr=tmpstr+"</span>";
-
            } else {
 
 
               if (this.listype == "people") {
-
-                  tmpstr=tmpstr+"<span style='background-color:white;' >"; 
 
                   lbl= this.spotid + "_" + lspot + "_" + "name" + "_spot";
                   cls="spotd_off";
@@ -195,7 +193,7 @@
                   tmpstr = tmpstr + "<div  style=''  >";
  
                   lbl= this.spotid + "_" + lspot + "_nav_btns";
-                  tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
+	 	  tmpstr=tmpstr+"<span id='"+lbl+"' style='vertical-align:top;' >"; 
     	          tmpstr=tmpstr+"</span>";
 
  	          lbl= this.spotid + "_" + lspot + "_" + "send_btns";
@@ -224,18 +222,16 @@
                   tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='display:inline-block;'  >"; 
                   tmpstr=tmpstr+"</div>";
 
-                  tmpstr=tmpstr+"</span>"; 
 
                } else {
-
-                  tmpstr=tmpstr+"<span style='' >"; 
 
 
 		  if (this.parvar != "nicky" ) {
 
-                    tmpstr=tmpstr+"<div>";
+                    tmpstr=tmpstr+"<div >";
+
                     lbl= this.spotid + "_" + lspot + "_nav_btns";
-                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
+	 	    tmpstr=tmpstr+"<span id='"+lbl+"' style='vertical-align:top;'  >";
       	            tmpstr=tmpstr+"</span>";
 
 		    lbl= this.spotid + "_" + lspot + "_" + "send_btns";
@@ -256,6 +252,17 @@
 	              tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='float:right;' >"; 
                       tmpstr=tmpstr+"</span>";
                     }
+
+		    tmpstr = tmpstr + "<br>";
+                    
+                    lbl = this.spotid +'_'+lspot + '_sort_btns';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
+                    tmpstr = tmpstr + "</span>";
+
+                    lbl = this.spotid +'_'+lspot + '_sort_spot';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
+                    tmpstr = tmpstr + "</span>";
+
                     tmpstr=tmpstr+"</div>";
                     tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
@@ -264,7 +271,7 @@
                     tmpstr=tmpstr+"<div style='' >";
 
 		    lbl= this.spotid + "_" + lspot + "_nav_btns";
-                    tmpstr=tmpstr+"<span id='"+lbl+"' onclick='' onmouseover=''  onmouseout=''  style='float:left;'  >"; 
+	 	    tmpstr=tmpstr+"<span id='"+lbl+"' style='vertical-align:top;' >";
       	            tmpstr=tmpstr+"</span>";
 
                     lbl= this.spotid + "_" + lspot + "_" + "send_btns";
@@ -273,9 +280,19 @@
 
   		    lbl = this.spotid +'_'+lspot + '_work_btns';
                     tmpstr = tmpstr + "<span id='"+lbl+"'  style='float:right;'  >";
-                    tmpstr = tmpstr + "</span>"; 
+                    tmpstr = tmpstr + "</span>";
+
+                    tmpstr = tmpstr + "<br>";
                     
-		    tmpstr=tmpstr+"</div>";
+                    lbl = this.spotid +'_'+lspot + '_sort_btns';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
+                    tmpstr = tmpstr + "</span>";
+
+                    lbl = this.spotid +'_'+lspot + '_sort_spot';
+                    tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
+                    tmpstr = tmpstr + "</span>";
+
+                    tmpstr=tmpstr+"</div>";
 
                     tmpstr=tmpstr+"<div style='clear:both;' ></div>";
 
@@ -306,23 +323,11 @@
                   tmpstr=tmpstr+"<div style='clear:left;' ></div>";
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
-                  tmpstr = tmpstr + "<div style='' >";
-                  lbl = this.spotid +'_'+lspot + '_sort_btns';
-                  tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
-                  tmpstr = tmpstr + "</span>";
-
-                  lbl = this.spotid +'_'+lspot + '_sort_spot';
-                  tmpstr = tmpstr + "<span id='"+lbl+"'  style=''  >";
-                  tmpstr = tmpstr + "</span>";
-
-                 
-
-                  tmpstr = tmpstr + "</div>";
 
                   tmpstr=tmpstr+"<div style='clear:left;' ></div>";
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
-                  if ((this.btnson == true) && (this.shape=="getpic")) {
+                  if ((this.btnson == true) && (this.shape == "getpic")) {
   	              lbl= this.spotid + "_" + lspot + "_getpic";
 	              tmpstr=tmpstr+"<div  id='"+lbl+"' style='float:right;' >";
                       tmpstr=tmpstr+"</div>";
@@ -343,9 +348,10 @@
                   tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off'  style='vertical-align:top;background-color:white;'  >"; 
     	          tmpstr=tmpstr+"</div>";
 
-    	          tmpstr=tmpstr+"</span>";
 
            } 
+
+    	   tmpstr=tmpstr+"</div>";
 
       }
 

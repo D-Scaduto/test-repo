@@ -2,11 +2,10 @@
 function webit(tpid) { 
 
    this.pid = tpid;
-   this.rung = "";
-   this.shape = "";
-   this.changed=false;
-   this.showing=false;
+  
    this.listype="webits";
+   this.stored=false;
+   this.source = "deskfm";
 
    this.uname="";
    this.groupid = "";
@@ -16,11 +15,18 @@ function webit(tpid) {
    this.story="";
    this.prodid = "";
    this.price = -1;
+
+   this.picurl = "";
    this.linkurl ="";
-   this.source = "deskfm";
+   this.embedurl ="";
+
 
    this.color = "black";
-
+//   this.showing=false;
+//   this.changed=false;
+//   this.shape = "";
+//   this.rung = "";
+//
 }
 
 

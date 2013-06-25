@@ -45,13 +45,14 @@ header.prototype.show = function() {
 
        tmp = tmp + "<div style='width:300px;min-width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
 
-       tmp = tmp + "<span id='nitro_img' onclick='daviewer.toggle_nitro();' style='padding:3px;' >";
+       tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;padding:3px;' >";
 
        tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
-       tmp = tmp + "</span>";
+       tmp = tmp + "</div>";
 
-       tmp = tmp + "<span id='top_rail' style='' >";
-       tmp = tmp + "</span>";
+       tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
+       tmp = tmp + "</div>";
+
        tmp = tmp + "</div>";
 
      lbl = this.spotid;
@@ -61,6 +62,26 @@ header.prototype.show = function() {
           this.showing = true;
           this.draw_mainmenu();
      }
+
+}
+
+header.prototype.redraw_view = function (psetype) {
+
+    sal.draw_vman();
+
+    if (this.main_shape == "browse" ) {
+	    if (psetype == "webits") { 
+   	       cater.redraw_view();
+	    }
+    } else if (this.main_shape == "contact") {
+
+    } else if (this.main_shape == "sort") {
+            if (psetype == "unsorted") {
+               mac.redraw_view();
+	    }
+    }
+
+
 
 }
 

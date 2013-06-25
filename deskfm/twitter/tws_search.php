@@ -10,13 +10,67 @@ $cb = \Codebird\Codebird::getInstance();
 $reply = $cb->oauth2_token();
 $bearer_token = $reply->access_token;
 
-?>
+ class foo { 
+ 
+   public $pid = ""; 
+   public $uname = "";
+   public $cat = "";
+   public $subcat = "";
+   public $story = "";
+   public $prodid = "";
+   public $price = "";
+   public $source = "";
+   public $dfdate = "";
+   public $picurl = "";
+   public $linkurl = "";
+   public $embedurl = "";
+   public $listype = "";
 
-<?php 
+  }
+
+ class bar {
+   public $dalist;
+ }
+ $rebar = new bar;
+ $arr = array();
 
     $reply = $cb->search_tweets('q=standing desk',true);
+ 
+    for ($i =0; $i < sizeof($reply->statuses); $i++ ) {
 
-    echo json_encode($reply);
+      $d = $reply->statuses[$i];
+
+      if ($d != null) {
+
+      $foodo = new foo;
+ 
+      $foodo->source = "twitter";
+      $foodo->listype = "unsorted";
+
+      $foodo->pid =    $d->id_str;
+
+
+        $foodo->picurl = $d->user->profile_image_url;
+
+        $foodo->uname = $d->user->screen_name;
+
+      $foodo->story  =  $d->text;
+
+      $foodo->dfdate = $d->created_at;
+ 
+      $foodo->linkurl = "";
+      $foodo->embedurl = "";
+
+      $foodo->urls = array();
+
+      $arr[] = $foodo;
+
+      }
+    }
+
+    $rebar->dalist = $arr;
+ 
+    echo json_encode($rebar);
 
 
 ?> 

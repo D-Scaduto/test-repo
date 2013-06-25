@@ -6,36 +6,18 @@ viewer.prototype.draw_rail = function() {
     var omo = "";
     var omt = "";
 
-/*
-    lbl = this.screen + "_set0";
-    cls = "spotd_off";
-    ocl = this.varname + ".goto_rung(4);";
-    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='' onmouseout='' >";
-    tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='25px' >";
-    tmp = tmp + "</span>";
-*/
 
-    lbl = this.screen + "_prev";
-    omo = "markyd(\""+lbl+"\");";
-    omt = "unmarkyd(\""+lbl+"\");";
-    cls = "spotd_off";
-    ocl = this.varname + ".prev();";
-    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-    tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
-    tmp = tmp + "</span>";
+    tmp = tmp + "<div style='display:inline-block;border-color:black;border-style:solid;border-width:2px;' >";
 
-    lbl = this.screen + "_track";
-    tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
-    tmp = tmp + "</span>";
+    lbl = this.screen + "_chunks";
+    tmp = tmp + "<div id='"+lbl+"' onclick='' style='' >";
+    tmp = tmp + "</div>";
 
-    lbl = this.screen + "_next"
-    omo = "markyd(\""+lbl+"\");";
-    omt = "unmarkyd(\""+lbl+"\");";
-    cls = "spotd_off";
-    ocl = this.varname + ".next();";
-    tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-    tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
-    tmp = tmp + "</span>";
+    lbl = this.screen + "_chips";
+    tmp = tmp + "<div id='"+lbl+"' onclick='' style='' >";
+    tmp = tmp + "</div>";
+
+    tmp = tmp + "</div>";
 
 /*
     lbl = this.screen + "_shuffle";
@@ -46,95 +28,101 @@ viewer.prototype.draw_rail = function() {
     tmp = tmp + "</span>";
 */
 
-    lbl = this.screen + "_index";
-    tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
-    tmp = tmp + "</span>";
-
-    lbl = this.screen + "_listmax";
-    tmp = tmp + "<span id='"+lbl+"' onclick='' style='' >";
-    tmp = tmp + "</span>";
-
-    lbl = "top_rail";
+   lbl = "top_rail";
     pobj = document.getElementById(lbl);
     if ( pobj != null) {
         pobj.innerHTML = tmp;
-        this.draw_chipbar();
-        this.draw_index();
-        this.draw_listmax();
+
+       	this.draw_chunkbar();
+	this.draw_chipbar();
     }
 }
 
 
-viewer.prototype.draw_index = function() {
 
-     var pobj=null;
-     var lbl = "";
-     var tmp = "";
-     var cls= "";
-     var ocl = "";
+viewer.prototype.draw_chunkbar = function() {
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+   var st=0;
+   var fn=0;
+   var pv = null;
+   var cls = "";
+   var moin="";
+   var mout="";
 
-      lbl = this.screen + '_indexbtn';
-      cls='spotd_off';
-      ocl = 'daviewer.toggle_zoom();';   
-    
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-      var n = this.listdex + 1;
-      tmp = tmp + n;
-      tmp = tmp + "</span>";
+   var ts = null;
+   var tot = 0;
 
-      tmp = tmp + "<span  class='spotd_off' >";
-      tmp = tmp + " of ";
-      tmp = tmp + "</span>";
+   if (this.stats != null) {
+	   tot = this.stats.cnum;
+   }
 
-     lbl = this.screen + '_index';
+    var chunks = tot / this.top_end;
+    if (chunks > 1) {
 
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+
+       var fac =  1;
+       if (chunks > 10 ) {
+         fac = Math.round( chunks / 10);
+       }
+
+       lbl = this.screen + "_prev_chunk";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".prev();";
+       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='20px' >";
+       tmp = tmp + "</div>";
+
+       for (var k=1; k<10;k++) {
+
+             var g = k*fac*this.top_end;
+             var tsrc = "deskfm/images/icons/pez-white.png";
+             lbl = this.screen + "_chunk_"+ k;
+
+             if (g < tot) {
+               tsrc = "deskfm/images/icons/pez-silver.png";
+//               ocl = this.varname + ".goto_rung("+g+");";
+               moin = "imarkyp(\""+lbl+"\");";
+               mout = "unimarkyp(\""+lbl+"\");";
+
+               if ((this.listdex >= g)&&(this.listdex < g+fac)){
+
+                 tsrc = "deskfm/images/icons/pez-black.png";
+                 moin = "";
+                 mout="";
+               }
+             }
+
+             tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
+             tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
+             tmp = tmp + "</span>";
+       }
+
+    lbl = this.screen + "_next_chunk"
+    omo = "markyd(\""+lbl+"\");";
+    omt = "unmarkyd(\""+lbl+"\");";
+    cls = "spotd_off";
+    ocl = this.varname + ".next();";
+    tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+    tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='20px' >";
+    tmp = tmp + "</div>";
+
+
+
+    }
+
+
+   lbl = this.screen + '_chunks';
+   pobj = document.getElementById(lbl);
+   if ( pobj != null) {
        pobj.innerHTML = tmp;
-     }
+   }
 }
 
 
-viewer.prototype.draw_listmax = function() {
-
-     var pobj=null;
-     var lbl = "";
-     var tmp = "";
-     var ts = null;
-
-     var ocl = '';
-      lbl = this.screen + '_chipbtn';
-        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-     tmp = tmp + this.dalist.length;
-        tmp = tmp + "</span>";
-
-     lbl = this.screen + '_chunkbtn';
-     if (this.listype == "webits") {
-       ocl = "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
-     } else if (this.listype == "people") {
-         ocl = "amare.get_group_list(\""+this.groupid+"\");";
-      } else if (this.listype == "webits") {
-         ocl = "amare.get_prod_list(\""+this.prodid+"\");";
-      }
-     tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-     if (this.listype == "people") {
-       ts = amare.get_groupstat(this.groupid);
-     }
-     if (this.listype == "webits") {
-        ts = amare.get_catstat(this.cat,this.subcat);
-     }
-     if (ts != null) {
-       tmp = tmp + " of " + ts.cnum;
-     }
-     tmp = tmp + "</span>";
-
-     lbl = this.screen + '_listmax';
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-       pobj.innerHTML = tmp;
-     }
-
-}
 
 
 viewer.prototype.draw_chipbar = function() {
@@ -151,6 +139,16 @@ viewer.prototype.draw_chipbar = function() {
 
      var len = this.dalist.length;
      var fac =  1;
+
+       lbl = this.screen + "_prev_chip";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".prev();";
+       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
+       tmp = tmp + "</div>";
+
        if (len > 10 ) {
          fac = Math.round( len / 10);
        }
@@ -178,8 +176,81 @@ viewer.prototype.draw_chipbar = function() {
             tmp = tmp + "</span>";
        }
 
+   lbl = this.screen + "_next_chip"
+    omo = "markyd(\""+lbl+"\");";
+    omt = "unmarkyd(\""+lbl+"\");";
+    cls = "spotd_off";
+    ocl = this.varname + ".next();";
+    tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+    tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
+    tmp = tmp + "</div>";
 
-   lbl = this.screen + '_track';
+
+     lbl = this.screen + '_indexbtn';
+      cls='spotd_off';
+      ocl = 'daviewer.toggle_zoom();';   
+    
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      var n = this.listdex + 1;
+      tmp = tmp + n;
+      tmp = tmp + "</span>";
+
+
+
+     if (this.listype == "webits") {
+         ocl = "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
+
+     } else if (this.listype == "people") {
+      lbl = this.screen + '_indexbtn';
+      cls='spotd_off';
+      ocl = 'daviewer.toggle_zoom();';   
+    
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      var n = this.listdex + 1;
+      tmp = tmp + n;
+      tmp = tmp + "</span>";
+      ocl = "amare.get_group_list(\""+this.groupid+"\");";
+
+     } else if (this.listype == "products") {
+         ocl = "amare.get_prod_list(\""+this.prodid+"\");";
+     }
+
+     lbl = this.screen + '_chunkbtn';
+
+     tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+     tmp = tmp + " of ";
+
+     if (this.listype == "people") {
+       ts = amare.get_groupstat(this.groupid);
+     }
+     
+     if (this.listype == "webits") {
+	if (this.cat == "") {
+            tmp = tmp + amare.total_sorted;
+        } else {
+           ts = amare.get_catstat(this.cat,this.subcat);
+           if (ts != null) {
+             tmp = tmp + ts.cnum;
+           }
+	}
+     }
+     
+     if (this.listype == "unsorted") {
+        tmp = tmp + amare.total_unsorted;
+     }
+
+     if (this.listype == "products") {
+        ts = amare.get_prodstat(this.prodid);
+        if (ts != null) {
+         tmp = tmp + ts.cnum;
+       }
+     }
+     
+    
+     tmp = tmp + "</span>";
+
+
+   lbl = this.screen + '_chips';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
        pobj.innerHTML = tmp;
@@ -216,14 +287,6 @@ viewer.prototype.mark_chipbar = function(mdex) {
 }
 
 
-viewer.prototype.toggle_trackshape = function() { 
-   if (this.track_show == true) {
-       this.track_show = false;
-   } else {
-     this.track_show = true;
-   }
-   this.draw_rail();
-}
 
 
 viewer.prototype.hide_rail = function() {

@@ -120,7 +120,7 @@ poster.prototype.get_pic = function() {
         tsrc = doctmp.getElementById('tmp_pic').src;
 
         this.picurl = tsrc;
-        var sobj = "dalist["+this.dadex+"].picurl = '" + this.picurl + "'";
+        var sobj = "webitlist["+this.dadex+"].picurl = '" + this.picurl + "'";
         eval(sobj);
 
         this.draw_pic();

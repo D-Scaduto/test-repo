@@ -194,9 +194,9 @@ function tws_get(qry_str)
      var op = "";
      var cur_page = 0;
 
-      var s = "";
+     var s = "";
 //      s = url + query;
-      s = url ;
+     s = url ;
 
      $.getJSON(s,function(json) {
 
@@ -204,38 +204,21 @@ function tws_get(qry_str)
         cur_page = json.page; 
         var rfsh = json.refresh_url +"&rpp=100";
 
-        main_array = [];
-        main_array = json.statuses;
-
         if (cur_page >1) {
              var prev_page = cur_page - 1;
             op = op + "<input type=button value='prev page' onClick='tws_reget(\""+rfsh+"&page="+prev_page+"\")' > ";
-         } 
+        } 
 
         if (np != undefined) {
           np = np.substring(1, np.length); 
           op = op + "<input type=button value='next page' onClick='tws_reget(\""+np+"\")' > "; 
         } 
 
-        if (main_array != undefined) {
-
         op = op + "<input type=button value='save all' onClick='tws_saveall();' > "; 
-      
-       $("#feed_btns").html(op);  
 
-        dfm_buildblocks();
-        for (var k=0; (k <main_array.length) ; k++) {
+        $("#feed_btns").html(op);  
 
-           if (main_array[k] != null) {
-               main_array[k].state = "none";
-               main_array[k].hide = false;
-
-            }
-          }
-
-       tws_showall();
-       tws_check_state();
-        }
+        add_unsorted(json);
 
     });   // end get json 
 }

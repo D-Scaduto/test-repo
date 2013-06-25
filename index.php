@@ -37,9 +37,12 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/unitview/debug.js type="text/javascript" ></script>
 <script src=deskfm/viewer.js type="text/javascript" ></script>
 <script src=deskfm/controller.js type="text/javascript" ></script>
+<script src=deskfm/loader.js type="text/javascript" ></script>
 <script src=deskfm/rail.js type="text/javascript" ></script>
-<script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/nitro.js type="text/javascript" ></script>
+
+<script src=deskfm/model.js type="text/javascript" ></script>
+<script src=deskfm/stater.js type="text/javascript" ></script>
 
 <script src=deskfm/suggester.js type="text/javascript" ></script>
 <script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
@@ -57,7 +60,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
-<script src=deskfm/stater.js type="text/javascript" ></script>
+
 <script src=deskfm/header.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>

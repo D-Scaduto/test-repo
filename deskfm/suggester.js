@@ -349,24 +349,11 @@ suggester.prototype.click_suggestion = function () {
     var oit = null;
     if (this.suggs[this.cur] != undefined) {
 
-        if (this.varname.substring(0,3) == "joe") {
-          if (this.varname == "joe.subcater") {
-             joe.set_subcat(this.suggs[this.cur].cat,this.suggs[this.cur].subcat);
-          } else if (this.varname == "joe.preseter") {
-             joe.set_preset(this.suggs[this.cur].preset);
-          } else if (this.varname == "joe.producter") {
-             joe.set_product(this.suggs[this.cur].prodid);
-          } else if (this.varname == "joe.dacater") {
-             joe.set_cat(this.suggs[this.cur].cat);
-          } else if (this.varname == "joe.grouper") {
-             joe.set_group(this.suggs[this.cur].groupid);
-          }
-
-        } else {
-
           if (this.varname == "cater.subcater") {
               se = this.boss + ".set_cats(\""+this.suggs[this.cur].cat+"\",\""+this.suggs[this.cur].subcat+"\");";
               eval(se);
+          } else if (this.varname == "joe.grouper") {
+             joe.set_group(this.suggs[this.cur].groupid);
           } else if (this.varname == "nicky.preseter") {
              se = this.boss + ".set_preset(\""+this.suggs[this.cur].preset+"\");";
              eval(se);
@@ -392,8 +379,6 @@ suggester.prototype.click_suggestion = function () {
                eval(se);
              }
           }
-
-       }
 
        this.hide_suggestions();
 

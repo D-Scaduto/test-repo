@@ -112,6 +112,9 @@ categor.prototype.show = function() {
    if (obj != null) {
      obj.innerHTML=tmpstr;
      this.showing = true;
+     if (init_run == false) {
+	 this.redraw_view();
+     }
    }
 
   if (pname == "debug") {
@@ -129,7 +132,7 @@ categor.prototype.redraw_view = function() {
      if ((this.cat == "") && (this.subcat == "")) {
        daviewer.load_random_list();
      } else {
-       daviewer.set_catscreen(this.cat,this.subcat);
+       daviewer.load_category_list(this.cat,this.subcat);
      }
    }
 }
@@ -159,7 +162,7 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
       this.subcater.request_suggestions(this.cat);
     } 
 
-    daviewer.set_catscreen(this.cat,this.subcat);
+    daviewer.load_category_list(this.cat,this.subcat);
    
 }
 

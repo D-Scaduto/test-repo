@@ -10,6 +10,7 @@ function group_provider() {
 
 group_provider.prototype.init = function () {
 
+     this.sealist.push({'text':'ungrouped' ,'groupid':''   });
      this.sealist.push({'text':'desk standers' ,'groupid':'stands'   });
      this.sealist.push({'text':'desk dancers' ,'groupid':'dances'  });
      this.sealist.push({'text':'desk workouters' ,'groupid':'workout'  });

@@ -79,7 +79,7 @@ searcher.prototype.check_local = function() {
    }
 
    this.sterms = st;
-   daviewer.get_lsearch_list(st);
+   daviewer.load_search_list(st);
 }
 
 

@@ -15,9 +15,9 @@ class foo {
   class bar {
    public $dasql1;
    public $dasql2;
-   public $peeplist_len;
+   public $peoplelist_len;
    public $dachunk;
-   public $peeplist;
+   public $peoplelist;
  }
 
 
@@ -55,8 +55,6 @@ if (!$con) {
 
    if ($groupid != "" ) {
       $sql = $sql . " where group_id = '" .  $groupid. "'";
-   } else {
-      $sql = $sql . " where group_id != ''";
    } 
 
   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;
@@ -79,7 +77,7 @@ if (!$con) {
     $arr[] = $foodo;
   }
 
-  $rebar->peeplist = $arr;
+  $rebar->peoplelist = $arr;
 
   echo json_encode($rebar); 
 

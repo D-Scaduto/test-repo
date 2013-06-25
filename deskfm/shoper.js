@@ -74,10 +74,9 @@ shoper.prototype.set_product = function(tprod) {
       if (tprod != undefined) {
          this.prodid=tprod;
       }
-
-      if (this.pricemax != -1) {
-        daviewer.set_prodscreen(this.prodid); 
-      }
+//      if (this.pricemax != -1) {
+        daviewer.set_productscreen(this.prodid); 
+//      }
 
       if (this.producter.layer.style.visibility == "hidden") {
           lbl = "product_sog";
@@ -97,22 +96,12 @@ shoper.prototype.set_product = function(tprod) {
 shoper.prototype.set_pricemax = function(tpmax,tptxt) {
       if (tpmax != undefined) {
          this.pricemax=tpmax;
-
-           var cdx=null;
-           var stpid="";
-           var spid="";
-           var stx = this.daviewer.darungs[0].dadex;
-           cdx = this.daviewer.dalist[stx];
-           if (cdx != undefined) {
-             spid = dalist[cdx].pid;
-           }
-
       }
       if (tptxt != undefined) {
          this.pmaxtext=tptxt;
       }
 
-//      this.daviewer.set_prodscreen(this.prodid); 
+//      this.daviewer.set_productscreen(this.prodid); 
       if (this.pricer.layer.style.visibility == "hidden") {
           lbl = "price_sog";
           tmp = "<div onclick='store.pricer.request_suggestions();' class='spotd_off' >";

@@ -72,7 +72,6 @@
         if (this.subcater == null) {
           this.subcater = new suggester(lb2,new subcat_provider(),this.varname + ".subcater",this.varname);
         }
-        this.dacater.request_suggestions(); 
      }
      
 }
@@ -106,6 +105,19 @@ poster.prototype.set_subcat = function(psubcat) {
       }
 
 }
+
+
+
+poster.prototype.toggle_getsort = function() {
+
+    if (this.shape != "getsort") {
+       this.shape = "getsort";
+    } else {
+       this.shape = "";
+    }
+    this.redraw_rung();
+}
+
 
 
 poster.prototype.hide_catsel = function() {

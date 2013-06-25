@@ -101,7 +101,7 @@ sharer.prototype.new_one = function(pdex) {
      var t = -1;
      if (pdex == undefined) { 
        g = new webit();
-       t = dalist.push(g);
+       t = webitlist.push(g);
        this.newster.set_ppid(t-1);
      } else {
        this.newster.set_ppid(pdex);
