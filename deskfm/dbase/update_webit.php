@@ -120,16 +120,16 @@ $con = mysql_connect($Server, $username, $password);
        $sql_upd = $sql_upd . " embedurl = '" . $embedurl . "'"; 
        $some = true;
      }
-
-
+     
+     if($some==true){
+       $sql_upd = $sql_upd . " , ";
+     }
+     $change_date = "now()";	
+     $sql_upd = $sql_upd . "change_date = " . $change_date;
     
 
 
   if ($some == true) {
-        $change_date = date('Y-m-d h:m:s');
-	$sql_upd = $sql_upd . " , ";
-        $sql_upd = $sql_upd . "change_date = '" . $chang_date . "'";
-
     if ($source == "deskfm") {
       $sql_upd = "update dfm_posts set " . $sql_upd;
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
