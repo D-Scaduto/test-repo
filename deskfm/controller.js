@@ -8,8 +8,10 @@ viewer.prototype.clear_list = function() {
 
 
 viewer.prototype.goto_rung = function(pidex) {
+
    this.load_rungs(pidex);
    this.draw_view();
+
    window.scroll(0,0);
    var lbl=this.screen+"_rung_0";
    if ( document.getElementById(lbl) != null) {
@@ -68,40 +70,9 @@ viewer.prototype.next = function() {
 
 
 
-viewer.prototype.load_random_rungs = function() {
-
-   var tls = [];
-   var r = 0;
-   var i =0;
-   var mx = this.dalist.length;
-   var ro = null;
-   this.darungs = [];
-
-   while (i<this.top_end) {
-       r = Math.floor((Math.random()*mx));
-       ro = this.dalist[r];
-       if (ro != undefined) {
-         var used = false;
-         for (var z=0;z<=tls.length;z++){
-           if (r == tls[z]) {
-               used = true;
-           }
-         }
-         if (used == false) {
-           tls.push(r);
-           this.darungs[i] = new Object();
-           this.darungs[i].dadex = r;
-         }
-       }
-       i = i+1;
-   }
-
-    this.draw_view();
-
-}
-
 
 viewer.prototype.load_rungs = function(plocdex) {
+
        this.darungs = [];
        var r = 0;
        if (plocdex != undefined) {
@@ -214,3 +185,35 @@ viewer.prototype.redraw_rungs = function(trungdex) {
 
 
 
+
+viewer.prototype.load_random_rungs = function() {
+
+   var tls = [];
+   var r = 0;
+   var i =0;
+   var mx = this.dalist.length;
+   var ro = null;
+   this.darungs = [];
+
+   while (i<this.top_end) {
+       r = Math.floor((Math.random()*mx));
+       ro = this.dalist[r];
+       if (ro != undefined) {
+         var used = false;
+         for (var z=0;z<=tls.length;z++){
+           if (r == tls[z]) {
+               used = true;
+           }
+         }
+         if (used == false) {
+           tls.push(r);
+           this.darungs[i] = new Object();
+           this.darungs[i].dadex = r;
+         }
+       }
+       i = i+1;
+   }
+
+    this.draw_view();
+
+}

@@ -6,8 +6,8 @@ function categor (pspotid) {
    this.varname='cater';
    this.shape = "";
 
-   this.cat="";
-   this.subcat="";
+   this.cat="who";
+   this.subcat="stands";
    this.sterms = "";
    this.searchon = false;
 
@@ -126,15 +126,8 @@ categor.prototype.show = function() {
 
 categor.prototype.redraw_view = function() {
 
-   if (wanda.sterms != "") {
-         daviewer.get_lsearch_list(wanda.sterms);
-   } else {
-     if ((this.cat == "") && (this.subcat == "")) {
-       daviewer.load_random_list();
-     } else {
        daviewer.load_category_list(this.cat,this.subcat);
-     }
-   }
+
 }
 
 categor.prototype.get_more = function() {

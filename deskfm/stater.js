@@ -26,16 +26,18 @@ stat.prototype.next_chunk = function() {
 }
 
 
+
 function stater () { 
 
    this.substats = [];
    this.chunkset = [];
    this.prodstats = [];
    this.groupstats = [];
-   this.total_unsorted = 0;
-   this.total_sorted = 0;
-   this.total_people = 0;
-   this.total_products = 0;
+
+   this.total_unsorted = new stat();
+   this.total_sorted = new stat();
+   this.total_people = new stat();
+   this.total_products = new stat ();
 
 }
 
@@ -91,19 +93,67 @@ function update_stats(statobj) {
      }
 
 
-      amare.total_unsorted = statobj.total_unsorted;
-      amare.total_sorted = statobj.total_sorted;
-      amare.total_people = statobj.total_people;  
-      amare.total_products = statobj.total_products;
+      amare.total_unsorted.cnum = statobj.total_unsorted;
+      amare.total_sorted.cnum = statobj.total_sorted;
+      amare.total_people.cnum = statobj.total_people;  
+      amare.total_products.cnum = statobj.total_products;
 
       amare.count_lstats();
       amare.count_lpstats();
 
-       daviewer.draw_rail();
+      got_stats = true;
+      if (init_run == true) {
+         amare.count_lstats();
+         init_run = false;
+         diego.redraw_view("webits");
+      }
 
-       sal.draw_vman();
    }
 }  
+
+
+
+stater.prototype.count_lstats = function() {
+    var i=0
+    for (i=0; i<this.substats.length; i++) {
+          this.substats[i].lnum = 0;
+    }
+    for (i=0; i<this.prodstats.length; i++) {
+          this.prodstats[i].lnum = 0;
+    }
+    this.total_sorted.lnum = 0;
+
+    var d=0;
+    for (d=0;d<webitlist.length;d++) {
+      if (webitlist[d] != undefined) {
+        var c = webitlist[d].cat;
+        var s = webitlist[d].subcat;
+        if ((c != "") && (s != "")) {
+	     this.total_sorted.lnum = this.total_sorted.lnum + 1;
+	}
+
+        for (var k=0; k<this.substats.length; k++) {
+           
+           if ((this.substats[k].cat == c) && (this.substats[k].subcat == s)) {
+              this.substats[k].lnum = this.substats[k].lnum + 1;
+           }
+        }
+      }
+    } 
+
+    for (d=0;d<productlist.length;d++) {
+      if (productlist[d] != undefined) {
+        var p = productlist[d].prodid;
+        for (var l=0; l<this.prodstats.length; l++) {
+          if (this.prodstats[l].prodid == p) {
+            this.prodstats[l].lnum = this.prodstats[l].lnum + 1;
+          }
+        }
+      }
+    } 
+
+}
+
 
 
 stater.prototype.count_lpstats = function() {
@@ -125,54 +175,15 @@ stater.prototype.count_lpstats = function() {
 }
 
 
-stater.prototype.count_lstats = function() {
-     var i=0
-     for (i=0; i<this.substats.length; i++) {
-          this.substats[i].lnum = 0;
-     }
-     for (i=0; i<this.prodstats.length; i++) {
-          this.prodstats[i].lnum = 0;
-     }
-    var d=0;
-    for (d=0;d<webitlist.length;d++) {
-      if (webitlist[d] != undefined) {
-        var c = webitlist[d].cat;
-        var s = webitlist[d].subcat;
-          for (var k=0; k<this.substats.length; k++) {
-            if ((this.substats[k].cat ==c) && (this.substats[k].subcat == s)) {
-               this.substats[k].lnum = this.substats[k].lnum + 1;
-            }
-          }
-     }
-   } 
-    for (d=0;d<productlist.length;d++) {
-      if (productlist[d] != undefined) {
-        var p = productlist[d].prodid;
-        for (var l=0; l<this.prodstats.length; l++) {
-          if (this.prodstats[l].prodid == p) {
-            this.prodstats[l].lnum = this.prodstats[l].lnum + 1;
-          }
-        }
-     }
-   } 
-
-}
-
-stater.prototype.true_count = function() {
-
-    var true_count = 0; 
-    for (var i=0; (i < amare.chunkset.length); i++) {
-      if (amare.chunkset[i] == true) {
-        true_count = true_count + 1;
-      }
-    }
-    return true_count;
-}
-
 
 stater.prototype.get_catstat = function(tcat,tsubcat) {
   var ret = null;
-     if ((tsubcat != undefined)&& (tcat != undefined)) {
+
+     if (tcat == "") {
+	  return this.total_sorted;
+
+     } else {
+    
         for (var i=0; (i < amare.substats.length); i++) {
           if ((amare.substats[i].cat ==tcat) && (amare.substats[i].subcat == tsubcat)) {
               ret = amare.substats[i];

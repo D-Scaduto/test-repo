@@ -167,12 +167,6 @@ buyer.prototype.hide = function() {
          pobj.style.backgroundColor = "white";
      }
 
-     s = this.boss + ".newster.hide_rung();";
-     e = eval(s);
-     if (this.boss != "obiwan.daviewer") {
-       s = this.boss + ".draw_screen();";
-       eval(s);
-     }
 }
 
 

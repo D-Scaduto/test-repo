@@ -163,7 +163,7 @@ a:active{
 .spotd_on {
 border-color:silver;
 border-style:solid;
-border-width:3px;
+border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;
@@ -172,7 +172,7 @@ font-size:medium;
 .spotd_mark {
 border-color:silver;
 border-style:solid;
-border-width:3px;
+border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;
@@ -182,7 +182,7 @@ font-size:medium;
 .spotd_off {
 border-color:white;
 border-style:solid;
-border-width:3px;
+border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;

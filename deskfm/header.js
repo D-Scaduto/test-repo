@@ -43,11 +43,11 @@ header.prototype.show = function() {
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='width:300px;min-width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
+       tmp = tmp + "<div style='width:325px;background-color:white;border:3px solid grey;padding:3px;' >";
 
        tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;padding:3px;' >";
 
-       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='35px' >";
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";

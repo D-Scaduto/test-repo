@@ -7,7 +7,7 @@ viewer.prototype.draw_rail = function() {
     var omt = "";
 
 
-    tmp = tmp + "<div style='display:inline-block;border-color:black;border-style:solid;border-width:2px;' >";
+    tmp = tmp + "<div style='display:inline-block;' >";
 
     lbl = this.screen + "_chunks";
     tmp = tmp + "<div id='"+lbl+"' onclick='' style='' >";
@@ -41,30 +41,33 @@ viewer.prototype.draw_rail = function() {
 
 
 viewer.prototype.draw_chunkbar = function() {
+
    var pobj=null;
    var lbl = "";
    var tmp = "";
-   var st=0;
-   var fn=0;
-   var pv = null;
    var cls = "";
    var moin="";
    var mout="";
 
-   var ts = null;
    var tot = 0;
+   var chunks = 0;
+   var cur_chunk = 0;
+   var fac = 1;
 
    if (this.stats != null) {
-	   tot = this.stats.cnum;
+	tot = this.stats.cnum;
    }
 
-    var chunks = tot / this.top_end;
+    chunks = tot / this.top_end;
+
     if (chunks > 1) {
 
-
-       var fac =  1;
        if (chunks > 10 ) {
          fac = Math.round( chunks / 10);
+       }
+       cur_chunk = 1;
+       if (this.listdex > this.top_end * fac) {
+	    cur_chunk = this.listdex / this.top_end * fac;
        }
 
        lbl = this.screen + "_prev_chunk";
@@ -79,38 +82,62 @@ viewer.prototype.draw_chunkbar = function() {
        for (var k=1; k<10;k++) {
 
              var g = k*fac*this.top_end;
-             var tsrc = "deskfm/images/icons/pez-white.png";
+
              lbl = this.screen + "_chunk_"+ k;
+             ocl = '';
+	     cls = 'spotd_off';
+             moin = "markyd(\""+lbl+"\");";
+             mout = "unmarkyd(\""+lbl+"\");";
 
-             if (g < tot) {
-               tsrc = "deskfm/images/icons/pez-silver.png";
-//               ocl = this.varname + ".goto_rung("+g+");";
-               moin = "imarkyp(\""+lbl+"\");";
-               mout = "unimarkyp(\""+lbl+"\");";
+             var tsrc = "";
+	     if (cur_chunk == k) {
+                    tsrc = "deskfm/images/icons/pez-black.png";
+                    moin = "";
+                    mout="";
 
-               if ((this.listdex >= g)&&(this.listdex < g+fac)){
+             } else {
 
-                 tsrc = "deskfm/images/icons/pez-black.png";
-                 moin = "";
-                 mout="";
-               }
+		tsrc = "deskfm/images/icons/pez-white.png";
+
+                if (g < this.stats.cnum) {
+                    ocl =  "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
+                    tsrc = "deskfm/images/icons/pez-brown.png";
+		}
+
+	        if (g < this.stats.lnum ) {
+	            ocl = this.varname + ".goto_rung("+g+");";
+		    tsrc = "deskfm/images/icons/pez-silver.png";
+		}
              }
 
-             tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
+             tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
              tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
              tmp = tmp + "</span>";
        }
 
-    lbl = this.screen + "_next_chunk"
-    omo = "markyd(\""+lbl+"\");";
-    omt = "unmarkyd(\""+lbl+"\");";
-    cls = "spotd_off";
-    ocl = this.varname + ".next();";
-    tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-    tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='20px' >";
-    tmp = tmp + "</div>";
+       lbl = this.screen + "_next_chunk"
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".next();";
+       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='20px' >";
+       tmp = tmp + "</div>";
 
+      lbl = this.screen + '_chunkbtn';
+      cls='spotd_off';
+      ocl = '';   
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
 
+      tmp = tmp + "set " + cur_chunk;
+      tmp = tmp + "</span>";
+
+      lbl = this.screen + '_setlen';
+      cls='spotd_off';
+      ocl = '';   
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      tmp = tmp + " of " + Math.round(chunks);
+      tmp = tmp + "</span>"
 
     }
 
@@ -136,9 +163,30 @@ viewer.prototype.draw_chipbar = function() {
    var cls = "";
    var moin="";
    var mout="";
+   var chunks = 0;
+   var cur_chunk = 0;
+   var fac =  1;
+   var tot = 0;
+   var g = 0;
+   var st = 0;
+ 
+   if (this.stats != null) {
+	tot = this.stats.cnum;
+   }
 
-     var len = this.dalist.length;
-     var fac =  1;
+    chunks = tot / this.top_end;
+
+    if (chunks > 1) {
+
+       if (chunks > 10 ) {
+         fac = Math.round( chunks / 10);
+       }
+       cur_chunk = 1;
+       if (this.listdex > this.top_end * fac) {
+	    cur_chunk = this.listdex / this.top_end * fac;
+	    st = cur_chunk * this.top_end;
+       }
+    }
 
        lbl = this.screen + "_prev_chip";
        omo = "markyd(\""+lbl+"\");";
@@ -149,13 +197,13 @@ viewer.prototype.draw_chipbar = function() {
        tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
        tmp = tmp + "</div>";
 
-       if (len > 10 ) {
-         fac = Math.round( len / 10);
+       if (this.top_end > 10 ) {
+         fac = Math.round( this.top_end / 10);
        }
 
        for (var k=1; k<10;k++) {
 
-             var g = k*fac;
+             var g = st + k*fac;
              var tsrc = "deskfm/images/icons/pez-white.png";
              lbl = this.screen + "_minichip_"+ k;
 
@@ -172,11 +220,11 @@ viewer.prototype.draw_chipbar = function() {
              }
 
              tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
-              tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
-            tmp = tmp + "</span>";
+             tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
+             tmp = tmp + "</span>";
        }
 
-   lbl = this.screen + "_next_chip"
+    lbl = this.screen + "_next_chip"
     omo = "markyd(\""+lbl+"\");";
     omt = "unmarkyd(\""+lbl+"\");";
     cls = "spotd_off";
@@ -186,21 +234,6 @@ viewer.prototype.draw_chipbar = function() {
     tmp = tmp + "</div>";
 
 
-     lbl = this.screen + '_indexbtn';
-      cls='spotd_off';
-      ocl = 'daviewer.toggle_zoom();';   
-    
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-      var n = this.listdex + 1;
-      tmp = tmp + n;
-      tmp = tmp + "</span>";
-
-
-
-     if (this.listype == "webits") {
-         ocl = "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
-
-     } else if (this.listype == "people") {
       lbl = this.screen + '_indexbtn';
       cls='spotd_off';
       ocl = 'daviewer.toggle_zoom();';   
@@ -209,45 +242,16 @@ viewer.prototype.draw_chipbar = function() {
       var n = this.listdex + 1;
       tmp = tmp + n;
       tmp = tmp + "</span>";
-      ocl = "amare.get_group_list(\""+this.groupid+"\");";
 
-     } else if (this.listype == "products") {
-         ocl = "amare.get_prod_list(\""+this.prodid+"\");";
-     }
-
-     lbl = this.screen + '_chunkbtn';
-
-     tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-     tmp = tmp + " of ";
-
-     if (this.listype == "people") {
-       ts = amare.get_groupstat(this.groupid);
-     }
-     
-     if (this.listype == "webits") {
-	if (this.cat == "") {
-            tmp = tmp + amare.total_sorted;
-        } else {
-           ts = amare.get_catstat(this.cat,this.subcat);
-           if (ts != null) {
-             tmp = tmp + ts.cnum;
-           }
-	}
-     }
-     
-     if (this.listype == "unsorted") {
-        tmp = tmp + amare.total_unsorted;
-     }
-
-     if (this.listype == "products") {
-        ts = amare.get_prodstat(this.prodid);
-        if (ts != null) {
-         tmp = tmp + ts.cnum;
-       }
-     }
-     
-    
-     tmp = tmp + "</span>";
+      lbl = this.screen + '_setlen';
+      cls='spotd_off';
+      ocl = '';   
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      if (this.stats != null) {
+        tmp = tmp + " of " + this.stats.lnum ;
+        tmp = tmp + " of " + this.stats.cnum ;
+      }
+      tmp = tmp + "</span>"
 
 
    lbl = this.screen + '_chips';
@@ -295,11 +299,6 @@ viewer.prototype.hide_rail = function() {
     var lbl = "";
     var tmp = "";
 
-    lbl = this.screen + "_unrail";
-    cls = "smpez_mark";
-    ocl = this.varname + ".draw_rail();";
-    tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='' onmouseout='' >";
-    tmp = tmp + "</div>";
 
 
     lbl = this.screen + "_rail";
@@ -308,6 +307,8 @@ viewer.prototype.hide_rail = function() {
         pobj.innerHTML = tmp;
     }
 }
+
+
 
 /*
    if (buddah == true) {

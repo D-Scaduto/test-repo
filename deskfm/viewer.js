@@ -268,7 +268,7 @@ viewer.prototype.toggle_zoom = function() {
 viewer.prototype.unset_zoom = function() {
    this.zoom = false;
    this.darungs[0].postman.btnson = false;
-   this.draw_screen();
+   this.draw_view();
 }
 
 

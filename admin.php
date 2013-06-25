@@ -226,14 +226,14 @@ if (is_ie == false) {
 	      is_mobile = true;
 	      sal.hide_3dview();
 	      nicky.hide();
-	      daviewer.draw_screen();
+	      daviewer.draw_view();
          }
        } else {
          if ((is_mobile == true) && (is_ie == false)) {
 		 is_mobile = false;
 		 sal.draw_3dview();
 		 nicky.show();
-		 daviewer.draw_screen();
+		 daviewer.draw_view();
          }
        }
 

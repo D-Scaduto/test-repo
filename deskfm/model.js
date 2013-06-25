@@ -20,6 +20,7 @@
 
   var da_limit=1000;
   var init_run = true;
+  var got_stats = false;
   var buddah = false;
   var pname = "";
   var debug = false;
@@ -169,9 +170,12 @@ function update_webits(listobj) {
             }
          }
       }
-      amare.count_lstats();
-      diego.redraw_view("webits");
-      init_run = false;
+      
+      if (got_stats == true) {
+         amare.count_lstats();
+         diego.redraw_view("webits");
+         init_run = false;
+      }
 
 }  
 
