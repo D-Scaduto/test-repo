@@ -1,0 +1,6 @@
+in admin.php
+
+> no way to view recent DB items
+	-change save button to use another feild of the DB for date added?
+
+>
