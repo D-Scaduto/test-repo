@@ -52,7 +52,7 @@ viewer.prototype.load_search_list = function(pterms) {
 
 
 
-viewer.prototype.load_category_list = function(pcat,psubcat) {
+viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
 
 
    if (pcat != undefined) {
@@ -60,6 +60,11 @@ viewer.prototype.load_category_list = function(pcat,psubcat) {
    }
    if (psubcat != undefined) {
      this.subcat = psubcat;
+   }
+  
+   var st = 0;
+   if (pstart != undefined) {
+	  st = pstart;
    }
 
     this.stats = amare.get_catstat(this.cat,this.subcat);
@@ -103,18 +108,27 @@ viewer.prototype.load_category_list = function(pcat,psubcat) {
          }
       } 
     }
-//      alert(d);
-    this.load_rungs(0);
 
+   this.load_rungs(st);
    this.draw_view();
 }
 
 
-viewer.prototype.load_group_list = function(tgroupid) {
+viewer.prototype.load_group_list = function(tgroupid,pstart) {
    if (tgroupid != undefined) {
        this.groupid = tgroupid;
    }
+   var st = 0;
+   if (pstart != undefined) {
+	  st = pstart;
+   }
+
+   if (this.groupid == "") {
+     this.stats = amare.total_people;
+   } else {
     this.stats  = amare.get_groupstat(this.groupid);
+   }
+
     this.dalist = [];
     this.listype = "people";
     var lgo = true;
@@ -131,7 +145,7 @@ viewer.prototype.load_group_list = function(tgroupid) {
            }
         } 
       }
-    this.load_rungs(0);
+    this.load_rungs(st);
    this.draw_view();
 }
 
@@ -174,7 +188,7 @@ viewer.prototype.load_person_list = function(tuname) {
     this.listype = "products";
     var lgo = true;
     var d = 0;
-      for (var r=d; r<prodlist.length;r++) {
+      for (var r=d; r<productlist.length;r++) {
         if (productlist[r] != undefined) {
            var ok = false;
 
@@ -183,7 +197,7 @@ viewer.prototype.load_person_list = function(tuname) {
                 ok = true;
              } else {
                for (var z=0; z<this.prodids.length;z++) {
-                 if (this.prodids[z] == prodlist[r].prodid)  {
+                 if (this.prodids[z] == productlist[r].prodid)  {
                    ok = true;
                  }
                }
@@ -266,27 +280,37 @@ viewer.prototype.load_unsorted_list = function() {
 
 
 viewer.prototype.load_random_list = function() {
-   var tls = [];
-   var r = 0;
-   var i =0;
+
+  
    var mx = webitlist.length;
    var ro = null;
    this.darungs = [];
 
    this.stats = amare.total_sorted;
    this.dalist = [];
-    this.listype = "webits";
+   this.listype = "webits";
+    
+   var tls = [];
+   var r = 0;
+   var i =0;
+   var j =0;
 
-   while (i<100) {
+   if (mx == 0) {
+	    return;
+   }
+
+   while ((i<100) && (j < 100)) {
        r = Math.floor((Math.random()*mx)+1);
        ro = webitlist[r];
        if (ro != undefined) {
          var used = false;
+	 
          for (var z=0;z<tls.length;z++){
            if (r == tls[z]) {
                used = true;
            }
          }
+	 
          if (used == false) {
            tls.push(r);
            this.dalist.push(r);
@@ -294,9 +318,45 @@ viewer.prototype.load_random_list = function() {
            this.darungs[i].dadex = r;
            i = i+1;
          }
+       } else {
+	   j = j+1;
        }
    }
+	     
    this.load_rungs(0);
- this.draw_view();
+   this.draw_view();
 
 }
+
+
+viewer.prototype.load_list = function(pstart) {
+  
+   this.darungs = [];
+   this.dalist = [];
+
+   this.stats = amare.total_sorted;
+   this.listype = "webits";
+    
+   var st = 0;
+   if (pstart != undefined) {
+	  st = pstart;
+   }
+   var mx = webitlist.length;
+
+   var i = 0;
+   var o = null;
+
+   while (i < mx) {
+       o = webitlist[i];
+       if (o != undefined) {
+           this.dalist.push(i);
+       }
+       i = i+1;
+   }
+	     
+   this.load_rungs(st);
+   this.draw_view();
+
+}
+
+

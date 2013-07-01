@@ -143,7 +143,9 @@ if (is_ie == false) {
   if (isset($_GET['mobile'])) {
     echo "is_mobile = true;";
   }
-
+  if (isset($_GET['debug'])) {
+    echo "debug = true;";
+  }
   echo "</script>";
 ?>
 

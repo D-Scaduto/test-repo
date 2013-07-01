@@ -43,11 +43,11 @@ header.prototype.show = function() {
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='width:325px;background-color:white;border:3px solid grey;padding:3px;' >";
+       tmp = tmp + "<div style='width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
 
-       tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;padding:3px;' >";
+       tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;vertical-align:top;' >";
 
-       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='35px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
@@ -65,19 +65,20 @@ header.prototype.show = function() {
 
 }
 
-header.prototype.redraw_view = function (psetype) {
+header.prototype.redraw_view = function (psetype,pchunk) {
 
     sal.draw_vman();
 
     if (this.main_shape == "browse" ) {
 	    if (psetype == "webits") { 
-   	       cater.redraw_view();
+   	       cater.redraw_view(pchunk);
 	    }
     } else if (this.main_shape == "contact") {
+	    joe.redraw_view(pchunk);
 
     } else if (this.main_shape == "sort") {
             if (psetype == "unsorted") {
-               mac.redraw_view();
+               mac.redraw_view(pchunk);
 	    }
     }
 

@@ -41,18 +41,20 @@ manager.prototype.show = function() {
 }
 
  
-manager.prototype.redraw_view = function() {
+manager.prototype.redraw_view = function(pchunk) {
+	var start = 0;
 
-   if (wanda.sterms != "") {
-         daviewer.get_lsearch_list(wanda.sterms);
-   } else {
-     if ((this.cat == "") && (this.subcat == "")) {
-       daviewer.load_random_list();
-     } else {
-       daviewer.set_catscreen(this.cat,this.subcat);
-     }
-   }
+	this.stats = amare.get_groupstat(this.groupid);
+
+            if (pchunk != undefined) {
+
+      	          this.stats.last_chunk = pchunk;
+//		    alert(pchunk);
+		 start = pchunk  * da_limit;
+	    }
+       daviewer.load_group_list(this.groupid,start);
 }
+
 
 manager.prototype.change = function() {
 

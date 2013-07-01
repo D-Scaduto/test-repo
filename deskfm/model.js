@@ -170,13 +170,11 @@ function update_webits(listobj) {
             }
          }
       }
-      
       if (got_stats == true) {
          amare.count_lstats();
-         diego.redraw_view("webits");
+         diego.redraw_view("webits",listobj.dachunk);
          init_run = false;
       }
-
 }  
 
 
@@ -187,6 +185,7 @@ function update_people(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
+
        if ( listobj.peoplelist.length > 0 ) { 
          for (var j=0;j<listobj.peoplelist.length;j++) {
               found = false;
@@ -208,8 +207,10 @@ function update_people(listobj) {
          }
       }
 
-      amare.count_lpstats();
-      diego.redraw_view("people");
+      if (got_stats == true) {
+        amare.count_lpstats();
+        diego.redraw_view("people",listobj.dachunk);
+      }
 }  
 
 

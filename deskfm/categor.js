@@ -6,8 +6,8 @@ function categor (pspotid) {
    this.varname='cater';
    this.shape = "";
 
-   this.cat="who";
-   this.subcat="stands";
+   this.cat="all";
+   this.subcat="";
    this.sterms = "";
    this.searchon = false;
 
@@ -29,12 +29,12 @@ categor.prototype.show = function() {
     var cls = "";
     var ims = "";
 
-    if (this.cat == "") {
+    if (this.cat == "all") {
 
         lbl = 'duh_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = "daviewer.next();";
+        ocl = "cater.redraw_view();";
         tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
         tmpstr = tmpstr + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
         tmpstr=tmpstr+"</span>";
@@ -42,7 +42,7 @@ categor.prototype.show = function() {
         lbl = 'who_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        tmpstr = tmpstr + "<span id='' onclick='cater.set_cats(\"who\");'  class='spotd_off' >";
+        tmpstr = tmpstr + "<span id='' onclick='cater.set_cats(\"who\",\"\");'  class='spotd_off' >";
         tmpstr=tmpstr+"who ?";
         tmpstr=tmpstr+"</span>";
 /*
@@ -58,7 +58,7 @@ categor.prototype.show = function() {
         lbl = 'why_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = 'cater.set_cats(\"why\");';
+        ocl = 'cater.set_cats(\"why\",\"\");';
         tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
         tmpstr=tmpstr+"why ?";
         tmpstr=tmpstr+"</span>";
@@ -66,7 +66,7 @@ categor.prototype.show = function() {
         lbl = 'how_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = 'cater.set_cats(\"how\");';
+        ocl = 'cater.set_cats(\"how\",\"\");';
         tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
         tmpstr=tmpstr+"how ?";
         tmpstr=tmpstr+"</span>";
@@ -80,7 +80,7 @@ categor.prototype.show = function() {
         lbl = 'undo_btn';
         omo = 'markyd(\"'+lbl+'\");';
         omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = "cater.cat=\"\";cater.subcat=\"\";cater.show();";
+        ocl = "cater.cat=\"all\";cater.subcat=\"\";cater.show();";
         tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
         tmpstr = tmpstr + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
         tmpstr=tmpstr+"</span>";
@@ -115,6 +115,7 @@ categor.prototype.show = function() {
      if (init_run == false) {
 	 this.redraw_view();
      }
+
    }
 
   if (pname == "debug") {
@@ -124,17 +125,31 @@ categor.prototype.show = function() {
 }
 
 
-categor.prototype.redraw_view = function() {
+categor.prototype.redraw_view = function(pchunk) {
 
-       daviewer.load_category_list(this.cat,this.subcat);
+	var start = 0;
+  
+	this.stats = amare.get_catstat(this.cat,this.subcat);
+
+            if (pchunk != undefined) {
+
+      	          this.stats.last_chunk = pchunk;
+//		    alert(pchunk);
+		 start = pchunk  * da_limit;
+	    }
+
+
+	if (this.cat == "all") {
+
+	    daviewer.load_list(start);
+
+	} else {
+
+            daviewer.load_category_list(this.cat,this.subcat,start);
+	    
+	}
 
 }
-
-categor.prototype.get_more = function() {
-   amare.get_cat_list(this.cat,this.subcat);
-}
-
-
 
 
 categor.prototype.set_cats = function(tcat,tsubcat) {
@@ -149,13 +164,12 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
         }
       }
 
-    this.show();
+     this.show(); 
 
-    if (this.cat != "") {
-      this.subcater.request_suggestions(this.cat);
-    } 
-
-    daviewer.load_category_list(this.cat,this.subcat);
+     if ((this.cat != "") && (this.subcat == ""))  {
+        this.subcater.request_suggestions(this.cat);
+     }
+   
    
 }
 

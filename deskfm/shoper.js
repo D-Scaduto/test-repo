@@ -75,7 +75,7 @@ shoper.prototype.set_product = function(tprod) {
          this.prodid=tprod;
       }
 //      if (this.pricemax != -1) {
-        daviewer.set_productscreen(this.prodid); 
+        daviewer.load_product_list(this.prodid); 
 //      }
 
       if (this.producter.layer.style.visibility == "hidden") {

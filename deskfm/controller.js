@@ -7,22 +7,25 @@ viewer.prototype.clear_list = function() {
 }
 
 
-viewer.prototype.goto_rung = function(pidex) {
+viewer.prototype.goto_listdex = function(ldex) {
 
-   this.load_rungs(pidex);
+   this.load_rungs(ldex);
+
    this.draw_view();
 
+   /*
    window.scroll(0,0);
    var lbl=this.screen+"_rung_0";
    if ( document.getElementById(lbl) != null) {
      document.getElementById(lbl).focus(); 
    }
+   */
 }
 
 
 viewer.prototype.goto_end = function() {
    var e = this.dalist.length -2;
-   this.goto_rung(e);
+   this.to_top(e);
 }
 
 
@@ -34,8 +37,8 @@ viewer.prototype.to_top = function(trung) {
      this.darungs[0].postman.btnson = true;
      this.darungs[0].postman.redraw_rung();
    }
-   window.scroll(0,0);
 
+   window.scroll(0,0);
    var lbl=this.screen+"_rung_0";
    if ( document.getElementById(lbl) != null) {
      document.getElementById(lbl).focus(); 
@@ -71,32 +74,52 @@ viewer.prototype.next = function() {
 
 
 
-viewer.prototype.load_rungs = function(plocdex) {
+viewer.prototype.load_rungs = function(ldex) {
 
        this.darungs = [];
        var r = 0;
-       if (plocdex != undefined) {
-        r = plocdex;
+       if (ldex != undefined) {
+        r = ldex;
        }
        this.listdex = r;
  
        var lgo = true;
        var c=0;
        var k=0;
-       while (lgo) {
-         if (this.dalist[r] != undefined) {
 
+       while (lgo) {
+
+         if (this.dalist[r] != undefined) {
            this.darungs[c] = new Object();
            k = this.dalist[r];
-           if (webitlist[k] != undefined) {
-             this.darungs[c].dadex = r;
-           }
+
+           if (this.listype == "webits") {
+             if (webitlist[k] != undefined) {
+               this.darungs[c].dadex = r;
+             }
+	   }
+           if (this.listype == "people") {
+             if (peoplelist[k] != undefined) {
+               this.darungs[c].dadex = r;
+             }
+	   }
+           if (this.listype == "products") {
+             if (productlist[k] != undefined) {
+               this.darungs[c].dadex = r;
+             }
+	   }
+           if (this.listype == "unsorted") {
+             if (unsortedlist[k] != undefined) {
+               this.darungs[c].dadex = r;
+             }
+	   }
          }
+
          r = r+1;
          if (r >= this.dalist.length) {
             r = 0;
          }
-         c = c+1;
+         c = c+1;	 
          if ((c >= this.top_end) || (c >=this.dalist.length))  {
            lgo=false;
          }

@@ -14,9 +14,9 @@ function viewer (pscreen,pvarname) {
    this.groupid = "";
 
    this.stats = null;
-   
-   this.dalist=[];
+
    this.listdex = 0;
+   this.dalist=[];
    this.darungs= [];
 
    this.top_end=10;

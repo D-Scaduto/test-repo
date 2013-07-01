@@ -10,19 +10,16 @@ function stat () {
     this.lnum = 0;
     this.cnum=0;
     this.desc="";
-    this.top_chunk=0;
+    this.last_chunk=0;
 }
 
 
 stat.prototype.next_chunk = function() {
+
    var ret =0;
-   var max_chunks = this.cnum / da_limit;
-   var cur_chunk = this.lnum / da_limit;
-   var next_chunk = cur_chunk + 1;
-   if (next_chunk < max_chunks) {
-     ret = next_chunk;
-   }
+   ret = parseInt(this.last_chunk) + 1;
    return ret;
+
 }
 
 
@@ -34,10 +31,11 @@ function stater () {
    this.prodstats = [];
    this.groupstats = [];
 
-   this.total_unsorted = new stat();
+
    this.total_sorted = new stat();
    this.total_people = new stat();
    this.total_products = new stat ();
+   this.total_unsorted = new stat();
 
 }
 
@@ -157,21 +155,28 @@ stater.prototype.count_lstats = function() {
 
 
 stater.prototype.count_lpstats = function() {
-     var i=0
-     for (i=0; i<this.groupstats.length; i++) {
+    var i=0;
+    this.total_people.lnum = 0;
+    for (i=0; i<this.groupstats.length; i++) {
           this.groupstats[i].lnum = 0;
-     }
+    }
     var d=0;
+    var g = 0;
     for (d=0;d<peoplelist.length;d++) {
       if (peoplelist[d] != undefined) {
-        var g = peoplelist[d].groupid;
-        for (var l=0; l<this.groupstats.length; l++) {
-          if (this.groupstats[l].groupid == g) {
-            this.groupstats[l].lnum = this.groupstats[l].lnum + 1;
+        g = peoplelist[d].groupid;
+        if (peoplelist[d].groupid == "") {
+  	    this.total_people.lnum = this.total_people.lnum + 1;
+	} else {	
+	  for (var l=0; l<this.groupstats.length; l++) {
+            if (this.groupstats[l].groupid == g) {
+              this.groupstats[l].lnum = this.groupstats[l].lnum + 1;
+            }
           }
-        }
+	}
      }
-   } 
+   }
+
 }
 
 
@@ -179,7 +184,8 @@ stater.prototype.count_lpstats = function() {
 stater.prototype.get_catstat = function(tcat,tsubcat) {
   var ret = null;
 
-     if (tcat == "") {
+     if (tcat == "all") {
+
 	  return this.total_sorted;
 
      } else {
@@ -193,6 +199,8 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
   return ret;
 }
 
+
+
 stater.prototype.get_prodstat = function(tp) {
     var ret = null;
      for (var i=0; i<this.prodstats.length; i++) {
@@ -203,7 +211,8 @@ stater.prototype.get_prodstat = function(tp) {
     return ret;
 }
 
-stater.prototype.get_unstat = function(tp) {
+
+stater.prototype.get_prodstat = function(tp) {
     var ret = null;
      for (var i=0; i<this.prodstats.length; i++) {
         if (this.prodstats[i].prodid == tp) {
@@ -213,17 +222,20 @@ stater.prototype.get_unstat = function(tp) {
     return ret;
 }
 
+
 stater.prototype.get_groupstat = function(tp) {
     var ret = null;
-     for (var i=0; i<this.groupstats.length; i++) {
+     if (tp == "") {
+        ret = this.total_people;
+     } else {
+       for (var i=0; i<this.groupstats.length; i++) {
         if (this.groupstats[i].groupid == tp) {
               ret = amare.groupstats[i];
          }
+       }
      }
     return ret;
 }
-
-
 
 
 stater.prototype.get_person_group = function(tname) {
@@ -261,17 +273,61 @@ stater.prototype.hide = function () {
 
 
 
-
-
- stater.prototype.get_products = function() {
-
-  var url='deskfm/dbase/get_products.php';
-  //  alert(url);
-  $.getJSON(url,function(json) {
-      update_products(json);
+stater.prototype.get_webits = function(tchunk) {
+   var url='deskfm/dbase/get_webits.php';
+   url = url + "?lim="+ da_limit;
+   var c = ""
+   if (tchunk != undefined) {
+      c = tchunk;
+   } else {
+      c = this.total_sorted.next_chunk();
+   }
+   url = url + "&chunk="+ c;
+//   alert(url);
+   $.getJSON(url,function(json) {
+      update_webits(json);
    });   
    sal.waiting();
-}  
+}
+  
+
+
+stater.prototype.get_people = function(tchunk) {
+   var url='deskfm/dbase/dfm_people.php';
+   url = url + "?lim="+ da_limit;
+   var c = ""
+   if (tchunk != undefined) {
+      c = tchunk;
+   } else {
+      c = this.total_people.next_chunk();
+   }
+   url = url + "&chunk="+ c;
+//   alert(url);
+   $.getJSON(url,function(json) {
+       update_people(json);
+   });   // end get json 
+   sal.waiting();
+}
+
+
+
+stater.prototype.get_group_list = function(pgroupid) {
+   var url='deskfm/dbase/dfm_people.php';
+   url = url + "?lim="+ da_limit;
+   url = url + "&groupid="+ pgroupid;
+
+//   var c = ""
+//   c = this.total_sorted.next_chunk();
+//   url = url + "&chunk="+ c;
+//
+//  alert(url);
+   $.getJSON(url,function(json) {
+       update_people(json);
+   });   // end get json 
+   sal.waiting();
+}
+
+ 
 
 
 stater.prototype.get_unsorted = function(tchunk) {
@@ -286,23 +342,20 @@ stater.prototype.get_unsorted = function(tchunk) {
 
    $.getJSON(url,function(json) {
       add_unsorted(json);
-   });   // end get json 
+   });   
    sal.waiting();
 }
 
-stater.prototype.get_webits = function(tchunk) {
-   var url='deskfm/dbase/get_webits.php';
-   url = url + "?lim="+ da_limit;
-    if (tchunk != undefined) {
-       url = url + "&chunk="+ tchunk;
-    } 
- // alert(url);
-   $.getJSON(url,function(json) {
-      update_webits(json);
-   });   // end get json 
+
+stater.prototype.get_products = function() {
+
+  var url='deskfm/dbase/get_products.php';
+  //  alert(url);
+  $.getJSON(url,function(json) {
+      update_products(json);
+   });   
    sal.waiting();
-}
-  
+} 
 
 stater.prototype.get_providers = function() {
    var url='deskfm/dbase/get_providers.php';
@@ -314,37 +367,6 @@ stater.prototype.get_providers = function() {
 }
 
 
-
-stater.prototype.get_people = function(tchunk) {
-   var url='deskfm/dbase/dfm_people.php';
-   url = url + "?lim="+ da_limit;
-
-    if (tchunk != undefined) {
-       url = url + "&chunk="+ tchunk;
-    } 
-//  alert(url);
-   $.getJSON(url,function(json) {
-       update_people(json);
-   });   // end get json 
-   sal.waiting();
-}
-
-
-stater.prototype.get_group_list = function(pgroupid) {
-   var url='deskfm/dbase/dfm_people.php';
-   url = url + "?lim="+ da_limit;
-   url = url + "&groupid="+ pgroupid;
-/*
-    if (tchunk != undefined) {
-       url = url + "&chunk="+ tchunk;
-    } 
-*/
-//  alert(url);
-   $.getJSON(url,function(json) {
-       update_people(json);
-   });   // end get json 
-   sal.waiting();
-}
 
 
 stater.prototype.get_random_list = function() {

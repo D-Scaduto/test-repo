@@ -1,23 +1,68 @@
 
+
+
 viewer.prototype.draw_rail = function() {
-    var pobj=null;
-    var lbl = "";
-    var tmp = "";
-    var omo = "";
-    var omt = "";
 
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+   var cls = "";
+   var moin="";
+   var mout="";
+   var tsrc = "";
 
-    tmp = tmp + "<div style='display:inline-block;' >";
+   var tot = 0;
+   var chunks = 0;
+   var cur_chunk = 1;
+   var fac = 1;
 
-    lbl = this.screen + "_chunks";
-    tmp = tmp + "<div id='"+lbl+"' onclick='' style='' >";
-    tmp = tmp + "</div>";
+   if (this.stats != null) {
+       tot = this.stats.cnum;
+       chunks = tot / this.top_end;
+       if (chunks > 10 ) {
+         fac = Math.round( chunks / 10);
+       }
+       cur_chunk = 1;
+       if (this.listdex > this.top_end * fac) {
+	    cur_chunk = this.listdex / this.top_end * fac;
+       }
+       tmp = tmp + "<div>";
 
-    lbl = this.screen + "_chips";
-    tmp = tmp + "<div id='"+lbl+"' onclick='' style='' >";
-    tmp = tmp + "</div>";
+       lbl = this.screen + "_prev_chunk";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".prev_chunk();";
+       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='20px' >";
+       tmp = tmp + "</span>";
 
-    tmp = tmp + "</div>";
+       lbl = this.screen + "_prev_chip";
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".prev();";
+       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
+       tmp = tmp + "</span>";
+
+       lbl = this.screen + "_next_chip"
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".next();";
+       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
+       tmp = tmp + "</span>";
+
+       lbl = this.screen + "_next_chunk"
+       omo = "markyd(\""+lbl+"\");";
+       omt = "unmarkyd(\""+lbl+"\");";
+       cls = "spotd_off";
+       ocl = this.varname + ".next_chunk();";
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='20px' >";
+       tmp = tmp + "</span>";
 
 /*
     lbl = this.screen + "_shuffle";
@@ -28,14 +73,46 @@ viewer.prototype.draw_rail = function() {
     tmp = tmp + "</span>";
 */
 
-   lbl = "top_rail";
-    pobj = document.getElementById(lbl);
-    if ( pobj != null) {
-        pobj.innerHTML = tmp;
 
-       	this.draw_chunkbar();
-	this.draw_chipbar();
-    }
+      lbl = this.screen + '_indexbtn';
+      cls='spotd_off';
+      ocl = 'daviewer.toggle_zoom();';   
+    
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style='display:inline-block;'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      var n = this.listdex + 1;
+      tmp = tmp + n;
+      tmp = tmp + "</span>";
+
+      lbl = this.screen + '_setlen';
+      cls='spotd_off';
+      ocl = '';   
+      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style='display:inline-block;'  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+      if (this.stats != null) {
+        if (debug == true) {	      
+          tmp = tmp + " of " + this.stats.lnum ;
+	}
+        tmp = tmp + " of " + this.stats.cnum ;
+      }
+      tmp = tmp + "</span>";   
+      tmp = tmp + "</div>";
+
+      tmp = tmp + "<div id='chunk_bar' style='' >";
+      tmp = tmp + "</div>";
+ 
+      tmp = tmp + "<div id='debug_rail' style='' >";
+      tmp = tmp + "</div>";
+
+   lbl = "top_rail";
+   pobj = document.getElementById(lbl);
+   if ( pobj != null) {
+       pobj.innerHTML = tmp;
+       this.draw_chunkbar();
+       if (debug == true) {
+	   this.draw_debug_rail();
+       }
+   }
+
+  }
 }
 
 
@@ -48,108 +125,95 @@ viewer.prototype.draw_chunkbar = function() {
    var cls = "";
    var moin="";
    var mout="";
+   var tsrc = "";
 
-   var tot = 0;
    var chunks = 0;
-   var cur_chunk = 0;
-   var fac = 1;
+   var cur_chunk = 1;
+   var chunk_fac =  1;
+   var tot = 0;
+   var g = 0;
+   var e = 0;
 
-   if (this.stats != null) {
-	tot = this.stats.cnum;
-   }
+    tot = this.stats.cnum;
+    chunk_size = Math.round(tot / 10);
+    cur_chunk = 0;
+    cur_chunk = Math.floor(this.listdex / chunk_size);
 
-    chunks = tot / this.top_end;
+    for (var k=0; k<10;k++) {
 
-    if (chunks > 1) {
+                tmp = tmp + "<span style='padding:1px;' >"
 
-       if (chunks > 10 ) {
-         fac = Math.round( chunks / 10);
-       }
-       cur_chunk = 1;
-       if (this.listdex > this.top_end * fac) {
-	    cur_chunk = this.listdex / this.top_end * fac;
-       }
+                g = k * chunk_size;
+	        e = g + chunk_size;
 
-       lbl = this.screen + "_prev_chunk";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       cls = "spotd_off";
-       ocl = this.varname + ".prev();";
-       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='20px' >";
-       tmp = tmp + "</div>";
+		lbl = this.screen + "_chunk_"+ k;
+	        ocl = '';
+ 	        cls = 'spotd_off';
+                moin = "markyd(\""+lbl+"\");";
+                mout = "unmarkyd(\""+lbl+"\");";           
 
-       for (var k=1; k<10;k++) {
+                if ((this.listdex >= g) && (this.listdex < e)) {
 
-             var g = k*fac*this.top_end;
+		     lbl = this.screen + "_chips";
+		     tmp = tmp + "<div id='"+lbl+"' onclick='' style='display:inline-block;padding:2px;' >";
+		     tmp = tmp + "</div>";
 
-             lbl = this.screen + "_chunk_"+ k;
-             ocl = '';
-	     cls = 'spotd_off';
-             moin = "markyd(\""+lbl+"\");";
-             mout = "unmarkyd(\""+lbl+"\");";
+		} else {
 
-             var tsrc = "";
-	     if (cur_chunk == k) {
-                    tsrc = "deskfm/images/icons/pez-black.png";
-                    moin = "";
-                    mout="";
+                  if (g <= this.stats.lnum ) {
 
-             } else {
+	             ocl = this.varname + ".goto_listdex("+g+");";
+		     tsrc = "deskfm/images/icons/pez-silver.png";
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
+                     tmp = tmp + "<img  src='"+tsrc+"' >"; 
+                     tmp = tmp + "</span>"
 
-		tsrc = "deskfm/images/icons/pez-white.png";
+  		  } else {
 
-                if (g < this.stats.cnum) {
-                    ocl =  "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
-                    tsrc = "deskfm/images/icons/pez-brown.png";
+                   if (g < this.stats.cnum)  {
+	             
+	             if (this.listype == "webits") {
+          	       if ((this.cat == "all") || (this.cat == "")) {
+                         ocl =  "amare.get_webits();";
+		       } else {
+                         ocl =  "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
+		       }
+		     }
+       
+		     if (this.listype == "people") {
+          	       if (this.groupid == "") {
+                         ocl =  "amare.get_people();";
+		       } else {
+                         ocl =  "amare.get_group_list(\""+this.groupid+"\");";
+		       }
+		     }
+
+                     tsrc = "deskfm/images/icons/pez-brown.png";
+
+		   } else {
+
+                     ocl = '';
+ 		     tsrc = "deskfm/images/icons/pez-white.png";
+   		     
+
+		   }
+
+                   tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
+                   tmp = tmp + "<img src='"+tsrc+"' >"; 
+                   tmp = tmp + "</span>";
 		}
-
-	        if (g < this.stats.lnum ) {
-	            ocl = this.varname + ".goto_rung("+g+");";
-		    tsrc = "deskfm/images/icons/pez-silver.png";
-		}
-             }
-
-             tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
-             tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
-             tmp = tmp + "</span>";
+	     }
+             tmp = tmp + "</span>"
        }
 
-       lbl = this.screen + "_next_chunk"
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       cls = "spotd_off";
-       ocl = this.varname + ".next();";
-       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='20px' >";
-       tmp = tmp + "</div>";
 
-      lbl = this.screen + '_chunkbtn';
-      cls='spotd_off';
-      ocl = '';   
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-
-      tmp = tmp + "set " + cur_chunk;
-      tmp = tmp + "</span>";
-
-      lbl = this.screen + '_setlen';
-      cls='spotd_off';
-      ocl = '';   
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-      tmp = tmp + " of " + Math.round(chunks);
-      tmp = tmp + "</span>"
-
-    }
-
-
-   lbl = this.screen + '_chunks';
+   lbl = 'chunk_bar';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
        pobj.innerHTML = tmp;
+       this.draw_chipbar();
    }
 }
-
-
 
 
 viewer.prototype.draw_chipbar = function() {
@@ -157,102 +221,97 @@ viewer.prototype.draw_chipbar = function() {
    var pobj=null;
    var lbl = "";
    var tmp = "";
-   var st=0;
-   var fn=0;
-   var pv = null;
    var cls = "";
    var moin="";
    var mout="";
+   var tsrc = "";
+
    var chunks = 0;
    var cur_chunk = 0;
-   var fac =  1;
+   var chunk_fac =  1;
+   var chip_fac = 1;
+   var chunk_size = 0;
+
    var tot = 0;
    var g = 0;
    var st = 0;
- 
-   if (this.stats != null) {
-	tot = this.stats.cnum;
-   }
 
-    chunks = tot / this.top_end;
+    tot = this.stats.cnum;
+    chunk_size = Math.round(tot / 10);
+    cur_chunk = 0;
+    cur_chunk = Math.floor(this.listdex / chunk_size);
+    chip_fac = Math.round(chunk_size / 10);
+    st = Math.round(cur_chunk * chunk_size);
 
-    if (chunks > 1) {
-
-       if (chunks > 10 ) {
-         fac = Math.round( chunks / 10);
-       }
-       cur_chunk = 1;
-       if (this.listdex > this.top_end * fac) {
-	    cur_chunk = this.listdex / this.top_end * fac;
-	    st = cur_chunk * this.top_end;
-       }
+    if (debug == true) {
+             tmp = tmp + "<span >";
+	     tmp = tmp + st;
+             tmp = tmp + "</span>";
     }
 
-       lbl = this.screen + "_prev_chip";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       cls = "spotd_off";
-       ocl = this.varname + ".prev();";
-       tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='20px' >";
-       tmp = tmp + "</div>";
+       for (var k=0; k<10;k++) {
 
-       if (this.top_end > 10 ) {
-         fac = Math.round( this.top_end / 10);
-       }
+	     g =  st + Math.round(k * chip_fac);
 
-       for (var k=1; k<10;k++) {
-
-             var g = st + k*fac;
-             var tsrc = "deskfm/images/icons/pez-white.png";
+             tsrc = "deskfm/images/icons/pez-white.png";
              lbl = this.screen + "_minichip_"+ k;
+             moin = "markyd(\""+lbl+"\");";
+             mout = "unmarkyd(\""+lbl+"\");";  
+	     cls = "spotd_off";
 
-             if (g < this.dalist.length) {
-               tsrc = "deskfm/images/icons/pez-silver.png";
-               ocl = this.varname + ".goto_rung("+g+");";
-               moin = "imarkyp(\""+lbl+"\");";
-               mout = "unimarkyp(\""+lbl+"\");";
-               if ((this.listdex >= g)&&(this.listdex < g+fac)){
-                 tsrc = "deskfm/images/icons/pez-black.png";
-                 moin = "";
-                 mout="";
-               }
-             }
+                  if (g <= this.stats.lnum ) {
 
-             tmp = tmp + "<span onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
-             tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' >"; 
+                     if ((this.listdex >= g ) && (this.listdex < g+chip_fac)) {
+                       tsrc = "deskfm/images/icons/pez-black.png";
+ 		       ocl="";
+                       moin = "";
+                       mout="";
+                     } else {
+	               ocl = this.varname + ".goto_listdex("+g+");";
+		       tsrc = "deskfm/images/icons/pez-silver.png";
+                     }
+
+  		  } else {
+
+                   if (g < this.stats.cnum)  {
+
+
+	             if (this.listype == "webits") {
+          	       if ((this.cat == "all") || (this.cat == "")) {
+                         ocl =  "amare.get_webits();";
+		       } else {
+                         ocl =  "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
+		       }
+		     }
+       
+		     if (this.listype == "people") {
+          	       if (this.groupid == "") {
+                         ocl =  "amare.get_people();";
+		       } else {
+                         ocl =  "amare.get_group_list(\""+this.groupid+"\");";
+		       }
+		     }
+
+                     tsrc = "deskfm/images/icons/pez-brown.png";
+
+		   } else {
+
+                     ocl = '';
+ 		     tsrc = "deskfm/images/icons/pez-white.png";
+
+		   }
+		 }
+
+             tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' >";
+             tmp = tmp + "<img  src='"+tsrc+"' >"; 
              tmp = tmp + "</span>";
        }
 
-    lbl = this.screen + "_next_chip"
-    omo = "markyd(\""+lbl+"\");";
-    omt = "unmarkyd(\""+lbl+"\");";
-    cls = "spotd_off";
-    ocl = this.varname + ".next();";
-    tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-    tmp = tmp + "<img src='deskfm/images/icons/play.png' height='20px' >";
-    tmp = tmp + "</div>";
-
-
-      lbl = this.screen + '_indexbtn';
-      cls='spotd_off';
-      ocl = 'daviewer.toggle_zoom();';   
-    
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-      var n = this.listdex + 1;
-      tmp = tmp + n;
-      tmp = tmp + "</span>";
-
-      lbl = this.screen + '_setlen';
-      cls='spotd_off';
-      ocl = '';   
-      tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' style=''  onclick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-      if (this.stats != null) {
-        tmp = tmp + " of " + this.stats.lnum ;
-        tmp = tmp + " of " + this.stats.cnum ;
-      }
-      tmp = tmp + "</span>"
-
+       if (debug == true) {
+             tmp = tmp + "<span >";
+	     tmp = tmp + g;
+             tmp = tmp + "</span>";
+        }
 
    lbl = this.screen + '_chips';
    pobj = document.getElementById(lbl);
@@ -262,35 +321,87 @@ viewer.prototype.draw_chipbar = function() {
 }
 
 
-viewer.prototype.mark_chipbar = function(mdex) {
-     var len = this.dalist.length;
-     var fac =  1;
-       if (len > 10) {
-         fac = Math.round( len / 10);
-       }
+viewer.prototype.prev_chunk = function() {
 
-       for (var k=1; k<10;k++) {
+   var chunks = 0;
+   var cur_chunk = 1;
+   var chunk_fac =  1;
+   var tot = 0;
+   var g = 0;
+   var e = 0;
 
-             var g = k*fac;
-             var tsrc = "deskfm/images/icons/pez-white.png";
-             if (g < this.dalist.length) {
-               tsrc = "deskfm/images/icons/pez-silver.png";
-               if ((this.listdex >= g)&&(this.listdex < g+fac)){
-                 tsrc = "deskfm/images/icons/pez-black.png";
-               }
-             }
+    tot = this.stats.cnum;
+    chunk_size = Math.round(tot / 10);
+    cur_chunk = 0;
+    cur_chunk = Math.round(this.listdex / chunk_size);
 
-             lbl = this.screen + "_minichip_"+ k;
-
-            pobj = document.getElementById(lbl);
-            if ( pobj != null) {
-                 pobj.src = tsrc;
-            }
-      }
 
 }
 
 
+viewer.prototype.next_chunk = function() {
+
+   var chunks = 0;
+   var cur_chunk = 1;
+   var chunk_fac =  1;
+   var tot = 0;
+   var g = 0;
+   var e = 0;
+
+    tot = this.stats.cnum;
+    chunk_size = Math.round(tot / 10);
+    cur_chunk = 0;
+    cur_chunk = Math.round(this.listdex / chunk_size);
+
+}
+
+viewer.prototype.draw_debug_rail = function() {
+     var pobj=null;
+     var lbl = "";
+     var tmp = "";
+     var tot = 0;
+     var chunks=0;
+     var cur_chunk = 1;
+     var chunk_fac = 0;
+     var chip_fac = 0;
+     var st = 0;
+     
+
+  if (this.stats != null) {
+    tot = this.stats.cnum;
+    chunk_size = Math.round(tot / 10);
+    cur_chunk = 1;
+    cur_chunk = Math.floor(this.listdex / chunk_size);
+    chip_fac = Math.round(chunk_size / 10);
+  }
+
+
+       tmp = tmp + "<span class='spotd_off' >";
+       tmp = tmp + "cur_chunk=" + cur_chunk;
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<span class='spotd_off' >";
+       tmp = tmp + "chunk_size=" + chunk_size;
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<span class='spotd_off' >";
+       tmp = tmp + "chunkfac=" + chunk_fac;
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<span class='spotd_off' >";
+       tmp = tmp + "chipfac=" + chip_fac;
+       tmp = tmp + "</span>";
+
+       tmp = tmp + "<span class='spotd_off' >";
+       tmp = tmp + "listlen=" + this.dalist.length;
+       tmp = tmp + "</span>";
+
+     lbl = "debug_rail";
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+     }
+}
 
 
 viewer.prototype.hide_rail = function() {
@@ -307,8 +418,6 @@ viewer.prototype.hide_rail = function() {
         pobj.innerHTML = tmp;
     }
 }
-
-
 
 /*
    if (buddah == true) {
