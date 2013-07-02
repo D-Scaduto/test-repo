@@ -73,11 +73,6 @@ header.prototype.show = function() {
           tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
           tmp = tmp + "</div>";
 
-          tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;vertical-align:top;' >";
-
-          tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
-          tmp = tmp + "</div>";
-
           tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
           tmp = tmp + "</div>";
 
