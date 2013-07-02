@@ -9,6 +9,8 @@ include '../../config/names.php';
     public $desc = "";
     public $lnum = 0;
     public $cnum = 0;
+    public $max_chunks = 0;
+    public $last_chunk = 0;
   }
 
   class bar {

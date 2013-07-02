@@ -11,14 +11,16 @@ function stat () {
     this.cnum=0;
     this.desc="";
     this.last_chunk=0;
+    this.max_chunks=0;
 }
 
 
 stat.prototype.next_chunk = function() {
 
    var ret =0;
-   if (this.last_chunk > 0) {
-     ret = parseInt(this.last_chunk) + 1;
+   var t = parseInt(this.last_chunk) + 1;
+   if (t <= this.max_chunks) {
+	   ret = t;
    }
    return ret;
 
@@ -65,6 +67,7 @@ function update_stats(statobj) {
         st.cat=statobj.subs[z].cat;
         st.subcat=statobj.subs[z].subcat;
         st.cnum=statobj.subs[z].cnum;
+	st.max_chunks = Math.round(st.cnum/da_limit);
         st.desc = tp.get_desc(st.cat,st.subcat);
         st.listype = "webits";
         amare.substats.push(st);
@@ -76,6 +79,7 @@ function update_stats(statobj) {
         st = new stat();
         st.groupid=statobj.groups[z].groupid;
         st.cnum=statobj.groups[z].cnum;
+	st.max_chunks = Math.round(st.cnum/da_limit);
         st.desc = tp.get_desc(st.groupid);
         st.listype = "people";
         amare.groupstats.push(st);
@@ -87,6 +91,7 @@ function update_stats(statobj) {
         st = new stat();
         st.prodid=statobj.prods[z].prodid;
         st.cnum=statobj.prods[z].cnum;
+	st.max_chunks = Math.round(st.cnum/da_limit);
         st.desc = tp.get_desc(st.prodid);
         st.listype = "products";
         amare.prodstats.push(st);
@@ -94,9 +99,16 @@ function update_stats(statobj) {
 
 
       amare.total_unsorted.cnum = statobj.total_unsorted;
+      amare.total_unsorted.max_chunks = Math.round(amare.total_unsorted.cnum/da_limit);
+
       amare.total_sorted.cnum = statobj.total_sorted;
+      amare.total_sorted.max_chunks = Math.round(amare.total_sorted.cnum/da_limit);
+
       amare.total_people.cnum = statobj.total_people;  
+      amare.total_people.max_chunks = Math.round(amare.total_people.cnum/da_limit);
+
       amare.total_products.cnum = statobj.total_products;
+      amare.total_products.max_chunks = Math.round(amare.total_products.cnum/da_limit);
 
       amare.count_lstats();
       amare.count_lpstats();
@@ -431,7 +443,7 @@ stater.prototype.get_random_list = function() {
        url = url + "&chunk="+ st.next_chunk();
     }
 
-    alert(url);
+//    alert(url);
     $.getJSON(url,function(json) {
       update_webits(json);
     });   
