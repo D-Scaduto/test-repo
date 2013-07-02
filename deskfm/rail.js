@@ -28,7 +28,7 @@ viewer.prototype.draw_rail = function() {
        omo = "markyd(\""+lbl+"\");";
        omt = "unmarkyd(\""+lbl+"\");";
        cls = "spotd_off";
-       ocl = this.varname + ".prev();";
+       ocl = this.varname + ".prev_chunk();";
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='20px' >";
        tmp = tmp + "</span>";
@@ -324,9 +324,7 @@ viewer.prototype.prev_chunk = function() {
       st = Math.round(cur_chunk * chunk_size);
     } 
 
-    if (this.listdex - chunk_size > 0) {
        this.prev(chunk_size);
-    }
 
 }
 
@@ -345,7 +343,7 @@ viewer.prototype.next_chunk = function() {
       chip_fac = Math.round(chunk_size / 10);
       st = Math.round(cur_chunk * chunk_size);
     } 
-    if (this.listdex + chunk_size > this.stats.lnum) {
+    if (this.stats.lnum < this.stats.cnum) {
 	             if (this.listype == "webits") {
           	       if ((this.cat == "all") || (this.cat == "")) {
                          amare.get_webits();
