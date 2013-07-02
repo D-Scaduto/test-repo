@@ -8,7 +8,7 @@ viewer.prototype.prev = function(px) {
 
     var bret = true;
     var n = this.listdex -c;
-    if ( n <=0 ) {
+    if ( n <0 ) {
         n = this.dalist.length -1;
         bret = false;
     }

@@ -64,12 +64,18 @@ function draw_main() {
 
           tmp = tmp + "</span>"; 
 
-          tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;border-color:silver;border-style:solid;border-size:5px;'  >";
-          tmp = tmp + "</span>"; 
 
-          tmp = tmp + "<div id='menu' style='width:350px;padding:10px;background-color:white;border:solid;border-width:5px;border-color:silver;float:left;'  >";
+          tmp = tmp + "<span id='logo' style='float:left;background-color:white;padding:3px;border-color:silver;border-style:solid;border-size:5px;'  >";
+          tmp = tmp + "</span>";
+
+
+	  tmp = tmp + "<div style='clear:left;' ></div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
+
+
+	  tmp = tmp + "<div id='menu' style='position:fixed;right:0;top:100px;width:350px;padding:10px;background-color:white;border:solid;border-width:5px;border-color:silver;'  >";
           tmp = tmp + "</div>";
-   
+
 
        var pobj = document.getElementById('main_spot');
        if (pobj != null) {

@@ -185,7 +185,7 @@ function tws_get(qry_str)
      }
      var qe = escape(qry_str);
      if (qry_str != undefined) {
-       query ="?callback=?&q="+qe + "&rpp="+rpp;
+       query ="?q="+qe + "&rpp="+rpp;
      }
 
      var url='';
@@ -195,8 +195,7 @@ function tws_get(qry_str)
      var cur_page = 0;
 
      var s = "";
-//      s = url + query;
-     s = url ;
+     s = url + query;
 
      $.getJSON(s,function(json) {
 

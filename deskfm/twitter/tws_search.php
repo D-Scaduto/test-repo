@@ -34,7 +34,13 @@ $bearer_token = $reply->access_token;
  $rebar = new bar;
  $arr = array();
 
-    $reply = $cb->search_tweets('q=standing desk',true);
+ $q = "";
+ if (isset($_GET['q'])) {
+  $q = $_GET['q'];
+ }
+ $qs = "q=" . $q;
+
+    $reply = $cb->search_tweets($qs,true);
  
     for ($i =0; $i < sizeof($reply->statuses); $i++ ) {
 

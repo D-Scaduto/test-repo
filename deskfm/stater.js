@@ -31,7 +31,6 @@ stat.prototype.next_chunk = function() {
 function stater () { 
 
    this.substats = [];
-   this.chunkset = [];
    this.prodstats = [];
    this.groupstats = [];
 

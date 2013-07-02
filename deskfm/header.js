@@ -57,6 +57,7 @@ header.prototype.show = function() {
 
      }
 
+
           tmp = tmp + "<div style='width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
 
           lbl = 'nitro_btn';
@@ -82,8 +83,6 @@ header.prototype.show = function() {
 
           tmp = tmp + "</div>"; 
 
-          tmp = tmp + "<div style='clear:left;' ></div>";
-          tmp = tmp + "<div style='clear:right;' ></div>";
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);

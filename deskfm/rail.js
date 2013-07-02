@@ -18,21 +18,17 @@ viewer.prototype.draw_rail = function() {
 
    if (this.stats != null) {
        tot = this.stats.cnum;
-       chunks = tot / this.top_end;
-       if (chunks > 10 ) {
-         fac = Math.round( chunks / 10);
+       if (tot > 10) {
+         chunk_size = Math.round(tot / 10);
        }
-       cur_chunk = 1;
-       if (this.listdex > this.top_end * fac) {
-	    cur_chunk = this.listdex / this.top_end * fac;
-       }
+
        tmp = tmp + "<div>";
 
        lbl = this.screen + "_prev_chunk";
        omo = "markyd(\""+lbl+"\");";
        omt = "unmarkyd(\""+lbl+"\");";
        cls = "spotd_off";
-       ocl = this.varname + ".prev_chunk();";
+       ocl = this.varname + ".prev();";
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='20px' >";
        tmp = tmp + "</span>";
@@ -135,45 +131,42 @@ viewer.prototype.draw_chunkbar = function() {
    var e = 0;
 
     tot = this.stats.cnum;
-    if (tot > 10) {
-      chunk_size = Math.round(tot / 10);
-    }
-    cur_chunk = 0;
-    cur_chunk = Math.floor(this.listdex / chunk_size);
-
-    for (var k=0; k<10;k++) {
-
-                tmp = tmp + "<span style='padding:1px;' >"
-
-                g = k * chunk_size;
-	        e = g + chunk_size;
-
-		lbl = this.screen + "_chunk_"+ k;
-	        ocl = '';
- 	        cls = 'spotd_off';
-                moin = "markyd(\""+lbl+"\");";
-                mout = "unmarkyd(\""+lbl+"\");";           
-
-                if ((this.listdex >= g) && (this.listdex < e)) {
+    if (tot < 10) {
 
 		     lbl = this.screen + "_chips";
 		     tmp = tmp + "<div id='"+lbl+"' onclick='' style='display:inline-block;padding:2px;border-color:black;border-style:solid;border-width:1px;' >";
 		     tmp = tmp + "</div>";
 
+    } else {
+
+      chunk_size = Math.round(tot / 10);
+    
+      cur_chunk = 0;
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+
+      for (var k=0; k<10;k++) {
+                tmp = tmp + "<span style='padding:1px;' >"
+                g = k * chunk_size;
+	        e = g + chunk_size;
+		lbl = this.screen + "_chunk_"+ k;
+	        ocl = '';
+ 	        cls = 'spotd_off';
+                moin = "markyd(\""+lbl+"\");";
+                mout = "unmarkyd(\""+lbl+"\");";           
+                if ((this.listdex >= g) && (this.listdex < e)) {
+
+		     lbl = this.screen + "_chips";
+		     tmp = tmp + "<div id='"+lbl+"' onclick='' style='display:inline-block;padding:2px;border-color:black;border-style:solid;border-width:1px;' >";
+		     tmp = tmp + "</div>";
 		} else {
-
                   if (g <= this.stats.lnum ) {
-
 	             ocl = this.varname + ".goto_listdex("+g+");";
 		     tsrc = "deskfm/images/icons/pez-silver.png";
                      tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
                      tmp = tmp + "<img  src='"+tsrc+"' >"; 
                      tmp = tmp + "</span>"
-
   		  } else {
-
                    if (g < this.stats.cnum)  {
-	             
 	             if (this.listype == "webits") {
           	       if ((this.cat == "all") || (this.cat == "")) {
                          ocl =  "amare.get_webits();";
@@ -181,7 +174,6 @@ viewer.prototype.draw_chunkbar = function() {
                          ocl =  "amare.get_cat_list(\""+this.cat+"\",\""+this.subcat+"\");";
 		       }
 		     }
-       
 		     if (this.listype == "people") {
           	       if (this.groupid == "") {
                          ocl =  "amare.get_people();";
@@ -189,25 +181,20 @@ viewer.prototype.draw_chunkbar = function() {
                          ocl =  "amare.get_group_list(\""+this.groupid+"\");";
 		       }
 		     }
-
                      tsrc = "deskfm/images/icons/pez-brown.png";
-
 		   } else {
-
                      ocl = '';
  		     tsrc = "deskfm/images/icons/pez-white.png";
-   		     
 		   }
-
                    tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
                    tmp = tmp + "<img src='"+tsrc+"' >"; 
                    tmp = tmp + "</span>";
 		}
 	     }
              tmp = tmp + "</span>"
-       }
-
-
+         }
+    
+      }
    lbl = 'chunk_bar';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
@@ -239,11 +226,10 @@ viewer.prototype.draw_chipbar = function() {
     tot = this.stats.cnum;
     if (tot > 10) {
       chunk_size = Math.round(tot / 10);
-    }
-    cur_chunk = 0;
-    cur_chunk = Math.floor(this.listdex / chunk_size);
-    chip_fac = Math.round(chunk_size / 10);
-    st = Math.round(cur_chunk * chunk_size);
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+      chip_fac = Math.round(chunk_size / 10);
+      st = Math.round(cur_chunk * chunk_size);
+    } 
 
     if (debug == true) {
              tmp = tmp + "<span >";
@@ -329,14 +315,18 @@ viewer.prototype.prev_chunk = function() {
    var cur_chunk = 1;
    var chunk_fac =  1;
    var tot = 0;
-   var g = 0;
-   var e = 0;
 
     tot = this.stats.cnum;
-    chunk_size = Math.round(tot / 10);
-    cur_chunk = 0;
-    cur_chunk = Math.round(this.listdex / chunk_size);
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+      chip_fac = Math.round(chunk_size / 10);
+      st = Math.round(cur_chunk * chunk_size);
+    } 
 
+    if (this.listdex - chunk_size > 0) {
+       this.prev(chunk_size);
+    }
 
 }
 
@@ -345,16 +335,33 @@ viewer.prototype.next_chunk = function() {
 
    var chunks = 0;
    var cur_chunk = 1;
-   var chunk_fac =  1;
+   var chunk_size =  1;
    var tot = 0;
-   var g = 0;
-   var e = 0;
 
     tot = this.stats.cnum;
-    chunk_size = Math.round(tot / 10);
-    cur_chunk = 0;
-    cur_chunk = Math.round(this.listdex / chunk_size);
-
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+      chip_fac = Math.round(chunk_size / 10);
+      st = Math.round(cur_chunk * chunk_size);
+    } 
+    if (this.listdex + chunk_size > this.stats.lnum) {
+	             if (this.listype == "webits") {
+          	       if ((this.cat == "all") || (this.cat == "")) {
+                         amare.get_webits();
+		       } else {
+                         amare.get_cat_list(this.cat,this.subcat);
+		       }
+		     }
+       
+		     if (this.listype == "people") {
+          	       if (this.groupid == "") {
+                         amare.get_people();
+		       } else {
+                         amare.get_group_list(this.groupid);
+		       }
+		     }
+    }
 }
 
 viewer.prototype.draw_debug_rail = function() {
@@ -373,9 +380,9 @@ viewer.prototype.draw_debug_rail = function() {
     tot = this.stats.cnum;
     if (tot > 10) {
       chunk_size = Math.round(tot / 10);
+      cur_chunk = 1;
+      cur_chunk = Math.floor(this.listdex / chunk_size);
     }
-    cur_chunk = 1;
-    cur_chunk = Math.floor(this.listdex / chunk_size);
     chip_fac = Math.round(chunk_size / 10);
   }
 
