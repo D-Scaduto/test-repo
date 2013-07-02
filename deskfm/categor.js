@@ -128,14 +128,16 @@ categor.prototype.show = function() {
 categor.prototype.redraw_view = function(pchunk) {
 
 	var start = 0;
-  
+        var p = 0;
+
 	this.stats = amare.get_catstat(this.cat,this.subcat);
 
             if (pchunk != undefined) {
-
       	          this.stats.last_chunk = pchunk;
-//		    alert(pchunk);
-		 start = pchunk  * da_limit;
+		  if (pchunk > 1) {
+		    p = pchunk - 1;
+		  }
+		 start = p   * da_limit;
 	    }
 
 

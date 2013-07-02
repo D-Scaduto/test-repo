@@ -44,6 +44,7 @@ namer.prototype.show = function() {
 namer.prototype.get_name = function() {
     var tmp = "";
     var lbl = "";
+    var ocl = "";
 
     tmp =tmp + "<span class='spotd_off'  onclick='jesie.findme();' > ";
     tmp = tmp + "what\'s your name ?";
@@ -55,7 +56,7 @@ namer.prototype.get_name = function() {
         } else {
           val =  this.tmp_name;
         }
-
+    tmp =tmp + "<br>";
     tmp =tmp + "<input size=15 value='"+tval+"' id='pname_box' onclick='' > ";
 
     lbl = "name_talk";
@@ -69,6 +70,8 @@ namer.prototype.say_hi = function() {
       var tmp = ""; 
       var ocl ="";
       var lbl = "";
+    
+  
 
       if ( (this.pname != "") || (this.tmp_name != ""))  {
 

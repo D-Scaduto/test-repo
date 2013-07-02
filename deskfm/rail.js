@@ -129,13 +129,15 @@ viewer.prototype.draw_chunkbar = function() {
 
    var chunks = 0;
    var cur_chunk = 1;
-   var chunk_fac =  1;
+   var chunk_size =  1;
    var tot = 0;
    var g = 0;
    var e = 0;
 
     tot = this.stats.cnum;
-    chunk_size = Math.round(tot / 10);
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+    }
     cur_chunk = 0;
     cur_chunk = Math.floor(this.listdex / chunk_size);
 
@@ -155,7 +157,7 @@ viewer.prototype.draw_chunkbar = function() {
                 if ((this.listdex >= g) && (this.listdex < e)) {
 
 		     lbl = this.screen + "_chips";
-		     tmp = tmp + "<div id='"+lbl+"' onclick='' style='display:inline-block;padding:2px;' >";
+		     tmp = tmp + "<div id='"+lbl+"' onclick='' style='display:inline-block;padding:2px;border-color:black;border-style:solid;border-width:1px;' >";
 		     tmp = tmp + "</div>";
 
 		} else {
@@ -195,7 +197,6 @@ viewer.prototype.draw_chunkbar = function() {
                      ocl = '';
  		     tsrc = "deskfm/images/icons/pez-white.png";
    		     
-
 		   }
 
                    tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' >";
@@ -228,16 +229,17 @@ viewer.prototype.draw_chipbar = function() {
 
    var chunks = 0;
    var cur_chunk = 0;
-   var chunk_fac =  1;
    var chip_fac = 1;
-   var chunk_size = 0;
+   var chunk_size = 1;
 
    var tot = 0;
    var g = 0;
    var st = 0;
 
     tot = this.stats.cnum;
-    chunk_size = Math.round(tot / 10);
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+    }
     cur_chunk = 0;
     cur_chunk = Math.floor(this.listdex / chunk_size);
     chip_fac = Math.round(chunk_size / 10);
@@ -362,14 +364,16 @@ viewer.prototype.draw_debug_rail = function() {
      var tot = 0;
      var chunks=0;
      var cur_chunk = 1;
-     var chunk_fac = 0;
+     var chunk_size = 1;
      var chip_fac = 0;
      var st = 0;
      
 
   if (this.stats != null) {
     tot = this.stats.cnum;
-    chunk_size = Math.round(tot / 10);
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+    }
     cur_chunk = 1;
     cur_chunk = Math.floor(this.listdex / chunk_size);
     chip_fac = Math.round(chunk_size / 10);
@@ -382,10 +386,6 @@ viewer.prototype.draw_debug_rail = function() {
 
        tmp = tmp + "<span class='spotd_off' >";
        tmp = tmp + "chunk_size=" + chunk_size;
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "chunkfac=" + chunk_fac;
        tmp = tmp + "</span>";
 
        tmp = tmp + "<span class='spotd_off' >";
@@ -419,20 +419,4 @@ viewer.prototype.hide_rail = function() {
     }
 }
 
-/*
-   if (buddah == true) {
-       lbl = 'nitro_btn';
-       cls = "spotd_off";
-       ocl =  "daviewer.toggle_nitro();";
-       tsrc = "deskfm/images/icons/fast_fwd.png";
-       if (this.metro_spd > 0 ) {
-         tsrc = "deskfm/images/icons/stop.png";
-         ocl = "daviewer.nitro_stop();";
-       }
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"'  style='vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
-       lbl = 'nitro_img';
-       tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
-       tmp = tmp + "</span>";
-    }
-*/
 

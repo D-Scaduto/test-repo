@@ -39,6 +39,7 @@ sharer.prototype.show = function() {
      lbl = "share_btn";
      pobj = document.getElementById(lbl);
      if (pobj != null) {
+       pobj.innerHTML = "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
        if (is_ie) {
          pobj.className = "spotd_on";
        } else {
@@ -188,6 +189,7 @@ sharer.prototype.hide = function() {
    lbl = "share_btn";
    pobj = document.getElementById(lbl);
    if (pobj != null) {
+       pobj.innerHTML = "share";	  
        if (is_ie) {
          pobj.className = "spotd_off";
        } else {

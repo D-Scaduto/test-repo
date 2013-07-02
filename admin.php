@@ -223,22 +223,26 @@ if (is_ie == false) {
 
       var width = $(this).width();
       var height = $(this).height();
-       if (width < 700) {
-         if (is_mobile != true) {
+      if (width > 1000) {
+	    sal.hide_3dview();
+	    nicky.hide();
+      } else {
+        if (width < 700) {
+          if (is_mobile != true) {
 	      is_mobile = true;
 	      sal.hide_3dview();
 	      nicky.hide();
 	      daviewer.draw_view();
-         }
-       } else {
-         if ((is_mobile == true) && (is_ie == false)) {
+          }
+        } else {
+          if ((is_mobile == true) && (is_ie == false)) {
 		 is_mobile = false;
 		 sal.draw_3dview();
 		 nicky.show();
 		 daviewer.draw_view();
-         }
-       }
-
+          }
+        }
+      }
     });
 
 

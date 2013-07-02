@@ -43,16 +43,17 @@ manager.prototype.show = function() {
  
 manager.prototype.redraw_view = function(pchunk) {
 	var start = 0;
-
+        var p =0;
 	this.stats = amare.get_groupstat(this.groupid);
 
             if (pchunk != undefined) {
-
       	          this.stats.last_chunk = pchunk;
-//		    alert(pchunk);
-		 start = pchunk  * da_limit;
+	          if (pchunk > 1) {
+		    p = pchunk - 1;
+		  }
+		 start = p   * da_limit;
 	    }
-       daviewer.load_group_list(this.groupid,start);
+        daviewer.load_group_list(this.groupid,start);
 }
 
 

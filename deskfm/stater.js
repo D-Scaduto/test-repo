@@ -17,7 +17,9 @@ function stat () {
 stat.prototype.next_chunk = function() {
 
    var ret =0;
-   ret = parseInt(this.last_chunk) + 1;
+   if (this.last_chunk > 0) {
+     ret = parseInt(this.last_chunk) + 1;
+   }
    return ret;
 
 }
@@ -429,7 +431,7 @@ stater.prototype.get_random_list = function() {
        url = url + "&chunk="+ st.next_chunk();
     }
 
-//  alert(url);
+    alert(url);
     $.getJSON(url,function(json) {
       update_webits(json);
     });   

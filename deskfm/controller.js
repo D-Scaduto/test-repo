@@ -1,10 +1,40 @@
 
 
-viewer.prototype.clear_list = function() {
-    this.dalist = [];
-    this.darungs= [];
-    this.hide_screen();
+viewer.prototype.prev = function(px) {
+    var c = 1;
+    if (px != undefined) {
+	    c = px;
+    }
+
+    var bret = true;
+    var n = this.listdex -c;
+    if ( n <=0 ) {
+        n = this.dalist.length -1;
+        bret = false;
+    }
+    this.load_rungs(n);
+    this.draw_view();
+    return bret;
 }
+
+
+viewer.prototype.next = function(px) {
+    var c = 1;
+    if (px != undefined) {
+	    c = px;
+    } 
+    var bret = true;
+    var n = this.listdex +c;
+    if ( n >= this.dalist.length ) {
+         n = 0;
+        bret = false;
+    }
+    this.load_rungs(n);
+    this.draw_view();
+    return bret;
+}
+
+
 
 
 viewer.prototype.goto_listdex = function(ldex) {
@@ -46,31 +76,12 @@ viewer.prototype.to_top = function(trung) {
 }
 
 
-viewer.prototype.prev = function() {
-    var bret = true;
-    var n = this.listdex -1;
-    if ( n <=0 ) {
-         n = this.dalist.length -1;
-        bret = false;
-    }
-    this.load_rungs(n);
-    this.draw_view();
-    return bret;
+
+viewer.prototype.clear_list = function() {
+    this.dalist = [];
+    this.darungs= [];
+    this.hide_screen();
 }
-
-
-viewer.prototype.next = function() {
-    var bret = true;
-    var n = this.listdex +1;
-    if ( n >= this.dalist.length ) {
-         n = 0;
-        bret = false;
-    }
-    this.load_rungs(n);
-    this.draw_view();
-    return bret;
-}
-
 
 
 

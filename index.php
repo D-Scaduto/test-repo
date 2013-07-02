@@ -134,7 +134,9 @@ header('X-Frame-Options: SAMEORIGIN');
   if (isset($_GET['mobile'])) {
     echo "is_mobile = true;";
   }
-
+  if (isset($_GET['debug'])) {
+    echo "debug = true;";
+  }
   echo "</script>";
 ?>
 
@@ -152,25 +154,29 @@ header('X-Frame-Options: SAMEORIGIN');
    do_preload();
 //   init_months();
 
- 
 
-           sal = new logoman("logo");
-            nicky = new sharer("share_spot");
+        sal = new logoman("logo");
+        nicky = new sharer("share_spot");
 	   
-           jesie = new namer("name_spot");
-           cater = new categor("menu_bar");
-           store = new shoper("menu_bar");
+	jesie = new namer("name_spot");
 
-           wanda = new searcher("menu_bar");
-           amare = new stater();
+//        cater = new categor("menu_bar");
+//        store = new shoper("menu_bar");
+//        wanda = new searcher("menu_bar");
+	
+        cater = new categor("cat_spot");
+	wanda = new searcher("search_spot");
 
-      diego = new header("menu");
-      diego.add_mainspot("browse","cater");
-      diego.add_mainspot("search","wanda");
-      diego.main_shape = "browse";
+        amare = new stater();
 
+	diego = new header("menu");
+
+//      diego.add_mainspot("browse","cater");
+//	diego.add_mainspot("search","wanda");
+
+        diego.main_shape = "browse";
    
-      daviewer = new viewer("main_view","daviewer");
+        daviewer = new viewer("main_view","daviewer");
 
        if (is_mobile == true) {
            da_limit = 250;
@@ -184,6 +190,8 @@ header('X-Frame-Options: SAMEORIGIN');
     draw_main();
     sal.show();
     diego.show();
+    cater.show();
+    wanda.show();
     nicky.show();
     jesie.show();
 
@@ -196,17 +204,24 @@ header('X-Frame-Options: SAMEORIGIN');
     $(window).resize(function() {
       var width = $(this).width();
       var height = $(this).height();
-      if (width < 801) {
-         if (is_mobile != true) {
+       if (width > 1000) {
+	    sal.hide_3dview();
+	    nicky.hide();
+       } else {
+         if (width < 700) {
+           if (is_mobile != true) {
 	      is_mobile = true;
 	      sal.hide_3dview();
+	      nicky.hide();
 	      daviewer.draw_view();
-         }
-       } else {
-         if ((is_mobile == true) && (is_ie == false)) {
+           }
+         } else {
+           if ((is_mobile == true) && (is_ie == false)) {
 		 is_mobile = false;
 		 sal.draw_3dview();
+		 nicky.show();
 		 daviewer.draw_view();
+           }
          }
        }
     });

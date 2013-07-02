@@ -35,6 +35,8 @@ header.prototype.show = function() {
      var cls = "";
 
 
+     if (buddah == true) {
+
        lbl = "menu_btns";
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
@@ -43,17 +45,45 @@ header.prototype.show = function() {
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "<div style='width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
+     } else {
 
-       tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;vertical-align:top;' >";
-
-       tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
+       lbl = "search_spot";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
+       lbl = "cat_spot";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       tmp = tmp + "</div>";
+     }
+
+          tmp = tmp + "<div style='width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
+
+          lbl = 'nitro_btn';
+          cls = "spotd_off";
+          ocl =  "daviewer.toggle_nitro();";
+          tsrc = "deskfm/images/icons/fast_fwd.png";
+          if (this.metro_spd > 0 ) {
+            tsrc = "deskfm/images/icons/stop.png";
+            ocl = "daviewer.nitro_stop();";
+          }
+          tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
+          lbl = 'nitro_img';
+          tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
+          tmp = tmp + "</div>";
+
+          tmp = tmp + "<div id='nitro_img' onclick='daviewer.toggle_nitro();' style='display:inline-block;vertical-align:top;' >";
+
+          tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' height='20px' >";
+          tmp = tmp + "</div>";
+
+          tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
+          tmp = tmp + "</div>";
+
+          tmp = tmp + "</div>"; 
+
+          tmp = tmp + "<div style='clear:left;' ></div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
