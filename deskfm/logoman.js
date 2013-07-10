@@ -3,17 +3,18 @@ function logoman (pspot) {
 
   this.spotid = pspot;
   this.varname= "sal";
-  this.shape="deskfm";
+  this.shape = "full";
+  this.logo_shape="deskfm";
 
   this.preset = "sitonly";
   this.preseter = new suggester("logo_sog",new preset_provider(), this.varname +".preseter",this.varname);
 
-  this.show3d = true;
+  this.show3d = false;
   if (is_mobile == true) {
       this.show3d = false;
   }
 
-  this.zoom = false;
+  this.zoom = true;
   this.flip =0;
 }
 
@@ -25,7 +26,6 @@ logoman.prototype.show = function () {
    var ocl = "";
    var cls = "";
 
-   
        lbl = "logo_sog";
        tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:4px;' >";
        tmp = tmp + "</span>";
@@ -34,14 +34,21 @@ logoman.prototype.show = function () {
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
 
+       lbl = "logo_btn";
+       ocl = "sal.change_shape();";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='float:right;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+       tmp = tmp + "</span>";
+
+   
        lbl = "logo_story";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
 
        tmp = tmp + "<div class='elem' >";
-  
-       tmp = tmp + "<span class='endlabel' >";
 
+  if (this.shape == "full") {
+       tmp = tmp + "<span class='endlabel' >";
        lbl = "logo_3dtgl";
        ocl = "sal.toggle_3dview();";
        cls = "spotd_off";
@@ -50,35 +57,28 @@ logoman.prototype.show = function () {
        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' style='' >";
        tmp = tmp + " 3D ";
        tmp = tmp + "</span>";
-      
-       lbl = "logo_3dzoom";
-       ocl = "sal.toggle_zoom();";
-       cls = "spotd_off";
-       moin = "";
-       mout = "";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' style='' >";
-       tmp = tmp + " zoom ";
-       tmp = tmp + "</span>";
-       
-       tmp = tmp + "</span>";
 
+       tmp = tmp + "</span>";
+   
        tmp = tmp + "<p>";
        tmp = tmp + "<div id='logo_3dview' class='' style='width:300px;' >";
        tmp = tmp + "</div>";
        tmp = tmp + "</p>";
-       tmp = tmp + "</div>";
-
+   }
+    tmp = tmp + "</div>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmp;
+	 this.draw_logo(35);
 
-	 this.draw_preman();
-      	 this.draw_vman();
-         this.draw_logo(35);
-         this.draw_story();
-	 if (this.show3d == true) {
-           this.draw_3dview();
+	 if (this.shape == "full") {
+	   this.draw_preman();
+      	   this.draw_vman();
+           this.draw_story();
+	   if (this.show3d == true) {
+             this.draw_3dview();
+	   }
 	 }
    }
 }
@@ -92,6 +92,15 @@ logoman.prototype.set_preset = function (tpreset) {
 	 }
 }
 
+
+logoman.prototype.change_shape = function () {
+     if (this.shape == "full") {
+        this.shape = "shrunk";
+     } else {
+	this.shape = "full";
+     }
+     this.show();
+}
 
 logoman.prototype.toggle_zoom = function () {
 
@@ -309,8 +318,8 @@ logoman.prototype.waiting = function () {
    }
 }
 
-logoman.prototype.set_shape = function (psz) {
-	this.shape = psz;
+logoman.prototype.set_logoshape = function (psz) {
+	this.logo_shape = psz;
 	this.draw_logo();
 }
 
@@ -327,9 +336,9 @@ logoman.prototype.draw_logo = function (psz) {
    var dt = new Date();
    var ocl = "";
 
-   if (this.shape == "deskfm") {
+   if (this.logo_shape == "deskfm") {
             lbl = this.spotid + '_logo_lspot';
-	    ocl = this.varname + ".set_shape(\"freedom\");";
+	    ocl = this.varname + ".set_logoshape(\"freedom\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"D");
             tmpstr=tmpstr+"</span>";
@@ -341,20 +350,20 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>";
 
             lbl = this.spotid + '_logo_rspot';
-	    ocl = this.varname + ".set_shape(\"freedom\");";
+	    ocl = this.varname + ".set_logoshape(\"freedom\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"FM");
             tmpstr=tmpstr+"</span>";
 
 	    lbl = this.spotid + '_logo_rspot22';
-            ocl = this.varname + ".set_shape(\"freedom\");";
+            ocl = this.varname + ".set_logoshape(\"freedom\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,".com");
             tmpstr=tmpstr+"</span>";
    } 
-   if (this.shape == "freedom") {
+   if (this.logo_shape == "freedom") {
             lbl = this.spotid + '_logo_lspot';
-	    ocl = this.varname + ".set_shape(\"deskfm\");";
+	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"D");
             tmpstr=tmpstr+"</span>";
@@ -366,7 +375,7 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>"; 
 
 	    lbl = this.spotid + '_logo_rspot1';
-	    ocl = this.varname + ".set_shape(\"deskfm\");";
+	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"F");
             tmpstr=tmpstr+"</span>";
@@ -378,12 +387,12 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>";
 
             lbl = this.spotid + '_logo_rspot3';
-	    ocl = this.varname + ".set_shape(\"deskfm\");";
+	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"M");
             tmpstr=tmpstr+"</span>";
    } 
-   if (this.shape == "standing") {
+   if (this.logo_shape == "standing") {
             lbl = this.spotid + '_logo_lspot';
 	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";

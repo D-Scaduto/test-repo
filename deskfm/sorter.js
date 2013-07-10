@@ -5,8 +5,9 @@ function sorter (pspotid) {
    this.spotid = pspotid;
    this.showing = false;
    this.varname = "mac";
-   this.sterms = "standing desk";
    this.shape = "sort"; // feed
+   this.menued = false;
+   this.sterms = "standing desk";
    this.cal = new calendor('sort_calendor',"mac.cal");
 
 }
@@ -69,6 +70,18 @@ sorter.prototype.show = function() {
 
 }
 
+
+sorter.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+	this.show();
+}
 
 
 sorter.prototype.redraw_view = function() {

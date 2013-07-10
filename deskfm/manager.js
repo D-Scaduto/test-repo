@@ -6,6 +6,7 @@ function manager (pspotid) {
    this.varname = "";
    this.showing = false;
    this.shape = "";
+   this.menued = false;
 
    this.groupid="";
 
@@ -41,6 +42,18 @@ manager.prototype.show = function() {
 }
 
  
+manager.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
+
 manager.prototype.redraw_view = function(pchunk) {
 	var start = 0;
         var p =0;
@@ -84,7 +97,6 @@ manager.prototype.set_group = function (tgroupid) {
   }
   this.shape = "people";
   this.show();
-  daviewer.load_group_list(this.groupid);
 }
 
 

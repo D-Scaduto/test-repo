@@ -4,7 +4,7 @@ function shoper (pspotid) {
 
   this.spotid=pspotid;
   this.varname='store';
-
+  this.menued = false;
   this.prodid = '';
   this.producter = new suggester("product_sog",new product_provider(), "store.producter","store");
 
@@ -69,6 +69,17 @@ shoper.prototype.show = function() {
     }
 }
 
+
+shoper.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
 
 shoper.prototype.set_product = function(tprod) {
       if (tprod != undefined) {

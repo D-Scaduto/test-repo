@@ -5,7 +5,8 @@ function sharer (pspotid) {
    this.spotid = pspotid;
    this.varname="nicky";
    this.showing = false;
-   this.shape = "solo";  //menued 
+
+   this.shape = "shrunk";  //full
 
    this.newster = new poster("share_spot",0,this.varname,this.varname +".newster","webits",false); 
    this.newster.btnson = true;
@@ -21,8 +22,27 @@ sharer.prototype.show = function() {
     var lbl = "";
     var ocl = "";
 
-    tmp = tmp + "<span id='share_spot_rung_0' class='sbox' style='' >";
-    tmp = tmp + "</span>";
+          tmp = tmp + "<div class='' style='background-color:white;' >";
+ 
+	  lbl = "network_btns";
+          tmp = tmp + "<span id='"+lbl+"' class='' style='min-width:150px;width:200px;background-color:white;' >";
+          tmp = tmp + "</span>";     
+
+	  ocl = "nicky.change_shape();";
+	  lbl = 'share_btn';
+          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
+          tmp = tmp + "</span>";
+
+	  lbl = "name_spot";
+          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;' >";
+          tmp = tmp + "</span>"; 
+
+      	  tmp = tmp + "</div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
+
+       	  lbl = "share_spot_rung_0";
+          tmp = tmp + "<div id='"+lbl+"' class='sbox' style=''  >";
+          tmp = tmp + "</div>";
 
 
     lbl = this.spotid;
@@ -30,26 +50,73 @@ sharer.prototype.show = function() {
     if (pobj != null) {
       pobj.innerHTML = tmp;
       this.showing = true;
-      this.newster.build_rung();
-      this.newster.draw_rung();
-      jesie.show();
+      this.network_btns();
+      this.set_shape();
     }
- 
-
-     lbl = "share_btn";
-     pobj = document.getElementById(lbl);
-     if (pobj != null) {
-       pobj.innerHTML = "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
-       if (is_ie) {
-         pobj.className = "spotd_on";
-       } else {
-         pobj.setAttribute("class","spotd_on");
-       }
-     }
-   
 
 }
 
+
+
+
+sharer.prototype.change_shape = function() {
+   if (this.shape == "full") {
+      this.set_shape("shrunk");
+   } else {
+      this.set_shape("full");
+   }
+}
+
+
+sharer.prototype.set_shape = function(pshape) {
+   if (pshape != undefined) {
+	this.shape = pshape;
+   }
+
+   if (this.shape == "shrunk") {
+      this.newster.hide_rung();
+      lbl = 'share_spot_rung_0';
+      pobj = document.getElementById(lbl);
+      if (pobj != null) {
+        pobj.innerHTML = "";
+        if (is_ie) {
+          pobj.className = "";
+        } else {
+          pobj.setAttribute("class","");
+        }
+      }
+      jesie.hide();
+      lbl = 'share_btn';
+      pobj = document.getElementById(lbl);
+      if (pobj != null) {
+        tmp = "share";
+	tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+        pobj.innerHTML = tmp;
+      }
+
+   }
+
+  if (this.shape == "full") { 
+      lbl = 'share_spot_rung_0';
+      pobj = document.getElementById(lbl);
+      if (pobj != null) {
+        if (is_ie) {
+          pobj.className = "sbox";
+        } else {
+          pobj.setAttribute("class","sbox");
+        }
+      }
+      this.newster.build_rung();
+      this.newster.draw_rung();
+      jesie.show();
+      lbl = 'share_btn';
+      pobj = document.getElementById(lbl);
+      if (pobj != null) {
+          tmp = "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+          pobj.innerHTML = tmp;
+      }
+   }
+}
 
 sharer.prototype.network_btns = function() {
 
@@ -134,35 +201,6 @@ sharer.prototype.update_one = function(pdex) {
 }
 
 
-sharer.prototype.set_shape = function(jnk,pshape) {
-   if (pshape != undefined) {
-      this.shape = pshape;
-      this.newster.shape = this.shape;
-      this.newster.build_rung(0);
-      this.newster.draw_rung(0);
-   }
-}
-
-
-sharer.prototype.set_dex = function(tdex) {
-   if (tdex != undefined) {
-      this.pidex = tdex;
-      this.show();
-   }
-}
-
-
-sharer.prototype.set_preset = function(tpreset) {
-
-   this.preset = tpreset;
-   this.newster.build_rung();
-   this.newster.draw_rung();
-
-}
-
-sharer.prototype.change = function() {
-   this.toggle();
-}
 
 sharer.prototype.toggle = function() {
    if (this.showing == true) {
@@ -178,23 +216,12 @@ sharer.prototype.hide = function() {
    this.newster.hide_rung(); 
    jesie.hide();
 
+   this.showing = false; 
+ 
    lbl = this.spotid;
    pobj = document.getElementById(lbl);
    if (pobj != null) {
-         pobj.innerHTML = "";
-   }
-
-   this.showing = false; 
- 
-   lbl = "share_btn";
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       pobj.innerHTML = "share";	  
-       if (is_ie) {
-         pobj.className = "spotd_off";
-       } else {
-         pobj.setAttribute("class","spotd_off");
-       }
+       pobj.innerHTML = "";	  
    }
 
 }
@@ -210,6 +237,10 @@ sharer.prototype.draw_debug = function() {
          pobj.innerHTML = tmp;
      }
 }
+
+
+
+
 
 sharer.prototype.gplus_render = function() {
 

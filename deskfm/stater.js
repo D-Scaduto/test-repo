@@ -29,11 +29,16 @@ stat.prototype.next_chunk = function() {
 
 
 function stater () { 
+ 
+   this.webitlist = [];
+   this.productlist = [];
+   this.peoplelist = [];
+   this.providerlist = [];
+   this.unsortedlist = [];
 
    this.substats = [];
    this.prodstats = [];
    this.groupstats = [];
-
 
    this.total_sorted = new stat();
    this.total_people = new stat();
@@ -47,14 +52,14 @@ stater.prototype.get_stats = function() {
    var url='deskfm/dbase/get_stats.php';
 //   alert(url);
    $.getJSON(url,function(json) {
-       update_stats(json);
+       amare.update_stats(json);
    });    
    sal.waiting();
 
 } 
 
 
-function update_stats(statobj) {
+stater.prototype.update_stats = function (statobj) {
    if (statobj != undefined) {
 
      var tp = new subcat_provider();
@@ -135,10 +140,10 @@ stater.prototype.count_lstats = function() {
     this.total_sorted.lnum = 0;
 
     var d=0;
-    for (d=0;d<webitlist.length;d++) {
-      if (webitlist[d] != undefined) {
-        var c = webitlist[d].cat;
-        var s = webitlist[d].subcat;
+    for (d=0;d<this.webitlist.length;d++) {
+      if (this.webitlist[d] != undefined) {
+        var c = this.webitlist[d].cat;
+        var s = this.webitlist[d].subcat;
         if ((c != "") && (s != "")) {
 	     this.total_sorted.lnum = this.total_sorted.lnum + 1;
 	}
@@ -152,9 +157,9 @@ stater.prototype.count_lstats = function() {
       }
     } 
 
-    for (d=0;d<productlist.length;d++) {
-      if (productlist[d] != undefined) {
-        var p = productlist[d].prodid;
+    for (d=0;d<this.productlist.length;d++) {
+      if (this.productlist[d] != undefined) {
+        var p = this.productlist[d].prodid;
         for (var l=0; l<this.prodstats.length; l++) {
           if (this.prodstats[l].prodid == p) {
             this.prodstats[l].lnum = this.prodstats[l].lnum + 1;
@@ -175,10 +180,10 @@ stater.prototype.count_lpstats = function() {
     }
     var d=0;
     var g = 0;
-    for (d=0;d<peoplelist.length;d++) {
-      if (peoplelist[d] != undefined) {
-        g = peoplelist[d].groupid;
-        if (peoplelist[d].groupid == "") {
+    for (d=0;d<this.peoplelist.length;d++) {
+      if (this.peoplelist[d] != undefined) {
+        g = this.peoplelist[d].groupid;
+        if (this.peoplelist[d].groupid == "") {
   	    this.total_people.lnum = this.total_people.lnum + 1;
 	} else {	
 	  for (var l=0; l<this.groupstats.length; l++) {
@@ -253,9 +258,9 @@ stater.prototype.get_groupstat = function(tp) {
 
 stater.prototype.get_person_group = function(tname) {
     var ret = "";
-    for (var i=0; i<peoplelist.length; i++) {
-        if (peoplelist[i].uname == tname) {
-              ret = peoplelist[i].groupid;
+    for (var i=0; i<this.peoplelist.length; i++) {
+        if (this.peoplelist[i].uname == tname) {
+              ret = this.peoplelist[i].groupid;
         }
     }
     return ret;
@@ -298,7 +303,7 @@ stater.prototype.get_webits = function(tchunk) {
    url = url + "&chunk="+ c;
 //   alert(url);
    $.getJSON(url,function(json) {
-      update_webits(json);
+      amare.update_webits(json);
    });   
    sal.waiting();
 }
@@ -317,7 +322,7 @@ stater.prototype.get_people = function(tchunk) {
    url = url + "&chunk="+ c;
 //   alert(url);
    $.getJSON(url,function(json) {
-       update_people(json);
+       amare.update_people(json);
    });   // end get json 
    sal.waiting();
 }
@@ -335,7 +340,7 @@ stater.prototype.get_group_list = function(pgroupid) {
 //
 //  alert(url);
    $.getJSON(url,function(json) {
-       update_people(json);
+       amare.update_people(json);
    });   // end get json 
    sal.waiting();
 }
@@ -354,7 +359,7 @@ stater.prototype.get_unsorted = function(tchunk) {
 //  alert(url);
 
    $.getJSON(url,function(json) {
-      add_unsorted(json);
+      amare.add_unsorted(json);
    });   
    sal.waiting();
 }
@@ -365,7 +370,7 @@ stater.prototype.get_products = function() {
   var url='deskfm/dbase/get_products.php';
   //  alert(url);
   $.getJSON(url,function(json) {
-      update_products(json);
+      amare.update_products(json);
    });   
    sal.waiting();
 } 
@@ -374,7 +379,7 @@ stater.prototype.get_providers = function() {
    var url='deskfm/dbase/get_providers.php';
 //  alert(url);
    $.getJSON(url,function(json) {
-       update_providers(json);
+       amare.update_providers(json);
    });   // end get json 
    sal.waiting();
 }
@@ -389,7 +394,7 @@ stater.prototype.get_random_list = function() {
   url = url + "&rand="+Math.random();
   //alert(url);
   $.getJSON(url,function(json) {
-      update_webitlist(json,p);
+      amare.update_webitlist(json,p);
   });   // end get json 
 }
 
@@ -405,7 +410,7 @@ stater.prototype.get_random_list = function() {
        this.prodids.push(tprod);
     }
   $.getJSON(url,function(json) {
-      update_products(json);
+      amare.update_products(json);
    });   // end get json a
   sal.waiting();
 }  
@@ -419,7 +424,7 @@ stater.prototype.get_random_list = function() {
     url = url + "&mon="+ da_month;
  // alert(url);
   $.getJSON(url,function(json) {
-      update_webits(json);
+      amare.update_webits(json);
    });   // end get json 
 }  
 
@@ -444,7 +449,7 @@ stater.prototype.get_random_list = function() {
 
 //    alert(url);
     $.getJSON(url,function(json) {
-      update_webits(json);
+      amare.update_webits(json);
     });   
   sal.waiting();
 }  
@@ -461,7 +466,7 @@ stater.prototype.get_csearch_list = function(tsterms) {
    } 
 //   alert(url);
    $.getJSON(url,function(json) {
-      update_webits(json);
+      amare.update_webits(json);
    });   // end get json 
 }  
 
@@ -475,8 +480,305 @@ stater.prototype.get_cperson_list = function(tuname) {
    } 
 //   alert(url);
    $.getJSON(url,function(json) {
-      update_webits(json);
+      amare.update_webits(json);
    });   // end get json 
 }  
+
+
+ stater.prototype.update_providers = function (listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+            found = false;
+            if (listobj.dalist[j] != undefined) {
+               var found_at=-1;
+               for (var i=0;i<this.providerlist.length;i++) {
+                  if (this.providerlist[i] != undefined) {
+                    if (listobj.dalist[j].uname == this.providerlist[i].uname) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+               } 
+               if (found == true) {
+                  providerlist.splice(found_at,1);
+               }
+              this.providerlist.push(listobj.dalist[j]);
+            }
+         }
+      }
+}  
+
+
+
+ stater.prototype.update_products= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+            found = false;
+            if (listobj.dalist[j] != undefined) {
+               var found_at=-1;
+               for (var i=0;i<this.productlist.length;i++) {
+                  if (this.productlist[i] != undefined) {
+                    if (listobj.dalist[j].pid == this.productlist[i].pid) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+               } 
+               if (found == true) {
+                  this.productlist.splice(found_at,1);
+               }
+              this.productlist.push(listobj.dalist[j]);
+            }
+         }
+      }
+}  
+
+
+
+
+ stater.prototype.update_webits= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+            found = false;
+            if (listobj.dalist[j] != undefined) {
+               var found_at=-1;
+               for (var i=0;i<this.webitlist.length;i++) {
+                  if (this.webitlist[i] != undefined) {
+                    if (listobj.dalist[j].pid == this.webitlist[i].pid) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+               } 
+               if (found == true) {
+                  this.webitlist[found_at] = listobj.dalist[j];
+               } else {
+                  this.webitlist.push(listobj.dalist[j]);
+               }             
+            }
+         }
+      }
+      if (got_stats == true) {
+         amare.count_lstats();
+         diego.redraw_view("webits",listobj.dachunk);
+         init_run = false;
+      }
+}  
+
+
+
+
+ stater.prototype.update_people= function(listobj) {
+
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+
+       if ( listobj.peoplelist.length > 0 ) { 
+         for (var j=0;j<listobj.peoplelist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.peoplelist.length;i++) {
+                  if (this.peoplelist[i] != undefined) {
+                    if (listobj.peoplelist[j].uname == this.peoplelist[i].uname) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.peoplelist.splice(found_at,1);
+              }
+              this.peoplelist.push(listobj.peoplelist[j]);
+         }
+      }
+
+      if (got_stats == true) {
+        amare.count_lpstats();
+        diego.redraw_view("people",listobj.dachunk);
+      }
+}  
+
+
+
+stater.prototype.add_unsorted= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.unsortedlist.length;i++) {
+                  if (this.unsortedlist[i] != undefined) {
+                    if (listobj.dalist[j].uname == this.unsortedlist[i].uname) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.unsortedlist.splice(found_at,1);
+              }
+              this.unsortedlist.unshift(listobj.dalist[j]);
+         }
+      }
+
+       amare.count_lstats();
+       diego.redraw_view("unsorted");
+}  
+
+
+
+
+ stater.prototype.get_one= function(dpid) {
+
+   if (pobj.listype == "webits") {
+       for (var k=0; k<=this.webitlist.length; k++) {
+         if (this.webitlist[k] != undefined) {
+           if (this.webitlist[k].pid == dpid) {
+               return this.webitlist[k];
+           }
+         }
+       }
+   }
+
+   if (pobj.listype == "people") {
+   }
+
+}
+
+
+
+ stater.prototype.add_webit= function(tpobj) {
+
+   var t=-1;
+   if (tpobj != undefined) {
+     if (tpobj.listype == "webits") {
+       t=  this.webitlist.push(tpobj);
+     }
+   }
+   if (t != -1) {
+     var dx = t-1;
+   }
+}
+
+
+ stater.prototype. new_webit= function(pobj) {
+
+       sal.draw_vman();
+       var t = this.webitlist.push(pobj);
+
+       nicky.new_one(t-1);
+        
+}
+
+ stater.prototype.update_webit= function(pobj) {
+      
+      sal.draw_vman();
+
+      var fnd = -1;
+      if (pobj.listype == "webits") {
+        for (var k=0; k<=this.webitlist.length; k++) {
+          if (this.webitlist[k] != undefined) {
+            if (this.webitlist[k].pid == pobj.pid) {
+                this.webitlist[k] = pobj;
+		fnd = k;
+            }
+          }
+        }
+	if (fnd != -1) {
+          daviewer.update_one(pobj.pid);
+    	  nicky.update_one(fnd);
+	}
+      }
+
+      if (pobj.groupid != "") {
+        fnd = -1;
+        for (var k=0; k<=this.peoplelist.length; k++) {
+          if (this.peoplelist[k] != undefined) {
+            if (this.peoplelist[k].uname == pobj.uname) {
+                this.peoplelist[k].groupid = pobj.groupid;
+                fnd = k;
+            }
+          }
+        }
+        if (fnd == -1) {
+            var w = new webit();
+            w.uname = pobj.uname;
+            w.groupid = pobj.groupid;
+            this.peoplelist.push(w);
+        }
+        daviewer.update_person(pobj.uname);
+      }
+}
+
+ stater.prototype.del_webit= function(tpid) {
+
+  daviewer.del_webit(tpid);
+   for (var k=0; k<=this.webitlist.length; k++) {
+     if (this.webitlist[k] != undefined) {
+         if (this.webitlist[k].pid == tpid) {
+             this.webitlist[k] = null;
+         }
+     }
+   }
+}
+
+
+
+ stater.prototype.update_person= function(pobj) {
+     var fnd = -1;
+     if (pobj.listype == "people") {
+        fnd = -1;
+        for (var k=0; k<=this.peoplelist.length; k++) {
+          if (this.peoplelist[k] != undefined) {
+            if (this.peoplelist[k].uname == pobj.uname) {
+                this.peoplelist[k] = pobj;
+                fnd = k;
+            }
+          }
+        }
+        if (fnd == -1) {
+            this.peoplelist.push(pobj);
+        }
+        daviewer.update_person(pobj.uname);
+      }
+}
+
+
+
+ stater.prototype.del_person= function(tuname) {
+
+   daviewer.del_person(tuname);
+
+   for (var k=0; k<=this.peoplelist.length; k++) {
+     if ((peoplelist[k] != undefined)&&(peoplelist[k] != undefined)){
+         if (peoplelist[k].uname == tuname) {
+             peoplelist[k] = null;
+         }
+     }
+   }
+
+}
 
 

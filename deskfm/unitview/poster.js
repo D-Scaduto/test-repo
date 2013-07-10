@@ -82,13 +82,13 @@ poster.prototype.set_ppid = function(pdadex) {
   if (pdadex != undefined) {
     this.dadex = pdadex;
     if (this.listype == "webits") {
-        s =  "webitlist[" + pdadex + "]";
+        s =  "amare.webitlist[" + pdadex + "]";
     } else if (this.listype == "people") {
-        s =  "peoplelist[" + pdadex + "]";
+        s =  "amare.peoplelist[" + pdadex + "]";
     } else if (this.listype == "products") {
-        s =  "productlist[" + pdadex + "]";
+        s =  "amare.productlist[" + pdadex + "]";
     } else if (this.listype == "unsorted") {
-        s =  "unsortedlist[" + pdadex + "]";
+        s =  "amare.unsortedlist[" + pdadex + "]";
     }
 
     pobj = eval(s);

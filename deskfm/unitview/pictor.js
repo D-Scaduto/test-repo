@@ -95,7 +95,6 @@ poster.prototype.get_pic = function() {
 
 
  poster.prototype.get_newpic = function() {
-
    var tspot = this.rung;
    var doctmp;
    var tmpstr="";
@@ -108,6 +107,8 @@ poster.prototype.get_pic = function() {
    lbl= this.spotid ;
    lbl = lbl + "_" + tspot + "_upic_frame";
    if (document.getElementById(lbl) != null) {
+
+
 
       doctmp = document.getElementById(lbl).contentWindow.document;
       if (doctmp.getElementById('tmp_extra') != null) {

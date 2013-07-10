@@ -10,27 +10,20 @@ header('X-Frame-Options: SAMEORIGIN');
 <link rel=StyleSheet href=deskfm/twitter/tws_style.css type="text/css" media="screen,print" />
 <title>deskfm.com</title>
 
+
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
 </script>
 
-<script src="../lib/jquery-code.js" type="text/javascript"></script>
-<script src="../lib/codebird.js" type="text/javascript"></script>
-<script src="../lib/sha1.js" type="text/javascript"></script>
 
-<!--
-<script src="http://apis.google.com/js/plus.js" ></script>
-<script src="http://apis.google.com/js/plusone.js" ></script>
-<script src="http://apis.google.com/js/client:plus.js" ></script>
--->
+
+<script src="../lib/jquery-code.js" type="text/javascript"></script>
+<script src="../lib/jquery-insight.js" type="text/javascript"></script>
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
 <script src=deskfm/logoman.js type="text/javascript" ></script>
-<script src=deskfm/audio.js type="text/javascript" ></script>
-<script src=deskfm/wheretor.js type="text/javascript" ></script>
-<script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/webit.js type="text/javascript" ></script>
 <script src=deskfm/unitview/poster.js type="text/javascript" ></script>
@@ -43,8 +36,8 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/unitview/embeder.js type="text/javascript" ></script>
 <script src=deskfm/unitview/pricer.js type="text/javascript" ></script>
 <script src=deskfm/unitview/namer.js type="text/javascript" ></script>
-<script src=deskfm/unitview/person.js type="text/javascript" ></script>
 <script src=deskfm/unitview/grouper.js type="text/javascript" ></script>
+<script src=deskfm/unitview/person.js type="text/javascript" ></script>
 <script src=deskfm/unitview/debug.js type="text/javascript" ></script>
 <script src=deskfm/viewer.js type="text/javascript" ></script>
 <script src=deskfm/controller.js type="text/javascript" ></script>
@@ -55,28 +48,30 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
-<script src='deskfm/suggester.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/search_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/cat_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/subcat_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/price_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/product_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/servicer_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/preset_provider.js' type="text/javascript" ></script>
-<script src='deskfm/qandas/group_provider.js' type="text/javascript" ></script>
+<script src=deskfm/suggester.js type="text/javascript" ></script>
+<script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/cat_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/price_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/product_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/servicer_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/preset_provider.js type="text/javascript" ></script>
+<script src=deskfm/qandas/group_provider.js type="text/javascript" ></script>
 
 <script src=deskfm/namer.js type="text/javascript" ></script>
+
 <script src=deskfm/shoper.js type="text/javascript" ></script>
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/sorter.js type="text/javascript" ></script>
 <script src=deskfm/manager.js type="text/javascript" ></script>
+
 <script src=deskfm/header.js type="text/javascript" ></script>
 
-<script src="deskfm/twitter/tws_front.js"></script>
-<script src="deskfm/twitter/tws_back.js"></script>
-
+<script src=deskfm/audio.js type="text/javascript" ></script>
+<script src=deskfm/wheretor.js type="text/javascript" ></script>
+<script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 
@@ -89,32 +84,14 @@ header('X-Frame-Options: SAMEORIGIN');
 
 </head>
 
+
 <body style='background-color:white;' >
 
 <div id="fb-root"></div>
+
 <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
 <script src=deskfm/fbooker.js type="text/javascript" >
-if (is_ie == false) {
-   FB.init({
-      appId  : '191528434226668',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth  : true
-   });
 
-      // Load the SDK asynchronously
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-}
-
-</script>
 <?php 
   include 'deskfm/browsers.php';
   if (is_mobile()) {
@@ -130,6 +107,8 @@ if (is_ie == false) {
   } else {
 
   }
+
+
 
 
   $phgname = "null";
@@ -150,6 +129,27 @@ if (is_ie == false) {
 ?>
 
 
+<script type="text/javascript" >
+  if (is_ie == false) {
+   FB.init({
+      appId  : '191528434226668',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true,  // parse XFBML
+      oauth  : true
+   });
+      // Load the SDK asynchronously
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+  }
+
+</script>
+
 <div id='main_spot' style='background-color:white;padding:10px;' >";
 </div>
 
@@ -162,6 +162,30 @@ if (is_ie == false) {
 
 <script type='text/javascript' >
 
+
+
+  var daviewer = null;
+
+  var cater = null;  //categor
+  var store = null;  //shoper
+  var nicky = null;  //sharer
+  var wanda = null;  //searcher
+  var joe = null;    //manager
+  var amare = null;  //stater
+  var sal = null;    //logoman
+  var diego = null;  //header
+  var mac  = null;   //farmer
+  var elle = null;   //model 
+
+  var da_limit=1000;
+  var init_run = true;
+  var got_stats = false;
+  var buddah = false;
+  var pname = "";
+  var debug = false;
+
+
+
    do_preload();
 //   init_months();
 
@@ -169,33 +193,31 @@ if (is_ie == false) {
 
 
    sal = new logoman("logo");
+   amare = new stater();
+   elle = new model();
    daviewer = new viewer("main_view","daviewer");
-   jesie = new namer("name_spot");
-
   
+
    nicky = new sharer("share_spot");
+   jesie = new namer("name_spot");
+ 
 
    if (is_mobile == true) {
-
            da_limit = 250;
            daviewer.top_end = 25;
-
-
-
     } else {
-
            da_limit = 1000;
 	   daviewer.top_end = 100;
     }
 
+           store = new shoper("shop");
+	   mac = new sorter("sort");
+	   cater = new categor("browse");
+	   wanda = new searcher("search");
+           joe = new manager("contact");
 
-           store = new shoper("menu_bar");
-	   mac = new sorter("menu_bar");
-	   cater = new categor("menu_bar");
-	   wanda = new searcher("menu_bar");
-           joe = new manager("menu_bar");
-
-	   diego = new header("menu");
+	   diego = new header("menu_spot");
+           diego.shape = "in";
 	   diego.add_mainspot("search","wanda");
 	   diego.add_mainspot("browse","cater");
            diego.add_mainspot("contact","joe");
@@ -203,13 +225,8 @@ if (is_ie == false) {
            diego.add_mainspot("shop","store");
 	   diego.main_shape = "browse";
 
-	   draw_main();
-           sal.show();
-	   diego.show();
-           nicky.show(); 
- 
-    
-    amare = new stater();
+    elle.draw_main();
+
     amare.get_stats();
 
     amare.get_products();
@@ -223,29 +240,34 @@ if (is_ie == false) {
 
       var width = $(this).width();
       var height = $(this).height();
-      if (width > 1000) {
-	    sal.hide_3dview();
-	    nicky.hide();
-      } else {
-        if (width < 700) {
+        if (width < 801) {
           if (is_mobile != true) {
 	      is_mobile = true;
-	      sal.hide_3dview();
-	      nicky.hide();
-	      daviewer.draw_view();
+	      elle.set_controlshape("thin"); 
           }
         } else {
           if ((is_mobile == true) && (is_ie == false)) {
-		 is_mobile = false;
-		 sal.draw_3dview();
-		 nicky.show();
-		 daviewer.draw_view();
+	      is_mobile = false;
+  	      elle.set_controlshape("wide");
           }
         }
-      }
     });
 
+   $(window).scroll(function() {
+        if ($('#logo').inSight(100) == true) {
+	    if ($('#control_spot').hasClass('top_menu') == false) {
+		$('#control_spot').addClass('top_menu');
+		$('#control_spot').removeClass('bot_menu');
 
+	    }
+	} else {
+	    if ($('#control_spot').hasClass('bot_menu') == false) {
+		$('#control_spot').addClass('bot_menu');
+		$('#control_spot').removeClass('top_menu');
+		elle.set_controlshape("wide");
+	    }
+	}
+    });
 
 
 

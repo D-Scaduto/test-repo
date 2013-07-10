@@ -105,22 +105,22 @@ viewer.prototype.load_rungs = function(ldex) {
            k = this.dalist[r];
 
            if (this.listype == "webits") {
-             if (webitlist[k] != undefined) {
+             if (amare.webitlist[k] != undefined) {
                this.darungs[c].dadex = r;
              }
 	   }
            if (this.listype == "people") {
-             if (peoplelist[k] != undefined) {
+             if (amare.peoplelist[k] != undefined) {
                this.darungs[c].dadex = r;
              }
 	   }
            if (this.listype == "products") {
-             if (productlist[k] != undefined) {
+             if (amare.productlist[k] != undefined) {
                this.darungs[c].dadex = r;
              }
 	   }
            if (this.listype == "unsorted") {
-             if (unsortedlist[k] != undefined) {
+             if (amare.unsortedlist[k] != undefined) {
                this.darungs[c].dadex = r;
              }
 	   }
@@ -154,25 +154,25 @@ viewer.prototype.redraw_rungs = function(trungdex) {
              darungs2[a] = new Object();
              var rd = this.darungs[c].dadex;
              if (this.listype == "webits") {
-               if (webitlist[rd] != null) {
+               if (amare.webitlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
              }
              if (this.listype == "people") {
-               if (peoplelist[rd] != null) {
+               if (amare.peoplelist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
              }
              if (this.listype == "products") {
-               if (productlist[rd] != null) {
+               if (amare.productlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
              }
             if (this.listype == "unsorted") {
-               if (unsortedlist[rd] != null) {
+               if (amare.unsortedlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
@@ -185,19 +185,19 @@ viewer.prototype.redraw_rungs = function(trungdex) {
              darungs2[a] = new Object();
              var rd = this.darungs[c].dadex;
              if (this.listype == "webits") {
-               if (webitlist[rd] != null) {
+               if (amare.webitlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
              }
              if (this.listype == "people") {
-               if (peoplelist[rd] != null) {
+               if (amare.peoplelist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }
              }
              if (this.listype == "products") {
-               if (productlist[rd] != null) {
+               if (amare.productlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }

@@ -18,6 +18,7 @@ function header (pspotid) {
    this.spotid = pspotid;
    this.varname = "diego";
    this.showing = false;
+   this.shape = "in";
 
    this.mainmenu = [];
    this.main_shape = "";
@@ -34,50 +35,27 @@ header.prototype.show = function() {
      var omt = "";
      var cls = "";
 
-
-     if (buddah == true) {
-
+    if (this.shape == "in") {
        lbl = "menu_btns";
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
        lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;position:relative;' >";
        tmp = tmp + "</div>";
+    } 
 
-     } else {
-
+    if (this.shape == "out") {
+       
        lbl = "search_spot";
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
 
-       lbl = "cat_spot";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
+       lbl = "browse_spot";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;position:relative;' >";
        tmp = tmp + "</div>";
-
-     }
-
-
-          tmp = tmp + "<div style='width:300px;background-color:white;border:3px solid grey;padding:3px;' >";
-
-          lbl = 'nitro_btn';
-          cls = "spotd_off";
-          ocl =  "daviewer.toggle_nitro();";
-          tsrc = "deskfm/images/icons/fast_fwd.png";
-          if (this.metro_spd > 0 ) {
-            tsrc = "deskfm/images/icons/stop.png";
-            ocl = "daviewer.nitro_stop();";
-          }
-          tmp = tmp + "<div  id='"+lbl+"' class='"+cls+"'  style='display:inline-block;vertical-align:top;' onclick='"+ocl+"'  onmouseover='' onmouseout=''   >";
-          lbl = 'nitro_img';
-          tmp = tmp + "<img  id='"+lbl+"' src='"+tsrc+"' height='20px' >";
-          tmp = tmp + "</div>";
-
-          tmp = tmp + "<div id='top_rail' style='display:inline-block;' >";
-          tmp = tmp + "</div>";
-
-          tmp = tmp + "</div>"; 
-
+	
+    }
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -111,7 +89,6 @@ header.prototype.redraw_view = function (psetype,pchunk) {
 }
 
 header.prototype.draw_mainmenu = function() {
-
      var tmp = "";
      var lbl = "";
      var ocl = "";
@@ -119,8 +96,18 @@ header.prototype.draw_mainmenu = function() {
      var omt = "";
      var cls = "";
      var i =0;
+     var s = "";
 
-      for (i=0;i<this.mainmenu.length;i++) {
+     if (this.shape == "out") {
+	  for (i=0;i<this.mainmenu.length;i++) {
+		s = this.mainmenu[i].varname + ".show();";
+		eval(s) 
+	  }
+     }
+
+
+     if (this.shape == "in") {
+       for (i=0;i<this.mainmenu.length;i++) {
           lbl = this.mainmenu[i].btn + "_btn";
           omo = "markyd(\""+lbl+"\");";
           omt = "unmarkyd(\""+lbl+"\");";
@@ -133,17 +120,23 @@ header.prototype.draw_mainmenu = function() {
           tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' style='padding:2px;'  >";
           tmp = tmp + this.mainmenu[i].btn;
           tmp = tmp + "</span>";
-      }
-
-     lbl = "menu_btns";
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+       }
+       lbl = "menu_btns";
+       pobj = document.getElementById(lbl);
+       if ( pobj != null) {
           pobj.innerHTML = tmp;
           this.showing = true;
+
+	  for (i=0;i<this.mainmenu.length;i++) {
+		s = this.mainmenu[i].varname + ".set_menued(true);";
+		eval(s) 
+	  }
+
           if (this.main_shape != "") {
             this.show_mainitem(this.main_shape);
           }
-    }
+       }
+     }
 
 }
 

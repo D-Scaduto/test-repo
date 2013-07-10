@@ -4,6 +4,7 @@ function viewer (pscreen,pvarname) {
 
    this.screen = pscreen;
    this.varname = pvarname;
+   this.btns_showing = false;
 
    this.listype = "webits";
    this.cat="";       
@@ -30,7 +31,6 @@ function viewer (pscreen,pvarname) {
         this.is_mini = true;
    }
 
-   this.track_show = true;
    this.color="";
    this.whenaply = false; 
 }
@@ -225,7 +225,10 @@ viewer.prototype.draw_view = function() {
     }
 
   if (this.is_mini == false ) {
-    this.draw_rail();
+       if (this.btns_showing == false) {
+	  this.draw_railbtns();
+       }
+       this.draw_raildata();
   }
 
 

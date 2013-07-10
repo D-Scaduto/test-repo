@@ -33,6 +33,64 @@ a:active{
 }
 
 
+.top_menu {
+  position:relative;
+  float:left;
+  background-color:white;
+  border:solid;
+  border-width:5px;
+  border-color:silver;
+}
+
+
+.bot_menu {
+  position:fixed;
+  top:10;
+  left:25px;
+  background-color:white;
+  border:solid;
+  border-width:5px;
+  border-color:silver;
+}
+
+
+.inner_menu {
+  width:325px;
+  min-width:325px;
+  background-color:white;
+  border:2px solid silver;
+  height:75px;
+}
+
+
+
+div.suggestions {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid black;
+  position: fixed;
+  background-color: white;
+}
+
+
+div.suggestions div {
+  cursor: default;
+  padding: 0px 3px ;
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+}
+
+div.suggestions div.current {
+  background-color: navy;
+  color:white;
+  padding: 0px 3px ;
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+}
+
+
     .mbox {
        background-color:white;
        display: -moz-inline-stack;

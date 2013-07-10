@@ -18,20 +18,20 @@ viewer.prototype.load_search_list = function(pterms) {
 
      this.listype = "webits";
 
-      for (var r=d; r<webitlist.length;r++) {
+      for (var r=d; r<amare.webitlist.length;r++) {
 
-        if (webitlist[r] != undefined) {
+        if (amare.webitlist[r] != undefined) {
          var ok = false;
          if (this.sterms != "") {
            ok = false;
-           if (webitlist[r] != undefined) {
-              if (webitlist[r].story != null) {
-                if (webitlist[r].story.search(this.sterms) > -1)  {
+           if (amare.webitlist[r] != undefined) {
+              if (amare.webitlist[r].story != null) {
+                if (amare.webitlist[r].story.search(this.sterms) > -1)  {
                   ok = true;
                 }
               }
-              if (webitlist[r].uname != null) {
-                if (webitlist[r].uname.search(this.sterms) > -1)  {
+              if (amare.webitlist[r].uname != null) {
+                if (amare.webitlist[r].uname.search(this.sterms) > -1)  {
                   ok = true;
                 }
               }
@@ -75,12 +75,12 @@ viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
 
      this.listype = "webits";
 
-      for (var r=d; r<webitlist.length;r++) {
+      for (var r=d; r<amare.webitlist.length;r++) {
 
-        if (webitlist[r] != undefined) {
+        if (amare.webitlist[r] != undefined) {
          var ok = false;
-          if (webitlist[r].cat == this.cat) {
-               if ((webitlist[r].subcat == this.subcat) || (this.subcat == "")) {
+          if (amare.webitlist[r].cat == this.cat) {
+               if ((amare.webitlist[r].subcat == this.subcat) || (this.subcat == "")) {
                  ok = true;
                }
            }
@@ -88,14 +88,14 @@ viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
 
          if (this.sterms != "") {
            ok = false;
-           if (webitlist[r] != undefined) {
-              if (webitlist[r].story != null) {
-                if (webitlist[r].story.search(this.sterms) > -1)  {
+           if (amare.webitlist[r] != undefined) {
+              if (amare.webitlist[r].story != null) {
+                if (amare.webitlist[r].story.search(this.sterms) > -1)  {
                   ok = true;
                 }
               }
-              if (webitlist[r].uname != null) {
-                if (webitlist[r].uname.search(this.sterms) > -1)  {
+              if (amare.webitlist[r].uname != null) {
+                if (amare.webitlist[r].uname.search(this.sterms) > -1)  {
                   ok = true;
                 }
               }
@@ -129,14 +129,14 @@ viewer.prototype.load_group_list = function(tgroupid,pstart) {
     this.stats  = amare.get_groupstat(this.groupid);
    }
 
-    this.dalist = [];
-    this.listype = "people";
-    var lgo = true;
-    var d = 0;
-      for (var r=d; r<peoplelist.length;r++) {
-        if (peoplelist[r] != undefined) {
+   this.dalist = [];
+   this.listype = "people";
+   var lgo = true;
+   var d = 0;
+      for (var r=d; r<amare.peoplelist.length;r++) {
+        if (amare.peoplelist[r] != undefined) {
            var ok = false;
-           if (peoplelist[r].groupid == this.groupid )  {
+           if (amare.peoplelist[r].groupid == this.groupid )  {
                ok = true;
            }
            if (ok == true) {
@@ -145,7 +145,7 @@ viewer.prototype.load_group_list = function(tgroupid,pstart) {
            }
         } 
       }
-    this.load_rungs(st);
+   this.load_rungs(st);
    this.draw_view();
 }
 
@@ -157,16 +157,16 @@ viewer.prototype.load_person_list = function(tuname) {
     this.dalist = [];
     var lgo = true;
     var d = 0;
-      for (var r=d; r<webitlist.length;r++) {
+      for (var r=d; r<amare.webitlist.length;r++) {
 
-        if (webitlist[r] != undefined) {
+        if (amare.webitlist[r] != undefined) {
            var ok = false;
-           if (webitlist[r].uname == tuname) {
+           if (amare.webitlist[r].uname == tuname) {
              ok = true;
            }
            if (ok == true) {
              this.dalist[d] = r;
-             d = d+1 
+             d = d+1;
            }
         } 
     }
@@ -188,16 +188,16 @@ viewer.prototype.load_person_list = function(tuname) {
     this.listype = "products";
     var lgo = true;
     var d = 0;
-      for (var r=d; r<productlist.length;r++) {
-        if (productlist[r] != undefined) {
+      for (var r=d; r<amare.productlist.length;r++) {
+        if (amare.productlist[r] != undefined) {
            var ok = false;
 
-           if (productlist[r].price > 0) {
+           if (amare.productlist[r].price > 0) {
              if (this.prodids.length == 0) {
                 ok = true;
              } else {
                for (var z=0; z<this.prodids.length;z++) {
-                 if (this.prodids[z] == productlist[r].prodid)  {
+                 if (this.prodids[z] == amare.productlist[r].prodid)  {
                    ok = true;
                  }
                }
@@ -225,13 +225,13 @@ viewer.prototype.load_provider_list = function(tproviderid) {
        this.provider_id = tproviderid;
      }
    }
-     this.stats = null;
+    this.stats = null;
     this.dalist = [];
     this.listype = "providers";
     var lgo = true;
     var d = 0;
-      for (var r=d; r<providerlist.length;r++) {
-        if (providerlist[r] != undefined) {
+      for (var r=d; r<amare.providerlist.length;r++) {
+        if (amare.providerlist[r] != undefined) {
              this.dalist[d] = r;
              d = d+1 
         } 
@@ -256,10 +256,10 @@ viewer.prototype.load_unsorted_list = function() {
      this.dalist = [];
 
 
-     mx = unsortedlist.length;
+     mx = amare.unsortedlist.length;
 
       for (var r=d; r<mx;r++) {
-        ro = unsortedlist[r];
+        ro = amare.unsortedlist[r];
         if (ro != undefined) {
           ok = false;
           if (ro.cat == "") {
@@ -301,7 +301,7 @@ viewer.prototype.load_random_list = function() {
 
    while ((i<100) && (j < 100)) {
        r = Math.floor((Math.random()*mx)+1);
-       ro = webitlist[r];
+       ro = amare.webitlist[r];
        if (ro != undefined) {
          var used = false;
 	 
@@ -341,13 +341,13 @@ viewer.prototype.load_list = function(pstart) {
    if (pstart != undefined) {
 	  st = pstart;
    }
-   var mx = webitlist.length;
+   var mx = amare.webitlist.length;
 
    var i = 0;
    var o = null;
 
    while (i < mx) {
-       o = webitlist[i];
+       o = amare.webitlist[i];
        if (o != undefined) {
            this.dalist.push(i);
        }

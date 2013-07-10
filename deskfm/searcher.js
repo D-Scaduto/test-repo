@@ -1,11 +1,12 @@
 
 
-function searcher (pspotid) { 
-
-   this.spotid = pspotid;
+function searcher (pmenuid) { 
+   this.menuid = pmenuid;
+   this.spotid = pmenuid + "_spot";
    this.varname = "wanda";
    this.showing = false;
-   this.shape = "solo";  // menued
+   this.shape = "";  
+   this.menued = false;
 
    this.sterms = "";
    this.full_check = false;
@@ -62,6 +63,17 @@ searcher.prototype.show = function() {
    }
 }
 
+
+searcher.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
 
 searcher.prototype.change = function() {
 

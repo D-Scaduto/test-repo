@@ -29,6 +29,7 @@ viewer.prototype.nitro_stop = function() {
 
    this.metro_spd = 0;
    this.flip_card();
+   
    var tmp = "";
    var   lbl = 'nitro_img';
    var    tsrc = "deskfm/images/icons/fast_fwd.png";
@@ -36,7 +37,7 @@ viewer.prototype.nitro_stop = function() {
       if (pobj != null) {
         pobj.src = tsrc;
       }
-
+  
 
 }
 
@@ -55,7 +56,7 @@ viewer.prototype.flip_card = function() {
  
    if (this.metro_spd != 0) {
 
-         this.next(25);
+         this.next(10);
 
          var cl = this.varname + ".flip_card();";
          this.metro_tmr = setTimeout(cl,this.metro_spd);

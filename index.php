@@ -16,6 +16,7 @@ header('X-Frame-Options: SAMEORIGIN');
 </script>
 
 <script src="../lib/jquery-code.js" type="text/javascript"></script>
+<script src="../lib/jquery-insight.js" type="text/javascript"></script>
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -151,29 +152,45 @@ header('X-Frame-Options: SAMEORIGIN');
 
 <script type='text/javascript' >
 
+  var daviewer = null;
+
+  var cater = null;  //categor
+  var store = null;  //shoper
+  var nicky = null;  //sharer
+  var wanda = null;  //searcher
+  var joe = null;    //manager
+  var amare = null;  //stater
+  var sal = null;    //logoman
+  var diego = null;  //header
+  var mac  = null;   //farmer
+  var elle = null;   //model 
+
+  var da_limit=1000;
+  var init_run = true;
+  var got_stats = false;
+  var buddah = false;
+  var pname = "";
+  var debug = false;
+
    do_preload();
 //   init_months();
 
-
         sal = new logoman("logo");
         nicky = new sharer("share_spot");
-	   
 	jesie = new namer("name_spot");
 
-//        cater = new categor("menu_bar");
-//        store = new shoper("menu_bar");
-//        wanda = new searcher("menu_bar");
+//        store = new shoper("shop");
 	
-        cater = new categor("cat_spot");
-	wanda = new searcher("search_spot");
+        cater = new categor("browse");
+	wanda = new searcher("search");
 
         amare = new stater();
+        elle = new model();
 
-	diego = new header("menu");
-
-//      diego.add_mainspot("browse","cater");
-//	diego.add_mainspot("search","wanda");
-
+	diego = new header("menu_spot");
+	diego.shape = "out";
+        diego.add_mainspot("browse","cater");
+	diego.add_mainspot("search","wanda");
         diego.main_shape = "browse";
    
         daviewer = new viewer("main_view","daviewer");
@@ -187,14 +204,7 @@ header('X-Frame-Options: SAMEORIGIN');
            daviewer.top_end = 100;
        }
 
-    draw_main();
-    sal.show();
-    diego.show();
-    cater.show();
-    wanda.show();
-    nicky.show();
-    jesie.show();
-
+	elle.draw_main();
 
     amare.get_stats();
     amare.get_providers();
@@ -202,31 +212,36 @@ header('X-Frame-Options: SAMEORIGIN');
     amare.get_webits();
 
     $(window).resize(function() {
+
       var width = $(this).width();
       var height = $(this).height();
-       if (width > 1000) {
-	    sal.hide_3dview();
-	    nicky.hide();
-       } else {
-         if (width < 700) {
-           if (is_mobile != true) {
+        if (width < 801) {
+          if (is_mobile != true) {
 	      is_mobile = true;
-	      sal.hide_3dview();
-	      nicky.hide();
-	      daviewer.draw_view();
-           }
-         } else {
-           if ((is_mobile == true) && (is_ie == false)) {
-		 is_mobile = false;
-		 sal.draw_3dview();
-		 nicky.show();
-		 daviewer.draw_view();
-           }
-         }
-       }
+	      elle.set_controlshape("thin"); 
+          }
+        } else {
+          if ((is_mobile == true) && (is_ie == false)) {
+	      is_mobile = false;
+  	      elle.set_controlshape("wide");
+          }
+        }
     });
 
-
+   $(window).scroll(function() {
+        if ($('#logo').inSight(100) == true) {
+	    if ($('#control_spot').hasClass('top_menu') == false) {
+		$('#control_spot').addClass('top_menu');
+		$('#control_spot').removeClass('bot_menu');
+	    }
+	    
+	} else {
+	    if ($('#control_spot').hasClass('bot_menu') == false) {
+		$('#control_spot').addClass('bot_menu');
+		$('#control_spot').removeClass('top_menu');
+	    }
+	 }
+   });
 
 /*
   var audiochannels = new Array();

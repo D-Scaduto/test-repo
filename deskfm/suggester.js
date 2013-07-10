@@ -234,10 +234,15 @@ suggester.prototype.show_suggestions = function (asuggestions) {
        }
     }
     var pos = find_pos(onode);
+//    alert(pos);
     this.layer.style.left = pos[0] + "px";
     this.layer.style.top = pos[1] + "px";
+
 //    this.layer.style.left = this.get_left() + "px";
 //    this.layer.style.top = (this.get_top() + onode.offsetHeight) + "px";
+//    this.layer.style.left = 0 + "px";
+//    this.layer.style.top = 0 + "px";
+
     this.layer.style.visibility = "visible";
   }
 }
@@ -292,15 +297,23 @@ function find_pos(obj) {
 suggester.prototype.create_drop_down = function () {
 
    this.layer = document.createElement("div");
-   this.layer.id = this.sugg_id + "_pop"; 
+   this.layer.id = this.sugg_id + "_pop";
+
    this.layer.className = "suggestions";
+
    this.layer.style.visibility = "hidden";
    this.layer.style.textAlign = 'left';
    this.layer.style.display = 'inline';
+
    document.body.appendChild(this.layer);
+
+//   alert(this.layer.parentNode.id);
+
    var oThis = this;
 
-   $("#"+this.layer.id).mouseleave(function(){oThis.hide_suggestions();});
+   $("#"+this.layer.id).mouseleave( function() {
+	    oThis.hide_suggestions();
+     });
 
    this.layer.onmousedown = this.layer.onmouseup  = function (oEvent) {
        oEvent = oEvent || window.event;
@@ -332,6 +345,7 @@ suggester.prototype.suggestions_showing = function () {
 
 
 suggester.prototype.hide_suggestions = function () {
+
    if (this.layer != null) {
       this.layer.style.visibility = "hidden";
    }
@@ -383,6 +397,18 @@ suggester.prototype.click_suggestion = function () {
        this.hide_suggestions();
 
     }
+}
+
+
+function find_pos(obj) {
+      var curleft = curtop = 0;
+      if (obj.offsetParent) {
+        do {
+          curleft += obj.offsetLeft;
+          curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+      }
+      return [curleft,curtop];
 }
 
 

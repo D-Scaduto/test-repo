@@ -1,10 +1,12 @@
 
 
-function categor (pspotid) { 
+function categor (pmenuid) { 
 
-   this.spotid=pspotid;
+   this.menuid = pmenuid;
+   this.spotid = pmenuid + "_spot";
    this.varname='cater';
    this.shape = "";
+   this.menued = false;
 
    this.cat="all";
    this.subcat="";
@@ -14,6 +16,7 @@ function categor (pspotid) {
    this.subcater = new suggester("cat_sog",new subcat_provider(), "cater.subcater","cater");
 
 }
+
 
 
 categor.prototype.show = function() {
@@ -72,7 +75,7 @@ categor.prototype.show = function() {
         tmpstr=tmpstr+"</span>";
 
         lbl = 'cat_sog';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  >";
+        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style=''  >";
         tmpstr=tmpstr+"</span>";
 
    } else { 
@@ -86,7 +89,7 @@ categor.prototype.show = function() {
         tmpstr=tmpstr+"</span>";
 
         lbl = 'cat_sog';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' onclick='cater.subcater.request_suggestions(\""+this.cat+"\");' >";
+        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style='' onclick='cater.subcater.request_suggestions(\""+this.cat+"\");' >";
         tmpstr=tmpstr+this.subcater.provider.get_desc(this.cat,this.subcat);
         tmpstr=tmpstr+"</span>";
     }
@@ -122,6 +125,24 @@ categor.prototype.show = function() {
      this.draw_debug();
   }
     sal.draw_vman();
+}
+
+categor.prototype.set_menued = function(ptog) {
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
+
+categor.prototype.reset_sog = function() {
+
+   this.subcater = new suggester("cat_sog",new subcat_provider(), "cater.subcater","cater");
+
+   this.show();
 }
 
 
