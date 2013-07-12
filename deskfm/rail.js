@@ -16,7 +16,15 @@ viewer.prototype.draw_rail = function() {
        tmp = tmp + "<span id='rail_data' class='' style='' >";
        tmp = tmp + "</span>";
 
-       tmp = tmp + "<div id='chunk_bar' class='' style='' >";
+       tmp = tmp + "<div>";
+       tmp = tmp + "<span id='chunk_bar' class='' style='' >";
+       tmp = tmp + "</span>";
+
+       lbl = "rail_zoom_btn";
+       ocl = "daviewer.toggle_zoom();";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='' >";
+       tmp = tmp + "zoom";
+       tmp = tmp + "</span>";
        tmp = tmp + "</div>";
  
       tmp = tmp + "<div id='debug_rail' style='' >";

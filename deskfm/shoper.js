@@ -62,7 +62,6 @@ shoper.prototype.show = function() {
       this.showing = true;
     }
 
-  sal.draw_vman();
 
     if (pname == "debug") {
        this.draw_debug();

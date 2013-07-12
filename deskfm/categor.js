@@ -124,7 +124,6 @@ categor.prototype.show = function() {
   if (pname == "debug") {
      this.draw_debug();
   }
-    sal.draw_vman();
 }
 
 categor.prototype.set_menued = function(ptog) {

@@ -100,22 +100,32 @@ $picaddr = "";
      }
 
       if (($picsrc != "null" ) && ($picsrc != ""))  {
-          $prefix = "http://www.deskfm.com/pics/tmp/";
-          $picslice = substr($picsrc,strlen($prefix));
-          $cognopos = strrpos($picsrc,"."); 
-          $cognomen = substr($picsrc,$cognopos);
-          $ret->cognomen = $cognomen;
-          $picfile = $pid . $cognomen; 
-          $cpsrc = "../../pics/tmp/" . $picslice;
-          $ret->cpsrc = $cpsrc;
-          $cpdest = "../../pics/keepers/" . $picfile;
-          $ret->cpdest = $cpdest;
-          $res = copy ($cpsrc,$cpdest);
-          $ret->cpres = $res;
-          $picaddr = "http://www.deskfm.com/pics/keepers/" . $picfile;
+
+	  $prefix = "/pics/tmp/";          
+	   $prepos = strpos($picsrc,$prefix);
+	   $prepos = $prepos + strlen($prefix);
+
+	  $picslice = substr($picsrc,$prepos);
+
+	   $cognomen = strrchr($picsrc,".");
+	   $ret->cognomen = $cognomen;
+	  $picfile = $pid;
+	  if (strlen($cognomen < 7)) {
+	    $picfile = $pid . $cognomen; 
+          }
+	  $cpsrc = "../../pics/tmp/" . $picslice;
+	  $ret->cpsrc = $cpsrc;
+	  $cpdest = "../../pics/keepers/" . $picfile;
+	  $ret->cpdest = $cpdest;
+	  $res = copy ($cpsrc,$cpdest);
+	  $ret->cpres = $res;
+	  if ($res == true) {
+		  $picaddr = "/pics/keepers/" . $picfile;
+	  }
+
       }
 
-     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() ,'" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
+     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() , now() , '" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);

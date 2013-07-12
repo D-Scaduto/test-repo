@@ -13,6 +13,27 @@ header('X-Frame-Options: SAMEORIGIN');
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
+  var daviewer = null;
+
+  var cater = null;  //categor
+  var store = null;  //shoper
+  var nicky = null;  //sharer
+  var wanda = null;  //searcher
+  var joe = null;    //manager
+  var amare = null;  //stater
+  var sal = null;    //logoman
+  var diego = null;  //header
+  var mac  = null;   //farmer
+  var elle = null;   //model 
+
+  var da_limit=1000;
+  var init_run = true;
+  var got_stats = false;
+  var buddah = false;
+  var pname = "";
+  var debug = false;
+  var nonets = false;
+
 </script>
 
 <script src="../lib/jquery-code.js" type="text/javascript"></script>
@@ -68,12 +89,6 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
-<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-
-<!--
-<script src=deskfm/twitter/news.js type="text/javascript" ></script>
-<script src='http://widgets.twimg.com/j/2/widget.js' type="text/javascript"  ></script>
--->
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 </head>
@@ -81,28 +96,6 @@ header('X-Frame-Options: SAMEORIGIN');
 <body style='background-color:white;' >
 
 <div id="fb-root"></div> 
-<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
-<script src=deskfm/fbooker.js type="text/javascript" >
-//if (is_ie == false) {
-   FB.init({
-      appId  : '191528434226668',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth  : true
-   });
-
-      // Load the SDK asynchronously
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-//}
-</script>
 
 <?php 
   include 'deskfm/browsers.php';
@@ -138,39 +131,53 @@ header('X-Frame-Options: SAMEORIGIN');
   if (isset($_GET['debug'])) {
     echo "debug = true;";
   }
+  if (isset($_GET['nonets'])) {
+    echo "nonets = true;";
+  }
   echo "</script>";
+
+  if (!isset($_GET['nonets'])) {
+    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
+    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
+    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
+//    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
+  }
 ?>
+
+<div id='top_line' style='background-color:white;padding:1px;' >
+</div>
 
 <div id='main_spot' style='background-color:white;padding:10px;' >
 </div>
 
 <div style='clear:left;' ></div> 
+<div style='clear:right;' ></div> 
 
-<div id='main_view' class='mainlane' >
+<div id='main_view' class='' style='padding:10px;'  >
 </div>
 
 
 <script type='text/javascript' >
 
-  var daviewer = null;
+  if (nonets == false) {
+     FB.init({
+      appId  : '191528434226668',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true,  // parse XFBML
+      oauth  : true
+     });
 
-  var cater = null;  //categor
-  var store = null;  //shoper
-  var nicky = null;  //sharer
-  var wanda = null;  //searcher
-  var joe = null;    //manager
-  var amare = null;  //stater
-  var sal = null;    //logoman
-  var diego = null;  //header
-  var mac  = null;   //farmer
-  var elle = null;   //model 
+     // Load the SDK asynchronously
+     (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  }
 
-  var da_limit=1000;
-  var init_run = true;
-  var got_stats = false;
-  var buddah = false;
-  var pname = "";
-  var debug = false;
 
    do_preload();
 //   init_months();
@@ -188,9 +195,8 @@ header('X-Frame-Options: SAMEORIGIN');
         elle = new model();
 
 	diego = new header("menu_spot");
-	diego.shape = "out";
+	diego.shape = "shrunk";
         diego.add_mainspot("browse","cater");
-	diego.add_mainspot("search","wanda");
         diego.main_shape = "browse";
    
         daviewer = new viewer("main_view","daviewer");
@@ -211,6 +217,8 @@ header('X-Frame-Options: SAMEORIGIN');
     amare.get_products();
     amare.get_webits();
 
+
+
     $(window).resize(function() {
 
       var width = $(this).width();
@@ -218,30 +226,36 @@ header('X-Frame-Options: SAMEORIGIN');
         if (width < 801) {
           if (is_mobile != true) {
 	      is_mobile = true;
-	      elle.set_controlshape("thin"); 
           }
         } else {
           if ((is_mobile == true) && (is_ie == false)) {
 	      is_mobile = false;
-  	      elle.set_controlshape("wide");
           }
         }
     });
 
-   $(window).scroll(function() {
-        if ($('#logo').inSight(100) == true) {
-	    if ($('#control_spot').hasClass('top_menu') == false) {
-		$('#control_spot').addClass('top_menu');
-		$('#control_spot').removeClass('bot_menu');
+    $(window).scroll(function() {
+        if ($('#top_line').inSight(100) == true) {
+	    if ($('#menu_spot').hasClass('top_menu') == false) {
+		$('#menu_spot').addClass('top_menu');
+		$('#menu_spot').removeClass('bot_menu');
+
 	    }
-	    
+	    if ($('#rail_spot').hasClass('top_rail') == false) {
+		$('#rail_spot').addClass('top_rail');
+		$('#rail_spot').removeClass('bot_rail');
+	    }
 	} else {
-	    if ($('#control_spot').hasClass('bot_menu') == false) {
-		$('#control_spot').addClass('bot_menu');
-		$('#control_spot').removeClass('top_menu');
+	    if ($('#menu_spot').hasClass('bot_menu') == false) {
+		$('#menu_spot').addClass('bot_menu');
+		$('#menu_spot').removeClass('top_menu');
 	    }
-	 }
-   });
+	    if ($('#rail_spot').hasClass('bot_rail') == false) {
+		$('#rail_spot').addClass('bot_rail');
+		$('#rail_spot').removeClass('top_rail');
+	    }
+	}
+    });
 
 /*
   var audiochannels = new Array();

@@ -3,7 +3,7 @@ function logoman (pspot) {
 
   this.spotid = pspot;
   this.varname= "sal";
-  this.shape = "full";
+  this.shape = "shrunk";    //shrunk,full
   this.logo_shape="deskfm";
 
   this.preset = "sitonly";
@@ -34,38 +34,24 @@ logoman.prototype.show = function () {
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
 
-       lbl = "logo_btn";
-       ocl = "sal.change_shape();";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' style='float:right;' >";
+/*
+       lbl = "view_tail_btn";
+       ocl = "daviewer.toggle_tail();";
+       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+       tmp = tmp + "</span>"; 
        tmp = tmp + "</span>";
-
-   
+*/
        lbl = "logo_story";
        tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
        tmp = tmp + "</span>";
 
-       tmp = tmp + "<div class='elem' >";
-
   if (this.shape == "full") {
-       tmp = tmp + "<span class='endlabel' >";
-       lbl = "logo_3dtgl";
-       ocl = "sal.toggle_3dview();";
-       cls = "spotd_off";
-       moin = "";
-       mout = "";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='"+cls+"' style='' >";
-       tmp = tmp + " 3D ";
-       tmp = tmp + "</span>";
 
-       tmp = tmp + "</span>";
-   
-       tmp = tmp + "<p>";
        tmp = tmp + "<div id='logo_3dview' class='' style='width:300px;' >";
        tmp = tmp + "</div>";
-       tmp = tmp + "</p>";
+  
    }
-    tmp = tmp + "</div>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -82,6 +68,17 @@ logoman.prototype.show = function () {
 	 }
    }
 }
+
+logoman.prototype.set_menued = function(ptog) {
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
 
 logoman.prototype.set_preset = function (tpreset) {
    this.preset = tpreset;
@@ -344,7 +341,6 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>";
            
 	    lbl = this.spotid + '_logo_lspot1';
-    	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"esk");
             tmpstr=tmpstr+"</span>";
@@ -369,7 +365,6 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>";
             
 	    lbl = this.spotid + '_logo_lspot1';
-    	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"esk");
             tmpstr=tmpstr+"</span>"; 
@@ -381,7 +376,6 @@ logoman.prototype.draw_logo = function (psz) {
             tmpstr=tmpstr+"</span>";
 
             lbl = this.spotid + '_logo_rspot2';
-    	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"reedo");
             tmpstr=tmpstr+"</span>";
@@ -394,7 +388,6 @@ logoman.prototype.draw_logo = function (psz) {
    } 
    if (this.logo_shape == "standing") {
             lbl = this.spotid + '_logo_lspot';
-	    ocl = this.varname + ".change_preset();";
             tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
             tmpstr = tmpstr + table_word(lbl,"Standing");
             tmpstr=tmpstr+"</span>";

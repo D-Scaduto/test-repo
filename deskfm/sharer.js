@@ -7,6 +7,7 @@ function sharer (pspotid) {
    this.showing = false;
 
    this.shape = "shrunk";  //full
+   this.networks_showing = false;
 
    this.newster = new poster("share_spot",0,this.varname,this.varname +".newster","webits",false); 
    this.newster.btnson = true;
@@ -23,36 +24,47 @@ sharer.prototype.show = function() {
     var ocl = "";
 
           tmp = tmp + "<div class='' style='background-color:white;' >";
- 
-	  lbl = "network_btns";
-          tmp = tmp + "<span id='"+lbl+"' class='' style='min-width:150px;width:200px;background-color:white;' >";
-          tmp = tmp + "</span>";     
 
 	  ocl = "nicky.change_shape();";
-	  lbl = 'share_btn';
+	  lbl = 'share_change_btn';
           tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
+          tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
           tmp = tmp + "</span>";
 
-	  lbl = "name_spot";
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;' >";
+	  lbl = "network_btns";
+          tmp = tmp + "<span id='"+lbl+"' class='' style='float:right;background-color:white;' >";
+          tmp = tmp + "</span>";     
+
+	  ocl = "nicky.toggle_networks();";
+	  lbl = 'share_btn';
+          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
+          tmp = tmp + "share";
           tmp = tmp + "</span>"; 
 
-      	  tmp = tmp + "</div>";
+          tmp = tmp + "<div style='clear:right;' ></div>";
+	  tmp = tmp + "</div>";
+         
+
+	  lbl = "name_spot";
+          tmp = tmp + "<div id='"+lbl+"' class='spotd_off' style='float:right;' >";
+          tmp = tmp + "</div>"; 
           tmp = tmp + "<div style='clear:right;' ></div>";
 
        	  lbl = "share_spot_rung_0";
-          tmp = tmp + "<div id='"+lbl+"' class='sbox' style=''  >";
+          tmp = tmp + "<div id='"+lbl+"' class='sbox' style='float:right;'  >";
           tmp = tmp + "</div>";
+	  tmp = tmp + "<div style='clear:right;' ></div>";
 
-
-    lbl = this.spotid;
-    pobj = document.getElementById(lbl);
-    if (pobj != null) {
-      pobj.innerHTML = tmp;
-      this.showing = true;
-      this.network_btns();
-      this.set_shape();
-    }
+   	  lbl = this.spotid;
+	  pobj = document.getElementById(lbl);
+	  if (pobj != null) {
+	      pobj.innerHTML = tmp;
+	      this.showing = true;
+	      if (this.networks_showing == true) {
+	        this.show_network_btns();
+	      }
+	      this.set_shape();
+	  }
 
 }
 
@@ -69,6 +81,10 @@ sharer.prototype.change_shape = function() {
 
 
 sharer.prototype.set_shape = function(pshape) {
+	var tmp = "";
+	var lbl = "";
+	var pobj = null;
+
    if (pshape != undefined) {
 	this.shape = pshape;
    }
@@ -89,8 +105,7 @@ sharer.prototype.set_shape = function(pshape) {
       lbl = 'share_btn';
       pobj = document.getElementById(lbl);
       if (pobj != null) {
-        tmp = "share";
-	tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+	tmp = "share";
         pobj.innerHTML = tmp;
       }
 
@@ -106,20 +121,35 @@ sharer.prototype.set_shape = function(pshape) {
           pobj.setAttribute("class","sbox");
         }
       }
+      this.show_network_btns();
       this.newster.build_rung();
       this.newster.draw_rung();
       jesie.show();
       lbl = 'share_btn';
       pobj = document.getElementById(lbl);
       if (pobj != null) {
-          tmp = "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+          tmp = "share";
           pobj.innerHTML = tmp;
       }
    }
 }
 
-sharer.prototype.network_btns = function() {
 
+sharer.prototype.toggle_networks = function() {
+   if (this.networks_showing == true) {
+      this.hide_network_btns();
+   } else {
+      this.show_network_btns();
+   }
+}
+
+
+sharer.prototype.show_network_btns = function() {
+
+
+	if (nonets == true) {
+		return;
+	}
 	var tmp = "";
 	var lbl = "";
 	var moin = "";
@@ -152,17 +182,33 @@ sharer.prototype.network_btns = function() {
      lbl = "network_btns";
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
-        this.fb_render();
-        this.gplus_render();
-               if (twttr != undefined) {
-                 if (twttr.widgets != undefined) {
-                   twttr.widgets.load();
-                 }
-               }
+	this.networks_showing = true;
+	if (nonets == false) {
+          this.fb_render();
+          this.gplus_render();
+          if (twttr != undefined) {
+           if (twttr.widgets != undefined) {
+              twttr.widgets.load();
+           }
+          }
+	}
      } 
 
 }
 
+sharer.prototype.hide_network_btns = function() {
+
+	var tmp = "";
+	var lbl = "";
+
+     lbl = "network_btns";
+     if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML= tmp;
+	this.networks_showing = false;
+     } 
+
+
+}
 
 sharer.prototype.new_one = function(pdex) {
      var g = null;

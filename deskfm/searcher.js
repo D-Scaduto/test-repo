@@ -5,7 +5,7 @@ function searcher (pmenuid) {
    this.spotid = pmenuid + "_spot";
    this.varname = "wanda";
    this.showing = false;
-   this.shape = "";  
+   this.shape = "full";  //full,shrunk
    this.menued = false;
 
    this.sterms = "";
@@ -27,23 +27,40 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-     lbl = "search_btn";
-     tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='' >";
-     tmp = tmp + "search";
-     tmp = tmp + "</span>";
 
+   lbl = "search_btn";
+   ocl = "wanda.change_shape();";
+   tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='' >";
+   tmp = tmp + "search";
+   tmp = tmp + "</span>";
+
+   if (this.shape == "full") {
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
-
+     tmp = tmp + "<span style='padding:2px' >";
      tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
+     tmp = tmp + "</span>";
+   }
 
-     ocl= this.varname + ".check_central();";
-     tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
+   /*
+   lbl = "search_icbtn";
+   ocl= this.varname + ".check_central();";
+   tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='' >";
+   tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
+   tmp = tmp + "</span>";
+   */
+  
+   ocl = "wanda.change_shape();";
+   lbl = 'search_change_btn';
+   tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
+   tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
+   tmp = tmp + "</span>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
+    
    } 
 
 
@@ -63,6 +80,15 @@ searcher.prototype.show = function() {
    }
 }
 
+
+searcher.prototype.change_shape = function() {
+   if (this.shape == "full") {
+      this.shape = "shrunk";
+   } else {
+      this.shape = "full";
+   }
+   this.show();
+}
 
 searcher.prototype.set_menued = function(ptog) {
 

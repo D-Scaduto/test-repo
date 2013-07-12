@@ -18,7 +18,7 @@ function header (pspotid) {
    this.spotid = pspotid;
    this.varname = "diego";
    this.showing = false;
-   this.shape = "in";
+   this.shape = "full";
 
    this.mainmenu = [];
    this.main_shape = "";
@@ -35,7 +35,6 @@ header.prototype.show = function() {
      var omt = "";
      var cls = "";
 
-    if (this.shape == "in") {
        lbl = "menu_btns";
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
        tmp = tmp + "</div>";
@@ -43,19 +42,6 @@ header.prototype.show = function() {
        lbl = "menu_bar";
        tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;position:relative;' >";
        tmp = tmp + "</div>";
-    } 
-
-    if (this.shape == "out") {
-       
-       lbl = "search_spot";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
-       tmp = tmp + "</div>";
-
-       lbl = "browse_spot";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;position:relative;' >";
-       tmp = tmp + "</div>";
-	
-    }
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -67,9 +53,21 @@ header.prototype.show = function() {
 
 }
 
-header.prototype.redraw_view = function (psetype,pchunk) {
+header.prototype.toggle_shape = function() {
 
-    sal.draw_vman();
+   if (this.shape == "full") {
+     this.shape = "shrunk";
+   } else {
+     this.shape = "full";
+   }
+   this.show();
+
+}
+
+
+
+
+header.prototype.redraw_view = function (psetype,pchunk) {
 
     if (this.main_shape == "browse" ) {
 	    if (psetype == "webits") { 
@@ -98,15 +96,7 @@ header.prototype.draw_mainmenu = function() {
      var i =0;
      var s = "";
 
-     if (this.shape == "out") {
-	  for (i=0;i<this.mainmenu.length;i++) {
-		s = this.mainmenu[i].varname + ".show();";
-		eval(s) 
-	  }
-     }
-
-
-     if (this.shape == "in") {
+     if (this.shape == "full") {
        for (i=0;i<this.mainmenu.length;i++) {
           lbl = this.mainmenu[i].btn + "_btn";
           omo = "markyd(\""+lbl+"\");";
@@ -121,23 +111,23 @@ header.prototype.draw_mainmenu = function() {
           tmp = tmp + this.mainmenu[i].btn;
           tmp = tmp + "</span>";
        }
+      
        lbl = "menu_btns";
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
-          pobj.innerHTML = tmp;
-          this.showing = true;
+          pobj.innerHTML = tmp;	  
+       }
+     }
 
-	  for (i=0;i<this.mainmenu.length;i++) {
+     for (i=0;i<this.mainmenu.length;i++) {
 		s = this.mainmenu[i].varname + ".set_menued(true);";
 		eval(s) 
 	  }
 
-          if (this.main_shape != "") {
+     if (this.main_shape != "") {
             this.show_mainitem(this.main_shape);
-          }
-       }
      }
-
+       
 }
 
 
@@ -150,6 +140,7 @@ header.prototype.change_mainitem = function(wdex) {
 header.prototype.toggle_mainitem = function(wdex) {
      var s = "";
      s = this.mainmenu[wdex].varname + ".toggle();";
+     alert(s);
      eval(s) 
 }
 

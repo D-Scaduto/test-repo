@@ -217,7 +217,7 @@ function tws_get(qry_str)
 
         $("#feed_btns").html(op);  
 
-        add_unsorted(json);
+        amare.add_unsorted(json);
 
     });   // end get json 
 }

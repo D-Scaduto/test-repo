@@ -10,13 +10,32 @@ header('X-Frame-Options: SAMEORIGIN');
 <link rel=StyleSheet href=deskfm/twitter/tws_style.css type="text/css" media="screen,print" />
 <title>deskfm.com</title>
 
-
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
+
+  var daviewer = null;
+
+  var cater = null;  //categor
+  var store = null;  //shoper
+  var nicky = null;  //sharer
+  var wanda = null;  //searcher
+  var joe = null;    //manager
+  var amare = null;  //stater
+  var sal = null;    //logoman
+  var diego = null;  //header
+  var mac  = null;   //farmer
+  var elle = null;   //model 
+
+  var da_limit=1000;
+  var init_run = true;
+  var got_stats = false;
+  var buddah = false;
+  var pname = "";
+  var debug = false;
+  var nonets = false;
+
 </script>
-
-
 
 <script src="../lib/jquery-code.js" type="text/javascript"></script>
 <script src="../lib/jquery-insight.js" type="text/javascript"></script>
@@ -73,12 +92,9 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
-<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<script src=deskfm/twitter/tws_front.js type="text/javascript" ></script>
+<script src=deskfm/twitter/tws_back.js type="text/javascript" ></script>
 
-<!--
-<script src=deskfm/twitter/news.js type="text/javascript" ></script>
-<script src='http://widgets.twimg.com/j/2/widget.js' type="text/javascript"  ></script>
--->
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 
@@ -89,33 +105,25 @@ header('X-Frame-Options: SAMEORIGIN');
 
 <div id="fb-root"></div>
 
-<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
-<script src=deskfm/fbooker.js type="text/javascript" >
-
 <?php 
+
   include 'deskfm/browsers.php';
+  echo "<script  type=\"text/javascript\" > ";
   if (is_mobile()) {
-    echo "<script  type='text/javascript' >";
+   
     echo " is_mobile = true; " ;
-    echo "</script>";
   }
   if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
-    echo "<script  type='text/javascript' >";
     echo " is_ie = true; " ;
     echo " is_mobile = true; ";
-    echo "</script>";
   } else {
 
   }
-
-
-
 
   $phgname = "null";
   if (isset($_GET['pname'])) {
    $phgname = $_GET['pname'];
   }
-  echo "<script  type='text/javascript' >";
   if ($phgname != "null") {
     echo "pname ='" . $phgname . "';";
   }
@@ -125,12 +133,42 @@ header('X-Frame-Options: SAMEORIGIN');
   if (isset($_GET['debug'])) {
     echo "debug = true;";
   }
+  if (isset($_GET['nonets'])) {
+    echo "nonets = true;";
+  } 
   echo "</script>";
+
+  if (!isset($_GET['nonets'])) {
+    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
+    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
+    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
+//    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
+  }
+
 ?>
 
 
 <script type="text/javascript" >
-  if (is_ie == false) {
+
+  
+ 
+</script>
+
+<div id='top_line' style='background-color:whiite;padding:1px;' >
+</div>
+
+<div id='main_spot' style='background-color:white;padding:10px;' >";
+</div>
+
+<div style='clear:left;' ></div>
+
+<div id='main_view' class='' style='padding:10px;' >
+</div>
+
+
+<script type='text/javascript' >
+
+  if (nonets == false) {
    FB.init({
       appId  : '191528434226668',
       status : true, // check login status
@@ -147,52 +185,12 @@ header('X-Frame-Options: SAMEORIGIN');
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
   }
-
-</script>
-
-<div id='main_spot' style='background-color:white;padding:10px;' >";
-</div>
-
-
-<div style='clear:left;' ></div> 
-
-<div id='main_view' class='mainlane' >
-</div>
-
-
-<script type='text/javascript' >
-
-
-
-  var daviewer = null;
-
-  var cater = null;  //categor
-  var store = null;  //shoper
-  var nicky = null;  //sharer
-  var wanda = null;  //searcher
-  var joe = null;    //manager
-  var amare = null;  //stater
-  var sal = null;    //logoman
-  var diego = null;  //header
-  var mac  = null;   //farmer
-  var elle = null;   //model 
-
-  var da_limit=1000;
-  var init_run = true;
-  var got_stats = false;
-  var buddah = false;
-  var pname = "";
-  var debug = false;
-
-
-
    do_preload();
 //   init_months();
 
    buddah=true;
 
 
-   sal = new logoman("logo");
    amare = new stater();
    elle = new model();
    daviewer = new viewer("main_view","daviewer");
@@ -210,6 +208,10 @@ header('X-Frame-Options: SAMEORIGIN');
 	   daviewer.top_end = 100;
     }
 
+   if (debug == true) {
+	   daviewer.top_end = 10;
+   }
+	   sal = new logoman("logo");
            store = new shoper("shop");
 	   mac = new sorter("sort");
 	   cater = new categor("browse");
@@ -217,8 +219,7 @@ header('X-Frame-Options: SAMEORIGIN');
            joe = new manager("contact");
 
 	   diego = new header("menu_spot");
-           diego.shape = "in";
-	   diego.add_mainspot("search","wanda");
+	   diego.shape = "full";
 	   diego.add_mainspot("browse","cater");
            diego.add_mainspot("contact","joe");
 	   diego.add_mainspot("sort","mac");
@@ -243,28 +244,33 @@ header('X-Frame-Options: SAMEORIGIN');
         if (width < 801) {
           if (is_mobile != true) {
 	      is_mobile = true;
-	      elle.set_controlshape("thin"); 
           }
         } else {
           if ((is_mobile == true) && (is_ie == false)) {
 	      is_mobile = false;
-  	      elle.set_controlshape("wide");
           }
         }
     });
 
    $(window).scroll(function() {
-        if ($('#logo').inSight(100) == true) {
-	    if ($('#control_spot').hasClass('top_menu') == false) {
-		$('#control_spot').addClass('top_menu');
-		$('#control_spot').removeClass('bot_menu');
+        if ($('#top_line').inSight(100) == true) {
+	    if ($('#menu_spot').hasClass('top_menu') == false) {
+		$('#menu_spot').addClass('top_menu');
+		$('#menu_spot').removeClass('bot_menu');
 
 	    }
+	    if ($('#rail_spot').hasClass('top_rail') == false) {
+		$('#rail_spot').addClass('top_rail');
+		$('#rail_spot').removeClass('bot_rail');
+	    }
 	} else {
-	    if ($('#control_spot').hasClass('bot_menu') == false) {
-		$('#control_spot').addClass('bot_menu');
-		$('#control_spot').removeClass('top_menu');
-		elle.set_controlshape("wide");
+	    if ($('#menu_spot').hasClass('bot_menu') == false) {
+		$('#menu_spot').addClass('bot_menu');
+		$('#menu_spot').removeClass('top_menu');
+	    }
+	    if ($('#rail_spot').hasClass('bot_rail') == false) {
+		$('#rail_spot').addClass('bot_rail');
+		$('#rail_spot').removeClass('top_rail');
 	    }
 	}
     });

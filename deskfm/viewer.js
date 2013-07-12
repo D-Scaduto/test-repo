@@ -23,6 +23,8 @@ function viewer (pscreen,pvarname) {
    this.top_end=10;
 
    this.zoom = false;
+   this.tail = true;
+
    this.metro_spd=0;
    
    this.is_mini = false;
@@ -169,6 +171,9 @@ viewer.prototype.draw_view = function() {
     var mout = "";
     var ct = 0; 
     var st = this.top_end;
+    var adex = "";
+    var pid = "";
+    var s = "";
  
     var cls='box';
     if (is_mobile == true) {
@@ -179,62 +184,90 @@ viewer.prototype.draw_view = function() {
     }
 
     if (this.zoom == true) {
-      st = 1;
+         lbl = "zoom_rung_0";
+         tmpstr=tmpstr+"<div id='"+lbl+"' class='zbox' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
+         tmpstr=tmpstr+"</div>";
+	 ct = ct + 1;
     }
-
-    while (ct < st) {
-      if (this.darungs[ct] != undefined) {
-         
+    
+    if (this.tail == true) {
+      while (ct < st) {
+        if (this.darungs[ct] != undefined) {
           lbl = this.screen+"_rung_"+ct;
 //          moin = "markyd(\""+lbl+"\");";
-//	  mout = "unmarkyd(\""+lbl+"\");";
-          tmpstr=tmpstr+"<span id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
-          tmpstr=tmpstr+"</span>";
-
-       }
-     ct = ct + 1;
+//	    mout = "unmarkyd(\""+lbl+"\");";
+          tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
+          tmpstr=tmpstr+"</div>";
+        }
+       ct = ct + 1;
+      }
     }
 
-    lbl = this.screen;
-    if (document.getElementById(lbl)!= null) {
+     lbl = this.screen;
+     if (document.getElementById(lbl)!= null) {
        document.getElementById(lbl).innerHTML=tmpstr;
-       var ct = 0; 
-       while (ct <= st) {
-         if (this.darungs[ct] != undefined) {
-           adex = this.darungs[ct].dadex;
-           if (this.dalist[adex] != null) {
-             p = this.dalist[adex];
-             if (this.darungs[ct].postman == undefined ) {
-               var s = this.varname + ".darungs["+ct+"].postman";
-               this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
-             }
-             this.darungs[ct].postman.set_ppid(p);
-           }
-           if (this.darungs[ct].postman != undefined) {
 
-   
-            if (this.listype == "unsorted") {
-              this.darungs[ct].postman.shape = "getsort";
-             }
-             this.darungs[ct].postman.build_rung(ct);
-             this.darungs[ct].postman.draw_rung(ct);
+       ct = 0; 
+       if (this.zoom == true) {
+          if (this.darungs[ct] != undefined) {
+             adex = this.darungs[ct].dadex;
+             if (this.dalist[adex] != null) {
+               pid = this.dalist[adex];
+	       if (this.darungs[ct].postman == undefined) {
+                 s = this.varname + ".darungs["+ct+"].postman";
+                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.listype,this.is_mini);
+	       }
+               if (this.darungs[ct].postman != undefined) {
+                 this.darungs[ct].postman.set_ppid(pid);
+                 this.darungs[ct].postman.spotid = 'zoom';
+  	         this.darungs[ct].postman.piczoom = true;
+                 if (this.listype == "unsorted") {
+                   this.darungs[ct].postman.shape = "getsort";
+                 }
+                 this.darungs[ct].postman.build_rung(ct);
+                 this.darungs[ct].postman.draw_rung(ct);
+              }
+	     }
+	  }
+	  ct = ct + 1;
+       }
+
+       if (this.tail == true) {
+         while (ct <= st) {
+           if (this.darungs[ct] != undefined) {
+             adex = this.darungs[ct].dadex;
+             if (this.dalist[adex] != null) {
+               pid = this.dalist[adex];
+               if (this.darungs[ct].postman == undefined ) {
+                 s = this.varname + ".darungs["+ct+"].postman";
+                 this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
+               }
+               if (this.darungs[ct].postman != undefined) {
+	         this.darungs[ct].postman.set_ppid(pid);
+                 if (this.listype == "unsorted") {
+                   this.darungs[ct].postman.shape = "getsort";
+                 }
+                 this.darungs[ct].postman.build_rung(ct);
+                 this.darungs[ct].postman.draw_rung(ct);
+               }
+	     }
            }
-         }
-         ct = ct + 1;
+           ct = ct + 1;
+	 }
        }
     }
 
-  if (this.is_mini == false ) {
+    if (this.is_mini == false ) {
        if (this.btns_showing == false) {
 	  this.draw_railbtns();
        }
        this.draw_raildata();
-  }
+    }
 
 
-   if (debug == true) {
+    if (debug == true) {
        this.draw_debug();
-   }
+    }
 
 }
 
@@ -243,7 +276,7 @@ viewer.prototype.draw_debug = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
-     tmp = tmp + " webitlist="+ webitlist.length;
+     tmp = tmp + " webitlist="+ amare.webitlist.length;
      tmp = tmp + " viewerlist="+ this.dalist.length;
      tmp = tmp + " rungs="+ this.darungs.length;
      tmp = tmp + " topend="+ this.top_end;
@@ -253,6 +286,57 @@ viewer.prototype.draw_debug = function() {
      if ( pobj != null) {
          pobj.innerHTML = tmp;
      }
+}
+
+
+viewer.prototype.change_shape = function() { 
+
+	if (this.zoom == false) {
+          if (this.tail == true) {
+	      this.unset_tail();
+           }
+   	   this.set_zoom();
+	} else {
+	    if (this.tail == false) {
+		    this.set_tail();
+	    } else {
+		  this.unset_zoom();
+	    }
+	}
+
+}
+
+
+viewer.prototype.toggle_tail = function() {
+
+   if (this.tail == true) {
+     this.unset_tail();
+   } else {
+     this.set_tail();
+   }
+}
+
+
+viewer.prototype.unset_tail = function() {
+	var lbl = "";
+	var pobj = null;
+	var tmp = "";
+
+   this.tail = false;
+   lbl = "main_view";
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+     }
+
+   this.set_zoom(); 
+}
+
+
+
+viewer.prototype.set_tail = function(pspot) {
+   this.tail = true;
+   this.draw_view();
 }
 
 
@@ -269,8 +353,20 @@ viewer.prototype.toggle_zoom = function() {
 
 
 viewer.prototype.unset_zoom = function() {
+	var lbl = "";
+	var pobj = null;
+	var tmp = "";
+
    this.zoom = false;
-   this.darungs[0].postman.btnson = false;
+ 
+   lbl = "zoom_rung_0";
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+     }
+
+   this.darungs[0].postman = undefined;
+   this.tail = true;
    this.draw_view();
 }
 
@@ -278,6 +374,7 @@ viewer.prototype.unset_zoom = function() {
 
 viewer.prototype.set_zoom = function(pspot) {
    this.zoom = true;
+   this.tail = false;
    this.to_top(pspot);
 }
 

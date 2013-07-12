@@ -189,7 +189,21 @@ poster.prototype.nav_btns = function() {
    var ocl = "";
    var tspot = this.rung;
 
-         if (this.btnson == true) { 
+    if (this.parvar != "nicky" ) {
+      lbl = this.rungster + "_totop_btn";
+      cls='spotd_off';
+      ocl = ""; 
+      if (this.rung != 0) {
+		ocl = this.parvar + ".to_top("+this.rung+");";
+      } else {
+	        ocl = this.parvar + ".toggle_zoom();";
+      }
+      tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+      tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
+      tmp = tmp + "</span>";
+    }
+
+      if (this.btnson == true) { 
 
           if (this.is_mini == true ) {
 
@@ -249,43 +263,42 @@ poster.prototype.nav_btns = function() {
           }
 
               if (this.parvar != "nicky" ) {
+  	        if (buddah == true) {
                   lbl = this.spotid + "_" + tspot + "_btns";
                   cls='spotd_off';
                   ocl = this.varname + ".toggle_btnson();";
                   tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
                   tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
                   tmp = tmp + "</span>";
+		}
 
-		  lbl = this.spotid + "_" + tspot + "_zoom";
-                  cls='spotd_off';
-                  ocl = ""; 
-		  if (this.rung != 0) {
-			ocl = this.parvar + ".to_top("+this.rung+");";
-		  }
-		  ocl = ocl + this.parvar + ".toggle_zoom();";
-                  tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-                  tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
-                  tmp = tmp + "</span>";
+		 
 	      }
      
        } else {
+               if (buddah == true) {
                   lbl = this.spotid + "_" + tspot + "_btns";
                   cls='spotd_off';
                   ocl = this.varname + ".toggle_btnson();";
                   tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
                   tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
                   tmp = tmp + "</span>";
+	       }
        }
+
+	 
 
          lbl = this.spotid + "_" + tspot + "_nav_btns";
          if (document.getElementById(lbl)!= null) {
              document.getElementById(lbl).innerHTML=tmp;
              if (this.btnson == true) {
-               if (twttr != undefined) {
-                 if (twttr.widgets != undefined) {
-                   twttr.widgets.load();
+   	       if (nonets == false) {
+                 if (twttr != undefined) {
+                   if (twttr.widgets != undefined) {
+                     twttr.widgets.load();
+                   }
                  }
-               }
+	       }
              }
          } 
 }
@@ -498,9 +511,9 @@ poster.prototype.clear = function() {
        prams = prams + "&groupid="+this.groupid;
      }
      var url = "deskfm/dbase/dfm_dbadd.php"+prams;
-//     alert(url);
+     alert(url);
      $.getJSON(url,function(json) {
-           new_webit(json.pobj);
+           amare.new_webit(json.pobj);
      });
     sal.waiting();
 }
@@ -541,7 +554,7 @@ poster.prototype.clear = function() {
      var url = "deskfm/dbase/update_webit.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
-          update_webit(json.pobj);
+          amare.update_webit(json.pobj);
      });
      sal.waiting();
 }
@@ -563,7 +576,7 @@ poster.prototype.clear = function() {
      var url = "deskfm/dbase/update_person.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
-          update_one(json.pobj);
+          amare.update_one(json.pobj);
      });
      sal.waiting();
 }
@@ -589,7 +602,7 @@ poster.prototype.update_product = function() {
      var url = "deskfm/dbase/update_product.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
-          update_one(json.pobj);
+          amare.update_one(json.pobj);
      });
      sal.waiting();
 }
@@ -606,7 +619,7 @@ poster.prototype.update_product = function() {
 
 //     alert(url);
      $.getJSON(url,function(json) {
-           del_one(json.pid);
+           amare.del_one(json.pid);
      });
     sal.waiting();
 }

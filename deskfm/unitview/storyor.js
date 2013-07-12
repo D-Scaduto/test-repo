@@ -45,7 +45,7 @@ poster.prototype.draw_story = function() {
 
       } else {
            if (this.parvar == "nicky") {
-                 tmp = tmp + "tell us about your standing desk "
+//                 tmp = tmp + " share about desks "
 	   }
       }
 
@@ -74,7 +74,7 @@ poster.prototype.get_story = function() {
    } 
 
    if ((tiesto == "" ) && (this.parvar == "nicky")) {
-        tiesto = "tell us about your desk ";
+        tiesto = " share about desks ";
    }
 
        

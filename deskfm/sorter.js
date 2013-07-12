@@ -5,10 +5,13 @@ function sorter (pspotid) {
    this.spotid = pspotid;
    this.showing = false;
    this.varname = "mac";
+
    this.shape = "sort"; // feed
+
    this.menued = false;
    this.sterms = "standing desk";
-   this.cal = new calendor('sort_calendor',"mac.cal");
+
+   this.cal = new calendor('cal_spot',"mac.cal");
 
 }
 
@@ -21,18 +24,9 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
    
-
- 
-       tmp = tmp + "<div>";
-
-       lbl = 'sort_unbtn';
-       ocl = this.varname + ".set_shape(\"sort\");";
-       omo = "markyd(\""+lbl+"\");";
-       omt = "unmarkyd(\""+lbl+"\");";
-       cls = "spotd_off";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+omo+"' onmouseout='"+omt+"' >";
-       tmp = tmp + "<img src='/deskfm/images/icons/grey_round.png' height='20px' >";
+       tmp = tmp + "<span id='cal_spot' >";
        tmp = tmp + "</span>";
+
 
        tmp = tmp + "<span class='spotd_off' >";
        tmp = tmp + "<input id='feed_string' size='15' value='"+this.sterms+"' >";
@@ -42,8 +36,6 @@ sorter.prototype.show = function() {
        tmp = tmp + "twitter";
        tmp = tmp + "</span>";
 
-       tmp = tmp + "</div>";
-
        tmp = tmp + "<div id='feed_btns'  >";
        tmp = tmp + "</div>";
 
@@ -52,9 +44,9 @@ sorter.prototype.show = function() {
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
+      this.cal.show();
       if (this.shape == "sort") {
 	  this.redraw_view();
-	  this.cal.show();
       }	  
    } 
 

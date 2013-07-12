@@ -19,7 +19,7 @@ poster.prototype.draw_pic = function() {
 	  if (is_mobile == true) {
          	  cls = "picmobile";
 	  }
-          if ((this.piczoom == true) || (daviewer.zoom == true))  {
+          if (this.piczoom == true)   {
               cls = "piczoom";
           }
           tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
@@ -61,7 +61,7 @@ poster.prototype.get_pic = function() {
 	  if (is_mobile == true) {
          	  cls = "picmobile";
 	  }
-          if ((this.piczoom == true) || (daviewer.zoom == true))  {
+          if (this.piczoom == true)   {
               cls = "piczoom";
           }
           tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
@@ -121,7 +121,7 @@ poster.prototype.get_pic = function() {
         tsrc = doctmp.getElementById('tmp_pic').src;
 
         this.picurl = tsrc;
-        var sobj = "webitlist["+this.dadex+"].picurl = '" + this.picurl + "'";
+        var sobj = "amare.webitlist["+this.dadex+"].picurl = '" + this.picurl + "'";
         eval(sobj);
 
         this.draw_pic();

@@ -342,7 +342,6 @@ stater.prototype.get_group_list = function(pgroupid) {
    $.getJSON(url,function(json) {
        amare.update_people(json);
    });   // end get json 
-   sal.waiting();
 }
 
  
