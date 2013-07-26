@@ -8,8 +8,8 @@ header('X-Frame-Options: SAMEORIGIN');
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
 <!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" /-->
-<!--link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /-->
-<link rel="stylesheet" href="lib/jquery-ui.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<!--link rel="stylesheet" href="lib/jquery-ui.css" /-->
 
 <title>deskfm.com</title>
 
