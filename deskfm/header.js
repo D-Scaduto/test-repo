@@ -36,13 +36,14 @@ header.prototype.show = function() {
      var cls = "";
 
        lbl = "menu_btns";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;' >";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='' >";
        tmp = tmp + "</div>";
 
        lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='padding:5px;position:relative;' >";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='position:relative;' >";
        tmp = tmp + "</div>";
 
+    
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
@@ -53,22 +54,9 @@ header.prototype.show = function() {
 
 }
 
-header.prototype.toggle_shape = function() {
-
-   if (this.shape == "full") {
-     this.shape = "shrunk";
-   } else {
-     this.shape = "full";
-   }
-   this.show();
-
-}
-
-
 
 
 header.prototype.redraw_view = function (psetype,pchunk) {
-
     if (this.main_shape == "browse" ) {
 	    if (psetype == "webits") { 
    	       cater.redraw_view(pchunk);
@@ -80,10 +68,12 @@ header.prototype.redraw_view = function (psetype,pchunk) {
             if (psetype == "unsorted") {
                mac.redraw_view(pchunk);
 	    }
+    } else {
+        daviewer.load_random_list();
     }
-
-
-
+    if (wanda.sterms != "") {
+	    wanda.check_local();
+    }
 }
 
 header.prototype.draw_mainmenu = function() {
@@ -97,25 +87,22 @@ header.prototype.draw_mainmenu = function() {
      var s = "";
 
      if (this.shape == "full") {
+      tmp = tmp + "<div id='mainmenu_top' >";
        for (i=0;i<this.mainmenu.length;i++) {
-          lbl = this.mainmenu[i].btn + "_btn";
-          omo = "markyd(\""+lbl+"\");";
-          omt = "unmarkyd(\""+lbl+"\");";
-          ocl = this.varname + ".set_mainshape(\""+this.mainmenu[i].btn+"\");";
-          cls = "spotd_off";
-        if (this.mainmenu[i].btn == this.main_shape ) {
-          cls = "spotd_on";
-          ocl = this.varname + ".change_mainitem("+i+");";
-        }
-          tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"' style='padding:2px;'  >";
-          tmp = tmp + this.mainmenu[i].btn;
-          tmp = tmp + "</span>";
+	       if (this.mainmenu[i] != undefined)  {
+                 lbl = this.mainmenu[i].btn + "_btn";
+                 ocl = this.varname + ".toggle_mainitem("+i+");";
+                 tmp = tmp + "<input type='radio' name='mainmenu_top' id='"+lbl+"' onclick='"+ocl+"' >";
+                 tmp = tmp + "<label for='"+lbl+"' >"+this.mainmenu[i].btn+"</label>";
+	       }
        }
-      
+       tmp = tmp + "</div>";
+
        lbl = "menu_btns";
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
-          pobj.innerHTML = tmp;	  
+          pobj.innerHTML = tmp;	 
+	  $("#mainmenu_top").buttonset();
        }
      }
 
@@ -137,11 +124,17 @@ header.prototype.change_mainitem = function(wdex) {
      eval(s) 
 }
 
+
 header.prototype.toggle_mainitem = function(wdex) {
      var s = "";
-     s = this.mainmenu[wdex].varname + ".toggle();";
-     alert(s);
-     eval(s) 
+     if (wdex != undefined) {
+	     if (this.mainmenu[wdex] != undefined) {
+                s = this.mainmenu[wdex].varname + ".toggle();";
+	   //      alert("w=" + wdex + " s="+ s);
+ 	        eval(s);
+	     }
+     }
+ 
 }
 
 header.prototype.show_mainitem = function(pbtn) {
@@ -152,9 +145,14 @@ header.prototype.show_mainitem = function(pbtn) {
          fspot = i;
        }
      }
+// alert("p=" + pbtn + " f=" + fspot);
    if (fspot != -1) {
-     s = this.mainmenu[fspot].varname +".show();";
-     eval(s);
+	   if (this.main_shape == this.mainmenu[fspot].btn) {
+	     s = this.mainmenu[fspot].varname +".change();";
+	   } else {
+	     s = this.mainmenu[fspot].varname +".show();";
+           }
+           eval(s);
    }
    
 }
@@ -208,16 +206,15 @@ header.prototype.del_mainspot = function(pbtn) {
 
 
 
-header.prototype.set_mainshape = function(pstr) {
-  var tshape = "";
-  if (pstr != undefined ) {
-	 tshape = pstr;
-  }
-    if (tshape != this.main_shape) {
-       this.was_shape = this.main_shape;
-       this.main_shape = pstr;
-    }
-  this.draw_mainmenu();
+header.prototype.toggle_shape = function() {
+
+   if (this.shape == "full") {
+     this.shape = "shrunk";
+   } else {
+     this.shape = "full";
+   }
+   this.show();
+
 }
 
 
@@ -233,7 +230,7 @@ header.prototype.hide = function() {
      var tmp = "";
      var lbl = "";
 
-     lbl = "main_" + this.spotid;
+     lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;

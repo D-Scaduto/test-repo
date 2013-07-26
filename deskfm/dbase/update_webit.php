@@ -82,6 +82,7 @@ $con = mysql_connect($Server, $username, $password);
 
  $sql_upd="";
  $some = false;
+ $result = "";
 
      if ($story != "null") {
        $sql_upd = $sql_upd . " story = '" . $story . "'"; 
@@ -140,7 +141,7 @@ $con = mysql_connect($Server, $username, $password);
     }
 
     //      echo $sql_upd  . " \n <br> " ;
-    $result = "";
+    
     $result = mysql_query($sql_upd);
     //  echo $result . " \n <br> ";
   }

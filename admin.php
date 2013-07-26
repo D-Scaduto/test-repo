@@ -5,9 +5,14 @@ header('X-Frame-Options: SAMEORIGIN');
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
-<link rel=StyleSheet href=deskfm/twitter/tws_style.css type="text/css" media="screen,print" />
+<!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" /-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="cbjq_style.css" />
+
+
 <title>deskfm.com</title>
 
 <script  type="text/javascript" >
@@ -37,7 +42,10 @@ header('X-Frame-Options: SAMEORIGIN');
 
 </script>
 
-<script src="../lib/jquery-code.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--script src="http://code.jquery.com/jquery-1.8.3.min.js"></script-->
+<!--script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script-->
 <script src="../lib/jquery-insight.js" type="text/javascript"></script>
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
@@ -97,6 +105,7 @@ header('X-Frame-Options: SAMEORIGIN');
 
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
+ 
 
 </head>
 
@@ -157,14 +166,20 @@ header('X-Frame-Options: SAMEORIGIN');
 <div id='top_line' style='background-color:whiite;padding:1px;' >
 </div>
 
-<div id='main_spot' style='background-color:white;padding:10px;' >";
+<div data-role="page">
+
+<div id='main_spot' data-role="cbheader" style='background-color:white;padding:10px;' >
 </div>
 
 <div style='clear:left;' ></div>
 
-<div id='main_view' class='' style='padding:10px;' >
+<div id='debug_spot' class='' style='padding:2px;' >
 </div>
 
+<div id='main_view'  data-role="cbcontent" class='' style='padding:10px;' >
+</div>
+
+</div>
 
 <script type='text/javascript' >
 
@@ -196,26 +211,29 @@ header('X-Frame-Options: SAMEORIGIN');
    daviewer = new viewer("main_view","daviewer");
   
 
-   nicky = new sharer("share_spot");
+   
    jesie = new namer("name_spot");
  
 
    if (is_mobile == true) {
            da_limit = 250;
-           daviewer.top_end = 25;
+	   daviewer.top_end = 25;
+	  
     } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
+	   elle.shape = "wingout";
     }
 
    if (debug == true) {
 	   daviewer.top_end = 10;
    }
-	   sal = new logoman("logo");
+	   sal = new logoman("logo_spot");
            store = new shoper("shop");
 	   mac = new sorter("sort");
 	   cater = new categor("browse");
 	   wanda = new searcher("search");
+	   nicky = new sharer("share_spot");
            joe = new manager("contact");
 
 	   diego = new header("menu_spot");
@@ -223,11 +241,12 @@ header('X-Frame-Options: SAMEORIGIN');
 	   diego.add_mainspot("browse","cater");
            diego.add_mainspot("contact","joe");
 	   diego.add_mainspot("sort","mac");
-           diego.add_mainspot("shop","store");
-	   diego.main_shape = "browse";
+	   diego.add_mainspot("shop","store");
+	   diego.add_mainspot("search","wanda");
+	 
 
     elle.draw_main();
-
+	   
     amare.get_stats();
 
     amare.get_products();
@@ -241,43 +260,50 @@ header('X-Frame-Options: SAMEORIGIN');
 
       var width = $(this).width();
       var height = $(this).height();
+
         if (width < 801) {
           if (is_mobile != true) {
-	      is_mobile = true;
-          }
+		  is_mobile = true;
+	  }
+	  if (elle.shape != "") {
+ 	    elle.shape = "";
+	    elle.draw_main();
+	  }
         } else {
-          if ((is_mobile == true) && (is_ie == false)) {
-	      is_mobile = false;
-          }
-        }
-    });
-
-   $(window).scroll(function() {
-        if ($('#top_line').inSight(100) == true) {
-	    if ($('#menu_spot').hasClass('top_menu') == false) {
-		$('#menu_spot').addClass('top_menu');
-		$('#menu_spot').removeClass('bot_menu');
-
-	    }
-	    if ($('#rail_spot').hasClass('top_rail') == false) {
-		$('#rail_spot').addClass('top_rail');
-		$('#rail_spot').removeClass('bot_rail');
-	    }
-	} else {
-	    if ($('#menu_spot').hasClass('bot_menu') == false) {
-		$('#menu_spot').addClass('bot_menu');
-		$('#menu_spot').removeClass('top_menu');
-	    }
-	    if ($('#rail_spot').hasClass('bot_rail') == false) {
-		$('#rail_spot').addClass('bot_rail');
-		$('#rail_spot').removeClass('top_rail');
-	    }
+  	   if ((is_mobile == true) && (is_ie == false)) {
+		   is_mobile = false;
+		   
+	   }
+           if (elle.shape != "wingout") {
+ 	    elle.shape = "wingout";
+	    elle.draw_main();
+	  }
 	}
     });
 
 
+   $(window).scroll(function() {
+        if ($('#top_line').inSight(100) == true) {
+	    if ($('#outer_menu').hasClass('top_menu') == false) {
+		$('#outer_menu').addClass('top_menu');
+		$('#outer_menu').removeClass('flying_menu');
+	    }
+	} else {
+	    if ($('#outer_menu').hasClass('flying_menu') == false) {
+		$('#outer_menu').addClass('flying_menu');
+		$('#outer_menu').removeClass('top_menu');
+	    }
+	}
+    });
+ 
+
 
 </script>
+
+
+
+
+
 
 </body>
 </html>

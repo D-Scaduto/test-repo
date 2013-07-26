@@ -29,18 +29,33 @@ $bearer_token = $reply->access_token;
   }
 
  class bar {
-   public $dalist;
+	
+	 public $listlen = 0;
+	 public $next_page = "";
+	 public $page = "";
+	 public $refresh_url = "";
+	 public $dalist = "";
  }
+
  $rebar = new bar;
  $arr = array();
 
  $q = "";
  if (isset($_GET['q'])) {
-  $q = $_GET['q'];
+   $q = $_GET['q'];
+   $qs = "q=" . $q;
  }
- $qs = "q=" . $q;
+ 
+ $count = 0;
+ if (isset($_GET['count'])) {
+	$count = $_GET['count'];
+ 	$qs = $qs . "&count=" . $count;
+ }
 
-    $reply = $cb->search_tweets($qs,true);
+
+ $reply = $cb->search_tweets($qs,true);
+ $rebar->listlen = sizeof($reply->statuses);
+
  
     for ($i =0; $i < sizeof($reply->statuses); $i++ ) {
 

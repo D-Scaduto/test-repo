@@ -233,13 +233,18 @@ suggester.prototype.show_suggestions = function (asuggestions) {
          onode = document.getElementById(this.sugg_id);
        }
     }
-    var pos = find_pos(onode);
-//    alert(pos);
-    this.layer.style.left = pos[0] + "px";
-    this.layer.style.top = pos[1] + "px";
 
-//    this.layer.style.left = this.get_left() + "px";
-//    this.layer.style.top = (this.get_top() + onode.offsetHeight) + "px";
+
+    var pos = null;
+//    pos = $('#'+onode.id).position();
+//    alert(pos.left + ","+pos.top);
+//    this.layer.style.left = pos.left + "px";
+//    this.layer.style.top = pos.top + "px";
+    pos = find_pos(onode);
+//    this.layer.style.left = pos[0] + "px";
+//    this.layer.style.top = pos[1] + "px";
+    this.layer.style.left = this.get_left() + "px";
+    this.layer.style.top = (this.get_top() + onode.offsetHeight) + "px";
 //    this.layer.style.left = 0 + "px";
 //    this.layer.style.top = 0 + "px";
 
@@ -280,22 +285,7 @@ suggester.prototype.get_top = function () {
 }
 
 
-function find_pos(obj) {
-  var curleft = curtop = 0;
-  if (obj != null) {
-    if (obj.offsetParent) {
-       do { 
-         curleft += obj.offsetLeft;
-         curtop += obj.offsetTop;
-       } while (obj = obj.offsetParent);
-    }
-  }
-  return [curleft,curtop];
-}
-
-
 suggester.prototype.create_drop_down = function () {
-
    this.layer = document.createElement("div");
    this.layer.id = this.sugg_id + "_pop";
 
@@ -401,6 +391,9 @@ suggester.prototype.click_suggestion = function () {
 
 
 function find_pos(obj) {
+//	alert(obj.id);
+//     
+
       var curleft = curtop = 0;
       if (obj.offsetParent) {
         do {
@@ -408,7 +401,9 @@ function find_pos(obj) {
           curtop += obj.offsetTop;
         } while (obj = obj.offsetParent);
       }
+      
       return [curleft,curtop];
+      
 }
 
 

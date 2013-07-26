@@ -56,7 +56,7 @@ viewer.prototype.flip_card = function() {
  
    if (this.metro_spd != 0) {
 
-         this.next(10);
+         this.next(5);
 
          var cl = this.varname + ".flip_card();";
          this.metro_tmr = setTimeout(cl,this.metro_spd);

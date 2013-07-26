@@ -2,7 +2,6 @@
 
 poster.prototype.draw_embed = function() {
 
-  var tspot = this.rung; 
   var tmp = "";
   var elink = "";
   var ocl="";
@@ -12,25 +11,49 @@ poster.prototype.draw_embed = function() {
 
 
        if ((this.embedurl != "") && (this.embedurl != undefined)) { 
-           elink = this.embedurl;
+
+              elink = this.embedurl;
+
+	      if (this.shape == "") {
+
+		  if ((buddah == true) || (this.parvar == "nicky")) {
+        	    ocl = this.varname + ".toggle_getembed();";
+        	    tmp = tmp + "<button  onclick='"+ocl+"' >";  
+		    tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+		    tmp = tmp + "</button>";
+	          }
+
+		  ocl = this.varname + ".toggle_showembed();";
+        	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
+		  tmp =	tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+		  tmp = tmp + "</button>";
+	          lbl = this.rungster + '_embed_btn';
+	       	  pobj = document.getElementById(lbl);
+	          if ( pobj != null) {
+	            pobj.innerHTML = tmp;
+        	  }
+	      }
+
        } else {
 
+	  if ((this.btnson == true) && (this.shape == "")) {	   
+              if ((buddah == true) || (this.parvar == "nicky")) {
+        	  ocl = this.varname + ".toggle_getembed();";
+        	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
+		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+		  tmp = tmp + "</button>";
+	          lbl = this.rungster + '_embed_btn';
+	       	  pobj = document.getElementById(lbl);
+	          if ( pobj != null) {
+	            pobj.innerHTML = tmp;
+        	  }
+	      }
+          }  
+  	  
        }
-
-       if (elink != "") {
-       	  cls = 'spotd_off';
-          ocl =  ocl + this.varname+".toggle_embed();";
-          tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
-          tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-          tmp = tmp + "</span>";
-
-          lbl = this.rungster + '_embed_btn';
-          pobj = document.getElementById(lbl);
-          if ( pobj != null) {
-           pobj.innerHTML = tmp;
-         }
-       }
+	
  
+
        tmp = "";
        if ((this.embed_show == true ) && (elink != "")) {
            tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";
@@ -57,16 +80,10 @@ poster.prototype.get_embed = function() {
      var ps = "";
      var pobj=null;
      var lbl = "";
-      
-       if (this.parvar == "nicky") {
-		 lbl = this.rungster + "_getlinkbtn";
-		 cls = "spotd_off";
-                 tmpstr = tmpstr + "<div id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
-                 tmpstr = tmpstr + "embed media";
-                 tmpstr = tmpstr + "</div>";
-        }
+  
 
-       if ((this.embedurl != undefined) && (this.embedurl != "")) {      
+       tmpstr = "";
+       if (this.embedurl != "") {      
          tlink = this.embedurl;
        } else {
        }
@@ -129,7 +146,7 @@ poster.prototype.toggle_getembed = function() {
 
 
 
-poster.prototype.toggle_embed = function  () {
+poster.prototype.toggle_showembed = function  () {
 
      if (this.embed_show == true) {
         this.embed_show = false;
@@ -137,7 +154,6 @@ poster.prototype.toggle_embed = function  () {
          this.embed_show = true;
      }
 
-     this.work_btns();
      this.draw_embed();
 
 }

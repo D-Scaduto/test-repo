@@ -282,7 +282,7 @@ viewer.prototype.load_unsorted_list = function() {
 viewer.prototype.load_random_list = function() {
 
   
-   var mx = webitlist.length;
+   var mx = amare.webitlist.length;
    var ro = null;
    this.darungs = [];
 

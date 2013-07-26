@@ -28,6 +28,15 @@ group_provider.prototype.init = function () {
 }
 
 
+group_provider.prototype.get_setlist = function () {
+
+  var retlist = [];
+   for (var i=0; i < this.sealist.length; i++ ) {
+           retlist.push(this.sealist[i]);
+   }
+   return retlist;
+}
+
 group_provider.prototype.requestSuggestions = function (osuggester,btype_ahead) {
 
   var asuggestions = [];

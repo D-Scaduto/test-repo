@@ -32,6 +32,28 @@ a:active{
   text-decoration:underline;  
 }
 
+.inner_menu {
+  border-color:silver;
+  border-style:solid;
+  border-size:1px;
+}
+
+.oline {
+  border-color:white;
+  border-style:solid;
+  border-size:1px;
+}
+
+.logo_menu {
+  float:left;
+  background-color:white;
+  padding:3px;
+  border-color:silver;
+  border-style:solid;
+  border-size:5px;
+  width:400px;
+}
+
 
 .search_menu {
   float:right;
@@ -41,52 +63,24 @@ a:active{
   border-color:silver;
 }
 
-.top_rail {
-  position:relative;
-  float:right;
-  background-color:white;
-  border:solid;
-  border-width:2px;
-  border-color:silver;
-}
-
-.bot_rail {
-  position:fixed;
-  top:20px;
-  right:25px;
-  background-color:white;
-  border:solid;
-  border-width:2px;
-  border-color:silver;
-}
 
 .top_menu {
   position:relative;
-  float:left;
   background-color:white;
-  border:solid;
-  border-width:2px;
-  border-color:silver;
+  border:4px solid white; 
+  padding:4px;
 }
 
 
-.bot_menu {
+
+.flying_menu {
   position:fixed;
-  top:20px;
-  left:25px;
+  top:0px;
+  right:0px;
+  left:0px;
   background-color:white;
-  border:solid;
-  border-width:2px;
-  border-color:silver;
-}
-
-
-.inner_menu {
-  position:relative;
-  width:325px;
-  min-width:325px;
-  background-color:white;
-  border:2px solid silver;
+  border:5px solid white; 
+  padding:5px;
 }
 
 
@@ -94,7 +88,7 @@ a:active{
 div.suggestions {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid white;
   position: fixed;
   background-color: white;
 }
@@ -120,10 +114,10 @@ div.suggestions div.current {
 
     .zbox {
        background-color:white;
-       display: block;
-       width:600px;
+       display: inline-block;
+       width:500px;
        border-style:solid;
-       border-color:silver;
+       border-color:white;
        border-width:2px;
      }
 
@@ -139,7 +133,7 @@ div.suggestions div.current {
        border-width:2px;
        width:500px;
        max-width:500px;
-       min-height:150px;
+//       min-height:150px;
 
      }
 
@@ -150,7 +144,8 @@ div.suggestions div.current {
        zoom: 1;
        *display: inline;
        overflow:auto;
-       width:200px;
+       width:350px;
+       float:right;
      }
 
     .cbox {
@@ -158,7 +153,7 @@ div.suggestions div.current {
        display: block;
        width:275px;
        max-width:275px;
-       min-height:100px;
+//     min-height:100px;
      }
 
 
@@ -180,22 +175,10 @@ div.suggestions div.current {
 	border-color:silver;
      }
 
-     .story {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       width:250px;
-     }
+    
 
-     .getstory {
-       font-family: sans-serif;
-       font-weight:normal;
-       font-size:medium;
-       vertical-align:top;
-       width:250px;
-       height:50px;
-     }
+
+
 
 @media screen and (max-width:699px) {
     
@@ -219,9 +202,27 @@ div.suggestions div.current {
        border-style:solid;
        border-color:silver;
        border-width:2px;
-       min-width:600px;
-       min-height:125px;
+       width:100%;
+       min-height:150px;
     }
+
+
+     .story {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       width:250px;
+     }
+
+     .getstory {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       width:350px;
+       height:150px;
+     }
 
 }
 
@@ -248,10 +249,30 @@ div.suggestions div.current {
        border-color:silver;
        border-width:2px;
        width:300px;
-       min-height:75px;
+       min-height:150px;
     }
 
+    .story {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       width:200px;
+     }
+
+     .getstory {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       width:200px;
+       height:100px;
+     }
 }
+
+
+
+
 
 
 .spotd_on {

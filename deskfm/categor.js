@@ -13,117 +13,172 @@ function categor (pmenuid) {
    this.sterms = "";
    this.searchon = false;
 
-   this.subcater = new suggester("cat_sog",new subcat_provider(), "cater.subcater","cater");
-
 }
 
 
 
 categor.prototype.show = function() {
 
-    var tmpstr = "";
-    var tstr1 = "";
+    var tmp = "";
     var lbl = "";
     var obj = null;
-    var tcl = "";
     var ocl = "";
-    var omo = "";
-    var omt = "";
-    var cls = "";
-    var ims = "";
+    var s = "";
+    var sugs = [];
 
-    if (this.cat == "all") {
+ 
+      if (this.cat == "all") { 
 
-        lbl = 'duh_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = "cater.redraw_view();";
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr = tmpstr + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
-        tmpstr=tmpstr+"</span>";
-
-        lbl = 'who_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        tmpstr = tmpstr + "<span id='' onclick='cater.set_cats(\"who\",\"\");'  class='spotd_off' >";
-        tmpstr=tmpstr+"who ?";
-        tmpstr=tmpstr+"</span>";
+        lbl = 'who_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >who</a>";
+        tmp = tmp +"<ul  style='width:350px;' >";
+        sugs = amare.subcat_set.get_setlist("who");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp + "</ul>";
+	tmp = tmp + "</li></ul>";
 /*
         lbl = 'what_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = 'cater.set_cat(\"what\");';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr=tmpstr+"what ? ";
-        tmpstr=tmpstr+"</span>";
-        tmpstr=tmpstr+"</span>";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >what</a>";
+        tmp = tmp +"<ul  style='width:350px;' >";
+        sugs = amare.subcat_set.get_setlist("what");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
 */
-        lbl = 'why_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = 'cater.set_cats(\"why\",\"\");';
-        tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr=tmpstr+"why ?";
-        tmpstr=tmpstr+"</span>";
 
-        lbl = 'how_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = 'cater.set_cats(\"how\",\"\");';
-        tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off' onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr=tmpstr+"how ?";
-        tmpstr=tmpstr+"</span>";
+        lbl = 'why_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >why</a>";
+        tmp = tmp +"<ul  style='width:350px;' >";
+        sugs = amare.subcat_set.get_setlist("why");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
 
-        lbl = 'cat_sog';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style=''  >";
-        tmpstr=tmpstr+"</span>";
+        lbl = 'how_sog';
+         tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >how</a>";
+        tmp = tmp +"<ul  id='"+lbl+"' style='width:350px;' >";
+        sugs = amare.subcat_set.get_setlist("how");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
+   
+    } else {
 
-   } else { 
+      
+        lbl = 'cat_undo_btn';
+        ocl = "cater.set_cats(\"all\");";
+        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
+	tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+        tmp=tmp+"</button>";
+      
 
-        lbl = 'undo_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = "cater.cat=\"all\";cater.subcat=\"\";cater.show();";
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr = tmpstr + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
-        tmpstr=tmpstr+"</span>";
+	lbl = this.cat + '_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >"+ this.cat + "</a>";
+        tmp = tmp +"<ul  id='"+lbl+"' style='width:350px;' >";
+        sugs = amare.subcat_set.get_setlist(this.cat);
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='"+this.cat+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
 
-        lbl = 'cat_sog';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off' style='' onclick='cater.subcater.request_suggestions(\""+this.cat+"\");' >";
-        tmpstr=tmpstr+this.subcater.provider.get_desc(this.cat,this.subcat);
-        tmpstr=tmpstr+"</span>";
+	lbl = 'subcat_btn';
+        s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
+        ocl = "cater.set_cats(\"all\");";
+        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
+	tmp = tmp + s;
+        tmp=tmp+"</button>";
+
     }
-
-
-/*
-        lbl = 'check_more_btn';
-        omo = 'markyd(\"'+lbl+'\");';
-        omt = 'unmarkyd(\"'+lbl+'\");';
-        ocl = "cater.get_more();";
-        tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"'  class='spotd_off' onmouseover='"+omo+"' onmouseout='"+omt+"'  >";
-        tmpstr = tmpstr + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
-        tmpstr=tmpstr+"</span>";
-*/
-     if (pname == "debug") {
-        lbl = 'cat_debug';
-        tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  >";
-        tmpstr=tmpstr+"</span>";
-     }
+       
 
    lbl = this.spotid;
    obj = document.getElementById(lbl)
    if (obj != null) {
-     obj.innerHTML=tmpstr;
+     obj.innerHTML=tmp;
+     if (this.cat == "all") {
+
+           $('#who_sog').menu();
+	    $('#who_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+	    /*
+	    $('#what_sog').menu();
+	    $('#what_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+	     */
+	    $('#why_sog').menu();
+	    $('#why_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+
+	    $('#how_sog').menu();
+	    $('#how_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+     } else {
+	    $('#cat_undo_btn').button();
+   	    $('#subcat_btn').button();
+
+	    $('#'+this.cat+'_sog').menu();
+	    $('#'+this.cat+'_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+            
+     }
+      
+
      this.showing = true;
      if (init_run == false) {
 	 this.redraw_view();
      }
 
    }
-
-  if (pname == "debug") {
-     this.draw_debug();
-  }
 }
 
 categor.prototype.set_menued = function(ptog) {
@@ -136,13 +191,6 @@ categor.prototype.set_menued = function(ptog) {
 	}
 }
 
-
-categor.prototype.reset_sog = function() {
-
-   this.subcater = new suggester("cat_sog",new subcat_provider(), "cater.subcater","cater");
-
-   this.show();
-}
 
 
 categor.prototype.redraw_view = function(pchunk) {
@@ -178,6 +226,7 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
       if (tcat != undefined) {
            if (this.cat != tcat) {
               this.cat=tcat;
+	      this.subcat = "";
            }
       }
       if (tsubcat != undefined) { 
@@ -187,16 +236,11 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
       }
 
      this.show(); 
-
-     if ((this.cat != "") && (this.subcat == ""))  {
-        this.subcater.request_suggestions(this.cat);
-     }
-   
    
 }
 
 categor.prototype.change = function () {
-   this.show();
+   this.toggle();
 }
 
 

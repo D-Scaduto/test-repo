@@ -13,8 +13,8 @@ poster.prototype.draw_story = function() {
 
        var tiesto = this.story;
 
-       ocl = this.varname + ".get_story();";
-       tmp = tmp + "<span onclick='"+ocl+"' onmouseover='' onmouseout='' >";
+       ocl = this.varname + ".set_shape(\"getstory\");";
+       tmp = tmp + "<span onclick='"+ocl+"' class='story' onmouseover='' onmouseout='' >";
 
        if ((this.story != "") && (this.story != null)) { 
 
@@ -44,8 +44,10 @@ poster.prototype.draw_story = function() {
           tmp = tmp + ps;
 
       } else {
-           if (this.parvar == "nicky") {
-//                 tmp = tmp + " share about desks "
+         if ((this.shape == "getstory") || (this.shape == "")) {
+	    tmp = tmp + "<button  onclick='"+this.varname+".toggle_getstory();' >";  
+            tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
+            tmp = tmp + "</button>"; 
 	   }
       }
 
@@ -68,24 +70,24 @@ poster.prototype.get_story = function() {
    var urlts= null;
    var tiesto = "";
 
+
+      tmpstr = "";
    if (this.story != null) {
 	tiesto = this.story;
         tiesto = this.story.replace(/<br>/gi,"\n");
    } 
 
    if ((tiesto == "" ) && (this.parvar == "nicky")) {
-        tiesto = " share about desks ";
+        tiesto = " share about standing desks ... ";
    }
 
-       
          oku = this.varname + ".update_story();";
          tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' class='getstory' onkeyup='"+oku+"' >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
 
-      lbl = this.spotid;
-      lbl = lbl +'_'+tspot;
-      lbl = lbl + '_story_spot';
+
+      lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
          document.getElementById(lbl).innerHTML= tmpstr;
       }

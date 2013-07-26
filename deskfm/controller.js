@@ -42,14 +42,6 @@ viewer.prototype.goto_listdex = function(ldex) {
    this.load_rungs(ldex);
 
    this.draw_view();
-
-   /*
-   window.scroll(0,0);
-   var lbl=this.screen+"_rung_0";
-   if ( document.getElementById(lbl) != null) {
-     document.getElementById(lbl).focus(); 
-   }
-   */
 }
 
 
@@ -64,7 +56,7 @@ viewer.prototype.to_top = function(trung) {
    this.redraw_rungs(trung);
 
    if (this.darungs[0] != undefined) {
-     this.darungs[0].postman.btnson = true;
+//     this.darungs[0].postman.btnson = true;
      this.darungs[0].postman.redraw_rung();
    }
 

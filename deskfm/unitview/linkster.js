@@ -10,42 +10,34 @@ poster.prototype.draw_link = function() {
   var pobj=null;
   var lbl = "";
 
-   if ((this.linkurl != "") && (this.linkurl != undefined)) { 
+  if ((this.shape == "getlink") || (this.shape == "")) {
+    if (this.btnson == true) {	   
+                 ocl = this.varname + ".set_shape(\"getlink\");";
+          	 tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	         tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+	         tmp = tmp + "</button>";
+      }
+
+   if ((this.linkurl != "") && (this.linkurl != undefined)) {
+
        tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
        tmp = tmp + "link" 
        tmp = tmp + " </a> ";
-
-       lbl = this.rungster + '_link_btn';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
-       }
-
-   } else {
-	/*
-        if (this.parvar == "nicky") {
-                 ocl = this.varname + ".set_shape(\"getlink\");";
-		 lbl = this.rungster + "_getlinkbtn";
-		 cls = "spotd_off";
-                 tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
-                 tmp = tmp + "share a link"
-                 tmp = tmp + "</span>";
-
-                 lbl = this.rungster + '_link_spot';
-                 pobj = document.getElementById(lbl);
-                 if ( pobj != null) {
-                   pobj.innerHTML = tmp;
-                 }
-	}
-	*/
+	
    }
-     
+
+     lbl = this.rungster + '_link_spot';
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+     } 
+   }
 }
 
 
 
 poster.prototype.get_link = function() {
-     var tspot = this.rung; 
+
      var tmpstr="";
      var tlink = "";
      var ocl="";
@@ -53,27 +45,19 @@ poster.prototype.get_link = function() {
      var pobj=null;
      var lbl = "";
 
-        if (this.parvar == "nicky") {
-		 lbl = this.rungster + "_getlinkbtn";
-		 cls = "spotd_off";
-                 tmpstr = tmpstr + "<div id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
-                 tmpstr = tmpstr + "post a link";
-                 tmpstr = tmpstr + "</div>";
-        }
-
+	 tmpstr = "";
        if ((this.linkurl != undefined) || (this.linkurl != "")) {      
-           tlink = this.linkurl;
+         tlink = this.linkurl;
 
-         lbl = this.spotid+"_"+tspot+"_link_addr"; 
+       } else {
+
+       }
+
+	 lbl = this.rungster + "_link_addr"; 
          ocl = this.varname + ".update_link();";
          tmpstr = tmpstr + "<textarea id='"+lbl+"' style='width:250px;height:50px;' onkeyup='"+ocl+"'  >";    
          tmpstr = tmpstr + tlink;
          tmpstr = tmpstr + " </textarea> ";
-
-       } else {
-
-  
-       }
 
        lbl = this.rungster + '_link_spot';
        pobj = document.getElementById(lbl);

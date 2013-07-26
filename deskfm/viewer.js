@@ -4,7 +4,6 @@ function viewer (pscreen,pvarname) {
 
    this.screen = pscreen;
    this.varname = pvarname;
-   this.btns_showing = false;
 
    this.listype = "webits";
    this.cat="";       
@@ -24,6 +23,8 @@ function viewer (pscreen,pvarname) {
 
    this.zoom = false;
    this.tail = true;
+   this.railon = true;
+   this.rail_showing = false;
 
    this.metro_spd=0;
    
@@ -38,12 +39,138 @@ function viewer (pscreen,pvarname) {
 }
 
 
+
+viewer.prototype.draw_view = function() {
+
+    var tmpstr = "";
+    var lbl = "";
+    var ocl = "";
+    var moin = "";
+    var mout = "";
+    var ct = 0; 
+    var st = this.top_end;
+    var adex = "";
+    var pid = "";
+    var s = "";
+    var cls='';
+
+    lbl = this.screen+"_debug";
+    cls='spotd_off'
+    tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style=''  >"; 
+    tmpstr=tmpstr+"</div>";
+
+ 
+
+    cls = 'box';
+    if (is_mobile == true) {
+      cls='mbox';
+    }
+    if (this.is_mini == true) {
+      cls='cbox';
+    }
+
+    if (this.zoom == true) {
+	 ct = ct + 1;
+    }
+
+//      tmpstr=tmpstr+"<ul id='main_list' data-role='listview' >"; 
+//      tmpstr=tmpstr+"<div id='accordion' >";
+
+    if (this.tail == true) {
+      while (ct < st) {
+        if (this.darungs[ct] != undefined) {
+          lbl = this.screen+"_rung_"+ct;
+//          tmpstr=tmpstr+"<li ><a>";
+//          tmpstr=tmpstr+"<h3>"+ct+"</h3>";
+          tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' >"; 
+	  tmpstr=tmpstr+"</div>";
+//          tmpstr=tmpstr+"</a></li>";
+        }
+       ct = ct + 1;
+      }
+    }
+
+//    tmpstr=tmpstr+"</ul>";
+//    tmpstr=tmpstr+"</div>";
+
+     lbl = this.screen;
+     if (document.getElementById(lbl)!= null) {
+
+       document.getElementById(lbl).innerHTML=tmpstr;
+
+//        $('#main_list').listview();
+//        $('#accordion').accordion(); 
+
+       ct = 0; 
+       if (this.zoom == true) {
+          if (this.darungs[ct] != undefined) {
+             adex = this.darungs[ct].dadex;
+             if (this.dalist[adex] != null) {
+               pid = this.dalist[adex];
+	       if (this.darungs[ct].postman == undefined) {
+                 s = this.varname + ".darungs["+ct+"].postman";
+                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.listype,this.is_mini);
+	       }
+               if (this.darungs[ct].postman != undefined) {
+                 this.darungs[ct].postman.set_ppid(pid);
+                 this.darungs[ct].postman.spotid = 'zoom';
+  	         this.darungs[ct].postman.piczoom = true;
+                 this.darungs[ct].postman.build_rung(ct);
+                 this.darungs[ct].postman.draw_rung(ct);
+              }
+	     }
+	  }
+	  ct = ct + 1;
+       }
+
+       if (this.tail == true) {
+         while (ct <= st) {
+           if (this.darungs[ct] != undefined) {
+             adex = this.darungs[ct].dadex;
+             if (this.dalist[adex] != null) {
+               pid = this.dalist[adex];
+               if (this.darungs[ct].postman == undefined ) {
+                 s = this.varname + ".darungs["+ct+"].postman";
+                 this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
+               }
+               if (this.darungs[ct].postman != undefined) {
+	         this.darungs[ct].postman.set_ppid(pid);
+                 this.darungs[ct].postman.build_rung(ct);
+                 this.darungs[ct].postman.draw_rung(ct);
+               }
+	     }
+           }
+           ct = ct + 1;
+	 }
+       }
+    }
+
+    if (this.is_mini == false ) {
+       if (this.railon == true) {
+	   if (this.rail_showing == false) {
+	      this.draw_rail();
+	   } else {
+		   this.draw_raildata();
+	   }
+       }
+    }
+
+
+    if (debug == true) {
+       this.draw_debug();
+    }
+
+}
+
+
+
 viewer.prototype.get_dadex = function() {
    return this.dalist[this.listdex];
 }
 
 
 viewer.prototype.update_one = function(pdx) {
+	alert(pdx);
   var fnd_rung = -1;
   for (var c=0; c<=this.darungs.length;c++) {
          if (this.darungs[c] != undefined) {
@@ -57,8 +184,8 @@ viewer.prototype.update_one = function(pdx) {
   if (fnd_rung != -1) {
         if (this.darungs[fnd_rung].postman != undefined) {
           this.darungs[fnd_rung].postman.changed =false;
+          this.darungs[fnd_rung].postman.redraw_rung();
         }
-        this.draw_rung(fnd_rung);
   } 
 }
 
@@ -162,122 +289,14 @@ viewer.prototype.del_person = function(puname) {
 }
 
 
-viewer.prototype.draw_view = function() {
-
-    var tmpstr = "";
-    var lbl = "";
-    var ocl = "";
-    var moin = "";
-    var mout = "";
-    var ct = 0; 
-    var st = this.top_end;
-    var adex = "";
-    var pid = "";
-    var s = "";
- 
-    var cls='box';
-    if (is_mobile == true) {
-      cls='mbox';
-    }
-    if (this.is_mini == true) {
-      cls='cbox';
-    }
-
-    if (this.zoom == true) {
-         lbl = "zoom_rung_0";
-         tmpstr=tmpstr+"<div id='"+lbl+"' class='zbox' style='' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
-         tmpstr=tmpstr+"</div>";
-	 ct = ct + 1;
-    }
-    
-    if (this.tail == true) {
-      while (ct < st) {
-        if (this.darungs[ct] != undefined) {
-          lbl = this.screen+"_rung_"+ct;
-//          moin = "markyd(\""+lbl+"\");";
-//	    mout = "unmarkyd(\""+lbl+"\");";
-          tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' onmouseover='"+moin+"' onmouseout='"+mout+"' >"; 
-          tmpstr=tmpstr+"</div>";
-        }
-       ct = ct + 1;
-      }
-    }
-
-     lbl = this.screen;
-     if (document.getElementById(lbl)!= null) {
-       document.getElementById(lbl).innerHTML=tmpstr;
-
-       ct = 0; 
-       if (this.zoom == true) {
-          if (this.darungs[ct] != undefined) {
-             adex = this.darungs[ct].dadex;
-             if (this.dalist[adex] != null) {
-               pid = this.dalist[adex];
-	       if (this.darungs[ct].postman == undefined) {
-                 s = this.varname + ".darungs["+ct+"].postman";
-                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.listype,this.is_mini);
-	       }
-               if (this.darungs[ct].postman != undefined) {
-                 this.darungs[ct].postman.set_ppid(pid);
-                 this.darungs[ct].postman.spotid = 'zoom';
-  	         this.darungs[ct].postman.piczoom = true;
-                 if (this.listype == "unsorted") {
-                   this.darungs[ct].postman.shape = "getsort";
-                 }
-                 this.darungs[ct].postman.build_rung(ct);
-                 this.darungs[ct].postman.draw_rung(ct);
-              }
-	     }
-	  }
-	  ct = ct + 1;
-       }
-
-       if (this.tail == true) {
-         while (ct <= st) {
-           if (this.darungs[ct] != undefined) {
-             adex = this.darungs[ct].dadex;
-             if (this.dalist[adex] != null) {
-               pid = this.dalist[adex];
-               if (this.darungs[ct].postman == undefined ) {
-                 s = this.varname + ".darungs["+ct+"].postman";
-                 this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
-               }
-               if (this.darungs[ct].postman != undefined) {
-	         this.darungs[ct].postman.set_ppid(pid);
-                 if (this.listype == "unsorted") {
-                   this.darungs[ct].postman.shape = "getsort";
-                 }
-                 this.darungs[ct].postman.build_rung(ct);
-                 this.darungs[ct].postman.draw_rung(ct);
-               }
-	     }
-           }
-           ct = ct + 1;
-	 }
-       }
-    }
-
-    if (this.is_mini == false ) {
-       if (this.btns_showing == false) {
-	  this.draw_railbtns();
-       }
-       this.draw_raildata();
-    }
-
-
-    if (debug == true) {
-       this.draw_debug();
-    }
-
-}
 
 
 viewer.prototype.draw_debug = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
-     tmp = tmp + " webitlist="+ amare.webitlist.length;
-     tmp = tmp + " viewerlist="+ this.dalist.length;
+     tmp = tmp + " listype="+ this.listype;
+     tmp = tmp + " listlen="+ this.dalist.length;
      tmp = tmp + " rungs="+ this.darungs.length;
      tmp = tmp + " topend="+ this.top_end;
 
@@ -366,6 +385,7 @@ viewer.prototype.unset_zoom = function() {
      }
 
    this.darungs[0].postman = undefined;
+   
    this.tail = true;
    this.draw_view();
 }

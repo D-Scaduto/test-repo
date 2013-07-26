@@ -48,7 +48,7 @@ calendor.prototype.show = function() {
    var lbl = "";
    var o = null;
    var cls = '';
-   var byrs = false;
+   var ocl= "";
   
 
 //       if (this.da_denom == "qtr") {  
@@ -59,79 +59,38 @@ calendor.prototype.show = function() {
 
           o=this.get_net_month(da_mon,-2);
           if (o != null) {
+	    ocl = this.varname + ".scroll_months(-1);";
+	  }
               lbl = 'hdr_prevmon_btn';
-              t = t+ "<span  id='"+lbl+"'  onclick='"+this.varname + ".scroll_months(-1);' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
+              t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button' >";
               t=t+ " <";
-              t = t + "</span>";
-          }
-/*
-          o=this.get_net_month(da_mon,-1);
-          if (o != null) {
-          lbl = 'hdr_month_btna';
-          t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname +".set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          t=t+ " " +this.ymons[o.month];
-          t = t + "</td>";
-          if (o.month == 12) {
-              lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-              t=t+ " '" +o.year;
-              t = t + "</td>";
-              byrs = true;
-          }
-         }
-*/
-          lbl = 'hdr_month_btnb';
-          t = t+ "<span  id='"+lbl+"' onclick='' class='spotd_on'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-          t=t+ " " +this.ymons[this.da_month];
-          t = t + "</span>";
-	  /*
-           if (this.da_month == 12) {
-              lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-              t=t+ " '" +o.year;
-              t = t + "</td>";
-              byrs = true;
-            }
-	    */
-/*
-          o=this.get_net_month(da_mon,1);
-          if (o != null) {
-           lbl = 'hdr_month_btnc';
-           t = t+ "<td  id='"+lbl+"'  onclick='"+this.varname + ".set_month("+o.month+","+o.year+");' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-           t=t+ " " +this.ymons[o.month];
-           t = t + "</td>";
-           if (o.month == 12) {
-              lbl = 'hdr_year_btn';
-              t = t+ "<td  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-              t=t+ " '" +o.year;
-              t = t + "</td>";
-              byrs = true;
-            }
-          }
-*/
-          o=this.get_net_month(da_mon,2);
+              t = t + "</button>";
+
+	  o=this.get_net_month(da_mon,2);
+	  lbl = 'hdr_nextmon_btn';
+	  ocl = "";
           if (o!=null) {
-              lbl = 'hdr_nextmon_btn';
-              t = t+ "<span  id='"+lbl+"'  onclick='"+this.varname + ".scroll_months(1);' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-              t=t+ " >";
-              t = t + "</span>";
-          }
+		  ocl = this.varname + ".scroll_months(1);";
+          }    
+          t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button'  >";
+          t=t+ " >";
+          t = t + "</button>";
 
-
-        if (byrs != true) {
-          lbl = 'hdr_year_btn';
-          t = t+ "<span  id='"+lbl+"'  onclick='' class='spot_off'   onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";
-          t = t + " '"+ this.da_year;
-          t = t + "</span>";
-        }
-
-  //    }
- 
-  
+          lbl = 'hdr_month_btn';
+	  ocl = "mac.toggle_calon();";
+          t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
+          t=t+ " " +this.ymons[this.da_month];
+          t=t+ " '" +this.da_year;
+          t = t + "</button>";
+	    
+     
     lbl = this.spotid;
     var obj = document.getElementById(lbl); 
     if (obj != null) {
       obj.innerHTML = t;
+      $('#hdr_prevmon_btn').button();
+      $('#hdr_month_btn').button();
+      $('#hdr_nextmon_btn').button();
     }
 }
 

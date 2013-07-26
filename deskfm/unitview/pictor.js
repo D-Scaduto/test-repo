@@ -2,15 +2,14 @@
 
 poster.prototype.draw_pic = function() {
 
-   var tspot = this.rung;
    var tmp="";
    var pobj=null;
    var lbl = "";
+   var ocl = "";
    var wd ="75";
    var ps="";
-   
-   var cls="";
-   var ocl = "";
+   var cls = "";
+
 
       ps = this.picurl;
       if (ps != "") {
@@ -22,21 +21,16 @@ poster.prototype.draw_pic = function() {
           if (this.piczoom == true)   {
               cls = "piczoom";
           }
-          tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
+	  ocl = this.varname + ".toggle_piczoom();";
+          tmp=tmp + "<img src='"+ps+"' onclick='"+ocl+"' class='"+cls+"'  >";
 
       } else {
-
-	   /*
-           if (this.parvar == "nicky") {
-                 ocl = this.varname + ".set_shape(\"getpic\");";
-		 lbl = this.rungster + "_getpicbtn";
-		 cls = "spotd_off";
-                 tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' >";  
-                 tmp = tmp + "share a picture"
-                 tmp = tmp + "</span>";
+          if (this.shape == "") {
+		ocl = this.varname+".set_shape(\"getpic\");";
+                tmp = tmp + "<button  onclick='"+ocl+"' >";  
+       		tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
+	        tmp = tmp + "</button>";
 	   }
-	   */
-
       }
 
       lbl = this.rungster + '_pic_spot';
@@ -47,50 +41,49 @@ poster.prototype.draw_pic = function() {
 
 
 poster.prototype.get_pic = function() {
-   var tspot = this.rung;
    var tmp="";
    var pobj=null;
    var lbl = "";
    var wd ="75";
    var ps="";
+   var cls = "";
+   var ocl = "";
 
+     tmp = "";
      ps = this.picurl;
-      if (ps != "") {
 
-	  cls = "piclip";
-	  if (is_mobile == true) {
-         	  cls = "picmobile";
-	  }
-          if (this.piczoom == true)   {
-              cls = "piczoom";
-          }
-          tmp=tmp + "<img src='"+ps+"'  class='"+cls+"'  >";
+     cls = "piclip";
+     if (is_mobile == true) {
+         cls = "picmobile";
+     }
+     if (this.piczoom == true)   {
+         cls = "piczoom";
+     }
+     ocl = this.varname + ".toggle_piczoom();";
 
-      } else {
-
-           if (this.parvar == "nicky") {
-		 tmp = tmp + "<span class='spotd_off' >";
-                 tmp = tmp + "upload a picture";
-		 tmp = tmp + "</span>";
-	   }
-
-      }
+     if ( (ps != "") && (ps != undefined)) {
+          tmp=tmp + "<img src='"+ps+"'  onclick='"+ocl+"' class='"+cls+"'  >";
+     } else {
+           tmp = tmp + "<img src='deskfm/images/icons/camera.png' onclick='"+ocl+"'  class='"+cls+"' >";
+     }
 
       lbl = this.rungster + '_pic_spot';
       if (document.getElementById(lbl) != null) {
         document.getElementById(lbl).innerHTML=tmp;
       }
 
+
         tmp = "";
         lbl = this.rungster + "_upic_frame_name";
-
         tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='pics/uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";
         tmp = tmp + "</form>";   
+
         lbl = this.rungster + '_getpic';
         if (document.getElementById(lbl) != null) {  
           document.getElementById(lbl).innerHTML=tmp;
         }
+
 }
 
 
@@ -133,28 +126,6 @@ poster.prototype.get_pic = function() {
 }
 
 
- poster.prototype.set_pic = function() {
-
-   var tspot = this.rung;
-
-   if ((tspot != undefined) && (tspot != null)) {
-     var st = this.parvar+".darungs["+tspot+"].shape";
-     var sh = eval (st);
-   }
-
-     var tmp="";
-     var pobj=null;
-     var lbl = "";
-     lbl = this.spotid;
-     if (tspot != undefined) {
-       lbl = lbl +'_'+tspot;
-     }
-     lbl = lbl + '_pic_spot';
-
-    if (document.getElementById(lbl) != null) {
-        document.getElementById(lbl).innerHTML=tmp;
-    }
-}
 
 poster.prototype.pic_progress = function() {
 
@@ -213,7 +184,6 @@ poster.prototype.toggle_piczoom = function() {
        this.piczoom = false;
      } else {
        this.piczoom = true;
-       this.shape = "pic";
      }
      this.redraw_rung();
 }

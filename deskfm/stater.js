@@ -31,9 +31,11 @@ stat.prototype.next_chunk = function() {
 function stater () { 
  
    this.webitlist = [];
-   this.productlist = [];
    this.peoplelist = [];
+
+   this.productlist = [];
    this.providerlist = [];
+
    this.unsortedlist = [];
 
    this.substats = [];
@@ -44,6 +46,11 @@ function stater () {
    this.total_people = new stat();
    this.total_products = new stat ();
    this.total_unsorted = new stat();
+
+   this.cat_set = new cat_provider();
+   this.subcat_set = new subcat_provider();
+   this.group_set = new group_provider();
+   this.product_set = new product_provider();
 
 }
 
@@ -311,7 +318,7 @@ stater.prototype.get_webits = function(tchunk) {
 
 
 stater.prototype.get_people = function(tchunk) {
-   var url='deskfm/dbase/dfm_people.php';
+   var url='deskfm/dbase/get_people.php';
    url = url + "?lim="+ da_limit;
    var c = ""
    if (tchunk != undefined) {
@@ -349,7 +356,13 @@ stater.prototype.get_group_list = function(pgroupid) {
 
 stater.prototype.get_unsorted = function(tchunk) {
    var url='deskfm/dbase/get_unsorted.php';
-   url = url + "?lim="+ da_limit;
+
+   var dl = da_limit;
+   if (debug == true) {
+      dl = 10;
+   }
+   url = url + "?lim="+ dl;
+   
 
     if (tchunk != undefined) {
        url = url + "&chunk="+ tchunk;
@@ -684,20 +697,17 @@ stater.prototype.add_unsorted= function(listobj) {
 
  stater.prototype. new_webit= function(pobj) {
 
-       sal.draw_vman();
        var t = this.webitlist.push(pobj);
-
        nicky.new_one(t-1);
         
 }
 
- stater.prototype.update_webit= function(pobj) {
-      
-      sal.draw_vman();
 
+
+ stater.prototype.update_webit= function(pobj) {
       var fnd = -1;
       if (pobj.listype == "webits") {
-        for (var k=0; k<=this.webitlist.length; k++) {
+        for (var k=0; k<this.webitlist.length; k++) {
           if (this.webitlist[k] != undefined) {
             if (this.webitlist[k].pid == pobj.pid) {
                 this.webitlist[k] = pobj;
@@ -708,10 +718,26 @@ stater.prototype.add_unsorted= function(listobj) {
 	if (fnd != -1) {
           daviewer.update_one(pobj.pid);
     	  nicky.update_one(fnd);
+	} else {
+            var j = "";                    
+	    var u= 0;
+           while (u<this.unsortedlist.length) {
+             if (this.unsortedlist[u] != undefined) {
+               if (this.unsortedlist[u].pid == pobj.pid) {
+                  this.unsortedlist[u] = pobj;
+	   	  fnd = u;
+               }
+             }
+	     u = u + 1;
+           }
+           if (fnd != -1) {
+             daviewer.update_one(pobj.pid);
+    	     nicky.update_one(fnd);
+	   }
 	}
       }
 
-      if (pobj.groupid != "") {
+      if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
         fnd = -1;
         for (var k=0; k<=this.peoplelist.length; k++) {
           if (this.peoplelist[k] != undefined) {
@@ -729,7 +755,10 @@ stater.prototype.add_unsorted= function(listobj) {
         }
         daviewer.update_person(pobj.uname);
       }
+
 }
+
+
 
  stater.prototype.del_webit= function(tpid) {
 

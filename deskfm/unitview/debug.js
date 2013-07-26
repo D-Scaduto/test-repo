@@ -4,17 +4,18 @@ poster.prototype.draw_debug = function() {
 
      var tmpstr="";
      var pobj=null;
-     var tspot = this.rung;
      var lbl = "";
      var s = "";
      var es = "";
-     lbl = this.spotid;
-     lbl = lbl +'_'+tspot;
-     lbl = lbl + '_debug_spot';
+  
 
       tmpstr=tmpstr +  "rng=" + this.rung;
       tmpstr=tmpstr +  "dadex="+this.dadex;
+
       if (this.listype == "webits") {
+        tmpstr=tmpstr +  "pid="+this.pid;
+      }
+      if (this.listype == "unsorted") {
         tmpstr=tmpstr +  "pid="+this.pid;
       }
       if (this.listype == "people") {
@@ -27,8 +28,10 @@ poster.prototype.draw_debug = function() {
       tmpstr=tmpstr +  "shape="+this.shape;
       tmpstr=tmpstr +  "ltype="+this.listype;
 
+   lbl = this.rungster + '_debug_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
+	     
           pobj.innerHTML = tmpstr;
      }
 }

@@ -5,11 +5,12 @@ function sharer (pspotid) {
    this.spotid = pspotid;
    this.varname="nicky";
    this.showing = false;
+   this.shape = "";  
+   this.menued = false;
 
-   this.shape = "shrunk";  //full
-   this.networks_showing = false;
+   this.networks_showing = true;
 
-   this.newster = new poster("share_spot",0,this.varname,this.varname +".newster","webits",false); 
+   this.newster = new poster("share",0,this.varname,this.varname +".newster","webits",false); 
    this.newster.btnson = true;
 
 }
@@ -17,122 +18,30 @@ function sharer (pspotid) {
 
 sharer.prototype.show = function() {
 
-    var lbl = "";
-    var pobj = null;
-    var tmp = "";
-    var lbl = "";
-    var ocl = "";
+   var tmp = "";
+   var cls="";
+   var pobj = null;
+   var lbl = "";
+   var ocl="";
 
-          tmp = tmp + "<div class='' style='background-color:white;' >";
+   tmp = tmp + "<div id='share_rung_0' class='' style=''  >";
+   tmp = tmp + " </div>";
 
-	  ocl = "nicky.change_shape();";
-	  lbl = 'share_change_btn';
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
-          tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
-          tmp = tmp + "</span>";
-
-	  lbl = "network_btns";
-          tmp = tmp + "<span id='"+lbl+"' class='' style='float:right;background-color:white;' >";
-          tmp = tmp + "</span>";     
-
-	  ocl = "nicky.toggle_networks();";
-	  lbl = 'share_btn';
-          tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
-          tmp = tmp + "share";
-          tmp = tmp + "</span>"; 
-
-          tmp = tmp + "<div style='clear:right;' ></div>";
-	  tmp = tmp + "</div>";
-         
-
-	  lbl = "name_spot";
-          tmp = tmp + "<div id='"+lbl+"' class='spotd_off' style='float:right;' >";
-          tmp = tmp + "</div>"; 
-          tmp = tmp + "<div style='clear:right;' ></div>";
-
-       	  lbl = "share_spot_rung_0";
-          tmp = tmp + "<div id='"+lbl+"' class='sbox' style='float:right;'  >";
-          tmp = tmp + "</div>";
-	  tmp = tmp + "<div style='clear:right;' ></div>";
-
-   	  lbl = this.spotid;
-	  pobj = document.getElementById(lbl);
-	  if (pobj != null) {
-	      pobj.innerHTML = tmp;
-	      this.showing = true;
-	      if (this.networks_showing == true) {
-	        this.show_network_btns();
-	      }
-	      this.set_shape();
-	  }
-
+     lbl = this.spotid;
+     if (document.getElementById(lbl) != null) {
+       document.getElementById(lbl).innerHTML=tmp;
+       this.showing = true;
+       if (this.networks_showing == true) {
+          this.show_network_btns();
+       }
+       this.newster.build_rung();
+       this.newster.draw_rung();
+     }
+      	     
+   
+      
 }
 
-
-
-
-sharer.prototype.change_shape = function() {
-   if (this.shape == "full") {
-      this.set_shape("shrunk");
-   } else {
-      this.set_shape("full");
-   }
-}
-
-
-sharer.prototype.set_shape = function(pshape) {
-	var tmp = "";
-	var lbl = "";
-	var pobj = null;
-
-   if (pshape != undefined) {
-	this.shape = pshape;
-   }
-
-   if (this.shape == "shrunk") {
-      this.newster.hide_rung();
-      lbl = 'share_spot_rung_0';
-      pobj = document.getElementById(lbl);
-      if (pobj != null) {
-        pobj.innerHTML = "";
-        if (is_ie) {
-          pobj.className = "";
-        } else {
-          pobj.setAttribute("class","");
-        }
-      }
-      jesie.hide();
-      lbl = 'share_btn';
-      pobj = document.getElementById(lbl);
-      if (pobj != null) {
-	tmp = "share";
-        pobj.innerHTML = tmp;
-      }
-
-   }
-
-  if (this.shape == "full") { 
-      lbl = 'share_spot_rung_0';
-      pobj = document.getElementById(lbl);
-      if (pobj != null) {
-        if (is_ie) {
-          pobj.className = "sbox";
-        } else {
-          pobj.setAttribute("class","sbox");
-        }
-      }
-      this.show_network_btns();
-      this.newster.build_rung();
-      this.newster.draw_rung();
-      jesie.show();
-      lbl = 'share_btn';
-      pobj = document.getElementById(lbl);
-      if (pobj != null) {
-          tmp = "share";
-          pobj.innerHTML = tmp;
-      }
-   }
-}
 
 
 sharer.prototype.toggle_networks = function() {
@@ -155,6 +64,7 @@ sharer.prototype.show_network_btns = function() {
 	var moin = "";
 	var mout = ""
         var cls = "";
+
 
                 var twparams='?count=none';
                 twparams = twparams + "&text="+escape(this.story);
@@ -210,6 +120,7 @@ sharer.prototype.hide_network_btns = function() {
 
 }
 
+
 sharer.prototype.new_one = function(pdex) {
      var g = null;
      var t = -1;
@@ -224,6 +135,7 @@ sharer.prototype.new_one = function(pdex) {
 }
 
 
+
 sharer.prototype.add_one = function(pdex) {
    var lbl = "";
    if (this.showing == false) {
@@ -236,14 +148,18 @@ sharer.prototype.add_one = function(pdex) {
 
 
 sharer.prototype.update_one = function(pdex) {
+
    var lbl = "";
    if (this.showing == false) {
        this.show();
    }
    if (pdex != undefined) { 
-       this.newster.set_ppid(pdex);
+      if (this.newster.pid == pdex) {
+        this.newster.set_ppid(pdex);
+      }
    }
    this.newster.redraw_rung();
+
 }
 
 
@@ -257,18 +173,30 @@ sharer.prototype.toggle = function() {
 }
 
 
+sharer.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
+
+sharer.prototype.change = function() {
+	this.toggle();
+}
+
+
 sharer.prototype.hide = function() {
 
    this.newster.hide_rung(); 
-   jesie.hide();
-
+   this.hide_network_btns();
    this.showing = false; 
  
-   lbl = this.spotid;
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       pobj.innerHTML = "";	  
-   }
+  
 
 }
 

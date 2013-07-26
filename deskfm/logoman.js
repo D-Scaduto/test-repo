@@ -6,14 +6,6 @@ function logoman (pspot) {
   this.shape = "shrunk";    //shrunk,full
   this.logo_shape="deskfm";
 
-  this.preset = "sitonly";
-  this.preseter = new suggester("logo_sog",new preset_provider(), this.varname +".preseter",this.varname);
-
-  this.show3d = false;
-  if (is_mobile == true) {
-      this.show3d = false;
-  }
-
   this.zoom = true;
   this.flip =0;
 }
@@ -25,47 +17,16 @@ logoman.prototype.show = function () {
    var tmp = "";
    var ocl = "";
    var cls = "";
+ 
+   lbl = "logo_title";
+   tmp = tmp + "<span id='"+lbl+"' style='' >";
+   tmp = tmp + "</span>";
 
-       lbl = "logo_sog";
-       tmp = tmp + "<span id='"+lbl+"' style='float:left;padding:4px;' >";
-       tmp = tmp + "</span>";
-
-       lbl = "logo_spot";
-       tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
-       tmp = tmp + "</span>";
-
-/*
-       lbl = "view_tail_btn";
-       ocl = "daviewer.toggle_tail();";
-       tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-       tmp = tmp + "</span>"; 
-       tmp = tmp + "</span>";
-*/
-       lbl = "logo_story";
-       tmp = tmp + "<span id='"+lbl+"' style='background-color:white;' >";
-       tmp = tmp + "</span>";
-
-  if (this.shape == "full") {
-
-       tmp = tmp + "<div id='logo_3dview' class='' style='width:300px;' >";
-       tmp = tmp + "</div>";
-  
-   }
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmp;
 	 this.draw_logo(35);
-
-	 if (this.shape == "full") {
-	   this.draw_preman();
-      	   this.draw_vman();
-           this.draw_story();
-	   if (this.show3d == true) {
-             this.draw_3dview();
-	   }
-	 }
    }
 }
 
@@ -80,167 +41,8 @@ logoman.prototype.set_menued = function(ptog) {
 }
 
 
-logoman.prototype.set_preset = function (tpreset) {
-   this.preset = tpreset;
-   this.draw_preman();
-   this.draw_story();
-	 if (this.show3d == true) {
-           this.draw_3dview();
-	 }
-}
 
 
-logoman.prototype.change_shape = function () {
-     if (this.shape == "full") {
-        this.shape = "shrunk";
-     } else {
-	this.shape = "full";
-     }
-     this.show();
-}
-
-logoman.prototype.toggle_zoom = function () {
-
-     if (this.zoom == true) {
-        this.zoom = false;
-     } else {
-	this.zoom = true;
-     }
-     this.draw_3dview();
-}
-
-
-logoman.prototype.change_preset = function () {
-   this.preset = this.preseter.provider.next_preset(this.preset);
-   this.draw_preman();
-   this.draw_story();
-	 if (this.show3d == true) {
-           this.draw_3dview();
-	 }
-}
-
-logoman.prototype.toggle_3dview = function () {
-
-     if (this.show3d == true) {
-          this.hide_3dview();
-     } else {
-	  this.draw_3dview();
-     }
-}
-
-logoman.prototype.draw_share = function () {
-
-     var lbl = "";
-     var tmp = "";
-     var twparams='?count=none';
-     twparams = twparams + "&text="+escape(this.story)
-     tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
-
-     lbl = "logo_share";
-     if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmp;
-               if (twttr != undefined) {
-                 if (twttr.widgets != undefined) {
-                   twttr.widgets.load();
-                 }
-               }
-     }
-
-}
-
-
-logoman.prototype.draw_preman = function () {
-
-     var lbl = "";
-     var tmp = "";
-              if (this.preseter != null) {
-                 ocl = this.varname + ".preseter.request_suggestions();"
-                 tmp = tmp + "<span id='' onclick='"+ocl+"'  >";  
-                 tmp = tmp + this.preseter.provider.preset_pic(this.preset);
-                 tmp = tmp + "</span>";
-              }
-
-     lbl = "logo_sog";
-     if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmp;
-     }
-
-}
-
-
-logoman.prototype.draw_story = function() {
-
-  var tmp = "";
-  var tlink = "";
-  var ocl="";
-  var pobj=null;
-  var lbl = "";
-
-       tmp = "";
-       tmp = tmp + " <div class='spotd_off' style='width:250px;margin:0 auto;' > ";
-       tmp = tmp +  this.preseter.provider.preset_story(this.preset);
-
-       tmp = tmp + " </div> ";
-
-       lbl = 'logo_story';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
-       }
-}
-
-
-logoman.prototype.draw_3dview = function() {
-
-  var tmp = "";
-  var tlink = "";
-  var ocl="";
-  var pobj=null;
-  var lbl = "";
-  var wd = '250';	 
-  var ht = '200';
-
-  if (this.zoom == true) {
-      wd = '500';
-      ht = '300';
-  }
-
-       tmp = "";
-           tlink = this.preseter.provider.preset_embed(this.preset,this.zoom);
-           tmp = tmp + " <div style='width:"+wd+"px;margin:0 auto;' > ";
-           tmp = tmp + "<iframe src='"+tlink+"' style='width:"+wd+"px;' ";
-           tmp = tmp + " scrolling='no'  width='"+wd+"' height='"+ht+"' > ";
-           tmp = tmp + " </iframe> ";
-           tmp = tmp + " </div> ";
-
-       lbl = 'logo_3dview';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
-	 this.show3d = true;
-       }
-   
-}
-
-
-logoman.prototype.hide_3dview = function() {
-
-  var tmp = "";
-  var tlink = "";
-  var ocl="";
-  var pobj=null;
-  var lbl = "";
-
-       tmp = "";
-
-       lbl = 'logo_3dview';
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-         pobj.innerHTML = tmp;
-	 this.show3d = false
-       }
-   
-}
 
 logoman.prototype.change_vman = function () {
 
@@ -334,73 +136,33 @@ logoman.prototype.draw_logo = function (psz) {
    var ocl = "";
 
    if (this.logo_shape == "deskfm") {
-            lbl = this.spotid + '_logo_lspot';
+            lbl = this.spotid + '_logo_spot1';
 	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"D");
-            tmpstr=tmpstr+"</span>";
+            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style=''  >";
+            tmpstr = tmpstr + "DeskFM.com";
+            tmpstr=tmpstr+"</button>";
            
-	    lbl = this.spotid + '_logo_lspot1';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"esk");
-            tmpstr=tmpstr+"</span>";
+           
 
-            lbl = this.spotid + '_logo_rspot';
-	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"FM");
-            tmpstr=tmpstr+"</span>";
 
-	    lbl = this.spotid + '_logo_rspot22';
-            ocl = this.varname + ".set_logoshape(\"freedom\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,".com");
-            tmpstr=tmpstr+"</span>";
    } 
    if (this.logo_shape == "freedom") {
-            lbl = this.spotid + '_logo_lspot';
+            lbl = this.spotid + '_logo_spot1';
 	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"D");
-            tmpstr=tmpstr+"</span>";
-            
-	    lbl = this.spotid + '_logo_lspot1';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"esk");
-            tmpstr=tmpstr+"</span>"; 
+            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style=''  >";
+            tmpstr = tmpstr + "Desk FreedoM";
+            tmpstr=tmpstr+"</button>";
+           
+           
 
-	    lbl = this.spotid + '_logo_rspot1';
-	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"F");
-            tmpstr=tmpstr+"</span>";
-
-            lbl = this.spotid + '_logo_rspot2';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"reedo");
-            tmpstr=tmpstr+"</span>";
-
-            lbl = this.spotid + '_logo_rspot3';
-	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"M");
-            tmpstr=tmpstr+"</span>";
    } 
-   if (this.logo_shape == "standing") {
-            lbl = this.spotid + '_logo_lspot';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"Standing");
-            tmpstr=tmpstr+"</span>";
+  
 
-            lbl = this.spotid + '_logo_rspot';
-            tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"' style='background-color:white;'  >";
-            tmpstr = tmpstr + table_word(lbl,"Desks");
-            tmpstr=tmpstr+"</span>";
-   } 
-
-   lbl = "logo_spot";
+   lbl = "logo_title";
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
+	 $('#'+this.spotid + '_logo_spot1').button();
+	 
    }
 
 }

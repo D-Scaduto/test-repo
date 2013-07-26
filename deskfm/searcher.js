@@ -18,7 +18,7 @@ function searcher (pmenuid) {
 
 
 searcher.prototype.show = function() {
-
+  
    var tmp = "";
    var cls="";
    var pobj = null;
@@ -27,34 +27,20 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-
-   lbl = "search_btn";
-   ocl = "wanda.change_shape();";
-   tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"' class='spotd_off' style='' >";
-   tmp = tmp + "search";
-   tmp = tmp + "</span>";
-
-   if (this.shape == "full") {
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
      tmp = tmp + "<span style='padding:2px' >";
      tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
      tmp = tmp + "</span>";
-   }
 
-   /*
-   lbl = "search_icbtn";
+   
+   lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";
    tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='' >";
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
    tmp = tmp + "</span>";
-   */
-  
-   ocl = "wanda.change_shape();";
-   lbl = 'search_change_btn';
-   tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='float:right;'  onclick='"+ocl+"' > ";
-   tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
-   tmp = tmp + "</span>";
+
+   
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
@@ -62,22 +48,8 @@ searcher.prototype.show = function() {
       this.showing = true;
     
    } 
+   
 
-
-          lbl =  "search_btn";
-          pobj = document.getElementById(lbl);
-          if (pobj != null) {
-            if (is_ie) {
-              pobj.className = "spotd_on";
-            } else {
-              pobj.setAttribute("class","spotd_on");
-            }
-          }
-	
-
-   if (pname == "debug") {
-     this.draw_debug();
-   }
 }
 
 
@@ -153,16 +125,6 @@ searcher.prototype.hide = function() {
    if (pobj != null) {
        pobj.innerHTML=tmpstr; 
        this.showing = false;
-   }
-
-   lbl = "search_btn";
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       if (is_ie) {
-         pobj.className = "spotd_off";
-       } else {
-         pobj.setAttribute("class","spotd_off");
-       }
    }
 
 }

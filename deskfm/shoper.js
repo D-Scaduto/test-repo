@@ -5,67 +5,81 @@ function shoper (pspotid) {
   this.spotid=pspotid;
   this.varname='store';
   this.menued = false;
-  this.prodid = '';
-  this.producter = new suggester("product_sog",new product_provider(), "store.producter","store");
+  this.shape = "all";//one
 
+  this.prodid = '';
   this.pricemax=1500;
   this.pmaxtext="< $1500";
-  this.pricer = new suggester("price_sog",new price_provider(), "store.pricer","store");
 
 }
 
 
 shoper.prototype.show = function() {
-    var tmpstr = "";
-    var tstr1 = "";
+    var tmp = "";
     var lbl = "";
     var obj = null;
-    var tcl = "";
     var ocl = "";
-    var omo = "";
-    var cls = "";
-    var ims = "";
-    var ts = "";
-    var so = "";
 
-         ts = "products";
-         if (this.prodid !="") {
-             ts = this.producter.provider.get_desc(this.prodid);
-         }
-         lbl = 'product_sog';
-         cls = 'spotd_off';
-         tmpstr = tmpstr + "<span  id='"+lbl+"'  class='"+cls+"' style='width:200px;'   >";
-         tmpstr=tmpstr+ "<span class='spotd_off' onclick='store.producter.request_suggestions(\"\");' style=''  >";
-         tmpstr=tmpstr+ ts;
-         tmpstr=tmpstr+"</span>";
+       if (this.shape == "one") {
 
-/*
-         lbl = 'price_sog';
-         cls = 'spotd_off';
-         tmpstr = tmpstr + "<div  id='"+lbl+"'  class='"+cls+"' onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-         tmpstr=tmpstr+ "<div class='spotd_off' onclick='store.pricer.request_suggestions();' >";
-         tmpstr=tmpstr+this.pmaxtext;
-         tmpstr=tmpstr+"</div>";
-         tmpstr=tmpstr+"</div>";
-*/
+	lbl = 'product_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:125px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >products</a>";
 
-/*
-       lbl = 'mobile_buy';
-       tmpstr=tmpstr+"<div id='"+lbl+"' style=''  >";
-       tmpstr=tmpstr+"</div>";
-*/
+        tmp = tmp +"<ul  style='width:300px;' >";
+        sugs = amare.product_set.get_setlist();
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a ptag='"+sugs[i].prodid+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
 
-    lbl = this.spotid;
-    obj = document.getElementById(lbl)
-    if (obj != null) {
-      obj.innerHTML=tmpstr;
-      this.showing = true;
+  	    lbl = 'product_all_btn';
+            ocl = '';
+            tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
+	    if (this.prodid != "") {
+              s = amare.product_set.get_desc(this.prodid);
+	    }
+	    tmp = tmp + s;
+            tmp = tmp + "</button>";
+
+     } else if (this.shape == "all") {
+
+	lbl = 'product_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:125px;display:inline-block;' >";
+  	tmp = tmp +"<li><a >products</a>";
+
+        tmp = tmp +"<ul  style='width:300px;' >";
+        sugs = amare.product_set.get_setlist();
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a ptag='"+sugs[i].prodid+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
+     }
+
+     lbl = this.spotid;
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+          this.showing = true;
+  
+	    if (this.shape == "one") {
+		  $('#product_all_btn').button();
+	    } 
+            
+	      $('#product_sog').menu();
+	      $('#product_sog').on( "menuselect", function( event, ui ) {
+ 	         var p,v  = "";
+                 p = ui.item.children().attr('ptag');
+  	         v = ui.item.children().attr('vtag');
+	         if ((p!= undefined) && (v != undefined)) {
+	           var exp = v + ".set_product(\""+ p + "\");";
+	           eval(exp);
+	         }
+               } );
+	    
+	  daviewer.load_product_list(this.prodid);
     }
 
-
-    if (pname == "debug") {
-       this.draw_debug();
-    }
 }
 
 
@@ -84,22 +98,8 @@ shoper.prototype.set_product = function(tprod) {
       if (tprod != undefined) {
          this.prodid=tprod;
       }
-//      if (this.pricemax != -1) {
-        daviewer.load_product_list(this.prodid); 
-//      }
-
-      if (this.producter.layer.style.visibility == "hidden") {
-          lbl = "product_sog";
-          tmp = "<span onclick='store.producter.request_suggestions(\"\");' class='spotd_off' >";
-          var so = this.producter.provider.get_desc(this.prodid);
-          tmp = tmp + so;
-          tmp = tmp + "</span>";
-          obj = document.getElementById(lbl);
-          if (obj != null) {
-            obj.innerHTML=tmp;
-          }
-      }
-
+     this.shape = "one";
+     this.show();
 }
 
 
@@ -111,42 +111,13 @@ shoper.prototype.set_pricemax = function(tpmax,tptxt) {
          this.pmaxtext=tptxt;
       }
 
-//      this.daviewer.set_productscreen(this.prodid); 
-      if (this.pricer.layer.style.visibility == "hidden") {
-          lbl = "price_sog";
-          tmp = "<div onclick='store.pricer.request_suggestions();' class='spotd_off' >";
-          tmp = tmp + this.pmaxtext;
-          tmp = tmp + "</div>";
-          obj = document.getElementById(lbl);
-          if (obj != null) {
-            obj.innerHTML=tmp;
-          }
-      }
-
 }
 
 
 shoper.prototype.change = function() {
-     var bret=false;
-     if (this.prodid == "") {
-         this.producter.request_suggestions("");
-     } else {
 
-        if (this.producter != null) {
-         bret = this.producter.next_suggestion();
-         this.producter.hide_suggestions();
-        }
-     }
-     return bret;
+   this.show();
 }
-
-
-shoper.prototype.hide_suggs = function() {
-   if (this.producter != null) {
-        this.producter.hide_suggestions();
-   }
-}
-
 
 
 

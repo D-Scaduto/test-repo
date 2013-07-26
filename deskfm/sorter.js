@@ -6,12 +6,13 @@ function sorter (pspotid) {
    this.showing = false;
    this.varname = "mac";
 
-   this.shape = "sort"; // feed
+   this.shape = ""; // live
 
    this.menued = false;
    this.sterms = "standing desk";
 
    this.cal = new calendor('cal_spot',"mac.cal");
+   this.calon = true;
 
 }
 
@@ -23,63 +24,60 @@ sorter.prototype.show = function() {
    var pobj = null;
    var lbl = "";
    var ocl="";
-   
-       tmp = tmp + "<span id='cal_spot' >";
-       tmp = tmp + "</span>";
 
+       if (this.shape == "live") {
+	 tmp = tmp + "<button id='live_feed_btn' onclick='mac.toggle_shape();' data-role='button'  >";
+         tmp = tmp + "live";
+         tmp = tmp + "</button>";
 
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "<input id='feed_string' size='15' value='"+this.sterms+"' >";
-       tmp = tmp + "</span>";
+        
+         tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
+      
 
-       tmp = tmp + "<span class='spotd_off' onclick='mac.check_feed();' >";
-       tmp = tmp + "twitter";
-       tmp = tmp + "</span>";
+         tmp = tmp + "<button id='twitter_feed_btn' onclick='mac.check_feed();' data-role='button'  >";
+         tmp = tmp + "check twitter";
+         tmp = tmp + "</button>";
 
-       tmp = tmp + "<div id='feed_btns'  >";
-       tmp = tmp + "</div>";
+         tmp = tmp + "<span id='feed_btns'  >";
+         tmp = tmp + "</span>";
 
+ 	
+
+       } else {
+
+	 tmp = tmp + "<button id='live_feed_btn' onclick='mac.toggle_shape();' data-role='button'  >";
+         tmp = tmp + "live";
+         tmp = tmp + "</button>";
+
+	 tmp = tmp + "<span id='cal_spot' >";
+         tmp = tmp + "</span>";
+
+	
+       }
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
+
+      $('#live_feed_btn').button();
+
+      if (this.shape == "live") {
+        $('#twitter_feed_btn').button();
+      } else {
+ 	this.cal.show();
+	daviewer.load_unsorted_list();
+      }
+
       this.showing = true;
-      this.cal.show();
-      if (this.shape == "sort") {
-	  this.redraw_view();
-      }	  
+      
    } 
 
-   lbl = this.spotid + "_btn";
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       if (is_ie) {
-         pobj.className = "spotd_on";
-       } else {
-         pobj.setAttribute("class","spotd_on");
-       }
-   }
-
 }
-
-
-sorter.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
-	this.show();
-}
-
 
 sorter.prototype.redraw_view = function() {
 	daviewer.load_unsorted_list();
-}
 
+}
 
 sorter.prototype.set_shape = function(pstr) {
 	if (pstr != undefined) {
@@ -89,9 +87,18 @@ sorter.prototype.set_shape = function(pstr) {
 }
 
 
-sorter.prototype.toggle_feed = function() {
-	if (this.shape != "feed") {
-		this.shape = "feed";
+sorter.prototype.toggle_calon = function() {
+	if (this.calon == true) {
+		this.calon = false;
+	} else {
+          this.calon = true;
+	}
+	this.show();
+}
+
+sorter.prototype.toggle_shape = function() {
+	if (this.shape != "live") {
+		this.shape = "live";
 	} else {
           this.shape = "";
 	}
@@ -113,11 +120,22 @@ sorter.prototype.check_feed = function() {
 
  
 
-
-
 sorter.prototype.change = function() {
-
+    this.show();
 }
+
+
+sorter.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
 
 
 sorter.prototype.hide = function() {
@@ -135,15 +153,7 @@ sorter.prototype.hide = function() {
        this.showing = false;
    }
 
-   lbl = this.spotid + "_btn";
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-       if (is_ie) {
-         pobj.className = "spotd_off";
-       } else {
-         pobj.setAttribute("class","spotd_off");
-       }
-   }
+   
 }
 
 

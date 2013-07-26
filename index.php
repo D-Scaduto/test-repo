@@ -7,7 +7,10 @@ header('X-Frame-Options: SAMEORIGIN');
 <head>
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
-<link rel=StyleSheet href=deskfm/twitter/tws_style.css type="text/css" media="screen,print" />
+<!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" /-->
+<!--link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /-->
+<link rel="stylesheet" href="lib/jquery-ui.css" />
+
 <title>deskfm.com</title>
 
 <script  type="text/javascript" >
@@ -36,9 +39,11 @@ header('X-Frame-Options: SAMEORIGIN');
 
 </script>
 
-<script src="../lib/jquery-code.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--script src="http://code.jquery.com/jquery-1.8.3.min.js"></script-->
+<!--script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script-->
 <script src="../lib/jquery-insight.js" type="text/javascript"></script>
-
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
 <script src=deskfm/logoman.js type="text/javascript" ></script>
@@ -151,7 +156,6 @@ header('X-Frame-Options: SAMEORIGIN');
 </div>
 
 <div style='clear:left;' ></div> 
-<div style='clear:right;' ></div> 
 
 <div id='main_view' class='' style='padding:10px;'  >
 </div>
@@ -182,7 +186,7 @@ header('X-Frame-Options: SAMEORIGIN');
    do_preload();
 //   init_months();
 
-        sal = new logoman("logo");
+        sal = new logoman("logo_spot");
         nicky = new sharer("share_spot");
 	jesie = new namer("name_spot");
 
@@ -195,9 +199,9 @@ header('X-Frame-Options: SAMEORIGIN');
         elle = new model();
 
 	diego = new header("menu_spot");
-	diego.shape = "shrunk";
-        diego.add_mainspot("browse","cater");
-        diego.main_shape = "browse";
+	diego.shape = "full";
+	diego.add_mainspot("browse","cater");
+	diego.add_mainspot("search","wanda");
    
         daviewer = new viewer("main_view","daviewer");
 
@@ -207,7 +211,8 @@ header('X-Frame-Options: SAMEORIGIN');
 
        } else {
            da_limit = 1000;
-           daviewer.top_end = 100;
+	   daviewer.top_end = 100;
+           elle.shape = "wingout";
        }
 
 	elle.draw_main();
@@ -226,37 +231,37 @@ header('X-Frame-Options: SAMEORIGIN');
         if (width < 801) {
           if (is_mobile != true) {
 	      is_mobile = true;
-          }
+	  }
+	  if (elle.shape != "") {
+ 	    elle.shape = "";
+	    elle.draw_main();
+	  }
         } else {
           if ((is_mobile == true) && (is_ie == false)) {
 	      is_mobile = false;
-          }
+	  }
+	  if (elle.shape != "wingout") {
+  	    elle.shape = "wingout";
+	    elle.draw_main();
+	  }
         }
     });
 
+
     $(window).scroll(function() {
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#menu_spot').hasClass('top_menu') == false) {
-		$('#menu_spot').addClass('top_menu');
-		$('#menu_spot').removeClass('bot_menu');
-
-	    }
-	    if ($('#rail_spot').hasClass('top_rail') == false) {
-		$('#rail_spot').addClass('top_rail');
-		$('#rail_spot').removeClass('bot_rail');
+	    if ($('#outer_menu').hasClass('top_menu') == false) {
+		$('#outer_menu').addClass('top_menu');
+		$('#outer_menu').removeClass('flying_menu');
 	    }
 	} else {
-	    if ($('#menu_spot').hasClass('bot_menu') == false) {
-		$('#menu_spot').addClass('bot_menu');
-		$('#menu_spot').removeClass('top_menu');
-	    }
-	    if ($('#rail_spot').hasClass('bot_rail') == false) {
-		$('#rail_spot').addClass('bot_rail');
-		$('#rail_spot').removeClass('top_rail');
+	    if ($('#outer_menu').hasClass('flying_menu') == false) {
+		$('#outer_menu').addClass('flying_menu');
+		$('#outer_menu').removeClass('top_menu');
 	    }
 	}
     });
-
+ 
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 

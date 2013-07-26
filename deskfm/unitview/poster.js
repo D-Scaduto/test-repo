@@ -38,12 +38,6 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
 
    this.shape = "";
 
-   this.preseter = null; 
-   this.preset = "sitonly";
-   if (this.parvar == "nicky")  { 
-     this.preseter = new suggester(this.rungster+"_presog",new preset_provider(), this.varname +".preseter",this.varname);
-   }
-
    this.cat ="";
    this.subcat ="";
    this.prodid = "";
@@ -130,55 +124,52 @@ poster.prototype.set_ppid = function(pdadex) {
 }
 
 
- poster.prototype.work_btns = function() {
-       var tmp = "";
+
+
+
+poster.prototype.draw_btns = function() {
+
+    var tmp = "";
        var lbl = "";
        var ocl="";
-       var cls = "";
 
-    if (this.btnson == true) {
-
-    if ((buddah == true) || (this.parvar == "nicky")) {
-
-       cls = 'spotd_off';
-       tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".toggle_getstory();' >";  
-       tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
-       tmp = tmp + "</span>"; 
-
-       if (this.listype != "people") { 
-         cls = 'spotd_off';
-         ocl =  this.varname+".toggle_getlink();";
-         tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-         tmp = tmp + "</span>";
-
-         cls = 'spotd_off';
-         ocl =  this.varname+".toggle_getembed();";
-         tmp = tmp + "<span class='"+cls+"' onclick='"+ocl+"' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-         tmp = tmp + "</span>";
+       if ((this.parvar == "nicky") || (daviewer.zoom == true)) {
+	 ocl = this.varname + ".change_shape()";
+       } else {
+	 ocl = this.varname + ".toggle_btnson()";
        }
+	 lbl = this.rungster + "_btns_btn";
+         tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
+         tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
+         tmp = tmp + "</button>";
 
-       cls = 'spotd_off';
-       tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".toggle_getpic();' >";  
-       tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
-       tmp = tmp + "</span>"; 
+        if (this.btnson == true) {
+	 lbl = this.rungster + "_nav_btns";
+         tmp = tmp + "<span  id='"+lbl+"' >";  
+	 tmp = tmp + "</span>";
 
-       if (buddah == true)  {
-	 cls = 'spotd_off';
-         tmp = tmp + "<span class='"+cls+"' onclick='"+this.varname+".toggle_getsort();' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/categories.png' height='20px' >";
-         tmp = tmp + "</span>"; 
-       } 
+	 lbl = this.rungster + "_work_btns";
+         tmp = tmp + "<span  id='"+lbl+"' >";  
+	 tmp = tmp + "</span>";
 
-    }
-    }
+	 lbl = this.rungster + "_send_btns";
+         tmp = tmp + "<span  id='"+lbl+"' style='float:right;' >";  
+	 tmp = tmp + "</span>";
 
-     lbl = this.rungster + '_work_btns';
+	 tmp = tmp + "<div  style='clear:right;' ></div>";  
+	}
+
+     lbl = this.rungster + '_btns_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
+	  if (this.btnson == true) {
+	    this.work_btns();
+	    this.nav_btns();
+	    this.change_btns();
+	  }
      }
+
 }
 
 
@@ -187,121 +178,103 @@ poster.prototype.nav_btns = function() {
    var tmp = "";
    var lbl = "";
    var ocl = "";
-   var tspot = this.rung;
-
-    if (this.parvar != "nicky" ) {
-      lbl = this.rungster + "_totop_btn";
-      cls='spotd_off';
-      ocl = ""; 
-      if (this.rung != 0) {
-		ocl = this.parvar + ".to_top("+this.rung+");";
-      } else {
-	        ocl = this.parvar + ".toggle_zoom();";
-      }
-      tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-      tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
-      tmp = tmp + "</span>";
-    }
-
-      if (this.btnson == true) { 
 
           if (this.is_mini == true ) {
 
-              cls='spotd_off';
               ocl = this.parvar + ".del_rung("+this.rung+")";
-              lbl = this.spotid + "_" + tspot + "_delfrom_mini_btn";
-              tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+              lbl = this.rungster + "_delfrom_mini_btn";
+              tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
           } else {
 
+	     if (this.parvar != "nicky") {
+               lbl = this.rungster + '_totop_btn';
+               ocl = "";
+   	       if (this.rung == 0)  { 
+	 	 ocl = "daviewer.toggle_zoom();";
+ 	       } else {
+                 ocl = this.parvar + ".to_top("+this.rung+");";
+	         ocl = ocl + "daviewer.set_zoom();";
+	       }
+
+              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button'  >";
+              tmp = tmp + "<img src='deskfm/images/icons/black_mag.png' height='15px' >";
+              tmp = tmp + "</button>";
+            }
 
           }
 
           if (this.listype == "people") {
-                cls='spotd_off';
                 ocl = this.varname + ".toggle_mini();";
-                lbl = this.spotid + "_" + tspot + "_mini_btn";
-                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+                lbl = this.rungster + "_mini_btn";
+                tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"'  >";
                 tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
-                tmp = tmp + "</span>";
+                tmp = tmp + "</button>";
 /*
                 cls='spotd_off';
                 ocl = "amare.get_cperson_list(\""+this.uname+"\");";
                 lbl = this.spotid + "_" + tspot + "_refresh_mini";
-                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+                tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"' >";
                 tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='25px' >";
-                tmp = tmp + "</span>";
+                tmp = tmp + "</button>";
 */
           }
- 
-          if (buddah==true) {
-
-              if ((this.shape == "share") && (this.listype == "webits")) {
-
-                cls='spotd_off';
-                lbl = this.spotid + "_" + tspot + "_tweetbtn";
-                moin = "markyd(\""+lbl+"\");";
-                mout = "unmarkyd(\""+lbl+"\");";
-                ocl='';
-                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-                var twparams='?count=none';
-                twparams = twparams + "&text="+escape(this.story);
-/*
-                if (this.linkurl != "") {
-                  twparams = twparams + "&url="+escape(this.linkurl);
-                } else {
-                  twparams = twparams + "&url="+escape("http://deskfm.com");
-                }
-*/
-                tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
-                tmp = tmp + "</span>";
-
-              }
-
-          }
-
-              if (this.parvar != "nicky" ) {
-  	        if (buddah == true) {
-                  lbl = this.spotid + "_" + tspot + "_btns";
-                  cls='spotd_off';
-                  ocl = this.varname + ".toggle_btnson();";
-                  tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-                  tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
-                  tmp = tmp + "</span>";
-		}
-
-		 
-	      }
+         
      
-       } else {
-               if (buddah == true) {
-                  lbl = this.spotid + "_" + tspot + "_btns";
-                  cls='spotd_off';
-                  ocl = this.varname + ".toggle_btnson();";
-                  tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
-                  tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
-                  tmp = tmp + "</span>";
-	       }
-       }
-
-	 
-
-         lbl = this.spotid + "_" + tspot + "_nav_btns";
+         lbl = this.rungster + "_nav_btns";
          if (document.getElementById(lbl)!= null) {
              document.getElementById(lbl).innerHTML=tmp;
-             if (this.btnson == true) {
-   	       if (nonets == false) {
-                 if (twttr != undefined) {
-                   if (twttr.widgets != undefined) {
-                     twttr.widgets.load();
-                   }
-                 }
-	       }
-             }
          } 
 }
+
+
+ poster.prototype.work_btns = function() {
+       var tmp = "";
+       var lbl = "";
+       var ocl="";
+       var cls = "";
+
+       if (this.shape == "getstory") {
+       	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getstory();' >";  
+         tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
+         tmp = tmp + "</button>";  
+       } 
+       if (this.shape == "getpic" ) {
+	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getpic();' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
+	 tmp = tmp + "</button>"; 
+       } 
+       if (this.shape == "getlink" ) {
+         ocl = this.varname + ".toggle_getlink();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+	 tmp = tmp + "</button>";
+
+       } 
+       if (this.shape == "getembed" ) {
+	 ocl = this.varname + ".toggle_getembed();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+	 tmp = tmp + "</button>";
+       } 
+       if (this.shape == "getsort" ) {
+	 ocl = this.varname + ".set_shape(\"\");";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
+	 tmp = tmp + "</button>";
+       }
+
+     lbl = this.rungster + '_work_btns';
+     pobj = document.getElementById(lbl);
+    
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+     }
+}
+
+
 
 
  poster.prototype.change_btns = function() {
@@ -313,67 +286,61 @@ poster.prototype.nav_btns = function() {
 
        if (this.changed == true) {
 
-         cls='spotd_off';
          ocl = this.varname + ".do_undo();";
          lbl = this.spotid + "_" + this.rung + "_undo_btn";
-         tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";
+         tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"' >";
 //              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
          tmp = tmp + "undo";
-         tmp = tmp + "</span>";
+         tmp = tmp + "</button>";
 
          if (this.listype == "webits") {
 
             lbl = this.spotid + "_" + this.rung + "_save_btn";
-            omo = "markyd(\""+lbl+"\");";
-            omt = "unmarkyd(\""+lbl+"\");";
             if (this.pid == "") {
               ocl = this.varname+".do_newpost();";
-              tmp=tmp + "<span id='"+lbl+"' class='spotd_off'  onClick='"+ocl+"'  onmouseover='"+omo+"' onmouseout='"+omt+"' >";  
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
             } else {
               lbl = this.spotid + "_" + this.rung + "_update_btn";
               ocl = this.varname+".update_webit();";
-              tmp=tmp + "<span id='"+lbl+"' class='spotd_off' onClick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";  
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
             }
 
          } else if (this.listype == "people") {
 
               ocl = this.varname+".update_person();";
-              tmp=tmp + "<span class='spotd_off' onClick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");'  >";  
+              tmp=tmp + "<button onClick='"+ocl+"'    >";  
               tmp = tmp + "save";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
          } else if (this.listype=="unsorted") {
 
             lbl = this.spotid + "_" + this.rung + "_save_btn";
-            omo = "markyd(\""+lbl+"\");";
-            omt = "unmarkyd(\""+lbl+"\");";
             if (this.pid == "") {
               ocl = this.varname+".do_newpost();";
-              tmp=tmp + "<span id='"+lbl+"' class='spotd_off'  onClick='"+ocl+"'  onmouseover='"+omo+"' onmouseout='"+omt+"' >";  
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
             } else {
               lbl = this.spotid + "_" + this.rung + "_update_btn";
               ocl = this.varname+".update_webit();";
-              tmp=tmp + "<span id='"+lbl+"' class='spotd_off' onClick='"+ocl+"'  onmouseover='markyd(\""+lbl+"\");' onmouseout='unmarkyd(\""+lbl+"\");' >";  
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
             }
 	 }
 	 
      }
 
-     lbl = this.spotid;
-     lbl = lbl +'_'+this.rung;
-     lbl = lbl + '_send_btns';
+
+     lbl = this.rungster + '_send_btns';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
@@ -387,11 +354,24 @@ poster.prototype.set_shape = function(tshape) {
 }
 
 
-poster.prototype.set_preset = function(tpreset) {
-     this.preset = tpreset;
-     this.build_rung();
-     this.draw_rung();
+poster.prototype.change_shape = function() {
+     var tshape = "";
 
+     if (this.shape == "") {
+	     tshape = "getstory";
+     } else if (this.shape == "getstory") {
+	     tshape = "getpic";
+     } else if (this.shape == "getpic") {
+	     tshape = "getlink";
+     } else if (this.shape == "getlink") {
+	     tshape = "getembed"; 
+     } else if (this.shape == "getembed") {
+	     tshape = "getsort";
+     } else if (this.shape == "getsort") {
+	     tshape = "";
+     }
+	
+     this.set_shape(tshape);
 }
 
 
@@ -419,16 +399,14 @@ poster.prototype.toggle_btnson = function() {
 poster.prototype.turn_btnson = function() {
   if (this.btnson != true) {
     this.btnson = true;
-    this.nav_btns();
-    this.work_btns();
+    this.redraw_rung();
   }
 }
 
 poster.prototype.turn_btnsoff = function() {
   if (this.btnson != false) {
     this.btnson = false;
-    this.nav_btns();
-    this.work_btns();
+    this.redraw_rung();
   }
 }
 

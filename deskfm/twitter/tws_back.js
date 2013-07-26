@@ -58,6 +58,7 @@ function tws_store(i)
     df = df + " " + bigd.getHours() + ":" + bigd.getMinutes() + ":" + bigd.getSeconds();
 
      url = url + "&twdate="+encodeURIComponent(df); 
+     alert(url);
 
     $.get(url, function(data) {
          var lbl =  "#tws_"+i;
@@ -185,33 +186,24 @@ function tws_get(qry_str)
      }
      var qe = escape(qry_str);
      if (qry_str != undefined) {
-       query ="?q="+qe + "&rpp="+rpp;
+       query ="?q="+qe + "&count="+rpp;
      }
 
      var url='';
      url = 'deskfm/twitter/tws_search.php';
 
-     var op = "";
-     var cur_page = 0;
-
+    
      var s = "";
      s = url + query;
 
+   //  alert(s);
+ 
      $.getJSON(s,function(json) {
+	var op = "";
+         op = op + "<input type=button value='prev page' onClick='' > ";
+        
 
-        var np = json.next_page; 
-        cur_page = json.page; 
-        var rfsh = json.refresh_url +"&rpp=100";
-
-        if (cur_page >1) {
-             var prev_page = cur_page - 1;
-            op = op + "<input type=button value='prev page' onClick='tws_reget(\""+rfsh+"&page="+prev_page+"\")' > ";
-        } 
-
-        if (np != undefined) {
-          np = np.substring(1, np.length); 
-          op = op + "<input type=button value='next page' onClick='tws_reget(\""+np+"\")' > "; 
-        } 
+          op = op + "<input type=button value='next page' onClick='' > "; 
 
         op = op + "<input type=button value='save all' onClick='tws_saveall();' > "; 
 
@@ -219,7 +211,7 @@ function tws_get(qry_str)
 
         amare.add_unsorted(json);
 
-    });   // end get json 
+     });   
 }
 
 
