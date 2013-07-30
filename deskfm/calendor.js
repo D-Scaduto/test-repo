@@ -1,10 +1,11 @@
 
-function calendor (pspotid,pvarname) { 
+function calendor (pvarname) { 
 
-   this.spotid = pspotid;
-   this.showing = false;
    this.varname = pvarname;
 
+   this.spotid = "";
+   this.showing = false;
+  
    this.ymons = ['','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
    this.mini_mons = ['','j','f','m','a','m','j','j','a','s','o','n','d'];
    this.wdays = ['mon','tue','wed','thu','fri','sat','sun'];
@@ -40,9 +41,13 @@ calendor.prototype.init_months = function() {
 
 
 
-calendor.prototype.show = function() {
+calendor.prototype.show = function(pspotid) {
 
-   this.showing = true;
+	if (pspotid != undefined) {
+		this.spotid = pspotid;
+	}
+
+  
 
    var t = "";
    var lbl = "";
@@ -77,7 +82,7 @@ calendor.prototype.show = function() {
           t = t + "</button>";
 
           lbl = 'hdr_month_btn';
-	  ocl = "mac.toggle_calon();";
+	  ocl = "";
           t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
           t=t+ " " +this.ymons[this.da_month];
           t=t+ " '" +this.da_year;
@@ -88,6 +93,7 @@ calendor.prototype.show = function() {
     var obj = document.getElementById(lbl); 
     if (obj != null) {
       obj.innerHTML = t;
+      this.showing = true;
       $('#hdr_prevmon_btn').button();
       $('#hdr_month_btn').button();
       $('#hdr_nextmon_btn').button();

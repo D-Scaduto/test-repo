@@ -26,6 +26,9 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
    this.story="";
    this.story_tmp;
    this.picurl ="";
+   this.dfdate = "";
+   this.created_at = "";
+   this.change_date = "";
 
    this.linkurl ="";
    this.link_tmp;
@@ -37,7 +40,7 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
    this.urls = [];
 
    this.shape = "";
-
+       
    this.cat ="";
    this.subcat ="";
    this.prodid = "";
@@ -83,7 +86,9 @@ poster.prototype.set_ppid = function(pdadex) {
         s =  "amare.productlist[" + pdadex + "]";
     } else if (this.listype == "unsorted") {
         s =  "amare.unsortedlist[" + pdadex + "]";
-    }
+    } else if (this.listype == "unsaved") {
+        s =  "amare.unsavedlist[" + pdadex + "]";
+    } 
 
     pobj = eval(s);
     if (pobj != null) {
@@ -91,6 +96,13 @@ poster.prototype.set_ppid = function(pdadex) {
       this.pid=pobj.pid;
       this.uname=pobj.uname;
       this.source=pobj.source;
+      this.dfdate=pobj.dfdate;
+      
+      if ((pobj.created_at != "") && (pobj.created_at != undefined))  {
+	 this.created_at=pobj.created_at;
+      }
+
+      this.change_date=pobj.change_date;
       this.picurl=pobj.picurl;
       this.linkurl=pobj.linkurl;
       this.story=pobj.story;         
@@ -114,6 +126,17 @@ poster.prototype.set_ppid = function(pdadex) {
         this.groupid=pobj.groupid;
       }
      
+      if (pobj.listype == "unsorted")  {
+	      
+           this.btnson = true;
+	   this.shape="getsort";
+      }
+
+       if (pobj.listype == "unsaved")  { 
+           this.btnson = true;
+	   this.shape="getsort";
+      }
+
       this.changed = false;
     } else {
 //      alert("err: "+pdadex);
@@ -335,7 +358,32 @@ poster.prototype.nav_btns = function() {
               tmp = tmp + "save";
               tmp = tmp + "</button>";
             }
-	 }
+
+	 } else if (this.listype=="unsaved") {
+
+            lbl = this.spotid + "_" + this.rung + "_save_btn";
+            if (this.pid == "") {
+              ocl = this.varname+".do_newpost();";
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
+//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp = tmp + "save";
+              tmp = tmp + "</button>";
+            } else {
+              lbl = this.spotid + "_" + this.rung + "_update_btn";
+              ocl = this.varname+".update_webit();";
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
+//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp = tmp + "save";
+              tmp = tmp + "</button>";
+            }
+	     lbl = this.spotid + "_" + this.rung + "_ignore_btn";
+              ocl = this.varname+".ignore_webit();";
+              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
+//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
+              tmp = tmp + "ignore";
+              tmp = tmp + "</button>";
+
+	 } 
 	 
      }
 
@@ -458,46 +506,7 @@ poster.prototype.clear = function() {
 
 
 
- poster.prototype.do_newpost = function() {
-
-     var pcat="";
-     var linkcode = escape(this.linkurl);
-     var storycode = escape(this.story);
-     var picode = escape(this.picurl);
-     var embedcode = escape(this.embedurl);
-
-     var prams = "?uname="+ jesie.pname;
-     prams = prams + "&source="+this.source;
-     prams = prams + "&listype=webits";
-     if (this.cat_changed == true) {
-       prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
-     }
-     if (this.story_changed == true) {
-       prams = prams + "&storycode="+storycode;
-     }
-
-     if (this.link_changed == true) {
-       prams = prams + "&linkcode="+linkcode;
-     }
-     if (this.pic_changed == true) {
-       prams = prams + "&picode="+picode;
-     }
-     if (this.embed_changed == true) {
-       prams = prams + "&embedcode="+embedcode;
-     }
-     if (this.group_changed == true) {
-       prams = prams + "&groupid="+this.groupid;
-     }
-     var url = "deskfm/dbase/dfm_dbadd.php"+prams;
-     alert(url);
-     $.getJSON(url,function(json) {
-           amare.new_webit(json.pobj);
-     });
-    sal.waiting();
-}
-
-
- poster.prototype.update_webit = function() {
+ poster.prototype.save_webit = function() {
 
      var pcat="";
      var linkcode = escape(this.linkurl);
@@ -529,7 +538,7 @@ poster.prototype.clear = function() {
        prams = prams + "&groupid="+this.groupid;
      }
 
-     var url = "deskfm/dbase/update_webit.php"+prams;
+     var url = "deskfm/dbase/save_webit.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);

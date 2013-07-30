@@ -21,7 +21,9 @@ class pfoo {
    public $prodid;
    public $price;
    public $source;
-   public $dfdate ;
+   public $dfdate;
+   public $created_at = "";
+   public $change_date = "";
    public $picurl;
    public $linkurl;
    public $embedurl;
@@ -96,7 +98,7 @@ $con = mysql_connect($Server, $username, $password);
     $foodo = new foo;
  
     $foodo->source = "twitter";
-    $foodo->listype = "webits";
+    $foodo->listype = "unsorted";
 
     $foodo->pid =    $row['webit_id'];
     $foodo->picurl = $row['picurl'];
@@ -106,6 +108,7 @@ $con = mysql_connect($Server, $username, $password);
 
     $foodo->cat = $row['cat'];
     $foodo->subcat = $row['subcat'];
+
     $foodo->dfdate = $row['twdate'];
  
     $foodo->linkurl = $row['linkurl'];

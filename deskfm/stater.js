@@ -32,11 +32,11 @@ function stater () {
  
    this.webitlist = [];
    this.peoplelist = [];
-
    this.productlist = [];
    this.providerlist = [];
 
    this.unsortedlist = [];
+   this.unsavedlist = [];
 
    this.substats = [];
    this.prodstats = [];
@@ -46,6 +46,7 @@ function stater () {
    this.total_people = new stat();
    this.total_products = new stat ();
    this.total_unsorted = new stat();
+   this.total_unsaved = new stat();
 
    this.cat_set = new cat_provider();
    this.subcat_set = new subcat_provider();
@@ -629,6 +630,35 @@ stater.prototype.get_cperson_list = function(tuname) {
 }  
 
 
+stater.prototype.add_unsaved = function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.unsavedlist.length;i++) {
+                  if (this.unsavedlist[i] != undefined) {
+                    if (listobj.dalist[j].uname == this.unsavedlist[i].uname) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.unsavedlist.splice(found_at,1);
+              }
+              this.unsavedlist.unshift(listobj.dalist[j]);
+         }
+      }
+      diego.redraw_view("unsaved");
+
+}  
+
+
 
 stater.prototype.add_unsorted= function(listobj) {
        var r = 0;
@@ -681,7 +711,7 @@ stater.prototype.add_unsorted= function(listobj) {
 
 
 
- stater.prototype.add_webit= function(tpobj) {
+ stater.prototype.add_webit = function(tpobj) {
 
    var t=-1;
    if (tpobj != undefined) {
@@ -695,7 +725,7 @@ stater.prototype.add_unsorted= function(listobj) {
 }
 
 
- stater.prototype. new_webit= function(pobj) {
+ stater.prototype.new_webit = function(pobj) {
 
        var t = this.webitlist.push(pobj);
        nicky.new_one(t-1);

@@ -116,6 +116,11 @@ viewer.prototype.load_rungs = function(ldex) {
                this.darungs[c].dadex = r;
              }
 	   }
+	   if (this.listype == "unsaved") {
+             if (amare.unsavedlist[k] != undefined) {
+               this.darungs[c].dadex = r;
+             }
+	   }
          }
 
          r = r+1;
@@ -169,6 +174,13 @@ viewer.prototype.redraw_rungs = function(trungdex) {
                  a = a+1;
                }
              }
+
+	    if (this.listype == "unsaved") {
+               if (amare.unsavedlist[rd] != null) {
+                 darungs2[a].dadex = rd;
+                 a = a+1;
+               }
+            }
          }
       }
 
@@ -190,6 +202,18 @@ viewer.prototype.redraw_rungs = function(trungdex) {
              }
              if (this.listype == "products") {
                if (amare.productlist[rd] != null) {
+                 darungs2[a].dadex = rd;
+                 a = a+1;
+               }
+             }
+	     if (this.listype == "unsorted") {
+               if (amare.unsortedlist[rd] != null) {
+                 darungs2[a].dadex = rd;
+                 a = a+1;
+               }
+             }
+	     if (this.listype == "unsaved") {
+               if (amare.unsavedlist[rd] != null) {
                  darungs2[a].dadex = rd;
                  a = a+1;
                }

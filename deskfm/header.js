@@ -57,24 +57,32 @@ header.prototype.show = function() {
 
 
 header.prototype.redraw_view = function (psetype,pchunk) {
-    if (this.main_shape == "browse" ) {
-	    if (psetype == "webits") { 
-   	       cater.redraw_view(pchunk);
-	    }
-    } else if (this.main_shape == "contact") {
-	    joe.redraw_view(pchunk);
 
-    } else if (this.main_shape == "sort") {
-            if (psetype == "unsorted") {
-               mac.redraw_view(pchunk);
-	    }
-    } else {
-        daviewer.load_random_list();
+
+    if (psetype == "webits") { 
+        cater.redraw_view(pchunk);
     }
+
+    if (psetype == "people") { 
+       joe.redraw_view(pchunk);
+    } 
+
+    if (psetype == "unsaved") { 
+         
+        mac.redraw_view("unsaved",pchunk);
+    }
+    if (psetype == "unsorted") { 
+
+      mac.redraw_view("unsorted",pchunk);
+    }
+
     if (wanda.sterms != "") {
 	    wanda.check_local();
     }
+
 }
+
+
 
 header.prototype.draw_mainmenu = function() {
      var tmp = "";

@@ -6,6 +6,9 @@ function webit(tpid) {
    this.listype="webits";
    this.stored=false;
    this.source = "deskfm";
+   this.dfdate = null;
+   this.created_at = "";
+   this.change_date = "";
 
    this.uname="";
    this.groupid = "";

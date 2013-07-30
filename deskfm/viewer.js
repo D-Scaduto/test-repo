@@ -5,7 +5,7 @@ function viewer (pscreen,pvarname) {
    this.screen = pscreen;
    this.varname = pvarname;
 
-   this.listype = "webits";
+   this.listype = "";
    this.cat="";       
    this.subcat="";    
    this.sterms = "";
@@ -134,6 +134,7 @@ viewer.prototype.draw_view = function() {
                  this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
                }
                if (this.darungs[ct].postman != undefined) {
+		 this.darungs[ct].postman.listype=this.listype;
 	         this.darungs[ct].postman.set_ppid(pid);
                  this.darungs[ct].postman.build_rung(ct);
                  this.darungs[ct].postman.draw_rung(ct);
@@ -170,7 +171,7 @@ viewer.prototype.get_dadex = function() {
 
 
 viewer.prototype.update_one = function(pdx) {
-	alert(pdx);
+//	alert(pdx);
   var fnd_rung = -1;
   for (var c=0; c<=this.darungs.length;c++) {
          if (this.darungs[c] != undefined) {

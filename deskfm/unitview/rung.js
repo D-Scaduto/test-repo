@@ -74,9 +74,6 @@
 
           }
 
-
-    
-
       if ((this.btnson == true) && (buddah == true))  {
          if (this.shape == "getsort")  {
            this.get_catsel();
@@ -87,12 +84,10 @@
 	 }
       }
 
-     if ((buddah == true) || (this.parvar == "nicky")) {
-         this.change_btns();
-     }
 
+	 this.draw_date();
 
-//     this.darungs[pspot].postman.set_price();
+//
 //     this.draw_date(pspot,this.darungs[tspot].dadex);
 //     this.draw_place(pspot,this.darungs[tspot].dadex);
 
@@ -165,36 +160,36 @@
                } else {
 
                     if (this.listype == "products") {
-                      lbl= this.spotid + "_" + lspot + "_" + "buy"+ "_spot";
+                      lbl= this.rungster + "_" + "buy"+ "_spot";
                       tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >"; 
                       tmpstr=tmpstr+"</span>";
                     } else {
-                      lbl= this.spotid + "_" + lspot + "_" + "name" + "_spot";
-	              tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >"; 
+                      lbl= this.rungstert + "_" + "name" + "_spot";
+	              tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >";
+		 
                       tmpstr=tmpstr+"</span>";
                     }
 
                     tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 		
 
-	  	  lbl= this.spotid + "_" + lspot + "_" + "pic" + "_spot";
+	  	  lbl= this.rungster + "_" + "pic" + "_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;'  >"; 
                   tmpstr=tmpstr+"</span>";
 
-		  lbl= this.spotid + "_" + lspot + "_" + "story" + "_spot";
+		  lbl= this.rungster + "_" + "story" + "_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
 	          tmpstr=tmpstr+"</span>";	
                  
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
                   if ((this.btnson == true) && (this.shape == "getpic")) {
-  	              lbl= this.spotid + "_" + lspot + "_getpic";
+  	              lbl= this.rungster + "_getpic";
 	              tmpstr=tmpstr+"<div  id='"+lbl+"' style='float:right;' >";
                       tmpstr=tmpstr+"</div>";
                       tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
-  	              lbl= this.spotid ;
-                      lbl = lbl + "_" + lspot + "_upic_frame";
+  	              lbl= this.rungster + "_upic_frame";
 		      var z = "";
                       z = this.varname+".get_newpic();";
                       tmpstr=tmpstr+"<iframe id='"+lbl+"' name='"+lbl+"_name' onload='"+z+"' src='' style='display:none;' >"; 
@@ -202,20 +197,26 @@
                   }
 
 		 
- 		 
-		  lbl= this.spotid + "_" + lspot + "_link_spot";
+  		  lbl= this.rungster + "_date_spot";
+	          tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off'   style='float:right;' >"; 
+                  tmpstr = tmpstr + "hey"; 
+		  tmpstr=tmpstr+"</span>";	
+                 
+                  tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+ 
+		  lbl= this.rungster + "_link_spot";
                   tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style='display:inline-block;'  >"; 
     	          tmpstr=tmpstr+"</div>";
   	          
-		  lbl= this.spotid + "_" + lspot + "_embed_btn";
+		  lbl= this.rungster + "_embed_btn";
                   tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style='display:inline-block;'  >"; 
     	          tmpstr=tmpstr+"</div>";
 	       
-		  lbl= this.spotid + "_" + lspot + "_sort_spot";
+		  lbl= this.rungster + "_sort_spot";
                   tmpstr=tmpstr+"<div id='"+lbl+"' class='' onclick='' style='display:inline-block;'  >"; 
   		  tmpstr=tmpstr+"</div>";
 
-		  lbl= this.spotid + "_" + lspot + "_embed_spot";
+		  lbl= this.rungster + "_embed_spot";
                   tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</div>";
 

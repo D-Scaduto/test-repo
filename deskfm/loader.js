@@ -255,7 +255,6 @@ viewer.prototype.load_unsorted_list = function() {
 
      this.dalist = [];
 
-
      mx = amare.unsortedlist.length;
 
       for (var r=d; r<mx;r++) {
@@ -360,3 +359,31 @@ viewer.prototype.load_list = function(pstart) {
 }
 
 
+viewer.prototype.load_unsaved_list = function() {
+
+    var lgo = true;
+    var d = 0;
+    var mx = 0;
+    var ro = null;
+    var ok = false;
+
+     this.listype = "unsaved";
+
+     this.stats = amare.total_unsaved;
+
+     this.dalist = [];
+
+     mx = amare.unsavedlist.length;
+
+     for (var r=d; r<mx;r++) {
+        ro = amare.unsavedlist[r];
+        if (ro != undefined) {
+          ok = false;
+          this.dalist[d] = r;
+          d = d+1 
+        }
+     } 
+
+    this.load_rungs(0);
+    this.draw_view();
+}

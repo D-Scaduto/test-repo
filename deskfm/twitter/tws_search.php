@@ -21,6 +21,8 @@ $bearer_token = $reply->access_token;
    public $price = "";
    public $source = "";
    public $dfdate = "";
+   public $created_at = "";
+   public $change_date = "";
    public $picurl = "";
    public $linkurl = "";
    public $embedurl = "";
@@ -31,32 +33,40 @@ $bearer_token = $reply->access_token;
  class bar {
 	
 	 public $listlen = 0;
-	 public $next_page = "";
-	 public $page = "";
-	 public $refresh_url = "";
+	 public $last_twid = "";
+	 public $first_date = "";
+	 public $last_date = "";
 	 public $dalist = "";
  }
 
  $rebar = new bar;
  $arr = array();
 
- $q = "";
+ $q = "q=standing desk";
  if (isset($_GET['q'])) {
    $q = $_GET['q'];
-   $qs = "q=" . $q;
+   $q = "q=" . $q;
  }
  
- $count = 0;
+ $count = 100;
  if (isset($_GET['count'])) {
 	$count = $_GET['count'];
- 	$qs = $qs . "&count=" . $count;
+ 	$q = $q . "&count=" . $count;
  }
 
+ $maxid = "";
+ if (isset($_GET['max_id'])) {
+	$maxid = $_GET['max_id'];
+ 	$q = $q . "&max_id=" . $maxid;
+ }
 
- $reply = $cb->search_tweets($qs,true);
- $rebar->listlen = sizeof($reply->statuses);
+ $reply = $cb->search_tweets($q,true);
+ $len = sizeof($reply->statuses);
+ $rebar->listlen = $len; 
+ $rebar->last_twid = $reply->statuses[$len-1]->id_str;
+ $rebar->first_date = $reply->statuses[0]->created_at;
+ $rebar->last_date = $reply->statuses[$len-1]->id_str;
 
- 
     for ($i =0; $i < sizeof($reply->statuses); $i++ ) {
 
       $d = $reply->statuses[$i];
@@ -66,10 +76,9 @@ $bearer_token = $reply->access_token;
       $foodo = new foo;
  
       $foodo->source = "twitter";
-      $foodo->listype = "unsorted";
+      $foodo->listype = "unsaved";
 
       $foodo->pid =    $d->id_str;
-
 
         $foodo->picurl = $d->user->profile_image_url;
 
@@ -77,7 +86,7 @@ $bearer_token = $reply->access_token;
 
       $foodo->story  =  $d->text;
 
-      $foodo->dfdate = $d->created_at;
+	$foodo->created_at = $d->created_at;
  
       $foodo->linkurl = "";
       $foodo->embedurl = "";

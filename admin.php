@@ -29,7 +29,8 @@ header('X-Frame-Options: SAMEORIGIN');
   var sal = null;    //logoman
   var diego = null;  //header
   var mac  = null;   //farmer
-  var elle = null;   //model 
+  var elle = null;   //model
+  var krono = null;  //calendor 
 
   var da_limit=1000;
   var init_run = true;
@@ -54,6 +55,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/webit.js type="text/javascript" ></script>
 <script src=deskfm/unitview/poster.js type="text/javascript" ></script>
 <script src=deskfm/unitview/rung.js type="text/javascript" ></script>
+<script src=deskfm/unitview/dater.js type="text/javascript" ></script>
 <script src=deskfm/unitview/childview.js type="text/javascript" ></script>
 <script src=deskfm/unitview/catsel.js type="text/javascript" ></script>
 <script src=deskfm/unitview/storyor.js type="text/javascript" ></script>
@@ -99,9 +101,7 @@ header('X-Frame-Options: SAMEORIGIN');
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
-<script src=deskfm/twitter/tws_front.js type="text/javascript" ></script>
-<script src=deskfm/twitter/tws_back.js type="text/javascript" ></script>
-
+<script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
  
@@ -204,7 +204,7 @@ header('X-Frame-Options: SAMEORIGIN');
 
    buddah=true;
 
-
+   krono = new calendor("krono");
    amare = new stater();
    elle = new model();
    daviewer = new viewer("main_view","daviewer");
