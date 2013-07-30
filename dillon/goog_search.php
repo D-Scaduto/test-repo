@@ -1,5 +1,21 @@
 <?php
 /*
+  takes a search term $SearchItem
+  collects an array of 100 image items
+  writes the array to a file called $FileName
+*/
+
+$FileName = 'search_results.txt';
+$SearchItem = 'standing desks';
+
+header('Content-type: text/html; charset=utf-8 ');
+header('X-Frame-Options: SAMEORIGIN');
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
+
+<?php
+/*
  * Copyright 2011 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,17 +42,35 @@ $client->setApplicationName('Google CustomSearch PHP Starter Application');
  $client->setDeveloperKey('AIzaSyCjXAewxHxllLQEd_Da4jUbo7XGbax62k4');
 $search = new Google_CustomsearchService($client);
 
+$totResult = array();
+for ($i=1;$i<100;$i+=10){
+  // Example executing a search with your custom search id.
+  
+  $result = $search->cse->listCse($SearchItem, array(
+	  'cx' => '006053170280681811530:cu2m8chxs6u', // The custom search engine ID to scope this search query.
+	  'start' => $i , 
+	  'num' => '10' , 
+	  'searchType' => 'image' ,
+   ));
+   
+  for ($j=0;$j<10;$j++){
+    $totResult[$j+$i] = $result['items'][$j];
+  }
+  
+}
 
-// Example executing a search with your custom search id.
-$result = $search->cse->listCse('standing desks', array(
-	'cx' => '006053170280681811530:cu2m8chxs6u', // The custom search engine ID to scope this search query.
-	'start' => '90' , 
-        'num' => '10' , 
-));
-print "<pre>" . print_r($result, true) . "</pre>";
+// encodes results to ensure easier manipulation
+file_put_contents( $FileName, json_encode($totResult));
 
-// Example executing a search with the URL of a linked custom search engine.
-//$result = $search->cse->listCse('burrito', array(
-//  'cref' => 'http://www.google.com/cse/samples/vegetarian.xml',
-//));
-//print "<pre>" . print_r($result, true) . "</pre>";
+//used for testing
+//print "<pre>" . print_r($totResult, true) . "</pre>";
+
+
+/*
+ * Example executing a search with the URL of a linked custom search engine.
+ * $result = $search->cse->listCse('burrito', array(
+ * 'cref' => 'http://www.google.com/cse/samples/vegetarian.xml',
+ * ));
+ * print "<pre>" . print_r($result, true) . "</pre>";
+*/
+?>
