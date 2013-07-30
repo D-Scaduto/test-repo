@@ -1,9 +1,16 @@
 
+
+function listdex () {
+    this.mdex = "";
+    this.ltype = "";
+}
+
+
 function webit(tpid) { 
 
    this.pid = tpid;
   
-   this.listype="webits";
+   this.listype="";
    this.stored=false;
    this.source = "deskfm";
    this.dfdate = null;

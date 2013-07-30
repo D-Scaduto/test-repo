@@ -87,8 +87,6 @@
 
 	 this.draw_date();
 
-//
-//     this.draw_date(pspot,this.darungs[tspot].dadex);
 //     this.draw_place(pspot,this.darungs[tspot].dadex);
 
         if (debug == true) {
@@ -97,24 +95,15 @@
 }
 
 
- poster.prototype.build_rung = function(tspot) {
-     var lspot = this.rung;
-     if (tspot != undefined) {
-      lspot = tspot;
-     }
+ poster.prototype.build_rung = function() {
 
        var tmpstr = "";
-       var tocl = "";
-       var lbl = "";
        var ocl = "";
        var moin = "";
        var mout = "";
        var lbl = "";
        var cls = '';
        var pobj = null;
-       var wd = "";
-       var mw = "";
-       var sp ="";
 
 	  lbl = this.rungster + "_mark";
 	  tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='background-color:white;padding:4px;' >"; 
@@ -227,7 +216,7 @@
       }
 
 
-      lbl = this.spotid + "_rung_" + lspot;
+      lbl = this.spotid + "_rung_" + this.rung;
       pobj = document.getElementById(lbl);
 
       if (pobj != null) {

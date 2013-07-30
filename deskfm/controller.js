@@ -88,37 +88,41 @@ viewer.prototype.load_rungs = function(ldex) {
  
        var lgo = true;
        var c=0;
-       var k=0;
+       var mdex=0;
+       var ltype = "";
 
        while (lgo) {
 
          if (this.dalist[r] != undefined) {
-           this.darungs[c] = new Object();
-           k = this.dalist[r];
 
-           if (this.listype == "webits") {
-             if (amare.webitlist[k] != undefined) {
-               this.darungs[c].dadex = r;
+           mdex = this.dalist[r].mdex;
+	   ltype = this.dalist[r].ltype;
+	   
+    	   this.darungs[c] = new Object();
+
+           if (ltype == "webits") {
+             if (amare.webitlist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
              }
 	   }
-           if (this.listype == "people") {
-             if (amare.peoplelist[k] != undefined) {
-               this.darungs[c].dadex = r;
+           if (ltype == "people") {
+             if (amare.peoplelist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
              }
 	   }
-           if (this.listype == "products") {
-             if (amare.productlist[k] != undefined) {
-               this.darungs[c].dadex = r;
+           if (ltype == "products") {
+             if (amare.productlist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
              }
 	   }
-           if (this.listype == "unsorted") {
-             if (amare.unsortedlist[k] != undefined) {
-               this.darungs[c].dadex = r;
+           if (ltype == "unsorted") {
+             if (amare.unsortedlist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
              }
 	   }
-	   if (this.listype == "unsaved") {
-             if (amare.unsavedlist[k] != undefined) {
-               this.darungs[c].dadex = r;
+	   if (ltype == "unsaved") {
+             if (amare.unsavedlist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
              }
 	   }
          }
@@ -142,42 +146,46 @@ viewer.prototype.redraw_rungs = function(trungdex) {
     var r = 0;
     var c = 0;
     var a = 0;
+    var rd, lt = "";
+
     if (trungdex != undefined) {
        r = trungdex;
     }
+
     var darungs2 = [];
       for (c=r; c<this.darungs.length;c++) {
          if (this.darungs[c] != undefined) {
              darungs2[a] = new Object();
-             var rd = this.darungs[c].dadex;
-             if (this.listype == "webits") {
+             rd = this.darungs[c].vdex;
+
+             if (lt == "webits") {
                if (amare.webitlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-             if (this.listype == "people") {
+             if (lt == "people") {
                if (amare.peoplelist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-             if (this.listype == "products") {
+             if (lt == "products") {
                if (amare.productlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-            if (this.listype == "unsorted") {
+            if (lt == "unsorted") {
                if (amare.unsortedlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
 
-	    if (this.listype == "unsaved") {
+	    if (lt == "unsaved") {
                if (amare.unsavedlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
             }
@@ -187,34 +195,36 @@ viewer.prototype.redraw_rungs = function(trungdex) {
       for (c=0; c<r;c++) {
          if (this.darungs[c] != undefined) {
              darungs2[a] = new Object();
-             var rd = this.darungs[c].dadex;
-             if (this.listype == "webits") {
+             rd = this.darungs[c].dadex;
+	     lt = this.dalist[rd].listype;
+
+             if (lt == "webits") {
                if (amare.webitlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-             if (this.listype == "people") {
+             if (lt == "people") {
                if (amare.peoplelist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-             if (this.listype == "products") {
+             if (lt == "products") {
                if (amare.productlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-	     if (this.listype == "unsorted") {
+	     if (lt == "unsorted") {
                if (amare.unsortedlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
-	     if (this.listype == "unsaved") {
+	     if (lt == "unsaved") {
                if (amare.unsavedlist[rd] != null) {
-                 darungs2[a].dadex = rd;
+                 darungs2[a].vdex = rd;
                  a = a+1;
                }
              }
@@ -226,7 +236,7 @@ viewer.prototype.redraw_rungs = function(trungdex) {
         if (darungs2[z] != undefined) {
            this.darungs[z] = new Object();
            var ad = darungs2[z].dadex;
-           this.darungs[z].dadex = ad;
+           this.darungs[z].vdex = ad;
         }
       }
 
@@ -242,13 +252,16 @@ viewer.prototype.load_random_rungs = function() {
    var r = 0;
    var i =0;
    var mx = this.dalist.length;
-   var ro = null;
+   var mdex = null;
+   var ltype = "";
+
    this.darungs = [];
 
    while (i<this.top_end) {
        r = Math.floor((Math.random()*mx));
-       ro = this.dalist[r];
-       if (ro != undefined) {
+       if (this.dalist[r] != undefined) {
+         mdex = this.dalist[r].mdex;
+         ltype = this.dalist[r].ltype;
          var used = false;
          for (var z=0;z<=tls.length;z++){
            if (r == tls[z]) {

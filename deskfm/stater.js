@@ -735,8 +735,12 @@ stater.prototype.add_unsorted= function(listobj) {
 
 
  stater.prototype.update_webit= function(pobj) {
+
       var fnd = -1;
-      if (pobj.listype == "webits") {
+      var j = "";                    
+      var u = 0;
+      var s = 0;
+
         for (var k=0; k<this.webitlist.length; k++) {
           if (this.webitlist[k] != undefined) {
             if (this.webitlist[k].pid == pobj.pid) {
@@ -746,11 +750,14 @@ stater.prototype.add_unsorted= function(listobj) {
           }
         }
 	if (fnd != -1) {
-          daviewer.update_one(pobj.pid);
-    	  nicky.update_one(fnd);
+
+		// update webitlist 
+                daviewer.update_one(pobj.pid);
+      	        nicky.update(pobj.pid);
+
+
 	} else {
-            var j = "";                    
-	    var u= 0;
+           u = 0;
            while (u<this.unsortedlist.length) {
              if (this.unsortedlist[u] != undefined) {
                if (this.unsortedlist[u].pid == pobj.pid) {
@@ -761,12 +768,35 @@ stater.prototype.add_unsorted= function(listobj) {
 	     u = u + 1;
            }
            if (fnd != -1) {
-             daviewer.update_one(pobj.pid);
-    	     nicky.update_one(fnd);
+
+         	
+			// if cat != ""  
+			// remove from unsorted list 
+			// else add to webitlist
+			// else just update unsorted
+
+	   } else {
+ 		s = 0;
+                while (s<this.unsavedlist.length) {
+                  if (this.unsavedlist[s] != undefined) {
+                    if (this.unsavedlist[s].pid == pobj.pid) {
+                      this.unsavedlist[s] = pobj;
+	   	      fnd = s;
+                    }
+                  }
+	          s = s + 1;
+                }
+		if (fnd != -1) {
+
+			// remove from unsaved list 
+			// if cat == "" add to unsorted list 
+			// else add to webitlist
+
+	   	}
 	   }
 	}
-      }
 
+/*
       if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
         fnd = -1;
         for (var k=0; k<=this.peoplelist.length; k++) {
@@ -785,6 +815,7 @@ stater.prototype.add_unsorted= function(listobj) {
         }
         daviewer.update_person(pobj.uname);
       }
+*/
 
 }
 

@@ -1,15 +1,18 @@
 
 
-function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) { 
+function poster(idtogo,trung,tparvar,tvarname,bmini) { 
 
    this.spotid = idtogo;
    this.parvar = tparvar;
    this.varname = tvarname;
    this.rung = trung;
-   this.listype = tlistype;
+   this.listype = "";
+   this.source = "deskfm";
+   this.dadex=0;
+ 
    this.is_mini = false;
-   if (bimini == true) {
-     this.is_mini = bimini 
+   if (bmini != undefined) {
+      this.is_mini = bmini;
    }
 
    this.showing = false;
@@ -18,9 +21,6 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
 
    this.mini_viewer = null;
    this.mini_showing = false;
-   if ((tlistype == "people") || (this.parvar == "nicky"))  { 
-     this.mini_showing = true;
-   }
 
    this.pid = "";
    this.story="";
@@ -57,8 +57,7 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
    this.twitterid = "";
    this.googleid = "";
 
-   this.source = "deskfm";
-   this.dadex=0;
+ 
    this.piczoom = false;
    this.color = "black";
 
@@ -72,12 +71,19 @@ function poster(idtogo,trung,tparvar,tvarname,tlistype,bimini) {
 }
 
 
-poster.prototype.set_ppid = function(pdadex) {
+poster.prototype.set_ppid = function(pdadex,plistype) {
   var s = "";
   var pobj = null;
 
   if (pdadex != undefined) {
     this.dadex = pdadex;
+  }
+
+  if (plistype != undefined) {
+       this.listype = plistype;
+  } 
+
+
     if (this.listype == "webits") {
         s =  "amare.webitlist[" + pdadex + "]";
     } else if (this.listype == "people") {
@@ -141,9 +147,8 @@ poster.prototype.set_ppid = function(pdadex) {
     } else {
 //      alert("err: "+pdadex);
     }
-  } else {
-//   alert("err: "+pdadex);
-  }  
+
+
 }
 
 
@@ -318,24 +323,16 @@ poster.prototype.nav_btns = function() {
 
          if (this.listype == "webits") {
 
-            lbl = this.spotid + "_" + this.rung + "_save_btn";
-            if (this.pid == "") {
-              ocl = this.varname+".do_newpost();";
+            lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".save_webit();";
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
               tmp = tmp + "</button>";
-            } else {
-              lbl = this.spotid + "_" + this.rung + "_update_btn";
-              ocl = this.varname+".update_webit();";
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
-              tmp = tmp + "</button>";
-            }
 
          } else if (this.listype == "people") {
 
+	         lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_person();";
               tmp=tmp + "<button onClick='"+ocl+"'    >";  
               tmp = tmp + "save";
@@ -343,39 +340,22 @@ poster.prototype.nav_btns = function() {
 
          } else if (this.listype=="unsorted") {
 
-            lbl = this.spotid + "_" + this.rung + "_save_btn";
-            if (this.pid == "") {
-              ocl = this.varname+".do_newpost();";
+        	 lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".save_webit();";
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
               tmp = tmp + "</button>";
-            } else {
-              lbl = this.spotid + "_" + this.rung + "_update_btn";
-              ocl = this.varname+".update_webit();";
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
-              tmp = tmp + "</button>";
-            }
 
 	 } else if (this.listype=="unsaved") {
 
-            lbl = this.spotid + "_" + this.rung + "_save_btn";
-            if (this.pid == "") {
-              ocl = this.varname+".do_newpost();";
+       		 lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".save_webit();";
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
               tmp = tmp + "save";
               tmp = tmp + "</button>";
-            } else {
-              lbl = this.spotid + "_" + this.rung + "_update_btn";
-              ocl = this.varname+".update_webit();";
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
-              tmp = tmp + "</button>";
-            }
+
 	     lbl = this.spotid + "_" + this.rung + "_ignore_btn";
               ocl = this.varname+".ignore_webit();";
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
@@ -538,8 +518,15 @@ poster.prototype.clear = function() {
        prams = prams + "&groupid="+this.groupid;
      }
 
-     var url = "deskfm/dbase/save_webit.php"+prams;
-//     alert(url);
+     var url = "";
+     if (this.listype == "unsaved") {
+       url = "deskfm/dbase/add_webit.php"+prams;
+     }
+     if ((this.listype == "unsorted") || (this.listype == "webits"))  {
+       url = "deskfm/dbase/update_webit.php"+prams;
+     }
+
+     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });

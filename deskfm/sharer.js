@@ -10,7 +10,7 @@ function sharer (pspotid) {
 
    this.networks_showing = true;
 
-   this.newster = new poster("share",0,this.varname,this.varname +".newster","webits",false); 
+   this.newster = new poster("share",0,this.varname,this.varname +".newster",false); 
    this.newster.btnson = true;
 
 }
@@ -34,12 +34,50 @@ sharer.prototype.show = function() {
        if (this.networks_showing == true) {
           this.show_network_btns();
        }
-       this.newster.build_rung();
-       this.newster.draw_rung();
+       if (this.newster.dadex == "") {
+           this.new_one();
+       } else {
+         this.newster.build_rung();
+         this.newster.draw_rung();
+       }
      }
-      	     
    
-      
+}
+
+
+sharer.prototype.new_one = function() {
+     var g = null;
+     var t = -1;
+     g = new webit();
+     t = amare.unsavedlist.push(g);
+     this.newster.set_ppid(t-1,"unsaved");
+}
+
+
+
+sharer.prototype.add_child = function(mdex,ltype) {
+   var lbl = "";
+   if (this.showing == false) {
+       this.show();
+   }
+   this.newster.mini_viewer.add_one(mdex,ltype);
+   this.newster.redraw_rung();
+}
+
+
+
+sharer.prototype.update = function(tpid) {
+   var lbl = "";
+   if (this.showing == false) {
+       this.show();
+   }
+   if (tpid != undefined)  { 
+      if (this.newster.pid == tpid) {
+        this.newster.set_ppid();
+      }
+   }
+   this.newster.redraw_rung();
+
 }
 
 
@@ -117,48 +155,6 @@ sharer.prototype.hide_network_btns = function() {
 	this.networks_showing = false;
      } 
 
-
-}
-
-
-sharer.prototype.new_one = function(pdex) {
-     var g = null;
-     var t = -1;
-     if (pdex == undefined) { 
-       g = new webit();
-       t = webitlist.push(g);
-       this.newster.set_ppid(t-1);
-     } else {
-       this.newster.set_ppid(pdex);
-     }
-     this.newster.redraw_rung();
-}
-
-
-
-sharer.prototype.add_one = function(pdex) {
-   var lbl = "";
-   if (this.showing == false) {
-       this.show();
-   }
-   this.newster.mini_viewer.add_one(pdex);
-   this.newster.redraw_rung();
-}
-
-
-
-sharer.prototype.update_one = function(pdex) {
-
-   var lbl = "";
-   if (this.showing == false) {
-       this.show();
-   }
-   if (pdex != undefined) { 
-      if (this.newster.pid == pdex) {
-        this.newster.set_ppid(pdex);
-      }
-   }
-   this.newster.redraw_rung();
 
 }
 

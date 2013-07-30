@@ -10,7 +10,8 @@ poster.prototype.draw_debug = function() {
   
 
       tmpstr=tmpstr +  "rng=" + this.rung;
-      tmpstr=tmpstr +  "dadex="+this.dadex;
+      tmpstr=tmpstr +  "mdex="+this.dadex;
+      tmpstr=tmpstr +  "ltype="+this.listype;
 
       if (this.listype == "webits") {
         tmpstr=tmpstr +  "pid="+this.pid;
@@ -26,7 +27,7 @@ poster.prototype.draw_debug = function() {
       }
 
       tmpstr=tmpstr +  "shape="+this.shape;
-      tmpstr=tmpstr +  "ltype="+this.listype;
+   
 
    lbl = this.rungster + '_debug_spot';
      pobj = document.getElementById(lbl);

@@ -5,7 +5,6 @@ function viewer (pscreen,pvarname) {
    this.screen = pscreen;
    this.varname = pvarname;
 
-   this.listype = "";
    this.cat="";       
    this.subcat="";    
    this.sterms = "";
@@ -45,14 +44,12 @@ viewer.prototype.draw_view = function() {
     var tmpstr = "";
     var lbl = "";
     var ocl = "";
-    var moin = "";
-    var mout = "";
+    var cls='';
     var ct = 0; 
     var st = this.top_end;
-    var adex = "";
-    var pid = "";
-    var s = "";
-    var cls='';
+    var vdex = "";
+    var ltype = "";
+    var mdex = "";
 
     lbl = this.screen+"_debug";
     cls='spotd_off'
@@ -73,46 +70,42 @@ viewer.prototype.draw_view = function() {
 	 ct = ct + 1;
     }
 
-//      tmpstr=tmpstr+"<ul id='main_list' data-role='listview' >"; 
-//      tmpstr=tmpstr+"<div id='accordion' >";
 
     if (this.tail == true) {
       while (ct < st) {
         if (this.darungs[ct] != undefined) {
           lbl = this.screen+"_rung_"+ct;
-//          tmpstr=tmpstr+"<li ><a>";
-//          tmpstr=tmpstr+"<h3>"+ct+"</h3>";
           tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' >"; 
 	  tmpstr=tmpstr+"</div>";
-//          tmpstr=tmpstr+"</a></li>";
         }
        ct = ct + 1;
       }
     }
 
-//    tmpstr=tmpstr+"</ul>";
-//    tmpstr=tmpstr+"</div>";
 
      lbl = this.screen;
      if (document.getElementById(lbl)!= null) {
 
        document.getElementById(lbl).innerHTML=tmpstr;
 
-//        $('#main_list').listview();
-//        $('#accordion').accordion(); 
-
        ct = 0; 
        if (this.zoom == true) {
+
           if (this.darungs[ct] != undefined) {
-             adex = this.darungs[ct].dadex;
-             if (this.dalist[adex] != null) {
-               pid = this.dalist[adex];
+
+             vdex = this.darungs[ct].vdex;
+             if (this.dalist[vdex] != null) {
+
+               mdex = this.dalist[vdex].mdex;
+	       ltype = this.dalist[vdex].ltype;
+		
+
 	       if (this.darungs[ct].postman == undefined) {
                  s = this.varname + ".darungs["+ct+"].postman";
-                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.listype,this.is_mini);
+                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.is_mini);
 	       }
                if (this.darungs[ct].postman != undefined) {
-                 this.darungs[ct].postman.set_ppid(pid);
+                 this.darungs[ct].postman.set_ppid(mdex,ltype);
                  this.darungs[ct].postman.spotid = 'zoom';
   	         this.darungs[ct].postman.piczoom = true;
                  this.darungs[ct].postman.build_rung(ct);
@@ -126,16 +119,18 @@ viewer.prototype.draw_view = function() {
        if (this.tail == true) {
          while (ct <= st) {
            if (this.darungs[ct] != undefined) {
-             adex = this.darungs[ct].dadex;
-             if (this.dalist[adex] != null) {
-               pid = this.dalist[adex];
+             vdex = this.darungs[ct].vdex;
+
+             if (this.dalist[vdex] != null) {
+               mdex = this.dalist[vdex].mdex;
+	       ltype = this.dalist[vdex].ltype;
+
                if (this.darungs[ct].postman == undefined ) {
                  s = this.varname + ".darungs["+ct+"].postman";
-                 this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.listype,this.is_mini);
+                 this.darungs[ct].postman = new poster(this.screen,ct,this.varname,s,this.is_mini);
                }
                if (this.darungs[ct].postman != undefined) {
-		 this.darungs[ct].postman.listype=this.listype;
-	         this.darungs[ct].postman.set_ppid(pid);
+	         this.darungs[ct].postman.set_ppid(mdex,ltype);
                  this.darungs[ct].postman.build_rung(ct);
                  this.darungs[ct].postman.draw_rung(ct);
                }
@@ -296,7 +291,6 @@ viewer.prototype.draw_debug = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
-     tmp = tmp + " listype="+ this.listype;
      tmp = tmp + " listlen="+ this.dalist.length;
      tmp = tmp + " rungs="+ this.darungs.length;
      tmp = tmp + " topend="+ this.top_end;

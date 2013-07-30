@@ -125,7 +125,7 @@ $picaddr = "";
 
       }
 
-     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() , now() , '" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
+     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() ,'', now() , '" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);
