@@ -27,7 +27,7 @@ tw_feeder.prototype.draw_btns = function() {
      }
 
      tmp = tmp + "<button id='twitter_feed_btn' onclick='mac.check_feed();' data-role='button'  >";
-     tmp = tmp + " ";
+     tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
      tmp = tmp + "</button>";
 
      if (this.last_twid != "") {

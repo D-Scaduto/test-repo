@@ -15,6 +15,7 @@ poster.prototype.draw_name = function() {
     tmp  = this.uname;
 
     if (this.source == "twitter") {
+	   
 //       tlink =  = "http://twitter.com/Support/status/" + this.pid;
          tlink =  "http://twitter.com/" + this.uname;
           tmp = "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";

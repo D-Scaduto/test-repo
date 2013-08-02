@@ -9,6 +9,8 @@ class foo {
    public $story;
    public $source;
    public $dfdate;
+   public $created_at;
+   public $change_date;
    public $picurl;
    public $linkurl;
    public $embedurl;
@@ -32,9 +34,25 @@ class bar {
 
 $ret = new bar;
 
+$pid = 'null';
+if (isset($_GET['pid'])) {
+  $pid = $_GET['pid']; 
+}
+
 $uname = 'null';
 if (isset($_GET['uname'])) {
   $uname = $_GET['uname']; 
+}
+
+$created_at = 'now()';
+if (isset($_GET['created_at'])) {
+   $created_at = strtotime($_GET['created_at']); 
+   $created_at = strtotime('next thursday'); 
+}
+
+$dfdate = 'now()';
+if (isset($_GET['dfdate'])) {
+  $dfdate =  "\'" . $_GET['dfdate'] . "\'";
 }
 
 $cat = "";
@@ -47,9 +65,14 @@ if (isset($_GET['subcat'])) {
   $subcat = $_GET['subcat']; 
 }
 
-$picsrc = "";
-if (isset($_GET['picode'])) {
-  $picsrc = $_GET['picode']; 
+$picsrc = "null";
+if (isset($_GET['picsrc'])) {
+  $picsrc = $_GET['picsrc']; 
+}
+
+$picurl = "";
+if (isset($_GET['picurl'])) {
+  $picurl = $_GET['picurl']; 
 }
 
 $linkurl = "";
@@ -82,7 +105,9 @@ if (isset($_GET['price'])) {
   $price = $_GET['price']; 
 }
 
-$pid = uniqid();
+if ($pid == 'null') {
+   $pid = uniqid();
+}
 
 $picaddr = "";
 
@@ -100,15 +125,14 @@ $picaddr = "";
      }
 
       if (($picsrc != "null" ) && ($picsrc != ""))  {
-
 	  $prefix = "/pics/tmp/";          
-	   $prepos = strpos($picsrc,$prefix);
-	   $prepos = $prepos + strlen($prefix);
+	  $prepos = strpos($picsrc,$prefix);
+	  $prepos = $prepos + strlen($prefix);
 
 	  $picslice = substr($picsrc,$prepos);
 
-	   $cognomen = strrchr($picsrc,".");
-	   $ret->cognomen = $cognomen;
+	  $cognomen = strrchr($picsrc,".");
+	  $ret->cognomen = $cognomen;
 	  $picfile = $pid;
 	  if (strlen($cognomen < 7)) {
 	    $picfile = $pid . $cognomen; 
@@ -122,50 +146,45 @@ $picaddr = "";
 	  if ($res == true) {
 		  $picaddr = "/pics/keepers/" . $picfile;
 	  }
-
+	  $picurl = $picaddr;
       }
 
-     $sql_ins = "insert into dfm_posts values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . $story .  "' , now() ,'', now() , '" . $picaddr . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
+      $table = "";
+      if ($source == 'deskfm') {
+        $table = "dfm_posts";
+      }
+
+      if ($source=="twitter") {
+        $table = "dfm_tweets";
+      }
+
+     $sql_ins = "insert into " . $table . " values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . addslashes($story) .  "'," . $dfdate . ",'" . $created_at . "', now() ,'" . $picurl . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);
      $ret->inres = $result;    
 
-     if ($source == 'deskfm') {
-       $sql= "  SELECT * FROM dfm_posts where webit_id='" . $pid . "' ";
-     }
-
-     if ($source=="twitter") {
-       $sql= "  SELECT * FROM dfm_tweets where webit_id='" . $pid . "' ";
-     }
+       $sql= "  SELECT * FROM " . $table . " where webit_id='" . $pid . "' ";
 
      $result = mysql_query($sql);
      $row = mysql_fetch_array($result); 
-         $b2 = new foo;
-         if ($source == "deskfm") {
+     $b2 = new foo;
+
            $b2->pid = $row['webit_id'];
            $b2->uname = $row['owner_id'];
            $b2->story  =  $row['story'];
-           $b2->source = 'deskfm';
+           $b2->source = $source;
            $b2->cat = $row['cat'];
-           $b2->subcat = $row['subcat'];
-           $b2->dfdate = $row['twdate'];
+	   $b2->subcat = $row['subcat'];
+
+	   $b2->dfdate = $row['twdate'];
+	   $b2->created_at = $row['created_at'];
+	   $b2->change_date = $row['change_date'];
+
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
            $b2->embedurl = $row['embedurl'];
-         }
-        if ($source == 'twitter') {
-           $b2->pid =    $row['webit_id'];
-           $b2->uname = $row['owner_id'];
-           $b2->story  =  $row['story'];
-           $b2->source = 'twitter';
-           $b2->cat = $row['cat'];
-           $b2->subcat = $row['subcat'];
-           $b2->dfdate = $row['twdate'];
-           $b2->picurl = $row['picurl'];;
-           $b2->linkurl = $row['linkurl'];;
-           $b2->embedurl = $row['embedurl'];;
-        }
+       
 
      $ret->pobj = $b2;
 

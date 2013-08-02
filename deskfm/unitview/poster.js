@@ -26,6 +26,8 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.story="";
    this.story_tmp;
    this.picurl ="";
+   this.picsrc = "";
+
    this.dfdate = "";
    this.created_at = "";
    this.change_date = "";
@@ -62,6 +64,7 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.color = "black";
 
    this.changed = false;
+   this.story_changed = false;
    this.pic_changed = false;
    this.link_changed = false;
    this.embed_changed = false;   
@@ -135,15 +138,23 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       if (pobj.listype == "unsorted")  {
 	      
            this.btnson = true;
-	   this.shape="getsort";
+	 //  this.shape="getsort";
       }
+      this.changed = false;
 
        if (pobj.listype == "unsaved")  { 
+    	   this.changed = true;
+	   this.story_changed = true;
+	   this.pic_changed = true;
+	   this.link_changed = true;
+	   this.embed_changed = true;   
+	   this.cat_changed = true;
+	   this.group_changed = true;
            this.btnson = true;
-	   this.shape="getsort";
+	//   this.shape="getsort";
       }
 
-      this.changed = false;
+      
     } else {
 //      alert("err: "+pdadex);
     }
@@ -320,6 +331,9 @@ poster.prototype.nav_btns = function() {
 //              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
          tmp = tmp + "undo";
          tmp = tmp + "</button>";
+       }
+
+ 	if ((this.changed == true) || (this.listype == "unsaved")) {
 
          if (this.listype == "webits") {
 
@@ -491,12 +505,15 @@ poster.prototype.clear = function() {
      var pcat="";
      var linkcode = escape(this.linkurl);
      var storycode = escape(this.story);
-     var picode = escape(this.picurl);
      var embedcode = escape(this.embedurl);
 
      var prams = "?uname="+this.uname+"&source="+this.source;
-     prams = prams + "&listype=webits";
+     prams = prams + "&listype=" + this.listype;
      prams = prams + "&pid="+this.pid;
+
+     if (this.created_at != undefined) {
+       prams = prams + "&created_at="+this.created_at;
+     }
 
      if (this.cat_changed == true) {
        prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
@@ -509,7 +526,11 @@ poster.prototype.clear = function() {
        prams = prams + "&linkcode="+linkcode;
      }
      if (this.pic_changed == true) {
-       prams = prams + "&picode="+picode;
+        if (this.picsrc !=  "") {
+          prams = prams + "&picsrc="+ this.picsrc;
+	} else {
+	  prams = prams + "&picurl="+ this.picurl;
+	}
      }
      if (this.embed_changed == true) {
        prams = prams + "&embedcode="+embedcode;

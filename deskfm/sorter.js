@@ -6,7 +6,7 @@ function sorter (pspotid) {
    this.showing = false;
    this.varname = "mac";
 
-   this.shape = "database"; // firehose,database 
+   this.shape = ""; // twitterhose,database 
 
    this.menued = false;
    this.sterms = "standing desk";
@@ -26,14 +26,14 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-       if (this.shape == "firehose") {
+       if (this.shape == "twitterhose") {
 
-	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"database\");' data-role='button'  >";
- 	tmp = tmp + "database";
+	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"\");' data-role='button'  >";
+ 	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
          tmp = tmp + "</button>";
 
 	 tmp = tmp + "<span class='spotd_off'  >";
-         tmp = tmp + "firehose";
+         tmp = tmp + "twitter-hose";
          tmp = tmp + "</sapn>";
 
          tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
@@ -45,8 +45,8 @@ sorter.prototype.show = function() {
 
        } else if (this.shape == "database") {
 
-	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"firehose\");' data-role='button'  >";
- 	tmp = tmp + "firehose";
+	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"\");' data-role='button'  >";
+ 	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='10px' >";
          tmp = tmp + "</button>";
 
 	 tmp = tmp + "<span class='spotd_off'  >";
@@ -59,8 +59,8 @@ sorter.prototype.show = function() {
 
        } else  {
 
-	 tmp = tmp + "<button id='sort_firehose_btn' onclick='mac.set_shape(\"firehose\");' data-role='button'  >";
-         tmp = tmp + "firehose";
+	 tmp = tmp + "<button id='sort_firehose_btn' onclick='mac.set_shape(\"twitterhose\");' data-role='button'  >";
+         tmp = tmp + "twitter-hose";
          tmp = tmp + "</button>";
 
 	 tmp = tmp + "<button id='sort_database_btn' onclick='mac.set_shape(\"database\");' data-role='button'  >";
@@ -85,8 +85,9 @@ sorter.prototype.show = function() {
 	} else {
 	   daviewer.load_unsaved_list();
         }
-      } else {
+      }
 
+     if (this.shape == "database") {
  	krono.show('cal_spot');
 	daviewer.load_unsorted_list();
       }
@@ -95,6 +96,17 @@ sorter.prototype.show = function() {
       this.twfeed.draw_btns();
       
    } 
+
+}
+
+sorter.prototype.redraw_view = function(psetype) {
+
+	if (psetype == "unsorted") {
+   	  	daviewer.load_unsorted_list();
+	} 
+	if (psetype == "unsaved") {
+		daviewer.load_unsaved_list();
+	}
 
 }
 
@@ -108,17 +120,6 @@ sorter.prototype.check_feed = function() {
       s = document.getElementById(lbl).value;
       this.twfeed.get_live_tweets(s); 
    }
-
-}
-
-sorter.prototype.redraw_view = function(psetype) {
-
-	if (psetype == "unsorted") {
-   	  	daviewer.load_unsorted_list();
-	} 
-	if (psetype == "unsaved") {
-		daviewer.load_unsaved_list();
-	}
 
 }
 

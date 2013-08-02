@@ -205,7 +205,8 @@ header('X-Frame-Options: SAMEORIGIN');
 	diego.shape = "full";
 	diego.add_mainspot("browse","cater");
 	diego.add_mainspot("search","wanda");
-   
+	diego.main_shape = "browse"; 
+
         daviewer = new viewer("main_view","daviewer");
 
        if (is_mobile == true) {

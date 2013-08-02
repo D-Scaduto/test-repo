@@ -56,8 +56,10 @@ viewer.prototype.to_top = function(trung) {
    this.redraw_rungs(trung);
 
    if (this.darungs[0] != undefined) {
+    if (this.darungs[0].postman != undefined) {
 //     this.darungs[0].postman.btnson = true;
-     this.darungs[0].postman.redraw_rung();
+       this.darungs[0].postman.redraw_rung();
+     }
    }
 
    window.scroll(0,0);
@@ -196,38 +198,40 @@ viewer.prototype.redraw_rungs = function(trungdex) {
          if (this.darungs[c] != undefined) {
              darungs2[a] = new Object();
              rd = this.darungs[c].dadex;
-	     lt = this.dalist[rd].listype;
+	     if (this.dalist[rd] != undefined) {
+ 	       lt = this.dalist[rd].ltype;
 
-             if (lt == "webits") {
-               if (amare.webitlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "webits") {
+                 if (amare.webitlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-             if (lt == "people") {
-               if (amare.peoplelist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "people") {
+                 if (amare.peoplelist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-             if (lt == "products") {
-               if (amare.productlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "products") {
+                 if (amare.productlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-	     if (lt == "unsorted") {
-               if (amare.unsortedlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+	       if (lt == "unsorted") {
+                 if (amare.unsortedlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-	     if (lt == "unsaved") {
-               if (amare.unsavedlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+	       if (lt == "unsaved") {
+                 if (amare.unsavedlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
+	     }
          }
       }
 

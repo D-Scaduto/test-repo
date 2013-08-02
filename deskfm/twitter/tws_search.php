@@ -27,7 +27,6 @@ $bearer_token = $reply->access_token;
    public $linkurl = "";
    public $embedurl = "";
    public $listype = "";
-
   }
 
  class bar {

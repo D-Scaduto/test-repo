@@ -10,8 +10,11 @@ poster.prototype.draw_pic = function() {
    var ps="";
    var cls = "";
 
-
-      ps = this.picurl;
+      if (this.picsrc != "") {
+	      ps = this.picsrc;
+      } else {
+           ps = this.picurl;
+      }
       if (ps != "") {
 
 	  cls = "piclip";
@@ -97,25 +100,19 @@ poster.prototype.get_pic = function() {
    var lbl = "";
 
 
-   lbl= this.spotid ;
-   lbl = lbl + "_" + tspot + "_upic_frame";
+   lbl = this.rungster + "_upic_frame";
    if (document.getElementById(lbl) != null) {
-
-
 
       doctmp = document.getElementById(lbl).contentWindow.document;
       if (doctmp.getElementById('tmp_extra') != null) {
         this.picurl = doctmp.getElementById('tmp_extra').innerHTML;
       }
 
-
       if (doctmp.getElementById('tmp_pic') != null) {
  
         tsrc = doctmp.getElementById('tmp_pic').src;
 
-        this.picurl = tsrc;
-        var sobj = "amare.webitlist["+this.dadex+"].picurl = '" + this.picurl + "'";
-        eval(sobj);
+        this.picsrc = tsrc;
 
         this.draw_pic();
         this.changed = true;

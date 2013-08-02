@@ -149,24 +149,21 @@
                } else {
 
                     if (this.listype == "products") {
-                      lbl= this.rungster + "_" + "buy"+ "_spot";
+                      lbl= this.rungster + "_buy_spot";
                       tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >"; 
                       tmpstr=tmpstr+"</span>";
                     } else {
-                      lbl= this.rungstert + "_" + "name" + "_spot";
+                      lbl= this.rungster + "_name_spot";
 	              tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >";
-		 
                       tmpstr=tmpstr+"</span>";
                     }
-
                     tmpstr=tmpstr+"<div style='clear:right;' ></div>";
-		
 
-	  	  lbl= this.rungster + "_" + "pic" + "_spot";
+	  	  lbl= this.rungster + "_pic_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;'  >"; 
                   tmpstr=tmpstr+"</span>";
 
-		  lbl= this.rungster + "_" + "story" + "_spot";
+		  lbl= this.rungster + "_story_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
 	          tmpstr=tmpstr+"</span>";	
                  

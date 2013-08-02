@@ -40,9 +40,12 @@ header.prototype.show = function() {
        tmp = tmp + "</div>";
 
        lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='position:relative;' >";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='position:relative;background-color:silver;' >";
        tmp = tmp + "</div>";
 
+       lbl = "menu_debug";
+       tmp = tmp + "<div id='"+lbl+"' class='' style='' >";
+       tmp = tmp + "</div>";
     
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -50,6 +53,9 @@ header.prototype.show = function() {
           pobj.innerHTML = tmp;
           this.showing = true;
           this.draw_mainmenu();
+	  if (debug == true) {
+		  this.draw_debug();
+	  }
      }
 
 }
@@ -58,26 +64,29 @@ header.prototype.show = function() {
 
 header.prototype.redraw_view = function (psetype,pchunk) {
 
-
     if (psetype == "webits") { 
-        cater.redraw_view(pchunk);
+        if (this.main_shape == "browse") {
+           cater.redraw_view(pchunk);
+	}
     }
 
     if (psetype == "people") { 
-       joe.redraw_view(pchunk);
+       if (this.main_shape == "contact") {
+         joe.redraw_view(pchunk);
+       }
     } 
 
-    if (psetype == "unsaved") { 
-         
+    if (this.main_shape == "sort") { 
+      if (psetype == "unsaved") { 
         mac.redraw_view("unsaved",pchunk);
-    }
-    if (psetype == "unsorted") { 
-
-      mac.redraw_view("unsorted",pchunk);
+      }
+      if (psetype == "unsorted") { 
+        mac.redraw_view("unsorted",pchunk);
+      }
     }
 
     if (wanda.sterms != "") {
-	    wanda.check_local();
+        wanda.check_local();
     }
 
 }
@@ -100,8 +109,12 @@ header.prototype.draw_mainmenu = function() {
 	       if (this.mainmenu[i] != undefined)  {
                  lbl = this.mainmenu[i].btn + "_btn";
                  ocl = this.varname + ".toggle_mainitem("+i+");";
-                 tmp = tmp + "<input type='radio' name='mainmenu_top' id='"+lbl+"' onclick='"+ocl+"' >";
-                 tmp = tmp + "<label for='"+lbl+"' >"+this.mainmenu[i].btn+"</label>";
+                 tmp = tmp + "<input type='radio' name='mainmenu_top' id='"+lbl+"' onclick='"+ocl+"' style='' ";
+		 if (this.mainmenu[i].btn == this.main_shape) {
+                   tmp = tmp + " checked='checked' ";
+		 }
+		 tmp = tmp + " >";
+                 tmp = tmp + "<label for='"+lbl+"' style='' >"+this.mainmenu[i].btn+"</label>";
 	       }
        }
        tmp = tmp + "</div>";
@@ -134,12 +147,18 @@ header.prototype.change_mainitem = function(wdex) {
 
 
 header.prototype.toggle_mainitem = function(wdex) {
+	
      var s = "";
      if (wdex != undefined) {
 	     if (this.mainmenu[wdex] != undefined) {
-                s = this.mainmenu[wdex].varname + ".toggle();";
-	   //      alert("w=" + wdex + " s="+ s);
- 	        eval(s);
+		     if (this.main_shape != this.mainmenu[wdex].btn ) {
+		       if (this.was_shape != "") {
+	  		   this.hide_mainitem(this.was_shape);
+		       }
+		       this.was_shape = this.main_shape;
+ 		       this.main_shape = this.mainmenu[wdex].btn;
+                       this.show_mainitem(this.main_shape);
+	             }
 	     }
      }
  
@@ -162,7 +181,9 @@ header.prototype.show_mainitem = function(pbtn) {
            }
            eval(s);
    }
-   
+   if (debug == true) {
+		  this.draw_debug();
+  } 
 }
 
  
@@ -178,7 +199,6 @@ header.prototype.hide_mainitem = function(pbtn) {
      s = this.mainmenu[fspot].varname +".hide();";
      eval(s);
    }
-   this.draw_main();
 }
 
 
@@ -247,4 +267,20 @@ header.prototype.hide = function() {
      this.showing = false;
 }
 
+
+header.prototype.draw_debug = function() {
+     var tmp = "";
+     var lbl = "";
+
+     tmp = tmp + " main=" + this.main_shape;
+     tmp = tmp + " was=" + this.was_shape;
+
+     lbl = "menu_debug";
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+     }
+
+     this.showing = false;
+}
 

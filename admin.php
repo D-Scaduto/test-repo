@@ -242,6 +242,7 @@ header('X-Frame-Options: SAMEORIGIN');
 	   diego.add_mainspot("sort","mac");
 	   diego.add_mainspot("shop","store");
 	   diego.add_mainspot("search","wanda");
+	   diego.main_shape = "browse";
 	 
 
     elle.draw_main();

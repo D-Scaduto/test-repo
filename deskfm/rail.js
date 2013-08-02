@@ -10,21 +10,21 @@ viewer.prototype.draw_rail = function() {
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div>";
-       tmp = tmp + "<span id='central_chunkbar' class='' style='width:150px;display:inline-block;' >";
+       tmp = tmp + "<span id='central_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='central_chunkdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div>";
-       tmp = tmp + "<span id='local_chunkbar' class='' style='width:150px;display:inline-block;' >";
+       tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='local_chunkdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div>";
-       tmp = tmp + "<span id='local_chipbar' class='' style='width:150px;display:inline-block;' >";
+       tmp = tmp + "<span id='local_chipbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='local_chipdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
@@ -147,32 +147,32 @@ viewer.prototype.draw_railbtns = function() {
        if (this.metro_spd > 0 ) {
           tsrc = "deskfm/images/icons/stop.png";
        }
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='ui-button-icon-only' data-role='button'  style=''  >";
-       tmp = tmp + "<img  id='nitro_img' src='"+tsrc+"' height='30px' >";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
+       tmp = tmp + "<img  id='nitro_img' src='"+tsrc+"' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_prev_chunk";
        ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='ui-button-icon-only' data-role='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' height='30px' >";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_prev_chip";
        ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' data-role='button' style=''  >";
-       tmp = tmp + "<img src='deskfm/images/icons/prev.png' height='30px' >";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/prev.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_next_chip";
        ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' data-role='button' style=''  >";
-       tmp = tmp + "<img src='deskfm/images/icons/play.png' height='30px' >";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_next_chunk";
        ocl = this.varname + ".next_chunk();";
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='ui-button-icon-only' data_role='button' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' height='30px' >";
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
        tmp = tmp + "</button>";
 
 /*
@@ -190,21 +190,19 @@ viewer.prototype.draw_railbtns = function() {
      if ( pobj != null) {
        pobj.innerHTML = tmp;
        this.btns_showing = true;
-
+/*
        $('#nitro_btn').button();
        lbl = this.screen + "_prev_chunk";
        $("#"+lbl).button();
-
        lbl = this.screen + "_prev_chip";
 //   $("#"+lbl).button( { icons: {primary: 'ui-icon-circle-triangle-w', secondary: null} } );
        $("#"+lbl).button();
-
        lbl = this.screen + "_next_chip";
     //   $("#"+lbl).button( { icons: {primary: 'ui-icon-custom', secondary: null} } );
        $("#"+lbl).button();
-
        lbl = this.screen + "_next_chunk";
        $("#"+lbl).button();
+*/
      }
 }
 

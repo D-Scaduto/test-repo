@@ -5,6 +5,7 @@ poster.prototype.draw_date = function() {
     var tmpstr = "";
     var mon = "";
     var year = "";
+    var day = "";
     var arr = null;
 
 
@@ -14,21 +15,23 @@ poster.prototype.draw_date = function() {
         var b =  arr[0];
         var c = b.split("-");
         var m = c[1];
+	day = c[2];
         var pi = parseInt(m,10);
-        var nic =  krono.ymons[pi] + " " +c[2] + " \'" + c[0].substr(2,2);
+        var nic =  krono.ymons[pi] + " " + day + " \'" + c[0].substr(2,2);
         var my =  krono.ymons[pi] + " " + " \'" + c[0].substr(2,2);
 //        tmpstr=tmpstr+ arr + "<br>";
-        tmpstr=tmpstr+ my;
+        tmpstr=tmpstr+ nic;
 
     } else if ((this.created_at != "")  && (this.created_at != undefined)) { 
         arr =  this.created_at.split(" ");
 	
         mon =  arr[1];
-	year = arr[5];
+	year = arr[5].substr(2,2);
+	day = arr[2];
 
-	var my = mon + "\'"+ year;
+	var my = mon + " " + day + " \'"+ year;
 
-//        tmpstr=tmpstr+ this.created_at + "<br>";
+        tmpstr=tmpstr+ this.created_at + "<br>";
         tmpstr=tmpstr+ my;
     }
 

@@ -640,7 +640,7 @@ stater.prototype.add_unsaved = function(listobj) {
               var found_at=-1;
               for (var i=0;i<this.unsavedlist.length;i++) {
                   if (this.unsavedlist[i] != undefined) {
-                    if (listobj.dalist[j].uname == this.unsavedlist[i].uname) {
+                    if (listobj.dalist[j].pid == this.unsavedlist[i].pid) {
                       found = true; 
                       fndcount = fndcount + 1;
                       found_at = i;
@@ -670,7 +670,7 @@ stater.prototype.add_unsorted= function(listobj) {
               var found_at=-1;
               for (var i=0;i<this.unsortedlist.length;i++) {
                   if (this.unsortedlist[i] != undefined) {
-                    if (listobj.dalist[j].uname == this.unsortedlist[i].uname) {
+                    if (listobj.dalist[j].pid == this.unsortedlist[i].pid) {
                       found = true; 
                       fndcount = fndcount + 1;
                       found_at = i;
