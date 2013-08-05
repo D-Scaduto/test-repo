@@ -189,14 +189,16 @@ header('X-Frame-Options: SAMEORIGIN');
 //   init_months();
 
         sal = new logoman("logo_spot");
-        nicky = new sharer("share_spot");
+       
 	jesie = new namer("name_spot");
 	krono = new calendor("krono");
 
-//        store = new shoper("shop");
+        store = new shoper("shop_spot");
 	
         cater = new categor("browse");
 	wanda = new searcher("search");
+//	nicky = new sharer("share");
+	nicky = new sharer("share_spot");
 
         amare = new stater();
         elle = new model();
@@ -204,7 +206,8 @@ header('X-Frame-Options: SAMEORIGIN');
 	diego = new header("menu_spot");
 	diego.shape = "full";
 	diego.add_mainspot("browse","cater");
-	diego.add_mainspot("search","wanda");
+//	diego.add_mainspot("search","wanda");
+//	diego.add_mainspot("share","nicky");
 	diego.main_shape = "browse"; 
 
         daviewer = new viewer("main_view","daviewer");
@@ -216,7 +219,7 @@ header('X-Frame-Options: SAMEORIGIN');
        } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
-           elle.shape = "wingout";
+         
        }
 
 	elle.draw_main();
@@ -226,44 +229,50 @@ header('X-Frame-Options: SAMEORIGIN');
     amare.get_products();
     amare.get_webits();
 
+        if ($(this).width() < 601) {
+	      is_mobile = true;
+	} 
 
 
     $(window).resize(function() {
 
       var width = $(this).width();
       var height = $(this).height();
-        if (width < 801) {
+        if (width < 601) {
           if (is_mobile != true) {
 	      is_mobile = true;
 	  }
-	  if (elle.shape != "") {
- 	    elle.shape = "";
-	    elle.draw_main();
-	  }
+	 
         } else {
           if ((is_mobile == true) && (is_ie == false)) {
-	      is_mobile = false;
-	  }
-	  if (elle.shape != "wingout") {
-  	    elle.shape = "wingout";
-	    elle.draw_main();
+		is_mobile = false;
+		if ($('#outer_menu').hasClass('top_menu') == false) {
+		  $('#outer_menu').addClass('top_menu');
+		  $('#outer_menu').removeClass('flying_menu');
+	  	  window.scroll(0,0); 
+	        }
 	  }
         }
     });
 
 
     $(window).scroll(function() {
+
+     
         if ($('#top_line').inSight(100) == true) {
 	    if ($('#outer_menu').hasClass('top_menu') == false) {
 		$('#outer_menu').addClass('top_menu');
 		$('#outer_menu').removeClass('flying_menu');
 	    }
 	} else {
-	    if ($('#outer_menu').hasClass('flying_menu') == false) {
+	    if (is_mobile == false) {
+	      if ($('#outer_menu').hasClass('flying_menu') == false) {
 		$('#outer_menu').addClass('flying_menu');
 		$('#outer_menu').removeClass('top_menu');
+	      }
 	    }
 	}
+      
     });
  
 /*

@@ -27,18 +27,22 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
+   lbl = "search_reset_btn";
+   ocl= "";
+   tmp = tmp + "<button id='"+lbl+"' class='' style='' >";
+   tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' onclick='"+ocl+"' >";
+   tmp = tmp + "</button>";
+
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
-     tmp = tmp + "<span style='padding:2px' >";
-     tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' >";
-     tmp = tmp + "</span>";
+     tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' value='search' >";
 
    
    lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";
-   tmp = tmp + "<span id='"+lbl+"' class='spotd_off' style='' >";
+   tmp = tmp + "<button id='"+lbl+"' class='' style='' >";
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
-   tmp = tmp + "</span>";
+   tmp = tmp + "</button>";
 
    
 

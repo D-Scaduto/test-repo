@@ -8,14 +8,14 @@ viewer.prototype.draw_rail = function() {
 
        tmp = tmp + "<div id='rail_btns' class='' style='' >";
        tmp = tmp + "</div>";
-
+/*
        tmp = tmp + "<div>";
        tmp = tmp + "<span id='central_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='central_chunkdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "</div>";
-
+*/
        tmp = tmp + "<div>";
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
@@ -41,7 +41,7 @@ viewer.prototype.draw_rail = function() {
        this.draw_railbtns();
        this.railon = true;
        this.rail_showing = true;
-
+/*
        $('#central_chunkbar').slider({
 	    range: false,
  	    min: 0,
@@ -51,7 +51,7 @@ viewer.prototype.draw_rail = function() {
 	      $( "#central_chunkdata" ).html( ui.value );
 	    }
        });
-
+*/
       var lchunk = 1
       var lchunks = 1;
       if (this.stas != null) {
@@ -110,9 +110,9 @@ viewer.prototype.draw_raildata = function() {
 
    //   $('#central_chunkbar').slider("option", "value", this.stats.lnum );
    //   $('#central_chunkbar').slider("option", "max", this.stats.cnum );
-      $('#central_chunkdata').html(this.stats.lnum  + " of " + this.stats.cnum);
+  //    $('#central_chunkdata').html(this.stats.lnum  + " of " + this.stats.cnum);
 
-      $('#local_chunkdata').html("set " +lc + " ["+st+" to "+fn+"]");
+      $('#local_chunkdata').html("set " +lc + " of " + lchunks );
       $('#local_chunkbar').slider("option", "value", lchunk  );
       $('#local_chunkbar').slider("option", "max", lchunks );
       $('#local_chunkbar').slider("option", "min", 0 );
@@ -141,40 +141,37 @@ viewer.prototype.draw_railbtns = function() {
    var ocl = "";
 
 
-       lbl = 'nitro_btn';
-       ocl = this.varname + ".toggle_nitro();";
-       tsrc = "deskfm/images/icons/fast_fwd.png";
-       if (this.metro_spd > 0 ) {
-          tsrc = "deskfm/images/icons/stop.png";
-       }
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
-       tmp = tmp + "<img  id='nitro_img' src='"+tsrc+"' width='20px' >";
-       tmp = tmp + "</button>";
-
        lbl = this.screen + "_prev_chunk";
-       ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       ocl = "";
+       tmp = tmp + "<button  id='"+lbl+"' onmouseover='daviewer.nitro_start(\"back\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_prev_chip";
-       ocl = this.varname + ".next();";
+       ocl = this.varname + ".prev();";
        tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/prev.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_next_chip";
        ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_next_chunk";
-       ocl = this.varname + ".next_chunk();";
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       ocl = "";
+       tmp = tmp + "<button id='"+lbl+"' onmouseover='daviewer.nitro_start(\"fwd\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
        tmp = tmp + "</button>";
 
+       /*
+       lbl = this.screen + "_zoom_btn";
+       ocl = "daviewer.toggle_zoom();";
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/pop-out.jpg' width='20px' >";
+       tmp = tmp + "</button>";
+	*/
 /*
     lbl = this.screen + "_shuffle";
     ocl = this.varname + ".load_random_rungs();";

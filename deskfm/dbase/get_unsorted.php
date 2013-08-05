@@ -21,6 +21,7 @@ class pfoo {
    public $prodid;
    public $price;
    public $source;
+   public $stored = true;
    public $dfdate;
    public $created_at = "";
    public $change_date = "";

@@ -24,21 +24,24 @@ sharer.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-   tmp = tmp + "<div id='share_rung_0' class='' style=''  >";
+   tmp = tmp + "<div id='share_rung_0' class='box' style=''  >";
    tmp = tmp + " </div>";
 
      lbl = this.spotid;
      if (document.getElementById(lbl) != null) {
        document.getElementById(lbl).innerHTML=tmp;
        this.showing = true;
-       if (this.networks_showing == true) {
-          this.show_network_btns();
-       }
+       
        if (this.newster.dadex == "") {
            this.new_one();
        } else {
-         this.newster.build_rung();
+        
+       }
+	 this.newster.build_rung();
          this.newster.draw_rung();
+
+       if (this.networks_showing == true) {
+          this.show_network_btns();
        }
      }
    
@@ -67,16 +70,16 @@ sharer.prototype.add_child = function(mdex,ltype) {
 
 
 sharer.prototype.update = function(tpid) {
-   var lbl = "";
-   if (this.showing == false) {
-       this.show();
-   }
+
    if (tpid != undefined)  { 
       if (this.newster.pid == tpid) {
-        this.newster.set_ppid();
+        this.newster.set_ppid(tpid);
       }
    }
-   this.newster.redraw_rung();
+
+   if (this.showing == true) {
+     this.newster.redraw_rung();
+   }
 
 }
 
@@ -190,9 +193,17 @@ sharer.prototype.hide = function() {
 
    this.newster.hide_rung(); 
    this.hide_network_btns();
+
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+
+   lbl = this.spotid;
+   pobj = document.getElementById(lbl);
+   if ( pobj != null) {
+        pobj.innerHTML = tmp;
+   }
    this.showing = false; 
- 
-  
 
 }
 

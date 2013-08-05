@@ -137,9 +137,9 @@ logoman.prototype.draw_logo = function (psz) {
 
    if (this.logo_shape == "deskfm") {
             lbl = this.spotid + '_logo_spot1';
-	    ocl = this.varname + ".set_logoshape(\"freedom\");";
+//	    ocl = this.varname + ".set_logoshape(\"freedom\");";
             tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style=''  >";
-            tmpstr = tmpstr + "DeskFM.com";
+            tmpstr = tmpstr + "DeskFM";
             tmpstr=tmpstr+"</button>";
            
            

@@ -35,13 +35,21 @@ header.prototype.show = function() {
      var omt = "";
      var cls = "";
 
+     if (this.mainmenu.length <2) {
+	     this.shape = "";
+     }
+
+
+     if (this.shape == "full") {
        lbl = "menu_btns";
        tmp = tmp + "<div id='"+lbl+"' class='' style='' >";
        tmp = tmp + "</div>";
+     }
 
        lbl = "menu_bar";
        tmp = tmp + "<div id='"+lbl+"' class='' style='position:relative;background-color:silver;' >";
        tmp = tmp + "</div>";
+
 
        lbl = "menu_debug";
        tmp = tmp + "<div id='"+lbl+"' class='' style='' >";

@@ -13,6 +13,7 @@ poster.prototype.draw_debug = function() {
       tmpstr=tmpstr +  " mdex="+this.dadex;
       tmpstr=tmpstr +  " ltype="+this.listype;
       tmpstr=tmpstr +  " source="+this.source;
+      tmpstr=tmpstr +  " stored="+this.stored;
       tmpstr=tmpstr +  "<br>";
 
       if (this.listype == "people") {

@@ -227,16 +227,6 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
 
 
 
-stater.prototype.get_prodstat = function(tp) {
-    var ret = null;
-     for (var i=0; i<this.prodstats.length; i++) {
-        if (this.prodstats[i].prodid == tp) {
-              ret = amare.prodstats[i];
-        }
-     }
-    return ret;
-}
-
 
 stater.prototype.get_prodstat = function(tp) {
     var ret = null;
@@ -273,29 +263,6 @@ stater.prototype.get_person_group = function(tname) {
     }
     return ret;
 }
-
-
-
-stater.prototype.toggle = function () {
-
-   if (this.showing == true ) {
-       this.hide();
-   } else {
-       this.show();
-   }
-}
-
-
-stater.prototype.hide = function () {
-
-   lbl = this.spotid;
-   if (document.getElementById(lbl) != null ) { 
-     document.getElementById(lbl).innerHTML=""; 
-   }
-   this.showing = false;
-}
-
-
 
 
 
@@ -388,6 +355,7 @@ stater.prototype.get_products = function() {
    sal.waiting();
 } 
 
+
 stater.prototype.get_providers = function() {
    var url='deskfm/dbase/get_providers.php';
 //  alert(url);
@@ -396,7 +364,6 @@ stater.prototype.get_providers = function() {
    });   // end get json 
    sal.waiting();
 }
-
 
 
 
@@ -631,6 +598,7 @@ stater.prototype.get_cperson_list = function(tuname) {
 
 
 stater.prototype.add_unsaved = function(listobj) {
+
        var r = 0;
        var found = false;
        var fndcount = 0;
@@ -692,24 +660,6 @@ stater.prototype.add_unsorted= function(listobj) {
 
 
 
- stater.prototype.get_one= function(dpid) {
-
-   if (pobj.listype == "webits") {
-       for (var k=0; k<=this.webitlist.length; k++) {
-         if (this.webitlist[k] != undefined) {
-           if (this.webitlist[k].pid == dpid) {
-               return this.webitlist[k];
-           }
-         }
-       }
-   }
-
-   if (pobj.listype == "people") {
-   }
-
-}
-
-
 
  stater.prototype.add_webit = function(tpobj) {
 
@@ -724,13 +674,6 @@ stater.prototype.add_unsorted= function(listobj) {
    }
 }
 
-
- stater.prototype.new_webit = function(pobj) {
-
-       var t = this.webitlist.push(pobj);
-       nicky.new_one(t-1);
-        
-}
 
 
 
@@ -757,6 +700,7 @@ stater.prototype.add_unsorted= function(listobj) {
 
 
 	} else {
+
            u = 0;
            while (u<this.unsortedlist.length) {
              if (this.unsortedlist[u] != undefined) {
@@ -776,6 +720,7 @@ stater.prototype.add_unsorted= function(listobj) {
 			// else just update unsorted
 
 	   } else {
+
  		s = 0;
                 while (s<this.unsavedlist.length) {
                   if (this.unsavedlist[s] != undefined) {
@@ -795,6 +740,10 @@ stater.prototype.add_unsorted= function(listobj) {
 	   	}
 	   }
 	}
+
+       daviewer.update_one(pobj);
+       nicky.update(pobj);
+
 
 /*
       if ((pobj.groupid != "") && (pobj.groupid != undefined)) {

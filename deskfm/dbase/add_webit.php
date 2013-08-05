@@ -8,6 +8,7 @@ class foo {
    public $subcat;
    public $story;
    public $source;
+   public $stored = true;
    public $dfdate;
    public $created_at;
    public $change_date;
@@ -46,9 +47,8 @@ if (isset($_GET['uname'])) {
 
 $created_at = 'now()';
 if (isset($_GET['created_at'])) {
-   $created_at = strtotime($_GET['created_at']); 
-   $created_at = strtotime('next thursday'); 
-}
+   $created_at = $_GET['created_at'];
+  }
 
 $dfdate = 'now()';
 if (isset($_GET['dfdate'])) {

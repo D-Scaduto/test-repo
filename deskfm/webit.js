@@ -11,8 +11,9 @@ function webit(tpid) {
    this.pid = tpid;
   
    this.listype="";
-   this.stored=false;
    this.source = "deskfm";
+   this.stored=false;
+
    this.dfdate = null;
    this.created_at = "";
    this.change_date = "";

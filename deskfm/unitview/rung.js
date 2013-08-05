@@ -82,10 +82,11 @@
   	     this.draw_catsel();
 	   }
 	 }
+	 this.draw_date();
       }
 
 
-	 this.draw_date();
+
 
 //     this.draw_place(pspot,this.darungs[tspot].dadex);
 
@@ -185,7 +186,6 @@
 		 
   		  lbl= this.rungster + "_date_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class='spotd_off'   style='float:right;' >"; 
-                  tmpstr = tmpstr + "hey"; 
 		  tmpstr=tmpstr+"</span>";	
                  
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";

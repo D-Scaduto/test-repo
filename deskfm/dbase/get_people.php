@@ -3,6 +3,7 @@ include '../../config/names.php';
 
 class foo { 
    public $uname;
+   public $stored = true;
    public $groupid;
    public $picurl;
    public $emailaddr;

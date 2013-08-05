@@ -5,6 +5,7 @@ function categor (pmenuid) {
    this.menuid = pmenuid;
    this.spotid = pmenuid + "_spot";
    this.varname='cater';
+   this.showing = false;
    this.shape = "";
    this.menued = false;
 
@@ -39,8 +40,8 @@ categor.prototype.show = function() {
         }
         tmp = tmp + "</ul>";
 	tmp = tmp + "</li></ul>";
-/*
-        lbl = 'what_btn';
+
+        lbl = 'what_sog';
         tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
   	tmp = tmp +"<li><a >what</a>";
         tmp = tmp +"<ul  style='width:350px;' >";
@@ -48,8 +49,9 @@ categor.prototype.show = function() {
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp +"</ul></li></ul>";
-*/
+        tmp = tmp + "</ul>";
+	tmp = tmp + "</li></ul>";
+
 
         lbl = 'why_sog';
         tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
@@ -118,7 +120,7 @@ categor.prototype.show = function() {
 	         eval(exp);
 	       }
              } );
-	    /*
+	    
 	    $('#what_sog').menu();
 	    $('#what_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";
@@ -130,7 +132,7 @@ categor.prototype.show = function() {
 	         eval(exp);
 	       }
              } );
-	     */
+	     
 	    $('#why_sog').menu();
 	    $('#why_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";

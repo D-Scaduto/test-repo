@@ -1,5 +1,6 @@
 <?php
 require_once('../../lib/codebird.php');
+include '../../config/names.php';
  
 $key = "UNR8M34dO1BIrkUgGQtxA";
 $secret = "dNYPZnf4nkbTXhh2uazCzoQ2F8yGHQEQg0jdgMNM";
@@ -20,9 +21,12 @@ $bearer_token = $reply->access_token;
    public $prodid = "";
    public $price = "";
    public $source = "";
+   public $stored = false;
+
    public $dfdate = "";
    public $created_at = "";
    public $change_date = "";
+
    public $picurl = "";
    public $linkurl = "";
    public $embedurl = "";
@@ -31,15 +35,20 @@ $bearer_token = $reply->access_token;
 
  class bar {
 	
+  	 public $sql = "";
 	 public $listlen = 0;
-	 public $last_twid = "";
-	 public $first_date = "";
-	 public $last_date = "";
+	 public $newest_date = "";
+	 public $newest_twid = "";
+	 public $oldest_date = "";
+	 public $oldest_twid = "";
 	 public $dalist = "";
+
+       
  }
 
  $rebar = new bar;
- $arr = array();
+ $retarr = array();
+ $idarr = array();
 
  $q = "q=standing desk";
  if (isset($_GET['q'])) {
@@ -59,33 +68,69 @@ $bearer_token = $reply->access_token;
  	$q = $q . "&max_id=" . $maxid;
  }
 
+
  $reply = $cb->search_tweets($q,true);
  $len = sizeof($reply->statuses);
  $rebar->listlen = $len; 
- $rebar->last_twid = $reply->statuses[$len-1]->id_str;
- $rebar->first_date = $reply->statuses[0]->created_at;
- $rebar->last_date = $reply->statuses[$len-1]->id_str;
 
-    for ($i =0; $i < sizeof($reply->statuses); $i++ ) {
+ $rebar->newest_twid = $reply->statuses[0]->id_str;
+ $rebar->newest_date = $reply->statuses[0]->created_at;
+ $rebar->oldest_date = $reply->statuses[$len -1]->created_at;
+ $rebar->oldest_twid = $reply->statuses[$len -1]->id_str;
+
+ // get saved tweet ids in range into an array
+
+  $con = mysql_connect("$Server", "$username", "$password");
+  if (!$con) {
+    echo('Could not connect: ' . mysql_error());
+  }
+  mysql_select_db($db_name, $con);
+
+  $sql="SELECT webit_id FROM dfm_tweets where ";
+  $dt = new DateTime($rebar->newest_date);
+  $sql = $sql . " created_at <= '" . date_format($dt, 'Y-m-d 23:59:59 ') . "'";
+  $dt = new DateTime($rebar->oldest_date);
+  $sql = $sql . " and created_at >= '" . date_format($dt, 'Y-m-d 0:0:1') . "'";
+  $rebar->sql = $sql;
+  
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+      $idarr[] =    $row['webit_id'];
+  }
+
+  $checklen = sizeof($idarr);
+   
+    for ($i =0; $i < $len; $i++ ) {
 
       $d = $reply->statuses[$i];
 
-      if ($d != null) {
+      if ($d != null) { 
 
       $foodo = new foo;
  
       $foodo->source = "twitter";
       $foodo->listype = "unsaved";
-
       $foodo->pid =    $d->id_str;
+
+      // check against saved tweet id  array
+      // set stored = true if found
+      
+      for ($z=0; $z < $checklen; $z++ ) {
+	      if ($idarr[$z] == $d->id_str) {
+ 		 $foodo->stored = true;
+	      }
+      }
 
         $foodo->picurl = $d->user->profile_image_url;
 
         $foodo->uname = $d->user->screen_name;
 
-      $foodo->story  =  $d->text;
+        $foodo->story  =  $d->text;
+	
+	$datetime = new DateTime($d->created_at);
+//	$datetime->setTimezone(new DateTimeZone('Europe/Zurich'));
 
-	$foodo->created_at = $d->created_at;
+	$foodo->created_at = date_format($datetime, 'Y-m-d H:i:s');
  
       $foodo->linkurl = "";
       $foodo->embedurl = "";
@@ -96,7 +141,8 @@ $bearer_token = $reply->access_token;
 
       }
     }
-
+ 
+   
     $rebar->dalist = $arr;
  
     echo json_encode($rebar);

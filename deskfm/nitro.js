@@ -1,10 +1,14 @@
 
   
 
-viewer.prototype.nitro_start = function() {
+viewer.prototype.nitro_start = function(pway) {
 
-  var lbl = "";
-  var pobj = null;
+	if (pway != undefined) {
+	    this.metro_dir = pway;
+	}
+
+   var lbl = "";
+   var pobj = null;
    var tmp = "";
 
     if (is_mobile == true) {
@@ -14,12 +18,6 @@ viewer.prototype.nitro_start = function() {
     }
     this.flip_card();    
 
-      lbl = 'nitro_img';
-      tsrc = "deskfm/images/icons/stop.png";
-      pobj = document.getElementById(lbl)
-      if (pobj != null) {
-        pobj.src = tsrc;
-      }
 
 }
 
@@ -30,14 +28,6 @@ viewer.prototype.nitro_stop = function() {
    this.metro_spd = 0;
    this.flip_card();
    
-   var tmp = "";
-   var   lbl = 'nitro_img';
-   var    tsrc = "deskfm/images/icons/fast_fwd.png";
-   var    pobj = document.getElementById(lbl)
-      if (pobj != null) {
-        pobj.src = tsrc;
-      }
-  
 
 }
 
@@ -56,8 +46,13 @@ viewer.prototype.flip_card = function() {
  
    if (this.metro_spd != 0) {
 
-         this.next(5);
-
+	   if (this.metro_dir == "fwd") {
+             this.next(5);
+	   } 
+	   if (this.metro_dir == "back") {
+             this.prev(5);
+	   }
+  
          var cl = this.varname + ".flip_card();";
          this.metro_tmr = setTimeout(cl,this.metro_spd);
 

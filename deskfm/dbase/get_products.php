@@ -3,7 +3,8 @@ include '../../config/names.php';
 
  class foo { 
  
-   public $pid; 
+   public $pid;
+   public $stored = true;
    public $uname;
    public $story;
    public $prodid;

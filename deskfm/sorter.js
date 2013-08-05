@@ -27,7 +27,7 @@ sorter.prototype.show = function() {
    var ocl="";
 
        if (this.shape == "twitterhose") {
-
+         tmp = tmp + "<div>";
 	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"\");' data-role='button'  >";
  	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
          tmp = tmp + "</button>";
@@ -37,9 +37,10 @@ sorter.prototype.show = function() {
          tmp = tmp + "</sapn>";
 
          tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
+         tmp = tmp + "</div>";
 
-         tmp = tmp + "<span id='feed_btns'  >";
-         tmp = tmp + "</span>";
+         tmp = tmp + "<div id='feed_btns'  >";
+         tmp = tmp + "</div>";
 
 	
 

@@ -8,6 +8,7 @@ include '../../config/names.php';
    public $subcat;
    public $story;
    public $source;
+  public $stored = true;
    public $dfdate ;
    public $picurl;
    public $linkurl;

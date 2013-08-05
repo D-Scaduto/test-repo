@@ -284,3 +284,128 @@ viewer.prototype.load_random_rungs = function() {
     this.draw_view();
 
 }
+
+
+
+
+viewer.prototype.update_one = function(pdx) {
+//	alert(pdx);
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.pid == pdx) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+        if (this.darungs[fnd_rung].postman != undefined) {
+          this.darungs[fnd_rung].postman.changed =false;
+          this.darungs[fnd_rung].postman.redraw_rung();
+        }
+  } 
+}
+
+
+viewer.prototype.update_person = function(pname) {
+  var s= "";
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.uname == pname) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+        if (this.darungs[fnd_rung].postman != undefined) {
+          this.darungs[fnd_rung].postman.changed =false;
+        }
+        this.draw_rung(fnd_rung);
+  } 
+}
+
+
+viewer.prototype.add_one = function(pdx) {
+   var t = null;
+   if (webitlist[pdx] == undefined) {
+//      alert("adderr " + pdx);
+   } else {
+         this.dalist.unshift(pdx);
+         this.load_rungs();  
+   } 
+}
+
+
+viewer.prototype.del_rung = function(tspot) {
+     var da = this.darungs[tspot].dadex;
+     this.dalist.splice(da,1);
+     this.darungs.splice(tspot,1);
+     this.load_rungs();
+}
+
+
+viewer.prototype.del_webit = function(tpid) {
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.pid == tpid) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+     this.del_rung(fnd_rung);
+  } else {
+    var fnd_le = -1;
+    for (var b=0; b<=this.webitlist.length;b++) {
+         if (webitlist[this.webitlist[b]] != undefined) {
+           if (webitlist[this.webitlist[b].pid] == tpid) {
+                fnd_le = b;
+           }
+         }
+    }
+    if (fnd_le != -1) {
+      this.dalist.splice(fnd_le,1);
+    }
+  }
+}
+
+
+viewer.prototype.del_person = function(puname) {
+
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.uname == puname) {
+                   fnd_rung = c;
+              }
+            } 
+         }
+  }
+  if (fnd_rung != -1) {
+     this.del_rung(fnd_rung);
+  } else {
+    var fnd_le = -1;
+    for (var b=0; b<=this.dalist.length;b++) {
+         if (peeplist[this.dalist[b]] != undefined) {
+            if (peeplist[this.dalist[b].uname] == puname) {
+                   fnd_le = b;
+            }
+         }
+    }
+    if (fnd_le != -1) {
+      this.dalist.splice(fnd_le,1);
+    }
+  }
+}
+
+
+

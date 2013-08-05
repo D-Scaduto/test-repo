@@ -228,11 +228,16 @@ header('X-Frame-Options: SAMEORIGIN');
 	   daviewer.top_end = 10;
    }
 	   sal = new logoman("logo_spot");
-           store = new shoper("shop");
+   	   store = new shoper("shop_spot");
+
 	   mac = new sorter("sort");
 	   cater = new categor("browse");
+	   
 	   wanda = new searcher("search");
+
+	  // nicky = new sharer("share");
 	   nicky = new sharer("share_spot");
+	   
            joe = new manager("contact");
 
 	   diego = new header("menu_spot");
@@ -240,8 +245,9 @@ header('X-Frame-Options: SAMEORIGIN');
 	   diego.add_mainspot("browse","cater");
            diego.add_mainspot("contact","joe");
 	   diego.add_mainspot("sort","mac");
-	   diego.add_mainspot("shop","store");
-	   diego.add_mainspot("search","wanda");
+	   diego.add_mainspot("manage","mac");
+//  	     diego.add_mainspot("search","wanda");
+//           diego.add_mainspot("share","nicky");
 	   diego.main_shape = "browse";
 	 
 
@@ -256,44 +262,51 @@ header('X-Frame-Options: SAMEORIGIN');
     amare.get_unsorted();
 
 
+        if ($(this).width() < 601) {
+	      is_mobile = true;
+	} 
+
+
     $(window).resize(function() {
 
       var width = $(this).width();
       var height = $(this).height();
 
-        if (width < 801) {
+        if (width < 601) {
           if (is_mobile != true) {
-		  is_mobile = true;
+		is_mobile = true;
+ 		if ($('#outer_menu').hasClass('top_menu') == false) {
+		  $('#outer_menu').addClass('top_menu');
+		  $('#outer_menu').removeClass('flying_menu');
+		  window.scroll(0,0); 
+		}	
 	  }
-	  if (elle.shape != "") {
- 	    elle.shape = "";
-	    elle.draw_main();
-	  }
+	
         } else {
   	   if ((is_mobile == true) && (is_ie == false)) {
 		   is_mobile = false;
-		   
 	   }
-           if (elle.shape != "wingout") {
- 	    elle.shape = "wingout";
-	    elle.draw_main();
-	  }
+	  
 	}
     });
 
 
-   $(window).scroll(function() {
+    $(window).scroll(function() {
+    
         if ($('#top_line').inSight(100) == true) {
 	    if ($('#outer_menu').hasClass('top_menu') == false) {
 		$('#outer_menu').addClass('top_menu');
 		$('#outer_menu').removeClass('flying_menu');
 	    }
 	} else {
+          if (is_mobile == false) {
 	    if ($('#outer_menu').hasClass('flying_menu') == false) {
 		$('#outer_menu').addClass('flying_menu');
 		$('#outer_menu').removeClass('top_menu');
 	    }
+	  }
 	}
+      
     });
  
 

@@ -9,6 +9,7 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.listype = "";
    this.source = "deskfm";
    this.dadex=0;
+   this.stored = false;
  
    this.is_mini = false;
    if (bmini != undefined) {
@@ -105,13 +106,14 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.pid=pobj.pid;
       this.uname=pobj.uname;
       this.source=pobj.source;
+      this.stored=pobj.stored;
+
       this.dfdate=pobj.dfdate;
-      
       if ((pobj.created_at != "") && (pobj.created_at != undefined))  {
 	 this.created_at=pobj.created_at;
       }
-
       this.change_date=pobj.change_date;
+
       this.picurl=pobj.picurl;
       this.linkurl=pobj.linkurl;
       this.story=pobj.story;         
@@ -143,13 +145,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.changed = false;
 
        if (pobj.listype == "unsaved")  { 
-    	   this.changed = true;
-	   this.story_changed = true;
-	   this.pic_changed = true;
-	   this.link_changed = true;
-	   this.embed_changed = true;   
-	   this.cat_changed = true;
-	   this.group_changed = true;
+    	   
            this.btnson = true;
 	//   this.shape="getsort";
       }
@@ -239,7 +235,7 @@ poster.prototype.nav_btns = function() {
 	       }
 
               tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/black_mag.png' height='15px' >";
+              tmp = tmp + "<img src='deskfm/images/icons/pop-out.jpg' height='15px' >";
               tmp = tmp + "</button>";
             }
 
@@ -320,8 +316,7 @@ poster.prototype.nav_btns = function() {
      var tmp = "";
      var lbl = "";
      var ocl="";
-     var omo = "";
-     var omt = "";
+     var ts = "";
 
        if (this.changed == true) {
 
@@ -333,54 +328,52 @@ poster.prototype.nav_btns = function() {
          tmp = tmp + "</button>";
        }
 
- 	if ((this.changed == true) || (this.listype == "unsaved")) {
+ 	if ((this.changed == true) || (this.stored == false)) {
 
-         if (this.listype == "webits") {
-
-            lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".save_webit();";
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
-              tmp = tmp + "</button>";
-
-         } else if (this.listype == "people") {
+          if (this.listype == "people") {
 
 	         lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_person();";
+	      ts = "update";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_person();";
+                ts = "add";
+	      }
               tmp=tmp + "<button onClick='"+ocl+"'    >";  
-              tmp = tmp + "save";
+              tmp = tmp + ts;
               tmp = tmp + "</button>";
 
-         } else if (this.listype=="unsorted") {
+         } else if (this.listype=="product") {
 
         	 lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".save_webit();";
+              ocl = this.varname+".update_product();";
+	      	      ts = "update";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_product();";
+		        ts = "add";
+	      }
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
+              tmp = tmp + ts;
               tmp = tmp + "</button>";
 
-	 } else if (this.listype=="unsaved") {
+	 } else  {
 
        		 lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".save_webit();";
+              ocl = this.varname+".update_webit();";
+      	      	      ts = "update";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_webit();";
+        	      ts = "add";
+	      }
               tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
 //              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "save";
-              tmp = tmp + "</button>";
-
-	     lbl = this.spotid + "_" + this.rung + "_ignore_btn";
-              ocl = this.varname+".ignore_webit();";
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + "ignore";
+              tmp = tmp + ts;
               tmp = tmp + "</button>";
 
 	 } 
 	 
      }
-
 
      lbl = this.rungster + '_send_btns';
      pobj = document.getElementById(lbl);
@@ -500,7 +493,7 @@ poster.prototype.clear = function() {
 
 
 
- poster.prototype.save_webit = function() {
+ poster.prototype.add_webit = function() {
 
      var pcat="";
      var linkcode = escape(this.linkurl);
@@ -540,12 +533,7 @@ poster.prototype.clear = function() {
      }
 
      var url = "";
-     if (this.listype == "unsaved") {
        url = "deskfm/dbase/add_webit.php"+prams;
-     }
-     if ((this.listype == "unsorted") || (this.listype == "webits"))  {
-       url = "deskfm/dbase/update_webit.php"+prams;
-     }
 
      alert(url);
      $.getJSON(url,function(json) {
@@ -555,6 +543,54 @@ poster.prototype.clear = function() {
 }
 
 
+ poster.prototype.update_webit = function() {
+
+     var pcat="";
+     var linkcode = escape(this.linkurl);
+     var storycode = escape(this.story);
+     var embedcode = escape(this.embedurl);
+
+     var prams = "?uname="+this.uname+"&source="+this.source;
+     prams = prams + "&listype=" + this.listype;
+     prams = prams + "&pid="+this.pid;
+
+     if (this.created_at != undefined) {
+       prams = prams + "&created_at="+this.created_at;
+     }
+
+     if (this.cat_changed == true) {
+       prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
+     }
+     if (this.story_changed == true) {
+       prams = prams + "&storycode="+storycode;
+     }
+
+     if (this.link_changed == true) {
+       prams = prams + "&linkcode="+linkcode;
+     }
+     if (this.pic_changed == true) {
+        if (this.picsrc !=  "") {
+          prams = prams + "&picsrc="+ this.picsrc;
+	} else {
+	  prams = prams + "&picurl="+ this.picurl;
+	}
+     }
+     if (this.embed_changed == true) {
+       prams = prams + "&embedcode="+embedcode;
+     }
+     if (this.group_changed == true) {
+       prams = prams + "&groupid="+this.groupid;
+     }
+
+     var url = "";
+       url = "deskfm/dbase/update_webit.php"+prams;
+
+     alert(url);
+     $.getJSON(url,function(json) {
+          amare.update_webit(json.pobj);
+     });
+     sal.waiting();
+}
 
  poster.prototype.update_person = function() {
 
