@@ -40,7 +40,7 @@ searcher.prototype.show = function() {
    
    lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";
-   tmp = tmp + "<button id='"+lbl+"' class='' style='' >";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
    tmp = tmp + "</button>";
 

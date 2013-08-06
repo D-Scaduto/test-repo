@@ -438,13 +438,13 @@ stater.prototype.get_random_list = function() {
 
 stater.prototype.get_csearch_list = function(tsterms) {
 
-   var url='deskfm/dbase/dfm_dbget.php';
+   var url='deskfm/dbase/get_dataset.php';
    url = url + "?lim="+ da_limit;
    if ((tsterms != "") &&  (tsterms != undefined)){
      url = url + "&sterms="+ tsterms;
      this.sterms = tsterms;
    } 
-//   alert(url);
+   alert(url);
    $.getJSON(url,function(json) {
       amare.update_webits(json);
    });   // end get json 

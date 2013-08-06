@@ -144,7 +144,25 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.changed = false;
 
        if (pobj.listype == "unsaved")  { 
-    	   
+    	   this.changed = true;
+           if (pobj.story != "") {
+	     this.story_changed = true;
+           }
+	   if (pobj.picrl != "") {
+	      this.pic_changed = true;
+	   }
+	   if (pobj.linkurl != "") {
+	      this.link_changed = true;
+	   }
+	   if (pobj.embedurl != "") {
+	      this.embed_changed = true;   
+	   }
+	   if (pobj.cat != "") {
+	     this.cat_changed = true;
+	   }
+	   if (pobj.groupid != "") {
+	     this.group_changed = true;
+	   }
            this.btnson = true;
       }
 
@@ -309,7 +327,6 @@ poster.prototype.nav_btns = function() {
 
 
 
-
  poster.prototype.change_btns = function() {
      var tmp = "";
      var lbl = "";
@@ -324,13 +341,10 @@ poster.prototype.nav_btns = function() {
 //              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
          tmp = tmp + "undo";
          tmp = tmp + "</button>";
-       }
-
- 	if ((this.changed == true) || (this.stored == false)) {
 
           if (this.listype == "people") {
 
-	         lbl = this.rungster + "_save_btn";
+	      lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_person();";
 	      ts = "update";
               if (this.stored == false) {
@@ -369,9 +383,8 @@ poster.prototype.nav_btns = function() {
               tmp = tmp + ts;
               tmp = tmp + "</button>";
 
-	 } 
-	 
-     }
+ 	  } 
+       } 
 
      lbl = this.rungster + '_send_btns';
      pobj = document.getElementById(lbl);
