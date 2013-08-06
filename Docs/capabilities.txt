@@ -1,0 +1,22 @@
+capabilities of DeskFM
+
+1. guest Users can sumbit stories/testominals
+2. displays a collection of personal tweets about the standing desk
+3. posts are sorted through and categorized
+4. grouped by author, easier to get testomials
+5. shows recent tweets coming from the  live- twitter feed
+6. browse standing desk manufacturers products
+7. search using keyword, checks "story" and author
+8. step through each tweet individually
+9. fast forward through the posts
+10. offers a zoomed view for simpler display.
+11. each post can contain an embed, and exteral link offering more information
+
+
+In the Future:
+1. Users can edit their own posts and self catagorize.
+    will have an automated set up
+      store tweet in database, contact user, 
+2. offer 3d google workstation to give examples of different kinds of standing desks
+3. allows for facebook and G+ integration
+4. 
