@@ -171,7 +171,7 @@ tw_feeder.prototype.get_live_tweets  = function (qry_str) {
      var url='';
      url = 'deskfm/twitter/tws_search.php' + qe;
 
-     alert(url);
+//     alert(url);
  
      $.getJSON(url,function(json) {
 

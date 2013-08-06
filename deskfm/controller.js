@@ -52,16 +52,16 @@ viewer.prototype.goto_end = function() {
 
 
 viewer.prototype.to_top = function(trung) {
-
+	
    this.redraw_rungs(trung);
-
+/*
    if (this.darungs[0] != undefined) {
     if (this.darungs[0].postman != undefined) {
 //     this.darungs[0].postman.btnson = true;
        this.darungs[0].postman.redraw_rung();
      }
    }
-
+*/
    window.scroll(0,0);
    var lbl=this.screen+"_rung_0";
    if ( document.getElementById(lbl) != null) {
@@ -155,49 +155,55 @@ viewer.prototype.redraw_rungs = function(trungdex) {
     }
 
     var darungs2 = [];
+
       for (c=r; c<this.darungs.length;c++) {
          if (this.darungs[c] != undefined) {
              darungs2[a] = new Object();
              rd = this.darungs[c].vdex;
+	     if (this.dalist[rd] != undefined) {
+	       lt = this.dalist[rd].ltype;
 
-             if (lt == "webits") {
-               if (amare.webitlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "webits") {
+                 if (amare.webitlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-             if (lt == "people") {
-               if (amare.peoplelist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "people") {
+                 if (amare.peoplelist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-             if (lt == "products") {
-               if (amare.productlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "products") {
+                 if (amare.productlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-            if (lt == "unsorted") {
-               if (amare.unsortedlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+               if (lt == "unsorted") {
+                 if (amare.unsortedlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-             }
-
-	    if (lt == "unsaved") {
-               if (amare.unsavedlist[rd] != null) {
-                 darungs2[a].vdex = rd;
-                 a = a+1;
+	       if (lt == "unsaved") {
+                 if (amare.unsavedlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
                }
-            }
+	     } else {
+		     alert(rd);
+	     }
          }
       }
 
       for (c=0; c<r;c++) {
          if (this.darungs[c] != undefined) {
              darungs2[a] = new Object();
-             rd = this.darungs[c].dadex;
+             rd = this.darungs[c].vdex;
+
 	     if (this.dalist[rd] != undefined) {
  	       lt = this.dalist[rd].ltype;
 
@@ -232,14 +238,14 @@ viewer.prototype.redraw_rungs = function(trungdex) {
                  }
                }
 	     }
-         }
+         }  
       }
 
       this.darungs=[];
       for (var z=0; z<darungs2.length;z++) {
         if (darungs2[z] != undefined) {
            this.darungs[z] = new Object();
-           var ad = darungs2[z].dadex;
+           var ad = darungs2[z].vdex;
            this.darungs[z].vdex = ad;
         }
       }
@@ -275,7 +281,7 @@ viewer.prototype.load_random_rungs = function() {
          if (used == false) {
            tls.push(r);
            this.darungs[i] = new Object();
-           this.darungs[i].dadex = r;
+           this.darungs[i].vdex = r;
          }
        }
        i = i+1;
@@ -342,7 +348,7 @@ viewer.prototype.add_one = function(pdx) {
 
 
 viewer.prototype.del_rung = function(tspot) {
-     var da = this.darungs[tspot].dadex;
+     var da = this.darungs[tspot].vdex;
      this.dalist.splice(da,1);
      this.darungs.splice(tspot,1);
      this.load_rungs();
