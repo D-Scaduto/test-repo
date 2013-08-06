@@ -8,7 +8,10 @@ function listdex () {
 
 function webit(tpid) { 
 
-   this.pid = tpid;
+   this.pid = "";
+   if (tpid != undefined) {
+	   this.pid =tpid;
+   }
   
    this.listype="";
    this.source = "deskfm";

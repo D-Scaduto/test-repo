@@ -140,14 +140,12 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       if (pobj.listype == "unsorted")  {
 	      
            this.btnson = true;
-	 //  this.shape="getsort";
       }
       this.changed = false;
 
        if (pobj.listype == "unsaved")  { 
     	   
            this.btnson = true;
-	//   this.shape="getsort";
       }
 
       
@@ -502,7 +500,9 @@ poster.prototype.clear = function() {
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;
-     prams = prams + "&pid="+this.pid;
+     if (this.pid != "") {
+       prams = prams + "&pid="+this.pid;
+     }
 
      if (this.created_at != undefined) {
        prams = prams + "&created_at="+this.created_at;
