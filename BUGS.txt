@@ -1,6 +1,18 @@
-in admin.php
+in admin view
 
-> no way to view recent DB items
-	-change save button to use another feild of the DB for date added?
+>Sort on firehouse doesn't have a search button and doesn't return any new information
+
+> sort for database doesn't have the dates oragnize correctly and you can not sort by an earlier dates
+
+>Search doesnt work
+
+>"pop out"/zoom button breaks the gui
+    webbit is loaded but not drawn corretly
+    
+> no way to input username when submitting a post
+
+>posts are not actually saved into dfm_posts
+
+>fast forward occurs when you hover over it.. this was done purpose 
 
 >
