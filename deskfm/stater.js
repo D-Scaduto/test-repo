@@ -444,7 +444,7 @@ stater.prototype.get_csearch_list = function(tsterms) {
      url = url + "&sterms="+ tsterms;
      this.sterms = tsterms;
    } 
-   alert(url);
+//   alert(url);
    $.getJSON(url,function(json) {
       amare.update_webits(json);
    });   // end get json 
