@@ -53,7 +53,11 @@ poster.prototype.get_pic = function() {
    var ocl = "";
 
      tmp = "";
-     ps = this.picurl;
+      if (this.picsrc != "") {
+	      ps = this.picsrc;
+      } else {
+           ps = this.picurl;
+      }
 
      cls = "piclip";
      if (is_mobile == true) {

@@ -54,15 +54,9 @@ viewer.prototype.goto_end = function() {
 viewer.prototype.to_top = function(trung) {
 	
    this.redraw_rungs(trung);
-/*
-   if (this.darungs[0] != undefined) {
-    if (this.darungs[0].postman != undefined) {
-//     this.darungs[0].postman.btnson = true;
-       this.darungs[0].postman.redraw_rung();
-     }
-   }
-*/
+
    window.scroll(0,0);
+
    var lbl=this.screen+"_rung_0";
    if ( document.getElementById(lbl) != null) {
      document.getElementById(lbl).focus(); 
@@ -294,13 +288,13 @@ viewer.prototype.load_random_rungs = function() {
 
 
 
-viewer.prototype.update_one = function(pdx) {
-//	alert(pdx);
+viewer.prototype.update_one = function(tpid,mdex,ltype) {
+
   var fnd_rung = -1;
   for (var c=0; c<=this.darungs.length;c++) {
          if (this.darungs[c] != undefined) {
             if (this.darungs[c].postman != undefined) {
-              if (this.darungs[c].postman.pid == pdx) {
+              if (this.darungs[c].postman.pid == tpid) {
                    fnd_rung = c;
               }
             }
@@ -308,7 +302,8 @@ viewer.prototype.update_one = function(pdx) {
   }
   if (fnd_rung != -1) {
         if (this.darungs[fnd_rung].postman != undefined) {
-          this.darungs[fnd_rung].postman.changed =false;
+          this.darungs[fnd_rung].postman.set_ppid(mdex,ltype);
+          this.darungs[fnd_rung].postman.shape= "";
           this.darungs[fnd_rung].postman.redraw_rung();
         }
   } 
@@ -329,9 +324,9 @@ viewer.prototype.update_person = function(pname) {
   }
   if (fnd_rung != -1) {
         if (this.darungs[fnd_rung].postman != undefined) {
-          this.darungs[fnd_rung].postman.changed =false;
+           this.darungs[fnd_rung].postman.set_ppid(tpid,ltype);
+           this.darungs[fnd_rung].postman.redraw_rung();
         }
-        this.draw_rung(fnd_rung);
   } 
 }
 

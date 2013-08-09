@@ -87,7 +87,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
        this.listype = plistype;
   } 
 
-
+    this.stored = true;
     if (this.listype == "webits") {
         s =  "amare.webitlist[" + pdadex + "]";
     } else if (this.listype == "people") {
@@ -98,6 +98,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
         s =  "amare.unsortedlist[" + pdadex + "]";
     } else if (this.listype == "unsaved") {
         s =  "amare.unsavedlist[" + pdadex + "]";
+	this.stored = false;
     } 
 
     pobj = eval(s);
@@ -138,39 +139,43 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       }
      
       if (pobj.listype == "unsorted")  {
-	      
            this.btnson = true;
       }
+      
       this.changed = false;
+      this.story_changed = false;
+      this.pic_changed = false;
+      this.link_changed = false;
+      this.embed_changed = false;   
+      this.cat_changed = false;
+      this.group_changed = false;
 
        if (pobj.listype == "unsaved")  { 
     	   this.changed = true;
-           if (pobj.story != "") {
+           if ((pobj.story != "") && (pobj.story != undefined)) {
 	     this.story_changed = true;
            }
-	   if (pobj.picrl != "") {
+	   if ((pobj.picurl != "")  && (pobj.picurl != undefined)){
 	      this.pic_changed = true;
 	   }
-	   if (pobj.linkurl != "") {
+	   if ((pobj.linkurl != "") && (pobj.linkurl != undefined)) {
 	      this.link_changed = true;
 	   }
-	   if (pobj.embedurl != "") {
+	   if ((pobj.embedurl != "") && (pobj.embedurl != undefined)) {
 	      this.embed_changed = true;   
 	   }
-	   if (pobj.cat != "") {
+	   if ((pobj.cat != "") && (pobj.cat != undefined)) {
 	     this.cat_changed = true;
 	   }
-	   if (pobj.groupid != "") {
+	   if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
 	     this.group_changed = true;
 	   }
            this.btnson = true;
       }
-
       
     } else {
 //      alert("err: "+pdadex);
     }
-
 
 }
 
@@ -547,8 +552,14 @@ poster.prototype.clear = function() {
 
      var url = "";
        url = "deskfm/dbase/add_webit.php"+prams;
-
-     alert(url);
+this.changed = false;
+   this.story_changed = false;
+   this.pic_changed = false;
+   this.link_changed = false;
+   this.embed_changed = false;   
+   this.cat_changed = false;
+   this.group_changed = false;
+//     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });
@@ -597,8 +608,14 @@ poster.prototype.clear = function() {
 
      var url = "";
        url = "deskfm/dbase/update_webit.php"+prams;
-
-     alert(url);
+this.changed = false;
+   this.story_changed = false;
+   this.pic_changed = false;
+   this.link_changed = false;
+   this.embed_changed = false;   
+   this.cat_changed = false;
+   this.group_changed = false;
+//     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });

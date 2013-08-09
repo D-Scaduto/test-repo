@@ -1,6 +1,6 @@
 
 
- poster.prototype.draw_rung = function(pspot) {
+ poster.prototype.draw_rung = function() {
 
 	 if (daviewer.zoom == true) {
 		 this.btnson = true;
@@ -84,11 +84,6 @@
 	 }
 	 this.draw_date();
       }
-
-
-
-
-//     this.draw_place(pspot,this.darungs[tspot].dadex);
 
         if (debug == true) {
           this.draw_debug();
@@ -211,7 +206,6 @@
     	   tmpstr=tmpstr+"</div>";
 
       }
-
 
       lbl = this.spotid + "_rung_" + this.rung;
       pobj = document.getElementById(lbl);

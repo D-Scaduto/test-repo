@@ -155,29 +155,6 @@ viewer.prototype.draw_view = function() {
 
 
 
-viewer.prototype.get_dadex = function() {
-   return this.dalist[this.listdex];
-}
-
-
-
-
-
-
-viewer.prototype.draw_debug = function() {
-     var pobj=null;
-     var lbl = "";
-     var tmp = "";
-     tmp = tmp + " listlen="+ this.dalist.length;
-     tmp = tmp + " rungs="+ this.darungs.length;
-     tmp = tmp + " topend="+ this.top_end;
-
-     lbl = this.screen + "_debug";
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-         pobj.innerHTML = tmp;
-     }
-}
 
 
 viewer.prototype.change_shape = function() { 
@@ -285,17 +262,21 @@ viewer.prototype.set_zoom = function(pspot) {
 
 
 
- viewer.prototype.draw_place = function(tspot,tdex) {
+viewer.prototype.draw_debug = function() {
+     var pobj=null;
+     var lbl = "";
+     var tmp = "";
+     tmp = tmp + " listlen="+ this.dalist.length;
+     tmp = tmp + " rungs="+ this.darungs.length;
+     tmp = tmp + " topend="+ this.top_end;
 
-  var tmpstr = "";
-  var lbl = this.screen +"_"+ tspot +"_place_spot";
-   tmpstr = tmpstr + " ";
-
- if ( document.getElementById(lbl) != null ) {
-    document.getElementById(lbl).innerHTML= tmpstr;
-  }
-
+     lbl = this.screen + "_debug";
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+     }
 }
+
 
 
 

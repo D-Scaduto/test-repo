@@ -6,8 +6,8 @@ function calendor (pvarname) {
    this.spotid = "";
    this.showing = false;
   
-   this.ymons = ['','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
-   this.mini_mons = ['','j','f','m','a','m','j','j','a','s','o','n','d'];
+   this.ymons = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+   this.mini_mons = ['j','f','m','a','m','j','j','a','s','o','n','d'];
    this.wdays = ['mon','tue','wed','thu','fri','sat','sun'];
    this.mini_days = ['m','t','w','t','f','s','s'];
    this.denoms = ['all','year','qtr','month','week','day'];
@@ -19,42 +19,50 @@ function calendor (pvarname) {
    this.da_week = 1;
    this.da_day = "";
 
+   this.da_date = null;
+
    this.cur_mon = new Object();
-   this.first_mon = new Object();
-   this.init_months();
+   this.first_mon =new Object();
+
+   this.init();
 }
 
 
-calendor.prototype.init_months = function() {
+calendor.prototype.init = function() {
 
    this.first_mon.month = 7;
    this.first_mon.year = 11;
 
-   var cur_time = new Date();
-   var s = cur_time.getFullYear().toString();
-   this.cur_mon.year = s.substr(2);
-   this.cur_mon.month = cur_time.getMonth()+1;
+   var now = new Date();
+
+   this.cur_mon.year = parseInt(now.getFullYear().toString().substr(2,2));
+   this.cur_mon.month = now.getMonth();
 
    this.da_month = this.cur_mon.month;
    this.da_year = this.cur_mon.year;
 }
 
+calendor.prototype.get_datetime = function() {
+
+	this.da_date = new Date();
+	this.da_date.setMonth(this.da_month);
+	this.da_date.setFullYear("20"+ this.da_year);
+//	this.da_date.setDate(this.day);
+	return this.da_date;
+}
 
 
 calendor.prototype.show = function(pspotid) {
 
-	if (pspotid != undefined) {
+	 if (pspotid != undefined) {
 		this.spotid = pspotid;
-	}
+ 	 }
 
-  
-
-   var t = "";
-   var lbl = "";
-   var o = null;
-   var cls = '';
-   var ocl= "";
-  
+         var t = "";
+         var lbl = "";
+         var o = null;
+         var cls = '';
+         var ocl= "";
 
 //       if (this.da_denom == "qtr") {  
 
@@ -62,16 +70,23 @@ calendor.prototype.show = function(pspotid) {
           da_mon.month = this.da_month;
           da_mon.year = this.da_year;
 
-          o=this.get_net_month(da_mon,-2);
+          o=this.get_net_month(da_mon,-1);
           if (o != null) {
 	    ocl = this.varname + ".scroll_months(-1);";
 	  }
-              lbl = 'hdr_prevmon_btn';
-              t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button' >";
-              t=t+ " <";
-              t = t + "</button>";
+          lbl = 'hdr_prevmon_btn';
+          t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button' >";
+          t=t+ " <";
+          t = t + "</button>";
 
-	  o=this.get_net_month(da_mon,2);
+          lbl = 'hdr_month_btn';
+	  ocl = "";
+          t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
+          t=t+ " " +this.ymons[this.da_month-1];
+          t=t+ " '" +this.da_year;
+          t = t + "</button>";
+
+	  o=this.get_net_month(da_mon,1);
 	  lbl = 'hdr_nextmon_btn';
 	  ocl = "";
           if (o!=null) {
@@ -80,13 +95,6 @@ calendor.prototype.show = function(pspotid) {
           t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button'  >";
           t=t+ " >";
           t = t + "</button>";
-
-          lbl = 'hdr_month_btn';
-	  ocl = "";
-          t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
-          t=t+ " " +this.ymons[this.da_month];
-          t=t+ " '" +this.da_year;
-          t = t + "</button>";
 	    
      
     lbl = this.spotid;
@@ -94,9 +102,7 @@ calendor.prototype.show = function(pspotid) {
     if (obj != null) {
       obj.innerHTML = t;
       this.showing = true;
-      $('#hdr_prevmon_btn').button();
       $('#hdr_month_btn').button();
-      $('#hdr_nextmon_btn').button();
     }
 }
 

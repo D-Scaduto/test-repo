@@ -56,14 +56,10 @@ tw_feeder.prototype.draw_btns = function() {
       }	 
       tmp = tmp + "</span>";
 
-    if (this.newest_twid == "") {
-      tmp = tmp + "<button id='twitter_feed_btn' onclick='mac.check_feed();'  >";
-      tmp = tmp + "get";
-      tmp = tmp + "</button>";
-    }
+   
 
      if (this.oldest_twid != "") {
-       ocl = this.varname + ".save_set();";
+       ocl =  "mac.save_set();";
        tmp = tmp + "<button id='twfeed_saveset_btn' onclick='"+ocl+"'  >";
        tmp = tmp + " save set ";
        tmp = tmp + "</button>";
@@ -75,6 +71,7 @@ tw_feeder.prototype.draw_btns = function() {
    } 
 
 }
+
 
 
 tw_feeder.prototype.next_set  = function () {

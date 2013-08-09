@@ -660,7 +660,6 @@ stater.prototype.add_unsorted= function(listobj) {
 
 
 
-
  stater.prototype.add_webit = function(tpobj) {
 
    var t=-1;
@@ -683,6 +682,8 @@ stater.prototype.add_unsorted= function(listobj) {
       var j = "";                    
       var u = 0;
       var s = 0;
+      var mdex = -1;
+      var ltype = "";
 
         for (var k=0; k<this.webitlist.length; k++) {
           if (this.webitlist[k] != undefined) {
@@ -695,11 +696,21 @@ stater.prototype.add_unsorted= function(listobj) {
 	if (fnd != -1) {
 
 		// update webitlist 
-                daviewer.update_one(pobj.pid);
-      	        nicky.update(pobj.pid);
+		ltype = "webits";
+		mdex = fnd;
+	 	 pobj.ltype = "webits";
+               this.webitlist[fnd] = pobj; 
 
 
 	} else {
+
+           // if cat != ""
+	   // add to webitlist 
+	   if (pobj.cat != "") {
+		  ltype = "webits";
+		 pobj.ltype = "webits";
+ 		mdex = this.webitlist.push(pobj); 
+	   }
 
            u = 0;
            while (u<this.unsortedlist.length) {
@@ -713,13 +724,33 @@ stater.prototype.add_unsorted= function(listobj) {
            }
            if (fnd != -1) {
 
-         	
-			// if cat != ""  
+			// if cat != ""
 			// remove from unsorted list 
-			// else add to webitlist
-			// else just update unsorted
+			// else update unsorted
+			
+			if (pobj.cat != "") {
+ 			   this.unsortedlist.splice(fnd,1);
+			} else {
+			   this.unsortedlist[fnd] = pobj;
+				ltype = "unsorted";
+				mdex = fnd;
+			}
 
 	   } else {
+
+	 
+		// if cat == "" add to unsorted list 
+		// else add to webitlist 
+		
+		if (pobj.cat == "") {
+			pobj.ltype="unsorted";
+		        ltype = "unsorted";
+			mdex = this.unsortedlist.push(pobj);
+		} else {
+			pobj.ltype="webits";
+			ltype = "webits";
+			mdex = this.webitlist.push(pobj);
+		}
 
  		s = 0;
                 while (s<this.unsavedlist.length) {
@@ -733,16 +764,16 @@ stater.prototype.add_unsorted= function(listobj) {
                 }
 		if (fnd != -1) {
 
-			// remove from unsaved list 
-			// if cat == "" add to unsorted list 
-			// else add to webitlist
+		    // remove from unsaved list	
+		    this.unsavedlist.splice(fnd,1);
+		
+		}
 
-	   	}
 	   }
 	}
 
-       daviewer.update_one(pobj);
-       nicky.update(pobj);
+     daviewer.update_one(pobj.pid,mdex,ltype);
+     nicky.update(pobj.pid,mdex,ltype);
 
 
 /*

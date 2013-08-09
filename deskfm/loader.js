@@ -247,7 +247,17 @@ viewer.prototype.load_provider_list = function(tproviderid) {
 }
 
 
-viewer.prototype.load_unsorted_list = function() {
+viewer.prototype.load_unsorted_list = function(dtmon) {
+
+    var month = "";
+    var year = "";
+
+    if (dtmon != undefined) {
+	    month = dtmon.getMonth();
+	    year = dtmon.getFullYear();
+	    year = year.toString().substr(2,2);
+	 alert("m="+month + " y="+year);
+    }
 
     var lgo = true;
     var d = 0;
@@ -265,9 +275,29 @@ viewer.prototype.load_unsorted_list = function() {
         ro = amare.unsortedlist[r];
         if (ro != undefined) {
           ok = false;
-          if (ro.cat == "") {
-             ok = true;
-          }
+	  if (month != "") {
+		 var dt = null;
+                 if ((ro.dfdate != "") && (ro.dfdate != undefined))  {
+		    var t = ro.dfdate.split(/[- :]/);
+		    dt = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+                 } else if ((ro.created_at != "")  && (ro.created_at != undefined)) {
+		   dt = new Date(ro.created_at);
+		 }
+		 if (dt != null) {
+	
+			 var ma = dt.getMonth();
+			 var ya = dt.getFullYear().toString().substr(2,2);
+
+  	           if ( (month == ma) && (year == ya) )  {
+	alert(dt + " m="+month + " y="+year + " ma=" + ma);
+                        ok = true;
+		   } 
+		 }
+	  } else {
+	//	 if (ro.cat == "") {
+        	     ok = true;
+	 //         }
+	  }
           if (ok == true) {
             obj = new listdex();
             obj.mdex = r;

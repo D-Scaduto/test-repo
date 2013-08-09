@@ -69,11 +69,11 @@ sharer.prototype.add_child = function(mdex,ltype) {
 
 
 
-sharer.prototype.update = function(tpid) {
+sharer.prototype.update = function(tpid,mdex,ltype) {
 
    if (tpid != undefined)  { 
       if (this.newster.pid == tpid) {
-        this.newster.set_ppid(tpid);
+        this.newster.set_ppid(tpid,ltype);
       }
    }
 

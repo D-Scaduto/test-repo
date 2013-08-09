@@ -31,6 +31,10 @@ sorter.prototype.show = function() {
 	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"\");' data-role='button'  >";
  	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
          tmp = tmp + "</button>";
+	
+	 tmp = tmp + "<button id='' onclick='mac.check_feed();'  >";
+ 	 tmp = tmp + "get";
+         tmp = tmp + "</button>";
 
 	 tmp = tmp + "<span class='spotd_off'  >";
          tmp = tmp + "twitter-hose";
@@ -41,13 +45,16 @@ sorter.prototype.show = function() {
 
          tmp = tmp + "<div id='feed_btns'  >";
          tmp = tmp + "</div>";
-
 	
 
        } else if (this.shape == "database") {
 
 	 tmp = tmp + "<button id='sort_shape_btn' onclick='mac.set_shape(\"\");' data-role='button'  >";
  	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='10px' >";
+         tmp = tmp + "</button>";
+
+	 tmp = tmp + "<button id='' onclick='mac.check_local();'  >";
+ 	 tmp = tmp + "get";
          tmp = tmp + "</button>";
 
 	 tmp = tmp + "<span class='spotd_off'  >";
@@ -67,34 +74,16 @@ sorter.prototype.show = function() {
 	 tmp = tmp + "<button id='sort_database_btn' onclick='mac.set_shape(\"database\");' data-role='button'  >";
          tmp = tmp + "database";
          tmp = tmp + "</button>";
-
-
 	
        } 
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
-
-      $('#live_feed_btn').button();
-
-      if (this.shape == "firehose") {
-
-        $('#twitter_feed_btn').button();
-	if (amare.unsavedlist.length== 0) {
-	   this.check_feed();
-	} else {
-	   daviewer.load_unsaved_list();
-        }
-      }
-
-     if (this.shape == "database") {
+      if (this.shape == "database") {
  	krono.show('cal_spot');
-	daviewer.load_unsorted_list();
       }
-
       this.showing = true;
-      this.twfeed.draw_btns();
       
    } 
 
@@ -123,6 +112,28 @@ sorter.prototype.check_feed = function() {
    }
 
 }
+
+
+sorter.prototype.save_set = function() {
+    // loop through daviewer
+    // call add on all of em 
+
+    var len = daviewer.darungs.length;
+    for (var i=0; i<len; i++) {
+	    daviewer.darungs[i].postman.add_webit();
+    }
+    
+}
+
+
+sorter.prototype.check_local = function() {
+
+   var dt = krono.get_datetime();
+   daviewer.load_unsorted_list(dt);
+
+}
+
+
 
 sorter.prototype.set_shape = function(pstr) {
 	if (pstr != undefined) {

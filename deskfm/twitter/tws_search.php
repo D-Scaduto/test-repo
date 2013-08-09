@@ -117,7 +117,8 @@ $bearer_token = $reply->access_token;
       
       for ($z=0; $z < $checklen; $z++ ) {
 	      if ($idarr[$z] == $d->id_str) {
- 		 $foodo->stored = true;
+		      $foodo->stored = true;
+		      $foodo->listype = "unsorted";
 	      }
       }
 

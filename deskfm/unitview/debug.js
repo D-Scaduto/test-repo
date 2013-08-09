@@ -23,6 +23,14 @@ poster.prototype.draw_debug = function() {
       }
 
       tmpstr=tmpstr +  " shape="+this.shape;
+      tmpstr=tmpstr +  " changed="+this.changed;
+      tmpstr=tmpstr +  " story_chg="+this.story_changed;
+       tmpstr=tmpstr +  " pic_chg="+this.pic_changed;
+       tmpstr=tmpstr +  " link_chg="+this.link_changed;
+       tmpstr=tmpstr +  " embed_chg="+this.embed_changed;
+       tmpstr=tmpstr +  " cat_chg="+this.cat_changed;
+       tmpstr=tmpstr +  " group_chg="+this.group_changed;
+  //    tmpstr=tmpstr +  " picurl="+this.picurl;
 
    lbl = this.rungster + '_debug_spot';
      pobj = document.getElementById(lbl);
