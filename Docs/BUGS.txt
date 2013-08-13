@@ -1,0 +1,24 @@
+in admin view
+
+<> sort for database doesn't have the dates oragnize correctly and you can not sort by an earlier dates
+
+<> no way to input username when submitting a post
+
+<>fast forward occurs when you hover over it.. this was done purpose ?
+
+<>sroll doesn't work with too few items
+
+<>no date displayed on browse tab
+
+<>guest post button "add" doesnt change to update
+
+<>after uploading a picure and clicking "add" the picture disapears
+
+AUGUST 13TH 2013
+
+
+AUGUST 6TH 2013
+<SOLVED>posts are not actually saved into dfm_posts
+<SOLVED>Sort on firehouse doesn't have a search button and doesn't return any new information
+<SOLVED>Search doesnt work
+<SOLVED>"pop out"/zoom button breaks the gui---webbit is loaded but not drawn corretly
