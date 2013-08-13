@@ -7,11 +7,15 @@ function stat () {
     this.subcat="";
     this.prodid="";
     this.groupid="";
+    this.month;
+    this.year;
+    this.desc="";
+
     this.lnum = 0;
     this.cnum=0;
-    this.desc="";
     this.last_chunk=0;
     this.max_chunks=0;
+
 }
 
 
@@ -41,6 +45,7 @@ function stater () {
    this.substats = [];
    this.prodstats = [];
    this.groupstats = [];
+   this.datestats = [];
 
    this.total_sorted = new stat();
    this.total_people = new stat();

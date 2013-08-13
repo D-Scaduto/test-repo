@@ -22,7 +22,6 @@ include '../../config/names.php';
     public $total_people;
     public $total_unsorted;
     public $total_sorted;
-
     public $sql1 = "";
   }
 
@@ -44,6 +43,20 @@ $con = mysql_connect($Server, $username, $password);
     $foodo = new foo;
     $foodo->cat = $row['cat'];
     $foodo->subcat = $row['subcat'];
+    $foodo->cnum = $row['count(*)'];
+    $baro->subs[] = $foodo;
+  }
+
+  $sql = "";
+  $sql= " select month(dt.created_at),year(dt.created_at),count(*) from dfm_tweets dt ";
+  $sql = $sql . " where dt.cat = '' ";
+  $sql = $sql . " group by month(dt.created_at),year(dt.created_at) ";
+
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $foodo = new foo;
+    $foodo->month = $row[0];
+    $foodo->year = $row[1];
     $foodo->cnum = $row['count(*)'];
     $baro->subs[] = $foodo;
   }
