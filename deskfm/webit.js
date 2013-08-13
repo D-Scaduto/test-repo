@@ -44,4 +44,37 @@ function webit(tpid) {
 }
 
 
+check_month = function(pobj,dtmon) {
+
+    var month = "";
+    var year = "";
+    var arr = null;
+    ret = false;
+
+    if (pobj != null) {
+
+    if ((pobj.dfdate != "") && (pobj.dfdate != undefined))  {
+
+       arr =  pobj.dfdate.split(" ");
+        var b =  arr[0];
+        var c = b.split("-");
+        month = c[1]-1;
+        year = c[0].substr(2,2);
+
+    } else if ((pobj.created_at != "")  && (pobj.created_at != undefined)) { 
+        arr =  pobj.created_at.split(" ");
+        var b =  arr[0];
+        var c = b.split("-");
+        month = c[1]-1;
+        year =  c[0].substr(2,2);
+    }
+
+    if ((dtmon.month == month) && (dtmon.year == year)) {
+	    ret = true;
+    }
+    }
+
+   return ret; 
+
+}
 

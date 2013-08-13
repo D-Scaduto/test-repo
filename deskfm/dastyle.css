@@ -1,4 +1,8 @@
 
+.ui-datepicker-calendar {
+    display: none;
+}
+
 
 * {
   -webkit-box-sizing: border-box;

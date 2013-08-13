@@ -1,28 +1,18 @@
 
-function calendor (pvarname) { 
 
-   this.varname = pvarname;
+function calendor (pspotid) { 
 
-   this.spotid = "";
+   this.spotid = pspotid; 
+   this.varname = "krono";
    this.showing = false;
-  
-   this.ymons = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
-   this.mini_mons = ['j','f','m','a','m','j','j','a','s','o','n','d'];
-   this.wdays = ['mon','tue','wed','thu','fri','sat','sun'];
-   this.mini_days = ['m','t','w','t','f','s','s'];
-   this.denoms = ['all','year','qtr','month','week','day'];
+ 
+   this.current_month = new Object();
+   this.first_month =new Object();
+   this.da_month = new Object();
 
-   this.da_denom = "qtr";
-   this.da_year = 0;
-   this.da_qtr = "";
-   this.da_month = "";
-   this.da_week = 1;
-   this.da_day = "";
+   this.months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+   this.mini_months = ['j','f','m','a','m','j','j','a','s','o','n','d'];
 
-   this.da_date = null;
-
-   this.cur_mon = new Object();
-   this.first_mon =new Object();
 
    this.init();
 }
@@ -30,47 +20,30 @@ function calendor (pvarname) {
 
 calendor.prototype.init = function() {
 
-   this.first_mon.month = 7;
-   this.first_mon.year = 11;
+   this.first_month.month = 6;
+   this.first_month.year = 11;
 
    var now = new Date();
+   this.current_month.year = parseInt(now.getFullYear().toString().substr(2,2));
+   this.current_month.month = now.getMonth();
 
-   this.cur_mon.year = parseInt(now.getFullYear().toString().substr(2,2));
-   this.cur_mon.month = now.getMonth();
-
-   this.da_month = this.cur_mon.month;
-   this.da_year = this.cur_mon.year;
-}
-
-calendor.prototype.get_datetime = function() {
-
-	this.da_date = new Date();
-	this.da_date.setMonth(this.da_month);
-	this.da_date.setFullYear("20"+ this.da_year);
-//	this.da_date.setDate(this.day);
-	return this.da_date;
+   this.da_month.year = this.current_month.year;
+   this.da_month.month = this.current_month.month;
 }
 
 
-calendor.prototype.show = function(pspotid) {
 
-	 if (pspotid != undefined) {
-		this.spotid = pspotid;
- 	 }
+
+calendor.prototype.show = function() {
 
          var t = "";
          var lbl = "";
          var o = null;
          var cls = '';
          var ocl= "";
+	 var btnstr = "";
 
-//       if (this.da_denom == "qtr") {  
-
-          var da_mon = new Object();
-          da_mon.month = this.da_month;
-          da_mon.year = this.da_year;
-
-          o=this.get_net_month(da_mon,-1);
+          o=this.get_net_month(this.da_month,-1);
           if (o != null) {
 	    ocl = this.varname + ".scroll_months(-1);";
 	  }
@@ -82,11 +55,12 @@ calendor.prototype.show = function(pspotid) {
           lbl = 'hdr_month_btn';
 	  ocl = "";
           t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
-          t=t+ " " +this.ymons[this.da_month-1];
-          t=t+ " '" +this.da_year;
+          btnstr=btnstr+ " " +this.months[this.da_month.month];
+          btnstr=btnstr+ " '" +this.da_month.year;
+	  t = t + btnstr;
           t = t + "</button>";
 
-	  o=this.get_net_month(da_mon,1);
+	  o=this.get_net_month(this.da_month,1);
 	  lbl = 'hdr_nextmon_btn';
 	  ocl = "";
           if (o!=null) {
@@ -102,78 +76,13 @@ calendor.prototype.show = function(pspotid) {
     if (obj != null) {
       obj.innerHTML = t;
       this.showing = true;
-      $('#hdr_month_btn').button();
     }
 }
 
-calendor.prototype.set_demon = function(pstr) {
-   this.da_denom = pstr;
-   this.show();
+
+calendor.prototype.get_da_month = function() {
+	return this.da_month;
 }
-
-calendor.prototype.change_demon = function() {
-
-   if (this.da_denom == "month" ) {
-     this.da_denom = "qtr";
-   } else if (this.da_denom == "qtr") {
-     this.da_denom = "years";
-   } else if (this.da_denom == "years") {
-     this.da_denom = "month";
-   } else {
-     this.da_denom = "month";
-   } 
-   this.show();
-}
-
-calendor.prototype.set_month = function(pmon,pyr) {
-
-   this.da_month = pmon;
-   if (pyr != undefined) {     
-     this.da_year = pyr;
-   }
-   this.show(); 
-}
-
-
-calendor.prototype.set_week = function(pweek) {
-
-  if (pweek != undefined) {
-     this.da_week = pweek;
-     this.da_denom = "month";
-     this.show(); 
-  }
-}
-
-
-calendor.prototype.set_day = function(pday) {
-
-  if (pday != undefined) {
-     this.da_day = pday;
-     this.da_denom = "month";
-     this.show(); 
- }
-}
-
-calendor.prototype.set_qtr = function(pqtr) {
-
- if (pqtr != undefined) {
-     this.da_qtr = pqtr;
-     var c = this.da_qtr * 3 - 1;
-     this.da_month =  c;
-     this.da_denom = "qtr";
-     this.show();
-  }
-}
-
-calendor.prototype.set_year = function(pyr) {
- 
- if (pyr != undefined) {
-     this.da_year = pyr;
-     this.da_denom = "month";
-     this.show();
-  }
-}
-
 
 calendor.prototype.get_net_year = function(pdiff) {
 
@@ -222,10 +131,10 @@ calendor.prototype.get_net_month = function(from,pnet) {
             ret.year = ret.year+1;
         }
 
-         if (ret.year > this.cur_mon.year) {
+         if (ret.year > this.current_month.year) {
              ret = null;
-         } else if (ret.year == this.cur_mon.year) {
-             if (ret.month > this.cur_mon.month) {
+         } else if (ret.year == this.current_month.year) {
+             if (ret.month > this.current_month.month) {
                  ret = null;
              }
          }
@@ -241,8 +150,8 @@ calendor.prototype.get_net_month = function(from,pnet) {
              ret.year = from.year;
          }
 
-       if (ret.year == this.first_mon.year) {
-          if (ret.month < this.first_mon.month) {
+       if (ret.year == this.first_month.year) {
+          if (ret.month < this.first_month.month) {
               ret = null;
           }
        } 
@@ -256,23 +165,23 @@ calendor.prototype.scroll_months = function(ppnet) {
 
    var pnet = parseInt(ppnet);
 
-   var r = this.da_month;
-   var y = this.da_year;
+   var r = this.da_month.month;
+   var y = this.da_month.year;
 
    // going up 
    if (pnet > 0) {
 
          // crossing year
-         if ((r+ pnet)> 12) {
+         if ((r+ pnet) >= 12) {
              y = y+1;
-             if (y <= this.cur_mon.year) {
-               this.da_month = r + pnet - 12;
-               this.da_year = y;
+             if (y <= this.current_month.year) {
+               this.da_month.month = r + pnet - 12;
+               this.da_month.year = y;
              }
          } else {
-             if ((y != this.cur_mon.year) || ((r+pnet) <= this.cur_mon.month)) {
-               this.da_month = r + pnet;
-               this.da_year = y;
+             if ((y != this.current_month.year) || ((r+pnet) <= this.current_month.month)) {
+               this.da_month.month = r + pnet;
+               this.da_month.year = y;
              }
          } 
 
@@ -280,16 +189,16 @@ calendor.prototype.scroll_months = function(ppnet) {
    } else {
 
          // crossing year
-         if ((r+ pnet)< 1) {
+         if ((r+ pnet)< 0) {
              y = y-1;
-             if (y >= this.first_mon.year) {
-               this.da_month = r + pnet + 12;
-               this.da_year = y;
+             if (y >= this.first_month.year) {
+               this.da_month.month = r + pnet + 12;
+               this.da_month.year = y;
              }
          } else {
-             if ((y != this.first_mon.year) || ((r+pnet) >= this.first_mon.month)) {
-               this.da_month = r + pnet;
-               this.da_year = y;
+             if ((y != this.first_month.year) || ((r+pnet) >= this.first_month.month)) {
+               this.da_month.month = r + pnet;
+               this.da_month.year = y;
              }
          } 
    }

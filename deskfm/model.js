@@ -2,7 +2,8 @@
 
 function model () {
 
-    this.shape = "";  // wingout 
+    this.shape = "";  // menu, search, share, shop 
+    this.shapes = ['menu','search','share','shop'];
 
 }	
  
@@ -18,7 +19,7 @@ model.prototype.draw_main = function () {
      tmp = tmp + "<div class='top_left' style='' >";
 
      lbl = 'menu_btn';
-     ocl = 'diego.toggle();'
+     ocl = 'elle.set_shape(\"menu\");'
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
      tmp = tmp + "</button>";  
@@ -29,20 +30,20 @@ model.prototype.draw_main = function () {
      tmp = tmp + "<span class='' style='float:right;' >";
 
      lbl = 'search_btn';
-     ocl = 'wanda.toggle();'
+     ocl = 'elle.set_shape(\"search\");'
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;' >";
      tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
      tmp = tmp + "</button>"; 
 
      lbl = 'share_btn';
-     ocl = 'nicky.toggle();'
+     ocl = 'elle.set_shape(\"share\");'
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
      tmp = tmp + "</button>";
 
 //     if (buddah == true) {
        lbl = 'shop_btn';
-       ocl = 'store.toggle();'
+       ocl = 'elle.set_shape(\"shop\");'
        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
        tmp = tmp + "</button>"; 
@@ -80,11 +81,23 @@ model.prototype.draw_main = function () {
        var pobj = document.getElementById('main_spot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
-   //       $('#share_btn').button();
+
+ //       $('#share_btn').button();
 //	  $('#search_btn').button();
+//	  
 	  daviewer.draw_rail();
   	  sal.show();
-	  diego.show();
+
+	  if (this.shape == "menu") {
+	    	diego.show();
+	  } else if (this.shape == "search") {
+		wanda.show();
+	  } else if (this.shape == "share") {
+		nicky.show();
+	  } else if (this.shape == "shop") {
+		store.show();
+	  }
+
        }
 }
 
@@ -95,6 +108,10 @@ model.prototype.set_shape = function (pshape) {
 	if (pshape != undefined) {
 	    this.shape = pshape;
 	}
+
+	// hide all non shapes
+	// show shape
+
         this.draw_main();
 
 }

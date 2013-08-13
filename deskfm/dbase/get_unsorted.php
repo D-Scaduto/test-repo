@@ -81,8 +81,9 @@ $con = mysql_connect($Server, $username, $password);
 
   $sql = "";
   $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM dfm_tweets ". $where ;
-  $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;
 
+  $sql = $sql .  " order by created_at DESC ";
+   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit; 
  // echo $sql . " \n <br> " ;
   $rebar->dasql1 = $sql;
  
@@ -124,7 +125,6 @@ $con = mysql_connect($Server, $username, $password);
    $sql= " select * from dfm_people ";
 
    $sql = $sql . " where group_id = ''";
-
   $sql= $sql . " LIMIT " . $pchunk_start . " , " . $limit;
 
   $rebar->dasql2 = $sql;

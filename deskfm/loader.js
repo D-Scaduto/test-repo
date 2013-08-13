@@ -44,7 +44,7 @@ viewer.prototype.load_search_list = function(pterms) {
          }
       } 
     }
-    this.load_rungs(0,"webits");
+    this.load_rungs(0);
 
    this.draw_view();
 }
@@ -109,7 +109,7 @@ viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
       } 
     }
 
-   this.load_rungs(st,"webits");
+   this.load_rungs(st);
    this.draw_view();
 }
 
@@ -147,7 +147,7 @@ viewer.prototype.load_group_list = function(tgroupid,pstart) {
            }
         } 
       }
-   this.load_rungs(st,"people");
+   this.load_rungs(st);
    this.draw_view();
 }
 
@@ -174,7 +174,7 @@ viewer.prototype.load_person_list = function(tuname) {
            }
         } 
     }
-    this.load_rungs(0,"webits");
+    this.load_rungs(0);
     this.draw_view();
 }
 
@@ -216,7 +216,7 @@ viewer.prototype.load_person_list = function(tuname) {
         } 
       }
 
-    this.load_rungs(0,"products");
+    this.load_rungs(0);
     this.draw_view();
 
 }
@@ -242,22 +242,12 @@ viewer.prototype.load_provider_list = function(tproviderid) {
              d = d+1 
         } 
       }
-    this.load_rungs(0,"providers");
+    this.load_rungs(0);
     this.draw_view();
 }
 
 
 viewer.prototype.load_unsorted_list = function(dtmon) {
-
-    var month = "";
-    var year = "";
-
-    if (dtmon != undefined) {
-	    month = dtmon.getMonth();
-	    year = dtmon.getFullYear();
-	    year = year.toString().substr(2,2);
-	 alert("m="+month + " y="+year);
-    }
 
     var lgo = true;
     var d = 0;
@@ -270,45 +260,28 @@ viewer.prototype.load_unsorted_list = function(dtmon) {
      this.dalist = [];
 
      mx = amare.unsortedlist.length;
-
       for (var r=d; r<mx;r++) {
         ro = amare.unsortedlist[r];
         if (ro != undefined) {
-          ok = false;
-	  if (month != "") {
-		 var dt = null;
-                 if ((ro.dfdate != "") && (ro.dfdate != undefined))  {
-		    var t = ro.dfdate.split(/[- :]/);
-		    dt = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-                 } else if ((ro.created_at != "")  && (ro.created_at != undefined)) {
-		   dt = new Date(ro.created_at);
-		 }
-		 if (dt != null) {
-	
-			 var ma = dt.getMonth();
-			 var ya = dt.getFullYear().toString().substr(2,2);
-
-  	           if ( (month == ma) && (year == ya) )  {
-	alert(dt + " m="+month + " y="+year + " ma=" + ma);
-                        ok = true;
-		   } 
-		 }
-	  } else {
-	//	 if (ro.cat == "") {
-        	     ok = true;
-	 //         }
-	  }
-          if (ok == true) {
-            obj = new listdex();
-            obj.mdex = r;
-	    obj.ltype = "unsorted";
-            this.dalist.push(obj);
-            d = d+1 
-          }
+            ok = false;
+	    if (dtmon == undefined) {
+		ok = true;
+	    } else {
+	//	    alert("m=" + dtmon.month + " y=" + dtmon.year);
+		if (check_month(ro,dtmon) == true) {
+			ok = true;
+		}
+	    }
+	    if (ok == true) {
+              obj = new listdex();
+              obj.mdex = r;
+	      obj.ltype = "unsorted";
+              this.dalist.push(obj);
+              d = d+1 
+	    }
         }
     } 
-    
-    this.load_rungs(0,"unsorted");
+    this.load_rungs(0);
     this.draw_view();
 }
 

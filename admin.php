@@ -10,7 +10,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
 <!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" /-->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-
+<link type="text/css" href="../lib/jquery.ui.datepicker.monthyearpicker.css" rel="stylesheet" />
 
 <title>deskfm.com</title>
 
@@ -47,6 +47,8 @@ header('Content-type: text/html; charset=utf-8 ');
 <!--script src="http://code.jquery.com/jquery-1.8.3.min.js"></script-->
 <!--script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script-->
 <script src="../lib/jquery-insight.js" type="text/javascript"></script>
+<script src="../lib/jquery.mtz.monthpicker.js" type="text/javascript"></script>
+<!--script src="../lib/jquery.ui.datepicker.monthyearpicker.js"></script-->
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -204,7 +206,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
    buddah=true;
 
-   krono = new calendor("krono");
+   krono = new calendor("cal_spot");
    amare = new stater();
    elle = new model();
    daviewer = new viewer("main_view","daviewer");
