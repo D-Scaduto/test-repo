@@ -1,8 +1,7 @@
 
 
 function stat () { 
-
-    this.listype="";
+ 
     this.cat="";
     this.subcat="";
     this.prodid="";
@@ -10,7 +9,8 @@ function stat () {
     this.month;
     this.year;
     this.desc="";
-
+   
+    this.listype="";
     this.lnum = 0;
     this.cnum=0;
     this.last_chunk=0;
@@ -45,7 +45,7 @@ function stater () {
    this.substats = [];
    this.prodstats = [];
    this.groupstats = [];
-   this.datestats = [];
+   this.monthstats = [];
 
    this.total_sorted = new stat();
    this.total_people = new stat();
@@ -70,6 +70,26 @@ stater.prototype.get_stats = function() {
    sal.waiting();
 
 } 
+
+
+
+
+stater.prototype.get_more = function(tstat) {
+   var chunk = 0;
+
+    if (tstat != undefined) {
+//	    alert(tstat.listype);
+         if (tstat.listype == "webits") {
+            this.get_cat_list(tstat.cat,tstat.subcat,tstat.last_chunk+1);
+         } else if (tstat.listype == "unsorted") {
+	    this.get_unsorted(tstat.last_chunk+1);
+   	 } else if (tstat.listype == "people") {
+	    this.get_people(chunk);
+         } 
+    }
+}
+
+
 
 
 stater.prototype.update_stats = function (statobj) {
@@ -114,16 +134,30 @@ stater.prototype.update_stats = function (statobj) {
         amare.prodstats.push(st);
      }
 
+     s = "";
+     for (z=0; z<statobj.months.length;z++) {
+        st = new stat();
+        st.month=statobj.months[z].month;
+        st.year=statobj.months[z].year;
+        st.cnum=statobj.months[z].cnum;
+	st.max_chunks = Math.round(st.cnum/da_limit);
+        st.listype = "unsorted";
+        amare.monthstats.push(st);
+     }
 
+      amare.total_unsorted.listype = "unsorted";
       amare.total_unsorted.cnum = statobj.total_unsorted;
       amare.total_unsorted.max_chunks = Math.round(amare.total_unsorted.cnum/da_limit);
 
+      amare.total_sorted.listype = "webits";
       amare.total_sorted.cnum = statobj.total_sorted;
       amare.total_sorted.max_chunks = Math.round(amare.total_sorted.cnum/da_limit);
 
+      amare.total_people.listype = "people";
       amare.total_people.cnum = statobj.total_people;  
       amare.total_people.max_chunks = Math.round(amare.total_people.cnum/da_limit);
 
+      amare.total_products.listype = "products";
       amare.total_products.cnum = statobj.total_products;
       amare.total_products.max_chunks = Math.round(amare.total_products.cnum/da_limit);
 
@@ -232,6 +266,16 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
 
 
 
+stater.prototype.get_monthstat = function(pmon) {
+    var ret = null;
+    for (var i=0; i<this.monthstats.length; i++) {
+        if ((this.monthstats[i].month == pmon.month) && (this.monthstats[i].year == pmon.year)) {
+              ret = amare.monthstats[i];
+        }
+    }
+    return ret;
+}
+
 
 stater.prototype.get_prodstat = function(tp) {
     var ret = null;
@@ -257,6 +301,9 @@ stater.prototype.get_groupstat = function(tp) {
      }
     return ret;
 }
+
+
+
 
 
 stater.prototype.get_person_group = function(tname) {
@@ -416,7 +463,7 @@ stater.prototype.get_random_list = function() {
 
  stater.prototype.get_cat_list = function(tcat,tsubcat) {
 
-   var url='deskfm/dbase/dfm_dbget.php';
+   var url='deskfm/dbase/get_webits.php';
     url = url + "?lim="+ da_limit;
     if (tcat != undefined ) {
        url = url + "&cat="+ tcat;
@@ -431,8 +478,7 @@ stater.prototype.get_random_list = function() {
     if (st != null) {
        url = url + "&chunk="+ st.next_chunk();
     }
-
-//    alert(url);
+//  alert(url);
     $.getJSON(url,function(json) {
       amare.update_webits(json);
     });   

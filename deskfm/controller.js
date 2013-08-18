@@ -36,6 +36,13 @@ viewer.prototype.next = function(px) {
 
 
 
+viewer.prototype.more = function() { 
+
+    amare.get_more(this.stats);
+
+}
+
+
 
 viewer.prototype.goto_listdex = function(ldex) {
 
@@ -250,7 +257,7 @@ viewer.prototype.redraw_rungs = function(trungdex) {
 
 
 
-viewer.prototype.load_random_rungs = function() {
+viewer.prototype.randomize_rungs = function() {
 
    var tls = [];
    var r = 0;

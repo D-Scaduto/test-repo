@@ -256,7 +256,12 @@ viewer.prototype.load_unsorted_list = function(dtmon) {
     var ok = false;
     var obj = null;
 
-     this.stats = amare.total_unsorted;
+     if (dtmon == undefined) {
+       this.stats = amare.total_unsorted;
+     } else {
+       this.stats = amare.get_monthstat(dtmon);
+     }
+  
      this.dalist = [];
 
      mx = amare.unsortedlist.length;

@@ -223,6 +223,7 @@ header('Content-type: text/html; charset=utf-8 ');
          
        }
 
+	elle.shape="menu";
 	elle.draw_main();
 
     amare.get_stats();

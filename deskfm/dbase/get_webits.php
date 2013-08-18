@@ -49,11 +49,21 @@ if (isset($_GET['lim'])) {
   $limit = $_GET['lim'];
 }
 
+$cat = "null"; 
+if (isset($_GET['cat'])) {
+ $cat = $_GET['cat'];
+}
+
+$subcat = "null";
+if (isset($_GET['subcat'])) {
+  $subcat = $_GET['subcat'];
+}
+
 $chunk_start = $chunk * $limit;
 
 $con = mysql_connect("$Server", "$username", "$password");
 
-  $where = "";
+ 
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
@@ -61,17 +71,33 @@ $con = mysql_connect("$Server", "$username", "$password");
    mysql_select_db($db_name, $con);
 
   $sql = "";
-  $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM (";
+  $sql = $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM (";
   $sql = $sql . " select  * from dfm_tweets dt ";
-  $sql = $sql . " where dt.cat != '' and dt.subcat != ''  ";
-  $sql = $sql . " and dt.cat != 'deleted' and dt.cat != 'junk' ";
+
+  if ($cat == "null") {
+    $where = " where dt.cat != '' and dt.subcat != ''  ";
+    $where = $where . " and dt.cat != 'deleted' and dt.cat != 'junk' ";
+  } else {
+    $where = " where dt.cat = '" . $cat . "'";
+    if ($subcat != "null") {
+      $where = $where . " and subcat ='" . $subcat . "'";
+    }
+  }
+  $sql = $sql . $where;
 
   $sql = $sql . " union ";
 
   $sql = $sql . " select * from dfm_posts dp " ;
-  $sql = $sql . " where dp.cat != '' and dp.subcat != ''  ";
-  $sql = $sql . " and dp.cat != 'deleted' and dp.cat != 'junk' ";
-
+  if ($cat == "null") {
+    $where = " where dp.cat != '' and dp.subcat != ''  ";
+    $where = $where . " and dp.cat != 'deleted' and dp.cat != 'junk' ";
+  } else {
+    $where = " where dp.cat = '" . $cat . "'";
+    if ($subcat != "null") {
+      $where = $where . " and subcat ='" . $subcat . "'";
+    }
+  }
+ $sql = $sql . $where;
   $sql= $sql . " ) as g LIMIT " . $chunk_start . " , " . $limit;
 
  // echo $sql . " \n <br> " ;

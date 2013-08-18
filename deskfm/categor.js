@@ -200,10 +200,10 @@ categor.prototype.redraw_view = function(pchunk) {
 	var start = 0;
         var p = 0;
 
-	this.stats = amare.get_catstat(this.cat,this.subcat);
+	daviewer.stats = amare.get_catstat(this.cat,this.subcat);
 
             if (pchunk != undefined) {
-      	          this.stats.last_chunk = pchunk;
+      	          daviewer.stats.last_chunk = pchunk;
 		  if (pchunk > 1) {
 		    p = pchunk - 1;
 		  }

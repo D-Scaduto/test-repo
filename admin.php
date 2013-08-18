@@ -210,11 +210,8 @@ header('Content-type: text/html; charset=utf-8 ');
    amare = new stater();
    elle = new model();
    daviewer = new viewer("main_view","daviewer");
-  
-
    
    jesie = new namer("name_spot");
- 
 
    if (is_mobile == true) {
            da_limit = 250;

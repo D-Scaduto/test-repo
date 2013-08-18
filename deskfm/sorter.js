@@ -61,7 +61,7 @@ sorter.prototype.show = function() {
  	 tmp = tmp + "get";
          tmp = tmp + "</button>";
 
-	 tmp = tmp + "<button id='cal_btn'  data-role='button'  >";
+	 tmp = tmp + "<button id='cal_btn' onclick='krono.toggle();'  >";
  	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
          tmp = tmp + "</button>";
 
@@ -83,16 +83,7 @@ sorter.prototype.show = function() {
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
-      if (this.shape == "deskfm") {
-
-	 $('#cal_btn').click(function() {
-		 krono.toggle();
-	 });
-
-      }
-
       this.showing = true;
-      
    } 
 
 }
@@ -100,12 +91,11 @@ sorter.prototype.show = function() {
 
 
 sorter.prototype.check_local = function() {
-
-   if (krono.showing== true) {
-	   var dt = krono.get_da_month();
-	    daviewer.load_unsorted_list(dt);
+   if (krono.showing == true) {
+         var dt = krono.get_da_month();
+         daviewer.load_unsorted_list(dt);
    }  else {
-	    daviewer.load_unsorted_list();
+         daviewer.load_unsorted_list();
    }
   
 

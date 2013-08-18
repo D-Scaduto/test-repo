@@ -8,19 +8,13 @@ viewer.prototype.draw_rail = function() {
 
        tmp = tmp + "<div id='rail_btns' class='' style='' >";
        tmp = tmp + "</div>";
-/*
-       tmp = tmp + "<div>";
-       tmp = tmp + "<span id='central_chunkbar' class='' style='width:75px;display:inline-block;' >";
-       tmp = tmp + "</span>";
-       tmp = tmp + "<span id='central_chunkdata' style='padding:10px;' >";
-       tmp = tmp + "</span>";
-       tmp = tmp + "</div>";
-*/
+
        tmp = tmp + "<div>";
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='local_chunkdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
+       
        tmp = tmp + "</div>";
 
        tmp = tmp + "<div>";
@@ -41,17 +35,7 @@ viewer.prototype.draw_rail = function() {
        this.draw_railbtns();
        this.railon = true;
        this.rail_showing = true;
-/*
-       $('#central_chunkbar').slider({
-	    range: false,
- 	    min: 0,
-	    max: 100,
-            value: 0,
-	    slide: function( event, ui ) {
-	      $( "#central_chunkdata" ).html( ui.value );
-	    }
-       });
-*/
+
       var lchunk = 1
       var lchunks = 1;
       if (this.stas != null) {
@@ -97,30 +81,49 @@ viewer.prototype.draw_rail = function() {
 
 
 viewer.prototype.draw_raildata = function() {
+   var lbl = "";
+   var tmp = "";
+   var moin = "";
+   var mout = "";
 
    if (this.stats != null) {
 
       var lchunk = Math.floor(this.listdex/this.top_end);
-      var lchunks = this.stats.lnum / this.top_end;
-      var lc = lchunk +1;
+      var lchunks = Math.floor(this.stats.lnum / this.top_end);
+      var mchunks = Math.floor(this.stats.cnum / this.top_end);
+      var lc = lchunk;
       var st = lchunk * this.top_end;
       if (st == 0) {st = 1; } 
       var fn = st + this.top_end ;
       var ld = this.listdex + 1;
 
-   //   $('#central_chunkbar').slider("option", "value", this.stats.lnum );
-   //   $('#central_chunkbar').slider("option", "max", this.stats.cnum );
-  //    $('#central_chunkdata').html(this.stats.lnum  + " of " + this.stats.cnum);
+      if (lchunks >= 1) {
+	    $('#local_chunkbar').show();
+            $('#local_chunkbar').slider("option", "value", lchunk  );
+            $('#local_chunkbar').slider("option", "max", lchunks );
+            $('#local_chunkbar').slider("option", "min", 0 );
+      } else {
+            $('#local_chunkbar').hide();
+      }
+ 
+      $('#local_chunkdata').show();
+      if (lc >= 1) {
+        tmp = lc + "x ";
+      }
+      if (mchunks > lchunks ) {
+        lbl = 'more_chunk_btn';
+        moin = 'markyd(\"'+lbl+'\");';
+        mout = 'unmarkyd(\"'+lbl+'\");';
+  	tmp = tmp + "<span id='"+lbl+"' onclick='daviewer.more();' class='spotd_off' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
+        tmp = tmp + " more";
+        tmp = tmp + "</span>";
+      } 
+      $('#local_chunkdata').html(tmp);
 
-      $('#local_chunkdata').html("set " +lc + " of " + lchunks );
-      $('#local_chunkbar').slider("option", "value", lchunk  );
-      $('#local_chunkbar').slider("option", "max", lchunks );
-      $('#local_chunkbar').slider("option", "min", 0 );
-      
       $('#local_chipbar').slider("option", "min", st );
       $('#local_chipbar').slider("option", "max", fn );
       $('#local_chipbar').slider("option", "value", ld );
-      $('#local_chipdata').html(ld + " of " + daviewer.dalist.length);
+      $('#local_chipdata').html(ld + " of " + this.dalist.length);
 
    } else {
 //	   alert("no stats");
@@ -164,6 +167,8 @@ viewer.prototype.draw_railbtns = function() {
        tmp = tmp + "<button id='"+lbl+"' onmouseover='daviewer.nitro_start(\"fwd\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
        tmp = tmp + "</button>";
+
+     
 
        /*
        lbl = this.screen + "_zoom_btn";
@@ -316,14 +321,6 @@ viewer.prototype.draw_debug_rail = function() {
 
        tmp = tmp + "<span class='spotd_off' >";
        tmp = tmp + "cnum=" + this.stats.cnum;
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "listdex=" + this.listdex;
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "listlen=" + this.dalist.length;
        tmp = tmp + "</span>";
 
   } else {

@@ -21,10 +21,10 @@ function calendor (pspotid) {
 calendor.prototype.init = function() {
 
    this.first_month.month = 6;
-   this.first_month.year = 11;
+   this.first_month.year = 2011;
 
    var now = new Date();
-   this.current_month.year = parseInt(now.getFullYear().toString().substr(2,2));
+   this.current_month.year = parseInt(now.getFullYear().toString());
    this.current_month.month = now.getMonth();
 
    this.da_month.year = this.current_month.year;
@@ -81,84 +81,12 @@ calendor.prototype.show = function() {
 
 
 calendor.prototype.get_da_month = function() {
-	return this.da_month;
+	var o = new Object();
+	o.month = this.da_month.month;
+	o.year = this.da_month.year;
+	return o;
 }
 
-calendor.prototype.get_net_year = function(pdiff) {
-
-  var m = this.da_year; 
-
-  m =  m + pdiff ;
-
-  if (m>this.cur_mon.year) {
-    m = this.da_year;
-  }
-
-  return m;
-
-}
-
-
-calendor.prototype.get_net_months = function(from,to) {
-
-
-  var m = 0; 
-
-  if (from.year == to.year) {
-     m = to.month - from.month;
-  }
-
-  if (from.year < to.year) {
-     m =  12 - from.month;
-     m =  m + to.month;
-  }
-
-  return m;
-
-}
-
-calendor.prototype.get_net_month = function(from,pnet) {
-   var ret = {};
-
-   // going up 
-   if (pnet > 0) {
-
-         ret.year = from.year;
-         ret.month = from.month + pnet;
-       
-         if (ret.month > 12) {
-            ret.month = ret.month-12;
-            ret.year = ret.year+1;
-        }
-
-         if (ret.year > this.current_month.year) {
-             ret = null;
-         } else if (ret.year == this.current_month.year) {
-             if (ret.month > this.current_month.month) {
-                 ret = null;
-             }
-         }
- 
-   } else {
-
-         // crossing year
-         if ((from.month + pnet)< 1) {
-             ret.month = from.month + pnet + 12;
-             ret.year = from.year-1;
-         } else {
-             ret.month = from.month + pnet;
-             ret.year = from.year;
-         }
-
-       if (ret.year == this.first_month.year) {
-          if (ret.month < this.first_month.month) {
-              ret = null;
-          }
-       } 
-   }        
-
-   return ret;
-}
 
 
 calendor.prototype.scroll_months = function(ppnet) {
@@ -207,6 +135,77 @@ calendor.prototype.scroll_months = function(ppnet) {
 
 }
 
+
+calendor.prototype.get_net_month = function(from,pnet) {
+   var ret = {};
+
+   // going up 
+   if (pnet > 0) {
+
+         ret.year = from.year;
+         ret.month = from.month + pnet;
+       
+         if (ret.month > 12) {
+            ret.month = ret.month-12;
+            ret.year = ret.year+1;
+        }
+
+         if (ret.year > this.current_month.year) {
+             ret = null;
+         } else if (ret.year == this.current_month.year) {
+             if (ret.month > this.current_month.month) {
+                 ret = null;
+             }
+         }
+ 
+   } else {
+
+         // crossing year
+         if ((from.month + pnet)< 1) {
+             ret.month = from.month + pnet + 12;
+             ret.year = from.year-1;
+         } else {
+             ret.month = from.month + pnet;
+             ret.year = from.year;
+         }
+
+       if (ret.year == this.first_month.year) {
+          if (ret.month < this.first_month.month) {
+              ret = null;
+          }
+       } 
+   }        
+
+   return ret;
+}
+
+
+calendor.prototype.get_net_year = function(pdiff) {
+
+  var m = this.da_month.year; 
+  m =  m + pdiff ;
+
+  if (m>this.current_month.year) {
+    m = this.da_month.year;
+  }
+  return m;
+
+}
+
+
+calendor.prototype.get_net_months = function(from,to) {
+
+  var m = 0; 
+  if (from.year == to.year) {
+     m = to.month - from.month;
+  }
+  if (from.year < to.year) {
+     m =  12 - from.month;
+     m =  m + to.month;
+  }
+  return m;
+
+}
 
 
 calendor.prototype.toggle = function() {

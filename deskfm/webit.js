@@ -34,7 +34,6 @@ function webit(tpid) {
    this.linkurl ="";
    this.embedurl ="";
 
-
    this.color = "black";
 //   this.showing=false;
 //   this.changed=false;
@@ -59,14 +58,14 @@ check_month = function(pobj,dtmon) {
         var b =  arr[0];
         var c = b.split("-");
         month = c[1]-1;
-        year = c[0].substr(2,2);
+        year = c[0];
 
     } else if ((pobj.created_at != "")  && (pobj.created_at != undefined)) { 
         arr =  pobj.created_at.split(" ");
         var b =  arr[0];
         var c = b.split("-");
         month = c[1]-1;
-        year =  c[0].substr(2,2);
+        year =  c[0];
     }
 
     if ((dtmon.month == month) && (dtmon.year == year)) {
