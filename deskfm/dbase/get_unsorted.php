@@ -77,16 +77,16 @@ if (isset($_GET['lim'])) {
 $chunk_start = $chunk * $limit;
 $pchunk_start = $pchunk * $limit;
 
-$con = mysql_connect($Server, $username, $password);
+
+  $con = mysql_connect($Server, $username, $password);
 
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db($db_name, $con);
 
-   $where =  " where cat = '' and subcat = ''  ";
+  mysql_select_db($db_name, $con);
 
    if ($month != "null") {
        $where = $where . " and month(created_at) = $month ";
@@ -96,11 +96,17 @@ $con = mysql_connect($Server, $username, $password);
    }
 
   $sql = "";
-  $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM dfm_tweets ". $where ;
+//  $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM ";
+ 
+  $sql= $sql . " ( SELECT  * FROM dfm_tweets ";
+  $sql = $sql .  " where cat = '' and subcat = ''  ";
+  $sql = $sql .  " order by created_at DESC ) ";
+  $sql = $sql . " union ";
+  $sql= $sql . " ( SELECT  * FROM dfm_posts ";
+  $sql = $sql .  " where cat = '' and subcat = ''  ";
+  $sql = $sql .  " order by created_at DESC ) ";
+//  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit; 
 
-  $sql = $sql .  " order by created_at DESC ";
-   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit; 
- // echo $sql . " \n <br> " ;
   $rebar->dasql1 = $sql;
  
   $result = mysql_query($sql);
@@ -162,7 +168,6 @@ $con = mysql_connect($Server, $username, $password);
   }
 
   $rebar->peoplelist = $arr;
-
 
    echo json_encode($rebar); 
 
