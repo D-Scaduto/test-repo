@@ -63,8 +63,6 @@ $chunk_start = $chunk * $limit;
 
 $con = mysql_connect("$Server", "$username", "$password");
 
- 
-
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }

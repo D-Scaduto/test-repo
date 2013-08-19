@@ -107,19 +107,18 @@ viewer.prototype.draw_raildata = function() {
       }
  
       $('#local_chunkdata').show();
-      if (lc >= 1) {
-        tmp = lc + "x ";
-      }
-      if (mchunks > lchunks ) {
-        lbl = 'more_chunk_btn';
-        moin = 'markyd(\"'+lbl+'\");';
-        mout = 'unmarkyd(\"'+lbl+'\");';
-  	tmp = tmp + "<span id='"+lbl+"' onclick='daviewer.more();' class='spotd_off' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
-        tmp = tmp + " more";
-        tmp = tmp + "</span>";
-      } 
+      tmp = lc + " x" + this.top_end;
       $('#local_chunkdata').html(tmp);
 
+      if (mchunks > lchunks ) {
+        lbl = this.screen + "_more_btn";
+        ocl = "daviewer.more();";
+        tmp = "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+        tmp = tmp + "<img src='deskfm/images/icons/database.png' width='20px' >";
+        tmp = tmp + "</button>";
+        $(lbl).html(tmp);
+      } 
+     
       $('#local_chipbar').slider("option", "min", st );
       $('#local_chipbar').slider("option", "max", fn );
       $('#local_chipbar').slider("option", "value", ld );
@@ -167,9 +166,13 @@ viewer.prototype.draw_railbtns = function() {
        tmp = tmp + "<button id='"+lbl+"' onmouseover='daviewer.nitro_start(\"fwd\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
        tmp = tmp + "</button>";
-
-     
-
+  
+       lbl = this.screen + "_more_btn";
+       ocl = "daviewer.more();";
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/database.png' width='20px' >";
+       tmp = tmp + "</button>";
+	
        /*
        lbl = this.screen + "_zoom_btn";
        ocl = "daviewer.toggle_zoom();";

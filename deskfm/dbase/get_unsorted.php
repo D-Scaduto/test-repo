@@ -46,7 +46,15 @@ class pfoo {
  $rebar = new bar;
  
 
-$limit = 1000;
+$month = "null";
+if (isset($_GET['month'])) {
+  $month = $_GET['month'];
+}
+
+$year = "null";
+if (isset($_GET['year'])) {
+  $year = $_GET['year'];
+}
 
 $chunk = 0;
 if (isset($_GET['chunk'])) {
@@ -61,6 +69,7 @@ if (isset($_GET['pchunk'])) {
 $rebar->dachunk = $chunk;
 $rebar->pchunk = $pchunk;
 
+$limit = 1000;
 if (isset($_GET['lim'])) {
   $limit = $_GET['lim'];
 }
@@ -78,6 +87,13 @@ $con = mysql_connect($Server, $username, $password);
    mysql_select_db($db_name, $con);
 
    $where =  " where cat = '' and subcat = ''  ";
+
+   if ($month != "null") {
+       $where = $where . " and month(created_at) = $month ";
+   }
+   if ($year != "null") {
+       $where = $where . " and year(created_at) = $year ";
+   }
 
   $sql = "";
   $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM dfm_tweets ". $where ;
