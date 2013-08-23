@@ -14,11 +14,14 @@ poster.prototype.draw_debug = function() {
       tmpstr=tmpstr +  " source="+this.source;
       tmpstr=tmpstr +  " stored="+this.stored;
       tmpstr=tmpstr +  "<br>";
+      tmpstr=tmpstr +  "uname="+this.uname;
+
+      if (this.listype == "webits") {
+        tmpstr=tmpstr +  " pid="+this.pid;
+      }
 
       if (this.listype == "people") {
-        tmpstr=tmpstr +  "uname="+this.uname;
-      } else {
-        tmpstr=tmpstr +  " pid="+this.pid;
+        tmpstr=tmpstr +  " group="+this.groupid;
       }
 
       tmpstr=tmpstr +  " shape="+this.shape;

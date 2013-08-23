@@ -27,7 +27,7 @@ class bar {
     public $total_people;
     public $total_unsorted;
     public $total_sorted;
-    public $sql1 = "";
+    public $sql = "";
 }
 
 //error_reporting(E_ERROR);
@@ -56,22 +56,7 @@ $con = mysql_connect($Server, $username, $password);
     $baro->subs[] = $foodo;
   }
 
-  $sql = "";
-  $sql = $sql . " (select month(dt.created_at),year(dt.created_at),count(*) from dfm_tweets dt ";
-  $sql = $sql . " where dt.cat = '' ";
-  $sql = $sql . " group by month(dt.created_at),year(dt.created_at) ) union ";
-  $sql = $sql . " (select month(dt.created_at),year(dt.created_at),count(*) from dfm_tweets dt ";
-  $sql = $sql . " where dt.cat = '' ";
-  $sql = $sql . " group by month(dt.created_at),year(dt.created_at)) ";
-  $result = mysql_query($sql);
-  while($row = mysql_fetch_array($result)) {
-      $foodo = new stdClass;
-    $foodo->month = $row[0]-1;
-    $foodo->year = $row[1];
-    $foodo->cnum = $row['count(*)'];
-    $foodo->listype = "unsorted";
-    $baro->months[] = $foodo;
-  }
+ 
 
   $sql = "";
   $sql= $sql . " select dp.cat,dp.subcat,count(*) from dfm_posts dp  ";
@@ -80,7 +65,7 @@ $con = mysql_connect($Server, $username, $password);
 
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
-     $foodo = new stdClass;
+    $foodo = new stdClass;
     $foodo->cat = $row['cat'];
     $foodo->subcat = $row['subcat'];
     $foodo->cnum = $row['count(*)'];
@@ -102,6 +87,28 @@ $con = mysql_connect($Server, $username, $password);
   }
 
   $sql = "";
+  $sql = $sql . " (select month(dt.created_at),year(dt.created_at),count(*) from dfm_tweets dt ";
+  $sql = $sql . " where dt.cat = '' ";
+  $sql = $sql . " group by month(dt.created_at),year(dt.created_at) ) union ";
+  $sql = $sql . " (select month(dp.created_at),year(dp.created_at),count(*) from dfm_posts dp ";
+  $sql = $sql . " where dp.cat = '' ";
+  $sql = $sql . " group by month(dp.created_at),year(dp.created_at)) ";
+  $baro->sql =$sql;
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $foodo = new stdClass;
+    $foodo->month = $row[0] -1;
+    $foodo->year = $row[1];
+    $foodo->cnum = $row['count(*)'];
+    $foodo->listype = "unsorted";
+    $baro->months[] = $foodo;
+  }
+
+
+
+
+
+  $sql = "";
   $sql= " select prodid,count(*) from dfm_products ";
   $sql = $sql . " group by prodid";
   $result = mysql_query($sql);
@@ -112,6 +119,8 @@ $con = mysql_connect($Server, $username, $password);
     $foodo->listype = "products";
     $baro->prods[] = $foodo;
   }
+
+
 
   $sql = "";
   $sql= " select group_id,count(*) from dfm_people ";

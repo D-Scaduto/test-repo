@@ -85,12 +85,15 @@ header.prototype.redraw_view = function (psetype,pchunk) {
     } 
 
     if (this.main_shape == "sort") { 
+
       if (psetype == "unsaved") { 
         mac.redraw_view("unsaved",pchunk);
       }
+
       if (psetype == "unsorted") { 
         mac.redraw_view("unsorted",pchunk);
       }
+
     }
 
     if (wanda.sterms != "") {

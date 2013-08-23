@@ -14,7 +14,6 @@ include '../../config/names.php';
 
    public $stored = true;
 
-   public $dfdate;
    public $created_at = "";
    public $change_date = "";
    public $picurl;
@@ -124,7 +123,7 @@ $con = mysql_connect("$Server", "$username", "$password");
 
     $foodo->cat = $row['cat'];
     $foodo->subcat = $row['subcat'];
-    $foodo->dfdate = $row['twdate'];
+    $foodo->created_at = $row['created_at'];
  
     $foodo->linkurl = $row['linkurl'];
     $foodo->embedurl = $row['linkurl'];

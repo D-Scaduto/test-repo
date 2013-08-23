@@ -38,10 +38,57 @@ viewer.prototype.next = function(px) {
 
 viewer.prototype.more = function() { 
 
-    amare.get_more(this.stats);
+   if (this.stats != undefined) {
+         if (this.stats.listype == "webits") {
+
+            amare.get_cat_list(this.stats);
+
+         } else if (this.stats.listype == "unsorted") {
+
+	    amare.get_unsorted(this.stats);
+
+   	 } else if (this.stats.listype == "people") {
+
+	    amare.get_people(this.stats);
+
+         } 
+    }
 
 }
 
+viewer.prototype.redraw_view = function(plistype) { 
+   var start = 0;
+
+
+   if (this.stats == null) {
+	   this.stats= amare.total_sorted;
+   }
+  if ((this.stats != null) && (this.stats != undefined)) {
+
+         start = this.stats.chunk * da_limit;
+
+
+         if ((this.stats.listype == "webits" ) && (plistype == "webits"))  {
+
+	        if ((this.stats.cat == "") || (this.stats.cal == "all")) {
+                    this.load_random_list();
+		 } else {
+	            this.load_category_list(this.stats.cat,this.stats.subcat,start);
+		 }
+
+         } else if ((this.stats.listype == "unsorted") &&( plistype == "unsorted")) {
+             var dt = new Object();
+	     dt.month = this.stats.month;
+	     dt.year = this.stats.year;
+	     this.load_unsorted_list(dt,start);
+
+   	 } else if ((this.stats.listype == "people") && ( plistype == "people") ) {
+
+	    this.load_group_list(this.stats.groupid,start);
+
+         } 
+   }
+}
 
 
 viewer.prototype.goto_listdex = function(ldex) {

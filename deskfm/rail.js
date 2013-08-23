@@ -97,14 +97,14 @@ viewer.prototype.draw_raildata = function() {
       var fn = st + this.top_end ;
       var ld = this.listdex + 1;
 
-      if (lchunks >= 1) {
+ //     if (lchunks >= 1) {
 	    $('#local_chunkbar').show();
             $('#local_chunkbar').slider("option", "value", lchunk  );
             $('#local_chunkbar').slider("option", "max", lchunks );
             $('#local_chunkbar').slider("option", "min", 0 );
-      } else {
-            $('#local_chunkbar').hide();
-      }
+  //    } else {
+  //          $('#local_chunkbar').hide();
+  //    }
  
       $('#local_chunkdata').show();
       tmp = lc + " x" + this.top_end;
@@ -309,22 +309,26 @@ viewer.prototype.draw_debug_rail = function() {
 
   if (this.stats != null) {
 
-/*
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "cur_chunk=" + cur_chunk;
-       tmp = tmp + "</span>";
+       tmp = tmp + "<div class='spotd_off' >";
+       tmp = tmp + "ltype=" + this.stats.listype;
+       tmp = tmp + "</div>";
 
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "chunk_size=" + chunk_size;
-       tmp = tmp + "</span>";
-*/
-       tmp = tmp + "<span class='spotd_off' >";
+     if ((this.stats.cat != undefined )  && (this.stats.cat != "" )) {
+       tmp = tmp + "<div class='spotd_off' >";
+       tmp = tmp + "cat=" + this.stats.cat + "subcat=" + this.stats.subcat;
+       tmp = tmp + "</div>";
+     }
+
+    if (this.stats.month != undefined) {
+       tmp = tmp + "<div class='spotd_off' >";
+       tmp = tmp + this.stats.month + " '" + this.stats.year;
+       tmp = tmp + "</div>";
+     }
+
+       tmp = tmp + "<div  class='spotd_off' >";
        tmp = tmp + "lnum=" + this.stats.lnum;
-       tmp = tmp + "</span>";
-
-       tmp = tmp + "<span class='spotd_off' >";
-       tmp = tmp + "cnum=" + this.stats.cnum;
-       tmp = tmp + "</span>";
+       tmp = tmp + " cnum=" + this.stats.cnum;
+       tmp = tmp + "</div>";
 
   } else {
 	  tmp = tmp + "no stats object";

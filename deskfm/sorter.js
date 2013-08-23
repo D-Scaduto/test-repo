@@ -61,6 +61,10 @@ sorter.prototype.show = function() {
  	 tmp = tmp + "get";
          tmp = tmp + "</button>";
 
+	 tmp = tmp + "<button id='' onclick='daviewer.more();'  >";
+ 	 tmp = tmp + "more";
+         tmp = tmp + "</button>";
+
 	 tmp = tmp + "<button id='cal_btn' onclick='krono.toggle();'  >";
  	 tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='15px' >";
          tmp = tmp + "</button>";

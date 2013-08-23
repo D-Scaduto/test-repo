@@ -58,6 +58,10 @@ function stater () {
    this.group_set = new group_provider();
    this.product_set = new product_provider();
 
+   this.got_webits = false;
+   this.got_unsorted = false;
+   this.got_stats = false;
+
 }
 
 
@@ -70,24 +74,6 @@ stater.prototype.get_stats = function() {
    sal.waiting();
 
 } 
-
-
-
-
-stater.prototype.get_more = function(tstat) {
-   var chunk = 0;
-
-    if (tstat != undefined) {
-//	    alert(tstat.listype);
-         if (tstat.listype == "webits") {
-            this.get_cat_list(tstat.cat,tstat.subcat,tstat.last_chunk+1);
-         } else if (tstat.listype == "unsorted") {
-	    this.get_unsorted(tstat.last_chunk+1);
-   	 } else if (tstat.listype == "people") {
-	    this.get_people(chunk);
-         } 
-    }
-}
 
 
 
@@ -161,22 +147,146 @@ stater.prototype.update_stats = function (statobj) {
       amare.total_products.cnum = statobj.total_products;
       amare.total_products.max_chunks = Math.round(amare.total_products.cnum/da_limit);
 
-      amare.count_lstats();
+      amare.count_lwstats();
       amare.count_lpstats();
+      amare.count_lustats();
 
-      got_stats = true;
+      this.got_stats = true;
       if (init_run == true) {
-         amare.count_lstats();
-         init_run = false;
-         diego.redraw_view("webits");
+	      if (this.got_webits == true) {
+                 init_run = false;
+                 daviewer.redraw_view("webits");
+	      }
       }
 
    }
 }  
 
 
+ stater.prototype.update_webits= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+            found = false;
+            if (listobj.dalist[j] != undefined) {
+               var found_at=-1;
+               for (var i=0;i<this.webitlist.length;i++) {
+                  if (this.webitlist[i] != undefined) {
+                    if (listobj.dalist[j].pid == this.webitlist[i].pid) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+               } 
+               if (found == true) {
+                  this.webitlist[found_at] = listobj.dalist[j];
+               } else {
+                  this.webitlist.push(listobj.dalist[j]);
+               }             
+            }
+         }
+      }
 
-stater.prototype.count_lstats = function() {
+      this.got_webits = true;
+      this.count_lwstats();
+      if (init_run == true) {
+	      if (this.got_stats == true) {
+                 init_run = false;
+                 daviewer.redraw_view("webits");
+	      }
+      } else {
+          daviewer.redraw_view("webits");
+      }
+}  
+
+
+
+
+ stater.prototype.update_people= function(listobj) {
+
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+
+       if ( listobj.peoplelist.length > 0 ) { 
+         for (var j=0;j<listobj.peoplelist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.peoplelist.length;i++) {
+                  if (this.peoplelist[i] != undefined) {
+                    if (listobj.peoplelist[j].uname == this.peoplelist[i].uname) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.peoplelist.splice(found_at,1);
+              }
+              this.peoplelist.push(listobj.peoplelist[j]);
+         }
+      }
+
+      this.got_people = true;
+      this.count_lpstats();
+      if (init_run == true) {
+	      if (this.got_stats == true) {
+                 init_run = false;
+                daviewer.redraw_view("people");
+	      }
+      } else {
+         daviewer.redraw_view("people");
+      }
+}  
+
+
+stater.prototype.add_unsorted= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+       if ( listobj.dalist.length > 0 ) { 
+         for (var j=0;j<listobj.dalist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.unsortedlist.length;i++) {
+                  if (this.unsortedlist[i] != undefined) {
+                    if (listobj.dalist[j].pid == this.unsortedlist[i].pid) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.unsortedlist.splice(found_at,1);
+              }
+              this.unsortedlist.unshift(listobj.dalist[j]);
+         }
+      }
+
+      this.got_unsorted = true;
+      this.count_lustats();
+      if (init_run == true) {
+	      if (this.got_stats == true) {
+                 init_run = false;
+                 daviewer.redraw_view("unsorted");
+	      }
+      } else {
+          daviewer.redraw_view("unsorted");
+      }
+}  
+
+
+
+
+stater.prototype.count_lwstats = function() {
     var i=0
     for (i=0; i<this.substats.length; i++) {
           this.substats[i].lnum = 0;
@@ -194,9 +304,7 @@ stater.prototype.count_lstats = function() {
         if ((c != "") && (s != "")) {
 	     this.total_sorted.lnum = this.total_sorted.lnum + 1;
 	}
-
         for (var k=0; k<this.substats.length; k++) {
-           
            if ((this.substats[k].cat == c) && (this.substats[k].subcat == s)) {
               this.substats[k].lnum = this.substats[k].lnum + 1;
            }
@@ -217,6 +325,34 @@ stater.prototype.count_lstats = function() {
 
 }
 
+stater.prototype.count_lustats = function() {
+    
+    this.total_unsorted.lnum = 0;
+
+    var d=0;
+    for (d=0;d<this.unsortedlist.length;d++) {
+      if (this.unsortedlist[d] != undefined) {
+
+        var arr =  this.unsortedlist[d].created_at.split(" ");
+        var b =  arr[0];
+        var c = b.split("-");
+        var m = c[1]-1; 
+	var y = c[0];
+
+	this.total_unsorted.lnum = this.total_unsorted.lnum + 1;
+
+        for (var k=0; k<this.monthstats.length; k++) {
+	    var dtmon = new Object();
+	    dtmon.month =  this.monthstats[k].month;
+            dtmon.year =  this.monthstats[k].year;
+   	    if ((dtmon.month == m) && ( dtmon.year == y)) {
+                this.monthstats[k].lnum = this.monthstats[k].lnum + 1;
+            }
+        }
+      }
+    } 
+
+}
 
 
 stater.prototype.count_lpstats = function() {
@@ -247,7 +383,7 @@ stater.prototype.count_lpstats = function() {
 
 
 stater.prototype.get_catstat = function(tcat,tsubcat) {
-  var ret = null;
+     var ret = null;
 
      if (tcat == "all") {
 
@@ -261,7 +397,7 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
           }
         }
      }
-  return ret;
+     return ret;
 }
 
 
@@ -318,23 +454,6 @@ stater.prototype.get_person_group = function(tname) {
 
 
 
-stater.prototype.get_webits = function(tchunk) {
-   var url='deskfm/dbase/get_webits.php';
-   url = url + "?lim="+ da_limit;
-   var c = ""
-   if (tchunk != undefined) {
-      c = tchunk;
-   } else {
-      c = this.total_sorted.next_chunk();
-   }
-   url = url + "&chunk="+ c;
-//   alert(url);
-   $.getJSON(url,function(json) {
-      amare.update_webits(json);
-   });   
-   sal.waiting();
-}
-  
 
 
 stater.prototype.get_people = function(tchunk) {
@@ -373,28 +492,64 @@ stater.prototype.get_group_list = function(pgroupid) {
 
  
 
+stater.prototype.get_webits = function() {
 
-stater.prototype.get_unsorted = function(tchunk) {
+   var url='deskfm/dbase/get_webits.php';
+   url = url + "?lim="+ da_limit;
+   url = url + "&chunk="+ this.total_sorted.chunk;
+//   alert(url);
+   $.getJSON(url,function(json) {
+      amare.update_webits(json);
+   });   
+   sal.waiting();
+}
+  
+
+stater.prototype.get_unsorted = function(pstats) {
+
    var url='deskfm/dbase/get_unsorted.php';
+   url = url + "?lim="+ da_limit;
 
-   var dl = da_limit;
-   if (debug == true) {
-      dl = 10;
+   if ((pstats.month != undefined) && (pstats.month != "")) {
+	   var m = pstats.month+1;
+       url = url + "&month="+ m;
+   } 
+   if ((pstats.year != undefined) && (pstats.year != "")) {
+       url = url + "&year="+ pstats.year;
+   } 
+   if ((pstats.last_chunk != undefined) && (pstats.last_chunk != "")) {
+     url = url + "&chunk="+ pstats.last_chunk;
    }
-   url = url + "?lim="+ dl;
-   
-
-    if (tchunk != undefined) {
-       url = url + "&chunk="+ tchunk;
-    } 
-
-//  alert(url);
+   alert(url);
 
    $.getJSON(url,function(json) {
       amare.add_unsorted(json);
    });   
    sal.waiting();
 }
+
+
+
+ stater.prototype.get_cat_list = function(pstats) {
+
+   var url='deskfm/dbase/get_webits.php';
+    url = url + "?lim="+ da_limit;
+
+    if (pstats.cat != undefined ) {
+       url = url + "&cat="+ pstats.cat;
+    }
+    if (pstats.subcat != undefined) {
+       url = url + "&subcat="+ pstats.subcat;
+    } 
+
+    url = url + "&chunk="+ pstats.next_chunk();
+//  alert(url);
+    $.getJSON(url,function(json) {
+      amare.update_webits(json);
+    });   
+  sal.waiting();
+}  
+
 
 
 stater.prototype.get_products = function() {
@@ -419,17 +574,6 @@ stater.prototype.get_providers = function() {
 
 
 
-stater.prototype.get_random_list = function() {
-  var url='deskfm/dbase/dfm_dbrand.php';
-  url = url + "?lim="+ da_limit;
-  var p = this.boss;
-  url = url + "&rand="+Math.random();
-  //alert(url);
-  $.getJSON(url,function(json) {
-      amare.update_webitlist(json,p);
-  });   // end get json 
-}
-
 
 
  stater.prototype.get_product_list = function(tprod) {
@@ -449,41 +593,6 @@ stater.prototype.get_random_list = function() {
 
 
 
- stater.prototype.get_time_list = function() {
-   var url='deskfm/dbase/dfm_dbget.php';
-    url = url + "?lim="+ da_limit;
-    url = url + "&yr="+ da_year;
-    url = url + "&mon="+ da_month;
- // alert(url);
-  $.getJSON(url,function(json) {
-      amare.update_webits(json);
-   });   // end get json 
-}  
-
-
- stater.prototype.get_cat_list = function(tcat,tsubcat) {
-
-   var url='deskfm/dbase/get_webits.php';
-    url = url + "?lim="+ da_limit;
-    if (tcat != undefined ) {
-       url = url + "&cat="+ tcat;
-       this.cat = tcat;
-    }
-    if (tsubcat != undefined) {
-       url = url + "&subcat="+ tsubcat;
-       this.subcat=tsubcat;
-    } 
-
-    var st =this.get_catstat(tcat,tsubcat);
-    if (st != null) {
-       url = url + "&chunk="+ st.next_chunk();
-    }
-//  alert(url);
-    $.getJSON(url,function(json) {
-      amare.update_webits(json);
-    });   
-  sal.waiting();
-}  
 
 
 
@@ -577,75 +686,6 @@ stater.prototype.get_cperson_list = function(tuname) {
 
 
 
- stater.prototype.update_webits= function(listobj) {
-       var r = 0;
-       var found = false;
-       var fndcount = 0;
-       if ( listobj.dalist.length > 0 ) { 
-         for (var j=0;j<listobj.dalist.length;j++) {
-            found = false;
-            if (listobj.dalist[j] != undefined) {
-               var found_at=-1;
-               for (var i=0;i<this.webitlist.length;i++) {
-                  if (this.webitlist[i] != undefined) {
-                    if (listobj.dalist[j].pid == this.webitlist[i].pid) {
-                      found = true; 
-                      fndcount = fndcount + 1;
-                      found_at = i;
-                      break;
-                    }
-                  }
-               } 
-               if (found == true) {
-                  this.webitlist[found_at] = listobj.dalist[j];
-               } else {
-                  this.webitlist.push(listobj.dalist[j]);
-               }             
-            }
-         }
-      }
-      if (got_stats == true) {
-         amare.count_lstats();
-         diego.redraw_view("webits",listobj.dachunk);
-         init_run = false;
-      }
-}  
-
-
-
-
- stater.prototype.update_people= function(listobj) {
-
-       var r = 0;
-       var found = false;
-       var fndcount = 0;
-
-       if ( listobj.peoplelist.length > 0 ) { 
-         for (var j=0;j<listobj.peoplelist.length;j++) {
-              found = false;
-              var found_at=-1;
-              for (var i=0;i<this.peoplelist.length;i++) {
-                  if (this.peoplelist[i] != undefined) {
-                    if (listobj.peoplelist[j].uname == this.peoplelist[i].uname) {
-                      found = true; 
-                      fndcount = fndcount + 1;
-                      found_at = i;
-                      break;
-                    }
-                  }
-              }
-              if (found == true) {
-                  this.peoplelist.splice(found_at,1);
-              }
-              this.peoplelist.push(listobj.peoplelist[j]);
-         }
-      }
-
-      if (got_stats == true) {
-        amare.count_lpstats();
-        diego.redraw_view("people",listobj.dachunk);
-      }
-}  
 
 
 stater.prototype.add_unsaved = function(listobj) {
@@ -677,36 +717,6 @@ stater.prototype.add_unsaved = function(listobj) {
 
 }  
 
-
-
-stater.prototype.add_unsorted= function(listobj) {
-       var r = 0;
-       var found = false;
-       var fndcount = 0;
-       if ( listobj.dalist.length > 0 ) { 
-         for (var j=0;j<listobj.dalist.length;j++) {
-              found = false;
-              var found_at=-1;
-              for (var i=0;i<this.unsortedlist.length;i++) {
-                  if (this.unsortedlist[i] != undefined) {
-                    if (listobj.dalist[j].pid == this.unsortedlist[i].pid) {
-                      found = true; 
-                      fndcount = fndcount + 1;
-                      found_at = i;
-                      break;
-                    }
-                  }
-              }
-              if (found == true) {
-                  this.unsortedlist.splice(found_at,1);
-              }
-              this.unsortedlist.unshift(listobj.dalist[j]);
-         }
-      }
-
-       amare.count_lstats();
-       diego.redraw_view("unsorted");
-}  
 
 
 

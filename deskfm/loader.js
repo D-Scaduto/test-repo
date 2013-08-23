@@ -113,6 +113,56 @@ viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
    this.draw_view();
 }
 
+viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
+
+    var lgo = true;
+    var d = 0;
+    var mx = 0;
+    var ro = null;
+    var ok = false;
+    var obj = null;
+
+     if (dtmon == undefined) {
+       this.stats = amare.total_unsorted;
+     } else {
+       this.stats = amare.get_monthstat(dtmon);
+     }
+  
+     var st = 0;
+     if (pstart != undefined) {
+	  st = pstart;
+     }
+
+     this.dalist = [];
+
+     mx = amare.unsortedlist.length;
+      for (var r=d; r<mx;r++) {
+        ro = amare.unsortedlist[r];
+        if (ro != undefined) {
+            ok = false;
+	    if (dtmon == undefined) {
+		ok = true;
+	    } else {
+	//	    alert("m=" + dtmon.month + " y=" + dtmon.year);
+		if (check_month(ro,dtmon) == true) {
+			ok = true;
+		}
+	    }
+	    if (ok == true) {
+              obj = new listdex();
+              obj.mdex = r;
+	      obj.ltype = "unsorted";
+              this.dalist.push(obj);
+              d = d+1 
+	    }
+        }
+    } 
+    this.load_rungs(st);
+    this.draw_view();
+}
+
+
+
 
 viewer.prototype.load_group_list = function(tgroupid,pstart) {
 
@@ -247,51 +297,6 @@ viewer.prototype.load_provider_list = function(tproviderid) {
 }
 
 
-viewer.prototype.load_unsorted_list = function(dtmon) {
-
-    var lgo = true;
-    var d = 0;
-    var mx = 0;
-    var ro = null;
-    var ok = false;
-    var obj = null;
-
-     if (dtmon == undefined) {
-       this.stats = amare.total_unsorted;
-     } else {
-       this.stats = amare.get_monthstat(dtmon);
-     }
-  
-     this.dalist = [];
-
-     mx = amare.unsortedlist.length;
-      for (var r=d; r<mx;r++) {
-        ro = amare.unsortedlist[r];
-        if (ro != undefined) {
-            ok = false;
-	    if (dtmon == undefined) {
-		ok = true;
-	    } else {
-	//	    alert("m=" + dtmon.month + " y=" + dtmon.year);
-		if (check_month(ro,dtmon) == true) {
-			ok = true;
-		}
-	    }
-	    if (ok == true) {
-              obj = new listdex();
-              obj.mdex = r;
-	      obj.ltype = "unsorted";
-              this.dalist.push(obj);
-              d = d+1 
-	    }
-        }
-    } 
-    this.load_rungs(0);
-    this.draw_view();
-}
-
-
-
 
 
 
@@ -361,12 +366,8 @@ viewer.prototype.load_unsaved_list = function() {
 
 
 
-
-
 viewer.prototype.load_random_list = function() {
 
-  
-   var mx = amare.webitlist.length;
    var ro = null;
    this.darungs = [];
 
@@ -379,34 +380,23 @@ viewer.prototype.load_random_list = function() {
    var j =0;
    var obj = null;
 
-   if (mx == 0) {
-	    return;
-   }
-
-   while ((i<100) && (j < 100)) {
+   var clone = amare.webitlist.slice(0);
+   var mx = clone.length;
+   var tls = [];
+  
+   while (i<999) {
+       mx = clone.length;
        r = Math.floor((Math.random()*mx)+1);
-       ro = amare.webitlist[r];
+       ro = clone[r];
        if (ro != undefined) {
-         var used = false;
-	 
-         for (var z=0;z<tls.length;z++){
-           if (r == tls[z]) {
-               used = true;
-           }
-         }
-	 
-         if (used == false) {
             tls.push(r);
 	    obj = new listdex();
             obj.mdex = r;
 	    obj.ltype = "webits";
             this.dalist.push(obj);
-            this.darungs[i].vdex = r;
             i = i+1;
-         }
-       } else {
-	   j = j+1;
        }
+       clone.splice(r,1);
    }
 	     
    this.load_rungs(0,"webits");

@@ -17,7 +17,6 @@ function webit(tpid) {
    this.source = "deskfm";
    this.stored=false;
 
-   this.dfdate = null;
    this.created_at = "";
    this.change_date = "";
 
@@ -52,15 +51,7 @@ check_month = function(pobj,dtmon) {
 
     if (pobj != null) {
 
-    if ((pobj.dfdate != "") && (pobj.dfdate != undefined))  {
-
-       arr =  pobj.dfdate.split(" ");
-        var b =  arr[0];
-        var c = b.split("-");
-        month = c[1]-1;
-        year = c[0];
-
-    } else if ((pobj.created_at != "")  && (pobj.created_at != undefined)) { 
+    if ((pobj.created_at != "")  && (pobj.created_at != undefined)) { 
         arr =  pobj.created_at.split(" ");
         var b =  arr[0];
         var c = b.split("-");

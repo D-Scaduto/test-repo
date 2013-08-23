@@ -217,15 +217,11 @@ header('Content-type: text/html; charset=utf-8 ');
            da_limit = 250;
 	   daviewer.top_end = 25;
 	  
-    } else {
+   } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
-	   elle.shape = "wingout";
-    }
-
-   if (debug == true) {
-	   daviewer.top_end = 10;
    }
+
 	   sal = new logoman("logo_spot");
    	   store = new shoper("shop_spot");
 
@@ -234,7 +230,6 @@ header('Content-type: text/html; charset=utf-8 ');
 	   
 	   wanda = new searcher("search");
 
-	  // nicky = new sharer("share");
 	   nicky = new sharer("share_spot");
 	   
            joe = new manager("contact");
@@ -245,11 +240,9 @@ header('Content-type: text/html; charset=utf-8 ');
            diego.add_mainspot("contact","joe");
 	   diego.add_mainspot("sort","mac");
 	   diego.add_mainspot("manage","mac");
-//  	     diego.add_mainspot("search","wanda");
-//           diego.add_mainspot("share","nicky");
 	   diego.main_shape = "browse";
 	 
-
+    elle.shape="";
     elle.draw_main();
 	   
     amare.get_stats();
@@ -258,7 +251,7 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_providers();
     amare.get_webits();
     amare.get_people();
-    amare.get_unsorted();
+    amare.get_unsorted("","");
 
 
         if ($(this).width() < 601) {

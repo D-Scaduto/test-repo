@@ -33,13 +33,10 @@ class pfoo {
 
 
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $sql;
    public $dalist_len;
    public $dachunk;
    public $dalist;
-   public $peoplelist;
-   public $peoplelist_len;
  }
 
 
@@ -61,13 +58,8 @@ if (isset($_GET['chunk'])) {
   $chunk = $_GET['chunk'];
 }
 
-$pchunk = 0;
-if (isset($_GET['pchunk'])) {
-  $whunk = $_GET['pchunk'];
-}
 
 $rebar->dachunk = $chunk;
-$rebar->pchunk = $pchunk;
 
 $limit = 1000;
 if (isset($_GET['lim'])) {
@@ -75,8 +67,6 @@ if (isset($_GET['lim'])) {
 }
 
 $chunk_start = $chunk * $limit;
-$pchunk_start = $pchunk * $limit;
-
 
   $con = mysql_connect($Server, $username, $password);
 
@@ -96,26 +86,29 @@ $pchunk_start = $pchunk * $limit;
    }
 
   $sql = "";
-//  $sql= $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM ";
- 
-  $sql= $sql . " ( SELECT  * FROM dfm_tweets ";
+  $sql= $sql . " ( SELECT  SQL_CALC_FOUND_ROWS  * FROM dfm_tweets ";
   $sql = $sql .  " where cat = '' and subcat = ''  ";
-  $sql = $sql .  " order by created_at DESC ) ";
+  $sql = $sql . $where ;
+  $sql = $sql .  " order by created_at DESC ";
+  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit . " )";
+  
   $sql = $sql . " union ";
   $sql= $sql . " ( SELECT  * FROM dfm_posts ";
   $sql = $sql .  " where cat = '' and subcat = ''  ";
-  $sql = $sql .  " order by created_at DESC ) ";
-//  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit; 
+  $sql = $sql . $where ;
+  $sql = $sql .  " order by created_at DESC ";
+  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit . " )"; 
+  
 
-  $rebar->dasql1 = $sql;
- 
-  $result = mysql_query($sql);
+  $rebar->sql = $sql;
+  $result = mysql_query($sql); 
 
   $result2 = mysql_query('select found_rows()');
   $row2 = mysql_fetch_row($result2);
   $num_rows = $row2[0];
   $rebar->dalist_len = $num_rows;
 
+ 
   $arr = array();
   while($row = mysql_fetch_array($result)) {
 
@@ -133,7 +126,7 @@ $pchunk_start = $pchunk * $limit;
     $foodo->cat = $row['cat'];
     $foodo->subcat = $row['subcat'];
 
-    $foodo->dfdate = $row['twdate'];
+    $foodo->created_at = $row['created_at'];
  
     $foodo->linkurl = $row['linkurl'];
 
@@ -144,30 +137,7 @@ $pchunk_start = $pchunk * $limit;
    }
    $rebar->dalist = $arr;
 
-   $sql= " select * from dfm_people ";
-
-   $sql = $sql . " where group_id = ''";
-  $sql= $sql . " LIMIT " . $pchunk_start . " , " . $limit;
-
-  $rebar->dasql2 = $sql;
-  $result = mysql_query($sql);
-  $arr = array();
-
-  while($row = mysql_fetch_array($result)) {
-    $poodo = new pfoo;
-    $poodo->uname = $row['person_id'];
-    $poodo->groupid = $row['group_id'];
-    $poodo->picurl = $row['picurl'];
-    $poodo->emailaddr = $row['emailaddr'];
-    $poodo->facebookid = $row['facebookid'];
-    $poodo->twitter = $row['twitterid'];
-    $poodo->googleid = $row['googleid'];
-    $poodo->source = "person";
-    $poodo->listype = "people";
-    $arr[] = $poodo;
-  }
-
-  $rebar->peoplelist = $arr;
+  
 
    echo json_encode($rebar); 
 
