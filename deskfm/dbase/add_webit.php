@@ -9,7 +9,6 @@ class foo {
    public $story;
    public $source;
    public $stored = true;
-   public $dfdate;
    public $created_at;
    public $change_date;
    public $picurl;
@@ -49,11 +48,6 @@ $created_at = 'now()';
 if (isset($_GET['created_at'])) {
    $created_at = $_GET['created_at'];
   }
-
-$dfdate = 'now()';
-if (isset($_GET['dfdate'])) {
-  $dfdate =  "\'" . $_GET['dfdate'] . "\'";
-}
 
 $cat = "";
 if (isset($_GET['cat'])) {
@@ -149,38 +143,26 @@ $picaddr = "";
 	  $picurl = $picaddr;
       }
 
-      $table = "";
-      if ($source == 'deskfm') {
-        $table = "dfm_posts";
-      }
-
-      if ($source=="twitter") {
-        $table = "dfm_tweets";
-      }
-
-     $sql_ins = "insert into " . $table . " values ('" . $pid . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . addslashes($story) .  "'," . $dfdate . ",'" . $created_at . "', now() ,'" . $picurl . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
+     $sql_ins = "insert into dfm_webits values ('" . $pid . "','" . $source . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . addslashes($story) .  "','" . $created_at . "', now() ,'" . $picurl . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);
      $ret->inres = $result;    
 
-       $sql= "  SELECT * FROM " . $table . " where webit_id='" . $pid . "' ";
+       $sql= "  SELECT * FROM dfm_webits where webit_id='" . $pid . "' ";
 
      $result = mysql_query($sql);
      $row = mysql_fetch_array($result); 
      $b2 = new foo;
 
            $b2->pid = $row['webit_id'];
+           $b2->source =$row['source'];
            $b2->uname = $row['owner_id'];
            $b2->story  =  $row['story'];
-           $b2->source = $source;
            $b2->cat = $row['cat'];
 	   $b2->subcat = $row['subcat'];
-
-	   $b2->dfdate = $row['twdate'];
 	   $b2->created_at = $row['created_at'];
 	   $b2->change_date = $row['change_date'];
-
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
            $b2->embedurl = $row['embedurl'];

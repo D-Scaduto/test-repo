@@ -29,24 +29,14 @@ $con = mysql_connect($Server, $username, $password);
 
   if ($pid != 'null') {
 
-   if ($listype == "webit") {
-
-    if ($source == "deskfm") {
- 
-      $sql_upd = "delete from dfm_posts  ";
+      $sql_upd = "delete from dfm_webits  ";
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
-
+/*
       $ret->picfile = "../../pics/keepers/" . $pid . "\.*";
       foreach(glob($ret->picfile) as $filename) {
         unlink($filename);
       }
-    }
-
-    if ($source == "twitter") {
-      $sql_upd = "delete from dfm_tweets ";
-      $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
-    }
-   }
+ */
 
 //   echo $sql_upd  . " \n <br> " ;
     $result = mysql_query($sql_upd);

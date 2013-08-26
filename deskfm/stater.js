@@ -13,23 +13,10 @@ function stat () {
     this.listype="";
     this.lnum = 0;
     this.cnum=0;
-    this.last_chunk=0;
+    this.last_chunk=-1;
     this.max_chunks=0;
 
 }
-
-
-stat.prototype.next_chunk = function() {
-
-   var ret =0;
-   var t = parseInt(this.last_chunk) + 1;
-   if (t <= this.max_chunks) {
-	   ret = t;
-   }
-   return ret;
-
-}
-
 
 
 function stater () { 
@@ -160,13 +147,41 @@ stater.prototype.update_stats = function (statobj) {
       }
 
    }
-}  
+}
 
+
+stater.prototype.set_stat = function (newstat) {
+
+	var stat = null;
+	if (newstat != undefined) {
+
+		if ((newstat.groupid != "" ) && (newstat.groupid != undefined )) {
+		}
+
+		if (newstat.cat == "") {
+		     stat = this.get_monthstat(newstat.month,newstat.year);
+		} else {
+		     stat = this.get_catstat(newstat.cat,newstat.subcat);
+		}
+	
+	        if (stat != undefined) {
+                     stat.last_chunk = newstat.dachunk; 
+	        }
+	}
+
+}
 
  stater.prototype.update_webits= function(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
+
+       if (listobj == undefined) {
+	       return;
+       }
+
+       this.set_stat(listobj);
+
        if ( listobj.dalist.length > 0 ) { 
          for (var j=0;j<listobj.dalist.length;j++) {
             found = false;
@@ -201,7 +216,49 @@ stater.prototype.update_stats = function (statobj) {
       } else {
           daviewer.redraw_view("webits");
       }
+    
 }  
+
+
+stater.prototype.add_unsorted= function(listobj) {
+       var r = 0;
+       var found = false;
+       var fndcount = 0;
+
+       if ( listobj.dalist.length > 0 ) { 
+         	       
+         for (var j=0;j<listobj.dalist.length;j++) {
+              found = false;
+              var found_at=-1;
+              for (var i=0;i<this.unsortedlist.length;i++) {
+                  if (this.unsortedlist[i] != undefined) {
+                    if (listobj.dalist[j].pid == this.unsortedlist[i].pid) {
+                      found = true; 
+                      fndcount = fndcount + 1;
+                      found_at = i;
+                      break;
+                    }
+                  }
+              }
+              if (found == true) {
+                  this.unsortedlist.splice(found_at,1);
+              }
+              this.unsortedlist.unshift(listobj.dalist[j]);
+         }
+      }
+
+      this.got_unsorted = true;
+      this.count_lustats();
+      if (init_run == true) {
+	      if (this.got_stats == true) {
+                 init_run = false;
+                 daviewer.redraw_view("unsorted");
+	      }
+      } else {
+          daviewer.redraw_view("unsorted");
+      }
+}  
+
 
 
 
@@ -244,45 +301,6 @@ stater.prototype.update_stats = function (statobj) {
          daviewer.redraw_view("people");
       }
 }  
-
-
-stater.prototype.add_unsorted= function(listobj) {
-       var r = 0;
-       var found = false;
-       var fndcount = 0;
-       if ( listobj.dalist.length > 0 ) { 
-         for (var j=0;j<listobj.dalist.length;j++) {
-              found = false;
-              var found_at=-1;
-              for (var i=0;i<this.unsortedlist.length;i++) {
-                  if (this.unsortedlist[i] != undefined) {
-                    if (listobj.dalist[j].pid == this.unsortedlist[i].pid) {
-                      found = true; 
-                      fndcount = fndcount + 1;
-                      found_at = i;
-                      break;
-                    }
-                  }
-              }
-              if (found == true) {
-                  this.unsortedlist.splice(found_at,1);
-              }
-              this.unsortedlist.unshift(listobj.dalist[j]);
-         }
-      }
-
-      this.got_unsorted = true;
-      this.count_lustats();
-      if (init_run == true) {
-	      if (this.got_stats == true) {
-                 init_run = false;
-                 daviewer.redraw_view("unsorted");
-	      }
-      } else {
-          daviewer.redraw_view("unsorted");
-      }
-}  
-
 
 
 
@@ -459,13 +477,11 @@ stater.prototype.get_person_group = function(tname) {
 stater.prototype.get_people = function(tchunk) {
    var url='deskfm/dbase/get_people.php';
    url = url + "?lim="+ da_limit;
-   var c = ""
-   if (tchunk != undefined) {
-      c = tchunk;
-   } else {
-      c = this.total_people.next_chunk();
+   var c = this.total_people.last_chunk; 
+   if (c != -1) {
+      c = c +1;
+      url = url + "&chunk="+ c;
    }
-   url = url + "&chunk="+ c;
 //   alert(url);
    $.getJSON(url,function(json) {
        amare.update_people(json);
@@ -479,11 +495,14 @@ stater.prototype.get_group_list = function(pgroupid) {
    var url='deskfm/dbase/dfm_people.php';
    url = url + "?lim="+ da_limit;
    url = url + "&groupid="+ pgroupid;
-
-//   var c = ""
-//   c = this.total_sorted.next_chunk();
-//   url = url + "&chunk="+ c;
-//
+ 
+   var pstats = this.get_groupstat(pgroupid);
+   var c = -1;
+   if (pstats != null) {
+     c = pstats.last_chunk; 
+   }
+   c = c +1;
+   url = url + "&chunk="+ c;
 //  alert(url);
    $.getJSON(url,function(json) {
        amare.update_people(json);
@@ -496,7 +515,11 @@ stater.prototype.get_webits = function() {
 
    var url='deskfm/dbase/get_webits.php';
    url = url + "?lim="+ da_limit;
-   url = url + "&chunk="+ this.total_sorted.chunk;
+ var c = this.total_sorted.last_chunk; 
+   if (c != -1) {
+      c = c +1;
+      url = url + "&chunk="+ c;
+   }
 //   alert(url);
    $.getJSON(url,function(json) {
       amare.update_webits(json);
@@ -507,25 +530,41 @@ stater.prototype.get_webits = function() {
 
 stater.prototype.get_unsorted = function(pstats) {
 
+   var dstats = this.total_unsorted;
+   if (pstats != undefined) {
+	dstats = pstats;
+   }
+
    var url='deskfm/dbase/get_unsorted.php';
    url = url + "?lim="+ da_limit;
+   var m = 0;
 
-   if ((pstats.month != undefined) && (pstats.month != "")) {
-	   var m = pstats.month+1;
+   var gots = false;
+
+   if ((dstats.month != undefined) && (dstats.month != "")) {
+       m = dstats.month+1;
        url = url + "&month="+ m;
+       gots = true;
    } 
-   if ((pstats.year != undefined) && (pstats.year != "")) {
-       url = url + "&year="+ pstats.year;
-   } 
-   if ((pstats.last_chunk != undefined) && (pstats.last_chunk != "")) {
-     url = url + "&chunk="+ pstats.last_chunk;
+   if ((dstats.year != undefined) && (dstats.year != "")) {
+       url = url + "&year="+ dstats.year;
+       gots = true;
    }
+
+   var c = 0;
+   if (dstats.last_chunk != undefined) {
+     c = dstats.last_chunk; 
+     alert(c);
+      c = c +1;
+   }
+      url = url + "&chunk="+ c;
    alert(url);
 
    $.getJSON(url,function(json) {
       amare.add_unsorted(json);
    });   
    sal.waiting();
+
 }
 
 
@@ -542,7 +581,14 @@ stater.prototype.get_unsorted = function(pstats) {
        url = url + "&subcat="+ pstats.subcat;
     } 
 
-    url = url + "&chunk="+ pstats.next_chunk();
+  var c = -1;
+   if (pstats.cat == "") {
+	    c = this.total_unsorted.last_chunk; 
+   } else {
+	    c = pstats.last_chunk; 
+   }
+      c = c +1;
+      url = url + "&chunk="+ c;
 //  alert(url);
     $.getJSON(url,function(json) {
       amare.update_webits(json);
@@ -892,7 +938,7 @@ stater.prototype.add_unsaved = function(listobj) {
             this.peoplelist.push(pobj);
         }
         daviewer.update_person(pobj.uname);
-      }
+     }
 }
 
 

@@ -551,14 +551,14 @@ poster.prototype.clear = function() {
      }
 
      var url = "";
-       url = "deskfm/dbase/add_webit.php"+prams;
-this.changed = false;
-   this.story_changed = false;
-   this.pic_changed = false;
-   this.link_changed = false;
-   this.embed_changed = false;   
-   this.cat_changed = false;
-   this.group_changed = false;
+     url = "deskfm/dbase/add_webit.php"+prams;
+     this.changed = false;
+     this.story_changed = false;
+     this.pic_changed = false;
+     this.link_changed = false;
+     this.embed_changed = false;   
+     this.cat_changed = false;
+     this.group_changed = false;
 //     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
@@ -607,14 +607,14 @@ this.changed = false;
      }
 
      var url = "";
-       url = "deskfm/dbase/update_webit.php"+prams;
-this.changed = false;
-   this.story_changed = false;
-   this.pic_changed = false;
-   this.link_changed = false;
-   this.embed_changed = false;   
-   this.cat_changed = false;
-   this.group_changed = false;
+     url = "deskfm/dbase/update_webit.php"+prams;
+     this.changed = false;
+     this.story_changed = false;
+     this.pic_changed = false;
+     this.link_changed = false;
+     this.embed_changed = false;   
+     this.cat_changed = false;
+     this.group_changed = false;
 //     alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);

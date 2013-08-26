@@ -68,34 +68,21 @@ $con = mysql_connect("$Server", "$username", "$password");
    mysql_select_db($db_name, $con);
 
   $sql = "";
-  $sql = $sql . "  SELECT SQL_CALC_FOUND_ROWS * FROM (";
-  $sql = $sql . " select  * from dfm_tweets dt ";
+  $sql = $sql . " select SQL_CALC_FOUND_ROWS * from dfm_webits  ";
 
   if ($cat == "null") {
-    $where = " where dt.cat != '' and dt.subcat != ''  ";
-    $where = $where . " and dt.cat != 'deleted' and dt.cat != 'junk' ";
+    $where = " where cat != '' and subcat != ''  ";
+    $where = $where . " and cat != 'deleted' and cat != 'junk' ";
   } else {
-    $where = " where dt.cat = '" . $cat . "'";
+    $where = " where cat = '" . $cat . "'";
     if ($subcat != "null") {
       $where = $where . " and subcat ='" . $subcat . "'";
     }
   }
   $sql = $sql . $where;
 
-  $sql = $sql . " union ";
-
-  $sql = $sql . " select * from dfm_posts dp " ;
-  if ($cat == "null") {
-    $where = " where dp.cat != '' and dp.subcat != ''  ";
-    $where = $where . " and dp.cat != 'deleted' and dp.cat != 'junk' ";
-  } else {
-    $where = " where dp.cat = '" . $cat . "'";
-    if ($subcat != "null") {
-      $where = $where . " and subcat ='" . $subcat . "'";
-    }
-  }
- $sql = $sql . $where;
-  $sql= $sql . " ) as g LIMIT " . $chunk_start . " , " . $limit;
+  
+  $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;
 
  // echo $sql . " \n <br> " ;
   $rebar->dasql1 = $sql;
@@ -112,12 +99,13 @@ $con = mysql_connect("$Server", "$username", "$password");
 
     $foodo = new foo;
  
-    $foodo->source = "twitter";
+  
     $foodo->listype = "webits";
 
     $foodo->pid =    $row['webit_id'];
     $foodo->picurl = $row['picurl'];
- 
+    $foodo->source = $row['source'];
+
     $foodo->uname = $row['owner_id'];
     $foodo->story  = $row['story'];
 

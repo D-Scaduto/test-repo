@@ -86,7 +86,7 @@ $bearer_token = $reply->access_token;
   }
   mysql_select_db($db_name, $con);
 
-  $sql="SELECT webit_id FROM dfm_tweets where ";
+  $sql="SELECT webit_id FROM dfm_webits where ";
   $dt = new DateTime($rebar->newest_date);
   $sql = $sql . " created_at <= '" . date_format($dt, 'Y-m-d 23:59:59 ') . "'";
   $dt = new DateTime($rebar->oldest_date);

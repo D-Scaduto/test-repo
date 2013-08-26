@@ -42,9 +42,9 @@ $con = mysql_connect($Server, $username, $password);
   $baro = new bar();
 
   $sql = "";
-  $sql= " select dt.cat,dt.subcat,count(*) from dfm_tweets dt ";
-  $sql = $sql . " where dt.cat != '' and dt.cat != 'junk' ";
-  $sql = $sql . " group by dt.cat,dt.subcat ";
+  $sql= " select cat,subcat,count(*) from dfm_webits ";
+  $sql = $sql . " where cat != '' and cat != 'junk' ";
+  $sql = $sql . " group by cat,subcat ";
 
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
@@ -53,54 +53,26 @@ $con = mysql_connect($Server, $username, $password);
     $foodo->subcat = $row['subcat'];
     $foodo->cnum = $row['count(*)'];
     $foodo->listype = "webits";
+    $foodo->last_chunk = -1;
     $baro->subs[] = $foodo;
   }
 
  
 
-  $sql = "";
-  $sql= $sql . " select dp.cat,dp.subcat,count(*) from dfm_posts dp  ";
-  $sql = $sql . " where dp.cat != '' and dp.cat != 'junk' "; 
-  $sql = $sql . " group by dp.cat,dp.subcat ";
-
-  $result = mysql_query($sql);
-  while($row = mysql_fetch_array($result)) {
-    $foodo = new stdClass;
-    $foodo->cat = $row['cat'];
-    $foodo->subcat = $row['subcat'];
-    $foodo->cnum = $row['count(*)'];
-    $foodo->listype = "webits";
-    $bf = false;
-    $dex = 0;
-    for ($b=0;$b<count($baro->subs);$b++) {
-       if (($baro->subs[$b]->cat == $foodo->cat ) && ($baro->subs[$b]->subcat == $foodo->subcat )) {
-          $bf = true;
-          $dex = $b;
-       }
-    }
-
-    if ($bf == true) {
-        $baro->subs[$dex]->cnum = $baro->subs[$dex]->cnum + $row['count(*)'];
-    } else {
-        $baro->subs[] = $foodo;
-    }
-  }
 
   $sql = "";
-  $sql = $sql . " (select month(dt.created_at),year(dt.created_at),count(*) from dfm_tweets dt ";
-  $sql = $sql . " where dt.cat = '' ";
-  $sql = $sql . " group by month(dt.created_at),year(dt.created_at) ) union ";
-  $sql = $sql . " (select month(dp.created_at),year(dp.created_at),count(*) from dfm_posts dp ";
-  $sql = $sql . " where dp.cat = '' ";
-  $sql = $sql . " group by month(dp.created_at),year(dp.created_at)) ";
+  $sql = $sql . " select month(created_at),year(created_at),count(*) from dfm_webits ";
+  $sql = $sql . " where cat = '' ";
+  $sql = $sql . " group by month(created_at),year(created_at)"; 
   $baro->sql =$sql;
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
     $foodo = new stdClass;
     $foodo->month = $row[0] -1;
     $foodo->year = $row[1];
-    $foodo->cnum = $row['count(*)'];
+    $foodo->cnum = $row[2];
     $foodo->listype = "unsorted";
+       $foodo->last_chunk = -1;
     $baro->months[] = $foodo;
   }
 
@@ -131,6 +103,7 @@ $con = mysql_connect($Server, $username, $password);
     $foodo->groupid = $row['group_id'];
     $foodo->cnum = $row['count(*)'];
     $foodo->listype = "people";
+       $foodo->last_chunk = -1;
     $baro->groups[] = $foodo;
   }
 
@@ -145,36 +118,27 @@ $con = mysql_connect($Server, $username, $password);
   $sql= " select count(*) from dfm_people ";
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
-    $baro->total_people = $row[0];
+	  $baro->total_people = $row[0];
+	     $foodo->last_chunk = -1;
   }
 
   $sql = "";
-  $sql= " select count(*) from dfm_tweets where cat = ''; ";
+  $sql= " select count(*) from dfm_webits where cat = ''; ";
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
-    $baro->total_unsorted = $row[0];
+	  $baro->total_unsorted = $row[0];
+	     $foodo->last_chunk = -1;
   }
 
-  $sql = "";
-  $sql= " select count(*) from dfm_posts where cat = ''; ";
-  $result = mysql_query($sql);
-  while($row = mysql_fetch_array($result)) {
-    $baro->total_unsorted = $baro->total_unsorted + $row[0];
-  }
 
   $sql = "";
-  $sql= " select count(*) from dfm_tweets where cat != '' and cat != 'junk'; ";
+  $sql= " select count(*) from dfm_webits where cat != '' and cat != 'junk'; ";
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
-    $baro->total_sorted = $row[0];
+	  $baro->total_sorted = $row[0];
+	     $foodo->last_chunk = -1;
   }
 
-  $sql = "";
-  $sql= " select count(*) from dfm_posts where cat != '' and cat != 'junk'; ";
-  $result = mysql_query($sql);
-  while($row = mysql_fetch_array($result)) {
-    $baro->total_sorted = $baro->total_sorted + $row[0];
-  }
   echo json_encode($baro); 
 
 ?>

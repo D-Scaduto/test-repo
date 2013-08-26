@@ -8,7 +8,7 @@ include '../../config/names.php';
    public $subcat;
    public $story;
    public $source;
-  public $stored = true;
+   public $stored = true;
    public $dfdate ;
    public $picurl;
    public $linkurl;
@@ -132,12 +132,7 @@ $con = mysql_connect($Server, $username, $password);
 
 
   if ($some == true) {
-    if ($source == "deskfm") {
-      $sql_upd = "update dfm_posts set " . $sql_upd;
-      $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
-    }
-    if ($source == "twitter") {
-      $sql_upd = "update dfm_tweets set " . $sql_upd;
+      $sql_upd = "update dfm_webits set " . $sql_upd;
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
     }
 
@@ -150,13 +145,8 @@ $con = mysql_connect($Server, $username, $password);
    $ret->sql = $sql_upd;    
    $ret->resql = $result;    
 
-     if ($source == 'deskfm') {
-       $sql= "  SELECT * FROM dfm_posts where webit_id='" . $pid . "' ";
-     }
+       $sql= "  SELECT * FROM dfm_webits where webit_id='" . $pid . "' ";
 
-     if ($source=="twitter") {
-       $sql= "  SELECT * FROM dfm_tweets where webit_id='" . $pid . "' ";
-     }
  
   //  echo $sql  . "  \n <br>  ";
      $result2 = mysql_query($sql);
@@ -166,15 +156,16 @@ $con = mysql_connect($Server, $username, $password);
  
            $b2->listype = "webits";
            $b2->pid = $row['webit_id'];
+           $b2->source = $row['source'];
            $b2->uname = $row['owner_id'];
            $b2->story  =  $row['story'];
            $b2->source = $source;
            $b2->cat = $row['cat'];
            $b2->subcat = $row['subcat'];
-           $b2->dfdate = $row['twdate'];
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
-           $b2->embedurl = $row['embedurl'];
+	   $b2->embedurl = $row['embedurl'];
+	   $b2->created_at = $row['created_at'];
 	   $b2->change_date = $row['change_date'];
 
      if ($groupid != "null") {

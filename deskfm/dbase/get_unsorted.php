@@ -36,6 +36,10 @@ class pfoo {
    public $sql;
    public $dalist_len;
    public $dachunk;
+   public $cat;
+   public $subcat;
+   public $month;
+   public $year;
    public $dalist;
  }
 
@@ -60,6 +64,8 @@ if (isset($_GET['chunk'])) {
 
 
 $rebar->dachunk = $chunk;
+$rebar->month = $chunk;
+$rebar->year = $year;
 
 $limit = 1000;
 if (isset($_GET['lim'])) {
@@ -86,20 +92,12 @@ $chunk_start = $chunk * $limit;
    }
 
   $sql = "";
-  $sql= $sql . " ( SELECT  SQL_CALC_FOUND_ROWS  * FROM dfm_tweets ";
+  $sql= $sql . "  SELECT  SQL_CALC_FOUND_ROWS  * FROM dfm_webits ";
   $sql = $sql .  " where cat = '' and subcat = ''  ";
   $sql = $sql . $where ;
   $sql = $sql .  " order by created_at DESC ";
-  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit . " )";
+  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit;
   
-  $sql = $sql . " union ";
-  $sql= $sql . " ( SELECT  * FROM dfm_posts ";
-  $sql = $sql .  " where cat = '' and subcat = ''  ";
-  $sql = $sql . $where ;
-  $sql = $sql .  " order by created_at DESC ";
-  $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit . " )"; 
-  
-
   $rebar->sql = $sql;
   $result = mysql_query($sql); 
 
@@ -114,10 +112,10 @@ $chunk_start = $chunk * $limit;
 
     $foodo = new foo;
  
-    $foodo->source = "twitter";
     $foodo->listype = "unsorted";
 
     $foodo->pid =    $row['webit_id'];
+    $foodo->source =    $row['source'];
     $foodo->picurl = $row['picurl'];
  
     $foodo->uname = $row['owner_id'];
