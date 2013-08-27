@@ -13,7 +13,7 @@ function stat () {
     this.listype="";
     this.lnum = 0;
     this.cnum=0;
-    this.last_chunk=-1;
+    this.last_chunk=0;
     this.max_chunks=0;
 
 }
@@ -150,26 +150,31 @@ stater.prototype.update_stats = function (statobj) {
 }
 
 
-stater.prototype.set_stat = function (newstat) {
+stater.prototype.get_stat = function (pstat) {
 
-	var stat = null;
-	if (newstat != undefined) {
+	if (pstat == undefined) {
+		return this.total_sorted;
+	} else {
 
-		if ((newstat.groupid != "" ) && (newstat.groupid != undefined )) {
-		}
-
-		if (newstat.cat == "") {
-		     stat = this.get_monthstat(newstat.month,newstat.year);
+		if ((pstat.groupid != "" ) && (pstat.groupid != undefined )) {
+		     return this.get_groupstat(pstat.groupid);
 		} else {
-		     stat = this.get_catstat(newstat.cat,newstat.subcat);
+
+  		   if (pstat.cat != 'null' ) {
+			if (pstat.month == 'null')  {
+			     return this.total_unsorted;
+			} else {
+		       	     return this.get_monthstat(pstat.month,pstat.year);
+			}
+		   } else {
+		     return this.get_catstat(pstat.cat,pstat.subcat);
+		   }
 		}
-	
-	        if (stat != undefined) {
-                     stat.last_chunk = newstat.dachunk; 
-	        }
 	}
 
 }
+
+
 
  stater.prototype.update_webits= function(listobj) {
        var r = 0;
@@ -180,7 +185,10 @@ stater.prototype.set_stat = function (newstat) {
 	       return;
        }
 
-       this.set_stat(listobj);
+       var lstat = this.get_stat(listobj);
+       if (lstat != null) {
+	       lstat.last_chunk = listobj.dachunk;
+       }
 
        if ( listobj.dalist.length > 0 ) { 
          for (var j=0;j<listobj.dalist.length;j++) {
@@ -224,6 +232,22 @@ stater.prototype.add_unsorted= function(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
+ 
+       if (listobj == undefined) {
+	       return;
+       }
+
+       if (daviewer.stats != undefined) { 
+       
+       }
+
+       var lstat = this.get_stat(listobj);
+
+       if (lstat != null) {
+	    lstat.last_chunk = listobj.dachunk;
+//	    daviewer.stats = lstat;
+//	    alert("vs=" + daviewer.stats.listype + " gs=" + lstat.listype); 
+       }
 
        if ( listobj.dalist.length > 0 ) { 
          	       
@@ -249,11 +273,12 @@ stater.prototype.add_unsorted= function(listobj) {
 
       this.got_unsorted = true;
       this.count_lustats();
+
       if (init_run == true) {
-	      if (this.got_stats == true) {
-                 init_run = false;
-                 daviewer.redraw_view("unsorted");
-	      }
+	  if (this.got_stats == true) {
+               init_run = false;
+               daviewer.redraw_view("unsorted");
+	  }
       } else {
           daviewer.redraw_view("unsorted");
       }
@@ -421,13 +446,23 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
 
 
 stater.prototype.get_monthstat = function(pmon) {
+  
     var ret = null;
-    for (var i=0; i<this.monthstats.length; i++) {
+
+    if ((pmon == undefined) || (pmon.month == undefined)) {
+//    if (pmon == undefined) {
+	ret = this.total_unsorted;
+    } else {
+  
+      for (var i=0; i<this.monthstats.length; i++) {
         if ((this.monthstats[i].month == pmon.month) && (this.monthstats[i].year == pmon.year)) {
               ret = amare.monthstats[i];
         }
+      }
     }
+
     return ret;
+
 }
 
 
@@ -554,11 +589,11 @@ stater.prototype.get_unsorted = function(pstats) {
    var c = 0;
    if (dstats.last_chunk != undefined) {
      c = dstats.last_chunk; 
-     alert(c);
-      c = c +1;
+     c = parseInt(c,10) +1;
    }
-      url = url + "&chunk="+ c;
-   alert(url);
+
+   url = url + "&chunk="+ c;
+//   alert(url);
 
    $.getJSON(url,function(json) {
       amare.add_unsorted(json);

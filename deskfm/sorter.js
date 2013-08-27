@@ -101,8 +101,6 @@ sorter.prototype.check_local = function() {
    }  else {
          daviewer.load_unsorted_list();
    }
-  
-
 }
 
 sorter.prototype.check_feed = function() {

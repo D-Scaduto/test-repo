@@ -328,6 +328,7 @@ viewer.prototype.draw_debug_rail = function() {
        tmp = tmp + "<div  class='spotd_off' >";
        tmp = tmp + "lnum=" + this.stats.lnum;
        tmp = tmp + " cnum=" + this.stats.cnum;
+       tmp = tmp + " lchunk=" + this.stats.last_chunk;
        tmp = tmp + "</div>";
 
   } else {

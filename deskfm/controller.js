@@ -60,13 +60,13 @@ viewer.prototype.redraw_view = function(plistype) {
    var start = 0;
 
 
-   if (this.stats == null) {
+   if ((this.stats == null) || (this.stats == undefined)) {
 	   this.stats= amare.total_sorted;
    }
-  if ((this.stats != null) && (this.stats != undefined)) {
 
-         start = this.stats.chunk * da_limit;
+         start = this.stats.last_chunk * da_limit;
 
+// alert("sl=" + this.stats.listype + " pl=" + plistype);
 
          if ((this.stats.listype == "webits" ) && (plistype == "webits"))  {
 
@@ -87,7 +87,6 @@ viewer.prototype.redraw_view = function(plistype) {
 	    this.load_group_list(this.stats.groupid,start);
 
          } 
-   }
 }
 
 

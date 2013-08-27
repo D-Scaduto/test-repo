@@ -22,7 +22,6 @@ class pfoo {
    public $price;
    public $source;
    public $stored = true;
-   public $dfdate;
    public $created_at = "";
    public $change_date = "";
    public $picurl;
@@ -64,7 +63,7 @@ if (isset($_GET['chunk'])) {
 
 
 $rebar->dachunk = $chunk;
-$rebar->month = $chunk;
+$rebar->month = $month;
 $rebar->year = $year;
 
 $limit = 1000;
@@ -135,7 +134,6 @@ $chunk_start = $chunk * $limit;
    }
    $rebar->dalist = $arr;
 
-  
 
    echo json_encode($rebar); 
 

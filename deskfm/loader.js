@@ -125,9 +125,14 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
      if (dtmon == undefined) {
        this.stats = amare.total_unsorted;
      } else {
+
+       alert("month="+dtmon.month);
        this.stats = amare.get_monthstat(dtmon);
+       if (this.stats != null) {
+         //alert(this.stats.listype);
+       }
      }
-  
+
      var st = 0;
      if (pstart != undefined) {
 	  st = pstart;

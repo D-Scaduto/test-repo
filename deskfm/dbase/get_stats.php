@@ -72,7 +72,7 @@ $con = mysql_connect($Server, $username, $password);
     $foodo->year = $row[1];
     $foodo->cnum = $row[2];
     $foodo->listype = "unsorted";
-       $foodo->last_chunk = -1;
+    $foodo->last_chunk = -1;
     $baro->months[] = $foodo;
   }
 
@@ -99,11 +99,11 @@ $con = mysql_connect($Server, $username, $password);
   $sql = $sql . " group by group_id ";
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
-     $foodo = new stdClass;
+    $foodo = new stdClass;
     $foodo->groupid = $row['group_id'];
     $foodo->cnum = $row['count(*)'];
     $foodo->listype = "people";
-       $foodo->last_chunk = -1;
+    $foodo->last_chunk = -1;
     $baro->groups[] = $foodo;
   }
 
@@ -119,7 +119,7 @@ $con = mysql_connect($Server, $username, $password);
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
 	  $baro->total_people = $row[0];
-	     $foodo->last_chunk = -1;
+	  $foodo->last_chunk = -1;
   }
 
   $sql = "";
@@ -127,7 +127,7 @@ $con = mysql_connect($Server, $username, $password);
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
 	  $baro->total_unsorted = $row[0];
-	     $foodo->last_chunk = -1;
+	  $foodo->last_chunk = -1;
   }
 
 
@@ -136,7 +136,7 @@ $con = mysql_connect($Server, $username, $password);
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
 	  $baro->total_sorted = $row[0];
-	     $foodo->last_chunk = -1;
+	  $foodo->last_chunk = -1;
   }
 
   echo json_encode($baro); 
