@@ -7,13 +7,13 @@ include '../../config/names.php';
    public $cat;
    public $subcat;
    public $story;
-   public $source;
-   public $stored = true;
-   public $dfdate ;
    public $picurl;
    public $linkurl;
    public $embedurl;
+   public $source;
    public $listype;
+   public $stored = true;
+   public $created_at;
    public $change_date;
 }
 
@@ -29,14 +29,6 @@ class bar {
 }
 
 $ret = new bar;
-
-$dfdate = "null"; 
-if (isset($_GET['dfdate'])) {
- $dfdate = $_GET['dfdate'];
-}
-
-$listype = 'webits';
-$source = $_GET['source'];
 
 $cat = "null"; 
 if (isset($_GET['cat'])) {
@@ -73,7 +65,6 @@ if (isset($_GET['picode'])) {
 }
 
 
-
 $pid = $_GET['pid'];
 $uname = $_GET['uname'];
 
@@ -100,6 +91,32 @@ $con = mysql_connect($Server, $username, $password);
      }
 
      if ($picurl != "null") {
+
+      $prefix = "tmpics/";
+      $prepos = strpos($picurl,$prefix);
+
+      if (substr($picurl,0,7) == $prefix) {
+ 
+	  $prepos = $prepos + strlen($prefix);
+	  $picslice = substr($picurl,$prepos);
+
+	  $cognomen = strrchr($picurl,".");
+	  $ret->cognomen = $cognomen;
+	  $picfile = $pid;
+	  if (strlen($cognomen < 7)) {
+	    $picfile = $pid . $cognomen; 
+          }
+	  $cpsrc = "../../tmpics/" . $picslice;
+	  $ret->cpsrc = $cpsrc;
+	  $cpdest = "../../pics/" . $picfile;
+	  $ret->cpdest = $cpdest;
+	  $res = copy ($cpsrc,$cpdest);
+	  $ret->cpres = $res;
+	  if ($res == true) {
+		  $picurl = "/pics/" . $picfile;
+	  }
+      }
+
        if ($some == true) {
          $sql_upd = $sql_upd . " , ";
        }
@@ -159,7 +176,6 @@ $con = mysql_connect($Server, $username, $password);
            $b2->source = $row['source'];
            $b2->uname = $row['owner_id'];
            $b2->story  =  $row['story'];
-           $b2->source = $source;
            $b2->cat = $row['cat'];
            $b2->subcat = $row['subcat'];
            $b2->picurl = $row['picurl'];
@@ -176,23 +192,6 @@ $con = mysql_connect($Server, $username, $password);
      }
 
         $ret->pobj = $b2;
-
-      if (($picurl != "null" ) && ($picurl != ""))  {
-          $prefix = "http://" . $Server . "/pics/tmp/";
-          $picslice = substr($picurl,strlen($prefix));
-          $cognopos = strrpos($picurl,"."); 
-          $cognomen = substr($picurl,$cognopos);
-          $ret->cognomen = $cognomen;
-          $picfile = $pid . $cognomen; 
-          $cpsrc = "../../pics/tmp/" . $picslice;
-          $ret->cpsrc = $cpsrc;
-          $cpdest = "../../pics/keepers/" . $picfile;
-          $ret->cpdest = $cpdest;
-          $res = copy ($cpsrc,$cpdest);
-          $ret->resultcp = $res;
-          $picaddr = $Server . "/pics/keepers/" . $picfile;
-      }
-
 
      echo json_encode($ret); 
 

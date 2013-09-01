@@ -10,11 +10,7 @@ poster.prototype.draw_pic = function() {
    var ps="";
    var cls = "";
 
-      if (this.picsrc != "") {
-	      ps = this.picsrc;
-      } else {
-           ps = this.picurl;
-      }
+      ps = this.picurl;
       if (ps != "") {
 
 	  cls = "piclip";
@@ -53,11 +49,7 @@ poster.prototype.get_pic = function() {
    var ocl = "";
 
      tmp = "";
-      if (this.picsrc != "") {
-	      ps = this.picsrc;
-      } else {
-           ps = this.picurl;
-      }
+     ps = this.picurl;
 
      cls = "piclip";
      if (is_mobile == true) {
@@ -79,10 +71,9 @@ poster.prototype.get_pic = function() {
         document.getElementById(lbl).innerHTML=tmp;
       }
 
-
         tmp = "";
         lbl = this.rungster + "_upic_frame_name";
-        tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='pics/uploader.php' target='"+lbl+"' style='display:inline;' >";
+        tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";
         tmp = tmp + "</form>";   
 
@@ -95,28 +86,16 @@ poster.prototype.get_pic = function() {
 
 
  poster.prototype.get_newpic = function() {
-   var tspot = this.rung;
    var doctmp;
-   var tmpstr="";
-   var tsrc = "";
-   var tmpfile="";
-   var picstr="";
    var lbl = "";
-
 
    lbl = this.rungster + "_upic_frame";
    if (document.getElementById(lbl) != null) {
 
       doctmp = document.getElementById(lbl).contentWindow.document;
+
       if (doctmp.getElementById('tmp_extra') != null) {
         this.picurl = doctmp.getElementById('tmp_extra').innerHTML;
-      }
-
-      if (doctmp.getElementById('tmp_pic') != null) {
- 
-        tsrc = doctmp.getElementById('tmp_pic').src;
-
-        this.picsrc = tsrc;
 
         this.draw_pic();
         this.changed = true;

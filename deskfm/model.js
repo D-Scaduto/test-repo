@@ -41,14 +41,14 @@ model.prototype.draw_main = function () {
      tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
      tmp = tmp + "</button>";
 
-//     if (buddah == true) {
+/*
        lbl = 'shop_btn';
        ocl = 'elle.set_shape(\"shop\");'
        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
        tmp = tmp + "</button>"; 
        tmp = tmp + "</span>";
-//     }
+*/     
      tmp = tmp + "</div>";
 
 

@@ -73,15 +73,20 @@ if (isset($_GET['lim'])) {
 
 $chunk_start = $chunk * $limit;
 
-  $con = mysql_connect($Server, $username, $password);
+  $mysqli = new mysqli($Server, $username, $password, $db_name);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+/* change character set to utf8 */
+if (!$mysqli->set_charset("utf8")) {
+    printf("Error loading character set utf8: %s\n", $mysqli->error);
+}
 
   $where = "";
-
-  if (!$con) {
-    echo('Could not connect: ' . mysql_error());
-  }
-
-  mysql_select_db($db_name, $con);
 
    if ($month != "null") {
        $where = $where . " and month(created_at) = $month ";
@@ -98,16 +103,14 @@ $chunk_start = $chunk * $limit;
   $sql= $sql . "  LIMIT " . $chunk_start . " , " . $limit;
   
   $rebar->sql = $sql;
-  $result = mysql_query($sql); 
+  $result = $mysqli->query($sql); 
 
-  $result2 = mysql_query('select found_rows()');
-  $row2 = mysql_fetch_row($result2);
-  $num_rows = $row2[0];
+  $num_rows = $result->num_rows;
   $rebar->dalist_len = $num_rows;
 
  
   $arr = array();
-  while($row = mysql_fetch_array($result)) {
+  while($row = $result->fetch_assoc()) {
 
     $foodo = new foo;
  
@@ -133,7 +136,6 @@ $chunk_start = $chunk * $limit;
      $arr[] = $foodo;
    }
    $rebar->dalist = $arr;
-
 
    echo json_encode($rebar); 
 

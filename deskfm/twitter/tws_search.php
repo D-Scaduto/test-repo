@@ -23,7 +23,6 @@ $bearer_token = $reply->access_token;
    public $source = "";
    public $stored = false;
 
-   public $dfdate = "";
    public $created_at = "";
    public $change_date = "";
 
@@ -42,7 +41,6 @@ $bearer_token = $reply->access_token;
 	 public $oldest_date = "";
 	 public $oldest_twid = "";
 	 public $dalist = "";
-
        
  }
 
@@ -70,7 +68,9 @@ $bearer_token = $reply->access_token;
 
 
  $reply = $cb->search_tweets($q,true);
+
  $len = sizeof($reply->statuses);
+
  $rebar->listlen = $len; 
 
  $rebar->newest_twid = $reply->statuses[0]->id_str;
@@ -79,23 +79,42 @@ $bearer_token = $reply->access_token;
  $rebar->oldest_twid = $reply->statuses[$len -1]->id_str;
 
  // get saved tweet ids in range into an array
-
+ 
   $con = mysql_connect("$Server", "$username", "$password");
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
   mysql_select_db($db_name, $con);
 
+  date_default_timezone_set('America/Denver');
+
   $sql="SELECT webit_id FROM dfm_webits where ";
-  $dt = new DateTime($rebar->newest_date);
-  $sql = $sql . " created_at <= '" . date_format($dt, 'Y-m-d 23:59:59 ') . "'";
-  $dt = new DateTime($rebar->oldest_date);
-  $sql = $sql . " and created_at >= '" . date_format($dt, 'Y-m-d 0:0:1') . "'";
-  $rebar->sql = $sql;
-  
-  $result = mysql_query($sql);
-  while($row = mysql_fetch_array($result)) {
+  $probs = false;
+  try {
+    $dt_new = new DateTime($rebar->newest_date);
+    $sql = $sql . " created_at <= '" . date_format($dt_new, 'Y-m-d 23:59:59 ') . "'";
+  }
+  catch (Exception $e) {
+    $probs = true;
+  }
+
+  try {
+    $dt_old = new DateTime($rebar->oldest_date);
+    $sql = $sql . " and created_at >= '" . date_format($dt_old, 'Y-m-d 0:0:1') . "'";
+  }
+  catch (Exception $e) {
+    $probs = true;
+  }
+
+  $rebar->sql = $sql; 
+  if ($probs == false) {
+    $result = mysql_query($sql);
+  }
+
+  if ($probs == false) {
+    while($row = mysql_fetch_array($result)) {
       $idarr[] =    $row['webit_id'];
+    }
   }
 
   $checklen = sizeof($idarr);
@@ -127,12 +146,16 @@ $bearer_token = $reply->access_token;
         $foodo->uname = $d->user->screen_name;
 
         $foodo->story  =  $d->text;
-	
-	$datetime = new DateTime($d->created_at);
-//	$datetime->setTimezone(new DateTimeZone('Europe/Zurich'));
 
-	$foodo->created_at = date_format($datetime, 'Y-m-d H:i:s');
- 
+        try {	
+	  $datetime = new DateTime($d->created_at);
+   //	  $datetime->setTimezone(new DateTimeZone('Europe/Zurich'));
+   	  $foodo->created_at = date_format($datetime, 'Y-m-d H:i:s');
+       }
+        catch (Exception $e) {
+          $probs = true;
+        }
+
       $foodo->linkurl = "";
       $foodo->embedurl = "";
 

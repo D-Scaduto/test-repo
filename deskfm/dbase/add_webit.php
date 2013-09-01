@@ -8,6 +8,7 @@ class foo {
    public $subcat;
    public $story;
    public $source;
+   public $listype;
    public $stored = true;
    public $created_at;
    public $change_date;
@@ -20,7 +21,6 @@ class foo {
 
 
 class bar { 
-   public $pobj;
    public $npsql;
    public $npres; 
    public $cpsrc;
@@ -29,6 +29,7 @@ class bar {
    public $insql;
    public $inres; 
    public $cognomen;
+   public $pobj;
 }
 
 
@@ -46,7 +47,7 @@ if (isset($_GET['uname'])) {
 
 $created_at = 'now()';
 if (isset($_GET['created_at'])) {
-   $created_at = $_GET['created_at'];
+   $created_at = "\'" . $_GET['created_at'] . "\'";
   }
 
 $cat = "";
@@ -59,14 +60,9 @@ if (isset($_GET['subcat'])) {
   $subcat = $_GET['subcat']; 
 }
 
-$picsrc = "null";
-if (isset($_GET['picsrc'])) {
-  $picsrc = $_GET['picsrc']; 
-}
-
-$picurl = "";
-if (isset($_GET['picurl'])) {
-  $picurl = $_GET['picurl']; 
+$picurl = "null";
+if (isset($_GET['picode'])) {
+  $picurl = $_GET['picode']; 
 }
 
 $linkurl = "";
@@ -103,8 +99,6 @@ if ($pid == 'null') {
    $pid = uniqid();
 }
 
-$picaddr = "";
-
      $con = mysql_connect($Server, $username, $password);
       mysql_select_db($db_name, $con);
       $np = false;
@@ -118,32 +112,31 @@ $picaddr = "";
         $ret->npres = $result;    
      }
 
-      if (($picsrc != "null" ) && ($picsrc != ""))  {
-	  $prefix = "/pics/tmp/";          
-	  $prepos = strpos($picsrc,$prefix);
+      $prefix = "tmpics/";
+      $prepos = strpos($picurl,$prefix);
+      if (substr($picurl,0,7) == $prefix) {
+ 
 	  $prepos = $prepos + strlen($prefix);
+	  $picslice = substr($picurl,$prepos);
 
-	  $picslice = substr($picsrc,$prepos);
-
-	  $cognomen = strrchr($picsrc,".");
+	  $cognomen = strrchr($picurl,".");
 	  $ret->cognomen = $cognomen;
 	  $picfile = $pid;
 	  if (strlen($cognomen < 7)) {
 	    $picfile = $pid . $cognomen; 
           }
-	  $cpsrc = "../../pics/tmp/" . $picslice;
+	  $cpsrc = "../../tmpics/" . $picslice;
 	  $ret->cpsrc = $cpsrc;
-	  $cpdest = "../../pics/keepers/" . $picfile;
+	  $cpdest = "../../pics/" . $picfile;
 	  $ret->cpdest = $cpdest;
 	  $res = copy ($cpsrc,$cpdest);
 	  $ret->cpres = $res;
 	  if ($res == true) {
-		  $picaddr = "/pics/keepers/" . $picfile;
-	  }
-	  $picurl = $picaddr;
+		  $picurl = "/pics/" . $picfile;
+          }
       }
 
-     $sql_ins = "insert into dfm_webits values ('" . $pid . "','" . $source . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . addslashes($story) .  "','" . $created_at . "', now() ,'" . $picurl . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
+     $sql_ins = "insert into dfm_webits values ('" . $pid . "','" . $source . "','" . $uname . "','" . $cat . "','" . $subcat . "','" . addslashes($story) .  "'," . $created_at . ", now() ,'" . $picurl . "' ,'" . $linkurl . "','" . $embedurl . "','',''  )";
 
      $ret->insql = $sql_ins;    
      $result = mysql_query($sql_ins);

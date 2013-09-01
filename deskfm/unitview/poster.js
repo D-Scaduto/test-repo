@@ -27,9 +27,7 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.story="";
    this.story_tmp;
    this.picurl ="";
-   this.picsrc = "";
 
-   this.dfdate = "";
    this.created_at = "";
    this.change_date = "";
 
@@ -515,15 +513,12 @@ poster.prototype.clear = function() {
      var linkcode = escape(this.linkurl);
      var storycode = escape(this.story);
      var embedcode = escape(this.embedurl);
+     var picode = escape(this.picurl);
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;
      if (this.pid != "") {
        prams = prams + "&pid="+this.pid;
-     }
-
-     if (this.created_at != undefined) {
-       prams = prams + "&created_at="+this.created_at;
      }
 
      if (this.cat_changed == true) {
@@ -537,11 +532,7 @@ poster.prototype.clear = function() {
        prams = prams + "&linkcode="+linkcode;
      }
      if (this.pic_changed == true) {
-        if (this.picsrc !=  "") {
-          prams = prams + "&picsrc="+ this.picsrc;
-	} else {
-	  prams = prams + "&picurl="+ this.picurl;
-	}
+	  prams = prams + "&picode="+ picode;
      }
      if (this.embed_changed == true) {
        prams = prams + "&embedcode="+embedcode;
@@ -559,7 +550,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-//     alert(url);
+ //    alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });
@@ -573,6 +564,8 @@ poster.prototype.clear = function() {
      var linkcode = escape(this.linkurl);
      var storycode = escape(this.story);
      var embedcode = escape(this.embedurl);
+     var picode = escape(this.picurl);
+
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;
@@ -593,11 +586,7 @@ poster.prototype.clear = function() {
        prams = prams + "&linkcode="+linkcode;
      }
      if (this.pic_changed == true) {
-        if (this.picsrc !=  "") {
-          prams = prams + "&picsrc="+ this.picsrc;
-	} else {
-	  prams = prams + "&picurl="+ this.picurl;
-	}
+	  prams = prams + "&picode="+ picode;
      }
      if (this.embed_changed == true) {
        prams = prams + "&embedcode="+embedcode;

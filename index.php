@@ -45,7 +45,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <!--script src="http://code.jquery.com/jquery-1.8.3.min.js"></script-->
 <!--script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script-->
 <script src="../lib/jquery-insight.js" type="text/javascript"></script>
-<script src="../lib/jquery.mtz.monthpicker.js" type="text/javascript"></script>
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
 <script src=deskfm/logoman.js type="text/javascript" ></script>
