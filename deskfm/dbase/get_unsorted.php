@@ -35,6 +35,7 @@ class pfoo {
    public $sql;
    public $dalist_len;
    public $dachunk;
+   public $listype;
    public $cat;
    public $subcat;
    public $month;
@@ -63,6 +64,8 @@ if (isset($_GET['chunk'])) {
 
 
 $rebar->dachunk = $chunk;
+$rebar->listype = "unsorted";
+
 $rebar->month = $month;
 $rebar->year = $year;
 
@@ -108,7 +111,6 @@ if (!$mysqli->set_charset("utf8")) {
   $num_rows = $result->num_rows;
   $rebar->dalist_len = $num_rows;
 
- 
   $arr = array();
   while($row = $result->fetch_assoc()) {
 

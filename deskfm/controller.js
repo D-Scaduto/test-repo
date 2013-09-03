@@ -39,6 +39,9 @@ viewer.prototype.next = function(px) {
 viewer.prototype.more = function() { 
 
    if (this.stats != undefined) {
+
+//alert(this.stats.listype);
+
          if (this.stats.listype == "webits") {
 
             amare.get_cat_list(this.stats);
@@ -53,36 +56,46 @@ viewer.prototype.more = function() {
 
          } 
     }
-
 }
 
-viewer.prototype.redraw_view = function(plistype) { 
+
+
+viewer.prototype.update_stat = function(pstat) { 
+   if (pstat != undefined) {
+	   this.stats= pstat;
+   }
+} 
+
+
+viewer.prototype.redraw_view = function() { 
    var start = 0;
 
-
-   if ((this.stats == null) || (this.stats == undefined)) {
-	   this.stats= amare.total_sorted;
-   }
-
+    if (this.stats == null) {
+        this.stats = amare.total_sorted;
+    }
          start = this.stats.last_chunk * da_limit;
 
 // alert("sl=" + this.stats.listype + " pl=" + plistype);
 
-         if ((this.stats.listype == "webits" ) && (plistype == "webits"))  {
+         if (this.stats.listype == "webits" )  {
 
-	        if ((this.stats.cat == "") || (this.stats.cal == "all")) {
-                    this.load_random_list();
+	         if (this.stats.cat == "") {
+                    this.load_list(start);
 		 } else {
 	            this.load_category_list(this.stats.cat,this.stats.subcat,start);
 		 }
 
-         } else if ((this.stats.listype == "unsorted") &&( plistype == "unsorted")) {
+         } else if (this.stats.listype == "unsorted") {
+
              var dt = new Object();
-	     dt.month = this.stats.month;
-	     dt.year = this.stats.year;
+             dt.month = "";
+             if (this.stats.month != undefined) {
+	       dt.month = this.stats.month;
+	       dt.year = this.stats.year;
+             }
 	     this.load_unsorted_list(dt,start);
 
-   	 } else if ((this.stats.listype == "people") && ( plistype == "people") ) {
+   	 } else if (this.stats.listype == "people") {
 
 	    this.load_group_list(this.stats.groupid,start);
 
@@ -241,7 +254,7 @@ viewer.prototype.redraw_rungs = function(trungdex) {
                  }
                }
 	     } else {
-		     alert(rd);
+//		     alert(rd);
 	     }
          }
       }

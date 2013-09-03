@@ -14,11 +14,11 @@ class foo {
 
 
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $dasql;
    public $peoplelist_len;
    public $dachunk;
    public $peoplelist;
+   public $listype;
  }
 
 
@@ -60,9 +60,11 @@ if (!$con) {
 
   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;
 
-  $rebar->dasql1 = $sql;
+  $rebar->dasql = $sql;
   $result = mysql_query($sql);
   $arr = array();
+
+  $rebar->listype="people";
 
   while($row = mysql_fetch_array($result)) {
     $foodo = new foo;

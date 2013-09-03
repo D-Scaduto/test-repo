@@ -13,7 +13,6 @@ function searcher (pmenuid) {
    this.cat = "";
    this.subcat = "";
    this.prodid = "";
-
 }
 
 
@@ -44,27 +43,14 @@ searcher.prototype.show = function() {
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
    tmp = tmp + "</button>";
 
-   
-
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
     
    } 
-   
-
 }
 
-
-searcher.prototype.change_shape = function() {
-   if (this.shape == "full") {
-      this.shape = "shrunk";
-   } else {
-      this.shape = "full";
-   }
-   this.show();
-}
 
 searcher.prototype.set_menued = function(ptog) {
 

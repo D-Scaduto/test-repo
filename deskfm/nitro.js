@@ -14,7 +14,7 @@ viewer.prototype.nitro_start = function(pway) {
     if (is_mobile == true) {
        this.metro_spd = 1000;
     } else {
-       this.metro_spd =1000;
+       this.metro_spd =500;
     }
     this.flip_card();    
 

@@ -51,9 +51,7 @@ viewer.prototype.load_search_list = function(pterms) {
 
 
 
-
 viewer.prototype.load_category_list = function(pcat,psubcat,pstart) {
-
 
    if (pcat != undefined) {
      this.cat = pcat;
@@ -122,11 +120,13 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
     var ok = false;
     var obj = null;
 
-     if (dtmon == undefined) {
+     if (dtmon.month == "") {
+
        this.stats = amare.total_unsorted;
+
      } else {
 
-       alert("month="+dtmon.month);
+//       alert("month="+dtmon.month);
        this.stats = amare.get_monthstat(dtmon);
        if (this.stats != null) {
          //alert(this.stats.listype);
@@ -145,7 +145,7 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
         ro = amare.unsortedlist[r];
         if (ro != undefined) {
             ok = false;
-	    if (dtmon == undefined) {
+	    if (dtmon.month == "") {
 		ok = true;
 	    } else {
 	//	    alert("m=" + dtmon.month + " y=" + dtmon.year);

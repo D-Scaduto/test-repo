@@ -95,12 +95,13 @@ sorter.prototype.show = function() {
 
 
 sorter.prototype.check_local = function() {
+
+   var dt = new Object;
+   dt.month="";
    if (krono.showing == true) {
-         var dt = krono.get_da_month();
-         daviewer.load_unsorted_list(dt);
-   }  else {
-         daviewer.load_unsorted_list();
-   }
+         dt = krono.get_da_month();
+   }  
+   daviewer.load_unsorted_list(dt);
 }
 
 sorter.prototype.check_feed = function() {

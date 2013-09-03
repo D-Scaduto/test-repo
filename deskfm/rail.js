@@ -85,7 +85,6 @@ viewer.prototype.draw_raildata = function() {
    var tmp = "";
    var moin = "";
    var mout = "";
-
    if (this.stats != null) {
 
       var lchunk = Math.floor(this.listdex/this.top_end);
@@ -144,8 +143,8 @@ viewer.prototype.draw_railbtns = function() {
 
 
        lbl = this.screen + "_prev_chunk";
-       ocl = "";
-       tmp = tmp + "<button  id='"+lbl+"' onmouseover='daviewer.nitro_start(\"back\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
+       ocl = this.varname + ".prev(5);";
+       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' onmouseover='' onmouseout='' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' width='20px' >";
        tmp = tmp + "</button>";
 
@@ -162,8 +161,8 @@ viewer.prototype.draw_railbtns = function() {
        tmp = tmp + "</button>";
 
        lbl = this.screen + "_next_chunk";
-       ocl = "";
-       tmp = tmp + "<button id='"+lbl+"' onmouseover='daviewer.nitro_start(\"fwd\");' onmouseout='daviewer.nitro_stop();' class='' style='width:30px;' >";
+       ocl = this.varname + ".next(5);";
+       tmp = tmp + "<button id='"+lbl+"'  onclick='"+ocl+"'  onmouseover='' onmouseout='' class='' style='width:30px;' >";
        tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
        tmp = tmp + "</button>";
   
@@ -315,9 +314,16 @@ viewer.prototype.draw_debug_rail = function() {
 
      if ((this.stats.cat != undefined )  && (this.stats.cat != "" )) {
        tmp = tmp + "<div class='spotd_off' >";
-       tmp = tmp + "cat=" + this.stats.cat + "subcat=" + this.stats.subcat;
+       tmp = tmp + "cat=" + this.stats.cat + " sub=" + this.stats.subcat;
        tmp = tmp + "</div>";
      }
+
+     if ((this.stats.sterms != undefined )  && (this.stats.sterms != "" )) {
+       tmp = tmp + "<div class='spotd_off' >";
+       tmp = tmp + "sterms=" + this.stats.sterms;
+       tmp = tmp + "</div>";
+     }
+
 
     if (this.stats.month != undefined) {
        tmp = tmp + "<div class='spotd_off' >";

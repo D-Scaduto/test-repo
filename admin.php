@@ -244,11 +244,15 @@ header('Content-type: text/html; charset=utf-8 ');
 	   
     amare.get_stats();
 
-    amare.get_products();
-    amare.get_providers();
+//    amare.get_products();
+//    amare.get_providers();
     amare.get_webits();
-    amare.get_people();
-    amare.get_unsorted("","");
+//    amare.get_people();
+
+    var dt = new Object();
+    dt.month = "";
+    dt.year="";
+    amare.get_unsorted(dt,true);
 
 
         if ($(this).width() < 601) {

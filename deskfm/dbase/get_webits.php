@@ -11,34 +11,37 @@ include '../../config/names.php';
    public $prodid;
    public $price;
    public $source;
-
    public $stored = true;
-
+   public $listype;
    public $created_at = "";
    public $change_date = "";
    public $picurl;
    public $linkurl;
    public $embedurl;
-   public $listype;
-
   }
 
 
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $dasql;
+   public $listype;
+   public $cat;
+   public $subcat;
+   public $sterms;
    public $dalist_len;
    public $dachunk;
    public $dalist;
  }
 
 
- $rebar = new bar;
+ $rebar = new bar();
  
 
 $limit = 1000;
 
 $chunk = 0;
+
+$rebar->listype = "webits";
+
 if (isset($_GET['chunk'])) {
   $chunk = $_GET['chunk'];
 }
@@ -58,6 +61,11 @@ if (isset($_GET['subcat'])) {
   $subcat = $_GET['subcat'];
 }
 
+$sterms = "";
+if (isset($_GET['sterms'])) {
+  $sterms = $_GET['sterms'];
+}
+
 $chunk_start = $chunk * $limit;
 
 $con = mysql_connect("$Server", "$username", "$password");
@@ -70,38 +78,44 @@ $con = mysql_connect("$Server", "$username", "$password");
   $sql = "";
   $sql = $sql . " select SQL_CALC_FOUND_ROWS * from dfm_webits  ";
 
-  if ($cat == "null") {
-    $where = " where cat != '' and subcat != ''  ";
-    $where = $where . " and cat != 'deleted' and cat != 'junk' ";
+
+  if ($sterms != "" ) {
+    $rebar->sterms = $sterms;
+    $where = $where . " where (" ;
+    $where = $where . " story like '%" . $sterms . "%'";
+    $where = $where . " or owner_id like '%" . $sterms . "%' )";
   } else {
-    $where = " where cat = '" . $cat . "'";
-    if ($subcat != "null") {
-      $where = $where . " and subcat ='" . $subcat . "'";
+    if ($cat == "null") {
+      $where = " where cat != '' and subcat != ''  ";
+      $where = $where . " and cat != 'deleted' and cat != 'junk' ";
+    } else {
+      $where = " where cat = '" . $cat . "'";
+      $rebar->cat = $cat;
+      if ($subcat != "null") {
+        $rebar->subcat = $subcat;
+        $where = $where . " and subcat ='" . $subcat . "'";
+      }
     }
   }
-  $sql = $sql . $where;
 
+  $sql = $sql . $where;
   
   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;
 
  // echo $sql . " \n <br> " ;
-  $rebar->dasql1 = $sql;
- 
+  $rebar->dasql = $sql;
   $result = mysql_query($sql);
 
   $result2 = mysql_query('select found_rows()');
   $row2 = mysql_fetch_row($result2);
   $num_rows = $row2[0];
   $rebar->dalist_len = $num_rows;
-
   $arr = array();
+
   while($row = mysql_fetch_array($result)) {
 
     $foodo = new foo;
- 
-  
     $foodo->listype = "webits";
-
     $foodo->pid =    $row['webit_id'];
     $foodo->picurl = $row['picurl'];
     $foodo->source = $row['source'];
