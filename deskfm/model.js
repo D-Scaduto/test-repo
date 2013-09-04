@@ -21,7 +21,7 @@ model.prototype.draw_main = function () {
      lbl = 'menu_btn';
      ocl = 'elle.set_shape(\"menu\");'
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
-     tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
+     tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
      tmp = tmp + "</button>";  
 
      tmp = tmp + "<span id='logo_spot' class='' style=''  >";

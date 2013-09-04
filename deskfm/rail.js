@@ -106,7 +106,7 @@ viewer.prototype.draw_raildata = function() {
   //    }
  
       $('#local_chunkdata').show();
-      tmp = lc + " x" + this.top_end;
+      tmp = lc + " of " + lchunks;
       $('#local_chunkdata').html(tmp);
 
       if (mchunks > lchunks ) {

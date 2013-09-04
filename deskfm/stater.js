@@ -340,17 +340,19 @@ stater.prototype.count_lwstats = function() {
 
 stater.prototype.count_lustats = function() {
     
-    this.total_unsorted.lnum = 0;
+   this.total_unsorted.lnum = 0;
+   var top = this.unsortedlist.length;
 
     var d=0;
-    for (d=0;d<this.unsortedlist.length;d++) {
+    for (d=0;d<top;d++) {
       if (this.unsortedlist[d] != undefined) {
-
-        var arr =  this.unsortedlist[d].created_at.split(" ");
-        var b =  arr[0];
-        var c = b.split("-");
-        var m = c[1]-1; 
-	var y = c[0];
+        var dp1 = this.unsortedlist[d].created_at.split(" ");
+        var dp2 = dp1[0].split("-");
+        var dt = new Date(dp2[0], dp2[1] - 1, dp2[2]);
+        var m = dt.getMonth();
+        var y = new String(dt.getFullYear());
+        y = y.substring(2);
+//alert("m="+m+" y="+y);
 
 	this.total_unsorted.lnum = this.total_unsorted.lnum + 1;
 

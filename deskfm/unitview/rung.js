@@ -6,7 +6,7 @@
 		 this.btnson = true;
 	 }
 
-      this.draw_btns();
+       this.draw_btns();
 
        if (this.listype == "people") {
 
@@ -21,7 +21,6 @@
             } else {
                this.draw_story();
             }
-
 
             this.draw_price();
 
@@ -60,7 +59,11 @@
 
           } else {
 
-            this.draw_name();
+            if (this.shape == "getname") {
+               this.get_name();
+            } else {
+               this.draw_name();
+            }
 
             if (this.shape == "getpic") {
                this.get_pic();

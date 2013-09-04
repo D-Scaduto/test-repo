@@ -124,11 +124,12 @@ sorter.prototype.save_set = function() {
 
     var len = daviewer.darungs.length;
     for (var i=0; i<len; i++) {
+        if (daviewer.darungs[i].postman != undefined) {
 	    daviewer.darungs[i].postman.add_webit();
+        }
     }
     
 }
-
 
 
 sorter.prototype.redraw_view = function(psetype) {

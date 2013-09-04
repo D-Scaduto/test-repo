@@ -63,6 +63,7 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.color = "black";
 
    this.changed = false;
+   this.name_changed = false;
    this.story_changed = false;
    this.pic_changed = false;
    this.link_changed = false;
@@ -187,11 +188,11 @@ poster.prototype.draw_btns = function() {
        var lbl = "";
        var ocl="";
 
-       if ((this.parvar == "nicky") || (daviewer.zoom == true)) {
-	 ocl = this.varname + ".change_shape()";
-       } else {
-	 ocl = this.varname + ".toggle_btnson()";
-       }
+         if (this.btnson == true) {
+	    ocl = this.varname + ".set_shape(\"\")";
+         } else {
+	   ocl = this.varname + ".toggle_btnson()";
+         }
 	 lbl = this.rungster + "_btns_btn";
          tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
          tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
@@ -290,6 +291,12 @@ poster.prototype.nav_btns = function() {
        var ocl="";
        var cls = "";
 
+       if (this.shape == "getname") {
+       	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getname();' >";  
+         tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
+         tmp = tmp + "</button>";  
+       } 
+ 
        if (this.shape == "getstory") {
        	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getstory();' >";  
          tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";

@@ -8,8 +8,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
-<!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" /-->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel=StyleSheet href='lib/jquery-ui-1.10.3.custom.css' type="text/css" media="screen,print" />
 
 <title>deskfm.com</title>
 
@@ -41,11 +40,10 @@ header('Content-type: text/html; charset=utf-8 ');
 
 </script>
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--script src="http://code.jquery.com/jquery-1.8.3.min.js"></script-->
-<!--script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script-->
-<script src="../lib/jquery-insight.js" type="text/javascript"></script>
+<script src="lib/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="lib/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+<script src="lib/jquery-insight.js" type="text/javascript"></script>
+
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -146,9 +144,9 @@ header('Content-type: text/html; charset=utf-8 ');
   echo "</script>";
 
   if (!isset($_GET['nonets'])) {
-    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
-    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
-    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
+//    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
+//    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
+//    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
 //    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
   }
 
@@ -180,7 +178,7 @@ header('Content-type: text/html; charset=utf-8 ');
 </div>
 
 <script type='text/javascript' >
-
+/*
   if (nonets == false) {
    FB.init({
       appId  : '191528434226668',
@@ -198,6 +196,7 @@ header('Content-type: text/html; charset=utf-8 ');
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
   }
+*/
    do_preload();
 //   init_months();
 
