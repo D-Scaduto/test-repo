@@ -1,10 +1,10 @@
+
 function subcat_provider() {
 
   this.sealist=[];
   this.init();
 
 }
-
 
 
 subcat_provider.prototype.init = function () {

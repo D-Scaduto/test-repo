@@ -1,10 +1,10 @@
+
 function cat_provider() {
 
   this.sealist=[];
   this.init();
 
 }
-
 
 
 cat_provider.prototype.init = function () {

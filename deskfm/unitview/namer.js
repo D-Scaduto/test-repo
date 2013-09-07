@@ -1,6 +1,4 @@
 
-
-
 poster.prototype.draw_name = function() {
 
    var tmp="";
@@ -11,7 +9,13 @@ poster.prototype.draw_name = function() {
    var tlink = "";
    var s = "";
 
-    if ((this.uname != "") && (this.uname != undefined))  {
+	ocl = this.varname+".set_shape(\"getname\");";
+        tmp = tmp + "<button  onclick='"+ocl+"' >";  
+        tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
+        tmp = tmp + "</button>";
+
+    if (this.uname != "")   {
+
       if (this.source == "twitter") {
 //       tlink =  = "http://twitter.com/Support/status/" + this.pid;
          tlink =  "http://twitter.com/" + this.uname;
@@ -19,14 +23,6 @@ poster.prototype.draw_name = function() {
        } else {
           tmp = tmp + this.uname;
        }
-    } else {
-
-          if (this.shape == "") {
-		ocl = this.varname+".set_shape(\"getname\");";
-                tmp = tmp + "<button  onclick='"+ocl+"' >";  
-       		tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-	        tmp = tmp + "</button>";
-	   }
 
     }
   
@@ -36,7 +32,6 @@ poster.prototype.draw_name = function() {
      }
      
 }
-
               
 
 poster.prototype.get_name = function() {
@@ -49,10 +44,10 @@ poster.prototype.get_name = function() {
     tmp =tmp + "</span>";
 
     var tval =  "";
-        if (this.pname != "") {
-          tval =  this.pname;
+        if (this.uname != "") {
+          tval =  this.uname;
         } else {
-          val =  this.tmp_name;
+          val =  this.uname_tmp;
         }
     tmp =tmp + "<br>";
  
@@ -84,12 +79,14 @@ poster.prototype.update_name = function() {
 
        if (obj != null) {
           var bill = document.getElementById(lbl).value;
-          this.story = bill;
+          this.uname = bill;
           this.changed = true;
 	  this.name_changed = true;
           this.change_btns(); 
           obj.focus();
       }
+
+      this.set_shape("");
 
 }
 
@@ -109,26 +106,28 @@ poster.prototype.toggle_getname = function() {
 poster.prototype.space_me = function() {
      var tmpstr = "";
      var lbl = "";
-        tmpstr = tmpstr + "<span class='spotd_off'  onclick='jesie.say_hi();'  >";
-        tmpstr = tmpstr + "are you "+ this.pname +" ?   ";
-        tmpstr = tmpstr + "</span>";
-        tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.say_hi();' > y </span>";
-        tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.amnesiate();' > n </span>";
-      lbl = this.rungster + '_name_spot';
+     var ocl = "";
+
+     tmpstr = tmpstr + "<span class='spotd_off'  onclick=''  >";
+     tmpstr = tmpstr + "are you "+ this.pname +" ?   ";
+     tmpstr = tmpstr + "</span>";
+ 
+     ocl = this.varname + ".draw_name();";   
+     tmpstr = tmpstr + "<span class='spotd_on' onclick='"+ocl+"' > y </span>";
+     ocl = this.varname + ".amnesiate();";   
+     tmpstr = tmpstr + "<span class='spotd_on' onclick='"+ocl+"' > n </span>";
+
+     lbl = this.rungster + '_name_spot';
      if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmpstr; 
      } 
 }
 
 
-poster.prototype.amnesiate = function(pspotid) {
-    if (pspotid != undefined) {
-      this.spotid = pspotid
-    }
+poster.prototype.amnesiate = function() {
 
-      this.pname="";
-      this.tmp_name="";
-      pname_box = null;
+      this.uname = "";
+      this.name_tmp = "";
 /*
      FB.logout(function(response) {
        //alert(" user is now logged out ");
@@ -139,31 +138,15 @@ poster.prototype.amnesiate = function(pspotid) {
 }
 
 
-poster.prototype.findme = function() {
 
-    var cooknum = 0;
-
-    if (document.getElementById('pname_box') != null) {
-      this.tmp_name = document.getElementById('pname_box').value;
-    }
-    if (this.tmp_name != "")  {
-
-      if (this.tmp_name != this.pname) {
-
-        this.pname = this.tmp_name;
-      }
-    }
-    this.draw_name();
-
-}
-
-poster.prototype.dejavu = function(pspotid) {
+poster.prototype.dejavu = function() {
 
      var tmpstr = "";
      var lbl = "";
+
      tmpstr = tmpstr + "been here before ?<br> ";
-     tmpstr = tmpstr + " <input  type='button' value='yes' onclick='jesie.whichone();'  >";
-     tmpstr = tmpstr + " <input  type='button' value='no' onclick='jesie.addName();'  >";
+     tmpstr = tmpstr + " <input  type='button' value='yes' onclick=''  >";
+     tmpstr = tmpstr + " <input  type='button' value='no' onclick=''  >";
 
       lbl = this.rungster + '_name_spot';
      if (document.getElementById(lbl)!=null) {

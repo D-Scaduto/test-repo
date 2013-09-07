@@ -429,20 +429,21 @@ stater.prototype.get_stat = function (pstat) {
 
 
 stater.prototype.get_catstat = function(tcat,tsubcat) {
+
      var ret = null;
 
-     if ( (tcat == "all") || (tcat ==""))  {
+     if ( (tcat == "all") || (tcat == ""))  {
 
 	  return this.total_sorted;
 
-     } else {
-    
+     } else {    
         for (var i=0; (i < amare.substats.length); i++) {
           if ((amare.substats[i].cat ==tcat) && (amare.substats[i].subcat == tsubcat)) {
               ret = amare.substats[i];
           }
         }
      }
+
      return ret;
 }
 
@@ -822,8 +823,7 @@ stater.prototype.add_unsaved = function(listobj) {
 
 
 
-
- stater.prototype.update_webit= function(pobj) {
+stater.prototype.update_webit = function(pobj) {
 
       var fnd = -1;
       var j = "";                    
@@ -845,18 +845,18 @@ stater.prototype.add_unsaved = function(listobj) {
 		// update webitlist 
 		ltype = "webits";
 		mdex = fnd;
-	 	 pobj.ltype = "webits";
-               this.webitlist[fnd] = pobj; 
-
+	 	pobj.ltype = "webits";
+                this.webitlist[fnd] = pobj; 
 
 	} else {
 
-           // if cat != ""
+           // if cat != "" and != junk 
 	   // add to webitlist 
-	   if (pobj.cat != "") {
-		  ltype = "webits";
+
+	   if ((pobj.cat != "") && (pobj.cat != "junk")) {
+		 ltype = "webits";
 		 pobj.ltype = "webits";
- 		mdex = this.webitlist.push(pobj); 
+ 		 mdex = this.webitlist.push(pobj); 
 	   }
 
            u = 0;
@@ -869,6 +869,7 @@ stater.prototype.add_unsaved = function(listobj) {
              }
 	     u = u + 1;
            }
+
            if (fnd != -1) {
 
 			// if cat != ""
@@ -885,7 +886,6 @@ stater.prototype.add_unsaved = function(listobj) {
 
 	   } else {
 
-	 
 		// if cat == "" add to unsorted list 
 		// else add to webitlist 
 		
@@ -922,7 +922,6 @@ stater.prototype.add_unsaved = function(listobj) {
      daviewer.update_one(pobj.pid,mdex,ltype);
      nicky.update(pobj.pid,mdex,ltype);
 
-
 /*
       if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
         fnd = -1;
@@ -945,7 +944,6 @@ stater.prototype.add_unsaved = function(listobj) {
 */
 
 }
-
 
 
  stater.prototype.del_webit= function(tpid) {

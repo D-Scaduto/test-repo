@@ -6,10 +6,12 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.parvar = tparvar;
    this.varname = tvarname;
    this.rung = trung;
+
    this.listype = "";
-   this.source = "deskfm";
    this.dadex=0;
+
    this.stored = false;
+   this.source = "deskfm";
  
    this.is_mini = false;
    if (bmini != undefined) {
@@ -47,18 +49,14 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.prodid = "";
    this.price = -1;
 
-   this.dacater = null;
-   this.subcater = null;
-   this.grouper = null; 
- 
    this.uname = "";
+   this.uname_tmp = "";
    this.groupid = "";
    this.emailaddr = "";
    this.facebookid = "";
    this.twitterid = "";
    this.googleid = "";
 
- 
    this.piczoom = false;
    this.color = "black";
 
@@ -346,7 +344,7 @@ poster.prototype.nav_btns = function() {
        if (this.changed == true) {
 
          ocl = this.varname + ".do_undo();";
-         lbl = this.spotid + "_" + this.rung + "_undo_btn";
+         lbl = this.rungster + "_undo_btn";
          tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"' >";
 //              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
          tmp = tmp + "undo";
@@ -471,7 +469,7 @@ poster.prototype.do_undo = function() {
    if (this.pid == "") {
      this.clear();
    } else {
-     this.set_ppid(this.dadex);
+     this.set_ppid(this.dadex,this.listype);
    }
    this.changed = false;
    this.redraw_rung();
@@ -506,7 +504,7 @@ poster.prototype.clear = function() {
    this.prodid = "";
    this.price = -1;
    this.linkurl ="";
-   this.urls = [];
+   this.embedurl = "";
    this.changed = false;
    this.shape="";
    this.redraw_rung();
@@ -572,7 +570,6 @@ poster.prototype.clear = function() {
      var storycode = escape(this.story);
      var embedcode = escape(this.embedurl);
      var picode = escape(this.picurl);
-
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;

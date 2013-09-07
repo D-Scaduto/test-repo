@@ -10,22 +10,22 @@ function webit(tpid) {
 
    this.pid = "";
    if (tpid != undefined) {
-	   this.pid =tpid;
+      this.pid = tpid;
    }
   
-   this.listype="";
+   this.listype = "";
    this.source = "deskfm";
-   this.stored=false;
+   this.stored = false;
 
    this.created_at = "";
    this.change_date = "";
 
-   this.uname="";
+   this.uname = "";
    this.groupid = "";
-   this.picurl="";
-   this.cat ="";
-   this.subcat ="";
-   this.story="";
+   this.picurl = "";
+   this.cat = "";
+   this.subcat = "";
+   this.story = "";
    this.prodid = "";
    this.price = -1;
 
@@ -33,12 +33,6 @@ function webit(tpid) {
    this.linkurl ="";
    this.embedurl ="";
 
-   this.color = "black";
-//   this.showing=false;
-//   this.changed=false;
-//   this.shape = "";
-//   this.rung = "";
-//
 }
 
 

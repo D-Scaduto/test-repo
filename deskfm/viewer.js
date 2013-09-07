@@ -141,7 +141,7 @@ viewer.prototype.draw_view = function() {
 	   if (this.rail_showing == false) {
 	      this.draw_rail();
 	   } else {
-		   this.draw_raildata();
+	      this.draw_raildata();
 	   }
        }
     }

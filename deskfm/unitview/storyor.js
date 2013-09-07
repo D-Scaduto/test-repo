@@ -97,17 +97,13 @@ poster.prototype.get_story = function() {
 
 poster.prototype.update_story = function() {
 
-     var tspot = this.rung;
      var lbl = "";
      var obj = null;
-     lbl = this.spotid;
-     if (tspot != undefined) {
-       lbl = lbl +'_'+tspot;
-     }
-     lbl = lbl + '_story_area';
+     var tmpstr = "";
+     
+     lbl = this.rungster + '_story_area';
 
-        var tmpstr="";
-       obj = document.getElementById(lbl);
+      obj = document.getElementById(lbl);
 
        if (obj != null) {
           var bill = document.getElementById(lbl).value;
@@ -120,8 +116,6 @@ poster.prototype.update_story = function() {
       }
 
 }
-
-  
 
 
 poster.prototype.toggle_getstory = function() {

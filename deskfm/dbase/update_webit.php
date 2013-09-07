@@ -145,10 +145,9 @@ $con = mysql_connect($Server, $username, $password);
      }
      $change_date = "now()";	
      $sql_upd = $sql_upd . "change_date = " . $change_date;
-    
 
 
-  if ($some == true) {
+    if ($some == true) {
       $sql_upd = "update dfm_webits set " . $sql_upd;
       $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
     }
@@ -157,7 +156,6 @@ $con = mysql_connect($Server, $username, $password);
     
     $result = mysql_query($sql_upd);
     //  echo $result . " \n <br> ";
-  }
 
    $ret->sql = $sql_upd;    
    $ret->resql = $result;    

@@ -3,15 +3,15 @@
 function sharer (pspotid) {
 
    this.spotid = pspotid;
-   this.varname="nicky";
+   this.varname = "nicky";
    this.showing = false;
    this.shape = "";  
    this.menued = false;
 
-   this.networks_showing = true;
-
    this.newster = new poster("share",0,this.varname,this.varname +".newster",false); 
    this.newster.btnson = true;
+
+   this.networks_showing = true;
 
 }
 
