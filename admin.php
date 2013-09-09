@@ -4,9 +4,9 @@ header('Content-type: text/html; charset=utf-8 ');
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
+
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
-<link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href='lib/jquery-ui-1.10.3.custom.css' type="text/css" media="screen,print" />
 
@@ -26,8 +26,8 @@ header('Content-type: text/html; charset=utf-8 ');
   var amare = null;  //stater
   var sal = null;    //logoman
   var diego = null;  //header
-  var mac  = null;   //farmer
-  var elle = null;   //model
+  var mac = null;   //farmer
+  var moe = null;    //feeder 
   var krono = null;  //calendor 
 
   var da_limit=1000;
@@ -43,7 +43,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src="lib/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="lib/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 <script src="lib/jquery-insight.js" type="text/javascript"></script>
-
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -70,10 +69,8 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/rail.js type="text/javascript" ></script>
 <script src=deskfm/nitro.js type="text/javascript" ></script>
 
-<script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
-<script src=deskfm/suggester.js type="text/javascript" ></script>
 <script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/cat_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
@@ -90,6 +87,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/sorter.js type="text/javascript" ></script>
+<script src=deskfm/feeder.js type="text/javascript" ></script>
 <script src=deskfm/manager.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
@@ -102,7 +100,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
  
-
 </head>
 
 
@@ -114,10 +111,10 @@ header('Content-type: text/html; charset=utf-8 ');
 
   include 'deskfm/browsers.php';
   echo "<script  type=\"text/javascript\" > ";
-  if (is_mobile()) {
-   
+  if (is_mobile()) {   
     echo " is_mobile = true; " ;
   }
+
   if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
     echo " is_ie = true; " ;
     echo " is_mobile = true; ";
@@ -152,30 +149,19 @@ header('Content-type: text/html; charset=utf-8 ');
 
 ?>
 
-
-<script type="text/javascript" >
-
-  
- 
-</script>
-
-<div id='top_line' style='background-color:whiite;padding:1px;' >
+<div id='top_line' style='' >
 </div>
 
-<div data-role="page">
-
-<div id='main_spot' data-role="cbheader" style='background-color:white;padding:10px;' >
+<div id='outer_spot' style='' class='outer_menu' >
+<span id='menu_spot' style='float:left;' >
+</span>
+<span id='rail_spot' style='float:right;vertical-align:top;' >
+</span>
 </div>
 
-<div style='clear:left;' ></div>
+<span id='main_view'  style='display:inline-block;' >
+</span>
 
-<div id='debug_spot' class='' style='padding:2px;' >
-</div>
-
-<div id='main_view'  data-role="cbcontent" class='' style='padding:10px;' >
-</div>
-
-</div>
 
 <script type='text/javascript' >
 /*
@@ -198,13 +184,11 @@ header('Content-type: text/html; charset=utf-8 ');
   }
 */
    do_preload();
-//   init_months();
 
    buddah=true;
 
    krono = new calendor("cal_spot");
    amare = new stater();
-   elle = new model();
    daviewer = new viewer("main_view","daviewer");
    
    jesie = new namer("name_spot");
@@ -220,26 +204,16 @@ header('Content-type: text/html; charset=utf-8 ');
 
 	   sal = new logoman("logo_spot");
    	   store = new shoper("shop_spot");
-
 	   mac = new sorter("sort");
+	   moe = new feeder("feed");
 	   cater = new categor("browse");
-	   
 	   wanda = new searcher("search");
-
 	   nicky = new sharer("share_spot");
-	   
            joe = new manager("contact");
 
 	   diego = new header("menu_spot");
 	   diego.shape = "full";
-	   diego.add_mainspot("browse","cater");
-//           diego.add_mainspot("contact","joe");
-	   diego.add_mainspot("sort","mac");
-//	   diego.add_mainspot("manage","mac");
-	   diego.main_shape = "browse";
-	 
-    elle.shape="";
-    elle.draw_main();
+           diego.show();
 	   
     amare.get_stats();
 
@@ -254,63 +228,27 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_unsorted(dt,true);
 
 
-        if ($(this).width() < 601) {
-	      is_mobile = true;
-	} 
-
-
-    $(window).resize(function() {
-
-      var width = $(this).width();
-      var height = $(this).height();
-
-        if (width < 601) {
-          if (is_mobile != true) {
-		is_mobile = true;
- 		if ($('#outer_menu').hasClass('top_menu') == false) {
-		  $('#outer_menu').addClass('top_menu');
-		  $('#outer_menu').removeClass('flying_menu');
-		  window.scroll(0,0); 
-		}	
-	  }
-	
-        } else {
-  	   if ((is_mobile == true) && (is_ie == false)) {
-		   is_mobile = false;
-	   }
-	  
-	}
-    });
-
-
     $(window).scroll(function() {
-    
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#outer_menu').hasClass('top_menu') == false) {
-		$('#outer_menu').addClass('top_menu');
-		$('#outer_menu').removeClass('flying_menu');
+	    if ($('#outer_spot').hasClass('regular_top') == false) {
+		$('#outer_spot').addClass('regular_top');
+		$('#outer_spot').removeClass('flying_top');
 	    }
 	} else {
           if (is_mobile == false) {
-	    if ($('#outer_menu').hasClass('flying_menu') == false) {
-		$('#outer_menu').addClass('flying_menu');
-		$('#outer_menu').removeClass('top_menu');
+	    if ($('#outer_spot').hasClass('flying_top') == false) {
+		$('#outer_spot').addClass('flying_top');
+		$('#outer_spot').removeClass('regular_top');
 	    }
 	  }
 	}
-      
     });
- 
 
 
 </script>
 
-
-
-
-
-
 </body>
+
 </html>
 
 

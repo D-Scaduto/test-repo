@@ -5,7 +5,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
-<link rel=StyleSheet href=style.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
 <link rel=StyleSheet href='lib/jquery-ui-1.10.3.custom.css' type="text/css" media="screen,print" />
 
@@ -25,7 +24,6 @@ header('Content-type: text/html; charset=utf-8 ');
   var sal = null;    //logoman
   var diego = null;  //header
   var mac  = null;   //farmer
-  var elle = null;   //model
   var krono = null;  //calendor 
 
   var da_limit=1000;
@@ -67,7 +65,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/rail.js type="text/javascript" ></script>
 <script src=deskfm/nitro.js type="text/javascript" ></script>
 
-<script src=deskfm/model.js type="text/javascript" ></script>
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
 <script src=deskfm/suggester.js type="text/javascript" ></script>
@@ -92,7 +89,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
-
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 </head>
@@ -148,16 +144,18 @@ header('Content-type: text/html; charset=utf-8 ');
   }
 ?>
 
-<div id='top_line' style='background-color:white;padding:1px;' >
+<div id='top_line' style='' >
 </div>
 
-<div id='main_spot' style='background-color:white;padding:10px;' >
+<div id='outer_spot' style='' class='outer_menu' >
+<span id='menu_spot' style='float:left;' >
+</span>
+<span id='rail_spot' style='float:right;vertical-align:top;' >
+</span>
 </div>
 
-<div style='clear:left;' ></div> 
-
-<div id='main_view' class='' style='padding:10px;'  >
-</div>
+<span id='main_view'  style='display:inline-block;' >
+</span>
 
 
 <script type='text/javascript' >
@@ -191,21 +189,15 @@ header('Content-type: text/html; charset=utf-8 ');
 	krono = new calendor("krono");
 
         store = new shoper("shop_spot");
-	
         cater = new categor("browse");
 	wanda = new searcher("search");
-//	nicky = new sharer("share");
 	nicky = new sharer("share_spot");
 
         amare = new stater();
-        elle = new model();
 
 	diego = new header("menu_spot");
-	diego.shape = "full";
-	diego.add_mainspot("browse","cater");
-//	diego.add_mainspot("search","wanda");
-//	diego.add_mainspot("share","nicky");
-	diego.main_shape = "browse"; 
+	diego.shape = "browse";
+        diego.show();
 
         daviewer = new viewer("main_view","daviewer");
 
@@ -219,60 +211,29 @@ header('Content-type: text/html; charset=utf-8 ');
          
        }
 
-	elle.shape="menu";
-	elle.draw_main();
-
     amare.get_stats();
     amare.get_providers();
     amare.get_products();
     amare.get_webits();
 
-        if ($(this).width() < 601) {
-	      is_mobile = true;
-	} 
-
-
-    $(window).resize(function() {
-
-      var width = $(this).width();
-      var height = $(this).height();
-        if (width < 601) {
-          if (is_mobile != true) {
-	      is_mobile = true;
-	  }
-	 
-        } else {
-          if ((is_mobile == true) && (is_ie == false)) {
-		is_mobile = false;
-		if ($('#outer_menu').hasClass('top_menu') == false) {
-		  $('#outer_menu').addClass('top_menu');
-		  $('#outer_menu').removeClass('flying_menu');
-	  	  window.scroll(0,0); 
-	        }
-	  }
-        }
-    });
-
 
     $(window).scroll(function() {
-
-     
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#outer_menu').hasClass('top_menu') == false) {
-		$('#outer_menu').addClass('top_menu');
-		$('#outer_menu').removeClass('flying_menu');
+	    if ($('#outer_spot').hasClass('regular_top') == false) {
+		$('#outer_spot').addClass('regular_top');
+		$('#outer_spot').removeClass('flying_top');
 	    }
 	} else {
-	    if (is_mobile == false) {
-	      if ($('#outer_menu').hasClass('flying_menu') == false) {
-		$('#outer_menu').addClass('flying_menu');
-		$('#outer_menu').removeClass('top_menu');
-	      }
+          if (is_mobile == false) {
+	    if ($('#outer_spot').hasClass('flying_top') == false) {
+		$('#outer_spot').addClass('flying_top');
+		$('#outer_spot').removeClass('regular_top');
 	    }
+	  }
 	}
-      
     });
- 
+
+
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 
