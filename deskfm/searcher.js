@@ -34,8 +34,8 @@ searcher.prototype.show = function() {
 
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
+//     ocl= ocl + this.varname + ".check_central();";
      tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' value='' >";
-
    
    lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";

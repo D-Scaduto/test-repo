@@ -27,9 +27,9 @@ categor.prototype.show = function() {
       if (this.cat == "all") { 
 
         lbl = 'who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >who</a>";
-        tmp = tmp +"<ul  style='width:350px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
+  	tmp = tmp +"<li style='vertical-align:top;'  ><a >who</a>";
+        tmp = tmp +"<ul  style='' >";
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -38,9 +38,9 @@ categor.prototype.show = function() {
 	tmp = tmp + "</li></ul>";
 
         lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >what</a>";
-        tmp = tmp +"<ul  style='width:350px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
+  	tmp = tmp +"<li style='vertical-align:top;'  ><a >what</a>";
+        tmp = tmp +"<ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -49,9 +49,9 @@ categor.prototype.show = function() {
 	tmp = tmp + "</li></ul>";
 
         lbl = 'why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >why</a>";
-        tmp = tmp +"<ul  style='width:350px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
+  	tmp = tmp +"<li style='vertical-align:top;'  ><a >why</a>";
+        tmp = tmp +"<ul  style='' >";
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -59,9 +59,9 @@ categor.prototype.show = function() {
         tmp = tmp +"</ul></li></ul>";
 
         lbl = 'how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >how</a>";
-        tmp = tmp +"<ul  id='"+lbl+"' style='width:350px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
+  	tmp = tmp +"<li  style='vertical-align:top;' ><a >how</a>";
+        tmp = tmp +"<ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -70,16 +70,10 @@ categor.prototype.show = function() {
    
     } else {
 
-        lbl = 'cat_undo_btn';
-        ocl = "cater.set_cats(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
-        tmp=tmp+"</button>";
-      
 	lbl = this.cat + '_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >"+ this.cat + "</a>";
-        tmp = tmp +"<ul  id='"+lbl+"' style='width:350px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
+  	tmp = tmp +"<li style='vertical-align:top;'  ><a >"+ this.cat + "</a>";
+        tmp = tmp +"<ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist(this.cat);
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='"+this.cat+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";

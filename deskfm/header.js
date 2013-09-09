@@ -1,100 +1,155 @@
 
 
+function header () {
 
-function menu_item (pbtn,pvar) {
-  this.btn = "";
-  this.varname = "";
-  if (pbtn != undefined) {
-    this.btn = pbtn;
-  }
-  if (pvar != undefined) {
-    this.varname = pvar;
-  }
-}
-
-
-function header (pspotid) {
+    this.shape = "";  // menu, search, share, shop, sort  
+    this.shapes = ['menu','search','share','sort','shop','feed'];
+}	
  
-   this.spotid = pspotid;
-   this.varname = "diego";
-   this.showing = false;
-   this.shape = "full";
 
-   this.mainmenu = [];
-   this.main_shape = "";
-   this.was_shape = "";
-
-}
-
-header.prototype.show = function() {
+header.prototype.show = function () {
 
      var tmp = "";
      var lbl = "";
      var ocl = "";
-     var omo = "";
-     var omt = "";
-     var cls = "";
 
-     if (this.mainmenu.length <2) {
-	     this.shape = "";
-     }
+     tmp = tmp + "<div class='top_left' style='' >";
 
+     lbl = 'browse_btn';
+     ocl = 'diego.set_shape(\"browse\");'
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
+     tmp = tmp + "</button>";  
 
-     if (this.shape == "full") {
-       lbl = "menu_btns";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='' >";
-       tmp = tmp + "</div>";
-     }
+     tmp = tmp + "<span id='logo_spot' class='' style=''  >";
+     tmp = tmp + "</span>";
 
-       lbl = "menu_bar";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='position:relative;background-color:silver;' >";
-       tmp = tmp + "</div>";
+     tmp = tmp + "<span class='' style='float:right;' >";
 
+     lbl = 'search_btn';
+     ocl = 'diego.set_shape(\"search\");'
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;' >";
+     tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
+     tmp = tmp + "</button>"; 
 
-       lbl = "menu_debug";
-       tmp = tmp + "<div id='"+lbl+"' class='' style='' >";
-       tmp = tmp + "</div>";
-    
-     lbl = this.spotid;
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
+     lbl = 'share_btn';
+     ocl = 'diego.set_shape(\"share\");'
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+     tmp = tmp + "</button>";
+
+   if (buddah == true) {
+       lbl = 'sort_btn';
+       ocl = 'diego.set_shape(\"sort\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+       lbl = 'feed_btn';
+       ocl = 'diego.set_shape(\"feed\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+ }
+/*
+       lbl = 'shop_btn';
+       ocl = 'diego.set_shape(\"shop\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>";
+*/     
+ 
+       tmp = tmp + "</span>";
+      tmp = tmp + "</div>";
+
+     tmp = tmp + "<div  style='clear:left;' ></div>";
+
+     tmp = tmp + "<div id='search_spot' class='' style=''  >";
+     tmp = tmp + "</div>";
+ 
+     tmp = tmp + "<div id='browse_spot' class='inner_menu' style=''  >";
+     tmp = tmp + "</div>";
+
+     tmp = tmp + "<div id='shop_spot' class='' style=''  >";
+     tmp = tmp + "</div>";
+
+     tmp = tmp + "<div id='sort_spot' class='' style=''  >";
+     tmp = tmp + "</div>";
+
+     tmp = tmp + "<div id='feed_spot' class='' style=''  >";
+     tmp = tmp + "</div>";
+
+       var pobj = document.getElementById('menu_spot');
+       if (pobj != null) {
           pobj.innerHTML = tmp;
-          this.showing = true;
-          this.draw_mainmenu();
-	  if (debug == true) {
-		  this.draw_debug();
-	  }
-     }
 
+ //       $('#share_btn').button();
+//	  $('#search_btn').button();
+
+  	  sal.show();
+
+	  if (this.shape == "browse") {
+	    	cater.show();
+	  } else if (this.shape == "search") {
+		wanda.show();
+	  } else if (this.shape == "share") {
+		nicky.show();
+	  } else if (this.shape == "shop") {
+		store.show();
+	  } else if (this.shape == "sort") {
+		mac.show();
+	  } else if (this.shape == "feed") {
+		moe.show();
+	  }
+       }
 }
 
+
+
+header.prototype.set_shape = function (pshape) {
+
+	if (pshape != undefined) {
+
+            if (this.shape != pshape) {
+	       this.shape = pshape;
+  	       // hide all non shapes
+	       // show shape
+               this.show();
+            } else {
+               if (this.shape == "browse") {
+                   cater.set_cats("all");
+               }
+            }
+	}
+}
 
 
 header.prototype.redraw_view = function (psetype,pchunk) {
 
     if (psetype == "webits") { 
-        if (this.main_shape == "browse") {
+        if (this.shape == "browse") {
            cater.redraw_view(pchunk);
 	}
     }
 
     if (psetype == "people") { 
-       if (this.main_shape == "contact") {
+       if (this.shape == "contact") {
          joe.redraw_view(pchunk);
        }
     } 
 
-    if (this.main_shape == "sort") { 
-
       if (psetype == "unsaved") { 
-        mac.redraw_view("unsaved",pchunk);
+        if (this.shape == "feed") { 
+          moe.redraw_view("unsaved",pchunk);
+        } 
       }
 
       if (psetype == "unsorted") { 
-        mac.redraw_view("unsorted",pchunk);
+         if (this.shape == "sort") { 
+          mac.redraw_view("unsorted",pchunk);
+         }  
       }
-
-    }
 
     if (wanda.sterms != "") {
         wanda.check_local();
@@ -104,194 +159,4 @@ header.prototype.redraw_view = function (psetype,pchunk) {
 
 
 
-header.prototype.draw_mainmenu = function() {
-     var tmp = "";
-     var lbl = "";
-     var ocl = "";
-     var omo = "";
-     var omt = "";
-     var cls = "";
-     var i =0;
-     var s = "";
-
-     if (this.shape == "full") {
-      tmp = tmp + "<div id='mainmenu_top' >";
-       for (i=0;i<this.mainmenu.length;i++) {
-	       if (this.mainmenu[i] != undefined)  {
-                 lbl = this.mainmenu[i].btn + "_btn";
-                 ocl = this.varname + ".toggle_mainitem("+i+");";
-                 tmp = tmp + "<input type='radio' name='mainmenu_top' id='"+lbl+"' onclick='"+ocl+"' style='' ";
-		 if (this.mainmenu[i].btn == this.main_shape) {
-                   tmp = tmp + " checked='checked' ";
-		 }
-		 tmp = tmp + " >";
-                 tmp = tmp + "<label for='"+lbl+"' style='' >"+this.mainmenu[i].btn+"</label>";
-	       }
-       }
-       tmp = tmp + "</div>";
-
-       lbl = "menu_btns";
-       pobj = document.getElementById(lbl);
-       if ( pobj != null) {
-          pobj.innerHTML = tmp;	 
-	  $("#mainmenu_top").buttonset();
-       }
-     }
-
-     for (i=0;i<this.mainmenu.length;i++) {
-		s = this.mainmenu[i].varname + ".set_menued(true);";
-		eval(s) 
-	  }
-
-     if (this.main_shape != "") {
-            this.show_mainitem(this.main_shape);
-     }
-       
-}
-
-
-header.prototype.change_mainitem = function(wdex) {
-     var s = "";
-     s = this.mainmenu[wdex].varname + ".change();";
-     eval(s) 
-}
-
-
-header.prototype.toggle_mainitem = function(wdex) {
-	
-     var s = "";
-     if (wdex != undefined) {
-	     if (this.mainmenu[wdex] != undefined) {
-		     if (this.main_shape != this.mainmenu[wdex].btn ) {
-		       if (this.was_shape != "") {
-	  		   this.hide_mainitem(this.was_shape);
-		       }
-		       this.was_shape = this.main_shape;
- 		       this.main_shape = this.mainmenu[wdex].btn;
-                       this.show_mainitem(this.main_shape);
-	             }
-	     }
-     }
- 
-}
-
-header.prototype.show_mainitem = function(pbtn) {
-    var fspot = -1;
-    var s = "";
-     for (i=0;i<this.mainmenu.length;i++) {
-       if (this.mainmenu[i].btn == pbtn ) {
-         fspot = i;
-       }
-     }
-// alert("p=" + pbtn + " f=" + fspot);
-   if (fspot != -1) {
-	   if (this.main_shape == this.mainmenu[fspot].btn) {
-	     s = this.mainmenu[fspot].varname +".change();";
-	   } else {
-	     s = this.mainmenu[fspot].varname +".show();";
-           }
-           eval(s);
-   }
-   if (debug == true) {
-		  this.draw_debug();
-  } 
-}
-
- 
-header.prototype.hide_mainitem = function(pbtn) {
-    var fspot = -1;
-    var s = "";
-     for (i=0;i<this.mainmenu.length;i++) {
-       if (this.mainmenu[i].btn == pbtn ) {
-         fspot = i;
-       }
-     }
-   if (fspot != -1) {
-     s = this.mainmenu[fspot].varname +".hide();";
-     eval(s);
-   }
-}
-
-
-header.prototype.add_mainspot = function(pbtn,pvar) {
-
-    var fspot = -1;
-     for (i=0;i<this.mainmenu.length;i++) {
-       if (this.mainmenu[i].btn == pbtn ) {
-         fspot = i;
-       }
-     }
-   if (fspot != -1) {
-      this.mainmenu[fspot].varname = pvar;
-   } else {
-      var m = new menu_item(pbtn,pvar)
-      this.mainmenu.push(m);
-   }
-
-}
-
-
-header.prototype.del_mainspot = function(pbtn) {
-    var fspot = -1;
-     for (i=0;i<this.mainmenu.length;i++) {
-       if (this.mainmenu[i].btn == pbtn ) {
-         fspot = i;
-       }
-     }
-    if (fspot != -1) {
-      this.mainmenu.splice(fspot,1);
-    }
-}
-
-
-
-header.prototype.toggle_shape = function() {
-
-   if (this.shape == "full") {
-     this.shape = "shrunk";
-   } else {
-     this.shape = "full";
-   }
-   this.show();
-
-}
-
-
-header.prototype.toggle = function() {
-   if (this.showing == true) {
-      this.hide();
-   } else {
-      this.show();
-   }
-}
-
-header.prototype.hide = function() {
-     var tmp = "";
-     var lbl = "";
-
-     lbl = this.spotid;
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-     }
-
-     this.showing = false;
-}
-
-
-header.prototype.draw_debug = function() {
-     var tmp = "";
-     var lbl = "";
-
-     tmp = tmp + " main=" + this.main_shape;
-     tmp = tmp + " was=" + this.was_shape;
-
-     lbl = "menu_debug";
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-     }
-
-     this.showing = false;
-}
 

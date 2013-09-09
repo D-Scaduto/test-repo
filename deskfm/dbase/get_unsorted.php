@@ -66,7 +66,7 @@ if (isset($_GET['chunk'])) {
 $rebar->dachunk = $chunk;
 $rebar->listype = "unsorted";
 
-$rebar->month = $month;
+$rebar->month = $month -1;
 $rebar->year = $year;
 
 $limit = 1000;

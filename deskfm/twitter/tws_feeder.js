@@ -2,13 +2,11 @@
 
 function tw_feeder () { 
 
-   this.varname = "mac.twfeed";
-
+   this.varname = "moe.twfeed";
    this.sterms = "standing desk";
-  
+
    this.newest_date = "";
    this.newest_twid = "";
-
    this.oldest_date = "";
    this.oldest_twid = "";
 
@@ -34,7 +32,7 @@ tw_feeder.prototype.draw_btns = function() {
   	 tmp = tmp + ":";
          tmp = tmp + dt.getMinutes();
          tmp = tmp + "</span>";
-         tmp = tmp + "<button id='twitter_feed_btn' onclick='mac.twfeed.next_set();'  >";
+         tmp = tmp + "<button id='twitter_feed_btn' onclick='moe.twfeed.next_set();'  >";
          tmp = tmp + "newer";
          tmp = tmp + "</button>";
          tmp = tmp + "<br>"
@@ -50,16 +48,14 @@ tw_feeder.prototype.draw_btns = function() {
   	 tmp = tmp + ":";
          tmp = tmp + dt.getMinutes();
          tmp = tmp + "</span>";
-         tmp = tmp + "<button id='twitter_feed_btn' onclick='mac.twfeed.prev_set();'  >";
+         tmp = tmp + "<button id='twitter_feed_btn' onclick='moe.twfeed.prev_set();'  >";
          tmp = tmp + "older";
          tmp = tmp + "</button>";
       }	 
       tmp = tmp + "</span>";
 
-   
-
      if (this.oldest_twid != "") {
-       ocl =  "mac.save_set();";
+       ocl =  "moe.save_set();";
        tmp = tmp + "<button id='twfeed_saveset_btn' onclick='"+ocl+"'  >";
        tmp = tmp + " save set ";
        tmp = tmp + "</button>";
@@ -71,6 +67,43 @@ tw_feeder.prototype.draw_btns = function() {
    } 
 
 }
+
+
+tw_feeder.prototype.get_live_tweets  = function (qry_str) {
+     var qe = "";
+     if (qry_str != undefined) {
+	this.sterms = qry_str;
+     } 
+  
+     qe = "?q=" + escape(this.sterms);
+
+
+     var count = 100;
+     if (is_mobile == true) {
+       count=10;
+     }
+     qe = qe + "&count=" + count;
+
+     var url='';
+     url = 'deskfm/twitter/tws_search.php' + qe;
+
+//     alert(url);
+ 
+     $.getJSON(url,function(json) {
+
+        moe.twfeed.newest_twid = json.newest_twid;
+	moe.twfeed.newest_date = json.newest_date;
+        moe.twfeed.oldest_twid = json.oldest_twid;
+	moe.twfeed.oldest_date = json.oldest_date;
+
+	moe.twfeed.draw_btns();
+
+        amare.add_unsaved(json);
+
+     });   
+}
+
+
 
 
 
@@ -98,12 +131,12 @@ tw_feeder.prototype.next_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        mac.twfeed.newest_twid = json.newest_twid;
-	mac.twfeed.newest_date = json.newest_date;
-        mac.twfeed.oldest_twid = json.oldest_twid;
-	mac.twfeed.oldest_date = json.oldest_date;
+        moe.twfeed.newest_twid = json.newest_twid;
+	moe.twfeed.newest_date = json.newest_date;
+        moe.twfeed.oldest_twid = json.oldest_twid;
+	moe.twfeed.oldest_date = json.oldest_date;
 
-	mac.twfeed.draw_btns();
+	moe.twfeed.draw_btns();
 
         amare.add_unsaved(json);
 
@@ -135,55 +168,18 @@ tw_feeder.prototype.prev_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        mac.twfeed.newest_twid = json.newest_twid;
-	mac.twfeed.newest_date = json.newest_date;
-        mac.twfeed.oldest_twid = json.oldest_twid;
-	mac.twfeed.oldest_date = json.oldest_date;
+        moe.twfeed.newest_twid = json.newest_twid;
+	moe.twfeed.newest_date = json.newest_date;
+        moe.twfeed.oldest_twid = json.oldest_twid;
+	moe.twfeed.oldest_date = json.oldest_date;
 
-	mac.twfeed.draw_btns();
+	moe.twfeed.draw_btns();
 
         amare.add_unsaved(json);
 
      });  
 
 }
-
-
-
-tw_feeder.prototype.get_live_tweets  = function (qry_str) {
-     var qe = "";
-     if (qry_str != undefined) {
-	this.sterms = qry_str;
-     } 
-  
-     qe = "?q=" + escape(this.sterms);
-
-
-     var count = 100;
-     if (is_mobile == true) {
-       count=10;
-     }
-     qe = qe + "&count=" + count;
-
-     var url='';
-     url = 'deskfm/twitter/tws_search.php' + qe;
-
-//     alert(url);
- 
-     $.getJSON(url,function(json) {
-
-        mac.twfeed.newest_twid = json.newest_twid;
-	mac.twfeed.newest_date = json.newest_date;
-        mac.twfeed.oldest_twid = json.oldest_twid;
-	mac.twfeed.oldest_date = json.oldest_date;
-
-	mac.twfeed.draw_btns();
-
-        amare.add_unsaved(json);
-
-     });   
-}
-
 
 
 

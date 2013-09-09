@@ -1,22 +1,20 @@
 
 
-function sorter (pmenuid) { 
+function feeder (pmenuid) { 
 
    this.menuid = pmenuid;
    this.spotid = pmenuid + "_spot";
-   this.varname = "mac";
-
-   this.shape = "";  
+   this.varname = "moe";
+   this.shape = ""; 
    this.showing = false;
- 
    this.menued = false;
+
    this.sterms = "standing desk";
-   this.da_date = new Date();
-   this.krono = new calendor('cal_spot','mac.krono','mac.check_local()');
+   this.twfeed = new tw_feeder();
 }
 
 
-sorter.prototype.show = function() {
+feeder.prototype.show = function() {
 
    var tmp = "";
    var cls="";
@@ -24,39 +22,41 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-         tmp = tmp + "<span id='cal_spot' class='' >";
-         tmp = tmp + "</span>";	
+	 tmp = tmp + "<button id='' onclick='moe.check_feed();'  >";
+         tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+         tmp = tmp + "</button>";
 
+         tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
+         tmp = tmp + "</div>";
+
+         tmp = tmp + "<div id='feed_btns'  >";
+         tmp = tmp + "</div>";
+     
    lbl = this.spotid;
-   if (document.getElementById(lbl) != null) {
+  if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
-      this.krono.show();
    } 
 
 }
 
 
 
-sorter.prototype.check_local = function() {
+feeder.prototype.check_feed = function() {
 
-   var dt = new Object;
-   dt.month="";
-   if (this.krono.showing == true) {
-         dt = this.krono.get_da_month();
+   var lbl = "";
+   var tmp = "";
+   var s="";
+   lbl = 'feed_string';
+   if (document.getElementById(lbl)!= null) {
+      s = document.getElementById(lbl).value;
+      this.twfeed.get_live_tweets(s); 
    }
-   daviewer.load_unsorted_list(dt);
-   var lstat = amare.get_monthstat(dt);
-   if (lstat != null) {
-       if (lstat.cnum > lstat.lnum) {
-         daviewer.more();
-       }
-   }
-  
+
 }
 
 
-sorter.prototype.save_set = function() {
+feeder.prototype.save_set = function() {
     // loop through daviewer
     // call add on all of em 
 
@@ -70,15 +70,15 @@ sorter.prototype.save_set = function() {
 }
 
 
-sorter.prototype.redraw_view = function(psetype) {
-
-	if (psetype == "unsorted") {
-   	  	daviewer.load_unsorted_list();
-	} 
-
+feeder.prototype.redraw_view = function(psetype) {
+	if (psetype == "unsaved") {
+		daviewer.load_unsaved_list();
+	}
 }
 
-sorter.prototype.set_shape = function(pstr) {
+
+
+feeder.prototype.set_shape = function(pstr) {
 	if (pstr != undefined) {
           this.shape = pstr;
 	}
@@ -87,12 +87,12 @@ sorter.prototype.set_shape = function(pstr) {
 
 
 
-sorter.prototype.change = function() {
+feeder.prototype.change = function() {
     this.show();
 }
 
 
-sorter.prototype.set_menued = function(ptog) {
+feeder.prototype.set_menued = function(ptog) {
 
 	if (ptog == true) {
 		this.menued = true;
@@ -105,7 +105,7 @@ sorter.prototype.set_menued = function(ptog) {
 
 
 
-sorter.prototype.hide = function() {
+feeder.prototype.hide = function() {
 
    var tmpstr = "";
    var pobj = null;
@@ -124,7 +124,7 @@ sorter.prototype.hide = function() {
 }
 
 
-sorter.prototype.toggle = function() {
+feeder.prototype.toggle = function() {
    if (this.showing == true) {
       this.hide();
    } else {

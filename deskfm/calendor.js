@@ -1,9 +1,11 @@
 
 
-function calendor (pspotid) { 
+function calendor (pspotid, pvarname, pfunc) { 
 
    this.spotid = pspotid; 
-   this.varname = "krono";
+   this.varname = pvarname;
+   this.funcstr = pfunc;
+
    this.showing = false;
  
    this.current_month = new Object();
@@ -12,7 +14,6 @@ function calendor (pspotid) {
 
    this.months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
    this.mini_months = ['j','f','m','a','m','j','j','a','s','o','n','d'];
-
 
    this.init();
 }
@@ -30,7 +31,6 @@ calendor.prototype.init = function() {
    this.da_month.year = this.current_month.year;
    this.da_month.month = this.current_month.month;
 }
-
 
 
 
@@ -53,7 +53,7 @@ calendor.prototype.show = function() {
           t = t + "</button>";
 
           lbl = 'hdr_month_btn';
-	  ocl = "";
+	  ocl = this.funcstr;
           t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
           btnstr=btnstr+ " " +this.months[this.da_month.month];
           btnstr=btnstr+ " '" +this.da_month.year;

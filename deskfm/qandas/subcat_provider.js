@@ -20,8 +20,7 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'made their own standing desk ? ', 'cat':'who','subcat':'diy' });
      this.sealist.push({'text':'is anti standing ?' ,'cat':'who','subcat':'anti' });
 
-     this.sealist.push({'text':'is a standing desk ?', 'cat':'what','subcat':'' });
-     this.sealist.push({'text':'are the reports on standing desks ?', 'cat':'what','subcat':'report' });
+     this.sealist.push({'text':'is a standing desk ?', 'cat':'what','subcat':'standesk' });
      this.sealist.push({'text':'is a hutch ?', 'cat':'what','subcat':'hutch' });
      this.sealist.push({'text':'is an adjustable desk? ', 'cat':'what','subcat':'adjustable' });
      this.sealist.push({'text':'about chairs ? ', 'cat':'what','subcat':'chair' });

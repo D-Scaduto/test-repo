@@ -21,9 +21,6 @@ function viewer (pscreen,pvarname) {
    this.top_end=10;
 
    this.zoom = false;
-   this.tail = true;
-   this.railon = true;
-   this.rail_showing = false;
 
    this.metro_spd=0;
    this.metro_dir="fwd";
@@ -34,10 +31,7 @@ function viewer (pscreen,pvarname) {
         this.is_mini = true;
    }
 
-   this.color="";
-   this.whenaply = false; 
 }
-
 
 
 viewer.prototype.draw_view = function() {
@@ -58,16 +52,11 @@ viewer.prototype.draw_view = function() {
     tmpstr=tmpstr+"</div>";
 
     cls = 'box';
-  
-    if (this.is_mini == true) {
-      cls='cbox';
-    }
 
     if (this.zoom == true) {
 	 ct = ct + 1;
     }
 
-    if (this.tail == true) {
       while (ct < st) {
         if (this.darungs[ct] != undefined) {
           lbl = this.screen+"_rung_"+ct;
@@ -76,11 +65,9 @@ viewer.prototype.draw_view = function() {
         }
        ct = ct + 1;
       }
-    }
 
      lbl = this.screen;
      if (document.getElementById(lbl)!= null) {
-
        document.getElementById(lbl).innerHTML=tmpstr;
 
        ct = 0; 
@@ -111,7 +98,6 @@ viewer.prototype.draw_view = function() {
 	  ct = ct + 1;
        }
 
-       if (this.tail == true) {
          while (ct <= st) {
            if (this.darungs[ct] != undefined) {
              vdex = this.darungs[ct].vdex;
@@ -133,88 +119,17 @@ viewer.prototype.draw_view = function() {
            }
            ct = ct + 1;
 	 }
-       }
     }
 
     if (this.is_mini == false ) {
-       if (this.railon == true) {
-	   if (this.rail_showing == false) {
 	      this.draw_rail();
-	   } else {
 	      this.draw_raildata();
-	   }
-       }
     }
 
 
     if (debug == true) {
        this.draw_debug();
     }
-
-}
-
-
-
-
-
-viewer.prototype.change_shape = function() { 
-
-	if (this.zoom == false) {
-          if (this.tail == true) {
-	      this.unset_tail();
-           }
-   	   this.set_zoom();
-	} else {
-	    if (this.tail == false) {
-		    this.set_tail();
-	    } else {
-		  this.unset_zoom();
-	    }
-	}
-
-}
-
-
-viewer.prototype.toggle_tail = function() {
-
-   if (this.tail == true) {
-     this.unset_tail();
-   } else {
-     this.set_tail();
-   }
-}
-
-
-viewer.prototype.unset_tail = function() {
-	var lbl = "";
-	var pobj = null;
-	var tmp = "";
-
-   this.tail = false;
-   lbl = "main_view";
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-         pobj.innerHTML = tmp;
-     }
-
-   this.set_zoom(); 
-}
-
-
-
-viewer.prototype.set_tail = function(pspot) {
-   this.tail = true;
-   this.draw_view();
-}
-
-
-viewer.prototype.toggle_zoom = function() {
-
-   if (this.zoom == true) {
-     this.unset_zoom();
-   } else {
-     this.set_zoom();
-   }
 
 }
 
@@ -235,7 +150,6 @@ viewer.prototype.unset_zoom = function() {
 
    this.darungs[0].postman = undefined;
    
-   this.tail = true;
    this.draw_view();
 }
 
@@ -243,13 +157,12 @@ viewer.prototype.unset_zoom = function() {
 
 viewer.prototype.set_zoom = function(pspot) {
    this.zoom = true;
-   this.tail = false;
    this.to_top(pspot);
 }
 
 
 
- viewer.prototype.hide_screen = function() {
+viewer.prototype.hide_screen = function() {
 
     var tmpstr = "";
     var lbl = this.screen;
@@ -257,8 +170,6 @@ viewer.prototype.set_zoom = function(pspot) {
         document.getElementById(lbl).innerHTML=tmpstr;
     }
 }
-
-
 
 
 

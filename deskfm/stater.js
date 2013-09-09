@@ -1,7 +1,6 @@
 
 
 function stat () { 
- 
     this.cat="";
     this.subcat="";
     this.sterms="";
@@ -10,13 +9,11 @@ function stat () {
     this.month;
     this.year;
     this.desc="";
-   
     this.listype="";
     this.lnum;
     this.cnum;
-    this.last_chunk =0;
+    this.last_chunk = -1;
     this.max_chunks;
-
 }
 
 
@@ -34,6 +31,7 @@ function stater () {
    this.prodstats = [];
    this.groupstats = [];
    this.monthstats = [];
+   this.searchstats = [];
 
    this.total_sorted = new stat();
    this.total_people = new stat();
@@ -54,6 +52,7 @@ function stater () {
 
 
 stater.prototype.get_stats = function() {
+
    var url='deskfm/dbase/get_stats.php';
 //   alert(url);
    $.getJSON(url,function(json) {
@@ -64,10 +63,9 @@ stater.prototype.get_stats = function() {
 } 
 
 
-
 stater.prototype.update_stats = function (statobj) {
-   if (statobj != undefined) {
 
+   if (statobj != undefined) {
      var tp = new subcat_provider();
      var s = "";
      var st = null;
@@ -94,7 +92,6 @@ stater.prototype.update_stats = function (statobj) {
         st.desc = tp.get_desc(st.groupid);
         st.listype = "people";
         st.last_chunk=0;
-
         amare.groupstats.push(st);
      }
 
@@ -118,29 +115,29 @@ stater.prototype.update_stats = function (statobj) {
         st.cnum=statobj.months[z].cnum;
 	st.max_chunks = Math.round(st.cnum/da_limit);
         st.listype = "unsorted";
-        st.last_chunk=0;
+        st.last_chunk=-1;
         amare.monthstats.push(st);
      }
 
       amare.total_unsorted.listype = "unsorted";
       amare.total_unsorted.cnum = statobj.total_unsorted;
       amare.total_unsorted.max_chunks = Math.round(amare.total_unsorted.cnum/da_limit);
-      amare.total_unsorted.last_chunk = 0;
+      amare.total_unsorted.last_chunk = -1;
 
       amare.total_sorted.listype = "webits";
       amare.total_sorted.cnum = statobj.total_sorted;
       amare.total_sorted.max_chunks = Math.round(amare.total_sorted.cnum/da_limit);
-      amare.total_sorted.last_chunk = 0;
+      amare.total_sorted.last_chunk = -1;
 
       amare.total_people.listype = "people";
       amare.total_people.cnum = statobj.total_people;  
       amare.total_people.max_chunks = Math.round(amare.total_people.cnum/da_limit);
-      amare.total_people.last_chunk = 0;
+      amare.total_people.last_chunk = -1;
 
       amare.total_products.listype = "products";
       amare.total_products.cnum = statobj.total_products;
       amare.total_products.max_chunks = Math.round(amare.total_products.cnum/da_limit);
-      amare.total_products.last_chunk = 0;
+      amare.total_products.last_chunk = -1;
 
       amare.count_lwstats();
       amare.count_lpstats();
@@ -160,7 +157,8 @@ stater.prototype.update_stats = function (statobj) {
 }
 
 
-stater.prototype.update_webits= function(listobj) {
+stater.prototype.update_webits = function(listobj) {
+
        var r = 0;
        var found = false;
        var fndcount = 0;
@@ -214,7 +212,7 @@ stater.prototype.update_webits= function(listobj) {
 }  
 
 
-stater.prototype.add_unsorted= function(listobj,bgrnd) {
+stater.prototype.add_unsorted = function(listobj,bgrnd) {
        var r = 0;
        var found = false;
        var fndcount = 0;
@@ -273,7 +271,7 @@ stater.prototype.add_unsorted= function(listobj,bgrnd) {
 }  
 
 
- stater.prototype.update_people= function(listobj) {
+stater.prototype.update_people = function(listobj) {
 
        var r = 0;
        var found = false;
@@ -339,10 +337,14 @@ stater.prototype.count_lwstats = function() {
 }
 
 stater.prototype.count_lustats = function() {
-    
+ 
+    var i=0
+    for (i=0; i<this.monthstats.length; i++) {
+          this.monthstats[i].lnum = 0;
+    }
    this.total_unsorted.lnum = 0;
-   var top = this.unsortedlist.length;
-
+   
+    var top = this.unsortedlist.length;
     var d=0;
     for (d=0;d<top;d++) {
       if (this.unsortedlist[d] != undefined) {
@@ -351,8 +353,6 @@ stater.prototype.count_lustats = function() {
         var dt = new Date(dp2[0], dp2[1] - 1, dp2[2]);
         var m = dt.getMonth();
         var y = new String(dt.getFullYear());
-        y = y.substring(2);
-//alert("m="+m+" y="+y);
 
 	this.total_unsorted.lnum = this.total_unsorted.lnum + 1;
 
@@ -360,7 +360,8 @@ stater.prototype.count_lustats = function() {
 	    var dtmon = new Object();
 	    dtmon.month =  this.monthstats[k].month;
             dtmon.year =  this.monthstats[k].year;
-   	    if ((dtmon.month == m) && ( dtmon.year == y)) {
+ 	    if ((dtmon.month == m) && ( dtmon.year == y)) {
+// alert("m=" + this.monthstats[k].month + " sm="+dtmon.month+" sy="+dtmon.year +" m="+m+" y="+y);
                 this.monthstats[k].lnum = this.monthstats[k].lnum + 1;
             }
         }
@@ -402,17 +403,19 @@ stater.prototype.get_stat = function (pstat) {
 
 	if (pstat != undefined) {
 
-		if (pstat.listype == "people" ) {
+                if ((pstat.sterms != "") && (pstat.sterms != undefined)) {
+       
+                     ret = this.get_searchstat(pstat.sterms);
+
+		} else if (pstat.listype == "people" ) {
 
 		     ret = this.get_groupstat(pstat.groupid);
 
 		} else if  (pstat.listype == "unsorted" ) {
-
 			if ((pstat.month == 'null') || (pstat.month == ""))  {
-//alert("here");
-			     ret = this.total_unsorted;
+	  	             ret = this.total_unsorted;
 			} else {
-		       	     ret = this.get_monthstat(pstat.month,pstat.year);
+		       	     ret = this.get_monthstat(pstat);
 			}
 
 		} else if  (pstat.listype == "webits" ) {
@@ -421,8 +424,26 @@ stater.prototype.get_stat = function (pstat) {
 
 		}
 	}
-
     return ret;
+}
+
+
+
+stater.prototype.get_searchstat = function(sterms) {
+
+     var ret = null;
+
+     if ( (sterms != "") || (sterm  != undefined))  {
+
+        for (var i=0; (i < amare.searchstats.length); i++) {
+          if (amare.searchstats[i].sterms == sterms) {
+              ret = amare.searchstats[i];
+          }
+        }
+
+     }
+
+     return ret;
 }
 
 
@@ -454,7 +475,6 @@ stater.prototype.get_monthstat = function(pmon) {
     var ret = null;
 
     if ((pmon == undefined) || (pmon.month == undefined)) {
-//    if (pmon == undefined) {
 	ret = this.total_unsorted;
     } else {
   
@@ -511,9 +531,8 @@ stater.prototype.get_person_group = function(tname) {
 
 
 
-
-
 stater.prototype.get_people = function(tchunk) {
+
    var url='deskfm/dbase/get_people.php';
    url = url + "?lim="+ da_limit;
    var c = this.total_people.last_chunk; 
@@ -531,6 +550,7 @@ stater.prototype.get_people = function(tchunk) {
 
 
 stater.prototype.get_group_list = function(pgroupid) {
+
    var url='deskfm/dbase/dfm_people.php';
    url = url + "?lim="+ da_limit;
    url = url + "&groupid="+ pgroupid;
@@ -547,14 +567,13 @@ stater.prototype.get_group_list = function(pgroupid) {
        amare.update_people(json);
    });   // end get json 
 }
-
  
 
 stater.prototype.get_webits = function() {
 
    var url='deskfm/dbase/get_webits.php';
    url = url + "?lim="+ da_limit;
- var c = this.total_sorted.last_chunk; 
+   var c = this.total_sorted.last_chunk; 
    if (c != -1) {
       c = c +1;
       url = url + "&chunk="+ c;
@@ -571,7 +590,7 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
 
    var dstats = this.total_unsorted;
    if (pstats != undefined) {
-	dstats = pstats;
+       dstats = pstats;
    }
 
    var url='deskfm/dbase/get_unsorted.php';
@@ -581,7 +600,7 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
    var gots = false;
 
    if ((dstats.month != undefined) && (dstats.month != "")) {
-       m = dstats.month+1;
+       m = dstats.month +1;
        url = url + "&month="+ m;
        gots = true;
    } 
@@ -597,7 +616,7 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
    }
 
    url = url + "&chunk="+ c;
-//   alert("bgrnd=" + bgrnd + " url=" + url);
+ //  alert("localhost/" + url);
 
    if (bgrnd == true) {
      $.getJSON(url,function(json) {
@@ -689,7 +708,7 @@ stater.prototype.get_csearch_list = function(tsterms) {
      url = url + "&sterms="+ tsterms;
      this.sterms = tsterms;
    } 
-//   alert(url);
+   alert(url);
    $.getJSON(url,function(json) {
       amare.update_webits(json);
    });   // end get json 
@@ -769,9 +788,6 @@ stater.prototype.get_cperson_list = function(tuname) {
          }
       }
 }  
-
-
-
 
 
 

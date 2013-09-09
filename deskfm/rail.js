@@ -5,9 +5,6 @@ viewer.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
 
-       tmp = tmp + "<div id='rail_btns' class='' style='' >";
-       tmp = tmp + "</div>";
-
        tmp = tmp + "<div>";
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
@@ -31,9 +28,6 @@ viewer.prototype.draw_rail = function() {
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
 	pobj.innerHTML = tmp;
-       this.draw_railbtns();
-       this.railon = true;
-       this.rail_showing = true;
 
       var lchunk = 1
       var lchunks = 1;
@@ -134,85 +128,6 @@ viewer.prototype.draw_raildata = function() {
        }
 }
 
-
-viewer.prototype.draw_railbtns = function() {
-
-   var pobj=null;
-   var lbl = "";
-   var tmp = "";
-   var tsrc = "";
-   var ocl = "";
-
-
-       lbl = this.screen + "_prev_chunk";
-       ocl = this.varname + ".prev(5);";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' onmouseover='' onmouseout='' class='' style='width:30px;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_start.png' width='20px' >";
-       tmp = tmp + "</button>";
-
-       lbl = this.screen + "_prev_chip";
-       ocl = this.varname + ".prev();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/prev.png' width='20px' >";
-       tmp = tmp + "</button>";
-
-       lbl = this.screen + "_next_chip";
-       ocl = this.varname + ".next();";
-       tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
-       tmp = tmp + "</button>";
-
-       lbl = this.screen + "_next_chunk";
-       ocl = this.varname + ".next(5);";
-       tmp = tmp + "<button id='"+lbl+"'  onclick='"+ocl+"'  onmouseover='' onmouseout='' class='' style='width:30px;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/fast_end.png' width='20px' >";
-       tmp = tmp + "</button>";
-  
-       lbl = this.screen + "_more_btn";
-       ocl = "daviewer.more();";
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/database.png' width='20px' >";
-       tmp = tmp + "</button>";
-	
-       /*
-       lbl = this.screen + "_zoom_btn";
-       ocl = "daviewer.toggle_zoom();";
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/pop-out.jpg' width='20px' >";
-       tmp = tmp + "</button>";
-	*/
-/*
-    lbl = this.screen + "_shuffle";
-    ocl = this.varname + ".load_random_rungs();";
-    tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"' data_role='button' >";
-    tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='30px' >";
-    tmp = tmp + "</button>";
-*/
-
-
-     lbl = "rail_btns";
-
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-       pobj.innerHTML = tmp;
-       this.btns_showing = true;
-/*
-       $('#nitro_btn').button();
-       lbl = this.screen + "_prev_chunk";
-       $("#"+lbl).button();
-       lbl = this.screen + "_prev_chip";
-//   $("#"+lbl).button( { icons: {primary: 'ui-icon-circle-triangle-w', secondary: null} } );
-       $("#"+lbl).button();
-       lbl = this.screen + "_next_chip";
-    //   $("#"+lbl).button( { icons: {primary: 'ui-icon-custom', secondary: null} } );
-       $("#"+lbl).button();
-       lbl = this.screen + "_next_chunk";
-       $("#"+lbl).button();
-*/
-     }
-}
-
-
 viewer.prototype.prev_chunk = function() {
 
    var chunks = 0;
@@ -277,30 +192,6 @@ viewer.prototype.next_chunk = function() {
    }
 }
 
-
-viewer.prototype.toggle_rail = function() {
-	if (this.railon == true) {
-	     this.hide_rail();
-	} else {
-	     this.draw_rail();
-	}
-}
-
-
-viewer.prototype.hide_rail = function() {
-
-    var pobj=null;
-    var lbl = "";
-    var tmp = "";
-
-    lbl = "rail_spot";
-    pobj = document.getElementById(lbl);
-    if ( pobj != null) {
-        pobj.innerHTML = tmp;
-    }
-    this.rail_showing = false;
-    this.railon = false;
-}
 
 
 viewer.prototype.draw_debug_rail = function() {
