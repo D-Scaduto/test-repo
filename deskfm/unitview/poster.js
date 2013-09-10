@@ -19,7 +19,6 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    }
 
    this.showing = false;
-   this.btnson = false;
    this.rungster = this.spotid + "_"+this.rung;
 
    this.mini_viewer = null;
@@ -136,7 +135,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       }
      
       if (pobj.listype == "unsorted")  {
-           this.btnson = true;
       }
       
       this.changed = false;
@@ -167,7 +165,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 	   if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
 	     this.group_changed = true;
 	   }
-           this.btnson = true;
       }
       
     } else {
@@ -178,25 +175,12 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 
 
 
-
-
 poster.prototype.draw_btns = function() {
 
-    var tmp = "";
+       var tmp = "";
        var lbl = "";
        var ocl="";
 
-         if (this.btnson == true) {
-	    ocl = this.varname + ".set_shape(\"\")";
-         } else {
-	   ocl = this.varname + ".toggle_btnson()";
-         }
-	 lbl = this.rungster + "_btns_btn";
-         tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
-         tmp = tmp + "<img src='deskfm/images/icons/black_round.png' height='10px' >";
-         tmp = tmp + "</button>";
-
-        if (this.btnson == true) {
 	 lbl = this.rungster + "_nav_btns";
          tmp = tmp + "<span  id='"+lbl+"' >";  
 	 tmp = tmp + "</span>";
@@ -210,17 +194,14 @@ poster.prototype.draw_btns = function() {
 	 tmp = tmp + "</span>";
 
 	 tmp = tmp + "<div  style='clear:right;' ></div>";  
-	}
 
      lbl = this.rungster + '_btns_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
-	  if (this.btnson == true) {
 	    this.work_btns();
 	    this.nav_btns();
 	    this.change_btns();
-	  }
      }
 
 }
@@ -232,33 +213,28 @@ poster.prototype.nav_btns = function() {
    var lbl = "";
    var ocl = "";
 
-          if (this.is_mini == true ) {
 
+          if (this.rung == 0) {
+              lbl = this.rungster + '_zoom_btn';
+              ocl = this.parvar + ".toggle_zoom();";
+              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  >";
+              tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+              tmp = tmp + "</button>";
+ 
+          } else {
+              lbl = this.rungster + '_totop_btn';
+              ocl = this.parvar + ".to_top("+this.rung+");";
+              ocl = ocl + this.parvar + ".set_zoom();";
+              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  >";
+              tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+              tmp = tmp + "</button>";
+          }
               ocl = this.parvar + ".del_rung("+this.rung+")";
               lbl = this.rungster + "_delfrom_mini_btn";
               tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</button>";
-
-          } else {
-
-	     if (this.parvar != "nicky") {
-               lbl = this.rungster + '_totop_btn';
-               ocl = "";
-   	       if (this.rung == 0)  { 
-	 	 ocl = "daviewer.toggle_zoom();";
- 	       } else {
-                 ocl = this.parvar + ".to_top("+this.rung+");";
-	         ocl = ocl + "daviewer.set_zoom();";
-	       }
-
-              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/pop-out.jpg' height='15px' >";
-              tmp = tmp + "</button>";
-            }
-
-          }
-
+        
           if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
@@ -275,6 +251,11 @@ poster.prototype.nav_btns = function() {
 */
           }
          
+              ocl = "";
+              lbl = this.rungster + "_share_btn";
+              tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
+              tmp = tmp + "<img src='deskfm/images/icons/share.png' height='20px' >";
+              tmp = tmp + "</button>";
      
          lbl = this.rungster + "_nav_btns";
          if (document.getElementById(lbl)!= null) {
@@ -440,29 +421,6 @@ poster.prototype.show = function() {
    this.redraw_rung();
 }
 
-
-poster.prototype.toggle_btnson = function() {
-  if (this.btnson == true) {
-     this.turn_btnsoff();
-  } else {
-     this.turn_btnson();
-  }
-}
-
-
-poster.prototype.turn_btnson = function() {
-  if (this.btnson != true) {
-    this.btnson = true;
-    this.redraw_rung();
-  }
-}
-
-poster.prototype.turn_btnsoff = function() {
-  if (this.btnson != false) {
-    this.btnson = false;
-    this.redraw_rung();
-  }
-}
 
 
 poster.prototype.do_undo = function() {

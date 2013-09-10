@@ -54,7 +54,7 @@ viewer.prototype.draw_view = function() {
     cls = 'box';
 
     if (this.zoom == true) {
-	 ct = ct + 1;
+       st = 1;
     }
 
       while (ct < st) {
@@ -68,36 +68,10 @@ viewer.prototype.draw_view = function() {
 
      lbl = this.screen;
      if (document.getElementById(lbl)!= null) {
+ 
        document.getElementById(lbl).innerHTML=tmpstr;
 
-       ct = 0; 
-       if (this.zoom == true) {
-
-          if (this.darungs[ct] != undefined) {
-
-             vdex = this.darungs[ct].vdex;
-             if (this.dalist[vdex] != null) {
-
-               mdex = this.dalist[vdex].mdex;
-	       ltype = this.dalist[vdex].ltype;
-		
-
-	       if (this.darungs[ct].postman == undefined) {
-                 s = this.varname + ".darungs["+ct+"].postman";
-                 this.darungs[ct].postman = new poster("zoom",ct,this.varname,s,this.is_mini);
-	       }
-               if (this.darungs[ct].postman != undefined) {
-                 this.darungs[ct].postman.set_ppid(mdex,ltype);
-                 this.darungs[ct].postman.spotid = 'zoom';
-  	         this.darungs[ct].postman.piczoom = true;
-                 this.darungs[ct].postman.build_rung(ct);
-                 this.darungs[ct].postman.draw_rung(ct);
-              }
-	     }
-	  }
-	  ct = ct + 1;
-       }
-
+         ct = 0;
          while (ct <= st) {
            if (this.darungs[ct] != undefined) {
              vdex = this.darungs[ct].vdex;
@@ -135,29 +109,26 @@ viewer.prototype.draw_view = function() {
 
 
 
+viewer.prototype.toggle_zoom = function () {
+
+   if (this.zoom == true ) {
+       this.unset_zoom();
+   } else {
+       this.set_zoom();
+   }
+}
+
+
 viewer.prototype.unset_zoom = function() {
-	var lbl = "";
-	var pobj = null;
-	var tmp = "";
-
    this.zoom = false;
- 
-   lbl = "zoom_rung_0";
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-         pobj.innerHTML = tmp;
-     }
-
-   this.darungs[0].postman = undefined;
-   
    this.draw_view();
 }
 
 
 
-viewer.prototype.set_zoom = function(pspot) {
+viewer.prototype.set_zoom = function() {
    this.zoom = true;
-   this.to_top(pspot);
+   this.draw_view();
 }
 
 

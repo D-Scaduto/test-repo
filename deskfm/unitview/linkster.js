@@ -11,12 +11,10 @@ poster.prototype.draw_link = function() {
   var lbl = "";
 
   if ((this.shape == "getlink") || (this.shape == "")) {
-    if (this.btnson == true) {	   
                  ocl = this.varname + ".set_shape(\"getlink\");";
           	 tmp = tmp + "<button  onclick='"+ocl+"' >";  
 	         tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
 	         tmp = tmp + "</button>";
-      }
 
    if ((this.linkurl != "") && (this.linkurl != undefined)) {
 

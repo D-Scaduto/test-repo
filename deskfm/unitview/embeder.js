@@ -36,7 +36,7 @@ poster.prototype.draw_embed = function() {
 
        } else {
 
-	  if ((this.btnson == true) && (this.shape == "")) {	   
+	  if (this.shape == "") {	   
               if ((buddah == true) || (this.parvar == "nicky")) {
         	  ocl = this.varname + ".toggle_getembed();";
         	  tmp = tmp + "<button  onclick='"+ocl+"' >";  

@@ -77,6 +77,9 @@ header.prototype.show = function () {
      tmp = tmp + "<div id='sort_spot' class='' style=''  >";
      tmp = tmp + "</div>";
 
+     tmp = tmp + "<div id='share_spot' class='' style=''  >";
+     tmp = tmp + "</div>";
+
      tmp = tmp + "<div id='feed_spot' class='' style=''  >";
      tmp = tmp + "</div>";
 

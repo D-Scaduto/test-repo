@@ -84,26 +84,22 @@ viewer.prototype.draw_raildata = function() {
       var lchunks = Math.floor(this.stats.lnum / this.top_end) -1;
       var mchunks = Math.floor(this.stats.cnum / this.top_end);
       var lc = lchunk;
- //     if (lchunks >= 1) {
+      if (lchunks >= 1) {
 	    $('#local_chunkbar').show();
             $('#local_chunkbar').slider("option", "value", lchunk  );
             $('#local_chunkbar').slider("option", "max", lchunks );
             $('#local_chunkbar').slider("option", "min", 0 );
-  //    } else {
-  //          $('#local_chunkbar').hide();
-  //    }
- 
-      $('#local_chunkdata').show();
-      tmp = lc + " of " + lchunks;
-      $('#local_chunkdata').html(tmp);
 
+            $('#local_chunkdata').show();
+            tmp = lc + " of " + lchunks;
+     //       tmp = tmp + " x" + this.top_end;
+            $('#local_chunkdata').html(tmp);
+
+      } else {
+            $('#local_chunkbar').hide();
+      }
+ 
       if (mchunks > lchunks ) {
-        lbl = this.screen + "_more_btn";
-        ocl = "daviewer.more();";
-        tmp = "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='width:30px;' >";
-        tmp = tmp + "<img src='deskfm/images/icons/database.png' width='20px' >";
-        tmp = tmp + "</button>";
-        $(lbl).html(tmp);
       } 
  
       var st = lchunk * this.top_end;

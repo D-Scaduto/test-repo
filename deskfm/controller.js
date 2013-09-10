@@ -139,6 +139,129 @@ viewer.prototype.clear_list = function() {
 
 
 
+
+viewer.prototype.update_one = function(tpid,mdex,ltype) {
+
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.pid == tpid) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+        if (this.darungs[fnd_rung].postman != undefined) {
+          this.darungs[fnd_rung].postman.set_ppid(mdex,ltype);
+          this.darungs[fnd_rung].postman.shape= "";
+          this.darungs[fnd_rung].postman.redraw_rung();
+        }
+  } 
+}
+
+
+viewer.prototype.update_person = function(pname) {
+  var s= "";
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.uname == pname) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+        if (this.darungs[fnd_rung].postman != undefined) {
+           this.darungs[fnd_rung].postman.set_ppid(tpid,ltype);
+           this.darungs[fnd_rung].postman.redraw_rung();
+        }
+  } 
+}
+
+
+viewer.prototype.add_one = function(mdex,ltype) {
+   var t = null;
+
+   var o = new Object();
+   o.mdex = mdex;
+   o.ltype = ltype;  
+         this.dalist.unshift(o);
+         this.load_rungs();  
+}
+
+
+viewer.prototype.del_rung = function(tspot) {
+     var da = this.darungs[tspot].vdex;
+     this.dalist.splice(da,1);
+     this.darungs.splice(tspot,1);
+     this.load_rungs();
+}
+
+
+viewer.prototype.del_webit = function(tpid) {
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.pid == tpid) {
+                   fnd_rung = c;
+              }
+            }
+         }
+  }
+  if (fnd_rung != -1) {
+     this.del_rung(fnd_rung);
+  } else {
+    var fnd_le = -1;
+    for (var b=0; b<=this.webitlist.length;b++) {
+         if (webitlist[this.webitlist[b]] != undefined) {
+           if (webitlist[this.webitlist[b].pid] == tpid) {
+                fnd_le = b;
+           }
+         }
+    }
+    if (fnd_le != -1) {
+      this.dalist.splice(fnd_le,1);
+    }
+  }
+}
+
+
+viewer.prototype.del_person = function(puname) {
+
+  var fnd_rung = -1;
+  for (var c=0; c<=this.darungs.length;c++) {
+         if (this.darungs[c] != undefined) {
+            if (this.darungs[c].postman != undefined) {
+              if (this.darungs[c].postman.uname == puname) {
+                   fnd_rung = c;
+              }
+            } 
+         }
+  }
+  if (fnd_rung != -1) {
+     this.del_rung(fnd_rung);
+  } else {
+    var fnd_le = -1;
+    for (var b=0; b<=this.dalist.length;b++) {
+         if (peeplist[this.dalist[b]] != undefined) {
+            if (peeplist[this.dalist[b].uname] == puname) {
+                   fnd_le = b;
+            }
+         }
+    }
+    if (fnd_le != -1) {
+      this.dalist.splice(fnd_le,1);
+    }
+  }
+}
+
+
+
 viewer.prototype.load_rungs = function(ldex) {
 
        this.darungs = [];
@@ -315,7 +438,6 @@ viewer.prototype.redraw_rungs = function(trungdex) {
 
 
 
-
 viewer.prototype.randomize_rungs = function() {
 
    var tls = [];
@@ -351,128 +473,6 @@ viewer.prototype.randomize_rungs = function() {
 
 }
 
-
-
-
-viewer.prototype.update_one = function(tpid,mdex,ltype) {
-
-  var fnd_rung = -1;
-  for (var c=0; c<=this.darungs.length;c++) {
-         if (this.darungs[c] != undefined) {
-            if (this.darungs[c].postman != undefined) {
-              if (this.darungs[c].postman.pid == tpid) {
-                   fnd_rung = c;
-              }
-            }
-         }
-  }
-  if (fnd_rung != -1) {
-        if (this.darungs[fnd_rung].postman != undefined) {
-          this.darungs[fnd_rung].postman.set_ppid(mdex,ltype);
-          this.darungs[fnd_rung].postman.shape= "";
-          this.darungs[fnd_rung].postman.redraw_rung();
-        }
-  } 
-}
-
-
-viewer.prototype.update_person = function(pname) {
-  var s= "";
-  var fnd_rung = -1;
-  for (var c=0; c<=this.darungs.length;c++) {
-         if (this.darungs[c] != undefined) {
-            if (this.darungs[c].postman != undefined) {
-              if (this.darungs[c].postman.uname == pname) {
-                   fnd_rung = c;
-              }
-            }
-         }
-  }
-  if (fnd_rung != -1) {
-        if (this.darungs[fnd_rung].postman != undefined) {
-           this.darungs[fnd_rung].postman.set_ppid(tpid,ltype);
-           this.darungs[fnd_rung].postman.redraw_rung();
-        }
-  } 
-}
-
-
-viewer.prototype.add_one = function(pdx) {
-   var t = null;
-   if (webitlist[pdx] == undefined) {
-//      alert("adderr " + pdx);
-   } else {
-         this.dalist.unshift(pdx);
-         this.load_rungs();  
-   } 
-}
-
-
-viewer.prototype.del_rung = function(tspot) {
-     var da = this.darungs[tspot].vdex;
-     this.dalist.splice(da,1);
-     this.darungs.splice(tspot,1);
-     this.load_rungs();
-}
-
-
-viewer.prototype.del_webit = function(tpid) {
-  var fnd_rung = -1;
-  for (var c=0; c<=this.darungs.length;c++) {
-         if (this.darungs[c] != undefined) {
-            if (this.darungs[c].postman != undefined) {
-              if (this.darungs[c].postman.pid == tpid) {
-                   fnd_rung = c;
-              }
-            }
-         }
-  }
-  if (fnd_rung != -1) {
-     this.del_rung(fnd_rung);
-  } else {
-    var fnd_le = -1;
-    for (var b=0; b<=this.webitlist.length;b++) {
-         if (webitlist[this.webitlist[b]] != undefined) {
-           if (webitlist[this.webitlist[b].pid] == tpid) {
-                fnd_le = b;
-           }
-         }
-    }
-    if (fnd_le != -1) {
-      this.dalist.splice(fnd_le,1);
-    }
-  }
-}
-
-
-viewer.prototype.del_person = function(puname) {
-
-  var fnd_rung = -1;
-  for (var c=0; c<=this.darungs.length;c++) {
-         if (this.darungs[c] != undefined) {
-            if (this.darungs[c].postman != undefined) {
-              if (this.darungs[c].postman.uname == puname) {
-                   fnd_rung = c;
-              }
-            } 
-         }
-  }
-  if (fnd_rung != -1) {
-     this.del_rung(fnd_rung);
-  } else {
-    var fnd_le = -1;
-    for (var b=0; b<=this.dalist.length;b++) {
-         if (peeplist[this.dalist[b]] != undefined) {
-            if (peeplist[this.dalist[b].uname] == puname) {
-                   fnd_le = b;
-            }
-         }
-    }
-    if (fnd_le != -1) {
-      this.dalist.splice(fnd_le,1);
-    }
-  }
-}
 
 
 

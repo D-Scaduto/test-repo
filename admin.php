@@ -36,7 +36,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var buddah = false;
   var pname = "";
   var debug = false;
-  var nonets = false;
+  var netson = false;
 
 </script>
 
@@ -135,16 +135,16 @@ header('Content-type: text/html; charset=utf-8 ');
   if (isset($_GET['debug'])) {
     echo "debug = true;";
   }
-  if (isset($_GET['nonets'])) {
-    echo "nonets = true;";
+  if (isset($_GET['netson'])) {
+    echo "netson = true;";
   } 
   echo "</script>";
 
-  if (!isset($_GET['nonets'])) {
-//    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
-//    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
-//    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
-//    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
+  if (netson == true) {
+    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
+    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
+    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
+    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
   }
 
 ?>
@@ -159,13 +159,16 @@ header('Content-type: text/html; charset=utf-8 ');
 </span>
 </div>
 
-<span id='main_view'  style='display:inline-block;' >
-</span>
+<div id=''  style='clear:both;' >
+</div>
+
+<div id='main_view'  style='' >
+</div>
 
 
 <script type='text/javascript' >
-/*
-  if (nonets == false) {
+
+  if (netson == true) {
    FB.init({
       appId  : '191528434226668',
       status : true, // check login status
@@ -182,7 +185,7 @@ header('Content-type: text/html; charset=utf-8 ');
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
   }
-*/
+
    do_preload();
 
    buddah=true;

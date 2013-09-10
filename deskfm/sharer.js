@@ -16,96 +16,66 @@ function sharer (pspotid) {
 }
 
 
-sharer.prototype.show = function() {
-
-   var tmp = "";
-   var cls="";
-   var pobj = null;
-   var lbl = "";
-   var ocl="";
-
-   tmp = tmp + "<div id='share_rung_0' class='box' style=''  >";
-   tmp = tmp + " </div>";
-
-     lbl = this.spotid;
-     if (document.getElementById(lbl) != null) {
-       document.getElementById(lbl).innerHTML=tmp;
-       this.showing = true;
-       
-       if (this.newster.dadex == "") {
-           this.new_one();
-       } else {
-        
-       }
-	 this.newster.build_rung();
-         this.newster.draw_rung();
-
-       if (this.networks_showing == true) {
-          this.show_network_btns();
-       }
-     }
-   
-}
-
 
 sharer.prototype.new_one = function() {
      var g = null;
      var t = -1;
      g = new webit();
      t = amare.unsavedlist.push(g);
-     this.newster.set_ppid(t-1,"unsaved");
+     daviewer.add_one(t-1,"unsaved");
 }
 
 
+sharer.prototype.show = function() {
 
-sharer.prototype.add_child = function(mdex,ltype) {
-   var lbl = "";
-   if (this.showing == false) {
-       this.show();
-   }
-   this.newster.mini_viewer.add_one(mdex,ltype);
-   this.newster.redraw_rung();
+	var tmp = "";
+	var lbl = "";
+	var moin = "";
+	var mout = ""
+        var cls = "";
+        var ocl = "";
+
+       lbl = this.spotid +  "_addone_btn";
+       ocl = this.varname + ".new_one();";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+
+       lbl = this.spotid +  "_twitter_btn";
+       tmp=tmp +"<button >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = this.spotid +  "_facebook_btn";
+       tmp=tmp +"<button >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+
+       lbl = this.spotid +  "_google_btn";
+       tmp=tmp +"<button >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+     lbl = this.spotid;
+     if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML= tmp;
+     } 
+
 }
 
 
+sharer.prototype.show_nets = function() {
 
-sharer.prototype.update = function(tpid,mdex,ltype) {
-
-   if (tpid != undefined)  { 
-      if (this.newster.pid == tpid) {
-        this.newster.set_ppid(tpid,ltype);
-      }
-   }
-
-   if (this.showing == true) {
-     this.newster.redraw_rung();
-   }
-
-}
-
-
-
-sharer.prototype.toggle_networks = function() {
-   if (this.networks_showing == true) {
-      this.hide_network_btns();
-   } else {
-      this.show_network_btns();
-   }
-}
-
-
-sharer.prototype.show_network_btns = function() {
-
-
-	if (nonets == true) {
-		return;
-	}
 	var tmp = "";
 	var lbl = "";
 	var moin = "";
 	var mout = ""
         var cls = "";
 
+
+       
 
                 var twparams='?count=none';
                 twparams = twparams + "&text="+escape(this.story);
@@ -130,11 +100,11 @@ sharer.prototype.show_network_btns = function() {
        tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' data-width='40'  >";
        tmp=tmp +"</span>";
 
-     lbl = "network_btns";
-     if (document.getElementById(lbl)!=null) {
+     lbl = this.spotid;
+    if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
-	this.networks_showing = true;
-	if (nonets == false) {
+
+	if (netson == true) {
           this.fb_render();
           this.gplus_render();
           if (twttr != undefined) {
@@ -143,24 +113,10 @@ sharer.prototype.show_network_btns = function() {
            }
           }
 	}
+
      } 
 
 }
-
-sharer.prototype.hide_network_btns = function() {
-
-	var tmp = "";
-	var lbl = "";
-
-     lbl = "network_btns";
-     if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML= tmp;
-	this.networks_showing = false;
-     } 
-
-
-}
-
 
 
 sharer.prototype.toggle = function() {
@@ -191,8 +147,6 @@ sharer.prototype.change = function() {
 
 sharer.prototype.hide = function() {
 
-   this.newster.hide_rung(); 
-   this.hide_network_btns();
 
    var pobj=null;
    var lbl = "";

@@ -3,7 +3,6 @@
  poster.prototype.draw_rung = function() {
 
 	 if (daviewer.zoom == true) {
-		 this.btnson = true;
 	 }
 
        this.draw_btns();
@@ -77,7 +76,7 @@
 
           }
 
-      if ((this.btnson == true) && (buddah == true))  {
+      if (buddah == true)  {
          if (this.shape == "getsort")  {
            this.get_catsel();
          } else {
@@ -168,7 +167,7 @@
                  
                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
-                  if ((this.btnson == true) && (this.shape == "getpic")) {
+                  if (this.shape == "getpic") {
   	              lbl= this.rungster + "_getpic";
 	              tmpstr=tmpstr+"<div  id='"+lbl+"' style='float:right;' >";
                       tmpstr=tmpstr+"</div>";
