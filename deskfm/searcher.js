@@ -1,6 +1,7 @@
 
 
 function searcher (pmenuid) { 
+
    this.menuid = pmenuid;
    this.spotid = pmenuid + "_spot";
    this.varname = "wanda";
@@ -27,27 +28,35 @@ searcher.prototype.show = function() {
    var sz = '10';
 
    lbl = "search_reset_btn";
-   ocl= "";
-   tmp = tmp + "<button id='"+lbl+"' class='' style='' >";
-   tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' onclick='"+ocl+"' >";
+   ocl= "diego.set_shape(\"\")";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+   tmp = tmp + "search";
    tmp = tmp + "</button>";
 
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
 //     ocl= ocl + this.varname + ".check_central();";
      tmp = tmp + "<input id='"+lbl+"' size=20  onkeyup='"+ocl+"' value='' >";
-   
+
+/*   
    lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
    tmp = tmp + "</button>";
+*/
+
+    lbl = "search_unset_btn";
+    ocl= "diego.set_shape(\"\")";
+    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+    tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
+    tmp = tmp + "</button>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
-    
+      $('#search_reset_btn').button();
    } 
 }
 

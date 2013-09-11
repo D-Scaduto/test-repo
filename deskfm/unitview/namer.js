@@ -9,11 +9,6 @@ poster.prototype.draw_name = function() {
    var tlink = "";
    var s = "";
 
-	ocl = this.varname+".set_shape(\"getname\");";
-        tmp = tmp + "<button  onclick='"+ocl+"' >";  
-        tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-        tmp = tmp + "</button>";
-
     if (this.uname != "")   {
 
       if (this.source == "twitter") {

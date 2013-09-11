@@ -8,10 +8,102 @@ function sharer (pspotid) {
    this.shape = "";  
    this.menued = false;
 
-   this.newster = new poster("share",0,this.varname,this.varname +".newster",false); 
-   this.newster.btnson = true;
+}
 
-   this.networks_showing = true;
+
+sharer.prototype.show = function() {
+
+	var tmp = "";
+	var lbl = "";
+	var moin = "";
+	var mout = ""
+        var cls = "";
+        var ocl = "";
+
+   lbl = "share_reset_btn";
+   ocl= "diego.set_shape(\"\");";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+   tmp = tmp + "share";
+   tmp = tmp + "</button>";
+
+
+    if (this.shape == "twitter") {
+
+       lbl = this.spotid +  "_unset_btn";
+       ocl = this.varname + ".set_shape(\"\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = "twitter_spot";
+       tmp=tmp +"<span id='"+lbl+"'  >";
+       tmp=tmp +"</span>";
+
+     }  else if (this.shape == "facebook") {
+
+       lbl = this.spotid +  "_unset_btn";
+       ocl = this.varname + ".set_shape(\"\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = "twitter_spot";
+       tmp=tmp +"<span id='"+lbl+"'  >";
+       tmp=tmp +"</span>";
+
+     }  else if (this.shape == "google") {
+
+       lbl = this.spotid +  "_unset_btn";
+       ocl = this.varname + ".set_shape(\"\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = "twitter_spot";
+       tmp=tmp +"<span id='"+lbl+"'  >";
+       tmp=tmp +"</span>";
+
+     } else if (this.shape == "") {
+
+       lbl = this.spotid +  "_twitter_btn";
+       ocl = this.varname + ".set_shape(\"twitter\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = this.spotid +  "_facebook_btn";
+       ocl = this.varname + ".set_shape(\"facebook\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp=tmp +"</button>";
+
+       lbl = this.spotid +  "_google_btn";
+       ocl = this.varname + ".set_shape(\"google\");";
+       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp=tmp +"</button>";
+     }
+
+     lbl = "share_unset_btn";
+     ocl= "diego.set_shape(\"\")";
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+     tmp = tmp + "</button>";
+
+     lbl = "name_spot";
+     tmp=tmp +"<div id='"+lbl+"'  >";
+     tmp=tmp +"</div>";
+
+
+     lbl = this.spotid;
+     if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML= tmp;
+        this.showing = true;
+        if (this.shape == "getname") {
+             jesie.show();
+        }
+        $('#share_reset_btn').button();
+     } 
 
 }
 
@@ -26,45 +118,6 @@ sharer.prototype.new_one = function() {
 }
 
 
-sharer.prototype.show = function() {
-
-	var tmp = "";
-	var lbl = "";
-	var moin = "";
-	var mout = ""
-        var cls = "";
-        var ocl = "";
-
-       lbl = this.spotid +  "_addone_btn";
-       ocl = this.varname + ".new_one();";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' width='20px' >";
-       tmp=tmp +"</button>";
-
-
-       lbl = this.spotid +  "_twitter_btn";
-       tmp=tmp +"<button >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
-       tmp=tmp +"</button>";
-
-       lbl = this.spotid +  "_facebook_btn";
-       tmp=tmp +"<button >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
-       tmp=tmp +"</button>";
-
-
-       lbl = this.spotid +  "_google_btn";
-       tmp=tmp +"<button >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
-       tmp=tmp +"</button>";
-
-     lbl = this.spotid;
-     if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML= tmp;
-     } 
-
-}
-
 
 sharer.prototype.show_nets = function() {
 
@@ -73,9 +126,6 @@ sharer.prototype.show_nets = function() {
 	var moin = "";
 	var mout = ""
         var cls = "";
-
-
-       
 
                 var twparams='?count=none';
                 twparams = twparams + "&text="+escape(this.story);
@@ -137,6 +187,14 @@ sharer.prototype.set_menued = function(ptog) {
 		this.mened = false;
 		this.spotid = this.menuid + "_spot";
 	}
+}
+
+
+sharer.prototype.set_shape = function(pshape) {
+	if (pshape != undefined) {
+          this.shape = pshape;
+          this.show();
+        }
 }
 
 

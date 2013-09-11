@@ -1,9 +1,9 @@
 
 
- poster.prototype.draw_rung = function() {
+poster.prototype.draw_rung = function() {
 
-	 if (daviewer.zoom == true) {
-	 }
+       if (daviewer.zoom == true) {
+       }
 
        this.draw_btns();
 
@@ -76,17 +76,18 @@
 
           }
 
-      if (buddah == true)  {
          if (this.shape == "getsort")  {
            this.get_catsel();
          } else {
-           if (this.shape == "") {
+           if (debug == true) {
   	     this.draw_catsel();
 	   }
 	 }
-	 this.draw_date();
-      }
-
+ 
+        if (this.cat == "") {
+           this.draw_date();
+        }
+       
         if (debug == true) {
           this.draw_debug();
         }

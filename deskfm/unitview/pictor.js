@@ -17,20 +17,13 @@ poster.prototype.draw_pic = function() {
 	  if (is_mobile == true) {
          	  cls = "picmobile";
 	  }
-          if (this.piczoom == true)   {
+          if (daviewer.zoom == true)   {
               cls = "piczoom";
           }
 	  ocl = this.varname + ".toggle_piczoom();";
           tmp=tmp + "<img src='"+ps+"' onclick='"+ocl+"' class='"+cls+"'  >";
 
-      } else {
-          if (this.shape == "") {
-		ocl = this.varname+".set_shape(\"getpic\");";
-                tmp = tmp + "<button  onclick='"+ocl+"' >";  
-       		tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
-	        tmp = tmp + "</button>";
-	   }
-      }
+     }
 
       lbl = this.rungster + '_pic_spot';
       if (document.getElementById(lbl) != null) {

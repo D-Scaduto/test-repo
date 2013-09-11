@@ -12,7 +12,7 @@ function sorter (pmenuid) {
    this.menued = false;
    this.sterms = "standing desk";
    this.da_date = new Date();
-   this.krono = new calendor('cal_spot','mac.krono','mac.check_local()');
+   this.krono = null;
 }
 
 
@@ -24,14 +24,29 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-         tmp = tmp + "<span id='cal_spot' class='' >";
-         tmp = tmp + "</span>";	
+   lbl = "sort_reset_btn";
+   ocl= "diego.set_shape(\"\")";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+   tmp = tmp + "unsorted";
+   tmp = tmp + "</button>";
+
+   tmp = tmp + "<span id='cal_spot' class='' >";
+   tmp = tmp + "</span>";	
+
+    lbl = "sort_unset_btn";
+    ocl= "diego.set_shape(\"\")";
+    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+    tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+    tmp = tmp + "</button>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
+      this.krono = new calendor('cal_spot','mac.krono','mac.check_local()');
       this.krono.show();
+      $('#sort_reset_btn').button();
+      this.check_local();
    } 
 
 }

@@ -13,7 +13,11 @@ header('Content-type: text/html; charset=utf-8 ');
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
+  var debug = false;
+  var netson = false;
+
   var daviewer = null;
+  var da_limit=1000;
 
   var cater = null;  //categor
   var store = null;  //shoper
@@ -24,15 +28,13 @@ header('Content-type: text/html; charset=utf-8 ');
   var sal = null;    //logoman
   var diego = null;  //header
   var mac  = null;   //farmer
-  var krono = null;  //calendor 
+  var moe = null;    //feeder 
+  var jesie = null;  //namer;
 
-  var da_limit=1000;
   var init_run = true;
   var got_stats = false;
   var buddah = false;
   var pname = "";
-  var debug = false;
-  var netson = false;
 
 </script>
 
@@ -83,6 +85,11 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/categor.js type="text/javascript" ></script>
 <script src=deskfm/sharer.js type="text/javascript" ></script>
 <script src=deskfm/searcher.js type="text/javascript" ></script>
+<script src=deskfm/sorter.js type="text/javascript" ></script>
+<script src=deskfm/feeder.js type="text/javascript" ></script>
+<script src=deskfm/manager.js type="text/javascript" ></script>
+
+<script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
 
@@ -147,10 +154,13 @@ header('Content-type: text/html; charset=utf-8 ');
 </div>
 
 <div id='outer_spot' style='' class='outer_menu' >
-<span id='menu_spot' style='float:left;' >
+
+<span id='menu_spot' class='menu' style='' >
 </span>
-<span id='rail_spot' style='float:right;vertical-align:top;' >
+
+<span id='rail_spot' class='rail' style='' >
 </span>
+
 </div>
 
 <div id=''  style='clear:both;' >
@@ -186,18 +196,18 @@ header('Content-type: text/html; charset=utf-8 ');
         sal = new logoman("logo_spot");
        
 	jesie = new namer("name_spot");
-	krono = new calendor("krono");
 
         store = new shoper("shop_spot");
         cater = new categor("browse");
 	wanda = new searcher("search");
 
 	nicky = new sharer("share_spot");
+	   mac = new sorter("sort");
+	   moe = new feeder("feed");
 
         amare = new stater();
 
-	diego = new header("menu_spot");
-	diego.shape = "browse";
+	diego = new header();
         diego.show();
 
         daviewer = new viewer("main_view","daviewer");

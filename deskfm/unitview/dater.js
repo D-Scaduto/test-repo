@@ -16,8 +16,12 @@ poster.prototype.draw_date = function() {
         var m = c[1]-1;
 	day = c[2];
         var pi = parseInt(m,10);
-        var nic =  krono.months[pi] + " " + day + " \'" + c[0].substr(2,2);
-        var my =  krono.months[pi] + " " + " \'" + c[0].substr(2,2);
+        var nic = "";
+        var my = "";
+        if (mac.krono != null) {
+          nic = mac.krono.months[pi] + " " + day + " \'" + c[0].substr(2,2);
+          my =  mac.krono.months[pi] + " " + " \'" + c[0].substr(2,2);
+        }
 //        tmpstr=tmpstr+ arr + "<br>";
         tmpstr=tmpstr+ nic;
     }

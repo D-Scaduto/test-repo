@@ -43,12 +43,6 @@ poster.prototype.draw_story = function() {
 */
           tmp = tmp + ps;
 
-      } else {
-         if ((this.shape == "getstory") || (this.shape == "")) {
-	    tmp = tmp + "<button  onclick='"+this.varname+".toggle_getstory();' >";  
-            tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
-            tmp = tmp + "</button>"; 
-	   }
       }
 
       tmp = tmp + "</span>";

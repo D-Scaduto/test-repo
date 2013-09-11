@@ -1,41 +1,4 @@
 
-
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-
-
-a:link{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline; 
-  vertical-align:top;
-}
-
-a:visited{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline;  
-  vertical-align:top;
-}
-
-a:active{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline;  
-  vertical-align:top;
-}
-
-
 .regular_top {
   position:relative;
   background-color:white;
@@ -52,7 +15,6 @@ a:active{
   padding:5px;
 }
 
-
      .piczoom {
 	 width:200px;
      }
@@ -62,43 +24,28 @@ a:active{
 	 width:75px;
      }
 
-     .picmobile {
-	 width:100px;
-     }
-     
      .outer_menu {
 	width:100%;
       }
 
-@media screen and (max-width:480px) {
+
+@media screen and (max-width:724px) {
     
-
-    .top_left {
-        border-color:silver;
-        border-style:solid;
-        border-width:2px;
+     .menu {
 	width:100%;
-	margin:0 auto;
-    }
-
-
-     .inner_menu {
-        border-color:silver;
-        border-style:solid;
-        border-width:2px;
-	width:300px;
-	margin:0 auto;
-
       }
 
-    .rail_menu {
-	background-color:white;
-	border:solid;
-	border-width:2px;
-	border-color:silver;
-	width:235px;
-	margin:0 auto;
-    }
+     .rail {
+	width:100%;
+     }
+     .rail_btns {
+	width:100px;
+        float:right;
+     }
+     .rail_main {
+        display:inline-block;
+     }
+
 
     .box {
        background-color:white;
@@ -138,29 +85,27 @@ a:active{
 
 
 
+@media screen and (min-width:725px) {
 
-@media screen and (min-width:481px) {
-
-     .top_left {
-       float:left;
-     }
-
-     .inner_menu {
-        clear:left;
-        border-color:silver;
-        border-style:solid;
-        border-size:1px;
-//	width:450px;
-	display:inline-block;
+     .menu {
+	width:400px;
+        display:inline-block;
+        vertical-align:top;
       }
 
-    .rail_menu {
-	  float:right;
-	  background-color:white;
-	  border:4px solid silver; 
-	  padding:4px;
-	  width:200px;
-    }
+     .rail {
+	width:300px;
+        vertical-align:top;
+        display:inline-block;
+      }
+     .rail_btns {
+	width:100px;
+  	display:inline-block;
+     }
+     .rail_main {
+	float:right;
+     }
+
     .box {
        background-color:white;
        display: -moz-inline-stack;
@@ -195,8 +140,6 @@ a:active{
 }
 
 
-
-
 .spotd_on {
 border-color:silver;
 border-style:solid;
@@ -226,64 +169,40 @@ font-size:medium;
 }
 
 
-.spotl_on {
-border-color:white;
-border-style:solid;
-border-width:3px;
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium;
-}
-
-.spotl_mark {
-border-color:white;
-border-style:solid;
-border-width:3px;
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium;
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 
-.spotl_off {
-border-color:silver;
-border-style:solid;
-border-width:3px;
-font-family: sans-serif;
-font-weight:normal;
-font-size:medium;
-}
 
-
-.elem {
-   border:solid white 3px;
-   position: relative;
-}
-
-.elem p {
-   padding: 0 1em;
-}
-
-.label, .endlabel {
-  position:absolute;
-  background-color:white;
-  color: #414142;
-  line-height:1em;
+a:link{
   font-family: sans-serif;
   font-weight:normal;
   font-size:medium;
+  color:black;
+  text-decoration:underline; 
+  vertical-align:top;
 }
 
-.label {
-  top: 0;
-  left: 0;
-  padding: 0 3px 3px 0;
-  position:absolute;
+a:visited{
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+  color:black;
+  text-decoration:underline;  
+  vertical-align:top;
 }
 
-.endlabel {
-  right: 0;
-  top: 0;
-  padding: 3px 0 0 3px;
+a:active{
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+  color:black;
+  text-decoration:underline;  
+  vertical-align:top;
 }
+
+
 

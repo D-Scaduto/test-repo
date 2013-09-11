@@ -15,8 +15,14 @@ header('Content-type: text/html; charset=utf-8 ');
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
+  var debug = false;
+  var netson = false;
+
+  var buddah = false;
+  var pname = "";
 
   var daviewer = null;
+  var da_limit=1000;
 
   var cater = null;  //categor
   var store = null;  //shoper
@@ -26,17 +32,12 @@ header('Content-type: text/html; charset=utf-8 ');
   var amare = null;  //stater
   var sal = null;    //logoman
   var diego = null;  //header
-  var mac = null;   //farmer
+  var mac = null;    //farmer
   var moe = null;    //feeder 
-  var krono = null;  //calendor 
+  var jesie = null;  //namer 
 
-  var da_limit=1000;
   var init_run = true;
   var got_stats = false;
-  var buddah = false;
-  var pname = "";
-  var debug = false;
-  var netson = false;
 
 </script>
 
@@ -153,10 +154,13 @@ header('Content-type: text/html; charset=utf-8 ');
 </div>
 
 <div id='outer_spot' style='' class='outer_menu' >
-<span id='menu_spot' style='float:left;' >
+
+<span id='menu_spot' class='menu' style='' >
 </span>
-<span id='rail_spot' style='float:right;vertical-align:top;' >
+
+<span id='rail_spot' class='rail' style='' >
 </span>
+
 </div>
 
 <div id=''  style='clear:both;' >
@@ -190,7 +194,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
    buddah=true;
 
-   krono = new calendor("cal_spot");
    amare = new stater();
    daviewer = new viewer("main_view","daviewer");
    
@@ -212,10 +215,9 @@ header('Content-type: text/html; charset=utf-8 ');
 	   cater = new categor("browse");
 	   wanda = new searcher("search");
 	   nicky = new sharer("share_spot");
-           joe = new manager("contact");
+   //        joe = new manager("contact");
 
-	   diego = new header("menu_spot");
-	   diego.shape = "full";
+	   diego = new header();
            diego.show();
 	   
     amare.get_stats();
@@ -229,7 +231,6 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.month = "";
     dt.year="";
     amare.get_unsorted(dt,true);
-
 
     $(window).scroll(function() {
         if ($('#top_line').inSight(100) == true) {

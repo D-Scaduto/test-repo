@@ -22,20 +22,33 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
+      lbl = "feed_reset_btn";
+      ocl= "diego.set_shape(\"\")";
+      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+      tmp = tmp + "feed";
+      tmp = tmp + "</button>";
+
 	 tmp = tmp + "<button id='' onclick='moe.check_feed();'  >";
          tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
          tmp = tmp + "</button>";
 
          tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
-         tmp = tmp + "</div>";
 
+      lbl = "feed_unset_btn";
+      ocl= "diego.set_shape(\"\")";
+      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+      tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+      tmp = tmp + "</button>";
+ 
          tmp = tmp + "<div id='feed_btns'  >";
          tmp = tmp + "</div>";
-     
+ 
+   
    lbl = this.spotid;
-  if (document.getElementById(lbl) != null) {
+   if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
+      $('#feed_reset_btn').button();
    } 
 
 }

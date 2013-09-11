@@ -11,7 +11,6 @@ function categor (pmenuid) {
 
    this.cat ="all";
    this.subcat ="";
-
 }
 
 
@@ -23,6 +22,18 @@ categor.prototype.show = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
+
+    lbl = "browse_reset_btn";
+    ocl= "cater.set_cats(\"all\")";
+    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+    tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
+    tmp = tmp + "</button>";
+
+    lbl = "browse_reset_btn";
+    ocl= "diego.set_shape(\"\")";
+    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;vertical-align:top;' >";
+    tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
+    tmp = tmp + "</button>";
 
       if (this.cat == "all") { 
 
@@ -89,7 +100,7 @@ categor.prototype.show = function() {
 
     }
        
-
+ 
    lbl = this.spotid;
    obj = document.getElementById(lbl)
    if (obj != null) {

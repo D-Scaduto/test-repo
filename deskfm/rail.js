@@ -5,24 +5,42 @@ viewer.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
 
-       tmp = tmp + "<div>";
+     tmp = tmp + "<div class='rail_btns' style='' >";
+
+     lbl = 'nitro_lbtn';
+     ocl = ''
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
+     tmp = tmp + "</button>";  
+
+     lbl = 'nitro_rbtn';
+     ocl = ''
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
+     tmp = tmp + "</button>";  
+     tmp = tmp + "</div>";
+
+
+       tmp = tmp + "<div class='rail_main' style='width:200px;' >";
+
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='local_chunkdata' style='padding:10px;' >";
-       tmp = tmp + "</span>";
-       
-       tmp = tmp + "</div>";
+       tmp = tmp + "</span>";     
 
-       tmp = tmp + "<div>";
+       tmp = tmp + "<br>";
        tmp = tmp + "<span id='local_chipbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
        tmp = tmp + "<span id='local_chipdata' style='padding:10px;' >";
        tmp = tmp + "</span>";
+
        tmp = tmp + "</div>";
 
+
+      if (debug == true) {
        tmp = tmp + "<div id='rail_debug' class='' style='' >";
        tmp = tmp + "</div>";
-
+      }
     
    lbl = "rail_spot";
    pobj = document.getElementById(lbl);

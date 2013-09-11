@@ -11,18 +11,7 @@ poster.prototype.draw_embed = function() {
 
 
        if ((this.embedurl != "") && (this.embedurl != undefined)) { 
-
               elink = this.embedurl;
-
-	      if (this.shape == "") {
-
-		  if ((buddah == true) || (this.parvar == "nicky")) {
-        	    ocl = this.varname + ".toggle_getembed();";
-        	    tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		    tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-		    tmp = tmp + "</button>";
-	          }
-
 		  ocl = this.varname + ".toggle_showembed();";
         	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
 		  tmp =	tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
@@ -32,27 +21,7 @@ poster.prototype.draw_embed = function() {
 	          if ( pobj != null) {
 	            pobj.innerHTML = tmp;
         	  }
-	      }
-
-       } else {
-
-	  if (this.shape == "") {	   
-              if ((buddah == true) || (this.parvar == "nicky")) {
-        	  ocl = this.varname + ".toggle_getembed();";
-        	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-		  tmp = tmp + "</button>";
-	          lbl = this.rungster + '_embed_btn';
-	       	  pobj = document.getElementById(lbl);
-	          if ( pobj != null) {
-	            pobj.innerHTML = tmp;
-        	  }
-	      }
-          }  
-  	  
        }
-	
- 
 
        tmp = "";
        if ((this.embed_show == true ) && (elink != "")) {
@@ -62,6 +31,7 @@ poster.prototype.draw_embed = function() {
            tmp = tmp + " </iframe> ";
            tmp = tmp + " </div> ";
        }
+
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
@@ -69,7 +39,6 @@ poster.prototype.draw_embed = function() {
        }
    
 }
-
 
 
 poster.prototype.get_embed = function() {

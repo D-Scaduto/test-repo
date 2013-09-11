@@ -14,10 +14,10 @@ subcat_provider.prototype.init = function () {
 //     this.sealist.push({'text':'who sits all day at their desk', 'cat':'who','subcat':'sitter' });
      this.sealist.push({'text':'wants a standing desk ?', 'cat':'who','subcat':'wants' });
      this.sealist.push({'text':'is trying a standing desk ?', 'cat':'who','subcat':'newbie' });
-     this.sealist.push({'text':'likes standing at their desk ?', 'cat':'who','subcat':'likes' });
-     this.sealist.push({'text':'shares about standing desks ?', 'cat':'who','subcat':'shares' });
-     this.sealist.push({'text':'is curious about standing desks ?', 'cat':'who','subcat':'curious' });
-     this.sealist.push({'text':'made their own standing desk ? ', 'cat':'who','subcat':'diy' });
+     this.sealist.push({'text':'likes standing desks ?', 'cat':'who','subcat':'likes' });
+     this.sealist.push({'text':'shares about standing ?', 'cat':'who','subcat':'shares' });
+     this.sealist.push({'text':'is curious about standing  ?', 'cat':'who','subcat':'curious' });
+     this.sealist.push({'text':'made a standing desk ? ', 'cat':'who','subcat':'diy' });
      this.sealist.push({'text':'is anti standing ?' ,'cat':'who','subcat':'anti' });
 
      this.sealist.push({'text':'is a standing desk ?', 'cat':'what','subcat':'standesk' });
@@ -26,20 +26,20 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'about chairs ? ', 'cat':'what','subcat':'chair' });
      this.sealist.push({'text':'about feet pain ? ', 'cat':'what','subcat':'footpad' });
 
-     this.sealist.push({'text':'should you have a standing desk ?', 'cat':'why','subcat':'' });
-     this.sealist.push({'text':'is lots of sitting bad ?', 'cat':'why','subcat':'sitonly' });
-     this.sealist.push({'text':'is standing healthy ? ', 'cat':'why','subcat':'health' });
-     this.sealist.push({'text':'does standing helps back pain ?', 'cat':'why','subcat':'back' });
-     this.sealist.push({'text':'does standing burns calories ?', 'cat':'why','subcat':'weight' });
+     this.sealist.push({'text':'get a standing desk ?', 'cat':'why','subcat':'' });
+     this.sealist.push({'text':'is too much sitting bad ?', 'cat':'why','subcat':'sitonly' });
+     this.sealist.push({'text':'is more standing healthy ? ', 'cat':'why','subcat':'health' });
+     this.sealist.push({'text':'so much back pain ?', 'cat':'why','subcat':'back' });
+     this.sealist.push({'text':'no burns calories ?', 'cat':'why','subcat':'weight' });
      this.sealist.push({'text':'is standing productive ?', 'cat':'why','subcat':'productive' });
      this.sealist.push({'text':'not stand up ?' ,'cat':'why','subcat':'anti' });
 
      this.sealist.push({'text':'do you stand at a desk ? ', 'cat':'how','subcat':'howto' });
      this.sealist.push({'text':'difficult is standing ? ', 'cat':'how','subcat':'difficult' });
-     this.sealist.push({'text':'do you make a standing desk ? ' , 'cat':'how','subcat':'diy' });
-     this.sealist.push({'text':'do you get a standing desk ? ' , 'cat':'how','subcat':'get' });
-     this.sealist.push({'text':'do you compare standing desks ? ', 'cat':'how','subcat':'compare' });
-     this.sealist.push({'text':'do you workout at a desk   ' , 'cat':'how','subcat':'workout' });
+     this.sealist.push({'text':'to make a standing desk ? ' , 'cat':'how','subcat':'diy' });
+     this.sealist.push({'text':'to get a standing desk ? ' , 'cat':'how','subcat':'get' });
+     this.sealist.push({'text':'to compare standing desks ? ', 'cat':'how','subcat':'compare' });
+     this.sealist.push({'text':'to workout at a desk   ' , 'cat':'how','subcat':'workout' });
 
 }
 

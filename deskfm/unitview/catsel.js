@@ -1,25 +1,14 @@
 
 
  poster.prototype.draw_catsel = function() {
+
     var tmp="";
     var tspot = this.rung;
     var lbl = "";
     var pobj=null;
 
-  
-     if (this.cat == "") {
-	ocl = this.varname + ".set_shape(\"getsort\");";
-        tmp = tmp + "<button  onclick='"+ocl+"' >";  
-	tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
-	tmp = tmp + "</button>";
+     if (this.cat != "") {
 
-	lbl = this.rungster + '_sort_spot';
-        pobj = document.getElementById(lbl);
-        if ( pobj != null) {
-          pobj.innerHTML = tmp;
-        }
-
-     } else {
        lbl = this.spotid+"_"+tspot+"_catsog";
        ocl = this.varname + ".get_catsel();";
        tmp = tmp +"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' >";
@@ -38,8 +27,8 @@
 
 
  poster.prototype.get_catsel = function() {
+
      var tmp="";
-     var tspot = this.rung;
      var lbl = "";
      var lb1 = "";
      var lb2 = "";
