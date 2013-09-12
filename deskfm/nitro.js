@@ -12,9 +12,9 @@ viewer.prototype.nitro_start = function(pway) {
    var tmp = "";
 
     if (is_mobile == true) {
-       this.metro_spd = 1000;
+       this.metro_spd = 500;
     } else {
-       this.metro_spd =500;
+       this.metro_spd =250;
     }
     this.flip_card();    
 
@@ -22,13 +22,10 @@ viewer.prototype.nitro_start = function(pway) {
 }
 
 
-
 viewer.prototype.nitro_stop = function() {
 
    this.metro_spd = 0;
    this.flip_card();
-   
-
 }
 
 

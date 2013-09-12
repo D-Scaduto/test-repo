@@ -8,18 +8,17 @@ viewer.prototype.draw_rail = function() {
      tmp = tmp + "<div class='rail_btns' style='' >";
 
      lbl = 'nitro_lbtn';
-     ocl = ''
+     ocl = 'daviewer.nitro_stop();'
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
      tmp = tmp + "</button>";  
 
      lbl = 'nitro_rbtn';
-     ocl = ''
+     ocl = 'daviewer.nitro_start();';
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
      tmp = tmp + "</button>";  
      tmp = tmp + "</div>";
-
 
        tmp = tmp + "<div class='rail_main' style='width:200px;' >";
 
@@ -36,7 +35,6 @@ viewer.prototype.draw_rail = function() {
 
        tmp = tmp + "</div>";
 
-
       if (debug == true) {
        tmp = tmp + "<div id='rail_debug' class='' style='' >";
        tmp = tmp + "</div>";
@@ -47,8 +45,8 @@ viewer.prototype.draw_rail = function() {
    if ( pobj != null) {
 	pobj.innerHTML = tmp;
 
-      var lchunk = 1
-      var lchunks = 1;
+       var lchunk = 1
+       var lchunks = 1;
        if (this.stats != null) {
           lchunk = Math.floor(this.listdex/this.top_end);
           lchunks = this.stats.lnum / this.top_end;

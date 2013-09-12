@@ -47,7 +47,7 @@ namer.prototype.get_name = function() {
     var ocl = "";
 
     tmp =tmp + "<span class='spotd_off'  onclick='jesie.findme();' > ";
-    tmp = tmp + "what\'s your name ?";
+    tmp = tmp + "what can we call you ?";
     tmp =tmp + "</span>";
 
     var tval =  "";
@@ -100,7 +100,7 @@ namer.prototype.say_hi = function() {
            ocl = "jesie.get_name();";
            var cls='spotd_off';
            tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-           tmp = tmp + "what's your name?";
+           tmp = tmp + "what can we call you?";
            tmp = tmp + "</span>";
         }
 

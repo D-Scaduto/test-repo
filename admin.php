@@ -155,11 +155,11 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='outer_spot' style='' class='outer_menu' >
 
-<span id='menu_spot' class='menu' style='' >
-</span>
+<div id='menu_spot' class='menu' style='' >
+</div>
 
-<span id='rail_spot' class='rail' style='' >
-</span>
+<div id='rail_spot' class='rail' style='' >
+</div>
 
 </div>
 

@@ -6,7 +6,8 @@ function categor (pmenuid) {
    this.spotid = pmenuid + "_spot";
    this.varname ='cater';
    this.showing = false;
-   this.shape = "";
+
+   this.shape = "all";
    this.menued = false;
 
    this.cat ="all";
@@ -23,11 +24,31 @@ categor.prototype.show = function() {
     var s = "";
     var sugs = [];
 
-    lbl = "browse_reset_btn";
-    ocl= "cater.set_cats(\"all\")";
-    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-    tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
-    tmp = tmp + "</button>";
+    if (buddah == true) {
+       lbl = 'feed_btn';
+       ocl = 'diego.set_shape(\"feed\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+       lbl = 'sort_btn';
+       ocl = 'diego.set_shape(\"sort\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+    }
+
+     lbl = "share_set_btn";
+     ocl= "diego.set_shape(\"share\")";
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+     tmp = tmp + "</button>";
+
+    lbl = "search_set_btn";
+     ocl= "diego.set_shape(\"search\")";
+     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
+     tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
+     tmp = tmp + "</button>";
 
     lbl = "browse_reset_btn";
     ocl= "diego.set_shape(\"\")";
@@ -35,77 +56,108 @@ categor.prototype.show = function() {
     tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
     tmp = tmp + "</button>";
 
-      if (this.cat == "all") { 
+    if (this.subcat != "" ) {
+
+	lbl = 'subcat_btn';
+        s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
+        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
+        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
+	tmp = tmp +  this.cat + " " + s;
+        tmp=tmp+"</button>";
+
+   } else {
+
+      if (this.shape == "all") { 
+
+        lbl = "browse_who_btn";
+        ocl= "cater.set_shape(\"who\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "who?";
+        tmp = tmp + "</button>";
+
+        lbl = "browse_what_btn";
+        ocl= "cater.set_shape(\"what\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "what?";
+        tmp = tmp + "</button>";
+
+        lbl = "browse_why_btn";
+        ocl= "cater.set_shape(\"why\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "why?";
+        tmp = tmp + "</button>";
+
+        lbl = "browse_how_btn";
+        ocl= "cater.set_shape(\"how\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "how?";
+        tmp = tmp + "</button>";
+
+      } else if (this.shape == "who") { 
 
         lbl = 'who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
-  	tmp = tmp +"<li style='vertical-align:top;'  ><a >who</a>";
-        tmp = tmp +"<ul  style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+  	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp + "</ul>";
-	tmp = tmp + "</li></ul>";
+        tmp = tmp + "</ul></li></ul>";
+
+       } else if (this.shape == "what") { 
 
         lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
-  	tmp = tmp +"<li style='vertical-align:top;'  ><a >what</a>";
-        tmp = tmp +"<ul  style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+   	tmp = tmp +"<li style=''  ><a >what?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp + "</ul>";
-	tmp = tmp + "</li></ul>";
+        tmp = tmp + "</ul></li></ul>";
+
+       } else if (this.shape == "why") { 
 
         lbl = 'why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
-  	tmp = tmp +"<li style='vertical-align:top;'  ><a >why</a>";
-        tmp = tmp +"<ul  style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+    	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
         tmp = tmp +"</ul></li></ul>";
 
+       } else if (this.shape == "how") { 
+
         lbl = 'how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
-  	tmp = tmp +"<li  style='vertical-align:top;' ><a >how</a>";
-        tmp = tmp +"<ul  id='"+lbl+"' style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+  	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
         tmp = tmp +"</ul></li></ul>";
-   
-    } else {
-
-	lbl = this.cat + '_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:50px;display:inline-block;vertical-align:top;' >";
-  	tmp = tmp +"<li style='vertical-align:top;'  ><a >"+ this.cat + "</a>";
-        tmp = tmp +"<ul  id='"+lbl+"' style='' >";
-        sugs = amare.subcat_set.get_setlist(this.cat);
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='"+this.cat+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-        }
-        tmp = tmp +"</ul></li></ul>";
-
-	lbl = 'subcat_btn';
-        s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
-        ocl = "cater.set_cats(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + s;
-        tmp=tmp+"</button>";
+      }
 
     }
-       
- 
+        
    lbl = this.spotid;
    obj = document.getElementById(lbl)
    if (obj != null) {
      obj.innerHTML=tmp;
-     if (this.cat == "all") {
+
+     if (this.subcat != "") {
+
+   	    $('#subcat_btn').button();
+
+     } else {
+
+       if (this.shape == "all") {
+      	    $('#browse_who_btn').button();
+  	    $('#browse_what_btn').button();
+  	    $('#browse_why_btn').button();
+  	    $('#browse_how_btn').button();
+
+       } else if (this.shape == "who") {
 
             $('#who_sog').menu();
 	    $('#who_sog').on( "menuselect", function( event, ui ) {
@@ -118,7 +170,9 @@ categor.prototype.show = function() {
 	         eval(exp);
 	       }
              } );
-	    
+
+	} else if (this.shape == "what") {
+
 	    $('#what_sog').menu();
 	    $('#what_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";
@@ -130,7 +184,9 @@ categor.prototype.show = function() {
 	         eval(exp);
 	       }
              } );
-	     
+
+	} else if (this.shape == "why") {
+     
 	    $('#why_sog').menu();
 	    $('#why_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";
@@ -143,6 +199,8 @@ categor.prototype.show = function() {
 	       }
              } );
 
+	} else if (this.shape == "how") {
+
 	    $('#how_sog').menu();
 	    $('#how_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";
@@ -154,30 +212,10 @@ categor.prototype.show = function() {
 	         eval(exp);
 	       }
              } );
-
-     } else {
-
-	    $('#cat_undo_btn').button();
-   	    $('#subcat_btn').button();
-
-	    $('#'+this.cat+'_sog').menu();
-	    $('#'+this.cat+'_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-            
-     }
+         } 
+      }
       
      this.showing = true;
-     if (init_run == false) {
-	 this.redraw_view();
-     }
 
    }
 }
@@ -221,6 +259,16 @@ categor.prototype.redraw_view = function(pchunk) {
 }
 
 
+categor.prototype.set_shape = function(pshape) {
+
+      if (pshape != undefined) {
+           this.shape=pshape;
+           this.show();
+      }
+}
+
+
+
 categor.prototype.set_cats = function(tcat,tsubcat) {
 
       if (tcat != undefined) {
@@ -237,10 +285,11 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
       }
 
      // get more if more need be gotten 
-
-      this.show(); 
+      this.show();
+      this.redraw_view(); 
    
 }
+
 
 categor.prototype.change = function () {
    this.toggle();
