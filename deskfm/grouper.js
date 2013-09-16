@@ -1,19 +1,16 @@
 
 
-function manager (pspotid) {
+function grouper (pspotid) {
  
-   this.spotid = pspotid;
-   this.varname = "joe";
+   this.spotid = pspotid + "_spot";
+   this.varname = "robby";
    this.showing = false;
    this.shape = "all"; //one
-   this.menued = false;
-
    this.groupid="";
-
 }
 
 
-manager.prototype.show = function() {
+grouper.prototype.show = function() {
 
      var tmp = "";
      var lbl = "";
@@ -24,19 +21,8 @@ manager.prototype.show = function() {
 
      if (this.shape == "one") {
 
-	lbl = 'group_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >groups</a>";
-
-        tmp = tmp +"<ul  style='width:250px;' >";
-        sugs = amare.group_set.get_setlist();
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a gtag='"+sugs[i].groupid+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-        }
-        tmp = tmp +"</ul></li></ul>";
-
   	    lbl = 'group_all_btn';
-            ocl = '';
+            ocl = this.varname + '.set_shape(\"all\");';
             tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
 	    if (this.groupid != "") {
               s = amare.group_set.get_desc(this.groupid);
@@ -83,20 +69,8 @@ manager.prototype.show = function() {
      }
 }
 
- 
-manager.prototype.set_menued = function(ptog) {
 
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
-}
-
-
-manager.prototype.redraw_view = function(pchunk) {
+grouper.prototype.redraw_view = function(pchunk) {
 	var start = 0;
         var p =0;
 	this.stats = amare.get_groupstat(this.groupid);
@@ -112,13 +86,13 @@ manager.prototype.redraw_view = function(pchunk) {
 }
 
 
-manager.prototype.change = function() {
+grouper.prototype.change = function() {
 
 	this.toggle();
   
 }
 
-manager.prototype.set_shape = function(pstr) {
+grouper.prototype.set_shape = function(pstr) {
     if (pstr != undefined ) {
       if (pstr != this.shape) {
         this.shape = pstr;
@@ -131,7 +105,7 @@ manager.prototype.set_shape = function(pstr) {
 }
 
 
-manager.prototype.set_group = function (tgroupid) {
+grouper.prototype.set_group = function (tgroupid) {
   if (tgroupid != undefined) {
     this.groupid = tgroupid;
   }
@@ -140,9 +114,7 @@ manager.prototype.set_group = function (tgroupid) {
 }
 
 
-
-
-manager.prototype.toggle = function() {
+grouper.prototype.toggle = function() {
    if (this.showing == true) {
       this.hide();
    } else {
@@ -150,7 +122,8 @@ manager.prototype.toggle = function() {
    }
 }
 
-manager.prototype.hide = function() {
+
+grouper.prototype.hide = function() {
      var tmp = "";
      var lbl = "";
 
@@ -162,5 +135,18 @@ manager.prototype.hide = function() {
      this.showing = false;
 
 }
+
+ 
+grouper.prototype.set_menued = function(ptog) {
+
+	if (ptog == true) {
+		this.menued = true;
+		this.spotid = "menu_bar";
+	} else {
+		this.mened = false;
+		this.spotid = this.menuid + "_spot";
+	}
+}
+
 
 

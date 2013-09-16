@@ -13,7 +13,8 @@ poster.prototype.draw_story = function() {
 
        var tiesto = this.story;
 
-       ocl = this.varname + ".set_shape(\"getstory\");";
+       ocl='';
+//       ocl = this.varname + ".set_shape(\"getstory\");";
        tmp = tmp + "<span onclick='"+ocl+"' class='story' onmouseover='' onmouseout='' >";
 
        if ((this.story != "") && (this.story != null)) { 

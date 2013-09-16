@@ -79,8 +79,8 @@ viewer.prototype.redraw_view = function() {
 
          if (this.stats.listype == "webits" )  {
 
-	         if (this.stats.cat == "") {
-                    this.load_list(start);
+	         if (this.stats.cat == "all") {
+                    this.load_sorted_list(start);
 		 } else {
 	            this.load_category_list(this.stats.cat,this.stats.subcat,start);
 		 }
@@ -138,6 +138,44 @@ viewer.prototype.clear_list = function() {
 }
 
 
+viewer.prototype.check_match = function(mdex,ltype) {
+
+    var s = "";
+    var pobj = null;
+    var ret = false;
+
+    if (ltype == "webits") {
+        s =  "amare.webitlist[" + mdex + "]";
+    } else if (ltype == "people") {
+        s =  "amare.peoplelist[" + mdex + "]";
+    } else if (ltype == "products") {
+        s =  "amare.productlist[" + mdex + "]";
+    } else if (ltype == "suppliers") {
+        s =  "amare.supplierlist[" + mdex + "]";
+    } else if (ltype == "unsorted") {
+        s =  "amare.unsortedlist[" + mdex + "]";
+    } else if (ltype == "unsaved") {
+        s =  "amare.unsavedlist[" + mdex + "]";
+    } 
+    pobj = eval(s);
+    if (pobj != null) {
+        if (this.stats != null) {
+            ret = true;
+	    if (ltype == "webits") {
+                if (pobj.cat != this.stats.cat) { ret = false; } 
+                if (pobj.subcat != this.stats.subcat) { ret = false; } 
+  	    } else if (ltype == "people") {
+    	    } else if (ltype == "products") {
+    	    } else if (ltype == "suppliers") {
+    	    } else if (ltype == "unsorted") {
+                 if (pobj.cat != "") { ret = false; } 
+    	    } else if (ltype == "unsaved") {
+                 if (pobj.stored == true) { ret = false; } 
+   	    } 
+        }     
+    }
+   return ret;
+}
 
 
 viewer.prototype.update_one = function(tpid,mdex,ltype) {
@@ -153,12 +191,20 @@ viewer.prototype.update_one = function(tpid,mdex,ltype) {
          }
   }
   if (fnd_rung != -1) {
-        if (this.darungs[fnd_rung].postman != undefined) {
-          this.darungs[fnd_rung].postman.set_ppid(mdex,ltype);
-          this.darungs[fnd_rung].postman.shape= "";
-          this.darungs[fnd_rung].postman.redraw_rung();
+
+        // remove if no longer matches 
+        if (this.check_match(mdex,ltype) == false) {
+            this.del_rung(fnd_rung);
+        } else {
+          if (this.darungs[fnd_rung].postman != undefined) {
+            this.darungs[fnd_rung].postman.set_ppid(mdex,ltype);
+            this.darungs[fnd_rung].postman.shape= "";
+            this.darungs[fnd_rung].postman.redraw_rung();
+          }
         }
-  } 
+  }
+
+ 
 }
 
 
@@ -189,8 +235,8 @@ viewer.prototype.add_one = function(mdex,ltype) {
    var o = new Object();
    o.mdex = mdex;
    o.ltype = ltype;  
-         this.dalist.unshift(o);
-         this.load_rungs();  
+   this.dalist.unshift(o);
+   this.load_rungs();  
 }
 
 
@@ -296,6 +342,11 @@ viewer.prototype.load_rungs = function(ldex) {
              }
 	   }
            if (ltype == "products") {
+             if (amare.productlist[mdex] != undefined) {
+               this.darungs[c].vdex = r;
+             }
+	   }
+           if (ltype == "suppliers") {
              if (amare.productlist[mdex] != undefined) {
                this.darungs[c].vdex = r;
              }
@@ -472,7 +523,5 @@ viewer.prototype.randomize_rungs = function() {
     this.draw_view();
 
 }
-
-
 
 

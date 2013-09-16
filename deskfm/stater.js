@@ -1,6 +1,7 @@
 
 
 function stat () { 
+
     this.cat="";
     this.subcat="";
     this.sterms="";
@@ -22,7 +23,7 @@ function stater () {
    this.webitlist = [];
    this.peoplelist = [];
    this.productlist = [];
-   this.providerlist = [];
+   this.supplierlist = [];
 
    this.unsortedlist = [];
    this.unsavedlist = [];
@@ -38,6 +39,7 @@ function stater () {
    this.total_products = new stat ();
    this.total_unsorted = new stat();
    this.total_unsaved = new stat();
+   this.total_suppliers = new stat();
 
    this.cat_set = new cat_provider();
    this.subcat_set = new subcat_provider();
@@ -45,7 +47,6 @@ function stater () {
    this.product_set = new product_provider();
 
    this.got_webits = false;
-   this.got_unsorted = false;
    this.got_stats = false;
 
 }
@@ -123,11 +124,13 @@ stater.prototype.update_stats = function (statobj) {
       amare.total_unsorted.cnum = statobj.total_unsorted;
       amare.total_unsorted.max_chunks = Math.round(amare.total_unsorted.cnum/da_limit);
       amare.total_unsorted.last_chunk = -1;
+      amare.total_unsorted.cat = "";
 
       amare.total_sorted.listype = "webits";
       amare.total_sorted.cnum = statobj.total_sorted;
       amare.total_sorted.max_chunks = Math.round(amare.total_sorted.cnum/da_limit);
       amare.total_sorted.last_chunk = -1;
+      amare.total_sorted.cat = "all";
 
       amare.total_people.listype = "people";
       amare.total_people.cnum = statobj.total_people;  
@@ -138,6 +141,11 @@ stater.prototype.update_stats = function (statobj) {
       amare.total_products.cnum = statobj.total_products;
       amare.total_products.max_chunks = Math.round(amare.total_products.cnum/da_limit);
       amare.total_products.last_chunk = -1;
+
+      amare.total_suppliers.listype = "suppliers";
+      amare.total_suppliers.cnum = statobj.total_suppliers;
+      amare.total_suppliers.max_chunks = Math.round(amare.total_suppliers.cnum/da_limit);
+      amare.total_suppliers.last_chunk = -1;
 
       amare.count_lwstats();
       amare.count_lpstats();
@@ -429,6 +437,163 @@ stater.prototype.get_stat = function (pstat) {
 
 
 
+stater.prototype.update_supplier = function(pobj) {
+
+      var fnd = -1;
+      var mdex = -1;
+      var ltype = "";
+
+        for (var k=0; k<this.supplierlist.length; k++) {
+          if (this.supplierlist[k] != undefined) {
+            if (this.supplierlist[k].pid == pobj.pid) {
+                this.supplierlist[k] = pobj;
+		fnd = k;
+            }
+          }
+        }
+
+	if (fnd != -1) {
+		// update supplierlist 
+		ltype = "suppliers";
+		mdex = fnd;
+	 	pobj.ltype = "suppliers";
+                this.supplierlist[fnd] = pobj; 
+	} else {
+		 ltype = "suppliers";
+		 pobj.ltype = "suppliers";
+ 		 mdex = this.supplierlist.push(pobj); 
+	}	
+
+//    alert("pid=" + pobj.pid + "mdx=" + mdex + " ltp=" + ltype);
+
+      daviewer.update_one(pobj.pid,mdex,ltype);
+
+}
+	
+
+stater.prototype.update_webit = function(pobj) {
+
+      var fnd = -1;
+      var j = "";                    
+      var u = 0;
+      var s = 0;
+      var mdex = -1;
+      var ltype = "";
+
+        for (var k=0; k<this.webitlist.length; k++) {
+          if (this.webitlist[k] != undefined) {
+            if (this.webitlist[k].pid == pobj.pid) {
+                this.webitlist[k] = pobj;
+		fnd = k;
+            }
+          }
+        }
+	if (fnd != -1) {
+
+		// update webitlist 
+		ltype = "webits";
+		mdex = fnd;
+	 	pobj.ltype = "webits";
+                this.webitlist[fnd] = pobj; 
+
+	} else {
+
+           // if cat != "" and != junk 
+	   // add to webitlist 
+
+	   if ((pobj.cat != "") && (pobj.cat != "junk")) {
+		 ltype = "webits";
+		 pobj.ltype = "webits";
+ 		 mdex = this.webitlist.push(pobj); 
+	   }
+
+           u = 0;
+           while (u<this.unsortedlist.length) {
+             if (this.unsortedlist[u] != undefined) {
+               if (this.unsortedlist[u].pid == pobj.pid) {
+                  this.unsortedlist[u] = pobj;
+	   	  fnd = u;
+               }
+             }
+	     u = u + 1;
+           }
+
+           if (fnd != -1) {
+
+			// if cat != ""
+			// remove from unsorted list 
+			// else update unsorted
+			
+			if (pobj.cat != "") {
+ 			   this.unsortedlist.splice(fnd,1);
+			} else {
+			   this.unsortedlist[fnd] = pobj;
+				ltype = "unsorted";
+				mdex = fnd;
+			}
+
+	   } else {
+
+		// if cat == "" add to unsorted list 
+		// else add to webitlist 
+		
+		if (pobj.cat == "") {
+			pobj.ltype="unsorted";
+		        ltype = "unsorted";
+			mdex = this.unsortedlist.push(pobj);
+		} else {
+			pobj.ltype="webits";
+			ltype = "webits";
+			mdex = this.webitlist.push(pobj);
+		}
+
+ 		s = 0;
+                while (s<this.unsavedlist.length) {
+                  if (this.unsavedlist[s] != undefined) {
+                    if (this.unsavedlist[s].pid == pobj.pid) {
+                      this.unsavedlist[s] = pobj;
+	   	      fnd = s;
+                    }
+                  }
+	          s = s + 1;
+                }
+		if (fnd != -1) {
+
+		    // remove from unsaved list	
+		    this.unsavedlist.splice(fnd,1);
+		
+		}
+
+	   }
+	}
+
+     daviewer.update_one(pobj.pid,mdex,ltype);
+
+/*
+      if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
+        fnd = -1;
+        for (var k=0; k<=this.peoplelist.length; k++) {
+          if (this.peoplelist[k] != undefined) {
+            if (this.peoplelist[k].uname == pobj.uname) {
+                this.peoplelist[k].groupid = pobj.groupid;
+                fnd = k;
+            }
+          }
+        }
+        if (fnd == -1) {
+            var w = new webit();
+            w.uname = pobj.uname;
+            w.groupid = pobj.groupid;
+            this.peoplelist.push(w);
+        }
+        daviewer.update_person(pobj.uname);
+      }
+*/
+
+}
+
+
+
 stater.prototype.get_searchstat = function(sterms) {
 
      var ret = null;
@@ -669,17 +834,14 @@ stater.prototype.get_products = function() {
 } 
 
 
-stater.prototype.get_providers = function() {
-   var url='deskfm/dbase/get_providers.php';
+stater.prototype.get_suppliers = function() {
+   var url='deskfm/dbase/get_suppliers.php';
 //  alert(url);
    $.getJSON(url,function(json) {
-       amare.update_providers(json);
+       amare.update_suppliers(json);
    });   // end get json 
    sal.waiting();
 }
-
-
-
 
 
  stater.prototype.get_product_list = function(tprod) {
@@ -719,7 +881,7 @@ stater.prototype.get_csearch_list = function(tsterms) {
 
 stater.prototype.get_cperson_list = function(tuname) {
 
-   var url='deskfm/dbase/dfm_dbget.php';
+   var url='deskfm/dbase/get_webits.php';
    url = url + "?lim="+ da_limit;
    if ((tuname != "") &&  (tuname != undefined)){
      url = url + "&uname="+ tuname;
@@ -731,7 +893,7 @@ stater.prototype.get_cperson_list = function(tuname) {
 }  
 
 
- stater.prototype.update_providers = function (listobj) {
+ stater.prototype.update_suppliers = function (listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
@@ -740,9 +902,9 @@ stater.prototype.get_cperson_list = function(tuname) {
             found = false;
             if (listobj.dalist[j] != undefined) {
                var found_at=-1;
-               for (var i=0;i<this.providerlist.length;i++) {
-                  if (this.providerlist[i] != undefined) {
-                    if (listobj.dalist[j].uname == this.providerlist[i].uname) {
+               for (var i=0;i<this.supplierlist.length;i++) {
+                  if (this.supplierlist[i] != undefined) {
+                    if (listobj.dalist[j].uname == this.supplierlist[i].uname) {
                       found = true; 
                       fndcount = fndcount + 1;
                       found_at = i;
@@ -751,17 +913,17 @@ stater.prototype.get_cperson_list = function(tuname) {
                   }
                } 
                if (found == true) {
-                  providerlist.splice(found_at,1);
+                  this.supplierlist.splice(found_at,1);
                }
-              this.providerlist.push(listobj.dalist[j]);
+              this.supplierlist.push(listobj.dalist[j]);
             }
          }
       }
+      this.total_suppliers.lnum = this.supplierlist.length;
 }  
 
 
-
- stater.prototype.update_products= function(listobj) {
+ stater.prototype.update_products = function(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
@@ -787,6 +949,7 @@ stater.prototype.get_cperson_list = function(tuname) {
             }
          }
       }
+      this.total_products.lnum = this.productlist.length;
 }  
 
 
@@ -835,129 +998,6 @@ stater.prototype.add_unsaved = function(listobj) {
    if (t != -1) {
      var dx = t-1;
    }
-}
-
-
-
-stater.prototype.update_webit = function(pobj) {
-
-      var fnd = -1;
-      var j = "";                    
-      var u = 0;
-      var s = 0;
-      var mdex = -1;
-      var ltype = "";
-
-        for (var k=0; k<this.webitlist.length; k++) {
-          if (this.webitlist[k] != undefined) {
-            if (this.webitlist[k].pid == pobj.pid) {
-                this.webitlist[k] = pobj;
-		fnd = k;
-            }
-          }
-        }
-	if (fnd != -1) {
-
-		// update webitlist 
-		ltype = "webits";
-		mdex = fnd;
-	 	pobj.ltype = "webits";
-                this.webitlist[fnd] = pobj; 
-
-	} else {
-
-           // if cat != "" and != junk 
-	   // add to webitlist 
-
-	   if ((pobj.cat != "") && (pobj.cat != "junk")) {
-		 ltype = "webits";
-		 pobj.ltype = "webits";
- 		 mdex = this.webitlist.push(pobj); 
-	   }
-
-           u = 0;
-           while (u<this.unsortedlist.length) {
-             if (this.unsortedlist[u] != undefined) {
-               if (this.unsortedlist[u].pid == pobj.pid) {
-                  this.unsortedlist[u] = pobj;
-	   	  fnd = u;
-               }
-             }
-	     u = u + 1;
-           }
-
-           if (fnd != -1) {
-
-			// if cat != ""
-			// remove from unsorted list 
-			// else update unsorted
-			
-			if (pobj.cat != "") {
- 			   this.unsortedlist.splice(fnd,1);
-			} else {
-			   this.unsortedlist[fnd] = pobj;
-				ltype = "unsorted";
-				mdex = fnd;
-			}
-
-	   } else {
-
-		// if cat == "" add to unsorted list 
-		// else add to webitlist 
-		
-		if (pobj.cat == "") {
-			pobj.ltype="unsorted";
-		        ltype = "unsorted";
-			mdex = this.unsortedlist.push(pobj);
-		} else {
-			pobj.ltype="webits";
-			ltype = "webits";
-			mdex = this.webitlist.push(pobj);
-		}
-
- 		s = 0;
-                while (s<this.unsavedlist.length) {
-                  if (this.unsavedlist[s] != undefined) {
-                    if (this.unsavedlist[s].pid == pobj.pid) {
-                      this.unsavedlist[s] = pobj;
-	   	      fnd = s;
-                    }
-                  }
-	          s = s + 1;
-                }
-		if (fnd != -1) {
-
-		    // remove from unsaved list	
-		    this.unsavedlist.splice(fnd,1);
-		
-		}
-
-	   }
-	}
-
-     daviewer.update_one(pobj.pid,mdex,ltype);
-
-/*
-      if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
-        fnd = -1;
-        for (var k=0; k<=this.peoplelist.length; k++) {
-          if (this.peoplelist[k] != undefined) {
-            if (this.peoplelist[k].uname == pobj.uname) {
-                this.peoplelist[k].groupid = pobj.groupid;
-                fnd = k;
-            }
-          }
-        }
-        if (fnd == -1) {
-            var w = new webit();
-            w.uname = pobj.uname;
-            w.groupid = pobj.groupid;
-            this.peoplelist.push(w);
-        }
-        daviewer.update_person(pobj.uname);
-      }
-*/
-
 }
 
 

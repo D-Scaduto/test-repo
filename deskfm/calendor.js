@@ -46,6 +46,7 @@ calendor.prototype.show = function() {
           o=this.get_net_month(this.da_month,-1);
           if (o != null) {
 	    ocl = this.varname + ".scroll_months(-1);";
+            ocl = ocl + this.funcstr;
 	  }
           lbl = 'hdr_prevmon_btn';
           t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button' >";
@@ -64,8 +65,9 @@ calendor.prototype.show = function() {
 	  lbl = 'hdr_nextmon_btn';
 	  ocl = "";
           if (o!=null) {
-		  ocl = this.varname + ".scroll_months(1);";
-          }    
+		 ocl = this.varname + ".scroll_months(1);";
+                 ocl = ocl + this.funcstr;
+	  }    
           t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button'  >";
           t=t+ " >";
           t = t + "</button>";

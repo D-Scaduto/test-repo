@@ -123,7 +123,6 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
      if (dtmon.month == "") {
 
        this.stats = amare.total_unsorted;
-
      } else {
 
 //       alert("month="+dtmon.month);
@@ -132,6 +131,8 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
          //alert(this.stats.listype);
        }
      }
+
+     this.cat = "";
 
      var st = 0;
      if (pstart != undefined) {
@@ -278,22 +279,18 @@ viewer.prototype.load_person_list = function(tuname) {
 
 
 
-viewer.prototype.load_provider_list = function(tproviderid) {
+viewer.prototype.load_supplier_list = function() {
 
-   if (tproviderid != undefined) {
-     if (tproviderid != "") {
-       this.provider_id = tproviderid;
-     }
-   }
-    this.stats = null;
+    this.stats = amare.total_suppliers;
+
     this.dalist = [];
     var lgo = true;
     var d = 0;
-      for (var r=d; r<amare.providerlist.length;r++) {
-        if (amare.providerlist[r] != undefined) {
+      for (var r=d; r<amare.supplierlist.length;r++) {
+        if (amare.supplierlist[r] != undefined) {
              this.dalist[d] = new Object();
   	     this.dalist[d].mdex = r;
-	     this.dalist[d].ltype = "unsaved";
+	     this.dalist[d].ltype = "suppliers";
              d = d+1 
         } 
       }
@@ -302,15 +299,13 @@ viewer.prototype.load_provider_list = function(tproviderid) {
 }
 
 
-
-
-
-viewer.prototype.load_list = function(pstart) {
+viewer.prototype.load_sorted_list = function(pstart) {
 
    this.darungs = [];
    this.dalist = [];
 
    this.stats = amare.total_sorted;
+   this.cat = "all";
     
    var st = 0;
    if (pstart != undefined) {
@@ -348,7 +343,6 @@ viewer.prototype.load_unsaved_list = function() {
     var ok = false;
 
      this.stats = amare.total_unsaved;
-
      this.dalist = [];
 
      mx = amare.unsavedlist.length;

@@ -5,21 +5,6 @@ viewer.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
 
-     tmp = tmp + "<div class='rail_btns' style='' >";
-
-     lbl = 'nitro_lbtn';
-     ocl = 'daviewer.nitro_stop();'
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
-     tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
-     tmp = tmp + "</button>";  
-
-     lbl = 'nitro_rbtn';
-     ocl = 'daviewer.nitro_start();';
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
-     tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
-     tmp = tmp + "</button>";  
-     tmp = tmp + "</div>";
-
        tmp = tmp + "<div class='rail_main' style='width:200px;' >";
 
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";

@@ -46,41 +46,6 @@ searcher.prototype.show = function() {
    tmp = tmp + "</button>";
 */
 
-   if (buddah == true) {
-       lbl = 'feed_btn';
-       ocl = 'diego.set_shape(\"feed\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
-       tmp = tmp + "</button>"; 
-
-       lbl = 'sort_btn';
-       ocl = 'diego.set_shape(\"sort\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-       tmp = tmp + "</button>"; 
-
- }
-
-
-    lbl = "browse_set_btn";
-     lbl = "share_set_btn";
-     ocl= "diego.set_shape(\"share\")";
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
-     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
-     tmp = tmp + "</button>";
-
-    lbl = "search_unset_btn";
-    ocl= "diego.set_shape(\"\")";
-    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
-    tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
-    tmp = tmp + "</button>";
-
-    ocl= "diego.set_shape(\"browse\")";
-    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;vertical-align:top;' >";
-    tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
-    tmp = tmp + "</button>";
-
-
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;

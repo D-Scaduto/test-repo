@@ -4,13 +4,10 @@ include '../../config/names.php';
  class foo { 
    public $pid; 
    public $uname;
-   public $story; 
+   public $story;
    public $picurl;
    public $linkurl;
-   public $emberdurl;
-   public $product_type;
-   public $price;
-   public $listype;
+   public $emebedurl;
 }
 
 
@@ -26,15 +23,8 @@ class bar {
 
 $ret = new bar;
 
-$price = "null";
-if (isset($_GET['price'])) {
-  $price = $_GET['price'];
-}
+$listype = "suppliers";
 
-$product_type = "null";
-if (isset($_GET['product_type'])) {
-  $prodid = $_GET['product_type'];
-}
 
 $linkurl = "null";
 if (isset($_GET['linkcode'])) {
@@ -51,8 +41,13 @@ if (isset($_GET['picode'])) {
   $picurl = $_GET['picode'];
 }
 
+$uname = "null";
+if (isset($_GET['uname'])) {
+  $uname = $_GET['uname'];
+}
+
+
 $pid = $_GET['pid'];
-$uname = $_GET['uname'];
 
 $con = mysql_connect($Server, $username, $password);
 
@@ -61,24 +56,14 @@ $con = mysql_connect($Server, $username, $password);
  $sql_upd="";
  $some = false;
 
+     if ($uname != "null") {
+       $sql_upd = $sql_upd . " name = '" . $uname . "'"; 
+       $some = true;
+     }
+
+
      if ($story != "null") {
        $sql_upd = $sql_upd . " story = '" . $story . "'"; 
-       $some = true;
-     }
-
-     if ($price != "null") { 
-       if ($some == true) {
-         $sql_upd = $sql_upd + " , ";
-       }
-       $sql_upd = $sql_upd . " price = '" . $price . "'" ;
-       $some = true;
-     }
-
-     if ($product_type != "null") { 
-       if ($some == true) {
-         $sql_upd = $sql_upd . " , ";
-       }
-       $sql_upd = $sql_upd . " product_type = '" . $product_type . "'" ;
        $some = true;
      }
 
@@ -86,7 +71,6 @@ $con = mysql_connect($Server, $username, $password);
 
       $prefix = "tmpics/";
       $prepos = strpos($picurl,$prefix);
-
       if (substr($picurl,0,7) == $prefix) {
  
 	  $prepos = $prepos + strlen($prefix);
@@ -109,8 +93,6 @@ $con = mysql_connect($Server, $username, $password);
 	  }
       }
 
-
-
        if ($some == true) {
          $sql_upd = $sql_upd . " , ";
        }
@@ -128,8 +110,8 @@ $con = mysql_connect($Server, $username, $password);
 
   if ($some == true) {
 
-      $sql_upd = "update dfm_products set " . $sql_upd;
-      $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
+      $sql_upd = "update dfm_suppliers set " . $sql_upd;
+      $sql_upd = $sql_upd . " where supplier_id ='" . $pid . "'";
 //      echo $sql_upd  . " \n <br> " ;
     $result = mysql_query($sql_upd);
     //  echo $result . " \n <br> ";
@@ -138,7 +120,7 @@ $con = mysql_connect($Server, $username, $password);
    $ret->sql = $sql_upd;    
    $ret->resql = $result;    
 
-       $sql= "  SELECT * FROM dfm_products where prodid_id='" . $prodid . "' ";
+       $sql= "  SELECT * FROM dfm_suppliers where supplier_id='" . $pid . "' ";
 
   // echo $sql  . "  \n <br>  ";
      $result2 = mysql_query($sql);
@@ -146,20 +128,16 @@ $con = mysql_connect($Server, $username, $password);
 
        $b2 = new foo;
  
-           $b2->listype = "products";
-           $b2->pid = $row['product_id'];
-           $b2->uname = $row['supplier_id'];
-           $b2->product_type = $row['product_type'];
+           $b2->listype = "suppliers";
+           $b2->pid = $row['supplier_id'];
+           $b2->uname = $row['name'];
            $b2->story  =  $row['story'];
            $b2->picurl = $row['picurl'];
            $b2->linkurl = $row['linkurl'];
-           $b2->prodid = $row['prodid'];
-           $b2->price = $row['price'];
 
        $ret->pobj = $b2;
  
-
-     echo json_encode($ret); 
+    echo json_encode($ret); 
 
      mysql_close($con);
 

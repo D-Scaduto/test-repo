@@ -32,14 +32,8 @@ feeder.prototype.show = function() {
          tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
          tmp = tmp + "</button>";
 
-         tmp = tmp + "<input type='text' name='s' id='feed_string' value='standing desk' >";
+         tmp = tmp + "<input type='text' name='s' id='feed_string' size='15' value='standing desk' >";
 
-      lbl = "feed_unset_btn";
-      ocl= "diego.set_shape(\"\")";
-      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
-      tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
-      tmp = tmp + "</button>";
- 
          tmp = tmp + "<div id='feed_btns'  >";
          tmp = tmp + "</div>";
  
@@ -49,6 +43,7 @@ feeder.prototype.show = function() {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#feed_reset_btn').button();
+      daviewer.load_unsaved_list();
    } 
 
 }

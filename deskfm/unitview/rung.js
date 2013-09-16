@@ -11,8 +11,9 @@ poster.prototype.draw_rung = function() {
 
          if (buddah == true) {
             this.draw_groups();
-	 }
-
+         }
+         this.mini_showing = true;
+	
        } else {
 
             if (this.shape == "getstory" ) {
@@ -115,21 +116,18 @@ poster.prototype.draw_rung = function() {
 	  tmpstr=tmpstr+"<span id='"+lbl+"' style='' >"; 
     	  tmpstr=tmpstr+"</span>";
 
-
            if (this.is_mini == true) {
 
-                lbl= this.spotid + "_" + lspot + "_" + "pic" + "_spot";
+                lbl= this.rungster + "_pic_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"' style=''  >"; 
                 tmpstr=tmpstr+"</span>";
  
                 tmpstr=tmpstr+"<span class='story' >";
-                lbl= this.spotid + "_" + lspot + "_" + "story" + "_spot";
+                lbl= this.rungster + "_story_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
 	        tmpstr=tmpstr+"</span>";
- 	       
 
            } else {
-
 
               if (this.listype == "people") {
 

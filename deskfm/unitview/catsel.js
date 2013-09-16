@@ -3,14 +3,16 @@
  poster.prototype.draw_catsel = function() {
 
     var tmp="";
-    var tspot = this.rung;
     var lbl = "";
     var pobj=null;
 
      if (this.cat != "") {
 
-       lbl = this.spotid+"_"+tspot+"_catsog";
-       ocl = this.varname + ".get_catsel();";
+       lbl = this.rungster+"_catsog";
+       ocl = this.varname + ".cat=\"\";";
+       ocl = ocl + this.varname + ".subcat=\"\";";
+       ocl = ocl + this.varname + ".cat_changed=true;";
+       ocl = ocl + this.varname + ".get_catsel();";
        tmp = tmp +"<span id='"+lbl+"' class='spotd_off'  onclick='"+ocl+"' >";
        tmp = tmp + this.cat + " - ";
        tmp = tmp + this.subcat;
@@ -33,79 +35,168 @@
      var lb1 = "";
      var lb2 = "";
      var sugs = [];
-
+     var pobj = null;
      tmp = "";
-     lb1 = this.rungster + "_catsog";
-     
-     tmp = tmp +"<ul id='"+lb1+"' class='ui-menu' style=''  >";
-   
-     tmp = tmp +"<li><a  >"+this.cat+" - " + this.subcat+" </a>";
-     tmp = tmp +"<ul class=''  style='width:100px;' >";
 
-     tmp = tmp +"<li><a >who</a>";
-     tmp = tmp +"<ul style='width:350px;' >";
-     sugs = amare.subcat_set.get_setlist("who");
-     for (var i=0;i<sugs.length;i++) {
-        tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-     }
-     tmp = tmp +"</ul>";
-     tmp = tmp +"</li>";
+      if (this.cat == "") { 
 
-     tmp = tmp +"<li><a >what</a>";
-     tmp = tmp +"<ul style='width:350px;' >";
-      sugs = amare.subcat_set.get_setlist("what");
-     for (var i=0;i<sugs.length;i++) {
-        tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-     }
-     tmp = tmp +"</ul>";
-     tmp = tmp +"</li>"; 
+        lbl = this.rungster + "_who_btn";
+        ocl = this.varname + ".set_cat(\"who\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "who?";
+        tmp = tmp + "</button>";
 
-     tmp = tmp +"<li><a >why</a>";
-     tmp = tmp +"<ul style='width:350px;'   >";
-       sugs = amare.subcat_set.get_setlist("why");
-     for (var i=0;i<sugs.length;i++) {
-        tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-     }
-     tmp = tmp +"</ul>";
-     tmp = tmp +"</li>";
+        lbl = this.rungster + "_what_btn";
+        ocl = this.varname + ".set_cat(\"what\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "what?";
+        tmp = tmp + "</button>";
 
-     tmp = tmp +"<li><a >how</a>";
-     tmp = tmp +"<ul  style='width:350px;'  >";
-      sugs = amare.subcat_set.get_setlist("how");
-     for (var i=0;i<sugs.length;i++) {
-        tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-     }
-     tmp = tmp +"</ul>";
-     tmp = tmp +"</li>";
+        lbl = this.rungster + "_why_btn";
+        ocl = this.varname + ".set_cat(\"why\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "why?";
+        tmp = tmp + "</button>";
 
-     tmp = tmp +"<li><a stag='' ctag='junk' ptag='"+this.varname+"' >del</a>";
-     tmp = tmp +"</li>";
+        lbl = this.rungster + "_how_btn";
+        ocl = this.varname + ".set_cat(\"how\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "how?";
+        tmp = tmp + "</button>";
 
-     tmp = tmp +"</ul>";   
-     tmp = tmp +"</li>";
-     tmp = tmp +"</ul>";
+        lbl = this.rungster + "_junk_btn";
+        ocl = this.varname + ".set_cat(\"junk\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "junk";
+        tmp = tmp + "</button>";
 
-     var pobj=null;
-     var lbl = "";
+
+      } else { 
+
+        lbl = this.rungster + "_uncat_btn";
+        ocl = this.varname + ".set_cat(\"\")";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
+        tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
+        tmp = tmp + "</button>";
+
+        if (this.cat == "who") { 
+
+        lbl = this.rungster + '_who_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+  	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
+        sugs = amare.subcat_set.get_setlist("who");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp + "</ul></li></ul>";
+
+       } else if (this.cat == "what") { 
+
+        lbl = this.rungster + '_what_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:85px;display:inline-block;' >";
+   	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
+        sugs = amare.subcat_set.get_setlist("what");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp + "</ul></li></ul>";
+
+       } else if (this.cat == "why") { 
+
+        lbl = this.rungster + '_why_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+    	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
+        sugs = amare.subcat_set.get_setlist("why");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
+
+       } else if (this.cat == "how") { 
+
+        lbl = this.rungster + '_how_sog';
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+  	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
+        sugs = amare.subcat_set.get_setlist("how");
+        for (var i=0;i<sugs.length;i++) {
+          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+        }
+        tmp = tmp +"</ul></li></ul>";
+       }
+    } 
+
      lbl = this.rungster + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
         pobj.innerHTML = tmp;
-     }
-    
-    $('#'+lb1).menu();
-    $('#'+lb1).on( "menuselect", function( event, ui ) {
-	    var c,s,p = "";
-	    c = ui.item.children().attr('ctag');
-            s = ui.item.children().attr('stag');
-  	    p = ui.item.children().attr('ptag');
-	    if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	      var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	      eval(exp);
-	    }
-    } );
- //   $('#'+lb1).menu( "option", "icons", { submenu: "ui-icon-circle-triangle-e" } );
-}
+        var s = "";
+       if (this.cat == "") {
+//      	    $('#' + this.rungster + '_who_btn').button();
+//  	    $('#' + this.rungster + '_what_btn').button();
+//  	    $('#' + this.rungster + '_why_btn').button();
+//  	    $('#' + this.rungster + '_how_btn').button();
+
+       }
+
+       else if (this.cat == "who") {
+
+            $('#' + this.rungster + '_who_sog').menu();
+	    $('#' + this.rungster + '_who_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+
+	} else if (this.cat == "what") {
+
+	    $('#' + this.rungster + '_what_sog').menu();
+	    $('#' + this.rungster + '_what_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+
+	} else if (this.cat == "why") {
+     
+	    $('#' + this.rungster + '_why_sog').menu();
+	    $('#' + this.rungster + '_why_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+
+	} else if (this.cat == "how") {
+
+	    $('#' + this.rungster + '_how_sog').menu();
+	    $('#' + this.rungster + '_how_sog').on( "menuselect", function( event, ui ) {
+ 	       var c,s,p = "";
+	       c = ui.item.children().attr('ctag');
+               s = ui.item.children().attr('stag');
+  	       p = ui.item.children().attr('ptag');
+	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
+	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
+	         eval(exp);
+	       }
+             } );
+       } 
+
+    }
+ }
 
 
 poster.prototype.set_cat = function(pcat) {
@@ -114,7 +205,7 @@ poster.prototype.set_cat = function(pcat) {
            this.subcat = "";
            this.changed = true;
 	   this.cat_changed = true;
-           this.draw_catsel();
+           this.get_catsel();
            this.change_btns();
       }
  

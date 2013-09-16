@@ -10,7 +10,6 @@ function namer (pspotid) {
    this.tmp_name = "";
    this.pname = "";
    this.name_source = "deskfm";
-//   this.pname_box = new suggester(document.getElementById("pname_box"), new name_provider(namelist));
 
 }
 
@@ -27,17 +26,18 @@ namer.prototype.show = function() {
     moin = "markyd(\""+lbl+"\");";
     mout = "unmarkyd(\""+lbl+"\");";
     tmp = tmp + "<div id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='spotd_off' style='' >";
-    tmp = tmp + "hey";
     tmp = tmp + "</div>";
-
 
     if (document.getElementById(this.spotid)!=null) {
         document.getElementById(this.spotid).innerHTML=tmp; 
-	this.say_hi();
+        if (pname != "") {
+ 	  this.say_hi();
+        } else {
+          this.get_name();
+        }
 	this.showing = true;
     } 
 }
-
 
               
 
@@ -47,7 +47,7 @@ namer.prototype.get_name = function() {
     var ocl = "";
 
     tmp =tmp + "<span class='spotd_off'  onclick='jesie.findme();' > ";
-    tmp = tmp + "what can we call you ?";
+    tmp = tmp + "your name";
     tmp =tmp + "</span>";
 
     var tval =  "";
@@ -56,7 +56,6 @@ namer.prototype.get_name = function() {
         } else {
           val =  this.tmp_name;
         }
-    tmp =tmp + "<br>";
     tmp =tmp + "<input size=15 value='"+tval+"' id='pname_box' onclick='' > ";
 
     lbl = "name_talk";

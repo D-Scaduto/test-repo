@@ -29,23 +29,37 @@
       }
 
 
-@media screen and (max-width:724px) {
+@media screen and (max-width:599px) {
     
      .menu {
-	width:100%;
-        min-width:250px;
+//	width:100%;
+        min-width:275px;
+        float:left; 
       }
 
-     .rail {
-	width:100%;
-        min-width:250px;
+    .menu_btnsbox {
+        width:250px;
+//  	float:right;
+        display:block;
+        margin:0 auto;
+
      }
-     .rail_btns {
-	width:100px;
-        float:right;
+
+    .menu_btns {
+//        float:left;
+//        display:inline-box;
      }
-     .rail_main {
-        display:inline-block;
+
+    .rail_btns {
+//        float:right;
+//        display:inline-box;
+     }
+
+    .rail_main {
+        clear:both;
+//        float:right;
+        width:250px;
+        margin:0 auto;
      }
 
 
@@ -64,7 +78,6 @@
        width:100%;
        min-height:150px;
     }
-
 
      .story {
        font-family: sans-serif;
@@ -87,25 +100,34 @@
 
 
 
-@media screen and (min-width:725px) {
+@media screen and (min-width:600px) {
 
      .menu {
-	width:400px;
-        display:inline-block;
+	width:275px;
         vertical-align:top;
+        float:left;
       }
 
-     .rail {
-	width:300px;
-        vertical-align:top;
+    .menu_btnsbox {
+	width:250px;
+ // 	float:right;
         display:inline-block;
-      }
-     .rail_btns {
-	width:100px;
-  	display:inline-block;
+        vertical-align:top; 
+    }
+
+    .menu_btns {
+        float:left;
      }
+
+    .rail_btns {
+        float:right;
+     }
+
+
      .rail_main {
+//       clear:right;
 	float:right;
+//       display:inline-block;
      }
 
     .box {

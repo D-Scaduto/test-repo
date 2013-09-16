@@ -23,13 +23,14 @@ header('Content-type: text/html; charset=utf-8 ');
   var store = null;  //shoper
   var nicky = null;  //sharer
   var wanda = null;  //searcher
-  var joe = null;    //manager
+  var joe = null;    //supplier
   var amare = null;  //stater
   var sal = null;    //logoman
   var diego = null;  //header
   var mac  = null;   //farmer
   var moe = null;    //feeder 
   var jesie = null;  //namer;
+  var robby = null;
 
   var init_run = true;
   var got_stats = false;
@@ -75,7 +76,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/price_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/product_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/servicer_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/preset_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/group_provider.js type="text/javascript" ></script>
 
@@ -134,12 +134,14 @@ header('Content-type: text/html; charset=utf-8 ');
   if (isset($_GET['debug'])) {
     echo "debug = true;";
   }
+  $netson = false;
   if (isset($_GET['netson'])) {
     echo "netson = true;";
+    $netson = true;
   }
   echo "</script>";
 
-  if (netson == true) {
+  if ($netson == true) {
     echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
     echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
     echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
@@ -155,11 +157,17 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='outer_spot' style='' class='outer_menu' >
 
+
+<span id='menu_btnspot' class='menu_btnsbox' style=''  >
+</span>
+
+
 <span id='menu_spot' class='menu' style='' >
 </span>
 
-<span id='rail_spot' class='rail' style='' >
+<span id='rail_spot' class='rail_main' style='' >
 </span>
+
 
 </div>
 
@@ -202,28 +210,27 @@ header('Content-type: text/html; charset=utf-8 ');
 	wanda = new searcher("search");
 
 	nicky = new sharer("share_spot");
-	   mac = new sorter("sort");
-	   moe = new feeder("feed");
+	mac = new sorter("sort");
+	moe = new feeder("feed");
 
         amare = new stater();
 
 	diego = new header();
-        diego.show();
+        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store' ];
+        diego.set_shapes(tshapes);
 
         daviewer = new viewer("main_view","daviewer");
 
-       if (is_mobile == true) {
+        if (is_mobile == true) {
            da_limit = 250;
            daviewer.top_end = 25;
-
-       } else {
+        } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
-         
        }
 
     amare.get_stats();
-    amare.get_providers();
+    amare.get_suppliers();
     amare.get_products();
     amare.get_webits();
 

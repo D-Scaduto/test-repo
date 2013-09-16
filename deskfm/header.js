@@ -2,8 +2,8 @@
 
 function header () {
 
-    this.shape = "";  // browse, search, share, shop, sort , feed   
-    this.shapes = ['browse:cater','search:wanda','share:nicky','sort:mac','shop:store','feed:moe' ];
+    this.shape = "";  // browse,search,share,shop,sort,feed,manage,group    
+    this.shapes = "";
     this.varname = "diego";
 }	
  
@@ -14,38 +14,38 @@ header.prototype.show = function () {
      var lbl = "";
      var ocl = "";
 
-     tmp = tmp + " <div id='menu_topbtns' class='' style=''  >";
-      tmp = tmp + "</div>";
+     tmp = tmp + "<span id='logo_spot' class='' style=''  >";
+     tmp = tmp + "</span>";
 
-     tmp = tmp + " <div style='clear:right;'  >";
-      tmp = tmp + "</div>";
-
-     tmp = tmp + " <div id='search_spot' class='' style=''  >";
-      tmp = tmp + "</div>";
-
-      tmp = tmp + " <div id='browse_spot' class='' style=''  >";
+     tmp = tmp + " <div id='search_spot' class='' style='display:inline-block;'  >";
      tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='shop_spot' class='' style=''  >";
+     tmp = tmp + " <div id='browse_spot' class='' style='display:inline-block;'  >";
+     tmp = tmp + "</div>";
+
+      tmp = tmp + "<div id='shop_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='sort_spot' class='' style=''  >";
+      tmp = tmp + "<div id='sort_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='share_spot' class='' style=''  >";
+      tmp = tmp + "<div id='share_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='feed_spot' class='' style=''  >";
+      tmp = tmp + "<div id='feed_spot' class='' style='display:inline-block;'  >";
+      tmp = tmp + "</div>";
+  
+      tmp = tmp + "<div id='group_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
+      tmp = tmp + "<div id='manage_spot' class='' style='display:inline-block;'  >";
+      tmp = tmp + "</div>";
+ 
       var pobj = document.getElementById('menu_spot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
 
-          if (this.shape == "") {
-              this.draw_topbtns();
-          } else {
-              this.hide_topbtns();
+             this.draw_btns();
              for (var i=0;i<this.shapes.length;i++) {
                 var s = this.shapes[i].split(':');
                 if (s[0] == this.shape) { 
@@ -53,22 +53,46 @@ header.prototype.show = function () {
                    eval(es);
                 }
              }
-         }
       }
 }
 
 
 
-header.prototype.draw_topbtns = function () {
+header.prototype.draw_btns = function () {
 
      var tmp = "";
      var lbl = "";
      var ocl = "";
 
-     tmp = tmp + "<span id='logo_spot' class='' style=''  >";
-     tmp = tmp + "</span>";
+     tmp = tmp + "<span class='menu_btns' style=''  >";
+ 
+   if (buddah == true) {
 
-     tmp = tmp + "<span class='' style='float:right;min-width:150px;' >";
+       lbl = 'sort_btn';
+       ocl = this.varname + '.set_shape(\"sort\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+       lbl = 'feed_btn';
+       ocl = this.varname + '.set_shape(\"feed\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+       lbl = 'manage_btn';
+       ocl = this.varname + '.set_shape(\"manage\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/molecule.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+       lbl = 'group_btn';
+       ocl = this.varname + '.set_shape(\"group\");'
+       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' width='20px' >";
+       tmp = tmp + "</button>"; 
+
+   } else {
 
      lbl = 'browse_btn';
      ocl = this.varname + '.set_shape(\"browse\");'
@@ -88,73 +112,66 @@ header.prototype.draw_topbtns = function () {
      tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
      tmp = tmp + "</button>";
 
-   if (buddah == true) {
-       lbl = 'sort_btn';
-       ocl = this.varname + '.set_shape(\"sort\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-       tmp = tmp + "</button>"; 
-
-       lbl = 'feed_btn';
-       ocl = this.varname + '.set_shape(\"feed\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
-       tmp = tmp + "</button>"; 
- }
-/*
        lbl = 'shop_btn';
        ocl = this.varname + '.set_shape(\"shop\");'
        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
        tmp = tmp + "</button>"; 
-       tmp = tmp + "</span>";
-*/     
- 
+
+   }
+     
        tmp = tmp + "</span>";
 
-      var pobj = document.getElementById('menu_topbtns');
+       tmp = tmp + "<span class='rail_btns' style=''  >";
+
+        tmp = tmp + "<button id='nitro_lbtn' onclick='daviewer.nitro_stop();' style='width:30px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
+        tmp = tmp + "</button>";
+
+        tmp = tmp + "<button id='nitro_rbtn' onclick='daviewer.nitro_start();' style='width:30px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
+        tmp = tmp + "</button>";
+
+       tmp = tmp + "</span>";
+
+      var pobj = document.getElementById('menu_btnspot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
 
  //       $('#share_btn').button();
 //	  $('#search_btn').button();
-
-  	  sal.show();
+          if (this.shape == "" ) {
+  	    sal.show();
+          }
        }
 }
 
 
 
-header.prototype.hide_topbtns = function () {
+header.prototype.set_shapes = function (pshapes) {
 
-     var tmp = "";
-     var lbl = "";
-     var ocl = "";
-
-      var pobj = document.getElementById('menu_topbtns');
-       if (pobj != null) {
-          pobj.innerHTML = "";
-       }
+   if (pshapes != undefined) {
+        this.shapes = pshapes;
+   }
+   this.show();
 }
-
-
 
 
 header.prototype.set_shape = function (pshape) {
 
    if (pshape != undefined) {
-
-      if (pshape == this.shape) {
-        this.shape = "";
+      if (this.shape == pshape) {
+         this.shape = "";
       } else {
         this.shape = pshape;
       }
+   }
 
-      if (this.shape == "") {
-        this.draw_topbtns();
-      } else {
-        this.hide_topbtns();
-      }
+   if (this.shape == "") {
+      sal.show();
+   } else {
+     sal.hide();
+   }
 
       var s , es = "";
       for (var i=0;i<this.shapes.length;i++) {
@@ -163,10 +180,9 @@ header.prototype.set_shape = function (pshape) {
          if (s[0] == this.shape) { 
             es = s[1] + '.show()'; 
          }
-     //    alert(this.shapes[i] + " " + es);
+         es = " if (" + s[1] + " != null) { "+es+"}";
          eval(es);
       }
-   }
 }
 
 

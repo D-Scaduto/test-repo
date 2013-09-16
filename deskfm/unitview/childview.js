@@ -19,7 +19,7 @@ poster.prototype.show_mini = function() {
 
 poster.prototype.set_mini = function() {
    var lbl = "";
-   lbl  = this.spotid + "_" + this.rung + "_mini";
+   lbl  = this.rungster + "_mini";
    var s = this.varname + ".mini_viewer";
    this.mini_viewer = new viewer(lbl,s,this.varname);
    this.mini_viewer.load_person_list(this.uname);

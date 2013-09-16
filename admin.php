@@ -28,7 +28,8 @@ header('Content-type: text/html; charset=utf-8 ');
   var store = null;  //shoper
   var nicky = null;  //sharer
   var wanda = null;  //searcher
-  var joe = null;    //manager
+  var joe = null;    //supplier
+  var robby = null;  //grouper
   var amare = null;  //stater
   var sal = null;    //logoman
   var diego = null;  //header
@@ -77,7 +78,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/price_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/product_provider.js type="text/javascript" ></script>
-<script src=deskfm/qandas/servicer_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/preset_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/group_provider.js type="text/javascript" ></script>
 
@@ -89,7 +89,8 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/searcher.js type="text/javascript" ></script>
 <script src=deskfm/sorter.js type="text/javascript" ></script>
 <script src=deskfm/feeder.js type="text/javascript" ></script>
-<script src=deskfm/manager.js type="text/javascript" ></script>
+<script src=deskfm/supplier.js type="text/javascript" ></script>
+<script src=deskfm/grouper.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
 
@@ -136,12 +137,14 @@ header('Content-type: text/html; charset=utf-8 ');
   if (isset($_GET['debug'])) {
     echo "debug = true;";
   }
+  $netson = false;
   if (isset($_GET['netson'])) {
     echo "netson = true;";
+    $netson = true;
   } 
   echo "</script>";
 
-  if (netson == true) {
+  if ($netson == true) {
     echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
     echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
     echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
@@ -155,11 +158,14 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='outer_spot' style='' class='outer_menu' >
 
-<div id='menu_spot' class='menu' style='' >
-</div>
+<span id='menu_btnspot' class='menu_btnsbox' style=''  >
+</span>
 
-<div id='rail_spot' class='rail' style='' >
-</div>
+<span id='menu_spot' class='menu' style='' >
+</span>
+
+<span id='rail_spot' class='rail_main' style='' >
+</span>
 
 </div>
 
@@ -208,6 +214,9 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
    }
 
+   if (debug == true) {
+//        daviewer.top_end=2;
+   }
 	   sal = new logoman("logo_spot");
    	   store = new shoper("shop_spot");
 	   mac = new sorter("sort");
@@ -215,17 +224,19 @@ header('Content-type: text/html; charset=utf-8 ');
 	   cater = new categor("browse");
 	   wanda = new searcher("search");
 	   nicky = new sharer("share_spot");
-   //        joe = new manager("contact");
+           joe = new supplier("manage");
+           robby = new grouper("group");
 
 	   diego = new header();
-           diego.show();
+           var tshapes = ['sort:mac','shop:store','feed:moe','manage:joe','group:robby' ];
+          diego.set_shapes(tshapes);
 	   
     amare.get_stats();
 
-//    amare.get_products();
-//    amare.get_providers();
+    amare.get_products();
+    amare.get_suppliers();
     amare.get_webits();
-//    amare.get_people();
+    amare.get_people();
 
     var dt = new Object();
     dt.month = "";

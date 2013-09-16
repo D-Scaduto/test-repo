@@ -3,18 +3,19 @@ include '../../config/names.php';
 
  class foo { 
  
+   public $pid;
    public $uname;
    public $story;
    public $picurl;
    public $linkurl;
    public $listype;
+   public $stored = true;
 
   }
 
 
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $dasql;
    public $dalist_len;
    public $dalist;
  }
@@ -33,10 +34,10 @@ $con = mysql_connect($Server, $username, $password);
    mysql_select_db($db_name, $con);
 
   $sql = "";
-  $sql= $sql . "  SELECT * FROM dfm_providers ";
+  $sql= $sql . "  SELECT * FROM dfm_suppliers ";
 
  // echo $sql . " \n <br> " ;
-  $rebar->dasql1 = $sql;
+  $rebar->dasql = $sql;
  
   $result = mysql_query($sql);
 
@@ -51,10 +52,9 @@ $con = mysql_connect($Server, $username, $password);
 
     $foodo = new foo;
  
-    $foodo->source = "deskfm";
-    $foodo->listype = "providers";
-
-    $foodo->uname =    $row['provider_id'];
+    $foodo->listype = "suppliers";
+    $foodo->pid =  $row['supplier_id'];
+    $foodo->uname =   $row['name'];
     $foodo->picurl = $row['picurl'];
     $foodo->story  = $row['story'];
     $foodo->linkurl = $row['linkurl'];

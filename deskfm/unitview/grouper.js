@@ -89,6 +89,18 @@ poster.prototype.set_group = function(pgroupid) {
 }
 
 
+poster.prototype.toggle_getgroup = function() {
+
+    if (this.shape != "getgroup") {
+       this.shape = "getgroup";
+    } else {
+       this.shape = "";
+    }
+    this.redraw_rung();
+}
+
+
+
 poster.prototype.hide_groups = function() {
      var tmpstr="";
      var pobj=null;

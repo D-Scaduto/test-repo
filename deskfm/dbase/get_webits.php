@@ -18,6 +18,7 @@ include '../../config/names.php';
    public $picurl;
    public $linkurl;
    public $embedurl;
+
   }
 
 
@@ -32,15 +33,10 @@ include '../../config/names.php';
    public $dalist;
  }
 
-
  $rebar = new bar();
- 
-
-$limit = 1000;
-
-$chunk = 0;
-
-$rebar->listype = "webits";
+ $limit = 1000;
+ $chunk = 0;
+ $rebar->listype = "webits";
 
 if (isset($_GET['chunk'])) {
   $chunk = $_GET['chunk'];
@@ -66,6 +62,12 @@ if (isset($_GET['sterms'])) {
   $sterms = $_GET['sterms'];
 }
 
+$uname = "null";
+if (isset($_GET['uname'])) {
+  $uname = $_GET['uname'];
+}
+
+
 $chunk_start = $chunk * $limit;
 
 $con = mysql_connect("$Server", "$username", "$password");
@@ -79,25 +81,34 @@ $con = mysql_connect("$Server", "$username", "$password");
   $sql = $sql . " select SQL_CALC_FOUND_ROWS * from dfm_webits  ";
 
 
-  if ($sterms != "" ) {
-    $rebar->sterms = $sterms;
+
+  if ($uname != "null" ) {
+
+    $rebar->uname = $uname;
     $where = $where . " where (" ;
-    $where = $where . " story like '%" . $sterms . "%'";
-    $where = $where . " or owner_id like '%" . $sterms . "%' )";
+    $where = $where . " owner_id = '" . $uname . "' )";
+
   } else {
-    if ($cat == "null") {
-      $where = " where cat != '' and subcat != ''  ";
-      $where = $where . " and cat != 'deleted' and cat != 'junk' ";
-    } else {
-      $where = " where cat = '" . $cat . "'";
-      $rebar->cat = $cat;
-      if ($subcat != "null") {
-        $rebar->subcat = $subcat;
-        $where = $where . " and subcat ='" . $subcat . "'";
+
+    if ($sterms != "" ) {
+      $rebar->sterms = $sterms;
+      $where = $where . " where (" ;
+      $where = $where . " story like '%" . $sterms . "%'";
+      $where = $where . " or owner_id like '%" . $sterms . "%' )";
+     } else {
+      if ($cat == "null") {
+        $where = " where cat != '' and subcat != ''  ";
+        $where = $where . " and cat != 'deleted' and cat != 'junk' ";
+      } else {
+        $where = " where cat = '" . $cat . "'";
+        $rebar->cat = $cat;
+        if ($subcat != "null") {
+         $rebar->subcat = $subcat;
+         $where = $where . " and subcat ='" . $subcat . "'";
+        }
       }
     }
   }
-
   $sql = $sql . $where;
   
   $sql= $sql . " LIMIT " . $chunk_start . " , " . $limit;

@@ -12,13 +12,8 @@ include '../../config/names.php';
   }
 
 
-$source = $_GET['source'];
-$uname = $_GET['uname'];
-$listype = $_GET['source'];
-
 $pid = 'null';
 $pid = $_GET['pid'];
-
 
 $con = mysql_connect($Server, $username, $password);
 
@@ -29,24 +24,13 @@ $con = mysql_connect($Server, $username, $password);
 
   if ($pid != 'null') {
 
-   if ($listype == "webit") {
+      $sql_upd = "delete from dfm_suppliers  ";
+      $sql_upd = $sql_upd . " where supplier_id ='" . $pid . "'";
 
-    if ($source == "deskfm") {
- 
-      $sql_upd = "delete from dfm_posts  ";
-      $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
-
-      $ret->picfile = "../../pics/keepers/" . $pid . "\.*";
+      $ret->picfile = "../pics/" . $pid . "\.*";
       foreach(glob($ret->picfile) as $filename) {
         unlink($filename);
       }
-    }
-
-    if ($source == "twitter") {
-      $sql_upd = "delete from dfm_tweets ";
-      $sql_upd = $sql_upd . " where webit_id ='" . $pid . "'";
-    }
-   }
 
 //   echo $sql_upd  . " \n <br> " ;
     $result = mysql_query($sql_upd);

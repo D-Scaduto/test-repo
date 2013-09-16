@@ -30,6 +30,19 @@ logoman.prototype.show = function () {
    }
 }
 
+logoman.prototype.hide = function () {
+
+   var lbl = "";
+   var tmp = "";
+ 
+   lbl = this.spotid;
+   if (document.getElementById(lbl) !=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         this.showing = false;
+   }
+}
+
+
 logoman.prototype.set_menued = function(ptog) {
 	if (ptog == true) {
 		this.menued = true;
@@ -42,8 +55,6 @@ logoman.prototype.set_menued = function(ptog) {
 
 
 
-
-
 logoman.prototype.change_vman = function () {
 
    this.flip = this.flip + 1;
@@ -52,6 +63,7 @@ logoman.prototype.change_vman = function () {
     } 
    this.draw_vman();
 }
+
 
 logoman.prototype.draw_vman = function () {
 

@@ -151,6 +151,9 @@ viewer.prototype.draw_debug = function() {
      tmp = tmp + " listlen="+ this.dalist.length;
      tmp = tmp + " rungs="+ this.darungs.length;
      tmp = tmp + " topend="+ this.top_end;
+     tmp = tmp + " cat="+ this.cat;
+     tmp = tmp + " subcat="+ this.subcat;
+     tmp = tmp + " sterms="+ this.sterms;
 
      lbl = this.screen + "_debug";
      pobj = document.getElementById(lbl);

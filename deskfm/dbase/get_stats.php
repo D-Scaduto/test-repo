@@ -56,8 +56,6 @@ $con = mysql_connect($Server, $username, $password);
     $baro->subs[] = $foodo;
   }
 
- 
-
 
   $sql = "";
   $sql = $sql . " select month(created_at),year(created_at),count(*) from dfm_webits ";
@@ -73,9 +71,6 @@ $con = mysql_connect($Server, $username, $password);
     $foodo->listype = "unsorted";
     $baro->months[] = $foodo;
   }
-
-
-
 
 
   $sql = "";
@@ -110,6 +105,14 @@ $con = mysql_connect($Server, $username, $password);
   while($row = mysql_fetch_array($result)) {
     $baro->total_products = $row[0];
   }
+
+  $sql = "";
+  $sql= " select count(*) from `dfm_suppliers` ";
+  $result = mysql_query($sql);
+  while($row = mysql_fetch_array($result)) {
+    $baro->total_suppliers = $row[0];
+  }
+
 
   $sql = "";
   $sql= " select count(*) from dfm_people ";

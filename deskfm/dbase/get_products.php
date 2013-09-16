@@ -7,40 +7,32 @@ include '../../config/names.php';
    public $stored = true;
    public $uname;
    public $story;
-   public $prodid;
+   public $product_type;
    public $price;
-   public $source;
-   public $dfdate ;
    public $linkurl;
    public $listype;
 
   }
 
-
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $dasql;
    public $dalist_len;
    public $dalist;
  }
 
-
- $rebar = new bar;
+  $rebar = new bar;
  
-
-$con = mysql_connect($Server, $username, $password);
+  $con = mysql_connect($Server, $username, $password);
 
   $where = "";
 
   if (!$con) {
     echo('Could not connect: ' . mysql_error());
   }
-   mysql_select_db($db_name, $con);
-
-   $where =  " where prodid != '' ";
+  mysql_select_db($db_name, $con);
 
   $sql = "";
-  $sql= $sql . "  SELECT * FROM dfm_products ". $where ;
+  $sql= $sql . "  SELECT * FROM dfm_products ";
 
  // echo $sql . " \n <br> " ;
   $rebar->dasql1 = $sql;
@@ -58,18 +50,14 @@ $con = mysql_connect($Server, $username, $password);
 
     $foodo = new foo;
  
-    $foodo->source = "deskfm";
     $foodo->listype = "products";
 
-    $foodo->pid =    $row['webit_id'];
+    $foodo->pid =    $row['product_id'];
     $foodo->picurl = $row['picurl'];
-
-    $foodo->prodid = $row['prodid'];
+    $foodo->uname = $row['supplier_id'];
+    $foodo->product_type = $row['product_type'];
     $foodo->price = $row['price'];
- 
-    $foodo->uname = $row['provider_id'];
     $foodo->story  = $row['story'];
- 
     $foodo->linkurl = $row['linkurl'];
     $foodo->urls = array();
 //    $foodo->urls[] = $row['linkurl'];

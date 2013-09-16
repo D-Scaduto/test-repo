@@ -4,10 +4,9 @@ function shoper (pspotid) {
 
   this.spotid=pspotid;
   this.varname='store';
-  this.menued = false;
   this.shape = "all";//one
 
-  this.prodid = '';
+  this.product_type = '';
   this.pricemax=1500;
   this.pmaxtext="< $1500";
 
@@ -22,22 +21,11 @@ shoper.prototype.show = function() {
 
        if (this.shape == "one") {
 
-	lbl = 'product_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:125px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >products</a>";
-
-        tmp = tmp +"<ul  style='width:300px;' >";
-        sugs = amare.product_set.get_setlist();
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a ptag='"+sugs[i].prodid+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
-        }
-        tmp = tmp +"</ul></li></ul>";
-
   	    lbl = 'product_all_btn';
-            ocl = '';
+            ocl = this.varname + '.set_shape(\"all\");';
             tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
 	    if (this.prodid != "") {
-              s = amare.product_set.get_desc(this.prodid);
+              s = amare.product_set.get_desc(this.product_type);
 	    }
 	    tmp = tmp + s;
             tmp = tmp + "</button>";
@@ -46,12 +34,12 @@ shoper.prototype.show = function() {
 
 	lbl = 'product_sog';
         tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:125px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >products</a>";
+  	tmp = tmp +"<li><a >shop</a>";
 
         tmp = tmp +"<ul  style='width:300px;' >";
         sugs = amare.product_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a ptag='"+sugs[i].prodid+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<li><a ptag='"+sugs[i].product_type+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
         tmp = tmp +"</ul></li></ul>";
      }
@@ -83,20 +71,16 @@ shoper.prototype.show = function() {
 }
 
 
-shoper.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
+shoper.prototype.set_shape = function(tshape) {
+      if (tshape != undefined) {
+         this.shape = tshape; 
+      }
+     this.show();
 }
 
 shoper.prototype.set_product = function(tprod) {
       if (tprod != undefined) {
-         this.prodid=tprod;
+         this.product_type = tprod;
       }
      this.shape = "one";
      this.show();

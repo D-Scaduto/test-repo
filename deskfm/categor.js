@@ -8,7 +8,6 @@ function categor (pmenuid) {
    this.showing = false;
 
    this.shape = "all";
-   this.menued = false;
 
    this.cat ="all";
    this.subcat ="";
@@ -23,38 +22,6 @@ categor.prototype.show = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
-
-    if (buddah == true) {
-       lbl = 'feed_btn';
-       ocl = 'diego.set_shape(\"feed\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
-       tmp = tmp + "</button>"; 
-
-       lbl = 'sort_btn';
-       ocl = 'diego.set_shape(\"sort\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='float:right;width:30px;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-       tmp = tmp + "</button>"; 
-    }
-
-     lbl = "share_set_btn";
-     ocl= "diego.set_shape(\"share\")";
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
-     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
-     tmp = tmp + "</button>";
-
-    lbl = "search_set_btn";
-     ocl= "diego.set_shape(\"search\")";
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;' >";
-     tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
-     tmp = tmp + "</button>";
-
-    lbl = "browse_reset_btn";
-    ocl= "diego.set_shape(\"\")";
-    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='float:right;vertical-align:top;' >";
-    tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
-    tmp = tmp + "</button>";
 
     if (this.subcat != "" ) {
 
@@ -71,25 +38,25 @@ categor.prototype.show = function() {
 
         lbl = "browse_who_btn";
         ocl= "cater.set_shape(\"who\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
         tmp = tmp + "who?";
         tmp = tmp + "</button>";
 
         lbl = "browse_what_btn";
         ocl= "cater.set_shape(\"what\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
         tmp = tmp + "what?";
         tmp = tmp + "</button>";
 
         lbl = "browse_why_btn";
         ocl= "cater.set_shape(\"why\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
         tmp = tmp + "why?";
         tmp = tmp + "</button>";
 
         lbl = "browse_how_btn";
         ocl= "cater.set_shape(\"how\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:75px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
         tmp = tmp + "how?";
         tmp = tmp + "</button>";
 
@@ -107,8 +74,8 @@ categor.prototype.show = function() {
        } else if (this.shape == "what") { 
 
         lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
-   	tmp = tmp +"<li style=''  ><a >what?</a><ul  style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:85px;' >";
+   	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -329,17 +296,6 @@ categor.prototype.draw_debug = function() {
      if ( pobj != null) {
          pobj.innerHTML = tmp;
      }
-}
-
-
-categor.prototype.set_menued = function(ptog) {
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
 }
 
 

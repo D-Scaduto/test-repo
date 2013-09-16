@@ -24,7 +24,6 @@ poster.prototype.draw_pic = function() {
           tmp=tmp + "<img src='"+ps+"' onclick='"+ocl+"' class='"+cls+"'  >";
 
      }
-
       lbl = this.rungster + '_pic_spot';
       if (document.getElementById(lbl) != null) {
         document.getElementById(lbl).innerHTML=tmp;
