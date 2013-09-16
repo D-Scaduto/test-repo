@@ -6,16 +6,19 @@ poster.prototype.draw_story = function() {
    var pobj=null;
    var lbl = "";
    var ocl = "";
-   var omo = "";
-   var omt="";
-   var tspot  = this.rung;
+   var cls = "";
    var urlts= null;
 
        var tiesto = this.story;
 
        ocl='';
 //       ocl = this.varname + ".set_shape(\"getstory\");";
-       tmp = tmp + "<span onclick='"+ocl+"' class='story' onmouseover='' onmouseout='' >";
+       cls = 'story';
+       if (this.is_mini == true) {
+          cls = '';
+       }
+
+       tmp = tmp + "<span onclick='"+ocl+"' class='"+cls+"' onmouseover='' onmouseout='' >";
 
        if ((this.story != "") && (this.story != null)) { 
 
@@ -59,25 +62,19 @@ poster.prototype.get_story = function() {
    var tmpstr="";
    var pobj=null;
    var lbl = "";
-   var tspot  = this.rung;
    var ocl = "";
    var oku = "";
    var urlts= null;
    var tiesto = "";
 
-
-      tmpstr = "";
+   tmpstr = "";
    if (this.story != null) {
 	tiesto = this.story;
         tiesto = this.story.replace(/<br>/gi,"\n");
    } 
 
-   if ((tiesto == "" ) && (this.parvar == "nicky")) {
-        tiesto = " share about standing desks ... ";
-   }
-
          oku = this.varname + ".update_story();";
-         tmpstr = tmpstr + "<textarea id='"+this.spotid+"_"+tspot+"_story_area' class='getstory' onkeyup='"+oku+"' >";
+         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' class='getstory' onkeyup='"+oku+"' >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
 

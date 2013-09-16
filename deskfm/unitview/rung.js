@@ -2,44 +2,12 @@
 
 poster.prototype.draw_rung = function() {
 
-       if (daviewer.zoom == true) {
-       }
-
-       this.draw_btns();
-
-       if (this.listype == "people") {
-
-         if (buddah == true) {
-            this.draw_groups();
-         }
-         this.mini_showing = true;
-	
-       } else {
-
-            if (this.shape == "getstory" ) {
-               this.get_story();
-            } else {
-               this.draw_story();
-            }
-
-            this.draw_price();
-
-            if (this.shape == "getlink") {
-               this.get_link();
-            } else {
-               this.draw_link();
-            }
-
-            if (this.shape == "getembed") {
-               this.get_embed();
-            } else {
-               this.draw_embed();
-            }
-
-       }
+          this.draw_btns();
 
           if (this.is_mini == true) {
 
+              this.draw_story();
+ 
               var s= "";
               var se1,se2 = null;
               se1 = eval(this.parvar);
@@ -59,6 +27,28 @@ poster.prototype.draw_rung = function() {
 
           } else {
 
+            if (this.shape == "getstory" ) {
+               this.get_story();
+            } else {
+               this.draw_story();
+            }
+
+            if (this.listype == "products") {
+              this.draw_price();
+            }
+
+            if (this.shape == "getlink") {
+               this.get_link();
+            } else {
+               this.draw_link();
+            }
+
+            if (this.shape == "getembed") {
+               this.get_embed();
+            } else {
+               this.draw_embed();
+            }
+
             if (this.shape == "getname") {
                this.get_name();
             } else {
@@ -75,20 +65,25 @@ poster.prototype.draw_rung = function() {
               this.show_mini();
             }
 
+            if (this.shape == "getsort")  {
+              this.get_catsel();
+            } else {
+              if (debug == true) {
+  	        this.draw_catsel();
+	      }
+	    }
+ 
+            if (this.cat == "") {
+              this.draw_date();
+            }
+ 
+            if (buddah == true) {
+//              this.draw_groups();
+            }
+      
           }
 
-         if (this.shape == "getsort")  {
-           this.get_catsel();
-         } else {
-           if (debug == true) {
-  	     this.draw_catsel();
-	   }
-	 }
  
-        if (this.cat == "") {
-           this.draw_date();
-        }
-       
         if (debug == true) {
           this.draw_debug();
         }
@@ -105,43 +100,53 @@ poster.prototype.draw_rung = function() {
        var cls = '';
        var pobj = null;
 
-	  lbl = this.rungster + "_mark";
-	  tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='background-color:white;padding:4px;' >"; 
-
-	  lbl= this.rungster + "_debug_spot";
-	  tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 
-          tmpstr=tmpstr+"</div>";
-
-	  lbl= this.rungster + "_btns_spot";
-	  tmpstr=tmpstr+"<span id='"+lbl+"' style='' >"; 
-    	  tmpstr=tmpstr+"</span>";
+          if (debug == true) {
+	    lbl= this.rungster + "_debug_spot";
+	    tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 
+            tmpstr=tmpstr+"</div>";
+          }
 
            if (this.is_mini == true) {
+
+   	       lbl= this.rungster + "_btns_spot";
+               moin = 'marky(\"'+lbl+'\");';
+               mout = 'unmarky(\"'+lbl+'\");';
+	       tmpstr=tmpstr+"<span id='"+lbl+"' class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='clear:left;float:left;' >"; 
+    	       tmpstr=tmpstr+"</span>";
 
                 lbl= this.rungster + "_pic_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"' style=''  >"; 
                 tmpstr=tmpstr+"</span>";
  
-                tmpstr=tmpstr+"<span class='story' >";
                 lbl= this.rungster + "_story_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
 	        tmpstr=tmpstr+"</span>";
 
            } else {
 
-              if (this.listype == "people") {
+   	       lbl= this.rungster + "_btns_spot";
+               moin = 'marky(\"'+lbl+'\");';
+               mout = 'unmarky(\"'+lbl+'\");';
+	       tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='' >"; 
+    	       tmpstr=tmpstr+"</div>";
+
+              if ((this.listype == "people") || (this.listype == "suppliers"))  {
 
                   lbl= this.rungster + "_name_spot";
-	          tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='' >"; 
-                  tmpstr=tmpstr+"</div>";
+	          tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >"; 
+                  tmpstr=tmpstr+"</span>";
+
+                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
                   lbl= this.rungster + "_pic_spot";
-	          tmpstr=tmpstr+"<div id='"+lbl+"' style=''  >"; 
-                  tmpstr=tmpstr+"</div>"; 
+	          tmpstr=tmpstr+"<span id='"+lbl+"' style='float:right;'  >"; 
+                  tmpstr=tmpstr+"</span>"; 
+
+//                   tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
                   lbl= this.rungster + "_mini";
-                  tmpstr=tmpstr+"<div id='"+lbl+"' class='' style='display:inline-block;'  >"; 
-                  tmpstr=tmpstr+"</div>";
+                  tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+                  tmpstr=tmpstr+"</span>";
 
                } else {
 
@@ -204,7 +209,6 @@ poster.prototype.draw_rung = function() {
 
            } 
 
-    	   tmpstr=tmpstr+"</div>";
 
       }
 

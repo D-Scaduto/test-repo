@@ -63,6 +63,8 @@ header.prototype.draw_btns = function () {
      var tmp = "";
      var lbl = "";
      var ocl = "";
+     var mout = "";
+     var moin = "";
 
      tmp = tmp + "<span class='menu_btns' style=''  >";
  
@@ -70,67 +72,103 @@ header.prototype.draw_btns = function () {
 
        lbl = 'sort_btn';
        ocl = this.varname + '.set_shape(\"sort\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       if (this.shape == 'sort') {
+         cls='spotd_on';
+       }
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style=''  >";
        tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>"; 
 
        lbl = 'feed_btn';
+        moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
        ocl = this.varname + '.set_shape(\"feed\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
-       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>"; 
 
        lbl = 'manage_btn';
-       ocl = this.varname + '.set_shape(\"manage\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+         moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+      ocl = this.varname + '.set_shape(\"manage\");'
+       tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png' width='20px' >";
-       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>"; 
 
        lbl = 'group_btn';
-       ocl = this.varname + '.set_shape(\"group\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+          moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+     ocl = this.varname + '.set_shape(\"group\");'
+       tmp = tmp + "<span id='"+lbl+"' class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
        tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' width='20px' >";
-       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>"; 
 
    } else {
 
      lbl = 'browse_btn';
-     ocl = this.varname + '.set_shape(\"browse\");'
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+         moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+    ocl = this.varname + '.set_shape(\"browse\");'
+     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
-     tmp = tmp + "</button>";  
+     tmp = tmp + "</span>";  
 
      lbl = 'search_btn';
+        moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
      ocl = this.varname + '.set_shape(\"search\");'
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;' >";
+     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;' >";
      tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
-     tmp = tmp + "</button>"; 
+     tmp = tmp + "</span>"; 
 
      lbl = 'share_btn';
+        moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
      ocl = this.varname + '.set_shape(\"share\");'
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;'  >";
      tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
-     tmp = tmp + "</button>";
+     tmp = tmp + "</span>";
 
        lbl = 'shop_btn';
+        moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
        ocl = this.varname + '.set_shape(\"shop\");'
-       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'style='width:30px;'  >";
+       tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style='width:30px;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
-       tmp = tmp + "</button>"; 
+       tmp = tmp + "</span>"; 
 
-   }
-     
+   } 
+    
        tmp = tmp + "</span>";
 
        tmp = tmp + "<span class='rail_btns' style=''  >";
 
-        tmp = tmp + "<button id='nitro_lbtn' onclick='daviewer.nitro_stop();' style='width:30px;'  >";
-        tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
-        tmp = tmp + "</button>";
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='prev_btn' onclick='daviewer.prev();' style='width:20px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/prev.png' width='20px' >";
+        tmp = tmp + "</span>";
 
-        tmp = tmp + "<button id='nitro_rbtn' onclick='daviewer.nitro_start();' style='width:30px;'  >";
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+        tmp = tmp + "<span id='next_btn' onclick='daviewer.next();' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
-        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='nitro_lbtn' onclick='daviewer.nitro_stop();' style='width:20px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
+        tmp = tmp + "</span>";
+
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='nitro_rbtn' onclick='daviewer.nitro_start();' style='width:20px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' width='20px' >";
+        tmp = tmp + "</span>";
 
        tmp = tmp + "</span>";
 

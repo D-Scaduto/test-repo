@@ -235,8 +235,33 @@ viewer.prototype.load_person_list = function(tuname) {
 }
 
 
+viewer.prototype.load_products_by_supplier = function(tsuppid) {
+  if (tsuppid != undefined) {
+    this.dalist = [];
+    var lgo = true;
+    var d = 0;
+      for (var r=d; r<amare.productlist.length;r++) {
+        if (amare.productlist[r] != undefined) {
+           var ok = false;
+           if (amare.productlist[r].uname == tsuppid ) {
+              ok = true;
+           }
+           if (ok == true) {
+	     this.dalist[d] = new Object();
+ 	     this.dalist[d].mdex = r;
+	     this.dalist[d].ltype = "products";
+             d = d+1 
+           }
+        } 
+      }
+    this.load_rungs(0);
+    this.draw_view();
+  }
+}
 
- viewer.prototype.load_product_list = function(tprodid) {
+
+
+ viewer.prototype.load_products_by_type = function(tprodid) {
    if (tprodid != undefined) {
      if (tprodid != "") {
        this.prodids = [];

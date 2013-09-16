@@ -21,7 +21,7 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.mini_showing = false;
 
    this.showing = false;
-   this.rungster = this.spotid + "_"+this.rung;
+   this.rungster = this.spotid + "_" + this.rung;
 
    this.pid = "";
    this.story="";
@@ -69,16 +69,16 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
 
 
 poster.prototype.set_ppid = function(pdadex,plistype) {
-  var s = "";
-  var pobj = null;
+   var s = "";
+   var pobj = null;
 
-  if (pdadex != undefined) {
-    this.dadex = pdadex;
-  }
+   if (pdadex != undefined) {
+     this.dadex = pdadex;
+   }
 
-  if (plistype != undefined) {
+   if (plistype != undefined) {
        this.listype = plistype;
-  } 
+   } 
 
     this.stored = true;
     if (this.listype == "webits") {
@@ -103,10 +103,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.uname=pobj.uname;
       this.stored=pobj.stored;
 
-      this.dfdate=pobj.dfdate;
-      if ((pobj.created_at != "") && (pobj.created_at != undefined))  {
-	 this.created_at=pobj.created_at;
-      }
+      this.created_at=pobj.created_at;
       this.change_date=pobj.change_date;
 
       this.picurl=pobj.picurl;
@@ -125,13 +122,14 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       }
 
       if (pobj.listype == "products") {
-        this.prodid=pobj.prodid;
+        this.product_type=pobj.product_type;
         this.price=pobj.price;
       }
 
       if (pobj.listype == "people") {
         this.groupid=pobj.groupid;
         this.set_mini();
+        this.mini_showing = true;
       }
      
       if (pobj.listype == "unsorted")  {
@@ -139,6 +137,8 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       }
        
       if (pobj.listype == "suppliers")  {
+         this.set_mini();
+         this.mini_showing = true;
       }
       
       this.changed = false;
@@ -190,7 +190,7 @@ poster.prototype.draw_btns = function() {
 	 tmp = tmp + "</span>";
 
 	 lbl = this.rungster + "_work_btns";
-         tmp = tmp + "<span  id='"+lbl+"' >";  
+         tmp = tmp + "<span  id='"+lbl+"' style='float:right;'>";  
 	 tmp = tmp + "</span>";
 
 	 lbl = this.rungster + "_send_btns";
@@ -219,55 +219,68 @@ poster.prototype.nav_btns = function() {
    var lbl = "";
    var ocl = "";
 
-      if (this.editing == false) {
+      if (this.is_mini == false) {
           if (this.rung == 0) {
               lbl = this.rungster + '_zoom_btn';
               ocl = this.parvar + ".toggle_zoom();";
-              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  >";
+              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
               tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' height='20px' >";
-              tmp = tmp + "</button>";
+              tmp = tmp + "</span>";
  
           } else {
               lbl = this.rungster + '_totop_btn';
               ocl = this.parvar + ".to_top("+this.rung+");";
               ocl = ocl + this.parvar + ".set_zoom();";
-              tmp = tmp + "<button  id='"+lbl+"' onclick='"+ocl+"'  >";
+              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
               tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' height='20px' >";
-              tmp = tmp + "</button>";
+              tmp = tmp + "</span>";
           }
 
           if (this.stored == false ) {
               ocl = this.parvar + ".del_rung("+this.rung+")";
               lbl = this.rungster + "_delfrom_mini_btn";
-              tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
+              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
-              tmp = tmp + "</button>";
+              tmp = tmp + "</span>";
           }
         
           if (this.listype == "people") {
-                ocl = this.varname + ".toggle_mini();";
+/* 
+               ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
-                tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"'  >";
+                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
                 tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
-                tmp = tmp + "</button>";
+                tmp = tmp + "</span>";
 
                 cls='spotd_off';
                 ocl = "amare.get_cperson_list(\""+this.uname+"\");";
                 lbl = this.rungster + "_refresh_mini";
-                tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"' >";
+                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
                 tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
-                tmp = tmp + "</button>";
+                tmp = tmp + "</span>";
+*/
+           }
 
-          }
+           if (buddah == true) {
+              ocl = this.varname + ".toggle_editing();";
+              lbl = this.rungster + "_edit_btn";
+              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"' style='float:right;'   >";
+              tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
+              tmp = tmp + "</span>";
+           }
+
+         } else {
+
+            if (buddah == true) {
+              ocl = this.varname + ".toggle_editing();";
+              lbl = this.rungster + "_edit_btn";
+              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"' style=''   >";
+              tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
+              tmp = tmp + "</span>";
+           }
 
          }
 
-              ocl = this.varname + ".toggle_editing();";
-              lbl = this.rungster + "_edit_btn";
-              tmp = tmp + "<button  id='"+lbl+"'   onclick='"+ocl+"';   >";
-              tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
-              tmp = tmp + "</button>";
-     
          lbl = this.rungster + "_nav_btns";
          if (document.getElementById(lbl)!= null) {
              document.getElementById(lbl).innerHTML=tmp;
@@ -281,48 +294,57 @@ poster.prototype.nav_btns = function() {
        var ocl="";
        var cls = "";
 
-       	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getstory();' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
-         tmp = tmp + "</button>";  
+       	 tmp = tmp + "<span  style='clear:left;' >";  
+         tmp = tmp + "</span>";  
 
-	 tmp = tmp + "<button  onclick='"+this.varname+".toggle_getpic();' >";  
+       	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getstory();' >";  
+         tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
+         tmp = tmp + "</span>";  
+
+	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getpic();' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
-	 tmp = tmp + "</button>"; 
+	 tmp = tmp + "</span>"; 
  
       if ((this.listype == "unsorted") || (this.listype == "webits")) {
 	        
   	 ocl = this.varname + ".toggle_getlink();";
-         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-	 tmp = tmp + "</button>";
+	 tmp = tmp + "</span>";
 
 	 ocl = this.varname + ".toggle_getembed();";
-         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-	 tmp = tmp + "</button>";
+	 tmp = tmp + "</span>";
       }
   
       if ((this.listype == "unsorted") || (this.listype == "webits")) {
 	 ocl = this.varname + ".toggle_getsort();";
-         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
-	 tmp = tmp + "</button>";
+	 tmp = tmp + "</span>";
       }
 
       if (this.listype == "people") {
 	 ocl = this.varname + ".toggle_getgroup();";
-         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-	 tmp = tmp + "</button>";
+	 tmp = tmp + "</span>";
       }
 
       if ((this.listype == "people") || (this.listype == "suppliers")) {
 	 ocl = this.varname + ".toggle_getname();";
-         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/pen_black.png' height='20px' >";
-	 tmp = tmp + "</button>";
+	 tmp = tmp + "</span>";
       }
 
+      if (this.listype == "suppliers") {
+	 ocl = "joe.add_product("+this.rung+");";
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/shop.png' height='20px' >";
+	 tmp = tmp + "</span>";
+      }
 
      lbl = this.rungster + '_work_btns';
      pobj = document.getElementById(lbl);

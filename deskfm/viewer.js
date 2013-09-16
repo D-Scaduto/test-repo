@@ -40,20 +40,28 @@ viewer.prototype.draw_view = function() {
     var lbl = "";
     var ocl = "";
     var cls='';
+    var moin = "";
+    var mout = "";
     var ct = 0; 
     var st = this.top_end;
     var vdex = "";
     var ltype = "";
     var mdex = "";
 
-    lbl = this.screen+"_debug";
-    cls='spotd_off'
-    tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style=''  >"; 
-    tmpstr=tmpstr+"</div>";
+    if (debug == true) {
+      lbl = this.screen+"_debug";
+      cls='spotd_off'
+      tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style=''  >"; 
+      tmpstr=tmpstr+"</div>";
+    }
 
     cls = 'box';
+    if (this.is_mini == true) {
+      cls='mbox';
+    }
 
     if (this.zoom == true) {
+       cls = 'zbox';
        st = 1;
     }
 
@@ -67,9 +75,9 @@ viewer.prototype.draw_view = function() {
       }
 
      lbl = this.screen;
-     if (document.getElementById(lbl)!= null) {
  
-       document.getElementById(lbl).innerHTML=tmpstr;
+  if (document.getElementById(lbl)!= null) {
+        document.getElementById(lbl).innerHTML=tmpstr;
 
          ct = 0;
          while (ct <= st) {

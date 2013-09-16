@@ -65,7 +65,7 @@ shoper.prototype.show = function() {
 	         }
                } );
 	    
-	  daviewer.load_product_list(this.prodid);
+	  daviewer.load_products_by_type(this.prodid);
     }
 
 }

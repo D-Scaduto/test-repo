@@ -347,7 +347,7 @@ viewer.prototype.load_rungs = function(ldex) {
              }
 	   }
            if (ltype == "suppliers") {
-             if (amare.productlist[mdex] != undefined) {
+             if (amare.supplierlist[mdex] != undefined) {
                this.darungs[c].vdex = r;
              }
 	   }
@@ -373,7 +373,6 @@ viewer.prototype.load_rungs = function(ldex) {
          }
        }
 
-    this.draw_view();
 
 }
 

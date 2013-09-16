@@ -28,6 +28,19 @@
 	width:100%;
       }
 
+    .mbox {
+   //    border-style:solid;
+   //    border-color:silver;
+   //    border-width:2px;
+         display:block;
+    }
+
+    .zbox {
+       min-width:250px;
+       width:100%;
+    }
+
+
 
 @media screen and (max-width:599px) {
     
@@ -73,10 +86,10 @@
 
        border-style:solid;
        border-color:silver;
-       border-width:2px;
+       border-width:4px;
        min-width:250px;
        width:100%;
-       min-height:150px;
+       padding:4px;
     }
 
      .story {
@@ -140,9 +153,9 @@
 
        border-style:solid;
        border-color:silver;
-       border-width:2px;
+       border-width:4px;
        width:275px;
-       min-height:150px;
+        padding:4px;
     }
 
     .story {
@@ -171,6 +184,7 @@ border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;
+vertical-align:bottom;
 }
 
 .spotd_mark {
@@ -180,6 +194,7 @@ border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;
+vertical-align:bottom;
 }
 
    
@@ -190,6 +205,7 @@ border-width:1px;
 font-family: sans-serif;
 font-weight:normal;
 font-size:medium;
+vertical-align:bottom;
 }
 
 

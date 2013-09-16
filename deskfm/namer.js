@@ -23,8 +23,8 @@ namer.prototype.show = function() {
 
     lbl = "name_talk";
     ocl = "";
-    moin = "markyd(\""+lbl+"\");";
-    mout = "unmarkyd(\""+lbl+"\");";
+    moin = "marky(\""+lbl+"\");";
+    mout = "unmarky(\""+lbl+"\");";
     tmp = tmp + "<div id='"+lbl+"' onclick='"+ocl+"' onmouseover='"+moin+"' onmouseout='"+mout+"' class='spotd_off' style='' >";
     tmp = tmp + "</div>";
 
@@ -75,8 +75,8 @@ namer.prototype.say_hi = function() {
       if ( (this.pname != "") || (this.tmp_name != ""))  {
 
        lbl = "getname_btn";
-       var moin = "markyd(\""+lbl+"\");";
-       var mout = "unmarkyd(\""+lbl+"\");";
+       var moin = "marky(\""+lbl+"\");";
+       var mout = "unmarky(\""+lbl+"\");";
        ocl = "jesie.get_name();";
        var cls='spotd_off';
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
@@ -84,8 +84,8 @@ namer.prototype.say_hi = function() {
        tmp = tmp + "</span>";
 
        lbl = "spacename_btn";
-       var moin = "markyd(\""+lbl+"\");";
-       var mout = "unmarkyd(\""+lbl+"\");";
+       var moin = "marky(\""+lbl+"\");";
+       var mout = "unmarky(\""+lbl+"\");";
        ocl = "jesie.space_me();";
        var cls='spotd_off';
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
@@ -94,8 +94,8 @@ namer.prototype.say_hi = function() {
 
         } else {
            lbl = "getname_btn";
-           var moin = "markyd(\""+lbl+"\");";
-           var mout = "unmarkyd(\""+lbl+"\");";
+           var moin = "marky(\""+lbl+"\");";
+           var mout = "unmarky(\""+lbl+"\");";
            ocl = "jesie.get_name();";
            var cls='spotd_off';
            tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";

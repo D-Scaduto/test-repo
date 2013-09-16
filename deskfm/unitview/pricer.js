@@ -11,8 +11,8 @@ poster.prototype.draw_price = function() {
      if (this.price != -1) {
        lbl= this.spotid + "_" + this.rung + "_" + "buy"+ "_spot";
        ocl = this.parvar + ".to_top("+ this.rung + ");";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
+       moin = "marky(\""+lbl+"\");";
+       mout = "unmarky(\""+lbl+"\");";
        tmp=tmp+"<div id='"+lbl+"' class='spotd_off' onclick='"+ocl+"' onmouseover='"+moin+"'  onmouseout='"+mout+"' >"; 
        tmp = tmp +  "$" + this.price;
        tmp = tmp + "</div>";

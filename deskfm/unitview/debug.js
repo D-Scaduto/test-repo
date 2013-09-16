@@ -16,7 +16,7 @@ poster.prototype.draw_debug = function() {
       tmpstr=tmpstr +  "<br>";
       tmpstr=tmpstr +  "uname="+this.uname;
 
-      tmpstr=tmpstr +  " pid="+this.pid;
+      tmpstr=tmpstr +  " pid=[" +this.pid + "]";
 
       if (this.listype == "people") {
         tmpstr=tmpstr +  " group="+this.groupid;
