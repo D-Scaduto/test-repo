@@ -25,14 +25,14 @@ feeder.prototype.show = function() {
       lbl = "feed_reset_btn";
       ocl= "diego.set_shape(\"\")";
       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
-      tmp = tmp + "feed";
+      tmp = tmp + "feeds";
       tmp = tmp + "</button>";
 
-	 tmp = tmp + "<button id='' onclick='moe.check_feed();'  >";
+	 tmp = tmp + "<span id='' onclick='moe.check_feed();'  >";
          tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
-         tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
 
-         tmp = tmp + "<input type='text' name='s' id='feed_string' size='15' value='standing desk' >";
+         tmp = tmp + "<input type='text' name='s' id='feed_string' size='15' value='standing desk' style='vertical-align:top;'  >";
 
          tmp = tmp + "<div id='feed_btns'  >";
          tmp = tmp + "</div>";

@@ -1,0 +1,94 @@
+
+.regular_top {
+  position:relative;
+}
+
+
+.flying_top {
+  position:fixed;
+  top:0px;
+}
+
+     .piczoom {
+	 width:200px;
+     }
+
+    .mbox {
+   //    border-style:solid;
+   //    border-color:silver;
+   //    border-width:2px;
+         display:block;
+    }
+
+
+
+.spotd_on {
+border-color:silver;
+border-style:solid;
+border-width:2px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+//vertical-align:top;
+padding:2px;
+}
+
+.spotd_mark {
+border-color:silver;
+border-style:solid;
+border-width:1px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+//vertical-align:top;
+}
+
+   
+.spotd_off {
+border-color:white;
+border-style:solid;
+border-width:1px;
+font-family: sans-serif;
+font-weight:normal;
+font-size:medium;
+//vertical-align:top;
+}
+
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+
+a:link{
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+  color:black;
+  text-decoration:underline; 
+  vertical-align:top;
+}
+
+a:visited{
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+  color:black;
+  text-decoration:underline;  
+  vertical-align:top;
+}
+
+a:active{
+  font-family: sans-serif;
+  font-weight:normal;
+  font-size:medium;
+  color:black;
+  text-decoration:underline;  
+  vertical-align:top;
+}
+
+
+

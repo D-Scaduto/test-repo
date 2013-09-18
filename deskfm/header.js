@@ -2,9 +2,10 @@
 
 function header () {
 
-    this.shape = "";  // browse,search,share,shop,sort,feed,manage,group    
-    this.shapes = "";
     this.varname = "diego";
+    this.shapes = []; //browse,search,share,shop,sort,feed,manage,groupi,login    
+    this.shape = ""; 
+    this.shape_was = "";
 }	
  
 
@@ -14,7 +15,12 @@ header.prototype.show = function () {
      var lbl = "";
      var ocl = "";
 
-     tmp = tmp + "<span id='logo_spot' class='' style=''  >";
+     lbl = "logo_lbtn";
+     ocl = "sal.change_vman();";
+     tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  style='vertical-align:top;' >";
+     tmp = tmp + "</span>";
+
+     tmp = tmp + "<span id='logo_spot' class='' style='vertical-align:top;'  >";
      tmp = tmp + "</span>";
 
      tmp = tmp + " <div id='search_spot' class='' style='display:inline-block;'  >";
@@ -41,10 +47,14 @@ header.prototype.show = function () {
       tmp = tmp + "<div id='manage_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
  
+      tmp = tmp + "<div id='name_spot' class='' style='display:inline-block;'  >";
+      tmp = tmp + "</div>";
+
       var pobj = document.getElementById('menu_spot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
-
+             sal.show();
+             sal.draw_vman();
              this.draw_btns();
              for (var i=0;i<this.shapes.length;i++) {
                 var s = this.shapes[i].split(':');
@@ -68,6 +78,18 @@ header.prototype.draw_btns = function () {
 
      tmp = tmp + "<span class='menu_btns' style=''  >";
  
+       lbl = 'name_btn';
+       ocl = this.varname + '.toggle_shape(\"name\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       if (this.shape == 'name') {
+         cls='spotd_on';
+       }
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style=''  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+
    if (buddah == true) {
 
        lbl = 'sort_btn';
@@ -91,9 +113,9 @@ header.prototype.draw_btns = function () {
        tmp = tmp + "</span>"; 
 
        lbl = 'manage_btn';
-         moin = 'marky(\"'+lbl+'\");';
+       moin = 'marky(\"'+lbl+'\");';
        mout = 'unmarky(\"'+lbl+'\");';
-      ocl = this.varname + '.set_shape(\"manage\");'
+       ocl = this.varname + '.set_shape(\"manage\");'
        tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png' width='20px' >";
        tmp = tmp + "</span>"; 
@@ -116,22 +138,6 @@ header.prototype.draw_btns = function () {
      tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
      tmp = tmp + "</span>";  
 
-     lbl = 'search_btn';
-        moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-     ocl = this.varname + '.set_shape(\"search\");'
-     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;' >";
-     tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
-     tmp = tmp + "</span>"; 
-
-     lbl = 'share_btn';
-        moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-     ocl = this.varname + '.set_shape(\"share\");'
-     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;'  >";
-     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
-     tmp = tmp + "</span>";
-
        lbl = 'shop_btn';
         moin = 'marky(\"'+lbl+'\");';
        mout = 'unmarky(\"'+lbl+'\");';
@@ -141,32 +147,60 @@ header.prototype.draw_btns = function () {
        tmp = tmp + "</span>"; 
 
    } 
-    
+
+     lbl = 'search_btn';
+     moin = 'marky(\"'+lbl+'\");';
+     mout = 'unmarky(\"'+lbl+'\");';
+     ocl = this.varname + '.toggle_shape(\"search\");'
+     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;' >";
+     tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
+     tmp = tmp + "</span>"; 
+
+     lbl = 'share_btn';
+     moin = 'marky(\"'+lbl+'\");';
+     mout = 'unmarky(\"'+lbl+'\");';
+     ocl = this.varname + '.toggle_shape(\"share\");'
+     tmp = tmp + "<span id='"+lbl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='width:30px;'  >";
+     tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+     tmp = tmp + "</span>";
+
+   
        tmp = tmp + "</span>";
 
        tmp = tmp + "<span class='rail_btns' style=''  >";
 
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");'; 
-        tmp = tmp + "<span id='prev_btn' onclick='daviewer.prev();' style='width:20px;'  >";
+        lbl = 'prev_btn';
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='prev_btn'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='daviewer.prev();' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/prev.png' width='20px' >";
         tmp = tmp + "</span>";
 
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-        tmp = tmp + "<span id='next_btn' onclick='daviewer.next();' style='width:20px;'  >";
+        lbl = 'next_btn';
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        tmp = tmp + "<span id='next_btn' onclick='daviewer.next();'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
         tmp = tmp + "</span>";
 
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");'; 
-        tmp = tmp + "<span id='nitro_lbtn' onclick='daviewer.nitro_stop();' style='width:20px;'  >";
+        lbl = 'zoom_btn';
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='"+lbl+"' onclick='daviewer.toggle_zoom();'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='width:20px;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' width='20px' >";
+        tmp = tmp + "</span>";
+
+        lbl = 'nitro_lbtn';
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='nitro_lbtn' onclick='daviewer.nitro_stop();'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/stop.png' width='20px' >";
         tmp = tmp + "</span>";
 
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");'; 
-        tmp = tmp + "<span id='nitro_rbtn' onclick='daviewer.nitro_start();' style='width:20px;'  >";
+        lbl = 'nitro_rbtn';
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");'; 
+        tmp = tmp + "<span id='nitro_rbtn' onclick='daviewer.nitro_start();'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' width='20px' >";
         tmp = tmp + "</span>";
 
@@ -198,11 +232,8 @@ header.prototype.set_shapes = function (pshapes) {
 header.prototype.set_shape = function (pshape) {
 
    if (pshape != undefined) {
-      if (this.shape == pshape) {
-         this.shape = "";
-      } else {
+        this.shape_was = this.shape;
         this.shape = pshape;
-      }
    }
 
    if (this.shape == "") {
@@ -221,6 +252,17 @@ header.prototype.set_shape = function (pshape) {
          es = " if (" + s[1] + " != null) { "+es+"}";
          eval(es);
       }
+}
+
+
+header.prototype.toggle_shape = function (pshape) {
+   if (pshape != undefined) {
+        if (this.shape == pshape) {
+           this.set_shape(this.shape_was);
+        } else {
+            this.set_shape(pshape);
+        }
+   }
 }
 
 

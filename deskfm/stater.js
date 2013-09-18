@@ -959,6 +959,9 @@ stater.prototype.add_unsaved = function(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
+       if (listobj.dalist == null) {
+          return;
+       }
        if ( listobj.dalist.length > 0 ) { 
          for (var j=0;j<listobj.dalist.length;j++) {
               found = false;

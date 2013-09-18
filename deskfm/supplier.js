@@ -5,9 +5,7 @@ function supplier (pspotid) {
    this.spotid = pspotid + "_spot";
    this.varname = "joe";
    this.showing = false;
-
    this.shape = "all";  //all,one 
-
 }
 
 
@@ -16,12 +14,21 @@ supplier.prototype.show = function() {
      var tmp = "";
      var lbl = "";
      var ocl = "";
+     var cls = 'spotd_off';
 
      lbl = 'suppliers_btn';
-     ocl = this.varname + '.new_one();';
+     ocl = '';
      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
      tmp = tmp + "suppliers";
      tmp = tmp + "</button>";
+
+      lbl = 'suppliers_new_btn';
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       ocl = this.varname + '.new_one();';
+       tmp = tmp + "<span id='"+lbl+"'  class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
+       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' width='20px' >";
+       tmp = tmp + "</span>"; 
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -37,22 +44,10 @@ supplier.prototype.show = function() {
 
 
 supplier.prototype.new_one = function() {
-     var g = null;
-     var t = -1;
  
-     if (daviewer.darungs[0].postman != undefined) { 
+     daviewer.new_one("suppliers");
  
-      if (daviewer.darungs[0].postman.stored == true) { 
-        g = new webit();
-        t = amare.supplierlist.push(g);
-        daviewer.add_one(t-1,"suppliers");
-        daviewer.darungs[0].postman.editing = true;
-        daviewer.darungs[0].postman.redraw_rung();
-      }
-   }
 }
-
-
 
 supplier.prototype.add_product = function(prung) {
     var g = null;

@@ -14,9 +14,6 @@ poster.prototype.draw_pic = function() {
       if (ps != "") {
 
 	  cls = "piclip";
-	  if (is_mobile == true) {
-         	  cls = "picmobile";
-	  }
           if (daviewer.zoom == true)   {
               cls = "piczoom";
           }

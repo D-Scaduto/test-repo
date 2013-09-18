@@ -80,6 +80,10 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
        this.listype = plistype;
    } 
 
+   if (this.dadex == -1) {
+      pobj = new webit();
+   } else {
+
     this.stored = true;
     if (this.listype == "webits") {
         s =  "amare.webitlist[" + pdadex + "]";
@@ -97,10 +101,12 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
     } 
 
     pobj = eval(s);
+  }
     if (pobj != null) {
 
       this.pid=pobj.pid;
       this.uname=pobj.uname;
+      this.listype=pobj.listype;
       this.stored=pobj.stored;
 
       this.created_at=pobj.created_at;
@@ -129,7 +135,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       if (pobj.listype == "people") {
         this.groupid=pobj.groupid;
         this.set_mini();
-        this.mini_showing = true;
       }
      
       if (pobj.listype == "unsorted")  {
@@ -138,7 +143,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
        
       if (pobj.listype == "suppliers")  {
          this.set_mini();
-         this.mini_showing = true;
       }
       
       this.changed = false;
@@ -169,12 +173,9 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 	   if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
 	     this.group_changed = true;
 	   }
-      }
-      
-    } else {
-//      alert("err: "+pdadex);
+       }   
     }
-
+   
 }
 
 
@@ -184,20 +185,28 @@ poster.prototype.draw_btns = function() {
        var tmp = "";
        var lbl = "";
        var ocl="";
+       var sty = '';
 
 	 lbl = this.rungster + "_nav_btns";
          tmp = tmp + "<span  id='"+lbl+"' >";  
 	 tmp = tmp + "</span>";
 
+       if ((this.listype == "unsorted") || (this.shape == "getsort")) {
+	 lbl = this.rungster + "_sort_spot";
+         tmp = tmp + "<span  id='"+lbl+"' style='" + sty+ "' >";  
+	 tmp = tmp + "</span>";
+       }
+
+       if (this.is_mini == false) {
+          sty='float:right;';
+       }
 	 lbl = this.rungster + "_work_btns";
-         tmp = tmp + "<span  id='"+lbl+"' style='float:right;'>";  
+         tmp = tmp + "<span  id='"+lbl+"' style='" + sty+ "' >";  
 	 tmp = tmp + "</span>";
 
 	 lbl = this.rungster + "_send_btns";
          tmp = tmp + "<span  id='"+lbl+"' style='float:right;' >";  
 	 tmp = tmp + "</span>";
-
-	 tmp = tmp + "<div  style='clear:right;' ></div>";  
 
      lbl = this.rungster + '_btns_spot';
      pobj = document.getElementById(lbl);
@@ -218,34 +227,88 @@ poster.prototype.nav_btns = function() {
    var tmp = "";
    var lbl = "";
    var ocl = "";
+   var src = "";
 
       if (this.is_mini == false) {
-          if (this.rung == 0) {
-              lbl = this.rungster + '_zoom_btn';
-              ocl = this.parvar + ".toggle_zoom();";
-              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' height='20px' >";
-              tmp = tmp + "</span>";
- 
-          } else {
+
+            if (this.rung == 0) {
+             if (daviewer.zoom == true) {
+
+                 if (nicky.showing == true) {
+                     lbl = this.rungster + '_zoom_btn';
+                     ocl = this.parvar + ".toggle_zoom();";
+                     src = 'deskfm/images/icons/dot_swirl.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+
+                     lbl = this.rungster + '_share_btn';
+                     ocl = "";
+                     src = 'deskfm/images/icons/share.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+
+                 } else {
+
+                     lbl = this.rungster + '_zoom_btn';
+                     ocl = this.parvar + ".toggle_zoom();";
+                     src = 'deskfm/images/icons/dot_swirl.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+
+                }
+
+              } else {
+
+                 if (nicky.showing == true) {
+
+                     lbl = this.rungster + '_zoom_btn';
+                     ocl = this.parvar + ".toggle_zoom();";
+                     src = 'deskfm/images/icons/share.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+
+                 } else {
+
+                     lbl = this.rungster + '_zoom_btn';
+                     ocl = this.parvar + ".toggle_zoom();";
+                     src = 'deskfm/images/icons/dot_swirl.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+                }
+
+              }
+
+             } else {
+
               lbl = this.rungster + '_totop_btn';
               ocl = this.parvar + ".to_top("+this.rung+");";
               ocl = ocl + this.parvar + ".set_zoom();";
+              if (nicky.showing == true) {
+                 src = 'deskfm/images/icons/share.png';
+              } else {
+                 src = 'deskfm/images/icons/dot_swirl.png';
+              }
               tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-              tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' height='20px' >";
+              tmp = tmp + "<img src='"+src+"' height='20px' >";
               tmp = tmp + "</span>";
-          }
 
-          if (this.stored == false ) {
+            }
+
+          if (this.stored == false )  {
               ocl = this.parvar + ".del_rung("+this.rung+")";
-              lbl = this.rungster + "_delfrom_mini_btn";
+              lbl = this.rungster + "_del_btn";
               tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</span>";
           }
         
           if (this.listype == "people") {
-/* 
+ 
                ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
                 tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
@@ -258,7 +321,15 @@ poster.prototype.nav_btns = function() {
                 tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
                 tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
                 tmp = tmp + "</span>";
-*/
+
+           }
+
+           if (this.listype == "suppliers") {
+                ocl = this.varname + ".toggle_mini();";
+                lbl = this.rungster + "_mini_btn";
+                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
+                tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
+                tmp = tmp + "</span>";
            }
 
            if (buddah == true) {
@@ -272,6 +343,13 @@ poster.prototype.nav_btns = function() {
          } else {
 
             if (buddah == true) {
+/*
+              ocl =  this.parvar + ".del_rung("+this.rung+");";
+              lbl = this.rungster + "_delfrom_mini_btn";
+              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
+              tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
+              tmp = tmp + "</span>";
+*/
               ocl = this.varname + ".toggle_editing();";
               lbl = this.rungster + "_edit_btn";
               tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"' style=''   >";
@@ -294,8 +372,10 @@ poster.prototype.nav_btns = function() {
        var ocl="";
        var cls = "";
 
-       	 tmp = tmp + "<span  style='clear:left;' >";  
-         tmp = tmp + "</span>";  
+	 ocl = this.varname + ".toggle_getname();";
+         tmp = tmp + "<span  onclick='"+ocl+"' style='height:20px;' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
+	 tmp = tmp + "</span>";
 
        	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getstory();' >";  
          tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
@@ -346,6 +426,7 @@ poster.prototype.nav_btns = function() {
 	 tmp = tmp + "</span>";
       }
 
+
      lbl = this.rungster + '_work_btns';
      pobj = document.getElementById(lbl);
     
@@ -366,65 +447,53 @@ poster.prototype.nav_btns = function() {
 
          ocl = this.varname + ".do_undo();";
          lbl = this.rungster + "_undo_btn";
-         tmp = tmp + "<button  id='"+lbl+"'  onclick='"+ocl+"' >";
-//              tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
-         tmp = tmp + "undo";
-         tmp = tmp + "</button>";
+         tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
+         tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
+         tmp = tmp + "</span>";
 
           if (this.listype == "people") {
 
 	      lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_person();";
-	      ts = "update";
               if (this.stored == false) {
  		ocl = this.varname+".add_person();";
-                ts = "add";
 	      }
-              tmp=tmp + "<button onClick='"+ocl+"'    >";  
-              tmp = tmp + ts;
-              tmp = tmp + "</button>";
+              tmp=tmp + "<span onClick='"+ocl+"'    >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
 
          } else if (this.listype=="product") {
 
-        	 lbl = this.rungster + "_save_btn";
+              lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_product();";
-	      	      ts = "update";
               if (this.stored == false) {
  		ocl = this.varname+".add_product();";
-		        ts = "add";
 	      }
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + ts;
-              tmp = tmp + "</button>";
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
 
 	 } else if (this.listype == "suppliers") {
 
-        	 lbl = this.rungster + "_save_btn";
+              lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_supplier();";
-	      	      ts = "update";
               if (this.stored == false) {
  		ocl = this.varname+".add_supplier();";
-		        ts = "add";
 	      }
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + ts;
-              tmp = tmp + "</button>";
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
 
 	 } else  {
 
-       		 lbl = this.rungster + "_save_btn";
+       	      lbl = this.rungster + "_save_btn";
               ocl = this.varname+".update_webit();";
-      	      	      ts = "update";
               if (this.stored == false) {
  		ocl = this.varname+".add_webit();";
-        	      ts = "add";
 	      }
-              tmp=tmp + "<button id='"+lbl+"' onClick='"+ocl+"'  >";  
-//              tmp = tmp + "<img src='deskfm/images/icons/black_redo.png' height='20px' >";
-              tmp = tmp + ts;
-              tmp = tmp + "</button>";
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
 
  	  } 
        } 
@@ -495,6 +564,7 @@ poster.prototype.do_undo = function() {
      this.set_ppid(this.dadex,this.listype);
    }
    this.changed = false;
+   this.shape = "";
    this.redraw_rung();
  
 }

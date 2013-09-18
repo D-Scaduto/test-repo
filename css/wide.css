@@ -1,0 +1,102 @@
+
+@media screen and (min-width:900px) {
+
+     .outer_menu {
+	width:900px;
+         margin:0 auto;
+        background-color:white;
+        padding:5px;
+//        display: -moz-inline-stack;
+//        display: inline-block;
+//        zoom: 1;
+//        *display: inline;
+//        overflow:auto;
+        border-style:solid;
+        border-color:silver;
+        border-width:5px;
+      }
+
+
+     .main {
+        background-color:black;
+        width:900px;
+        margin:0 auto;
+     }
+
+
+     .menu {
+	width:350px;
+        vertical-align:top;
+        float:left;
+      }
+
+    .menu_btnsbox {
+	width:300px;
+        display:inline-block;
+        vertical-align:top; 
+    }
+
+    .menu_btns {
+        float:left;
+     }
+
+    .rail_btns {
+        float:right;
+     }
+
+
+     .rail_main {
+        background-color:white;
+        width:200px;
+        vertical-align:top;
+        display:inline-block;
+	float:right;
+         border-style:solid;
+       border-color:silver;
+       border-width:1px;
+     }
+
+    .zbox {
+       width:550px;
+ //      margin:0 auto;
+       background-color:white;
+        padding:5px;
+       border-style:solid;
+       border-color:silver;
+       border-width:5px;
+    }
+
+
+    .box {
+       background-color:white;
+       display: -moz-inline-stack;
+       display: inline-block;
+       zoom: 1;
+       *display: inline;
+       overflow:auto;
+
+       border-style:solid;
+       border-color:silver;
+       border-width:4px;
+       width:300px;
+       padding:5px;
+       min-height:150px;
+    }
+
+     .piclip {
+         clip:rect(0px,100px,100px,0px);
+	 width:75px;
+     }
+ 
+ 
+     .getstory {
+       font-family: sans-serif;
+       font-weight:normal;
+       font-size:medium;
+       vertical-align:top;
+       width:250px;
+       height:100px;
+     }
+}
+
+

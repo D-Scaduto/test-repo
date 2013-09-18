@@ -49,28 +49,33 @@ calendor.prototype.show = function() {
             ocl = ocl + this.funcstr;
 	  }
           lbl = 'hdr_prevmon_btn';
-          t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button' >";
+          moin = 'marky(\"'+lbl+'\");';
+          mout = 'unmarky(\"'+lbl+'\");';
+          t = t+ "<span  id='"+lbl+"'   onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' class='spotd_off'  >";
           t=t+ " <";
-          t = t + "</button>";
+          t = t + "</span>";
 
           lbl = 'hdr_month_btn';
 	  ocl = this.funcstr;
-          t = t+ "<button  id='"+lbl+"' onclick='"+ocl+"' data-role='button' >";
-          btnstr=btnstr+ " " +this.months[this.da_month.month];
-          btnstr=btnstr+ " '" +this.da_month.year;
-	  t = t + btnstr;
-          t = t + "</button>";
+          t = t+ "<span  class='spotd_off' id='"+lbl+"' onclick='"+ocl+"' >";
+          t = t +  " " +this.months[this.da_month.month];
+          var s = new String(this.da_month.year);
+          s = s.substring(2,4);
+          t = t + " '" + s;
+          t = t + "</span>";
 
 	  o=this.get_net_month(this.da_month,1);
 	  lbl = 'hdr_nextmon_btn';
-	  ocl = "";
+	  moin = 'marky(\"'+lbl+'\");';
+          mout = 'unmarky(\"'+lbl+'\");';
+          ocl = "";
           if (o!=null) {
 		 ocl = this.varname + ".scroll_months(1);";
                  ocl = ocl + this.funcstr;
 	  }    
-          t = t+ "<button  id='"+lbl+"'  onclick='"+ocl+"' data-role='button'  >";
+          t = t+ "<span  id='"+lbl+"'   onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' class='spotd_off'  >";
           t=t+ " >";
-          t = t + "</button>";
+          t = t + "</span>";
 	    
      
     lbl = this.spotid;

@@ -2,8 +2,8 @@
 
 function shoper (pspotid) { 
 
-  this.spotid=pspotid;
-  this.varname='store';
+  this.spotid = pspotid + "_spot";
+  this.varname = 'store';
   this.shape = "all";//one
 
   this.product_type = '';
@@ -24,7 +24,7 @@ shoper.prototype.show = function() {
   	    lbl = 'product_all_btn';
             ocl = this.varname + '.set_shape(\"all\");';
             tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
-	    if (this.prodid != "") {
+	    if (this.product_type != "") {
               s = amare.product_set.get_desc(this.product_type);
 	    }
 	    tmp = tmp + s;

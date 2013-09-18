@@ -5,8 +5,11 @@ header('Content-type: text/html; charset=utf-8 ');
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
-<link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
-<link rel=StyleSheet href='lib/jquery-ui-1.10.3.custom.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/medium.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
 
 <title>deskfm.com</title>
 
@@ -100,7 +103,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 </head>
 
-<body style='background-color:white;' >
+<body style='background-color:black;' >
 
 <div id="fb-root"></div> 
 
@@ -157,10 +160,8 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='outer_spot' style='' class='outer_menu' >
 
-
 <span id='menu_btnspot' class='menu_btnsbox' style=''  >
 </span>
-
 
 <span id='menu_spot' class='menu' style='' >
 </span>
@@ -168,13 +169,12 @@ header('Content-type: text/html; charset=utf-8 ');
 <span id='rail_spot' class='rail_main' style='' >
 </span>
 
-
 </div>
 
 <div id=''  style='clear:both;' >
 </div>
 
-<div id='main_view'  style='' >
+<div id='main_view'  class='main' style='' >
 </div>
 
 
@@ -201,22 +201,17 @@ header('Content-type: text/html; charset=utf-8 ');
    do_preload();
 //   init_months();
 
-        sal = new logoman("logo_spot");
-       
-	jesie = new namer("name_spot");
-
-        store = new shoper("shop_spot");
+        sal = new logoman("logo");
+	jesie = new namer("name");
+        store = new shoper("shop");
         cater = new categor("browse");
 	wanda = new searcher("search");
-
-	nicky = new sharer("share_spot");
+	nicky = new sharer("share");
 	mac = new sorter("sort");
 	moe = new feeder("feed");
-
         amare = new stater();
-
 	diego = new header();
-        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store' ];
+        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store','name:jesie' ];
         diego.set_shapes(tshapes);
 
         daviewer = new viewer("main_view","daviewer");

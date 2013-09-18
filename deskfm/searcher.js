@@ -1,13 +1,11 @@
 
 
-function searcher (pmenuid) { 
+function searcher (pspotid) { 
 
-   this.menuid = pmenuid;
-   this.spotid = pmenuid + "_spot";
+   this.spotid = pspotid + "_spot";
    this.varname = "wanda";
    this.showing = false;
    this.shape = "full";  //full,shrunk
-   this.menued = false;
 
    this.sterms = "";
    this.full_check = false;
@@ -28,7 +26,7 @@ searcher.prototype.show = function() {
    var sz = '10';
 
    lbl = "search_reset_btn";
-   ocl= "diego.set_shape(\"\")";
+   ocl= "";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
    tmp = tmp + "search";
    tmp = tmp + "</button>";
@@ -54,17 +52,6 @@ searcher.prototype.show = function() {
    } 
 }
 
-
-searcher.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
-}
 
 searcher.prototype.change = function() {
 

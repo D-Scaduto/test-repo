@@ -1,15 +1,13 @@
 
 
-function sorter (pmenuid) { 
+function sorter (pspotid) { 
 
-   this.menuid = pmenuid;
-   this.spotid = pmenuid + "_spot";
+   this.spotid = pspotid + "_spot";
    this.varname = "mac";
 
    this.shape = "";  
    this.showing = false;
  
-   this.menued = false;
    this.sterms = "standing desk";
    this.da_date = new Date();
    this.krono = null;
@@ -25,7 +23,7 @@ sorter.prototype.show = function() {
    var ocl="";
 
    lbl = "sort_reset_btn";
-   ocl= "diego.set_shape(\"\")";
+   ocl= "";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
    tmp = tmp + "sort";
    tmp = tmp + "</button>";
@@ -98,18 +96,6 @@ sorter.prototype.set_shape = function(pstr) {
 
 sorter.prototype.change = function() {
     this.show();
-}
-
-
-sorter.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
 }
 
 

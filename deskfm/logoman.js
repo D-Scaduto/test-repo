@@ -1,12 +1,10 @@
 
 function logoman (pspot) {
 
-  this.spotid = pspot;
+  this.spotid = pspot + "_spot";
   this.varname= "sal";
   this.shape = "shrunk";    //shrunk,full
   this.logo_shape="deskfm";
-
-  this.zoom = true;
   this.flip =0;
 }
 
@@ -19,9 +17,8 @@ logoman.prototype.show = function () {
    var cls = "";
  
    lbl = "logo_title";
-   tmp = tmp + "<span id='"+lbl+"' style='' >";
+   tmp = tmp + "<span id='"+lbl+"' style='vertical-align:top;' >";
    tmp = tmp + "</span>";
-
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -30,39 +27,6 @@ logoman.prototype.show = function () {
    }
 }
 
-logoman.prototype.hide = function () {
-
-   var lbl = "";
-   var tmp = "";
- 
-   lbl = this.spotid;
-   if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmp; 
-         this.showing = false;
-   }
-}
-
-
-logoman.prototype.set_menued = function(ptog) {
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
-}
-
-
-
-logoman.prototype.change_vman = function () {
-
-   this.flip = this.flip + 1;
-   if (this.flip > 9 ) { 
-        this.flip = 0;
-    } 
-   this.draw_vman();
-}
 
 
 logoman.prototype.draw_vman = function () {
@@ -102,13 +66,26 @@ logoman.prototype.draw_vman = function () {
           } 
      tmpsrc = "deskfm/images/daoman/cbman-"+vm+".png";
      var ht = '';
-     ht = '40px';
+     ht = '30px';
      tmpstr="<img src='"+tmpsrc+"' onClick='' height='"+ht+"' >";
 
      lbl = "logo_lbtn";
      if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
      }
+}
+
+
+logoman.prototype.change_vman = function () {
+
+   this.flip = this.flip + 1;
+   if (this.flip > 9 ) { 
+        this.flip = 0;
+    } 
+
+    var cl = this.varname + ".draw_vman();";
+    var tmr = setTimeout(cl,250);
+
 }
 
 
@@ -142,41 +119,43 @@ logoman.prototype.draw_logo = function (psz) {
    }
    var tmpstr = "";
    var lbl = "";
-   var tmpsrc = "";
-   var vm = "";
-   var dt = new Date();
    var ocl = "";
 
    if (this.logo_shape == "deskfm") {
             lbl = this.spotid + '_logo_spot1';
-//	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style=''  >";
+	    ocl = this.varname + ".set_logoshape(\"freedom\");";
+            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style='vertical-align:top;'  >";
             tmpstr = tmpstr + "DeskFM";
             tmpstr=tmpstr+"</button>";
-           
-           
-
-
    } 
    if (this.logo_shape == "freedom") {
             lbl = this.spotid + '_logo_spot1';
 	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style=''  >";
+            tmpstr=tmpstr+"<button id='"+lbl+"' onclick='"+ocl+"' data-role='button' style='vertical-align:top;'  >";
             tmpstr = tmpstr + "Desk FreedoM";
             tmpstr=tmpstr+"</button>";
-           
-           
-
    } 
-  
 
    lbl = "logo_title";
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
 	 $('#'+this.spotid + '_logo_spot1').button();
-	 
    }
 
+}
+
+
+
+logoman.prototype.hide = function () {
+
+   var lbl = "";
+   var tmp = "";
+ 
+   lbl = this.spotid;
+   if (document.getElementById(lbl) !=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         this.showing = false;
+   }
 }
 
 

@@ -8,8 +8,7 @@ poster.prototype.draw_name = function() {
    var ocl = "";
    var tlink = "";
    var s = "";
-
-    if (this.uname != "")   {
+   if (this.uname != "")   {
 
       if (this.source == "twitter") {
 //       tlink =  = "http://twitter.com/Support/status/" + this.pid;
@@ -35,25 +34,19 @@ poster.prototype.get_name = function() {
     var ocl = "";
 
     tmp =tmp + "<span class='spotd_off'  onclick='' > ";
-    tmp = tmp + "what\'s your name ?";
+    tmp = tmp + "id: ";
     tmp =tmp + "</span>";
-
+ 
     var tval =  "";
         if (this.uname != "") {
           tval =  this.uname;
         } else {
-          val =  this.uname_tmp;
+          tval =  pname;
         }
-    tmp =tmp + "<br>";
  
-     lbl = this.rungster + '_name_box';
+    lbl = this.rungster + '_name_box';
 
-   tmp =tmp + "<input size=15 value='"+tval+"' id='"+lbl+"' onclick='' > ";
-
-		ocl = this.varname+".update_name();";
-                tmp = tmp + "<button  onclick='"+ocl+"' >";  
-       		tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' height='20px' >";
-	        tmp = tmp + "</button>";
+    tmp =tmp + "<input size=15 value='"+tval+"' id='"+lbl+"' onclick='' > ";
 
       lbl = this.rungster + '_name_spot';
     if (document.getElementById(lbl)!=null) {
@@ -75,12 +68,8 @@ poster.prototype.update_name = function() {
        if (obj != null) {
           var bill = document.getElementById(lbl).value;
           this.uname = bill;
-          this.changed = true;
-	  this.name_changed = true;
-          this.change_btns(); 
-          obj.focus();
+          pname = bill;
       }
-
       this.set_shape("");
 
 }

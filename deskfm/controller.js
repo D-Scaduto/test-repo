@@ -230,14 +230,30 @@ viewer.prototype.update_person = function(pname) {
 
 
 viewer.prototype.add_one = function(mdex,ltype) {
-   var t = null;
 
+   var t = null;
    var o = new Object();
    o.mdex = mdex;
    o.ltype = ltype;  
    this.dalist.unshift(o);
    this.load_rungs();  
+   this.draw_view(); 
+
 }
+
+
+viewer.prototype.new_one = function(ltype) {
+
+   var t = null;
+   var o = new Object();
+   o.mdex = -1;
+   o.ltype = ltype;  
+   this.dalist.unshift(o);
+   this.load_rungs();  
+   this.draw_view(); 
+
+}
+
 
 
 viewer.prototype.del_rung = function(tspot) {
@@ -245,6 +261,8 @@ viewer.prototype.del_rung = function(tspot) {
      this.dalist.splice(da,1);
      this.darungs.splice(tspot,1);
      this.load_rungs();
+     this.zoom = false;
+     this.draw_view();
 }
 
 
@@ -328,39 +346,8 @@ viewer.prototype.load_rungs = function(ldex) {
 
            mdex = this.dalist[r].mdex;
 	   ltype = this.dalist[r].ltype;
-	   
     	   this.darungs[c] = new Object();
-
-           if (ltype == "webits") {
-             if (amare.webitlist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
-           if (ltype == "people") {
-             if (amare.peoplelist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
-           if (ltype == "products") {
-             if (amare.productlist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
-           if (ltype == "suppliers") {
-             if (amare.supplierlist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
-           if (ltype == "unsorted") {
-             if (amare.unsortedlist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
-	   if (ltype == "unsaved") {
-             if (amare.unsavedlist[mdex] != undefined) {
-               this.darungs[c].vdex = r;
-             }
-	   }
+           this.darungs[c].vdex = r;
          }
 
          r = r+1;

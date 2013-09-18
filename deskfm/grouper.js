@@ -34,7 +34,7 @@ grouper.prototype.show = function() {
 
 	lbl = 'group_sog';
         tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
-  	tmp = tmp +"<li><a >groups</a>";
+  	tmp = tmp +"<li><a >people</a>";
 
         tmp = tmp +"<ul  style='width:250px;' >";
         sugs = amare.group_set.get_setlist();

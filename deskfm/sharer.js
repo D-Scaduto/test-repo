@@ -2,12 +2,10 @@
 
 function sharer (pspotid) {
 
-   this.spotid = pspotid;
+   this.spotid = pspotid + "_spot";
    this.varname = "nicky";
    this.showing = false;
    this.shape = "";  
-   this.menued = false;
-
 }
 
 
@@ -20,19 +18,19 @@ sharer.prototype.show = function() {
    var cls = "";
    var ocl = "";
 
-   lbl = "share_reset_btn";
-   ocl= "nicky.new_one();";
+   lbl = "share_new_btn";
+   ocl = this.varname + ".new_one();";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
    tmp = tmp + "share";
    tmp = tmp + "</button>";
 
-    if (this.shape == "twitter") {
+   if (this.shape == "twitter") {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
@@ -42,9 +40,9 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
@@ -54,9 +52,9 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
@@ -66,49 +64,36 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_twitter_btn";
        ocl = this.varname + ".set_shape(\"twitter\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_facebook_btn";
        ocl = this.varname + ".set_shape(\"facebook\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_google_btn";
        ocl = this.varname + ".set_shape(\"google\");";
-       tmp=tmp +"<button onclick='"+ocl+"' >";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
-       tmp=tmp +"</button>";
+       tmp=tmp +"</span>";
      }
-
-     lbl = "name_spot";
-     tmp=tmp +"<div id='"+lbl+"'  >";
-     tmp=tmp +"</div>";
 
      lbl = this.spotid;
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
         this.showing = true;
-        jesie.show();
-        $('#share_reset_btn').button();
-     } 
+        daviewer.draw_view();
+        $('#share_new_btn').button();
+    } 
 }
 
 
-
 sharer.prototype.new_one = function() {
-     var g = null;
-     var t = -1;
-  
-     if (daviewer.darungs[0].postman.stored == true) {
-       g = new webit();
-       t = amare.unsavedlist.push(g);
-       daviewer.add_one(t-1,"unsaved");
-       daviewer.darungs[0].postman.editing = true;
-       daviewer.darungs[0].postman.redraw_rung();
-     }
+ 
+       daviewer.new_one("unsaved");
 }
 
 
@@ -171,18 +156,6 @@ sharer.prototype.toggle = function() {
 }
 
 
-sharer.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
-}
-
-
 sharer.prototype.set_shape = function(pshape) {
 	if (pshape != undefined) {
           this.shape = pshape;
@@ -198,18 +171,16 @@ sharer.prototype.change = function() {
 
 sharer.prototype.hide = function() {
 
-
    var pobj=null;
    var lbl = "";
    var tmp = "";
-
    lbl = this.spotid;
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
         pobj.innerHTML = tmp;
    }
    this.showing = false; 
-
+   daviewer.draw_view();
 }
 
 

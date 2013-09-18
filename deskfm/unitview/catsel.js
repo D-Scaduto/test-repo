@@ -1,5 +1,4 @@
 
-
  poster.prototype.draw_catsel = function() {
 
     var tmp="";
@@ -40,49 +39,69 @@
 
       if (this.cat == "") { 
 
+        lbl = this.rungster + "_uncat_btn";
+        ocl = this.varname + ".set_cat(\"\")";
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+        tmp = tmp + "</span>";
+
         lbl = this.rungster + "_who_btn";
         ocl = this.varname + ".set_cat(\"who\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "who?";
-        tmp = tmp + "</button>";
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
+        tmp = tmp + "who";
+        tmp = tmp + "</span>";
 
         lbl = this.rungster + "_what_btn";
         ocl = this.varname + ".set_cat(\"what\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "what?";
-        tmp = tmp + "</button>";
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' style='' >";
+        tmp = tmp + "what";
+        tmp = tmp + "</span>";
 
         lbl = this.rungster + "_why_btn";
         ocl = this.varname + ".set_cat(\"why\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "why?";
-        tmp = tmp + "</button>";
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
+        tmp = tmp + "why";
+        tmp = tmp + "</span>";
 
         lbl = this.rungster + "_how_btn";
         ocl = this.varname + ".set_cat(\"how\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "how?";
-        tmp = tmp + "</button>";
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
+        tmp = tmp + "how";
+        tmp = tmp + "</span>";
 
         lbl = this.rungster + "_junk_btn";
         ocl = this.varname + ".set_cat(\"junk\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
         tmp = tmp + "junk";
-        tmp = tmp + "</button>";
-
+        tmp = tmp + "</span>";
 
       } else { 
 
         lbl = this.rungster + "_uncat_btn";
         ocl = this.varname + ".set_cat(\"\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
-        tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
-        tmp = tmp + "</button>";
+        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+        tmp = tmp + "</span>";
 
         if (this.cat == "who") { 
 
         lbl = this.rungster + '_who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
@@ -93,7 +112,7 @@
        } else if (this.cat == "what") { 
 
         lbl = this.rungster + '_what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:85px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
    	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
@@ -104,7 +123,7 @@
        } else if (this.cat == "why") { 
 
         lbl = this.rungster + '_why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
     	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
@@ -115,7 +134,7 @@
        } else if (this.cat == "how") { 
 
         lbl = this.rungster + '_how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {

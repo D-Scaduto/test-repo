@@ -38,32 +38,32 @@ categor.prototype.show = function() {
 
         lbl = "browse_who_btn";
         ocl= "cater.set_shape(\"who\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
         tmp = tmp + "who?";
         tmp = tmp + "</button>";
 
         lbl = "browse_what_btn";
         ocl= "cater.set_shape(\"what\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
         tmp = tmp + "what?";
         tmp = tmp + "</button>";
 
         lbl = "browse_why_btn";
         ocl= "cater.set_shape(\"why\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
         tmp = tmp + "why?";
         tmp = tmp + "</button>";
 
         lbl = "browse_how_btn";
         ocl= "cater.set_shape(\"how\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='width:65px;' >";
+        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
         tmp = tmp + "how?";
         tmp = tmp + "</button>";
 
       } else if (this.shape == "who") { 
 
         lbl = 'who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
   	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
@@ -74,7 +74,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "what") { 
 
         lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:85px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
    	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
@@ -85,7 +85,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "why") { 
 
         lbl = 'why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
     	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
@@ -96,7 +96,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "how") { 
 
         lbl = 'how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:75px;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
   	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
@@ -119,11 +119,11 @@ categor.prototype.show = function() {
      } else {
 
        if (this.shape == "all") {
-      	    $('#browse_who_btn').button();
-  	    $('#browse_what_btn').button();
-  	    $('#browse_why_btn').button();
-  	    $('#browse_how_btn').button();
-
+	    $('#browse_who_btn').button();
+	    $('#browse_what_btn').button();
+	    $('#browse_why_btn').button();
+	    $('#browse_how_btn').button();
+	
        } else if (this.shape == "who") {
 
             $('#who_sog').menu();
@@ -183,7 +183,7 @@ categor.prototype.show = function() {
       }
       
      this.showing = true;
-
+     this.redraw_view();
    }
 }
 
@@ -201,7 +201,9 @@ categor.prototype.redraw_view = function(pchunk) {
         
 	  daviewer.stats = lstat;
           if (lstat.cnum > lstat.lnum) {
+             if (lstat.cat != "all") {
               daviewer.more();
+             }
           }          
 
             if (pchunk != undefined) {
@@ -214,7 +216,7 @@ categor.prototype.redraw_view = function(pchunk) {
 
 	  if (this.cat == "all") {
 
-	    daviewer.load_list(start);
+	    daviewer.load_sorted_list(start);
 
 	  } else {
 

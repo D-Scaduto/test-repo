@@ -7,8 +7,11 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
-<link rel=StyleSheet href=deskfm/dastyle.css type="text/css" media="screen,print" />
-<link rel=StyleSheet href='lib/jquery-ui-1.10.3.custom.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/medium.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
 
 <title>deskfm.com</title>
 
@@ -105,7 +108,7 @@ header('Content-type: text/html; charset=utf-8 ');
 </head>
 
 
-<body style='background-color:white;' >
+<body style='background-color:black;' >
 
 <div id="fb-root"></div>
 
@@ -172,7 +175,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id=''  style='clear:both;' >
 </div>
 
-<div id='main_view'  style='' >
+<div id='main_view'  class='main' >
 </div>
 
 
@@ -203,8 +206,6 @@ header('Content-type: text/html; charset=utf-8 ');
    amare = new stater();
    daviewer = new viewer("main_view","daviewer");
    
-   jesie = new namer("name_spot");
-
    if (is_mobile == true) {
            da_limit = 250;
 	   daviewer.top_end = 25;
@@ -217,19 +218,21 @@ header('Content-type: text/html; charset=utf-8 ');
    if (debug == true) {
 //        daviewer.top_end=2;
    }
-	   sal = new logoman("logo_spot");
-   	   store = new shoper("shop_spot");
+
+           jesie = new namer("name");
+	   sal = new logoman("logo");
+   	   store = new shoper("shop");
 	   mac = new sorter("sort");
 	   moe = new feeder("feed");
 	   cater = new categor("browse");
 	   wanda = new searcher("search");
-	   nicky = new sharer("share_spot");
+	   nicky = new sharer("share");
            joe = new supplier("manage");
            robby = new grouper("group");
 
 	   diego = new header();
-           var tshapes = ['sort:mac','shop:store','feed:moe','manage:joe','group:robby' ];
-          diego.set_shapes(tshapes);
+           var tshapes = ['sort:mac','shop:store','feed:moe','manage:joe','group:robby','search:wanda','share:nicky','name:jesie'];
+           diego.set_shapes(tshapes);
 	   
     amare.get_stats();
 
