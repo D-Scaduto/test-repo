@@ -1,9 +1,10 @@
 
 @media screen and (min-width:600px) and (max-width:899px) {
 
-     .outer_menu {
-	width:700px;
-        margin:0 auto;
+     .menu_box {
+	width:450px;
+       display:inline-block;
+//        margin:0 auto;
         background-color:white;
         padding:5px;
 //        display: -moz-inline-stack;
@@ -22,36 +23,35 @@
         margin:0 auto;
      }
 
-
-     .menu {
+     .menu_main {
 	width:300px;
         vertical-align:top;
-        float:left;
+      //  float:left;
       }
 
-    .menu_btnsbox {
-	width:300px;
-        display:inline-block;
+    .menu_btns {
+	width:150px;
+        float:right;
+     //   display:inline-block;
         vertical-align:top; 
     }
 
-    .menu_btns {
-        float:left;
+    .rail_box {
+       float:right;
+       background-color:white;
+     //  display:inline-block;
+         border-style:solid;
+        border-color:silver;
+        border-width:5px;
     }
 
     .rail_btns {
-        float:right;
+    //  display:inline-block;
+      background-color:white;
      }
 
      .rail_main {
-	float:right;
-//        disply:inline-block;
-        disply:block;
-        background-color:white;
-   //     padding:3px;
-        border-style:solid;
-       border-color:silver;
-       border-width:1px;
+      //  display:inline-block;
      }
 
     .zbox {

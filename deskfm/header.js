@@ -50,12 +50,13 @@ header.prototype.show = function () {
       tmp = tmp + "<div id='name_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
-      var pobj = document.getElementById('menu_spot');
+      var pobj = document.getElementById('menu_mainspot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
              sal.show();
              sal.draw_vman();
-             this.draw_btns();
+             this.draw_mainbtns();
+             this.draw_railbtns();
              for (var i=0;i<this.shapes.length;i++) {
                 var s = this.shapes[i].split(':');
                 if (s[0] == this.shape) { 
@@ -67,8 +68,7 @@ header.prototype.show = function () {
 }
 
 
-
-header.prototype.draw_btns = function () {
+header.prototype.draw_mainbtns = function () {
 
      var tmp = "";
      var lbl = "";
@@ -76,8 +76,6 @@ header.prototype.draw_btns = function () {
      var mout = "";
      var moin = "";
 
-     tmp = tmp + "<span class='menu_btns' style=''  >";
- 
        lbl = 'name_btn';
        ocl = this.varname + '.toggle_shape(\"name\");'
        moin = 'marky(\"'+lbl+'\");';
@@ -164,10 +162,27 @@ header.prototype.draw_btns = function () {
      tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
      tmp = tmp + "</span>";
 
-   
-       tmp = tmp + "</span>";
+      var pobj = document.getElementById('menu_btnspot');
+       if (pobj != null) {
+          pobj.innerHTML = tmp;
 
-       tmp = tmp + "<span class='rail_btns' style=''  >";
+ //       $('#share_btn').button();
+//	  $('#search_btn').button();
+          if (this.shape == "" ) {
+  	    sal.show();
+          }
+       }
+}
+
+
+
+header.prototype.draw_railbtns = function () {
+
+     var tmp = "";
+     var lbl = "";
+     var ocl = "";
+     var mout = "";
+     var moin = "";
 
         lbl = 'prev_btn';
         moin = 'marky(\"'+lbl+'\");';
@@ -204,17 +219,9 @@ header.prototype.draw_btns = function () {
         tmp = tmp + "<img src='deskfm/images/icons/fast_fwd.png' width='20px' >";
         tmp = tmp + "</span>";
 
-       tmp = tmp + "</span>";
-
-      var pobj = document.getElementById('menu_btnspot');
+      var pobj = document.getElementById('rail_btnspot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
-
- //       $('#share_btn').button();
-//	  $('#search_btn').button();
-          if (this.shape == "" ) {
-  	    sal.show();
-          }
        }
 }
 

@@ -9,7 +9,8 @@ header('Content-type: text/html; charset=utf-8 ');
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
-<link rel=StyleSheet href='css/medium.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/tab.css' type="text/css" media="screen,print" />
+<link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
 
@@ -159,17 +160,21 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='top_line' style='' >
 </div>
 
-<div id='outer_spot' style='' class='outer_menu' >
+<div id='menu_spot' style='' class='menu_box' >
 
-<span id='menu_btnspot' class='menu_btnsbox' style=''  >
+<span id='menu_btnspot' class='menu_btns' style=''  >
 </span>
 
-<span id='menu_spot' class='menu' style='' >
+<span id='menu_mainspot' class='menu_main' style='' >
 </span>
 
-<span id='rail_spot' class='rail_main' style='' >
-</span>
+</div>
 
+<div id='rail_spot' class='rail_box' style='' >
+<span id='rail_btnspot' class='rail_btns' style=''  >
+</span>
+<span id='rail_mainspot' class='rail_main' style='' >
+</span>
 </div>
 
 <div id=''  style='clear:both;' >
@@ -248,15 +253,15 @@ header('Content-type: text/html; charset=utf-8 ');
 
     $(window).scroll(function() {
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#outer_spot').hasClass('regular_top') == false) {
-		$('#outer_spot').addClass('regular_top');
-		$('#outer_spot').removeClass('flying_top');
+	    if ($('#rail_spot').hasClass('regular_top') == false) {
+		$('#rail_spot').addClass('regular_top');
+		$('#rail_spot').removeClass('flying_top');
 	    }
 	} else {
           if (is_mobile == false) {
-	    if ($('#outer_spot').hasClass('flying_top') == false) {
-		$('#outer_spot').addClass('flying_top');
-		$('#outer_spot').removeClass('regular_top');
+	    if ($('#rail_spot').hasClass('flying_top') == false) {
+		$('#rail_spot').addClass('flying_top');
+		$('#rail_spot').removeClass('regular_top');
 	    }
 	  }
 	}

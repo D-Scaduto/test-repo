@@ -25,7 +25,7 @@ viewer.prototype.draw_rail = function() {
        tmp = tmp + "</div>";
       }
     
-   lbl = "rail_spot";
+   lbl = "rail_mainspot";
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
 	pobj.innerHTML = tmp;

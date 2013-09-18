@@ -1,16 +1,12 @@
 
 @media screen and (min-width:900px) {
 
-     .outer_menu {
-	width:900px;
-         margin:0 auto;
+     .menu_box {
+	width:550px;
+        display:inline-block;
+   //      margin:0 auto;
         background-color:white;
         padding:5px;
-//        display: -moz-inline-stack;
-//        display: inline-block;
-//        zoom: 1;
-//        *display: inline;
-//        overflow:auto;
         border-style:solid;
         border-color:silver;
         border-width:5px;
@@ -19,29 +15,32 @@
 
      .main {
         background-color:black;
-        width:900px;
-        margin:0 auto;
+        width:100%;
+  //      margin:0 auto;
      }
 
-
-     .menu {
+     .menu_main {
 	width:350px;
         vertical-align:top;
-        float:left;
+//        float:left;
       }
 
-    .menu_btnsbox {
-	width:300px;
-        display:inline-block;
+    .menu_btns {
+	width:200px;
+        float:right;
         vertical-align:top; 
     }
 
-    .menu_btns {
-        float:left;
-     }
+    .rail_box {
+        float:right;
+       background-color:white;
+         border-style:solid;
+        border-color:silver;
+        border-width:5px;
+    }
 
     .rail_btns {
-        float:right;
+        padding:5px;
      }
 
 
@@ -50,11 +49,11 @@
         width:200px;
         vertical-align:top;
         display:inline-block;
-	float:right;
          border-style:solid;
        border-color:silver;
        border-width:1px;
-     }
+         padding:5px;
+    }
 
     .zbox {
        width:550px;
