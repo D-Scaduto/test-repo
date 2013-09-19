@@ -1,27 +1,30 @@
 
-@media screen and (min-width:600px) and (max-width:899px) {
+@media screen and (min-width:700px) and (max-width:999px) {
+
+     .top_main {
+        background-color:black; 
+        width:715px;
+        margin:0 auto;
+     }
+
+     .main {
+        background-color:white; 
+        width:715px;
+        margin:0 auto;
+     }
 
      .menu_box {
-	width:450px;
+	width:500px;
        display:inline-block;
 //        margin:0 auto;
         background-color:white;
         padding:5px;
-//        display: -moz-inline-stack;
-//        display: inline-block;
-//        zoom: 1;
-//        *display: inline;
-//        overflow:auto;
         border-style:solid;
         border-color:silver;
         border-width:5px;
+        vertical-align:top;
       }
 
-     .main {
-        background-color:black; 
-        width:700px;
-        margin:0 auto;
-     }
 
      .menu_main {
 	width:300px;
@@ -30,28 +33,30 @@
       }
 
     .menu_btns {
-	width:150px;
+//	width:150px;
         float:right;
      //   display:inline-block;
         vertical-align:top; 
     }
 
+
+
     .rail_box {
        float:right;
        background-color:white;
-     //  display:inline-block;
+//       display:inline-block;
          border-style:solid;
         border-color:silver;
         border-width:5px;
     }
 
     .rail_btns {
-    //  display:inline-block;
+      display:inline-block;
       background-color:white;
      }
 
      .rail_main {
-      //  display:inline-block;
+        display:inline-block;
      }
 
     .zbox {

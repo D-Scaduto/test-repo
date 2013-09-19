@@ -2,13 +2,11 @@
 
 function feeder (pmenuid) { 
 
-   this.menuid = pmenuid;
    this.spotid = pmenuid + "_spot";
    this.varname = "moe";
    this.shape = ""; 
    this.showing = false;
    this.menued = false;
-
    this.sterms = "standing desk";
    this.twfeed = new tw_feeder();
 }
@@ -22,21 +20,34 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-      lbl = "feed_reset_btn";
+     tmp = tmp + "<div style='width:250px;' >";
+
+     lbl = "feed_reset_btn";
       ocl= "diego.set_shape(\"\")";
       tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
       tmp = tmp + "feeds";
       tmp = tmp + "</button>";
 
-	 tmp = tmp + "<span id='' onclick='moe.check_feed();'  >";
-         tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
-         tmp = tmp + "</span>";
+      tmp = tmp + "<span id='' onclick='moe.check_feed();'  >";
+      tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+      tmp = tmp + "</span>";
 
-         tmp = tmp + "<input type='text' name='s' id='feed_string' size='15' value='standing desk' style='vertical-align:top;'  >";
-
-         tmp = tmp + "<div id='feed_btns'  >";
-         tmp = tmp + "</div>";
+      tmp = tmp + "<input type='text' name='s' id='feed_string' size='10' value='standing desk' style='vertical-align:top;'  >";
  
+      if (is_mini == true) {
+        lbl = 'feed_unset_btn';
+        ocl =  'diego.set_shape(\"\");'
+        moin = 'marky(\"'+lbl+'\");';
+        mout = 'unmarky(\"'+lbl+'\");';
+        cls = 'spotd_off';
+        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+        tmp = tmp + "</span>"; 
+      }
+      tmp = tmp + "</div>";
+ 
+      tmp = tmp + "<div id='feed_btns'  >";
+      tmp = tmp + "</div>";
    
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {

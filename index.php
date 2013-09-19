@@ -7,7 +7,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <head>
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
-<link rel=StyleSheet href='css/tab.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
@@ -19,6 +18,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var is_mobile = false;
   var debug = false;
   var netson = false;
+  var is_mini = false;
 
   var daviewer = null;
   var da_limit=1000;
@@ -159,15 +159,13 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='top_line' style='' >
 </div>
 
+<div id=''  class='top_main' style='' >
 
 <div id='menu_spot' style='' class='menu_box' >
-
-<span id='menu_btnspot' class='menu_btns' style=''  >
-</span>
-
 <span id='menu_mainspot' class='menu_main' style='' >
 </span>
-
+<span id='menu_btnspot' class='menu_btns' style=''  >
+</span>
 </div>
 
 <div id='rail_spot' class='rail_box' style='' >
@@ -175,6 +173,8 @@ header('Content-type: text/html; charset=utf-8 ');
 </span>
 <span id='rail_mainspot' class='rail_main' style='' >
 </span>
+</div>
+
 </div>
 
 <div id=''  style='clear:both;' >
@@ -216,6 +216,15 @@ header('Content-type: text/html; charset=utf-8 ');
 	mac = new sorter("sort");
 	moe = new feeder("feed");
         amare = new stater();
+
+
+         if ($(window).width() < 700) {
+            is_mini = true;
+         } else {
+            is_mini = false;
+         }
+
+
 	diego = new header();
         var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store','name:jesie' ];
         diego.set_shapes(tshapes);
@@ -236,17 +245,28 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_webits();
 
 
+    $(window).resize(function(val) {
+         if ($(window).width() < 700) {
+            if (is_mini != true) {
+              is_mini = true;
+              diego.show();
+            }
+         } else {
+            if (is_mini != false) {
+              is_mini = false;
+              diego.show();
+            }
+         }
+    });
+
+
     $(window).scroll(function() {
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#rail_spot').hasClass('regular_top') == false) {
-		$('#rail_spot').addClass('regular_top');
-		$('#rail_spot').removeClass('flying_top');
-	    }
+	      $('#rail_spot').removeClass('flying_top');
 	} else {
-          if (is_mobile == false) {
+          if (is_mini == false) {
 	    if ($('#rail_spot').hasClass('flying_top') == false) {
 		$('#rail_spot').addClass('flying_top');
-		$('#rail_spot').removeClass('regular_top');
 	    }
 	  }
 	}

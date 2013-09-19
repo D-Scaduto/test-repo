@@ -74,12 +74,12 @@ $con = mysql_connect($Server, $username, $password);
 
 
   $sql = "";
-  $sql= " select prodid,count(*) from dfm_products ";
-  $sql = $sql . " group by prodid";
+  $sql= " select product_type,count(*) from dfm_products ";
+  $sql = $sql . " group by product_type";
   $result = mysql_query($sql);
   while($row = mysql_fetch_array($result)) {
     $foodo = new stdClass;
-    $foodo->prodid = $row['prodid'];
+    $foodo->prodid = $row['product_type'];
     $foodo->cnum = $row['count(*)'];
     $foodo->listype = "products";
     $baro->prods[] = $foodo;

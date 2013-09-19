@@ -3,7 +3,7 @@
 function header () {
 
     this.varname = "diego";
-    this.shapes = []; //browse,search,share,shop,sort,feed,manage,groupi,login    
+    this.shapes = []; //browse,search,share,shop,sort,feed,manage,group,login    
     this.shape = ""; 
     this.shape_was = "";
 }	
@@ -16,11 +16,12 @@ header.prototype.show = function () {
      var ocl = "";
 
      lbl = "logo_lbtn";
-     ocl = "sal.change_vman();";
-     tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  style='vertical-align:top;' >";
+     ocl = this.varname + ".set_shape(\"\");";
+     ocl = ocl + "sal.change_vman();";
+     tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  style='display:inline-block;vertical-align:top;' >";
      tmp = tmp + "</span>";
 
-     tmp = tmp + "<span id='logo_spot' class='' style='vertical-align:top;'  >";
+     tmp = tmp + "<span id='logo_spot' class='' style='display:inline-block;vertical-align:top;'  >";
      tmp = tmp + "</span>";
 
      tmp = tmp + " <div id='search_spot' class='' style='display:inline-block;'  >";
@@ -50,13 +51,36 @@ header.prototype.show = function () {
       tmp = tmp + "<div id='name_spot' class='' style='display:inline-block;'  >";
       tmp = tmp + "</div>";
 
+      tmp = tmp + "<div id='header_debug_spot' class='' style='display:inline-block;'  >";
+      tmp = tmp + "</div>";
+
       var pobj = document.getElementById('menu_mainspot');
        if (pobj != null) {
           pobj.innerHTML = tmp;
-             sal.show();
+
+             if (this.shape == "") {
+               sal.show();
+             } else {
+               sal.hide();
+             }
              sal.draw_vman();
-             this.draw_mainbtns();
+
              this.draw_railbtns();
+ 
+             if (is_mini == true) {
+                if (this.shape =="") {
+                  this.draw_mainbtns();
+                } else {
+                  this.hide_mainbtns();
+               }
+             } else {
+               this.draw_mainbtns();
+             }
+
+             if (debug == true) {
+               this.draw_debug();
+             } 
+  
              for (var i=0;i<this.shapes.length;i++) {
                 var s = this.shapes[i].split(':');
                 if (s[0] == this.shape) { 
@@ -64,8 +88,55 @@ header.prototype.show = function () {
                    eval(es);
                 }
              }
+
       }
 }
+
+header.prototype.toggle_shape = function (pshape) {
+   if (pshape != undefined) {
+        if (this.shape == pshape) {
+           this.set_shape(this.shape_was);
+        } else {
+            this.set_shape(pshape);
+        }
+   }
+}
+
+
+header.prototype.set_shape = function (pshape) {
+
+   if (pshape != undefined) {
+        this.shape_was = this.shape;
+        this.shape = pshape;
+   }
+
+   if (this.shape == "") {
+     sal.show();
+   } else {
+     sal.hide();
+   }
+
+   if (is_mini == true) {
+     if (this.shape =="") {
+          this.draw_mainbtns();
+     } else {
+         this.hide_mainbtns();
+     }
+   }
+ 
+      var s , es = "";
+      for (var i=0;i<this.shapes.length;i++) {
+         s = this.shapes[i].split(':');
+         es = s[1] + '.hide();';
+         if (s[0] == this.shape) { 
+            es = s[1] + '.show()'; 
+         }
+         es = " if (" + s[1] + " != null) { "+es+"}";
+         eval(es);
+      }
+}
+
+
 
 
 header.prototype.draw_mainbtns = function () {
@@ -169,11 +240,23 @@ header.prototype.draw_mainbtns = function () {
  //       $('#share_btn').button();
 //	  $('#search_btn').button();
           if (this.shape == "" ) {
-  	    sal.show();
+            if (is_mini == false) {
+  	      sal.show();
+            }
           }
        }
 }
 
+
+header.prototype.hide_mainbtns = function () {
+
+     var tmp = "";
+     var lbl = "";
+      var pobj = document.getElementById('menu_btnspot');
+       if (pobj != null) {
+          pobj.innerHTML = tmp;
+       }
+}
 
 
 header.prototype.draw_railbtns = function () {
@@ -198,13 +281,15 @@ header.prototype.draw_railbtns = function () {
         tmp = tmp + "<img src='deskfm/images/icons/play.png' width='20px' >";
         tmp = tmp + "</span>";
 
+        tmp = tmp + "<br>";
+/*
         lbl = 'zoom_btn';
         moin = 'marky(\"'+lbl+'\");';
         mout = 'unmarky(\"'+lbl+'\");'; 
         tmp = tmp + "<span id='"+lbl+"' onclick='daviewer.toggle_zoom();'  onmouseover='"+moin+"' onmouseout='"+mout+"' style='width:20px;'  >";
         tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' width='20px' >";
         tmp = tmp + "</span>";
-
+*/
         lbl = 'nitro_lbtn';
         moin = 'marky(\"'+lbl+'\");';
         mout = 'unmarky(\"'+lbl+'\");'; 
@@ -235,41 +320,18 @@ header.prototype.set_shapes = function (pshapes) {
    this.show();
 }
 
+header.prototype.draw_debug = function () {
+ 
+    var lbl = "";
+     var tmp = "";
+    var pobj="";
 
-header.prototype.set_shape = function (pshape) {
-
-   if (pshape != undefined) {
-        this.shape_was = this.shape;
-        this.shape = pshape;
-   }
-
-   if (this.shape == "") {
-      sal.show();
-   } else {
-     sal.hide();
-   }
-
-      var s , es = "";
-      for (var i=0;i<this.shapes.length;i++) {
-         s = this.shapes[i].split(':');
-         es = s[1] + '.hide();';
-         if (s[0] == this.shape) { 
-            es = s[1] + '.show()'; 
-         }
-         es = " if (" + s[1] + " != null) { "+es+"}";
-         eval(es);
-      }
-}
-
-
-header.prototype.toggle_shape = function (pshape) {
-   if (pshape != undefined) {
-        if (this.shape == pshape) {
-           this.set_shape(this.shape_was);
-        } else {
-            this.set_shape(pshape);
-        }
-   }
+        lbl = 'header_debug_spot';
+      tmp = tmp + "mini=" + is_mini;
+       pobj = document.getElementById(lbl);
+       if (pobj != null) {
+          pobj.innerHTML = tmp;
+       }
 }
 
 

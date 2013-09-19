@@ -19,6 +19,8 @@ grouper.prototype.show = function() {
      var omt = "";
      var s = "";
 
+     tmp = tmp + "<div style='width:250px;' >";
+
      if (this.shape == "one") {
 
   	    lbl = 'group_all_btn';
@@ -33,10 +35,10 @@ grouper.prototype.show = function() {
      } else if (this.shape == "all") {
 
 	lbl = 'group_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:100px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li><a >people</a>";
 
-        tmp = tmp +"<ul  style='width:250px;' >";
+        tmp = tmp +"<ul  style='' >";
         sugs = amare.group_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a gtag='"+sugs[i].groupid+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -44,6 +46,19 @@ grouper.prototype.show = function() {
         tmp = tmp +"</ul></li></ul>";
      }
 
+     if (is_mini == true) {
+       lbl = 'grouper_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
+
+     tmp = tmp + "</div>"; 
+ 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

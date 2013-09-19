@@ -5,11 +5,9 @@ function shoper (pspotid) {
   this.spotid = pspotid + "_spot";
   this.varname = 'store';
   this.shape = "all";//one
-
   this.product_type = '';
   this.pricemax=1500;
   this.pmaxtext="< $1500";
-
 }
 
 
@@ -19,7 +17,9 @@ shoper.prototype.show = function() {
     var obj = null;
     var ocl = "";
 
-       if (this.shape == "one") {
+    tmp = tmp + "<div style='width:250px;' >";
+
+     if (this.shape == "one") {
 
   	    lbl = 'product_all_btn';
             ocl = this.varname + '.set_shape(\"all\");';
@@ -33,10 +33,10 @@ shoper.prototype.show = function() {
      } else if (this.shape == "all") {
 
 	lbl = 'product_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='width:125px;display:inline-block;' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li><a >shop</a>";
 
-        tmp = tmp +"<ul  style='width:300px;' >";
+        tmp = tmp +"<ul  style='' >";
         sugs = amare.product_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
           tmp = tmp +"<li><a ptag='"+sugs[i].product_type+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
@@ -44,6 +44,19 @@ shoper.prototype.show = function() {
         tmp = tmp +"</ul></li></ul>";
      }
 
+     if (is_mini == true) {
+       lbl = 'shoper_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
+
+    tmp = tmp + "</div>"; 
+ 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

@@ -18,6 +18,8 @@ sharer.prototype.show = function() {
    var cls = "";
    var ocl = "";
 
+   tmp = tmp + "<div style='width:250px;' >";
+
    lbl = "share_new_btn";
    ocl = this.varname + ".new_one();";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
@@ -81,6 +83,19 @@ sharer.prototype.show = function() {
        tmp=tmp +"</span>";
      }
 
+     if (is_mini == true) {
+       lbl = 'sharer_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
+
+     tmp = tmp + "</div>"; 
+ 
      lbl = this.spotid;
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;

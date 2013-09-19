@@ -5,7 +5,7 @@ viewer.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
 
-       tmp = tmp + "<div class='rail_main' style='width:200px;' >";
+       tmp = tmp + "<div class='rail_main' style='' >";
 
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";

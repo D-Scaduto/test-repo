@@ -6,9 +6,7 @@ function categor (pmenuid) {
    this.spotid = pmenuid + "_spot";
    this.varname ='cater';
    this.showing = false;
-
    this.shape = "all";
-
    this.cat ="all";
    this.subcat ="";
 }
@@ -22,6 +20,8 @@ categor.prototype.show = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
+
+    tmp = tmp + "<div style='width:305px;' >";
 
     if (this.subcat != "" ) {
 
@@ -63,7 +63,7 @@ categor.prototype.show = function() {
       } else if (this.shape == "who") { 
 
         lbl = 'who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
@@ -74,7 +74,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "what") { 
 
         lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
    	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
@@ -85,7 +85,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "why") { 
 
         lbl = 'why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
     	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
@@ -96,7 +96,7 @@ categor.prototype.show = function() {
        } else if (this.shape == "how") { 
 
         lbl = 'how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='' >";
+        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
   	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
@@ -106,7 +106,20 @@ categor.prototype.show = function() {
       }
 
     }
-        
+
+     if (is_mini == true) {
+       lbl = 'browse_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
+
+   tmp = tmp + "</div>"; 
+       
    lbl = this.spotid;
    obj = document.getElementById(lbl)
    if (obj != null) {

@@ -9,7 +9,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
-<link rel=StyleSheet href='css/tab.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
@@ -19,6 +18,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
+  var is_mini = true;
   var debug = false;
   var netson = false;
 
@@ -161,13 +161,10 @@ header('Content-type: text/html; charset=utf-8 ');
 </div>
 
 <div id='menu_spot' style='' class='menu_box' >
-
-<span id='menu_btnspot' class='menu_btns' style=''  >
-</span>
-
 <span id='menu_mainspot' class='menu_main' style='' >
 </span>
-
+<span id='menu_btnspot' class='menu_btns' style=''  >
+</span>
 </div>
 
 <div id='rail_spot' class='rail_box' style='' >
@@ -235,6 +232,12 @@ header('Content-type: text/html; charset=utf-8 ');
            joe = new supplier("manage");
            robby = new grouper("group");
 
+         if ($(window).width() < 700) {
+            is_mini = true;
+         } else {
+            is_mini = false;
+         }
+
 	   diego = new header();
            var tshapes = ['sort:mac','shop:store','feed:moe','manage:joe','group:robby','search:wanda','share:nicky','name:jesie'];
            diego.set_shapes(tshapes);
@@ -251,17 +254,27 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.year="";
     amare.get_unsorted(dt,true);
 
+    $(window).resize(function(val) {
+         if ($(window).width() < 700) {
+            if (is_mini != true) {
+              is_mini = true;
+              diego.show();
+            }
+         } else {
+            if (is_mini != false) {
+              is_mini = false;
+              diego.show();
+            }
+         }
+    });
+
     $(window).scroll(function() {
         if ($('#top_line').inSight(100) == true) {
-	    if ($('#rail_spot').hasClass('regular_top') == false) {
-		$('#rail_spot').addClass('regular_top');
 		$('#rail_spot').removeClass('flying_top');
-	    }
 	} else {
-          if (is_mobile == false) {
+          if (is_mini == false) {
 	    if ($('#rail_spot').hasClass('flying_top') == false) {
 		$('#rail_spot').addClass('flying_top');
-		$('#rail_spot').removeClass('regular_top');
 	    }
 	  }
 	}

@@ -11,11 +11,22 @@ function namer (pspotid) {
 
 
 namer.prototype.show = function() {
-       if (pname != "") {
- 	  this.say_hi();
-        } else {
-          this.get_name();
-        }
+    var tmp = "";
+    var lbl = "";
+    var ocl = "";
+    var moin = "";
+    var mout = "";
+
+       lbl ="name_talk";
+       tmp=tmp +"<span id='"+lbl+"' style='width:250px;display:block;' >";
+       tmp=tmp +"</span>";
+
+     lbl = this.spotid;
+    if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML=tmp; 
+        this.showing = true; 
+        this.say_hi();
+    }
 }
 
               
@@ -26,20 +37,80 @@ namer.prototype.get_name = function() {
     var moin = "";
     var mout = "";
 
-       lbl = this.spotid + "reset_btn";
-       ocl = this.varname + ".amnesiate();";
-       tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/grey_round.png' width='20px' >";
-       tmp=tmp +"</span>";
-
-
-       var tval =  "";
+        var tval =  "";
         if (pname != "") {
           tval =  pname;
         } else {
-          tval =  "any name...";
+          tval =  "name...";
         }
        tmp =tmp + "<input size=10 value='"+tval+"' id='pname_box' style='vertical-align:top;' > ";
+
+       lbl = this.spotid + "check_btn";
+       ocl = this.varname + ".find_me();";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' width='20px' >";
+       tmp=tmp +"</span>";
+
+
+       lbl = this.spotid + "twitter_btn";
+       ocl = this.varname + ".set_shape(\"twitter\");";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp=tmp +"</span>";
+
+       lbl = this.spotid +  "_facebook_btn";
+       ocl = this.varname + ".set_shape(\"facebook\");";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp=tmp +"</span>";
+
+       lbl = this.spotid +  "_google_btn";
+       ocl = this.varname + ".set_shape(\"google\");";
+       tmp=tmp +"<span onclick='"+ocl+"' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp=tmp +"</span>";
+
+    if (is_mini == true) {
+       lbl = 'namer_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
+
+    lbl = "name_talk";
+    if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML=tmp; 
+        this.showing = true; 
+   } 
+}
+
+
+namer.prototype.say_hi = function() {
+      var tmp = ""; 
+      var ocl ="";
+      var lbl = "";
+      var moin = "";
+      var mout = "";
+      var cls = "";
+
+    if (pname == "") {
+ 
+       this.get_name();
+ 
+    } else {
+
+       lbl = "spacename_btn";
+       moin = "marky(\""+lbl+"\");";
+       mout = "unmarky(\""+lbl+"\");";
+       ocl = "jesie.space_me();";
+       cls='spotd_off';
+       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
+       tmp = tmp +  pname;
+       tmp = tmp + "</span>";
 
        lbl = this.spotid + "twitter_btn";
        ocl = this.varname + ".set_shape(\"twitter\");";
@@ -60,42 +131,25 @@ namer.prototype.get_name = function() {
        tmp=tmp +"</span>";
 
 
-    lbl = this.spotid;
-    if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML=tmp; 
-        this.showing = true; 
-   } 
-}
 
+    if (is_mini == true) {
+       lbl = 'namer_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' width='20px' >";
+       tmp = tmp + "</span>"; 
+     }
 
-namer.prototype.say_hi = function() {
-      var tmp = ""; 
-      var ocl ="";
-      var lbl = "";
-      var moin = "";
-      var mout = "";
-      var cls = "";
-
-       lbl = "getname_btn";
-       cls='spotd_off';
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='jesie.amnesiate();' >";
-       tmp = tmp +  "hi, ";
-       tmp = tmp + "</span>";
-
-       lbl = "spacename_btn";
-       moin = "marky(\""+lbl+"\");";
-       mout = "unmarky(\""+lbl+"\");";
-       ocl = "jesie.space_me();";
-       cls='spotd_off';
-       tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp = tmp +  pname;
-       tmp = tmp + "</span>";
-
-        lbl = this.spotid;
+        lbl = "name_talk";
         if (document.getElementById(lbl)!=null) {
            document.getElementById(lbl).innerHTML= tmp;
            this.showing = true;
         } 
+   }
+
 }
 
 namer.prototype.space_me = function() {
@@ -106,7 +160,7 @@ namer.prototype.space_me = function() {
         tmpstr = tmpstr + "</span>";
         tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.say_hi();' > y </span>";
         tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.amnesiate();' > n </span>";
-     lbl = this.spotid;
+     lbl = "name_talk";
      if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmpstr; 
      } 
@@ -130,12 +184,13 @@ namer.prototype.amnesiate = function() {
 namer.prototype.find_me = function() {
 
     var cooknum = 0;
-
+    var tmp_name = "";
     if (document.getElementById('pname_box') != null) {
       this.tmp_name = document.getElementById('pname_box').value;
     }
-    if (this.tmp_name != "")  {
-        pname = this.tmp_name;
+
+   if (tmp_name != "")  {
+        pname = tmp_name;
     }
     this.say_hi();
 
@@ -149,7 +204,7 @@ namer.prototype.dejavu = function() {
      tmpstr = tmpstr + " <input  type='button' value='yes' onclick='jesie.whichone();'  >";
      tmpstr = tmpstr + " <input  type='button' value='no' onclick='jesie.addName();'  >";
 
-     lbl = this.spotid;
+     lbl = "name_talk";
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmpstr;
      } 
