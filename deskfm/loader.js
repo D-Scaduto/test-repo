@@ -3,7 +3,6 @@
 
 viewer.prototype.load_search_list = function(pterms) {
 
-
    this.sterms = "";
    if (pterms != undefined) {
      this.sterms = pterms;
@@ -12,12 +11,11 @@ viewer.prototype.load_search_list = function(pterms) {
     this.stats = amare.total_sorted;
 
     this.dalist = [];
-
     var lgo = true;
     var d = 0;
+    var r = 0;
 
-      for (var r=d; r<amare.webitlist.length;r++) {
-
+      for (r=0; r<amare.webitlist.length;r++) {
         if (amare.webitlist[r] != undefined) {
          var ok = false;
          if (this.sterms != "") {
@@ -35,18 +33,74 @@ viewer.prototype.load_search_list = function(pterms) {
               }
            }
          }
-
          if (ok == true) {
 	   this.dalist[d] = new Object();
            this.dalist[d].mdex = r;
 	   this.dalist[d].ltype = "webits";
            d = d+1 
          }
-      } 
+      }  
     }
-    this.load_rungs(0);
 
-   this.draw_view();
+   if (buddah == true) {
+
+      for  (r=0; r<amare.unsortedlist.length;r++) {
+        if (amare.unsortedlist[r] != undefined) {
+         var ok = false;
+         if (this.sterms != "") {
+           ok = false;
+           if (amare.unsortedlist[r] != undefined) {
+              if (amare.unsortedlist[r].story != null) {
+                if (amare.unsortedlist[r].story.search(this.sterms) > -1)  {
+                  ok = true;
+                }
+              }
+              if (amare.unsortedlist[r].uname != null) {
+                if (amare.unsortedlist[r].uname.search(this.sterms) > -1)  {
+                  ok = true;
+                }
+              }
+           }
+         }
+         if (ok == true) {
+	   this.dalist[d] = new Object();
+           this.dalist[d].mdex = r;
+	   this.dalist[d].ltype = "unsorted";
+           d = d+1 
+         }
+       }
+     }
+
+       for  (r=0; r<amare.unsavedlist.length;r++) {
+        if (amare.unsavedlist[r] != undefined) {
+         var ok = false;
+         if (this.sterms != "") {
+           ok = false;
+           if (amare.unsavedlist[r] != undefined) {
+              if (amare.unsavedlist[r].story != null) {
+                if (amare.unsavedlist[r].story.search(this.sterms) > -1)  {
+                  ok = true;
+                }
+              }
+              if (amare.unsavedlist[r].uname != null) {
+                if (amare.unsavedlist[r].uname.search(this.sterms) > -1)  {
+                  ok = true;
+                }
+              }
+           }
+         }
+         if (ok == true) {
+	   this.dalist[d] = new Object();
+           this.dalist[d].mdex = r;
+	   this.dalist[d].ltype = "unsaved";
+           d = d+1 
+         }
+       }
+     }
+   }
+
+  this.load_rungs(0);
+  this.draw_view();
 }
 
 

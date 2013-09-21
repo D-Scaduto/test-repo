@@ -21,7 +21,7 @@ categor.prototype.show = function() {
     var s = "";
     var sugs = [];
 
-    tmp = tmp + "<div style='width:305px;' >";
+    tmp = tmp + "<div style='width:250px;' >";
 
     if (this.subcat != "" ) {
 
@@ -39,25 +39,25 @@ categor.prototype.show = function() {
         lbl = "browse_who_btn";
         ocl= "cater.set_shape(\"who\")";
         tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "who?";
+        tmp = tmp + "who";
         tmp = tmp + "</button>";
 
         lbl = "browse_what_btn";
         ocl= "cater.set_shape(\"what\")";
         tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "what?";
+        tmp = tmp + "what";
         tmp = tmp + "</button>";
 
         lbl = "browse_why_btn";
         ocl= "cater.set_shape(\"why\")";
         tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "why?";
+        tmp = tmp + "why";
         tmp = tmp + "</button>";
 
         lbl = "browse_how_btn";
         ocl= "cater.set_shape(\"how\")";
         tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "how?";
+        tmp = tmp + "how";
         tmp = tmp + "</button>";
 
       } else if (this.shape == "who") { 
@@ -109,12 +109,12 @@ categor.prototype.show = function() {
 
      if (is_mini == true) {
        lbl = 'browse_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
+       ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
        moin = 'marky(\"'+lbl+'\");';
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/browse.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
 
@@ -215,7 +215,7 @@ categor.prototype.redraw_view = function(pchunk) {
 	  daviewer.stats = lstat;
           if (lstat.cnum > lstat.lnum) {
              if (lstat.cat != "all") {
-              daviewer.more();
+                 daviewer.more();
              }
           }          
 
@@ -244,8 +244,12 @@ categor.prototype.redraw_view = function(pchunk) {
 categor.prototype.set_shape = function(pshape) {
 
       if (pshape != undefined) {
-           this.shape=pshape;
-           this.show();
+           if ((pshape == "all") && (this.shape == "all")) {
+             diego.set_shape("");
+           } else {
+             this.shape=pshape;
+             this.show();
+           }
       }
 }
 

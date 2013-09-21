@@ -24,7 +24,6 @@ function stater () {
    this.peoplelist = [];
    this.productlist = [];
    this.supplierlist = [];
-
    this.unsortedlist = [];
    this.unsavedlist = [];
 
@@ -37,9 +36,9 @@ function stater () {
    this.total_sorted = new stat();
    this.total_people = new stat();
    this.total_products = new stat ();
+   this.total_suppliers = new stat();
    this.total_unsorted = new stat();
    this.total_unsaved = new stat();
-   this.total_suppliers = new stat();
 
    this.cat_set = new cat_provider();
    this.subcat_set = new subcat_provider();
@@ -146,6 +145,13 @@ stater.prototype.update_stats = function (statobj) {
       amare.total_suppliers.cnum = statobj.total_suppliers;
       amare.total_suppliers.max_chunks = Math.round(amare.total_suppliers.cnum/da_limit);
       amare.total_suppliers.last_chunk = -1;
+
+      amare.total_unsaved.listype = "unsaved";
+      amare.total_unsaved.lnum = 0;
+      amare.total_unsaved.cnum = 0;
+      amare.total_unsaved.max_chunks = -1;
+      amare.total_unsaved.last_chunk = -1;
+
 
       amare.count_lwstats();
       amare.count_lpstats();
@@ -430,7 +436,11 @@ stater.prototype.get_stat = function (pstat) {
 
 		     ret =  this.get_catstat(pstat.cat,pstat.subcat);
 
+		} else if  (pstat.listype == "unsaved" ) {
+		     ret =  this.total_unsaved;
+
 		}
+
 	}
     return ret;
 }
@@ -730,7 +740,8 @@ stater.prototype.get_group_list = function(pgroupid) {
 //  alert(url);
    $.getJSON(url,function(json) {
        amare.update_people(json);
-   });   // end get json 
+   });    
+   sal.waiting();
 }
  
 
@@ -839,7 +850,7 @@ stater.prototype.get_suppliers = function() {
 //  alert(url);
    $.getJSON(url,function(json) {
        amare.update_suppliers(json);
-   });   // end get json 
+   });    
    sal.waiting();
 }
 
@@ -870,7 +881,7 @@ stater.prototype.get_csearch_list = function(tsterms) {
      url = url + "&sterms="+ tsterms;
      this.sterms = tsterms;
    } 
-   alert(url);
+//   alert(url);
    $.getJSON(url,function(json) {
       amare.update_webits(json);
    });   // end get json 
@@ -959,9 +970,20 @@ stater.prototype.add_unsaved = function(listobj) {
        var r = 0;
        var found = false;
        var fndcount = 0;
+
+       if (listobj == undefined) {
+	       return;
+       }
+
+       var lstat = this.get_stat(listobj);
+       if (lstat != null) {
+            daviewer.update_stat(lstat);
+       }
+
        if (listobj.dalist == null) {
           return;
        }
+
        if ( listobj.dalist.length > 0 ) { 
          for (var j=0;j<listobj.dalist.length;j++) {
               found = false;
@@ -982,10 +1004,11 @@ stater.prototype.add_unsaved = function(listobj) {
               this.unsavedlist.unshift(listobj.dalist[j]);
          }
       }
-      diego.redraw_view("unsaved");
+
+      this.total_unsaved.lnum = this.unsavedlist.length;
+      daviewer.redraw_view();
 
 }  
-
 
 
 

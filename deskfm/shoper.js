@@ -17,8 +17,6 @@ shoper.prototype.show = function() {
     var obj = null;
     var ocl = "";
 
-    tmp = tmp + "<div style='width:250px;' >";
-
      if (this.shape == "one") {
 
   	    lbl = 'product_all_btn';
@@ -51,12 +49,10 @@ shoper.prototype.show = function() {
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' class='menu_btn'  >";
        tmp = tmp + "</span>"; 
      }
 
-    tmp = tmp + "</div>"; 
- 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

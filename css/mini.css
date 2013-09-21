@@ -2,13 +2,14 @@
 @media screen and (max-width:699px) {
 
      .menu_box {
-        width:350px;
+        min-width:400px;
+        width:100%;
         background-color:white;
         border-style:solid;
         border-color:silver;
         border-width:5px;
   //      display:inline-block;
-        margin:0 auto;
+   //     margin:0 auto;
       }
 
      .main {
@@ -16,35 +17,18 @@
      }
 
      .menu_main {
-        display:inline-block;
+  //      display:inline-block;
      }
 
-    .menu_btns {
-//      display:inline-block;
+    .menu_btnbox {
+ //     display:inline-block;
       float:right;
     }
 
-    .rail_box {
-//     width:100%;
-       width:250px;
-       background-color:white;
-       margin:0 auto;
-     //  display:inline-block;
-         border-style:solid;
-        border-color:silver;
-        border-width:5px;
-    }
-
-    .rail_btns {
-        display:inline-block;
-      // width:200px;
-        background-color:white;
+     .menu_btn {
+        width:35px;
      }
 
-    .rail_main {
-        display:inline-block;
-         background-color:white;
-    }
 
    .zbox {
        background-color:white;
@@ -68,7 +52,7 @@
        border-style:solid;
        border-color:silver;
        border-width:4px;
-       min-width:250px;
+       min-width:400px;
        min-height:150px;
        width:100%;
        padding:5px;

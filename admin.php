@@ -15,7 +15,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <title>deskfm.com</title>
 
-<script  type="text/javascript" >
+<script type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
   var is_mini = true;
@@ -38,7 +38,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var sal = null;    //logoman
   var diego = null;  //header
   var mac = null;    //farmer
-  var moe = null;    //feeder 
+  var louie = null;  //feeder 
   var jesie = null;  //namer 
 
   var init_run = true;
@@ -103,11 +103,9 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
-
 <script src=deskfm/preloader.js type="text/javascript" > </script>
  
 </head>
-
 
 <body style='background-color:black;' >
 
@@ -160,19 +158,14 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='top_line' style='' >
 </div>
 
+
 <div id='menu_spot' style='' class='menu_box' >
 <span id='menu_mainspot' class='menu_main' style='' >
 </span>
-<span id='menu_btnspot' class='menu_btns' style=''  >
+<span id='menu_btnspot' class='menu_btnbox' style=''  >
 </span>
 </div>
 
-<div id='rail_spot' class='rail_box' style='' >
-<span id='rail_btnspot' class='rail_btns' style=''  >
-</span>
-<span id='rail_mainspot' class='rail_main' style='' >
-</span>
-</div>
 
 <div id=''  style='clear:both;' >
 </div>
@@ -223,9 +216,10 @@ header('Content-type: text/html; charset=utf-8 ');
 
            jesie = new namer("name");
 	   sal = new logoman("logo");
+ 	   dale = new rail("rail");
    	   store = new shoper("shop");
 	   mac = new sorter("sort");
-	   moe = new feeder("feed");
+	   louie = new feeder("feed");
 	   cater = new categor("browse");
 	   wanda = new searcher("search");
 	   nicky = new sharer("share");
@@ -239,7 +233,7 @@ header('Content-type: text/html; charset=utf-8 ');
          }
 
 	   diego = new header();
-           var tshapes = ['sort:mac','shop:store','feed:moe','manage:joe','group:robby','search:wanda','share:nicky','name:jesie'];
+           var tshapes = ['sort:mac','shop:store','feed:louie','manage:joe','group:robby','search:wanda','share:nicky','name:jesie',"rail:dale"];
            diego.set_shapes(tshapes);
 	   
     amare.get_stats();

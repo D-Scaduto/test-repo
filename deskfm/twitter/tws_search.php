@@ -36,13 +36,13 @@ $bearer_token = $reply->access_token;
 	
   	 public $sql = "";
 	 public $listlen = 0;
-	 public $newest_date = "";
+	 public $listype = ""; 
+         public $newest_date = "";
 	 public $newest_twid = "";
 	 public $oldest_date = "";
 	 public $oldest_twid = "";
 	 public $dalist = "";
-       
- }
+}
 
  $rebar = new bar;
  $retarr = array();
@@ -72,6 +72,7 @@ $bearer_token = $reply->access_token;
  $len = sizeof($reply->statuses);
 
  $rebar->listlen = $len; 
+ $rebar->listype = "unsaved";
 
  $rebar->newest_twid = $reply->statuses[0]->id_str;
  $rebar->newest_date = $reply->statuses[0]->created_at;

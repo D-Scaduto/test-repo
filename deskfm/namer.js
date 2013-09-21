@@ -18,8 +18,20 @@ namer.prototype.show = function() {
     var mout = "";
 
        lbl ="name_talk";
-       tmp=tmp +"<span id='"+lbl+"' style='width:250px;display:block;' >";
+       tmp=tmp +"<span id='"+lbl+"' style='display:inline-block;' >";
        tmp=tmp +"</span>";
+
+   if (is_mini == true) {
+       lbl = 'namer_unset_btn';
+       ocl =  'diego.set_shape(\"\");'
+       moin = 'marky(\"'+lbl+'\");';
+       mout = 'unmarky(\"'+lbl+'\");';
+       cls = 'spotd_off';
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' class='menu_btn' >";
+       tmp = tmp + "</span>"; 
+     }
+
 
      lbl = this.spotid;
     if (document.getElementById(lbl)!=null) {
@@ -48,40 +60,29 @@ namer.prototype.get_name = function() {
        lbl = this.spotid + "check_btn";
        ocl = this.varname + ".find_me();";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' class='menu_btn' >";
        tmp=tmp +"</span>";
 
 
        lbl = this.spotid + "twitter_btn";
        ocl = this.varname + ".set_shape(\"twitter\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn' >";
        tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_facebook_btn";
        ocl = this.varname + ".set_shape(\"facebook\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' class='menu_btn' >";
        tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_google_btn";
        ocl = this.varname + ".set_shape(\"google\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' class='menu_btn' >";
        tmp=tmp +"</span>";
 
-    if (is_mini == true) {
-       lbl = 'namer_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' width='20px' >";
-       tmp = tmp + "</span>"; 
-     }
-
-    lbl = "name_talk";
+     lbl = "name_talk";
     if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML=tmp; 
         this.showing = true; 

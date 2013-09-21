@@ -226,9 +226,9 @@ poster.prototype.draw_rung = function() {
 	      }
 	    }
  
-            if (this.cat == "") {
+       //     if ((this.cat == "") || (this.cat = undefined))  {
               this.draw_date();
-            }
+        //    }
  
             if (buddah == true) {
 //              this.draw_groups();

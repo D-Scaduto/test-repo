@@ -43,7 +43,6 @@ viewer.prototype.more = function() {
 //alert(this.stats.listype);
 
          if (this.stats.listype == "webits") {
-
             amare.get_cat_list(this.stats);
 
          } else if (this.stats.listype == "unsorted") {
@@ -59,6 +58,72 @@ viewer.prototype.more = function() {
 }
 
 
+viewer.prototype.prev_chunk = function() {
+
+   var chunks = 0;
+   var cur_chunk = 1;
+   var chunk_fac =  1;
+   var tot = 0;
+   if (this.stats != null) {
+    tot = this.stats.cnum;
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+      chip_fac = Math.round(chunk_size / 10);
+      st = Math.round(cur_chunk * chunk_size);
+    } 
+
+       this.prev(chunk_size);
+   }
+
+}
+
+
+viewer.prototype.next_chunk = function() {
+
+   var chunks = 0;
+   var cur_chunk = 1;
+   var chunk_size =  1;
+   var tot = 0;
+ 
+   if (this.stats != null) {
+    tot = this.stats.cnum;
+    if (tot > 10) {
+      chunk_size = Math.round(tot / 10);
+      cur_chunk = Math.floor(this.listdex / chunk_size);
+      chip_fac = Math.round(chunk_size / 10);
+      st = Math.round(cur_chunk * chunk_size);
+    }
+
+    var nt = this.listdex + chunk_size;
+    if (nt > this.stats.cnum) {
+	    nt = this.stats.cnum;
+    }
+
+    if (nt > this.stats.lnum) {
+	             if (this.listype == "webits") {
+          	       if ((this.cat == "all") || (this.cat == "")) {
+                         amare.get_webits();
+		       } else {
+                         amare.get_cat_list(this.cat,this.subcat);
+		       }
+		     }
+       
+		     if (this.listype == "people") {
+          	       if (this.groupid == "") {
+                         amare.get_people();
+		       } else {
+                         amare.get_group_list(this.groupid);
+		       }
+		     }
+    } else {
+	    this.next(chunk_size);
+    }
+   }
+}
+
+
+
 
 viewer.prototype.update_stat = function(pstat) { 
    if (pstat != undefined) {
@@ -70,12 +135,11 @@ viewer.prototype.update_stat = function(pstat) {
 viewer.prototype.redraw_view = function() { 
    var start = 0;
 
-    if (this.stats == null) {
-        this.stats = amare.total_sorted;
-    }
-         start = this.stats.last_chunk * da_limit;
 
-// alert("sl=" + this.stats.listype + " pl=" + plistype);
+    if (this.stats != null) {
+// alert("sl=" + this.stats.listype );
+
+         start = this.stats.last_chunk * da_limit;
 
          if (this.stats.listype == "webits" )  {
 
@@ -99,7 +163,12 @@ viewer.prototype.redraw_view = function() {
 
 	    this.load_group_list(this.stats.groupid,start);
 
+         }  else if (this.stats.listype == "unsaved") {
+
+	    this.load_unsaved_list();
+
          } 
+    }
 }
 
 

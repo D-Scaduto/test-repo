@@ -20,29 +20,25 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-     tmp = tmp + "<div style='width:250px;' >";
-
    lbl = "sort_reset_btn";
    ocl= "";
-   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='vertical-align:top;' >";
    tmp = tmp + "sort";
    tmp = tmp + "</button>";
 
-   tmp = tmp + "<span id='cal_spot' class='' >";
+   tmp = tmp + "<span id='cal_spot' class='' style='vertical-align:top;' >";
    tmp = tmp + "</span>";	
 
      if (is_mini == true) {
-       lbl = 'sortper_unset_btn';
+       lbl = 'sorter_unset_btn';
        ocl =  'diego.set_shape(\"\");'
        moin = 'marky(\"'+lbl+'\");';
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style=''  >";
+       tmp = tmp + "<img src='deskfm/images/icons/categories.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
-
-    tmp = tmp + "</div>"; 
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {

@@ -31,9 +31,9 @@ header('Content-type: text/html; charset=utf-8 ');
   var amare = null;  //stater
   var sal = null;    //logoman
   var diego = null;  //header
-  var mac  = null;   //farmer
-  var moe = null;    //feeder 
-  var jesie = null;  //namer;
+  var louie = null;  //feeder 
+  var jesie = null;  //namer
+  var dale = null;   //rail 
   var robby = null;
 
   var init_run = true;
@@ -159,22 +159,11 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='top_line' style='' >
 </div>
 
-<div id=''  class='top_main' style='' >
-
 <div id='menu_spot' style='' class='menu_box' >
 <span id='menu_mainspot' class='menu_main' style='' >
 </span>
-<span id='menu_btnspot' class='menu_btns' style=''  >
+<span id='menu_btnspot' class='menu_btnbox' style=''  >
 </span>
-</div>
-
-<div id='rail_spot' class='rail_box' style='' >
-<span id='rail_btnspot' class='rail_btns' style=''  >
-</span>
-<span id='rail_mainspot' class='rail_main' style='' >
-</span>
-</div>
-
 </div>
 
 <div id=''  style='clear:both;' >
@@ -208,15 +197,15 @@ header('Content-type: text/html; charset=utf-8 ');
 //   init_months();
 
         sal = new logoman("logo");
+	dale = new rail("rail");
 	jesie = new namer("name");
         store = new shoper("shop");
         cater = new categor("browse");
 	wanda = new searcher("search");
 	nicky = new sharer("share");
 	mac = new sorter("sort");
-	moe = new feeder("feed");
+	louie = new feeder("feed");
         amare = new stater();
-
 
          if ($(window).width() < 700) {
             is_mini = true;
@@ -226,7 +215,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 
 	diego = new header();
-        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store','name:jesie' ];
+        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store','name:jesie','rail:dale' ];
         diego.set_shapes(tshapes);
 
         daviewer = new viewer("main_view","daviewer");

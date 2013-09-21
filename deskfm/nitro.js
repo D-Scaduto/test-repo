@@ -1,5 +1,4 @@
 
-  
 
 viewer.prototype.nitro_start = function(pway) {
 
@@ -7,9 +6,6 @@ viewer.prototype.nitro_start = function(pway) {
 	    this.metro_dir = pway;
 	}
 
-   var lbl = "";
-   var pobj = null;
-   var tmp = "";
 
     if (is_mobile == true) {
        this.metro_spd = 500;
@@ -17,6 +13,22 @@ viewer.prototype.nitro_start = function(pway) {
        this.metro_spd =250;
     }
     this.flip_card();    
+
+   var lbl = "";
+   var pobj = null;
+   var src = "";
+   var tmp = "";
+   var moin="";
+   var mout = "";
+
+       tmp = tmp + "<img src='deskfm/images/icons/stop.png'  class='menu_btn' >";
+
+      lbl = 'nitro_btn';
+ 
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
+     pobj.innerHTML = tmp;
+   } 
 
 
 }
@@ -26,6 +38,24 @@ viewer.prototype.nitro_stop = function() {
 
    this.metro_spd = 0;
    this.flip_card();
+
+   var lbl = "";
+   var pobj = null;
+   var src = "";
+   var moin = "";
+   var mout = "";
+   var tmp="";
+
+       tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/icons/play.png'  class='menu_btn' >";
+
+        lbl = 'nitro_btn';
+ 
+   pobj = document.getElementById(lbl);
+   if (pobj != null) {
+     pobj.innerHTML = tmp;
+   } 
+
+
 }
 
 

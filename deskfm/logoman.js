@@ -33,13 +33,12 @@ logoman.prototype.draw_vman = function () {
 
    var lbl = "";
    
-   var tmpstr = "";
+   var tmp = "";
    var tmpsrc = "";
    var vm = "";
+
    var dt = new Date();
-
 //   this.flip = this.flip + 1;
-
           if (this.flip==0) {
             vm="stand-r";
           } else if (this.flip==1) {
@@ -67,11 +66,13 @@ logoman.prototype.draw_vman = function () {
      tmpsrc = "deskfm/images/daoman/cbman-"+vm+".png";
      var ht = '';
      ht = '30px';
-     tmpstr="<img src='"+tmpsrc+"' onClick='' height='"+ht+"' >";
+     tmp="<img src='"+tmpsrc+"' onClick='' class='menu_btn' >";
 
-     lbl = "logo_lbtn";
+        tmp = "<img src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+ 
+     lbl = "zoom_btn";
      if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmpstr;
+         document.getElementById(lbl).innerHTML=tmp;
      }
 }
 
@@ -90,21 +91,21 @@ logoman.prototype.change_vman = function () {
 
 
 logoman.prototype.waiting = function () {
-
    var lbl = "";
-
    var tmpstr = "";
    var tmpsrc = "";
-   var dt = new Date();
 
    tmpsrc = "deskfm/images/random/loading-go.gif";
-   tmpstr="<img src='"+tmpsrc+"' height='40px' onClick='' >";
 
-   lbl = this.spotid + "_lbtn";
+   tmpstr="<img src='"+tmpsrc+"' class='menu_btn' >";
+
+   lbl =  "zoom_btn";
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmpstr;
    }
 }
+
+
 
 logoman.prototype.set_logoshape = function (psz) {
 	this.logo_shape = psz;

@@ -1,11 +1,19 @@
 
 
-viewer.prototype.draw_rail = function() {
+function rail (pspotid) {
+
+   this.spotid = pspotid + "_spot";
+   this.varname = "dale";
+   this.showing = false;
+}
+
+ 
+rail.prototype.show = function() {
    var pobj=null;
    var lbl = "";
    var tmp = "";
 
-       tmp = tmp + "<div class='rail_main' style='' >";
+       tmp = tmp + "<div class='rail_box' style='' >";
 
        tmp = tmp + "<span id='local_chunkbar' class='' style='width:75px;display:inline-block;' >";
        tmp = tmp + "</span>";
@@ -25,16 +33,30 @@ viewer.prototype.draw_rail = function() {
        tmp = tmp + "</div>";
       }
     
-   lbl = "rail_mainspot";
+   lbl = this.spotid;
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
 	pobj.innerHTML = tmp;
+        this.showing = true;
+        this.set_rails();
+    }
+}
+
+ 
+rail.prototype.set_rails = function() {
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+
+   if (daviewer == null) {
+      return;
+   }
 
        var lchunk = 1
        var lchunks = 1;
        if (this.stats != null) {
-          lchunk = Math.floor(this.listdex/this.top_end);
-          lchunks = this.stats.lnum / this.top_end;
+          lchunk = Math.floor(daviewer.listdex/this.top_end);
+          lchunks = daviewer.stats.lnum / this.top_end;
        }
 
        $('#local_chunkbar').slider({
@@ -48,15 +70,15 @@ viewer.prototype.draw_rail = function() {
 	    }
        });
 
-       var st = lchunk * this.top_end;
+       var st = lchunk * daviewer.top_end;
        if (st == 0) {st = 1; } 
-       var fn = st + this.top_end -1;
-       if (this.stats != null) {
-         if (fn >= this.stats.lnum) {
-          fn = this.stats.lnum -1;
+       var fn = st + daviewer.top_end -1;
+       if (daviewer.stats != null) {
+         if (fn >= daviewer.stats.lnum) {
+          fn = daviewer.stats.lnum -1;
          }
        }
-       var ld = this.listdex + 1;
+       var ld = daviewer.listdex + 1;
 
        $('#local_chipbar').slider({
 	    range: false,
@@ -69,21 +91,22 @@ viewer.prototype.draw_rail = function() {
 	});
 
         this.draw_raildata();
-   }
 }
 
 
 
-viewer.prototype.draw_raildata = function() {
+
+
+rail.prototype.draw_raildata = function() {
    var lbl = "";
    var tmp = "";
    var moin = "";
    var mout = "";
-   if (this.stats != null) {
+   if (daviewer.stats != null) {
 
-      var lchunk = Math.floor(this.listdex/this.top_end);
-      var lchunks = Math.floor(this.stats.lnum / this.top_end) -1;
-      var mchunks = Math.floor(this.stats.cnum / this.top_end);
+      var lchunk = Math.floor(daviewer.listdex/daviewer.top_end);
+      var lchunks = Math.floor(daviewer.stats.lnum / daviewer.top_end) -1;
+      var mchunks = Math.floor(daviewer.stats.cnum / daviewer.top_end);
       var lc = lchunk;
       if (lchunks >= 1) {
 	    $('#local_chunkbar').show();
@@ -93,7 +116,7 @@ viewer.prototype.draw_raildata = function() {
 
             $('#local_chunkdata').show();
             tmp = lc + " of " + lchunks;
-     //       tmp = tmp + " x" + this.top_end;
+     //       tmp = tmp + " x" + daviewer.top_end;
             $('#local_chunkdata').html(tmp);
 
       } else {
@@ -103,142 +126,77 @@ viewer.prototype.draw_raildata = function() {
       if (mchunks > lchunks ) {
       } 
  
-      var st = lchunk * this.top_end;
+      var st = lchunk * daviewer.top_end;
       if (st == 0) {st = 1; } 
-      var fn = st + this.top_end -2;
-      if (fn >= this.stats.lnum) {
-          fn = this.stats.lnum -2;
+      var fn = st + daviewer.top_end -2;
+      if (fn >= daviewer.stats.lnum) {
+          fn = daviewer.stats.lnum -2;
       }
-      var ld = this.listdex + 1;
+      var ld = daviewer.listdex + 1;
 
       $('#local_chipbar').slider("option", "min", st );
       $('#local_chipbar').slider("option", "max", fn );
       $('#local_chipbar').slider("option", "value", ld );
-      $('#local_chipdata').html(ld + " of " + this.dalist.length);
+      $('#local_chipdata').html(ld + " of " + daviewer.dalist.length);
 
    } else {
 //	   alert("no stats");
    }
 
        if (debug == true) {
-	       this.draw_debug_rail();
+	       this.draw_debug();
        }
 }
 
-viewer.prototype.prev_chunk = function() {
 
-   var chunks = 0;
-   var cur_chunk = 1;
-   var chunk_fac =  1;
-   var tot = 0;
-   if (this.stats != null) {
-    tot = this.stats.cnum;
-    if (tot > 10) {
-      chunk_size = Math.round(tot / 10);
-      cur_chunk = Math.floor(this.listdex / chunk_size);
-      chip_fac = Math.round(chunk_size / 10);
-      st = Math.round(cur_chunk * chunk_size);
-    } 
-
-       this.prev(chunk_size);
-   }
-
-}
-
-
-viewer.prototype.next_chunk = function() {
-
-   var chunks = 0;
-   var cur_chunk = 1;
-   var chunk_size =  1;
-   var tot = 0;
- 
-   if (this.stats != null) {
-    tot = this.stats.cnum;
-    if (tot > 10) {
-      chunk_size = Math.round(tot / 10);
-      cur_chunk = Math.floor(this.listdex / chunk_size);
-      chip_fac = Math.round(chunk_size / 10);
-      st = Math.round(cur_chunk * chunk_size);
-    }
-
-    var nt = this.listdex + chunk_size;
-    if (nt > this.stats.cnum) {
-	    nt = this.stats.cnum;
-    }
-
-    if (nt > this.stats.lnum) {
-	             if (this.listype == "webits") {
-          	       if ((this.cat == "all") || (this.cat == "")) {
-                         amare.get_webits();
-		       } else {
-                         amare.get_cat_list(this.cat,this.subcat);
-		       }
-		     }
-       
-		     if (this.listype == "people") {
-          	       if (this.groupid == "") {
-                         amare.get_people();
-		       } else {
-                         amare.get_group_list(this.groupid);
-		       }
-		     }
-    } else {
-	    this.next(chunk_size);
-    }
-   }
-}
-
-
-
-viewer.prototype.draw_debug_rail = function() {
+rail.prototype.draw_debug = function() {
      var pobj=null;
      var lbl = "";
      var tmp = "";
 
-  if (this.stats != null) {
+  if (daviewer.stats != null) {
 
        tmp = tmp + "<div class='spotd_off' >";
-       tmp = tmp + "ltype=" + this.stats.listype;
+       tmp = tmp + "ltype=" + daviewer.stats.listype;
        tmp = tmp + "</div>";
 
-     if ((this.stats.cat != undefined )  && (this.stats.cat != "" )) {
+     if ((daviewer.stats.cat != undefined )  && (daviewer.stats.cat != "" )) {
        tmp = tmp + "<div class='spotd_off' >";
-       tmp = tmp + "cat=" + this.stats.cat + " sub=" + this.stats.subcat;
-       tmp = tmp + "</div>";
-     }
-
-     if ((this.stats.sterms != undefined )  && (this.stats.sterms != "" )) {
-       tmp = tmp + "<div class='spotd_off' >";
-       tmp = tmp + "sterms=" + this.stats.sterms;
+       tmp = tmp + "cat=" + daviewer.stats.cat + " sub=" + daviewer.stats.subcat;
        tmp = tmp + "</div>";
      }
 
-
-    if (this.stats.month != undefined) {
+     if ((daviewer.stats.sterms != undefined )  && (daviewer.stats.sterms != "" )) {
        tmp = tmp + "<div class='spotd_off' >";
-       tmp = tmp + this.stats.month + " '" + this.stats.year;
+       tmp = tmp + "sterms=" + daviewer.stats.sterms;
+       tmp = tmp + "</div>";
+     }
+
+
+    if (daviewer.stats.month != undefined) {
+       tmp = tmp + "<div class='spotd_off' >";
+       tmp = tmp + daveiwer.stats.month + " '" + daviewer.stats.year;
        tmp = tmp + "</div>";
      }
 
       var lchunk = 1
       var lchunks = 1;
-       if (this.stats != null) {
-          lchunk = Math.floor(this.listdex/this.top_end);
-          lchunks = this.stats.lnum / this.top_end;
+       if (daviewer.stats != null) {
+          lchunk = Math.floor(daviewer.listdex/daviewer.top_end);
+          lchunks = daviewer.stats.lnum / daviewer.top_end;
        }
-      var st = lchunk * this.top_end;
+      var st = lchunk * daviewer.top_end;
       if (st == 0) {st = 1; } 
-      var fn = st + this.top_end  -1;
-      if (fn >= this.stats.lnum) {
-          fn = this.stats.lnum -1;
+      var fn = st + daviewer.top_end  -1;
+      if (fn >= daviewer.stats.lnum) {
+          fn = daviewer.stats.lnum -1;
       }
-      var ld = this.listdex + 1;
+      var ld = daviewer.listdex + 1;
 
        tmp = tmp + "<div  class='spotd_off' >";
-       tmp = tmp + "lnum=" + this.stats.lnum;
-       tmp = tmp + " cnum=" + this.stats.cnum;
-       tmp = tmp + " lchunk=" + this.stats.last_chunk;
+       tmp = tmp + "lnum=" + daviewer.stats.lnum;
+       tmp = tmp + " cnum=" + daviewer.stats.cnum;
+       tmp = tmp + " lchunk=" + daviewer.stats.last_chunk;
        tmp = tmp + " fin=" + fn;
        tmp = tmp + "</div>";
 
@@ -250,6 +208,32 @@ viewer.prototype.draw_debug_rail = function() {
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
          pobj.innerHTML = tmp;
+     }
+}
+
+
+rail.prototype.toggle = function () {
+
+   if (this.showing == true ) {
+       this.hide();
+   } else {
+       this.show();
+   }
+}
+
+
+
+ 
+rail.prototype.hide = function() {
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+
+     lbl = this.spotid;
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+         pobj.innerHTML = tmp;
+         this.showing = false;
      }
 }
 

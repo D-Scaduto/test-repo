@@ -3,7 +3,7 @@
 function feeder (pmenuid) { 
 
    this.spotid = pmenuid + "_spot";
-   this.varname = "moe";
+   this.varname = "louie";
    this.shape = ""; 
    this.showing = false;
    this.menued = false;
@@ -20,19 +20,20 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-     tmp = tmp + "<div style='width:250px;' >";
-
      lbl = "feed_reset_btn";
       ocl= "diego.set_shape(\"\")";
-      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='vertical-align:top;' >";
       tmp = tmp + "feeds";
       tmp = tmp + "</button>";
 
-      tmp = tmp + "<span id='' onclick='moe.check_feed();'  >";
-      tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+      tmp = tmp + "<input type='text' name='s' id='feed_string' size='10' value='standing desk' style='vertical-align:top;'  >";
+
+      tmp = tmp + "<span id='' onclick='louie.check_feed();'  >";
+      tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn'  >";
       tmp = tmp + "</span>";
 
-      tmp = tmp + "<input type='text' name='s' id='feed_string' size='10' value='standing desk' style='vertical-align:top;'  >";
+      tmp = tmp + "<span id='feed_btns'  >";
+      tmp = tmp + "</span>";
  
       if (is_mini == true) {
         lbl = 'feed_unset_btn';
@@ -41,20 +42,21 @@ feeder.prototype.show = function() {
         mout = 'unmarky(\"'+lbl+'\");';
         cls = 'spotd_off';
         tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' width='20px' >";
+        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' class='menu_btn'  >";
         tmp = tmp + "</span>"; 
       }
-      tmp = tmp + "</div>";
  
-      tmp = tmp + "<div id='feed_btns'  >";
-      tmp = tmp + "</div>";
-   
+  
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#feed_reset_btn').button();
-      daviewer.load_unsaved_list();
+     if (amare.unsavedlist.length ==  0) {
+         this.check_feed();
+      } else {
+         daviewer.load_unsaved_list(); 
+      } 
    } 
 
 }

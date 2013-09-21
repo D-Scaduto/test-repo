@@ -18,11 +18,9 @@ sharer.prototype.show = function() {
    var cls = "";
    var ocl = "";
 
-   tmp = tmp + "<div style='width:250px;' >";
-
    lbl = "share_new_btn";
    ocl = this.varname + ".new_one();";
-   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
+   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='vertical-align:top;' >";
    tmp = tmp + "share";
    tmp = tmp + "</button>";
 
@@ -31,7 +29,7 @@ sharer.prototype.show = function() {
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn'  >";
        tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
@@ -43,7 +41,7 @@ sharer.prototype.show = function() {
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
        tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
@@ -55,7 +53,7 @@ sharer.prototype.show = function() {
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
        tmp=tmp +"</span>";
 
        lbl = "twitter_spot";
@@ -67,19 +65,19 @@ sharer.prototype.show = function() {
        lbl = this.spotid +  "_twitter_btn";
        ocl = this.varname + ".set_shape(\"twitter\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/twitter.png'  class='menu_btn'  >";
        tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_facebook_btn";
        ocl = this.varname + ".set_shape(\"facebook\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
        tmp=tmp +"</span>";
 
        lbl = this.spotid +  "_google_btn";
        ocl = this.varname + ".set_shape(\"google\");";
        tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
        tmp=tmp +"</span>";
      }
 
@@ -90,12 +88,10 @@ sharer.prototype.show = function() {
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/share.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/share.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
 
-     tmp = tmp + "</div>"; 
- 
      lbl = this.spotid;
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;

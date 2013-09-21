@@ -2,14 +2,13 @@
 
 function tw_feeder () { 
 
-   this.varname = "moe.twfeed";
+   this.varname = "louie.twfeed";
    this.sterms = "standing desk";
 
    this.newest_date = "";
    this.newest_twid = "";
    this.oldest_date = "";
    this.oldest_twid = "";
-
 }
 
 
@@ -21,44 +20,48 @@ tw_feeder.prototype.draw_btns = function() {
    var ocl="";
    var dt = null;
       
-     tmp = tmp + "<span>";
-
-     if (this.newest_date != "") {
-         tmp = tmp + "<span class='spotd_off' >";
-	 dt = new Date(this.newest_date);
-         tmp = tmp + dt.toDateString();
-  	 tmp = tmp + " ";
-         tmp = tmp + dt.getHours();
-  	 tmp = tmp + ":";
-         tmp = tmp + dt.getMinutes();
+     if (this.oldest_date != "") {
+        tmp = tmp + "<span id='twitter_feed_btn' onclick='louie.twfeed.prev_set();'  >";
+         tmp = tmp + "<img id='' src='deskfm/images/icons/left_arrow_circle.png'  class='menu_btn' >";
          tmp = tmp + "</span>";
-         tmp = tmp + "<button id='twitter_feed_btn' onclick='moe.twfeed.next_set();'  >";
-         tmp = tmp + "newer";
-         tmp = tmp + "</button>";
-         tmp = tmp + "<br>"
-     }
+
+         if (debug == true) {
+           tmp = tmp + "<span class='spotd_off' >";
+	   dt = new Date(this.oldest_date);
+           tmp = tmp + dt.getMonth();
+    	   tmp = tmp + " ";
+           tmp = tmp + dt.getDate();
+  	   tmp = tmp + ":";
+           tmp = tmp + dt.getMinutes();
+           tmp = tmp + "</span>"; 
+         }
+      }	 
 
  
-     if (this.newest_twid != "") {
+     if (this.newest_date != "") {
+       if (debug == true) {
          tmp = tmp + "<span class='spotd_off' >";
-	 dt = new Date(this.oldest_date);
-         tmp = tmp + dt.toDateString();
+         tmp = tmp + "newer";
+	 dt = new Date(this.newest_date);
+         tmp = tmp + dt.getMonth();
   	 tmp = tmp + " ";
-         tmp = tmp + dt.getHours();
+         tmp = tmp + dt.getDate();
   	 tmp = tmp + ":";
          tmp = tmp + dt.getMinutes();
          tmp = tmp + "</span>";
-         tmp = tmp + "<button id='twitter_feed_btn' onclick='moe.twfeed.prev_set();'  >";
-         tmp = tmp + "older";
-         tmp = tmp + "</button>";
-      }	 
-      tmp = tmp + "</span>";
+       }
+          tmp = tmp + "<span id='twitter_feed_btn' onclick='louie.twfeed.next_set();'  >";
+          tmp = tmp + "<img id='' src='deskfm/images/icons/right_arrow_circle.png'  class='menu_btn' >";
+          tmp = tmp + "</span>";
 
-     if (this.oldest_twid != "") {
-       ocl =  "moe.save_set();";
-       tmp = tmp + "<button id='twfeed_saveset_btn' onclick='"+ocl+"'  >";
-       tmp = tmp + " save set ";
-       tmp = tmp + "</button>";
+
+     }
+
+    if (this.oldest_twid != "") {
+        ocl =  "louie.save_set();";
+        tmp = tmp + "<span id='twfeed_saveset_btn' onclick='"+ocl+"'  >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/cogs.png'  class='menu_btn' >";
+        tmp = tmp + "</span>";
      }
 
    lbl = "feed_btns";
@@ -74,9 +77,7 @@ tw_feeder.prototype.get_live_tweets  = function (qry_str) {
      if (qry_str != undefined) {
 	this.sterms = qry_str;
      } 
-  
      qe = "?q=" + escape(this.sterms);
-
 
      var count = 100;
      if (is_mobile == true) {
@@ -87,20 +88,19 @@ tw_feeder.prototype.get_live_tweets  = function (qry_str) {
      var url='';
      url = 'deskfm/twitter/tws_search.php' + qe;
 
-//     alert(url);
- 
+  //   alert(url);
+      sal.waiting();  
+
+
      $.getJSON(url,function(json) {
-
-        moe.twfeed.newest_twid = json.newest_twid;
-	moe.twfeed.newest_date = json.newest_date;
-        moe.twfeed.oldest_twid = json.oldest_twid;
-	moe.twfeed.oldest_date = json.oldest_date;
-
-	moe.twfeed.draw_btns();
-
+        louie.twfeed.newest_twid = json.newest_twid;
+	louie.twfeed.newest_date = json.newest_date;
+        louie.twfeed.oldest_twid = json.oldest_twid;
+	louie.twfeed.oldest_date = json.oldest_date;
+	louie.twfeed.draw_btns();
         amare.add_unsaved(json);
+     }); 
 
-     });   
 }
 
 
@@ -131,12 +131,12 @@ tw_feeder.prototype.next_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        moe.twfeed.newest_twid = json.newest_twid;
-	moe.twfeed.newest_date = json.newest_date;
-        moe.twfeed.oldest_twid = json.oldest_twid;
-	moe.twfeed.oldest_date = json.oldest_date;
+        louie.twfeed.newest_twid = json.newest_twid;
+	louie.twfeed.newest_date = json.newest_date;
+        louie.twfeed.oldest_twid = json.oldest_twid;
+	louie.twfeed.oldest_date = json.oldest_date;
 
-	moe.twfeed.draw_btns();
+	louie.twfeed.draw_btns();
 
         amare.add_unsaved(json);
 
@@ -168,12 +168,12 @@ tw_feeder.prototype.prev_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        moe.twfeed.newest_twid = json.newest_twid;
-	moe.twfeed.newest_date = json.newest_date;
-        moe.twfeed.oldest_twid = json.oldest_twid;
-	moe.twfeed.oldest_date = json.oldest_date;
+        louie.twfeed.newest_twid = json.newest_twid;
+	louie.twfeed.newest_date = json.newest_date;
+        louie.twfeed.oldest_twid = json.oldest_twid;
+	louie.twfeed.oldest_date = json.oldest_date;
 
-	moe.twfeed.draw_btns();
+	louie.twfeed.draw_btns();
 
         amare.add_unsaved(json);
 

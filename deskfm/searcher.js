@@ -24,26 +24,20 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-   tmp = tmp + "<div style='width:250px;' >";
-
-   lbl = "search_reset_btn";
-   ocl= "";
-   tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-   tmp = tmp + "search";
-   tmp = tmp + "</button>";
+   tmp = tmp + "<div style='width:250px;vertical-align:top;' >";
 
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
 //     ocl= ocl + this.varname + ".check_central();";
      tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value='' >";
 
-/*   
+   
    lbl = "search_central_btn";
    ocl= this.varname + ".check_central();";
    tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='' >";
    tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' onclick='"+ocl+"' >";
    tmp = tmp + "</button>";
-*/
+
      if (is_mini == true) {
        lbl = 'search_unset_btn';
        ocl =  'diego.set_shape(\"\");'
@@ -51,7 +45,7 @@ searcher.prototype.show = function() {
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/search.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
 

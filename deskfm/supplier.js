@@ -29,7 +29,7 @@ supplier.prototype.show = function() {
        mout = 'unmarky(\"'+lbl+'\");';
        ocl = this.varname + '.new_one();';
        tmp = tmp + "<span id='"+lbl+"'  class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
-       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
 
      if (is_mini == true) {
@@ -39,7 +39,7 @@ supplier.prototype.show = function() {
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/molecule.png' width='20px' >";
+       tmp = tmp + "<img src='deskfm/images/icons/molecule.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
 

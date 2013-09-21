@@ -19,7 +19,7 @@ grouper.prototype.show = function() {
      var omt = "";
      var s = "";
 
-     tmp = tmp + "<div style='width:250px;' >";
+ //    tmp = tmp + "<div style='width:250px;' >";
 
      if (this.shape == "one") {
 
@@ -52,12 +52,12 @@ grouper.prototype.show = function() {
        moin = 'marky(\"'+lbl+'\");';
        mout = 'unmarky(\"'+lbl+'\");';
        cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' width='20px' >";
+       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style=''  >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' class='menu_btn' >";
        tmp = tmp + "</span>"; 
      }
 
-     tmp = tmp + "</div>"; 
+//     tmp = tmp + "</div>"; 
  
      lbl = this.spotid;
      pobj = document.getElementById(lbl);

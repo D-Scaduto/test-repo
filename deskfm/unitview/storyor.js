@@ -22,7 +22,7 @@ poster.prototype.draw_story = function() {
 
        if ((this.story != "") && (this.story != null)) { 
 
-         tiesto = this.story.replace(/<br>/gi,"\n");
+         //tiesto = this.story.replace(/<br>/gi,"\n");
 
           var exp2 = new RegExp(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
 
@@ -32,12 +32,18 @@ poster.prototype.draw_story = function() {
              if (this.linkurl == "") {
                this.linkurl = urlts[0];
                this.changed = true;
+               this.link_changed = true;
             }
           } 
 
           var  exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
           var pg =   tiesto;
 	  pg =  tiesto.replace(exp,"");
+          if (pg != this.story) {
+             this.story = pg;
+             this.story_changed = true;
+             this.changed = true;
+          }
           var ps = pg;
 /*
           if (pg.length > 75) {

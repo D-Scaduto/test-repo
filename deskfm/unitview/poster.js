@@ -135,6 +135,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       if (pobj.listype == "people") {
         this.groupid=pobj.groupid;
         this.set_mini();
+        this.mini_showing = true;
       }
      
       if (pobj.listype == "unsorted")  {
@@ -143,6 +144,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
        
       if (pobj.listype == "suppliers")  {
          this.set_mini();
+         this.mini_showing = true;
       }
       
       this.changed = false;
@@ -608,10 +610,6 @@ poster.prototype.clear = function() {
  poster.prototype.add_webit = function() {
 
      var pcat="";
-     var linkcode = escape(this.linkurl);
-     var storycode = escape(this.story);
-     var embedcode = escape(this.embedurl);
-     var picode = escape(this.picurl);
 
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;
@@ -623,17 +621,17 @@ poster.prototype.clear = function() {
        prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
      }
      if (this.story_changed == true) {
-       prams = prams + "&storycode="+storycode;
+       prams = prams + "&story="+this.story;
      }
 
      if (this.link_changed == true) {
-       prams = prams + "&linkcode="+linkcode;
+       prams = prams + "&link="+this.link;
      }
      if (this.pic_changed == true) {
-	  prams = prams + "&picode="+ picode;
+	  prams = prams + "&pic="+ this.picurl;
      }
      if (this.embed_changed == true) {
-       prams = prams + "&embedcode="+embedcode;
+       prams = prams + "&embed="+embedurl;
      }
      if (this.group_changed == true) {
        prams = prams + "&groupid="+this.groupid;
@@ -641,6 +639,7 @@ poster.prototype.clear = function() {
 
      var url = "";
      url = "deskfm/dbase/add_webit.php"+prams;
+     url = encodeURI(url);
      this.changed = false;
      this.story_changed = false;
      this.pic_changed = false;

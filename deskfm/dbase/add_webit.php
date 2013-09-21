@@ -33,7 +33,7 @@ class bar {
 }
 
 
-$ret = new bar;
+$ret = new bar();
 
 $pid = 'null';
 if (isset($_GET['pid'])) {
@@ -61,38 +61,28 @@ if (isset($_GET['subcat'])) {
 }
 
 $picurl = "null";
-if (isset($_GET['picode'])) {
-  $picurl = $_GET['picode']; 
+if (isset($_GET['pic'])) {
+  $picurl = $_GET['pic']; 
 }
 
 $linkurl = "";
-if (isset($_GET['linkcode'])) {
-   $linkurl = $_GET['linkcode'];
+if (isset($_GET['link'])) {
+   $linkurl = $_GET['link'];
 }	
 
 $story = "";
-if (isset($_GET['storycode'])) {
-   $story = $_GET['storycode']; 
+if (isset($_GET['story'])) {
+   $story = $_GET['story']; 
 }
 
 $embedurl = "";
-if (isset($_GET['embedcode'])) {
-  $embedurl = $_GET['embedcode']; 
+if (isset($_GET['embed'])) {
+  $embedurl = $_GET['embed']; 
 }
 
 $source = "";
 if (isset($_GET['source'])) {
 	$source = $_GET['source']; 
-}
-
-$prodid = "";
-if (isset($_GET['prodid'])) {
-	$prodid = $_GET['prodid']; 
-}
-
-$price = "";
-if (isset($_GET['price'])) {
-  $price = $_GET['price']; 
 }
 
 if ($pid == 'null') {
