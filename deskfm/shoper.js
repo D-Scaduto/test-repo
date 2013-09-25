@@ -17,6 +17,14 @@ shoper.prototype.show = function() {
     var obj = null;
     var ocl = "";
 
+    if (is_mini == true ) {
+        ocl = 'diego.set_shape(\"\");'
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/shop.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+     }
+
+
      if (this.shape == "one") {
 
   	    lbl = 'product_all_btn';
@@ -58,7 +66,7 @@ shoper.prototype.show = function() {
      if ( pobj != null) {
           pobj.innerHTML = tmp;
           this.showing = true;
-  
+  /*
 	    if (this.shape == "one") {
 		  $('#product_all_btn').button();
 	    } 
@@ -73,7 +81,7 @@ shoper.prototype.show = function() {
 	           eval(exp);
 	         }
                } );
-	    
+*/	    
 	  daviewer.load_products_by_type(this.prodid);
     }
 
@@ -146,5 +154,36 @@ shoper.prototype.draw_debug = function() {
          pobj.innerHTML = tmp;
      }
 }
+
+
+shoper.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+
+       ocl = 'diego.toggle_shape(\"shop\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'shop_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
+}
+
+shoper.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'shop_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
+}
+
+
 
 

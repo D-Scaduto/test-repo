@@ -15,71 +15,46 @@ grouper.prototype.show = function() {
      var tmp = "";
      var lbl = "";
      var ocl = "";
-     var omo = "";
-     var omt = "";
      var s = "";
 
- //    tmp = tmp + "<div style='width:250px;' >";
+    if (is_mini == true ) {
+        ocl = 'diego.toggle_shape(\"group\");'
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+     }
 
-     if (this.shape == "one") {
 
-  	    lbl = 'group_all_btn';
-            ocl = this.varname + '.set_shape(\"all\");';
-            tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
-	    if (this.groupid != "") {
-              s = amare.group_set.get_desc(this.groupid);
-	    }
-	    tmp = tmp + s;
-            tmp = tmp + "</button>";
+    if (this.groupid != "" ) {
 
-     } else if (this.shape == "all") {
+        lbl = 'group_all_btn';
+        s = amare.group_set.get_desc(this.groupid);
+	ocl = this.varname + '.set_shape(\"\");';
+        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' data-inline='true' style='vertical-align:middle;'   >";
+	tmp = tmp +  this.cat + " " + s;
+        tmp=tmp+"</button>";
 
-	lbl = 'group_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-  	tmp = tmp +"<li><a >people</a>";
+   } else {
 
-        tmp = tmp +"<ul  style='' >";
+        lbl = 'group_sog';
+        tmp=tmp+"<span style='display:inline-block;vertical-align:middle;' >";
+	tmp = tmp +"<label for='"+lbl+" class='select'  ></label>";
+   	tmp = tmp +"<select name='"+lbl+"' id='"+lbl+"  >";
         sugs = amare.group_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a gtag='"+sugs[i].groupid+"' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<option value='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</option>";
         }
-        tmp = tmp +"</ul></li></ul>";
-     }
+        tmp = tmp + "</select>";
+         tmp=tmp+"</span>";
 
-     if (is_mini == true) {
-       lbl = 'grouper_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style=''  >";
-       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' class='menu_btn' >";
-       tmp = tmp + "</span>"; 
-     }
+   }
 
-//     tmp = tmp + "</div>"; 
- 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
           this.showing = true;
-  
-	    if (this.shape == "one") {
-		  $('#group_all_btn').button();
-	    } 
-            
-	      $('#group_sog').menu();
-	      $('#group_sog').on( "menuselect", function( event, ui ) {
- 	         var g,p  = "";
-                 g = ui.item.children().attr('gtag');
-  	         p = ui.item.children().attr('ptag');
-	         if ((g!= undefined) && (p != undefined)) {
-	           var exp = p + ".set_group(\""+ g + "\");";
-	           eval(exp);
-	         }
-               } );
-	    
+          $('#'+lbl).trigger("create");    
 	  daviewer.load_group_list(this.groupid);
      }
 }
@@ -151,17 +126,34 @@ grouper.prototype.hide = function() {
 
 }
 
- 
-grouper.prototype.set_menued = function(ptog) {
-
-	if (ptog == true) {
-		this.menued = true;
-		this.spotid = "menu_bar";
-	} else {
-		this.mened = false;
-		this.spotid = this.menuid + "_spot";
-	}
+  
+grouper.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+       ocl = 'diego.toggle_shape(\"group\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'group_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
 }
+
+grouper.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'group_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
+}
+
 
 
 

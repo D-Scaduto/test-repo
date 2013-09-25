@@ -5,11 +5,14 @@ header('Content-type: text/html; charset=utf-8 ');
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
 <head>
+
+<!--link rel=StyleSheet href='css/jquery.mobile-1.3.2.css' type="text/css" media="screen,print" /-->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
-<link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
 
 <title>deskfm.com</title>
 
@@ -34,7 +37,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var louie = null;  //feeder 
   var jesie = null;  //namer
   var dale = null;   //rail 
-  var robby = null;
+  var robby = null;  //grouper
 
   var init_run = true;
   var got_stats = false;
@@ -43,9 +46,9 @@ header('Content-type: text/html; charset=utf-8 ');
 
 </script>
 
-<script src="lib/jquery-1.9.1.js" type="text/javascript"></script>
-<script src="lib/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-<script src="lib/jquery-insight.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+<!--script src="lib/jquery.mobile-1.3.2.min.js" ></script-->
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -109,14 +112,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id="fb-root"></div> 
 
 <?php 
-  include 'deskfm/browsers.php';
-  if (is_mobile()) {
-    echo "<script  type='text/javascript' >";
-    echo " is_mobile = true; " ;
-    echo " netson = false; ";
-    echo "</script>";
- }
-
   if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
     echo "<script  type='text/javascript' >";
     echo " is_ie = true; " ;
@@ -156,22 +151,15 @@ header('Content-type: text/html; charset=utf-8 ');
   }
 ?>
 
-<div id='top_line' style='' >
+<div data-role='page' >
+
+<div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
+</div>
+ 
+<div id='main_view'  class='main'  data-role='content'  >
 </div>
 
-<div id='menu_spot' style='' class='menu_box' >
-<span id='menu_mainspot' class='menu_main' style='' >
-</span>
-<span id='menu_btnspot' class='menu_btnbox' style=''  >
-</span>
 </div>
-
-<div id=''  style='clear:both;' >
-</div>
-
-<div id='main_view'  class='main' style='' >
-</div>
-
 
 <script type='text/javascript' >
   if (netson == true) {
@@ -207,17 +195,6 @@ header('Content-type: text/html; charset=utf-8 ');
 	louie = new feeder("feed");
         amare = new stater();
 
-         if ($(window).width() < 700) {
-            is_mini = true;
-         } else {
-            is_mini = false;
-         }
-
-
-	diego = new header();
-        var tshapes = ['browse:cater','search:wanda','share:nicky','shop:store','name:jesie','rail:dale' ];
-        diego.set_shapes(tshapes);
-
         daviewer = new viewer("main_view","daviewer");
 
         if (is_mobile == true) {
@@ -228,13 +205,22 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
        }
 
+        if ($(window).width() < 700) {
+            is_mini = true;
+         } else {
+            is_mini = false;
+         }
+
+	diego = new header();
+        var tshapes = ['search:wanda','share:nicky','name:jesie','rail:dale','browse:cater'];
+        diego.set_shapes(tshapes);
+
     amare.get_stats();
     amare.get_suppliers();
     amare.get_products();
     amare.get_webits();
 
-
-    $(window).resize(function(val) {
+   $(window).resize(function(val) {
          if ($(window).width() < 700) {
             if (is_mini != true) {
               is_mini = true;
@@ -247,20 +233,6 @@ header('Content-type: text/html; charset=utf-8 ');
             }
          }
     });
-
-
-    $(window).scroll(function() {
-        if ($('#top_line').inSight(100) == true) {
-	      $('#rail_spot').removeClass('flying_top');
-	} else {
-          if (is_mini == false) {
-	    if ($('#rail_spot').hasClass('flying_top') == false) {
-		$('#rail_spot').addClass('flying_top');
-	    }
-	  }
-	}
-    });
-
 
 /*
   var audiochannels = new Array();

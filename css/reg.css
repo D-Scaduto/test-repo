@@ -1,11 +1,10 @@
 
-@media screen and (min-width:700px) and (max-width:999px) {
+@media screen and (min-width:600px) and (max-width:899px) {
 
-     .top_main {
-        background-color:black; 
-        width:750px;
-        margin:0 auto;
-     }
+.mybtns .ui-btn-inner {
+   background:white;
+//   padding: 2px 3px 0px;
+}
 
      .main {
 //        background-color:white; 
@@ -15,41 +14,21 @@
 
      .menu_box {
 	width:100%;
-//       display:inline-block;
-        display:block;
-        margin:0 auto;
-        background-color:white;
-        padding:5px;
-        border-style:solid;
-        border-color:silver;
-        border-width:5px;
-        vertical-align:top;
       }
 
-     .menu_main {
-//	width:300px;
+    .menu_sub {
         display:inline-block;
-        vertical-align:top;
-      //  float:left;
-      }
-
-    .menu_btnbox {
-//	width:150px;
-        float:right;
-    //    display:inline-block;
-        vertical-align:top; 
-    }
+   //    float:right;
+     }
 
      .menu_btn {
         width:25px;
-     }
+    }
 
     .rail_box {
-	width:175px;
-        display:inline-block;
-        vertical-align:top; 
-        background-color:cyan;
-    }
+        float:right;
+      //display:inline-block; 
+   }
 
 
    .zbox {

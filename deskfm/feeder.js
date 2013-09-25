@@ -1,5 +1,4 @@
 
-
 function feeder (pmenuid) { 
 
    this.spotid = pmenuid + "_spot";
@@ -11,7 +10,6 @@ function feeder (pmenuid) {
    this.twfeed = new tw_feeder();
 }
 
-
 feeder.prototype.show = function() {
 
    var tmp = "";
@@ -20,42 +18,41 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-     lbl = "feed_reset_btn";
-      ocl= "diego.set_shape(\"\")";
-      tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"' class='' style='vertical-align:top;' >";
-      tmp = tmp + "feeds";
+    if (is_mini == true ) {
+        ocl = 'diego.set_shape(\"\");'
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+     }
+
+
+     tmp = tmp + "<div style='width:300px;display:inline-block;'  >";
+
+      tmp = tmp + "<span style='width:150px;display:inline-block;vertical-align:middle;'  >";
+      tmp = tmp + "<input type='text' name='s' data-inline='true' size=10 id='feed_string'  value='standing desk' style=''  >";
+      tmp = tmp + "</span>";
+
+        ocl='louie.check_feed();';
+      tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+      tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='' width='20px'  >";
       tmp = tmp + "</button>";
 
-      tmp = tmp + "<input type='text' name='s' id='feed_string' size='10' value='standing desk' style='vertical-align:top;'  >";
-
-      tmp = tmp + "<span id='' onclick='louie.check_feed();'  >";
-      tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn'  >";
-      tmp = tmp + "</span>";
-
-      tmp = tmp + "<span id='feed_btns'  >";
-      tmp = tmp + "</span>";
+      tmp = tmp + "<div id='feed_btns' style='display:inline-block;vertical-align:middle;'  >";
+      tmp = tmp + "</div>";
  
-      if (is_mini == true) {
-        lbl = 'feed_unset_btn';
-        ocl =  'diego.set_shape(\"\");'
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' class='menu_btn'  >";
-        tmp = tmp + "</span>"; 
-      }
- 
-  
+
+     tmp = tmp + "</div>";
+
+
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
-      $('#feed_reset_btn').button();
-     if (amare.unsavedlist.length ==  0) {
-         this.check_feed();
+      $('#'+lbl).trigger("create");
+      if (amare.unsavedlist.length ==  0) {
+   //      this.check_feed();
       } else {
-         daviewer.load_unsaved_list(); 
+   //      daviewer.load_unsaved_list(); 
       } 
    } 
 
@@ -143,6 +140,36 @@ feeder.prototype.hide = function() {
 
    
 }
+
+ 
+feeder.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+
+       ocl = 'diego.toggle_shape(\"feed\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/cloud.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'feed_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
+}
+
+feeder.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'feed_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
+}
+
 
 
 feeder.prototype.toggle = function() {

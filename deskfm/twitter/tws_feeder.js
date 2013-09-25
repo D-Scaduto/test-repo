@@ -21,9 +21,10 @@ tw_feeder.prototype.draw_btns = function() {
    var dt = null;
       
      if (this.oldest_date != "") {
-        tmp = tmp + "<span id='twitter_feed_btn' onclick='louie.twfeed.prev_set();'  >";
+        ocl='louie.twfeed.prev_set();';
+       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
          tmp = tmp + "<img id='' src='deskfm/images/icons/left_arrow_circle.png'  class='menu_btn' >";
-         tmp = tmp + "</span>";
+         tmp = tmp + "</button>";
 
          if (debug == true) {
            tmp = tmp + "<span class='spotd_off' >";
@@ -50,23 +51,23 @@ tw_feeder.prototype.draw_btns = function() {
          tmp = tmp + dt.getMinutes();
          tmp = tmp + "</span>";
        }
-          tmp = tmp + "<span id='twitter_feed_btn' onclick='louie.twfeed.next_set();'  >";
+          ocl='louie.twfeed.next_set();';
+          tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
           tmp = tmp + "<img id='' src='deskfm/images/icons/right_arrow_circle.png'  class='menu_btn' >";
-          tmp = tmp + "</span>";
-
-
+          tmp = tmp + "</button>";
      }
 
     if (this.oldest_twid != "") {
         ocl =  "louie.save_set();";
-        tmp = tmp + "<span id='twfeed_saveset_btn' onclick='"+ocl+"'  >";
+        tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
         tmp = tmp + "<img id='' src='deskfm/images/icons/cogs.png'  class='menu_btn' >";
-        tmp = tmp + "</span>";
+        tmp = tmp + "</button>";
      }
 
    lbl = "feed_btns";
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
+      $('#'+lbl);
    } 
 
 }

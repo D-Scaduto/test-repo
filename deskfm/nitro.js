@@ -2,6 +2,12 @@
 
 viewer.prototype.nitro_start = function(pway) {
 
+         var tsrc='deskfm/images/icons/stop.png';
+      $('#nitro_btn').attr('src',tsrc);
+//     $('#nitro_btn').buttonMarkup({icon:"gear"});
+     $('#nitro_btn').trigger("create");
+
+
 	if (pway != undefined) {
 	    this.metro_dir = pway;
 	}
@@ -14,23 +20,6 @@ viewer.prototype.nitro_start = function(pway) {
     }
     this.flip_card();    
 
-   var lbl = "";
-   var pobj = null;
-   var src = "";
-   var tmp = "";
-   var moin="";
-   var mout = "";
-
-       tmp = tmp + "<img src='deskfm/images/icons/stop.png'  class='menu_btn' >";
-
-      lbl = 'nitro_btn';
- 
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-     pobj.innerHTML = tmp;
-   } 
-
-
 }
 
 
@@ -39,21 +28,11 @@ viewer.prototype.nitro_stop = function() {
    this.metro_spd = 0;
    this.flip_card();
 
-   var lbl = "";
-   var pobj = null;
-   var src = "";
-   var moin = "";
-   var mout = "";
-   var tmp="";
+         var tsrc='deskfm/images/icons/play.png';
+      $('#nitro_btn').attr('src',tsrc);
+//     $('#nitro_btn').buttonMarkup({icon:""});
+     $('#nitro_btn').trigger("create");
 
-       tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/icons/play.png'  class='menu_btn' >";
-
-        lbl = 'nitro_btn';
- 
-   pobj = document.getElementById(lbl);
-   if (pobj != null) {
-     pobj.innerHTML = tmp;
-   } 
 
 
 }
@@ -74,10 +53,10 @@ viewer.prototype.flip_card = function() {
    if (this.metro_spd != 0) {
 
 	   if (this.metro_dir == "fwd") {
-             this.next(1);
+             this.next(5);
 	   } 
 	   if (this.metro_dir == "back") {
-             this.prev(1);
+             this.prev(5);
 	   }
   
          var cl = this.varname + ".flip_card();";

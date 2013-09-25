@@ -16,42 +16,31 @@ supplier.prototype.show = function() {
      var ocl = "";
      var cls = 'spotd_off';
 
-     tmp = tmp + "<div style='width:250px;' >";
+    if (is_mini == true ) {
+        ocl = 'diego.toggle_shape(\"manage\");'
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/molecule.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+     }
+
 
      lbl = 'suppliers_btn';
      ocl = '';
-     tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button'  >";
+     tmp = tmp + "<h3  style='vertical-align:top;display:inline-block;'  >";
      tmp = tmp + "suppliers";
-     tmp = tmp + "</button>";
+     tmp = tmp + "</h3>";
 
       lbl = 'suppliers_new_btn';
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
        ocl = this.varname + '.new_one();';
-       tmp = tmp + "<span id='"+lbl+"'  class='spotd_off'  onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"'style=''  >";
+        tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='background-color:white;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
-       tmp = tmp + "</span>"; 
+       tmp = tmp + "</button>"; 
 
-     if (is_mini == true) {
-       lbl = 'supplier_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/molecule.png' class='menu_btn' >";
-       tmp = tmp + "</span>"; 
-     }
-
-     tmp = tmp + "</div>"; 
- 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
-
-	  $('#suppliers_btn').button();
-
+	  $('#'+lbl).trigger("create");
           this.showing = true;
 	  daviewer.load_supplier_list();
      }
@@ -108,5 +97,35 @@ supplier.prototype.hide = function() {
      }
      this.showing = false;
 }
+
+ 
+supplier.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+
+       ocl = 'diego.toggle_shape(\"manage\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/molecule.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'manage_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
+}
+
+supplier.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'manage_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
+}
+
 
 

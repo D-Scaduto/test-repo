@@ -73,6 +73,12 @@
 
                } else {
 
+                  if ((this.listype == "unsorted") || (this.shape == "getsort")) {
+	            lbl = this.rungster + "_sort_spot";
+                    tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+ 	            tmpstr = tmpstr + "</span>";
+                   }
+
 
                   if (this.shape == "getstory") {
 		     lbl= this.rungster + "_story_spot";

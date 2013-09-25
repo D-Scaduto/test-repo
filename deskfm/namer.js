@@ -11,104 +11,45 @@ function namer (pspotid) {
 
 
 namer.prototype.show = function() {
-    var tmp = "";
-    var lbl = "";
-    var ocl = "";
-    var moin = "";
-    var mout = "";
+      var tmp = ""; 
+      var ocl ="";
+      var lbl = "";
 
-       lbl ="name_talk";
-       tmp=tmp +"<span id='"+lbl+"' style='display:inline-block;' >";
-       tmp=tmp +"</span>";
-
-   if (is_mini == true) {
-       lbl = 'namer_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' class='menu_btn' >";
-       tmp = tmp + "</span>"; 
+     if (is_mini == true ) {
+        ocl = 'diego.toggle_shape(\"name\");'
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img src='deskfm/images/icons/people_clay.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
      }
 
 
-     lbl = this.spotid;
-    if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML=tmp; 
-        this.showing = true; 
-        this.say_hi();
-    }
-}
 
-              
-namer.prototype.get_name = function() {
-    var tmp = "";
-    var lbl = "";
-    var ocl = "";
-    var moin = "";
-    var mout = "";
+     tmp = tmp + "<div style='width:250px;display:inline-block;'  >";
 
-        var tval =  "";
+    if (pname == "") {
+ 
+         var tval =  "";
         if (pname != "") {
           tval =  pname;
         } else {
           tval =  "name...";
         }
-       tmp =tmp + "<input size=10 value='"+tval+"' id='pname_box' style='vertical-align:top;' > ";
+       tmp = tmp + "<span style='width:150px;display:inline-block;vertical-align:middle;'  >";
+       tmp =tmp + "<input size=10 value='"+tval+"' data-inline='true'  id='pname_box'  /> ";
+      tmp=tmp +"</span>";
+
 
        lbl = this.spotid + "check_btn";
        ocl = this.varname + ".find_me();";
-       tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' class='menu_btn' >";
-       tmp=tmp +"</span>";
+        tmp = tmp + "<button data-role='button' data-inline='true' id='"+lbl+"' onclick='"+ocl+"' class='mybtns'  style=''  >";
+        tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' class='menu_btn' >";
+       tmp=tmp +"</button>";
 
 
-       lbl = this.spotid + "twitter_btn";
-       ocl = this.varname + ".set_shape(\"twitter\");";
-       tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn' >";
-       tmp=tmp +"</span>";
-
-       lbl = this.spotid +  "_facebook_btn";
-       ocl = this.varname + ".set_shape(\"facebook\");";
-       tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png' class='menu_btn' >";
-       tmp=tmp +"</span>";
-
-       lbl = this.spotid +  "_google_btn";
-       ocl = this.varname + ".set_shape(\"google\");";
-       tmp=tmp +"<span onclick='"+ocl+"' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' class='menu_btn' >";
-       tmp=tmp +"</span>";
-
-     lbl = "name_talk";
-    if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML=tmp; 
-        this.showing = true; 
-   } 
-}
-
-
-namer.prototype.say_hi = function() {
-      var tmp = ""; 
-      var ocl ="";
-      var lbl = "";
-      var moin = "";
-      var mout = "";
-      var cls = "";
-
-    if (pname == "") {
- 
-       this.get_name();
- 
     } else {
 
        lbl = "spacename_btn";
-       moin = "marky(\""+lbl+"\");";
-       mout = "unmarky(\""+lbl+"\");";
        ocl = "jesie.space_me();";
-       cls='spotd_off';
        tmp = tmp + "<span  id='"+lbl+"' class='"+cls+"' onclick='"+ocl+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
        tmp = tmp +  pname;
        tmp = tmp + "</span>";
@@ -130,36 +71,28 @@ namer.prototype.say_hi = function() {
        tmp=tmp +"<span onclick='"+ocl+"' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png' width='20px' >";
        tmp=tmp +"</span>";
+    }
 
-
-
-    if (is_mini == true) {
-       lbl = 'namer_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' width='20px' >";
-       tmp = tmp + "</span>"; 
-     }
-
-        lbl = "name_talk";
-        if (document.getElementById(lbl)!=null) {
-           document.getElementById(lbl).innerHTML= tmp;
-           this.showing = true;
-        } 
-   }
+       tmp=tmp +"</div>";
+ 
+     lbl = this.spotid;
+    if (document.getElementById(lbl)!=null) {
+        document.getElementById(lbl).innerHTML=tmp; 
+        $('#'+lbl).trigger("create");
+        this.showing = true; 
+    }
 
 }
+
+    
 
 namer.prototype.space_me = function() {
      var tmpstr = "";
      var lbl = "";
-        tmpstr = tmpstr + "<span class='spotd_off'  onclick='jesie.say_hi();'  >";
+        tmpstr = tmpstr + "<span class='spotd_off'  onclick='jesie.show();'  >";
         tmpstr = tmpstr + "are you "+ pname +" ?   ";
         tmpstr = tmpstr + "</span>";
-        tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.say_hi();' > y </span>";
+        tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.show();' > y </span>";
         tmpstr = tmpstr + "<span class='spotd_on' onclick='jesie.amnesiate();' > n </span>";
      lbl = "name_talk";
      if (document.getElementById(lbl)!=null) {
@@ -175,7 +108,7 @@ namer.prototype.amnesiate = function() {
 /*
      FB.logout(function(response) {
        //alert(" user is now logged out ");
-      say_hi();
+      jesie.show();
      });
 */   
       this.get_name(); 
@@ -193,7 +126,7 @@ namer.prototype.find_me = function() {
    if (tmp_name != "")  {
         pname = tmp_name;
     }
-    this.say_hi();
+    this.show();
 
 }
 
@@ -238,7 +171,36 @@ namer.prototype.hide = function() {
     if (document.getElementById(this.spotid)!=null) {
         document.getElementById(this.spotid).innerHTML=tmp; 
 	this.showing = false;
-    } 
+    }
+}
+
+  
+namer.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+
+       ocl = 'diego.toggle_shape(\"name\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'name_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
+}
+
+namer.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'name_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
 }
 
 

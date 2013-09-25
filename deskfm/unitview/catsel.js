@@ -31,176 +31,95 @@
 
      var tmp="";
      var lbl = "";
-     var lb1 = "";
-     var lb2 = "";
      var sugs = [];
      var pobj = null;
      tmp = "";
 
-      if (this.cat == "") { 
+     tmp = tmp + "<div id='"+this.rungster+"_catabs' >";
+ 
+     tmp = tmp + "<ul>";
+     tmp = tmp + "<li><a href='#"+this.rungster + "_who_tab'>who</a></li>";
+     tmp = tmp + "<li><a href='#"+this.rungster + "_what_tab'>what</a></li>";
+     tmp = tmp + "<li><a href='#"+this.rungster + "_why_tab'>why</a></li>";
+     tmp = tmp + "<li><a href='#"+this.rungster + "_how_tab'>how</a></li>";
+     tmp = tmp + "</ul>";
 
-        lbl = this.rungster + "_uncat_btn";
-        ocl = this.varname + ".set_cat(\"\")";
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-        tmp = tmp + "</span>";
-
-        lbl = this.rungster + "_who_btn";
-        ocl = this.varname + ".set_cat(\"who\")";
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
-        tmp = tmp + "who";
-        tmp = tmp + "</span>";
-
-        lbl = this.rungster + "_what_btn";
-        ocl = this.varname + ".set_cat(\"what\")";
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' style='' >";
-        tmp = tmp + "what";
-        tmp = tmp + "</span>";
-
-        lbl = this.rungster + "_why_btn";
-        ocl = this.varname + ".set_cat(\"why\")";
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
-        tmp = tmp + "why";
-        tmp = tmp + "</span>";
-
-        lbl = this.rungster + "_how_btn";
-        ocl = this.varname + ".set_cat(\"how\")";
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
-        tmp = tmp + "how";
-        tmp = tmp + "</span>";
-
-        lbl = this.rungster + "_junk_btn";
-        ocl = this.varname + ".set_cat(\"junk\")";
-        moin = 'marky(\"'+lbl+'\");';
-        mout = 'unmarky(\"'+lbl+'\");';
-        cls = 'spotd_off';
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'   class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"'  style='' >";
-        tmp = tmp + "junk";
-        tmp = tmp + "</span>";
-
-      } else { 
-
-        lbl = this.rungster + "_uncat_btn";
-        ocl = this.varname + ".set_cat(\"\")";
-        tmp = tmp + "<span id='"+lbl+"' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "<img src='deskfm/images/icons/categories.png' width='20px' >";
-        tmp = tmp + "</span>";
-
-        if (this.cat == "who") { 
-
-        lbl = this.rungster + '_who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-  	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
-        sugs = amare.subcat_set.get_setlist("who");
+     tmp = tmp + "<div id='"+this.rungster + "_who_tab' >";
+      tmp = tmp + "<ul id='"+this.rungster + "_who_sel' class='items'  >";
+         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
         }
-        tmp = tmp + "</ul></li></ul>";
+       tmp=tmp + "</ul>";
+     tmp = tmp + "</div>";
 
-       } else if (this.cat == "what") { 
-
-        lbl = this.rungster + '_what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-   	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
-        sugs = amare.subcat_set.get_setlist("what");
+     tmp = tmp + "<div id='"+this.rungster + "_what_tab' >";
+      tmp = tmp + "<ul id='"+this.rungster + "_what_sel' class='items'  >";
+         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
         }
-        tmp = tmp + "</ul></li></ul>";
+       tmp=tmp + "</ul>";
+     tmp = tmp + "</div>";
 
-       } else if (this.cat == "why") { 
 
-        lbl = this.rungster + '_why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-    	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
-        sugs = amare.subcat_set.get_setlist("why");
+     tmp = tmp + "<div id='"+this.rungster + "_why_tab' >";
+      tmp = tmp + "<ul id='"+this.rungster + "_why_sel' class='items'  >";
+         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
         }
-        tmp = tmp +"</ul></li></ul>";
+       tmp=tmp + "</ul>";
+     tmp = tmp + "</div>";
 
-       } else if (this.cat == "how") { 
-
-        lbl = this.rungster + '_how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-  	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
-        sugs = amare.subcat_set.get_setlist("how");
+     tmp = tmp + "<div id='"+this.rungster + "_how_tab' >";
+      tmp = tmp + "<ul id='"+this.rungster + "_how_sel' class='items'  >";
+         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
         }
-        tmp = tmp +"</ul></li></ul>";
-       }
-    } 
+       tmp=tmp + "</ul>";
+     tmp = tmp + "</div>";
+
+    tmp = tmp + "</div>";
 
      lbl = this.rungster + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
         pobj.innerHTML = tmp;
         var s = "";
-       if (this.cat == "") {
-//      	    $('#' + this.rungster + '_who_btn').button();
-//  	    $('#' + this.rungster + '_what_btn').button();
-//  	    $('#' + this.rungster + '_why_btn').button();
-//  	    $('#' + this.rungster + '_how_btn').button();
+  	    $('#' + this.rungster + '_catabs').tabs({ active:false , collapsible:true } );
 
-       }
+            $('#' + this.rungster + '_who_sel').selectable({
+                selected: function (event, ui) {
+                        var selected = $("li[class$='ui-selected']").length;
+                        $("#info").html("you selected " + selected + " items!");
+                }
+            });
 
-       else if (this.cat == "who") {
+            $('#' + this.rungster + '_what_sel').selectable({
+                selected: function (event, ui) {
+                        var selected = $("li[class$='ui-selected']").length;
+                        $("#info").html("you selected " + selected + " items!");
+                }
+            });
 
-            $('#' + this.rungster + '_who_sog').menu();
-	    $('#' + this.rungster + '_who_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
+            $('#' + this.rungster + '_why_sel').selectable({
+                selected: function (event, ui) {
+                        var selected = $("li[class$='ui-selected']").length;
+                        $("#info").html("you selected " + selected + " items!");
+                }
+            });
 
-	} else if (this.cat == "what") {
+            $('#' + this.rungster + '_how_sel').selectable({
+                selected: function (event, ui) {
+                        var selected = $("li[class$='ui-selected']").length;
+                        $("#info").html("you selected " + selected + " items!");
+                }
+            });
 
-	    $('#' + this.rungster + '_what_sog').menu();
-	    $('#' + this.rungster + '_what_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
 
-	} else if (this.cat == "why") {
-     
-	    $('#' + this.rungster + '_why_sog').menu();
-	    $('#' + this.rungster + '_why_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-
-	} else if (this.cat == "how") {
-
+/*
 	    $('#' + this.rungster + '_how_sog').menu();
 	    $('#' + this.rungster + '_how_sog').on( "menuselect", function( event, ui ) {
  	       var c,s,p = "";
@@ -212,7 +131,7 @@
 	         eval(exp);
 	       }
              } );
-       } 
+*/
 
     }
  }

@@ -7,11 +7,13 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<link rel=StyleSheet href='css/jquery.mobile-1.3.2.css' type="text/css" media="screen,print" />
+
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
-<link rel=StyleSheet href='css/jquery-ui.css' type="text/css" media="screen,print" />
 
 <title>deskfm.com</title>
 
@@ -46,9 +48,9 @@ header('Content-type: text/html; charset=utf-8 ');
 
 </script>
 
-<script src="lib/jquery-1.9.1.js" type="text/javascript"></script>
-<script src="lib/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-<script src="lib/jquery-insight.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="lib/jquery.mobile-1.3.2.min.js" ></script>
+
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -113,12 +115,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <?php 
 
-  include 'deskfm/browsers.php';
-  echo "<script  type=\"text/javascript\" > ";
-  if (is_mobile()) {   
-    echo " is_mobile = true; " ;
-  }
-
   if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
     echo " is_ie = true; " ;
     echo " is_mobile = true; ";
@@ -155,22 +151,15 @@ header('Content-type: text/html; charset=utf-8 ');
 
 ?>
 
-<div id='top_line' style='' >
+<div data-role='page' >
+
+<div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
 
 
-<div id='menu_spot' style='' class='menu_box' >
-<span id='menu_mainspot' class='menu_main' style='' >
-</span>
-<span id='menu_btnspot' class='menu_btnbox' style=''  >
-</span>
+<div id='main_view'  class='main'  data-role='content'  >
 </div>
 
-
-<div id=''  style='clear:both;' >
-</div>
-
-<div id='main_view'  class='main' >
 </div>
 
 
@@ -210,9 +199,11 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
    }
 
-   if (debug == true) {
-//        daviewer.top_end=2;
-   }
+        if ($(window).width() < 700) {
+            is_mini = true;
+         } else {
+            is_mini = false;
+         }
 
            jesie = new namer("name");
 	   sal = new logoman("logo");
@@ -226,14 +217,8 @@ header('Content-type: text/html; charset=utf-8 ');
            joe = new supplier("manage");
            robby = new grouper("group");
 
-         if ($(window).width() < 700) {
-            is_mini = true;
-         } else {
-            is_mini = false;
-         }
-
 	   diego = new header();
-           var tshapes = ['sort:mac','shop:store','feed:louie','manage:joe','group:robby','search:wanda','share:nicky','name:jesie',"rail:dale"];
+           var tshapes = ['sort:mac','feed:louie','manage:joe','group:robby','name:jesie',"rail:dale"];
            diego.set_shapes(tshapes);
 	   
     amare.get_stats();
@@ -248,7 +233,7 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.year="";
     amare.get_unsorted(dt,true);
 
-    $(window).resize(function(val) {
+   $(window).resize(function(val) {
          if ($(window).width() < 700) {
             if (is_mini != true) {
               is_mini = true;
@@ -260,18 +245,6 @@ header('Content-type: text/html; charset=utf-8 ');
               diego.show();
             }
          }
-    });
-
-    $(window).scroll(function() {
-        if ($('#top_line').inSight(100) == true) {
-		$('#rail_spot').removeClass('flying_top');
-	} else {
-          if (is_mini == false) {
-	    if ($('#rail_spot').hasClass('flying_top') == false) {
-		$('#rail_spot').addClass('flying_top');
-	    }
-	  }
-	}
     });
 
 

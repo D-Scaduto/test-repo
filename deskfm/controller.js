@@ -175,7 +175,6 @@ viewer.prototype.redraw_view = function() {
 viewer.prototype.goto_listdex = function(ldex) {
 
    this.load_rungs(ldex);
-
    this.draw_view();
 }
 
@@ -403,7 +402,7 @@ viewer.prototype.load_rungs = function(ldex) {
         r = ldex;
        }
        this.listdex = r;
- 
+
        var lgo = true;
        var c=0;
        var mdex=0;

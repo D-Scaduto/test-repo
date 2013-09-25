@@ -36,7 +36,7 @@ calendor.prototype.init = function() {
 
 calendor.prototype.show = function() {
 
-         var t = "";
+         var tmp = "";
          var lbl = "";
          var o = null;
          var cls = '';
@@ -49,39 +49,35 @@ calendor.prototype.show = function() {
             ocl = ocl + this.funcstr;
 	  }
           lbl = 'hdr_prevmon_btn';
-          moin = 'marky(\"'+lbl+'\");';
-          mout = 'unmarky(\"'+lbl+'\");';
-          t = t+ "<span  id='"+lbl+"'   onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' class='spotd_off'  >";
-          t=t+ " <";
-          t = t + "</span>";
+          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+          tmp=tmp+ " < ";
+          tmp = tmp + "</button>";
 
           lbl = 'hdr_month_btn';
 	  ocl = this.funcstr;
-          t = t+ "<span  class='spotd_off' id='"+lbl+"' onclick='"+ocl+"' >";
-          t = t +  " " +this.months[this.da_month.month];
+          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+          tmp = tmp +  " " +this.months[this.da_month.month];
           var s = new String(this.da_month.year);
           s = s.substring(2,4);
-          t = t + " '" + s;
-          t = t + "</span>";
+          tmp = tmp + " '" + s;
+          tmp = tmp + "</button>";
 
 	  o=this.get_net_month(this.da_month,1);
 	  lbl = 'hdr_nextmon_btn';
-	  moin = 'marky(\"'+lbl+'\");';
-          mout = 'unmarky(\"'+lbl+'\");';
           ocl = "";
           if (o!=null) {
 		 ocl = this.varname + ".scroll_months(1);";
                  ocl = ocl + this.funcstr;
 	  }    
-          t = t+ "<span  id='"+lbl+"'   onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' class='spotd_off'  >";
-          t=t+ " >";
-          t = t + "</span>";
+           tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+          tmp = tmp+ " > ";
+          tmp = tmp + "</button>";
 	    
-     
     lbl = this.spotid;
     var obj = document.getElementById(lbl); 
     if (obj != null) {
-      obj.innerHTML = t;
+      obj.innerHTML = tmp;
+      $('#'+lbl).trigger("create");
       this.showing = true;
     }
 }

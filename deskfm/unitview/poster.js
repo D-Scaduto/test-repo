@@ -139,7 +139,8 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       }
      
       if (pobj.listype == "unsorted")  {
-          this.shape="getsort";
+//          this.shape="getsort";
+            this.editing = true;
       }
        
       if (pobj.listype == "suppliers")  {
@@ -192,12 +193,6 @@ poster.prototype.draw_btns = function() {
 	 lbl = this.rungster + "_nav_btns";
          tmp = tmp + "<span  id='"+lbl+"' >";  
 	 tmp = tmp + "</span>";
-
-       if ((this.listype == "unsorted") || (this.shape == "getsort")) {
-	 lbl = this.rungster + "_sort_spot";
-         tmp = tmp + "<span  id='"+lbl+"' style='" + sty+ "' >";  
-	 tmp = tmp + "</span>";
-       }
 
        if (this.is_mini == false) {
           sty='float:right;';

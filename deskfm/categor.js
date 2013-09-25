@@ -21,183 +21,76 @@ categor.prototype.show = function() {
     var s = "";
     var sugs = [];
 
-    tmp = tmp + "<div style='width:250px;' >";
+    if (is_mini == true ) {
+        ocl = 'diego.toggle_shape(\"browse\");'
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+     }
 
     if (this.subcat != "" ) {
 
 	lbl = 'subcat_btn';
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
+        ocl = "cater.subcat=\"\";cater.show();";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
 	tmp = tmp +  this.cat + " " + s;
         tmp=tmp+"</button>";
 
    } else {
 
-      if (this.shape == "all") { 
-
-        lbl = "browse_who_btn";
-        ocl= "cater.set_shape(\"who\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "who";
-        tmp = tmp + "</button>";
-
-        lbl = "browse_what_btn";
-        ocl= "cater.set_shape(\"what\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "what";
-        tmp = tmp + "</button>";
-
-        lbl = "browse_why_btn";
-        ocl= "cater.set_shape(\"why\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "why";
-        tmp = tmp + "</button>";
-
-        lbl = "browse_how_btn";
-        ocl= "cater.set_shape(\"how\")";
-        tmp = tmp + "<button id='"+lbl+"' onclick='"+ocl+"'  >";
-        tmp = tmp + "how";
-        tmp = tmp + "</button>";
-
-      } else if (this.shape == "who") { 
-
-        lbl = 'who_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-  	tmp = tmp +"<li style=''  ><a >who?</a><ul  style='' >";
+	tmp += '<a href="#who_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"  style="vertical-align:middle;"  > who ?</a>';
+ 	tmp += '<div data-role="popup" id="who_sog" data-theme="d">';
+ 	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+           ocl = this.varname + ".set_cats(\"who\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp + "</ul></li></ul>";
+   	tmp +=   '   </ul>';
+ 	tmp +=  '</div>';
 
-       } else if (this.shape == "what") { 
-
-        lbl = 'what_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-   	tmp = tmp +"<li style='' ><a >what?</a><ul  style='' >";
+	tmp += '<a href="#what_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"   style="vertical-align:middle;"  > what ?</a>';
+ 	tmp += '<div data-role="popup" id="what_sog" data-theme="d">';
+ 	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='what' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          ocl = this.varname + ".set_cats(\"what\",\""+sugs[i].subcat+"\");";
+          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp + "</ul></li></ul>";
+   	tmp +=   '   </ul>';
+ 	tmp +=  '</div>';
 
-       } else if (this.shape == "why") { 
-
-        lbl = 'why_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-    	tmp = tmp +"<li style=''  ><a >why?</a><ul  style='' >";
+	tmp += '<a href="#why_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"  style="vertical-align:middle;"   > why ?</a>';
+ 	tmp += '<div data-role="popup" id="why_sog" data-theme="d">';
+ 	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='why' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+           ocl = this.varname + ".set_cats(\"why\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp +"</ul></li></ul>";
+   	tmp +=   '   </ul>';
+ 	tmp +=  '</div>';
 
-       } else if (this.shape == "how") { 
-
-        lbl = 'how_sog';
-        tmp = tmp +"<ul  id='"+lbl+"' class='ui-menu' style='display:inline-block;' >";
-  	tmp = tmp +"<li style=''  ><a >how?</a><ul  id='"+lbl+"' style='' >";
+	tmp += '<a href="#how_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"   style="vertical-align:middle;"  > how ?</a>';
+ 	tmp += '<div data-role="popup" id="how_sog" data-theme="d">';
+ 	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li><a stag='"+sugs[i].subcat+"' ctag='how' ptag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
+          ocl = this.varname + ".set_cats(\"how\",\""+sugs[i].subcat+"\");";
+          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp +"</ul></li></ul>";
-      }
+   	tmp +=   '   </ul>';
+ 	tmp +=  '</div>';
 
-    }
+   }
 
-     if (is_mini == true) {
-       lbl = 'browse_unset_btn';
-       ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
-       tmp = tmp + "</span>"; 
-     }
+    lbl = this.spotid;
+    $('#'+lbl).html(tmp);
+    $('#'+lbl).trigger("create");    
 
-   tmp = tmp + "</div>"; 
-       
-   lbl = this.spotid;
-   obj = document.getElementById(lbl)
-   if (obj != null) {
-     obj.innerHTML=tmp;
-
-     if (this.subcat != "") {
-
-   	    $('#subcat_btn').button();
-
-     } else {
-
-       if (this.shape == "all") {
-	    $('#browse_who_btn').button();
-	    $('#browse_what_btn').button();
-	    $('#browse_why_btn').button();
-	    $('#browse_how_btn').button();
-	
-       } else if (this.shape == "who") {
-
-            $('#who_sog').menu();
-	    $('#who_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-
-	} else if (this.shape == "what") {
-
-	    $('#what_sog').menu();
-	    $('#what_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-
-	} else if (this.shape == "why") {
-     
-	    $('#why_sog').menu();
-	    $('#why_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-
-	} else if (this.shape == "how") {
-
-	    $('#how_sog').menu();
-	    $('#how_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-         } 
-      }
-      
      this.showing = true;
      this.redraw_view();
-   }
 }
 
 
@@ -316,5 +209,35 @@ categor.prototype.draw_debug = function() {
          pobj.innerHTML = tmp;
      }
 }
+
+
+categor.prototype.show_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+    var ocl = "";
+
+       ocl = 'diego.toggle_shape(\"browse\");'
+       tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
+       tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
+       tmp = tmp + "</button>";
+       lbl = 'browse_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+         $('#'+lbl).trigger("create");
+       }
+}
+
+categor.prototype.hide_btn = function() {
+    var tmp = "";
+    var lbl = "";
+    var pobj = null;
+
+       lbl = 'browse_btn'; 
+       if (document.getElementById(lbl)!=null) {
+         document.getElementById(lbl).innerHTML=tmp; 
+       }
+}
+
 
 
