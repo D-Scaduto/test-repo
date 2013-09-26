@@ -4,28 +4,67 @@ header('Content-type: text/html; charset=utf-8 ');
 ?>
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
-
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-<link rel=StyleSheet href='css/jquery.mobile-1.3.2.css' type="text/css" media="screen,print" />
+<title>deskfm.com</title>
+
+<script  type="text/javascript" >
+  var is_ie = false;
+  var is_mobile = false;
+  var debug = false;
+  var netson = false;
+  var is_mini = false;
+  var jqm_off = false;
+  var buddah = false;
+  var pname = "";
+</script>
+
+<?php   if (isset($_GET['mobile'])) {   ?>
+<script  type="text/javascript" >
+   is_mobile = true;
+</script>
+<?php  } ?>
+
+<?php   if (isset($_GET['debug'])) {   ?>
+<script  type="text/javascript" >
+   debug = true;
+</script>
+<?php  } ?>
+
+<script src="lib/jquery-1.9.1.min.js" ></script>
+
+<?php   if (isset($_GET['jqmoff'])) {   ?>
+<script  type="text/javascript" >
+   jqm_off = true;
+</script>
+
+<?php  } else {  ?>
+
+   <link rel=StyleSheet href='css/jquery.mobile-1.3.2.css' type="text/css" media="screen,print" />
+   <script src="lib/jquery.mobile-1.3.2.min.js" ></script>
+
+<?php  }  ?>
+
+
+<?php   if (isset($_GET['netson'])) {   ?>
+<script  type="text/javascript" >
+   netson = true;
+</script>
+    <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
+    <script src='deskfm/fbooker.js' type='text/javascript' ></script>
+    <script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>
+    <script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>
+    <script src='http://apis.google.com/js/plus.js' ></script>
+    <script src='http://apis.google.com/js/plusone.js' ></script>
+    <script src='http://apis.google.com/js/client:plus.js' ></script>
+<?php } ?>
 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
 
-<title>deskfm.com</title>
-
 <script type="text/javascript" >
-  var is_ie = false;
-  var is_mobile = false;
-  var is_mini = true;
-  var debug = false;
-  var netson = false;
-
-  var buddah = false;
-  var pname = "";
 
   var daviewer = null;
   var da_limit=1000;
@@ -47,10 +86,6 @@ header('Content-type: text/html; charset=utf-8 ');
   var got_stats = false;
 
 </script>
-
-<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
-<script src="lib/jquery.mobile-1.3.2.min.js" ></script>
-
 
 <script src=deskfm/wordies.js type="text/javascript" ></script>
 <script src=deskfm/marker.js type="text/javascript" ></script>
@@ -112,44 +147,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <body style='background-color:black;' >
 
 <div id="fb-root"></div>
-
-<?php 
-
-  if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == true) {
-    echo " is_ie = true; " ;
-    echo " is_mobile = true; ";
-  } else {
-
-  }
-
-  $phgname = "null";
-  if (isset($_GET['pname'])) {
-   $phgname = $_GET['pname'];
-  }
-  if ($phgname != "null") {
-    echo "pname ='" . $phgname . "';";
-  }
-  if (isset($_GET['mobile'])) {
-    echo "is_mobile = true;";
-  }
-  if (isset($_GET['debug'])) {
-    echo "debug = true;";
-  }
-  $netson = false;
-  if (isset($_GET['netson'])) {
-    echo "netson = true;";
-    $netson = true;
-  } 
-  echo "</script>";
-
-  if ($netson == true) {
-    echo "<script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>";
-    echo "<script src='deskfm/fbooker.js' type='text/javascript' ></script>";
-    echo "<script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>";
-    echo "<script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>";
-  }
-
-?>
 
 <div data-role='page' >
 

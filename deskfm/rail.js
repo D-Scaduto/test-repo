@@ -15,7 +15,12 @@ rail.prototype.show = function() {
 	
         tmp = tmp + "<div id='myrail' style='display:inline-block;width:250px;vertical-align:middle;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
+
+       if (jqm_off == true) {
+ 	tmp = tmp + "<input type='range'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style=''  />";
+       } else {
  	tmp = tmp + "<input type='range' data-inline='true'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style='width:40px;' data-theme='c' data-track-theme='e'  />";
+       }
          tmp = tmp + "</div>";
  
         lbl = 'nitro_btn'; 
@@ -44,12 +49,21 @@ rail.prototype.show = function() {
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
 	pobj.innerHTML = tmp;
-        $('#'+lbl).trigger("create");
-        $('#slider-1').bind("slidestop",function(event) {
+
+      if (jqm_off == true) {
+         $('#slider-1').on("change",function(event) {
                 var st = "";
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
-         });
+          });
+      } else {
+         $('#'+lbl).trigger("create");
+         $('#slider-1').bind("slidestop",function(event) {
+                var st = "";
+                st = parseInt(event.target.value);
+                daviewer.goto_listdex(st);
+          });
+       }
        this.showing = true;
     }
 }
@@ -82,7 +96,7 @@ rail.prototype.draw_raildata = function() {
  //     $('#local_chipbar').slider("option", "min", st );
  //     $('#local_chipbar').slider("option", "max", fn );
     $('#slider-1').val(ld);
-      $('#slider-1').slider('refresh');
+//      $('#slider-1').slider('refresh');
  //     $('#local_chipdata').html(ld + " of " + daviewer.dalist.length);
 
    } else {
