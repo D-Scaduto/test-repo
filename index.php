@@ -8,6 +8,8 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <title>deskfm.com</title>
 
+<meta name='viewport' content='initial-scale-1' >
+
 <script  type="text/javascript" >
   var is_ie = false;
   var is_mobile = false;
@@ -20,17 +22,23 @@ header('Content-type: text/html; charset=utf-8 ');
 
 </script>
 
+<?php
+  require_once 'lib/Mobile_Detect.php';
+  $detect = new Mobile_Detect;
+  $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+  if ($detect->isMobile() == true) {   
+?>
+  <script  type="text/javascript" >
+     is_mobile = true;
+  </script>
+<?php   } ?>
+
 <?php   if (isset($_GET['mobile'])) {   ?>
 <script  type="text/javascript" >
-   is_mobile = true;
+   mobile = true;
 </script>
 <?php  } ?>
 
-<?php   if (isset($_GET['debug'])) {   ?>
-<script  type="text/javascript" >
-   debug = true;
-</script>
-<?php  } ?>
 
 <script src="lib/jquery-1.9.1.min.js" ></script>
 
@@ -59,6 +67,13 @@ header('Content-type: text/html; charset=utf-8 ');
     <script src='http://apis.google.com/js/plusone.js' ></script>
     <script src='http://apis.google.com/js/client:plus.js' ></script>
 <?php } ?>
+
+<?php   if (isset($_GET['debug'])) {   ?>
+<script  type="text/javascript" >
+   debug = true;
+</script>
+<?php  } ?>
+
 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
@@ -149,18 +164,25 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div> 
 
-<div data-role='page' >
+<div data-role='page' class='ui-page' >
 
 <div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
 
 <div style='clear:both;' > </div>
 
+  <div  data-role='content'   >
 
-<div id='main_view'  class='main'  data-role='content'  >
+    <div id='mainbar_spot' class='' style=''  >
+    </div>
+ 
+    <div id='main_view'  class='main'   >
+    </div>
+
+  </div>
+
 </div>
 
-</div>
 
 <script type='text/javascript' >
   if (netson == true) {
@@ -199,22 +221,17 @@ header('Content-type: text/html; charset=utf-8 ');
         daviewer = new viewer("main_view","daviewer");
 
         if (is_mobile == true) {
-           da_limit = 250;
+           da_limit = 100;
            daviewer.top_end = 25;
         } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
        }
 
-        if ($(window).width() < 700) {
-            is_mini = true;
-         } else {
-            is_mini = false;
-         }
-
 	diego = new header();
-        var tshapes = ['search:wanda','share:nicky','name:jesie','rail:dale','browse:cater'];
+        var tshapes = ['search:wanda','share:nicky','browse:cater','rail:dale'];
         diego.set_shapes(tshapes);
+//        diego.set_shape("rail");
 
     amare.get_stats();
     amare.get_suppliers();
@@ -222,19 +239,36 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_webits();
 
    $(window).resize(function(val) {
-         if ($(window).width() < 700) {
+         if ($(window).width() < 600) {
+
             if (is_mini != true) {
               is_mini = true;
               diego.show();
             }
+ 
+          if (daviewer.gridcols != 1) {
+               daviewer.set_gridcols(1);
+           }
          } else {
-            if (is_mini != false) {
+            if ($(window).width() > 1200) {
+               if (daviewer.gridcols != 4) {
+                 daviewer.set_gridcols(4);
+               }
+            } else {
+               if (daviewer.gridcols != 3) {
+                 daviewer.set_gridcols(3);
+               }
+            }
+ 
+           if (is_mini != false) {
               is_mini = false;
               diego.show();
             }
-         }
-    });
+ 
+        }
 
+    });
+   $(window).resize();
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 

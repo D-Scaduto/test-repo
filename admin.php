@@ -19,15 +19,20 @@ header('Content-type: text/html; charset=utf-8 ');
   var pname = "";
 </script>
 
+<?php
+  require_once 'lib/Mobile_Detect.php';
+  $detect = new Mobile_Detect;
+  $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+  if ($detect->isMobile() == true) {   
+?>
+  <script  type="text/javascript" >
+     is_mobile = true;
+  </script>
+<?php   } ?>
+
 <?php   if (isset($_GET['mobile'])) {   ?>
 <script  type="text/javascript" >
    is_mobile = true;
-</script>
-<?php  } ?>
-
-<?php   if (isset($_GET['debug'])) {   ?>
-<script  type="text/javascript" >
-   debug = true;
 </script>
 <?php  } ?>
 
@@ -58,6 +63,13 @@ header('Content-type: text/html; charset=utf-8 ');
     <script src='http://apis.google.com/js/plusone.js' ></script>
     <script src='http://apis.google.com/js/client:plus.js' ></script>
 <?php } ?>
+
+<?php   if (isset($_GET['debug'])) {   ?>
+<script  type="text/javascript" >
+   debug = true;
+</script>
+<?php  } ?>
+
 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
@@ -148,14 +160,20 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div>
 
-<div data-role='page' >
+<div data-role='page' class='ui-page'  >
 
 <div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
 
+  <div  data-role='content'   >
 
-<div id='main_view'  class='main'  data-role='content'  >
-</div>
+    <div id='mainbar_spot' class='' style=''  >
+    </div>
+ 
+    <div id='main_view'  class='main'   >
+    </div>
+
+  </div>
 
 </div>
 
@@ -188,19 +206,13 @@ header('Content-type: text/html; charset=utf-8 ');
    daviewer = new viewer("main_view","daviewer");
    
    if (is_mobile == true) {
-           da_limit = 250;
+           da_limit = 100;
 	   daviewer.top_end = 25;
 	  
    } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
    }
-
-        if ($(window).width() < 700) {
-            is_mini = true;
-         } else {
-            is_mini = false;
-         }
 
            jesie = new namer("name");
 	   sal = new logoman("logo");
@@ -215,7 +227,7 @@ header('Content-type: text/html; charset=utf-8 ');
            robby = new grouper("group");
 
 	   diego = new header();
-           var tshapes = ['sort:mac','feed:louie','manage:joe','group:robby','name:jesie',"rail:dale"];
+        var tshapes = ['search:wanda','share:nicky','browse:cater'];
            diego.set_shapes(tshapes);
 	   
     amare.get_stats();
@@ -230,20 +242,38 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.year="";
     amare.get_unsorted(dt,true);
 
+
    $(window).resize(function(val) {
-         if ($(window).width() < 700) {
+         if ($(window).width() < 600) {
+/*
             if (is_mini != true) {
               is_mini = true;
               diego.show();
             }
+*/
+           if (daviewer.gridcols != 1) {
+               daviewer.set_gridcols(1);
+           }
          } else {
+            if ($(window).width() > 900) {
+               if (daviewer.gridcols != 4) {
+                 daviewer.set_gridcols(4);
+               }
+            } else {
+               if (daviewer.gridcols != 3) {
+                 daviewer.set_gridcols(3);
+               }
+            }
+/*
             if (is_mini != false) {
               is_mini = false;
               diego.show();
             }
+*/
          }
-    });
 
+    });
+   $(window).resize();
 
 </script>
 

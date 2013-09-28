@@ -1,4 +1,3 @@
- 
 
 function viewer (pscreen,pvarname) {
 
@@ -11,26 +10,25 @@ function viewer (pscreen,pvarname) {
    this.prodids = [];
    this.price = -1;
    this.groupid = "";
-
    this.stats = null;
 
    this.listdex = 0;
    this.dalist=[];
    this.darungs= [];
 
-   this.top_end=10;
-
-   this.zoom = false;
-
-   this.metro_spd=0;
-   this.metro_dir="fwd";
-   
    this.is_mini = false;
    var sl = this.varname.length;
    if (this.varname.substring(sl-11) == "mini_viewer") {
         this.is_mini = true;
    }
 
+   this.top_end=10;
+   this.gridcols=0;
+
+   this.zoom = false;
+   this.metro_spd=0;
+   this.metro_dir="fwd";
+ 
 }
 
 
@@ -55,31 +53,58 @@ viewer.prototype.draw_view = function() {
       tmpstr=tmpstr+"</div>";
     }
 
-    cls = 'box';
-    if (this.is_mini == true) {
-      cls='mbox';
-    }
+      cls = 'box';
+      if (this.is_mini == true) {
+        cls='mbox';
+      }
+      if (this.zoom == true) {
+         cls = 'zbox';
+         st = 1;
+      }
 
-    if (this.zoom == true) {
-       cls = 'zbox';
-       st = 1;
-    }
+
+   if (jqm_off == false) {
+     if (this.gridcols ==1) { 
+       tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='true' >";
+     } else if (this.gridcols == 3) {
+        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-b'  >";
+     } else if (this.gridcols == 4) {
+        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-c'  >";
+     }
+     cls = '';
+   }
 
       while (ct < st) {
         if (this.darungs[ct] != undefined) {
-          lbl = this.screen+"_rung_"+ct;
-          tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='vertical-align:top;' >"; 
-	  tmpstr=tmpstr+"</div>";
+
+         lbl = this.screen+"_rung_"+ct;
+         if (jqm_off == true) {
+              tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"'  >"; 
+              tmpstr=tmpstr+"</div>";
+         } else {
+            if (this.gridcols == 1) {
+              tmpstr=tmpstr+"<li id='"+lbl+"' style='min-width:325px;' >"; 
+              tmpstr=tmpstr+"</li>";
+            } else {
+              cls  = this.next_gridblock(cls);
+              tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+" my-box'  >"; 
+              tmpstr=tmpstr+"</div>";
+            }
+         }
         }
        ct = ct + 1;
       }
 
+       tmpstr=tmpstr+"</div>";
+
+//     tmpstr=tmpstr+"</ul>";
+        
      lbl = this.screen;
  
-  if (document.getElementById(lbl)!= null) {
+    if (document.getElementById(lbl)!= null) {
         document.getElementById(lbl).innerHTML=tmpstr;
 
-         ct = 0;
+        ct = 0;
          while (ct <= st) {
            if (this.darungs[ct] != undefined) {
              vdex = this.darungs[ct].vdex;
@@ -101,11 +126,19 @@ viewer.prototype.draw_view = function() {
            }
            ct = ct + 1;
 	 }
-    }
+      if (this.gridcols >1) {
+          $('#gv').trigger("create");
+      } else {
+       if (jqm_off == false) {
+          $('#lv').listview();
+         //      $('#lv').listview("refresh");
+          }
+      }
+   }
 
     if (this.is_mini == false ) {
 	   //  dale.set_rails();
-             dale.draw_raildata();
+           //  dale.draw_raildata();
             sal.draw_vman();
     }
 
@@ -116,6 +149,42 @@ viewer.prototype.draw_view = function() {
 
 }
 
+
+viewer.prototype.set_gridcols = function (pnum) {
+   this.gridcols = parseInt(pnum);
+   this.draw_view();
+
+}
+
+
+viewer.prototype.next_gridblock = function (pstr) {
+   var ret = "ui-block-a";
+
+   if (this.gridcols == 2) {
+     if (pstr == "ui-block-a") {
+        ret = "ui-block-b";
+     }
+
+   } else if (this.gridcols == 3) {
+     if (pstr == "ui-block-a") {
+        ret = "ui-block-b";
+     } else if (pstr == "ui-block-b") {
+        ret = "ui-block-c";
+     }
+
+   } else if (this.gridcols == 4) {
+
+     if (pstr == "ui-block-a") {
+        ret = "ui-block-b";
+     } else if (pstr == "ui-block-b") {
+        ret = "ui-block-c";
+     } else if (pstr == "ui-block-c") {
+        ret = "ui-block-d";
+     }
+   }
+
+   return ret;
+}
 
 
 viewer.prototype.toggle_zoom = function () {

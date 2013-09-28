@@ -1,5 +1,4 @@
 
-
 function searcher (pspotid) { 
 
    this.spotid = pspotid + "_spot";
@@ -13,7 +12,6 @@ function searcher (pspotid) {
    this.prodid = "";
 }
 
-
 searcher.prototype.show = function() {
   
    var tmp = "";
@@ -24,28 +22,12 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-
-    if (is_mini == true ) {
-        ocl = 'diego.set_shape(\"\");'
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/search.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
-
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
-//     ocl= ocl + this.varname + ".check_central();";
+     ocl= ocl + this.varname + ".check_central();";
       tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
-     tmp = tmp + "<input id='"+lbl+"' size=10  onkeyup='"+ocl+"' value=''  />";
+     tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value=''  />";
     tmp = tmp + "</span>";
-
- 
-   lbl = "search_central_btn";
-   ocl= this.varname + ".check_central();";
-     tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"' style='background-color:white;' >";
-   tmp = tmp + "<img src='deskfm/images/icons/refresh.png' class='menu_btn' >";
-   tmp = tmp + "</button>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {

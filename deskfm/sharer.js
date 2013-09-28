@@ -17,21 +17,14 @@ sharer.prototype.show = function() {
    var cls = "";
    var ocl = "";
 
-    if (is_mini == true ) {
-        ocl = 'diego.set_shape(\"\");'
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/share.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
-
    if (this.shape == "twitter") {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+          tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn'  >";
-       tmp=tmp +"</tmp>";
+       tmp=tmp +"</button>";
 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
@@ -41,10 +34,12 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+          tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
-       tmp=tmp +"</span>";
-
+       tmp=tmp +"</button>";
+        tmp=tmp +"</span>";
+ 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
        tmp=tmp +"</span>";
@@ -53,10 +48,12 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_unset_btn";
        ocl = this.varname + ".set_shape(\"\");";
-       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+          tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
-       tmp=tmp +"</span>";
-
+       tmp=tmp +"</button>";
+        tmp=tmp +"</span>";
+ 
        lbl = "twitter_spot";
        tmp=tmp +"<span id='"+lbl+"'  >";
        tmp=tmp +"</span>";
@@ -65,21 +62,27 @@ sharer.prototype.show = function() {
 
        lbl = this.spotid +  "_twitter_btn";
        ocl = this.varname + ".set_shape(\"twitter\");";
-       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+          tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/twitter.png'  class='menu_btn'  >";
        tmp=tmp +"</button>";
-
+        tmp=tmp +"</span>";
+ 
        lbl = this.spotid +  "_facebook_btn";
        ocl = this.varname + ".set_shape(\"facebook\");";
-       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+         tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
        tmp=tmp +"</button>";
-
+        tmp=tmp +"</span>";
+ 
        lbl = this.spotid +  "_google_btn";
        ocl = this.varname + ".set_shape(\"google\");";
-        tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
        tmp=tmp +"</button>";
+        tmp=tmp +"</span>";
      }
 
      lbl = this.spotid;

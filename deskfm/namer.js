@@ -22,11 +22,10 @@ namer.prototype.show = function() {
         tmp = tmp + "</button>";
      }
 
-
-
-     tmp = tmp + "<div style='width:250px;display:inline-block;'  >";
+ //    tmp = tmp + "<div style='width:250px;display:inline-block;'  >";
 
     if (pname == "") {
+
  
          var tval =  "";
         if (pname != "") {
@@ -41,9 +40,9 @@ namer.prototype.show = function() {
 
        lbl = this.spotid + "check_btn";
        ocl = this.varname + ".find_me();";
-        tmp = tmp + "<button data-role='button' data-inline='true' id='"+lbl+"' onclick='"+ocl+"' class='mybtns'  style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'   >";
         tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' class='menu_btn' >";
-       tmp=tmp +"</button>";
+      tmp=tmp +"</button>";
 
 
     } else {
@@ -73,7 +72,7 @@ namer.prototype.show = function() {
        tmp=tmp +"</span>";
     }
 
-       tmp=tmp +"</div>";
+   //    tmp=tmp +"</div>";
  
      lbl = this.spotid;
     if (document.getElementById(lbl)!=null) {

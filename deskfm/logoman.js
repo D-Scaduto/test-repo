@@ -15,23 +15,27 @@ logoman.prototype.show = function () {
    var tmp = "";
    var ocl = "";
    var cls = "";
-
-       lbl = 'vman_btn';
-       tmp = tmp + "<span id='"+lbl+"'  class='mybtns' >";
-      tmp = tmp + "</span>";
+   var sty ="";
+   if (jqm_off == true) {
+     sty='background-color:white;'
+   }
+     ocl = "diego.set_shape(\"\");";
 
    if (this.logo_shape == "deskfm") {
+            cls = 'logo_short';
+
             lbl = this.spotid + '_logo_spot1';
-//	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-             tmp=tmp+"<span onclick='"+ocl+"' style='font-size: 16pt;vertical-align:middle;' >";
+	    ocl = ocl + this.varname + ".set_logoshape(\"freedom\");";
+             tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
             tmp = tmp + "DeskFM";
             tmp=tmp+"</span>";
    } 
-   if (this.logo_shape == "freedom") {
+   if (this.logo_shape == "freedom") { 
+            cls = 'logo_long';
             lbl = this.spotid + '_logo_spot1';
-	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-             tmp=tmp+"<span onclick='"+ocl+"' >";
-            tmp = tmp + "Desk FreedoM";
+	    ocl = ocl + this.varname + ".set_logoshape(\"deskfm\");";
+             tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
+            tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
    } 
 
@@ -53,7 +57,7 @@ logoman.prototype.draw_vman = function () {
    var vm = "";
 
    var dt = new Date();
-//   this.flip = this.flip + 1;
+   this.flip = this.flip + 1;
           if (this.flip==0) {
             vm="stand-r";
           } else if (this.flip==1) {
@@ -74,22 +78,16 @@ logoman.prototype.draw_vman = function () {
             vm="stand-r";
           }  else if (this.flip==9) {
             vm="sit-r";
+             this.flip = 0;
           }  else  {
             vm="stand";
             this.flip = 0;
           } 
      tmpsrc = "deskfm/images/daoman/cbman-"+vm+".png";
 
-        ocl = 'sal.change_vman();'
-         tmp = tmp + "<button   data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp= tmp + "<img src='"+tmpsrc+"' onClick='' class='menu_btn' >";
-        tmp = tmp + "</button>";
- 
-     lbl = "vman_btn";
-     if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmp;
-         $('#'+lbl).trigger("create");
-     }
+      $('#vman_btn').attr('src',tmpsrc);
+     $('#vman_btn').trigger("create");
+
 }
 
 

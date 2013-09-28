@@ -2,9 +2,8 @@
 
 viewer.prototype.nitro_start = function(pway) {
 
-         var tsrc='deskfm/images/icons/stop.png';
+       var tsrc='deskfm/images/icons/stop.png';
       $('#nitro_btn').attr('src',tsrc);
-//     $('#nitro_btn').buttonMarkup({icon:"gear"});
      $('#nitro_btn').trigger("create");
 
 

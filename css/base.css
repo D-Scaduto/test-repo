@@ -1,34 +1,7 @@
 		
 
-
-
-.list {
-    background-color: lightblue;
-}
-
-.items .ui-selected {
-    background: red;
-    color: white;
-    font-weight: bold;
-}
-
-.items {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-//    width: 100px;
-}
-
-.items li {
-    margin: 2px;
-    padding: 2px;
-}
-
-
-.flying_top {
-  position:fixed;
-  top:10px;
-  right:10px;
+input.ui-slider-input {
+      display:none !important;
 }
 
      .piczoom {
@@ -81,35 +54,6 @@ font-size:medium;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-
-
-a:link{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline; 
-  vertical-align:top;
-}
-
-a:visited{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline;  
-  vertical-align:top;
-}
-
-a:active{
-  font-family: sans-serif;
-  font-weight:normal;
-  font-size:medium;
-  color:black;
-  text-decoration:underline;  
-  vertical-align:top;
 }
 
 

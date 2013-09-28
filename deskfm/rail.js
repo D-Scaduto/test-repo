@@ -1,5 +1,4 @@
 
-
 function rail (pspotid) {
 
    this.spotid = pspotid + "_spot";
@@ -12,34 +11,18 @@ rail.prototype.show = function() {
    var pobj=null;
    var lbl = "";
    var tmp = "";
-	
-        tmp = tmp + "<div id='myrail' style='display:inline-block;width:250px;vertical-align:middle;' >";
+
+        tmp = tmp + "<div id='myrail' style='width:200px;display:inline-block;vertical-align:middle;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
 
        if (jqm_off == true) {
- 	tmp = tmp + "<input type='range'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style=''  />";
+ 	  tmp = tmp + "<input type='range'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style=''  />";
        } else {
- 	tmp = tmp + "<input type='range' data-inline='true'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style='width:40px;' data-theme='c' data-track-theme='e'  />";
+ 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='0' min='0' max='100'  style='width:40px;' data-theme='c' data-track-theme='e' class=''  />";
        }
-         tmp = tmp + "</div>";
- 
-        lbl = 'nitro_btn'; 
-        ocl='daviewer.toggle_nitro();'
-        tmp = tmp + "<span  class='mybtns' style='display:inline-block;vertical-align:middle;'  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
 
-     if (is_mini == true ) {
-        tmp = tmp + "<span  class='mybtns' style='display:inline-block;vertical-align:middle;'  >";
-        ocl = 'diego.set_shape(\"\");'
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-     }
-
+       tmp = tmp + "</div>";
+	
       if (debug == true) {
        tmp = tmp + "<div id='rail_debug' class='' style='' >";
        tmp = tmp + "</div>";
@@ -48,21 +31,22 @@ rail.prototype.show = function() {
    lbl = this.spotid;
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
-	pobj.innerHTML = tmp;
-
+      pobj.innerHTML = tmp;
+      sal.show();  
       if (jqm_off == true) {
          $('#slider-1').on("change",function(event) {
-                var st = "";
+               var st = "";
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
           });
       } else {
-         $('#'+lbl).trigger("create");
-         $('#slider-1').bind("slidestop",function(event) {
+           $('#'+lbl).trigger("create");
+            $('#slider-1').bind("slidestop",function(event) {
                 var st = "";
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
-          });
+            });
+       //     $('#slider-1').listview("refresh");
        }
        this.showing = true;
     }
@@ -96,7 +80,10 @@ rail.prototype.draw_raildata = function() {
  //     $('#local_chipbar').slider("option", "min", st );
  //     $('#local_chipbar').slider("option", "max", fn );
     $('#slider-1').val(ld);
-//      $('#slider-1').slider('refresh');
+   if (jqm_off == false) {
+ //     $('#slider-1').slider();
+      $('#slider-1').slider('refresh');
+   }
  //     $('#local_chipdata').html(ld + " of " + daviewer.dalist.length);
 
    } else {
@@ -173,7 +160,6 @@ rail.prototype.draw_debug = function() {
 
 
 rail.prototype.toggle = function () {
-
    if (this.showing == true ) {
        this.hide();
    } else {
@@ -193,6 +179,7 @@ rail.prototype.hide = function() {
          pobj.innerHTML = tmp;
          this.showing = false;
      }
+
 }
 
 

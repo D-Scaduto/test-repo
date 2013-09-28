@@ -9,6 +9,12 @@
        var cls = '';
        var pobj = null;
 
+/*
+		     lbl= this.rungster + "_story_spot";
+	             tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
+	             tmpstr=tmpstr+"</span>";	
+*/
+
           if (debug == true) {
 	    lbl= this.rungster + "_debug_spot";
 	    tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 

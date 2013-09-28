@@ -1,15 +1,39 @@
 
 @media screen and (min-width:600px) and (max-width:899px) {
 
+ .logo_short {
+    font-size: 2.5em;
+     width:200px;   
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  .logo_long {
+    font-size: 2.2em;
+     width:200px;   
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+ .my-box {
+    padding:5px;
+    border: 5px solid silver;
+  }
+
 .mybtns .ui-btn-inner {
    background:white;
 //   padding: 2px 3px 0px;
 }
 
+.ui-popup > h2
+backround-color:cyan;
+}
+
+
      .main {
-//        background-color:white; 
-        width:750px;
-        margin:0 auto;
+        background-color:white; 
+//        width:750px;
+//        margin:0 auto;
      }
 
      .menu_box {
@@ -28,6 +52,7 @@
     .rail_box {
         float:right;
       //display:inline-block; 
+   //   vertical-align:top;
    }
 
 
