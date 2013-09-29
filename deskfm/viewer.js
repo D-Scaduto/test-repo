@@ -66,10 +66,10 @@ viewer.prototype.draw_view = function() {
    if (jqm_off == false) {
      if (this.gridcols ==1) { 
        tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='true' >";
+     } else if (this.gridcols == 2) {
+        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-a'  >";
      } else if (this.gridcols == 3) {
         tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-b'  >";
-     } else if (this.gridcols == 4) {
-        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-c'  >";
      }
      cls = '';
    }
@@ -83,7 +83,7 @@ viewer.prototype.draw_view = function() {
               tmpstr=tmpstr+"</div>";
          } else {
             if (this.gridcols == 1) {
-              tmpstr=tmpstr+"<li id='"+lbl+"' style='min-width:300px;' >"; 
+              tmpstr=tmpstr+"<li id='"+lbl+"' style='min-width:350px;' >"; 
               tmpstr=tmpstr+"</li>";
             } else {
               cls  = this.next_gridblock(cls);
@@ -95,10 +95,12 @@ viewer.prototype.draw_view = function() {
        ct = ct + 1;
       }
 
-       tmpstr=tmpstr+"</div>";
 
-//     tmpstr=tmpstr+"</ul>";
-        
+    if (this.gridcols == 1) {
+       tmpstr=tmpstr+"</ul>";
+    } else {
+       tmpstr=tmpstr+"</div>";
+    }
      lbl = this.screen;
  
     if (document.getElementById(lbl)!= null) {
@@ -170,16 +172,6 @@ viewer.prototype.next_gridblock = function (pstr) {
         ret = "ui-block-b";
      } else if (pstr == "ui-block-b") {
         ret = "ui-block-c";
-     }
-
-   } else if (this.gridcols == 4) {
-
-     if (pstr == "ui-block-a") {
-        ret = "ui-block-b";
-     } else if (pstr == "ui-block-b") {
-        ret = "ui-block-c";
-     } else if (pstr == "ui-block-c") {
-        ret = "ui-block-d";
      }
    }
 

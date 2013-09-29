@@ -61,7 +61,7 @@ sharer.prototype.show = function() {
      } else if (this.shape == "") {
 
        lbl = this.spotid +  "_twitter_btn";
-       ocl = this.varname + ".set_shape(\"twitter\");";
+//       ocl = this.varname + ".set_shape(\"twitter\");";
           tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/twitter.png'  class='menu_btn'  >";
@@ -69,7 +69,7 @@ sharer.prototype.show = function() {
         tmp=tmp +"</span>";
  
        lbl = this.spotid +  "_facebook_btn";
-       ocl = this.varname + ".set_shape(\"facebook\");";
+//       ocl = this.varname + ".set_shape(\"facebook\");";
          tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
@@ -77,7 +77,7 @@ sharer.prototype.show = function() {
         tmp=tmp +"</span>";
  
        lbl = this.spotid +  "_google_btn";
-       ocl = this.varname + ".set_shape(\"google\");";
+//       ocl = this.varname + ".set_shape(\"google\");";
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
        tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";

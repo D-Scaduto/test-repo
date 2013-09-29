@@ -18,14 +18,6 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-    if (is_mini == true ) {
-        ocl = 'diego.set_shape(\"\");'
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
-
      tmp = tmp + "<div style='width:300px;display:inline-block;'  >";
 
       tmp = tmp + "<span style='width:150px;display:inline-block;vertical-align:middle;'  >";

@@ -9,14 +9,16 @@ header('Content-type: text/html; charset=utf-8 ');
 <title>deskfm.com</title>
 
 <script  type="text/javascript" >
-  var is_ie = false;
-  var is_mobile = false;
   var debug = false;
   var netson = false;
-  var is_mini = false;
   var jqm_off = false;
+  var is_ie = false;
+
   var buddah = false;
   var pname = "";
+
+  var is_mobile = false;
+  var main_shape = "full";
 </script>
 
 <?php
@@ -165,12 +167,12 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
 
-  <div  data-role='content'   >
+  <div  data-role='content'  class='ui-grid-a' style=''  >
 
-    <div id='mainbar_spot' class='' style=''  >
+    <div id='mainbar_spot' class='ui-block-a' style=''  >
     </div>
  
-    <div id='main_view'  class='main'   >
+    <div id='main_view'  class='ui-block-b' style=''   >
     </div>
 
   </div>
@@ -215,7 +217,7 @@ header('Content-type: text/html; charset=utf-8 ');
    }
 
            jesie = new namer("name");
-	   sal = new logoman("logo");
+	   sal = new logoman("rail");
  	   dale = new rail("rail");
    	   store = new shoper("shop");
 	   mac = new sorter("sort");
@@ -227,7 +229,7 @@ header('Content-type: text/html; charset=utf-8 ');
            robby = new grouper("group");
 
 	   diego = new header();
-        var tshapes = ['search:wanda','share:nicky','browse:cater'];
+           var tshapes = ['search:wanda','share:nicky','browse:cater','feed:louie','sort:mac','group:robby','manage:joe'];
            diego.set_shapes(tshapes);
 	   
     amare.get_stats();
@@ -245,32 +247,39 @@ header('Content-type: text/html; charset=utf-8 ');
 
    $(window).resize(function(val) {
          if ($(window).width() < 600) {
-/*
-            if (is_mini != true) {
-              is_mini = true;
+
+            if (main_shape != "mini") {
+              main_shape = "mini";
               diego.show();
             }
-*/
-           if (daviewer.gridcols != 1) {
+ 
+          if (daviewer.gridcols != 1) {
                daviewer.set_gridcols(1);
            }
          } else {
             if ($(window).width() > 900) {
-               if (daviewer.gridcols != 4) {
-                 daviewer.set_gridcols(4);
-               }
-            } else {
+
+              if (main_shape != "wide") {
+                main_shape = "wide";
+                diego.show();
+              }
+ 
                if (daviewer.gridcols != 3) {
                  daviewer.set_gridcols(3);
                }
+               cater.show();
+
+            } else {
+ 
+              if (main_shape != "reg") {
+                main_shape = "reg";
+                diego.show();
+              }
+               if (daviewer.gridcols != 2) {
+                 daviewer.set_gridcols(2);
+               }
             }
-/*
-            if (is_mini != false) {
-              is_mini = false;
-              diego.show();
-            }
-*/
-         }
+        }
 
     });
    $(window).resize();

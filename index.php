@@ -11,15 +11,16 @@ header('Content-type: text/html; charset=utf-8 ');
 <meta name='viewport' content='initial-scale-1' >
 
 <script  type="text/javascript" >
-  var is_ie = false;
-  var is_mobile = false;
   var debug = false;
   var netson = false;
-  var is_mini = false;
+  var is_ie = false;
   var jqm_off = false;
+
   var buddah = false;
   var pname = "";
 
+  var is_mobile = false;
+  var main_shape = "full";
 </script>
 
 <?php
@@ -171,12 +172,12 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div style='clear:both;' > </div>
 
-  <div  data-role='content'   >
+  <div  data-role='content'  class='ui-grid-a' style=''  >
 
-    <div id='mainbar_spot' class='' style=''  >
+    <div id='mainbar_spot' class='ui-block-a' style=''  >
     </div>
  
-    <div id='main_view'  class='main'   >
+    <div id='main_view'  class='ui-block-b' style=''   >
     </div>
 
   </div>
@@ -207,7 +208,7 @@ header('Content-type: text/html; charset=utf-8 ');
    do_preload();
 //   init_months();
 
-        sal = new logoman("logo");
+        sal = new logoman("rail");
 	dale = new rail("rail");
 	jesie = new namer("name");
         store = new shoper("shop");
@@ -229,7 +230,7 @@ header('Content-type: text/html; charset=utf-8 ');
        }
 
 	diego = new header();
-        var tshapes = ['search:wanda','share:nicky','browse:cater'];
+        var tshapes = ['search:wanda','share:nicky'];
         diego.set_shapes(tshapes);
 //        diego.set_shape("rail");
 
@@ -241,8 +242,8 @@ header('Content-type: text/html; charset=utf-8 ');
    $(window).resize(function(val) {
          if ($(window).width() < 600) {
 
-            if (is_mini != true) {
-              is_mini = true;
+            if (main_shape != "mini") {
+              main_shape = "mini";
               diego.show();
             }
  
@@ -251,20 +252,30 @@ header('Content-type: text/html; charset=utf-8 ');
            }
          } else {
             if ($(window).width() > 900) {
-               if (daviewer.gridcols != 4) {
-                 daviewer.set_gridcols(4);
-               }
-            } else {
+
+              if (main_shape != "wide") {
+                main_shape = "wide";
+                diego.show();
+              }
+ 
                if (daviewer.gridcols != 3) {
                  daviewer.set_gridcols(3);
                }
-            }
+               cater.show();
+
+            } else {
  
-           if (is_mini != false) {
-              is_mini = false;
-              diego.show();
+              if (main_shape != "reg") {
+                main_shape = "reg";
+                diego.show();
+              }
+               if (daviewer.gridcols != 2) {
+                 daviewer.set_gridcols(2);
+               }
+
+               cater.show();
+
             }
- 
         }
 
     });

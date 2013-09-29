@@ -11,18 +11,34 @@ rail.prototype.show = function() {
    var pobj=null;
    var lbl = "";
    var tmp = "";
+   var tsrc = "";
 
-        tmp = tmp + "<div id='myrail' style='width:200px;display:inline-block;vertical-align:middle;' >";
+/*
+        lbl = 'nitro_btn'; 
+        ocl='daviewer.toggle_nitro();'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tsrc = 'deskfm/images/icons/play.png';
+        if (daviewer.metro_spd != 0) {
+           tsrc = 'deskfm/images/icons/stop.png';
+        }
+        tmp = tmp + "<img id='nitro_btn' src='"+tsrc+"'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+*/
+
+       tmp = tmp + "<div id='myrail' style='width:175px;display:inline-block;vertical-align:middle;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
 
        if (jqm_off == true) {
- 	  tmp = tmp + "<input type='range'  name='slider-1' id='slider-1' value='0' min='0' max='100' step='1'  style=''  />";
+ 	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='0' min='0' max='100' step='1' style=''  />";
        } else {
- 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='0' min='0' max='100'  style='width:40px;' data-theme='c' data-track-theme='e' class=''  />";
+ 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='0' min='0' max='100'  style='width:40px;'   data-theme='c' data-track-theme='e' class=''  />";
        }
 
        tmp = tmp + "</div>";
 	
+ 
       if (debug == true) {
        tmp = tmp + "<div id='rail_debug' class='' style='' >";
        tmp = tmp + "</div>";
@@ -32,7 +48,6 @@ rail.prototype.show = function() {
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
       pobj.innerHTML = tmp;
-      sal.show();  
       if (jqm_off == true) {
          $('#slider-1').on("change",function(event) {
                var st = "";
@@ -169,6 +184,7 @@ rail.prototype.toggle = function () {
 
 
 rail.prototype.hide = function() {
+
    var pobj=null;
    var lbl = "";
    var tmp = "";
@@ -179,6 +195,7 @@ rail.prototype.hide = function() {
          pobj.innerHTML = tmp;
          this.showing = false;
      }
+     sal.show();
 
 }
 

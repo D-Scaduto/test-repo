@@ -1,5 +1,4 @@
 
-
 function categor (pmenuid) { 
 
    this.menuid = pmenuid;
@@ -13,12 +12,85 @@ function categor (pmenuid) {
 
 
 categor.prototype.show = function() {
-
    if (jqm_off == true) {
-
        this.show_nojqm();
-
    } else {
+     if (main_shape != "wide") {
+        this.show_popups();
+     } else {
+       this.show_collapsers();
+     }
+  }
+}
+
+
+categor.prototype.show_collapsers = function() {
+
+    var tmp = "";
+    var lbl = "";
+    var obj = null;
+    var ocl = "";
+    var s = "";
+    var sugs = [];
+
+// 	tmp +=  "<div data-role='collapsible-set' id='' style='' >";
+ 
+ 	tmp +=  "<div data-role='collapsible' id='' style='' >";
+  	tmp +=  "<h3>who ?</h3>";
+        sugs = amare.subcat_set.get_setlist("who");
+  	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
+        for (var i=0;i<sugs.length;i++) {
+           ocl = "cater.set_cats(\"who\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   ' </ul>';
+ 	tmp +=  '</div>';
+
+ 	tmp +=  "<div data-role='collapsible' id=''>";
+  	tmp +=  "<h3>what ?</h3>";
+        sugs = amare.subcat_set.get_setlist("what");
+  	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
+        for (var i=0;i<sugs.length;i++) {
+           ocl = "cater.set_cats(\"who\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   ' </ul>';
+ 	tmp +=  '</div>';
+
+ 	tmp +=  "<div data-role='collapsible' id=''>";
+  	tmp +=  "<h3>why ?</h3>";
+        sugs = amare.subcat_set.get_setlist("why");
+  	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
+        for (var i=0;i<sugs.length;i++) {
+           ocl = "cater.set_cats(\"why\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   ' </ul>';
+ 	tmp +=  '</div>';
+
+ 	tmp +=  "<div data-role='collapsible' id='' style=''  >";
+  	tmp +=  "<h3 >how ?</h3>";
+        sugs = amare.subcat_set.get_setlist("how");
+  	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
+        for (var i=0;i<sugs.length;i++) {
+           ocl = "cater.set_cats(\"how\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   ' </ul>';
+ 	tmp +=  '</div>';
+
+ //   tmp +=  '</div>';
+
+    lbl = this.spotid;
+    $('#'+lbl).html(tmp);
+    $('#'+lbl).trigger("create");    
+
+    this.showing = true;
+     this.redraw_view();
+}
+
+
+categor.prototype.show_popups = function() {
 
     var tmp = "";
     var lbl = "";
@@ -90,7 +162,6 @@ categor.prototype.show = function() {
     this.showing = true;
      this.redraw_view();
 
-   }
 }
 
 
@@ -319,12 +390,16 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
      // get more if more need be gotten 
 //      this.show();
 
+
     if (jqm_off == false) {
-      var s = this.cat + "_sog"; 
-       $('#'+s).popup();    
-       $('#'+s).popup("close");    
-        $('#'+s).popup("close");    
-     //  $('#'+s).popup("refresh");    
+
+        if (main_shape != "wide") {
+           var s = this.cat + "_sog"; 
+           $('#'+s).popup();    
+           $('#'+s).popup("close");    
+           $('#'+s).popup("close");    
+       //  $('#'+s).popup("refresh"); 
+       }   
     }   
 
       this.redraw_view(); 

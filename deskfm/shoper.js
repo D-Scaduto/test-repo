@@ -17,13 +17,6 @@ shoper.prototype.show = function() {
     var obj = null;
     var ocl = "";
 
-    if (is_mini == true ) {
-        ocl = 'diego.set_shape(\"\");'
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/shop.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
 
      if (this.shape == "one") {
 
@@ -48,17 +41,6 @@ shoper.prototype.show = function() {
           tmp = tmp +"<li><a ptag='"+sugs[i].product_type+"' vtag='"+this.varname+"' >"+sugs[i].text+"</a></li>";
         }
         tmp = tmp +"</ul></li></ul>";
-     }
-
-     if (is_mini == true) {
-       lbl = 'shoper_unset_btn';
-       ocl =  'diego.set_shape(\"\");'
-       moin = 'marky(\"'+lbl+'\");';
-       mout = 'unmarky(\"'+lbl+'\");';
-       cls = 'spotd_off';
-       tmp = tmp + "<span id='"+lbl+"' class='"+cls+"' onmouseover='"+moin+"' onmouseout='"+mout+"' onclick='"+ocl+"' style='float:right;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' class='menu_btn'  >";
-       tmp = tmp + "</span>"; 
      }
 
      lbl = this.spotid;

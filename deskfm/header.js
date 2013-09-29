@@ -29,13 +29,14 @@ header.prototype.show = function () {
       var pobj = document.getElementById('menu_spot');
        if (pobj != null) {
             pobj.innerHTML = tmp;
-            this.draw_leftbtns();
-            this.draw_rightbtns();
+            this.draw_left();
+            this.draw_right();
 
+            this.draw_mainbar();
+ 
             if (buddah == true) {
                 this.draw_navbar();
-                this.draw_mainbar();
-            }
+           }
 
             $('#menu_spot').trigger("create");
             this.set_shape();
@@ -47,19 +48,14 @@ header.prototype.show = function () {
 }
 
 
-header.prototype.draw_leftbtns = function () {
+header.prototype.draw_right = function () {
 
      var lbl = "";
      var tmp = "";
      var ocl = "";
 
-      lbl = 'search_btn';
-       ocl = 'diego.toggle_shape(\"search\");'
-        tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
+
+      tmp = tmp + "<div id='' class='' style='display:inline-block;float:right;'  >";
 
       lbl = 'share_btn';
        ocl = 'diego.toggle_shape(\"share\");'
@@ -68,67 +64,69 @@ header.prototype.draw_leftbtns = function () {
         tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
+
+     if (main_shape != "mini") {
+         tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
+     } 
  
-      lbl = 'browse_btn';
-       ocl = 'diego.toggle_shape(\"browse\");'
+     if (main_shape != "mini") {
+         tmp = tmp + "<div id='search_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
+     } 
+ 
+      lbl = 'search_btn';
+       ocl = 'diego.toggle_shape(\"search\");'
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
+
+     if (main_shape == "mini") {
+        lbl = 'browse_btn';
+        ocl = 'cater.toggle();'
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
- 
-         tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
-         tmp = tmp + "</div>";
-         tmp = tmp + "<div id='search_spot' class='menu_sub' style=''  >";
-         tmp = tmp + "</div>";
-         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style=''  >";
-         tmp = tmp + "</div>";
+    }
 
+        tmp = tmp + "</div>";
 
-    lbl = 'left_spot';
+    lbl = 'right_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
 
 }
 
  
-header.prototype.draw_rightbtns = function () {
+header.prototype.draw_left = function () {
         var lbl = "";
         var ocl = "";
         var tmp = "";
 
-         lbl = 'vman_btn'; 
-         ocl = 'daviewer.next();';
+        lbl = 'vman_btn'; 
+         ocl = 'daviewer.toggle_nitro();';
          tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-         tmp += "<div  id='logo_spot' class='' style='display:inline-block;'  >";
-         tmp = tmp + "</div>";
- 
 
-        tmp = tmp + "<div id='' class='' style='display:inline-block;float:right;'  >";
-        lbl = 'rail_btn'; 
-        ocl='dale.toggle();'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+         ocl = 'dale.toggle();';
+         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-        lbl = 'nitro_btn'; 
-        ocl='daviewer.toggle_nitro();'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-        tmp = tmp + "</div>";
+         tmp = tmp + "</span>";
 
-         tmp = tmp + "<div id='rail_spot' class='' style='display:inline-block;'  >";
+        tmp = tmp + "<div id='rail_spot' class='' style='display:inline-block;'  >";
          tmp = tmp + "</div>";
- 
-    lbl = 'right_spot';
+    
+    lbl = 'left_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
 
@@ -146,18 +144,18 @@ header.prototype.draw_navbar = function () {
 
        lbl = 'sort_btn';
        ocl = this.varname + '.set_shape(\"sort\");'
-         tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
+       tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
        tmp = tmp + "<img src='deskfm/images/icons/categories.png'  class='menu_btn'  >";
-        tmp = tmp + "</a></li>"; 
+       tmp = tmp + "</a></li>"; 
  
-      lbl = 'feed_btn';
-      ocl = this.varname + '.set_shape(\"feed\");'
+        lbl = 'feed_btn';
+       ocl = this.varname + '.set_shape(\"feed\");'
          tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
-       tmp = tmp + "<img src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
         tmp = tmp + "</a></li>"; 
  
        lbl = 'manage_btn';
-     ocl = this.varname + '.set_shape(\"manage\");'
+       ocl = this.varname + '.set_shape(\"manage\");'
          tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png'  class='menu_btn'  >";
         tmp = tmp + "</a></li>"; 
@@ -181,6 +179,19 @@ header.prototype.draw_mainbar = function () {
      var lbl = "";
      var tmp = "";
      var ocl = "";
+
+
+     if (main_shape == "mini") {
+         tmp = tmp + "<div id='share_spot' class='' style='clear:right;'  >";
+         tmp = tmp + "</div>";
+
+         tmp = tmp + "<div id='search_spot' class='' style=''  >";
+         tmp = tmp + "</div>";
+     } 
+
+
+      tmp = tmp + "<div  id='browse_spot' class='' style=''  >";
+      tmp = tmp + "</div>";
 
       tmp = tmp + "<div id='shop_spot' class='menu_sub' style=''  >";
       tmp = tmp + "</div>";
@@ -220,7 +231,7 @@ header.prototype.set_shape = function (pshape) {
         this.shape = pshape;
    }
  
-    if (is_mini) {
+    if (main_shape == "mini") {
       if (this.shape == "") {
         for (var i=0;i<this.shapes.length;i++) {
          s = this.shapes[i].split(':');
@@ -274,7 +285,7 @@ header.prototype.draw_debug = function () {
     var pobj="";
 
         lbl = 'header_debug_spot';
-      tmp = tmp + "mini=" + is_mini;
+      tmp = tmp + "mshape=" + main_shape;
        pobj = document.getElementById(lbl);
        if (pobj != null) {
           pobj.innerHTML = tmp;

@@ -1,6 +1,17 @@
 
 @media screen and (min-width:900px) {
 
+     #mainbar_spot {
+        background-color:white; 
+        width:25%;
+     }
+
+     #main_view {
+        background-color:white; 
+        width:75%;
+     }
+
+
  .logo_short {
     font-size: 2em;
     display:inline-block;
@@ -29,12 +40,6 @@
 }
 
 
-     .main {
-        background-color:white;
-        width:100%;
-  //      margin:0 auto;
-     }
-
 
      .menu_box {
 	width:100%;
@@ -47,7 +52,6 @@
 
     .menu_sub {
         display:inline-block;
-//    float:right;
     }
 
      .menu_btn {

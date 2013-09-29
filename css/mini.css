@@ -1,6 +1,47 @@
 
 @media screen and (max-width:599px) {
 
+     #left_spot {
+       width:70%
+     }
+
+     #right_spot {
+       width:30%
+     }
+
+     #mainbar_spot {
+        background-color:white; 
+        width:100%;
+        float:none;
+     }
+
+     #main_view {
+        background-color:white; 
+        width:100%;
+        float:none;
+     }
+
+     .menu_box {
+        min-width:350px;
+        width:100%;
+      }
+
+     .menu_sub {
+        width:100%
+     }
+
+     .menu_btn {
+        width:20px;
+       background-color:white;
+     }
+
+ .mybtns .ui-btn-inner  {
+   background:white;
+   padding:0 0 0;
+ }
+
+
+
  .logo_short {
     font-size: 1.2em;
     display:inline-block;
@@ -20,45 +61,6 @@
   }
 
 
- .mybtns .ui-btn-inner  {
-   background:white;
-   padding:0 0 0;
- }
-
-
- .mybtns .ui-radio-btns  {
-   background:white;
-   padding:0 0 0;
- }
-
-
-    .my-breakpoint .ui-block-a, 
-    .my-breakpoint .ui-block-b, 
-    .my-breakpoint .ui-block-c,
-    .my-breakpoint .ui-block-d,
-    .my-breakpoint .ui-block-e { 
-	width: 100%; 
-	float:none; 
-    }
- 
-     .menu_box {
-        min-width:350px;
-        width:100%;
-      }
-
-     .main {
-//        background-color:white;
-     }
-
-     .menu_sub {
-        display:inline-block;
-     //  float:right;
-     }
-
-     .menu_btn {
-        width:20px;
-       background-color:white;
-     }
 
    .zbox {
        background-color:white;

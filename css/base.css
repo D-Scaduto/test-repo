@@ -1,4 +1,8 @@
-		
+
+
+.ui-btn-inner {
+    white-space:normal;
+}		
 
 input.ui-slider-input {
       display:none !important;

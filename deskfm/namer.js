@@ -15,13 +15,6 @@ namer.prototype.show = function() {
       var ocl ="";
       var lbl = "";
 
-     if (is_mini == true ) {
-        ocl = 'diego.toggle_shape(\"name\");'
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img src='deskfm/images/icons/people_clay.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
  //    tmp = tmp + "<div style='width:250px;display:inline-block;'  >";
 
     if (pname == "") {

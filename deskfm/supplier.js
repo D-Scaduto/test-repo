@@ -16,13 +16,6 @@ supplier.prototype.show = function() {
      var ocl = "";
      var cls = 'spotd_off';
 
-    if (is_mini == true ) {
-        ocl = 'diego.toggle_shape(\"manage\");'
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-       tmp = tmp + "<img src='deskfm/images/icons/molecule.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-     }
-
 
      lbl = 'suppliers_btn';
      ocl = '';

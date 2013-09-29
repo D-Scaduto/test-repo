@@ -22,13 +22,23 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
+/*
+      lbl = 'search_central btn';
+     ocl = this.varname+ ".check_central();";
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/refresh.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+*/
+
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
-     ocl= ocl + this.varname + ".check_central();";
-      tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
+     tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
      tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value=''  />";
     tmp = tmp + "</span>";
 
+ 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
