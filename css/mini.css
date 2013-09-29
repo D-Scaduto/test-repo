@@ -2,15 +2,13 @@
 @media screen and (max-width:599px) {
 
  .logo_short {
-    font-size: 1.8em;
-    width:110px;   
+    font-size: 1.2em;
     display:inline-block;
     vertical-align:middle;
   }
 
   .logo_long {
-    font-size: 1.5em;
-     width:110px;   
+    font-size: 1.2em;
     display:inline-block;
     vertical-align:middle;
   }
@@ -22,10 +20,17 @@
   }
 
 
- .mybtns .ui-btn-inner {
+ .mybtns .ui-btn-inner  {
    background:white;
    padding:0 0 0;
  }
+
+
+ .mybtns .ui-radio-btns  {
+   background:white;
+   padding:0 0 0;
+ }
+
 
     .my-breakpoint .ui-block-a, 
     .my-breakpoint .ui-block-b, 
@@ -37,7 +42,7 @@
     }
  
      .menu_box {
-        min-width:325px;
+        min-width:350px;
         width:100%;
       }
 

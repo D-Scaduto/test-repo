@@ -19,13 +19,12 @@ logoman.prototype.show = function () {
    if (jqm_off == true) {
      sty='background-color:white;'
    }
-     ocl = "diego.set_shape(\"\");";
 
    if (this.logo_shape == "deskfm") {
             cls = 'logo_short';
 
             lbl = this.spotid + '_logo_spot1';
-	    ocl = ocl + this.varname + ".set_logoshape(\"freedom\");";
+	    ocl = this.varname + ".set_logoshape(\"freedom\");";
              tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
             tmp = tmp + "DeskFM";
             tmp=tmp+"</span>";
@@ -33,7 +32,7 @@ logoman.prototype.show = function () {
    if (this.logo_shape == "freedom") { 
             cls = 'logo_long';
             lbl = this.spotid + '_logo_spot1';
-	    ocl = ocl + this.varname + ".set_logoshape(\"deskfm\");";
+	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
              tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
@@ -42,14 +41,12 @@ logoman.prototype.show = function () {
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
          document.getElementById(lbl).innerHTML=tmp;
-         sal.draw_vman();
   }
 }
 
 
 
 logoman.prototype.draw_vman = function () {
-
    var lbl = "";
    var ocl="";   
    var tmp = "";

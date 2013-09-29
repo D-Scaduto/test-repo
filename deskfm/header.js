@@ -13,136 +13,127 @@ header.prototype.show = function () {
      var lbl = "";
      var ocl = "";
 
-       tmp = tmp + "<div data-role='control-group' style='display:inline-block' >";
-      lbl = 'search_btn';
-       ocl = 'diego.toggle_shape(\"search\");'
-       tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-        tmp = tmp + "<img src='deskfm/images/icons/search.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
+         tmp = tmp + "<div class='ui-grid-a' >";
 
-      lbl = 'browse_btn';
-       ocl = 'diego.toggle_shape(\"browse\");'
-       tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
-      lbl = 'share_btn';
-       ocl = 'diego.toggle_shape(\"share\");'
-       tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img src='deskfm/images/icons/share.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
-        tmp = tmp + "</div>";
-
-         sty='display:inline-block;';
-         if (jqm_off == true) {
-           sty = sty + "vertical-align:top;";
-         }
-         tmp += "<div  id='logo_spot' class='' style='"+sty+"'  >";
+         tmp += "<div  id='left_spot' class='ui-block-a' style=''  >";
          tmp = tmp + "</div>";
 
-         tmp = tmp + "<div style='float:right;' >";
-        lbl = 'vman_btn'; 
-        if (is_mini == true) {
-          ocl='diego.toggle_shape(\"rail\");'
-        } else {
-          ocl='dale.toggle();'
-        }
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-        lbl = 'nitro_btn'; 
-        ocl='daviewer.toggle_nitro();'
-        tmp = tmp + "<span  class='mybtns' style='float:right;vertical-align:middle;'  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-        tmp = tmp + "</div>";
-
-        tmp = tmp + "<div id='rail_spot' class='' style='display:inline-block;'  >";
+         tmp = tmp + "<div id='right_spot' class='ui-block-b' style='' >";
          tmp = tmp + "</div>";
  
-       tmp = tmp + "<div style='display:inline-block' >";
-        tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
-        tmp = tmp + "</div>";
-        tmp = tmp + "<div id='search_spot' class='menu_sub' style=''  >";
-        tmp = tmp + "</div>";
-         tmp += "<div  id='browse_spot' class='menu_sub' style=''  >";
-         tmp = tmp + "</div>";
-        tmp = tmp + "</div>";
+       tmp = tmp + "</div>";
 
-     tmp = tmp + "<div id='navbar_spot' data-role='navbar' data-iconpos='top'   >";
-      tmp = tmp + "</div>";
+       tmp = tmp + "<div id='navbar_spot' data-role='navbar' data-iconpos='top'   >";
+       tmp = tmp + "</div>";
 
       var pobj = document.getElementById('menu_spot');
        if (pobj != null) {
             pobj.innerHTML = tmp;
+            this.draw_leftbtns();
+            this.draw_rightbtns();
+
             if (buddah == true) {
                 this.draw_navbar();
                 this.draw_mainbar();
             }
 
             $('#menu_spot').trigger("create");
-        
             this.set_shape();
-          
            if (debug == true) {
                this.draw_debug();
-             } 
+           } 
         
       }
 }
 
-header.prototype.set_shape = function (pshape) {
-   if (pshape != undefined) {
-        this.shape_was = this.shape;
-        this.shape = pshape;
-   }
 
+header.prototype.draw_leftbtns = function () {
+
+     var lbl = "";
+     var tmp = "";
+     var ocl = "";
+
+      lbl = 'search_btn';
+       ocl = 'diego.toggle_shape(\"search\");'
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
+      lbl = 'share_btn';
+       ocl = 'diego.toggle_shape(\"share\");'
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
  
-    if (is_mini) {
-      if (this.shape == "") {
-        for (var i=0;i<this.shapes.length;i++) {
-         s = this.shapes[i].split(':');
-         es = s[1] + '.show_btn()';
-         es = " if (" + s[1] + " != null) { "+es+"}";
-         eval(es);
-        }
-     } else {
-        for (var i=0;i<this.shapes.length;i++) {
-         s = this.shapes[i].split(':');
-         es = s[1] + '.hide_btn()';
-         es = " if (" + s[1] + " != null) { "+es+"}";
-         eval(es);
-        }
-     }
-   }
+      lbl = 'browse_btn';
+       ocl = 'diego.toggle_shape(\"browse\");'
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+ 
+         tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
+         tmp = tmp + "<div id='search_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
+         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
 
-     var s , es = "";
-      for (var i=0;i<this.shapes.length;i++) {
-         s = this.shapes[i].split(':');
-         es = s[1] + '.hide();';
-         if (s[0] == this.shape) {
-            es = s[1] + '.show()';
-         }
-         es = " if (" + s[1] + " != null) { "+es+"}";
-        eval(es);
-      }
 
-      sal.show();
-
-    $('.mybtns').trigger("create"); 
+    lbl = 'left_spot';
+    $('#'+lbl).html(tmp); 
+    $('#'+lbl).trigger("create");
 
 }
+
+ 
+header.prototype.draw_rightbtns = function () {
+        var lbl = "";
+        var ocl = "";
+        var tmp = "";
+
+         lbl = 'vman_btn'; 
+         ocl = 'daviewer.next();';
+         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+         tmp += "<div  id='logo_spot' class='' style='display:inline-block;'  >";
+         tmp = tmp + "</div>";
+ 
+
+        tmp = tmp + "<div id='' class='' style='display:inline-block;float:right;'  >";
+        lbl = 'rail_btn'; 
+        ocl='dale.toggle();'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+        lbl = 'nitro_btn'; 
+        ocl='daviewer.toggle_nitro();'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;'  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+        tmp = tmp + "</div>";
+
+         tmp = tmp + "<div id='rail_spot' class='' style='display:inline-block;'  >";
+         tmp = tmp + "</div>";
+ 
+    lbl = 'right_spot';
+    $('#'+lbl).html(tmp); 
+    $('#'+lbl).trigger("create");
+
+}
+
 
 
 header.prototype.draw_navbar = function () {
@@ -223,6 +214,48 @@ header.prototype.set_shapes = function (pshapes) {
    this.show(); 
 }
 
+header.prototype.set_shape = function (pshape) {
+   if (pshape != undefined) {
+        this.shape_was = this.shape;
+        this.shape = pshape;
+   }
+ 
+    if (is_mini) {
+      if (this.shape == "") {
+        for (var i=0;i<this.shapes.length;i++) {
+         s = this.shapes[i].split(':');
+         es = s[1] + '.show_btn()';
+         es = " if (" + s[1] + " != null) { "+es+"}";
+         eval(es);
+        }
+     } else {
+        for (var i=0;i<this.shapes.length;i++) {
+         s = this.shapes[i].split(':');
+         es = s[1] + '.hide_btn()';
+         es = " if (" + s[1] + " != null) { "+es+"}";
+         eval(es);
+        }
+     }
+   }
+
+     var s , es = "";
+      for (var i=0;i<this.shapes.length;i++) {
+         s = this.shapes[i].split(':');
+         es = s[1] + '.hide();';
+         if (s[0] == this.shape) {
+            es = s[1] + '.show()';
+         }
+         es = " if (" + s[1] + " != null) { "+es+"}";
+        eval(es);
+      }
+
+      sal.show();
+
+    $('.mybtns').trigger("create"); 
+}
+
+
+
 header.prototype.toggle_shape = function (pshape) {
    if (pshape != undefined) {
         if (this.shape == pshape) {
@@ -246,6 +279,46 @@ header.prototype.draw_debug = function () {
        if (pobj != null) {
           pobj.innerHTML = tmp;
        }
+}
+
+
+header.prototype.draw_radio = function () {
+
+     var lbl = "";
+     var tmp = "";
+     var ocl = "";
+
+      tmp += "    <fieldset data-role='controlgroup' data-type='horizontal'  data-role='fieldcontain' style='display:inline-block;' >";
+      tmp += "    <legend></legend>";
+
+      lbl = 'search_btn';
+       ocl = 'diego.toggle_shape(\"search\");'
+
+       tmp += "     <input type='radio' name='radio-choice-1' id='radio-choice-1' value='choice-1'  onclick='"+ocl+"' />";
+        tmp = tmp + "<label for='radio-choice-1' class='mybtns' >";
+        tmp = tmp + "<img src='deskfm/images/icons/search.png'  class='menu_btn'  >";
+        tmp = tmp + "</label>";
+ 
+      lbl = 'browse_btn';
+       ocl = 'diego.toggle_shape(\"browse\");'
+       tmp += "     <input type='radio' name='radio-choice-1' id='radio-choice-2' value='choice-2'  onclick='"+ocl+"'  />";
+      tmp += "     <label for='radio-choice-2'  class='mybtns'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</label>";
+ 
+      lbl = 'share_btn';
+       ocl = 'diego.toggle_shape(\"share\");'
+      tmp += "<input type='radio' name='radio-choice-1' id='radio-choice-4' value='choice-4'  onclick='"+ocl+"'  />";
+       tmp += "    <label for='radio-choice-4'  class='mybtns'  >";
+        tmp = tmp + "<img src='deskfm/images/icons/share.png'  class='menu_btn'  >";
+        tmp = tmp + "</label>";
+ 
+      tmp += "   </fieldset>";
+
+    lbl = 'left_spot';
+    $('#'+lbl).html(tmp); 
+    $('#'+lbl).trigger("create");
+
 }
 
 

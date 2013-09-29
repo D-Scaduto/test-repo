@@ -229,7 +229,7 @@ header('Content-type: text/html; charset=utf-8 ');
        }
 
 	diego = new header();
-        var tshapes = ['search:wanda','share:nicky','browse:cater','rail:dale'];
+        var tshapes = ['search:wanda','share:nicky','browse:cater'];
         diego.set_shapes(tshapes);
 //        diego.set_shape("rail");
 
@@ -250,7 +250,7 @@ header('Content-type: text/html; charset=utf-8 ');
                daviewer.set_gridcols(1);
            }
          } else {
-            if ($(window).width() > 1200) {
+            if ($(window).width() > 900) {
                if (daviewer.gridcols != 4) {
                  daviewer.set_gridcols(4);
                }

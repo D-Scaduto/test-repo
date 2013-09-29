@@ -83,7 +83,7 @@ viewer.prototype.draw_view = function() {
               tmpstr=tmpstr+"</div>";
          } else {
             if (this.gridcols == 1) {
-              tmpstr=tmpstr+"<li id='"+lbl+"' style='min-width:325px;' >"; 
+              tmpstr=tmpstr+"<li id='"+lbl+"' style='min-width:300px;' >"; 
               tmpstr=tmpstr+"</li>";
             } else {
               cls  = this.next_gridblock(cls);
@@ -138,7 +138,7 @@ viewer.prototype.draw_view = function() {
 
     if (this.is_mini == false ) {
 	   //  dale.set_rails();
-           //  dale.draw_raildata();
+            dale.draw_raildata();
             sal.draw_vman();
     }
 
