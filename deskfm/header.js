@@ -28,25 +28,21 @@ header.prototype.show = function () {
        tmp = tmp + "</div>";
 
       var pobj = document.getElementById('menu_spot');
-       if (pobj != null) {
+      if (pobj != null) {
             pobj.innerHTML = tmp;
-
             this.draw_left();
             this.draw_right();
             sal.show();
-
             this.draw_mainbar();
- 
             if (buddah == true) {
                 this.draw_navbar();
-           }
-
+            }
+            this.set_botshape();
             $('#menu_spot').trigger("create");
 
-           if (debug == true) {
+            if (debug == true) {
                this.draw_debug();
-           } 
-        
+            } 
       }
 }
 
@@ -60,26 +56,28 @@ header.prototype.draw_right = function () {
 
       tmp = tmp + "<div id='' class='' style='display:inline-block;float:right;'  >";
 
-      lbl = 'share_btn';
-       ocl = 'diego.set_topshape(\"share\");'
+    if (main_shape != "mini") {
+         tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
+         tmp = tmp + "</div>";
+     } 
+ 
+     lbl = 'share_btn';
+       ocl = 'diego.toggle_topshape(\"share\");'
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
-     if (main_shape != "mini") {
-         tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
-         tmp = tmp + "</div>";
-     } 
- 
+  
      if (main_shape != "mini") {
          tmp = tmp + "<div id='search_spot' class='menu_sub' style=''  >";
          tmp = tmp + "</div>";
      } 
  
+
       lbl = 'search_btn';
-       ocl = 'diego.set_topshape(\"search\");'
+       ocl = 'diego.toggle_topshape(\"search\");'
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
@@ -140,25 +138,25 @@ header.prototype.draw_navbar = function () {
 
        lbl = 'sort_btn';
        ocl = this.varname + '.set_botshape(\"sort\");'
-       tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
+       tmp = tmp + "<li><a href='#'  id='"+lbl+"' onclick='"+ocl+"' >"; 
        tmp = tmp + "<img src='deskfm/images/icons/categories.png'  class='menu_btn'  >";
        tmp = tmp + "</a></li>"; 
  
         lbl = 'feed_btn';
        ocl = this.varname + '.set_botshape(\"feed\");'
-         tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
+         tmp = tmp + "<li><a href='#'  id='"+lbl+"' onclick='"+ocl+"' >"; 
         tmp = tmp + "<img src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
         tmp = tmp + "</a></li>"; 
  
        lbl = 'manage_btn';
        ocl = this.varname + '.set_botshape(\"manage\");'
-         tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
+         tmp = tmp + "<li><a href='#'  id='"+lbl+"' onclick='"+ocl+"' >"; 
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png'  class='menu_btn'  >";
         tmp = tmp + "</a></li>"; 
  
        lbl = 'group_btn';
        ocl = this.varname + '.set_botshape(\"group\");'
-         tmp = tmp + "<li><a href='#' onclick='"+ocl+"' >"; 
+         tmp = tmp + "<li><a href='#'  id='"+lbl+"' onclick='"+ocl+"' >"; 
        tmp = tmp + "<img src='deskfm/images/icons/people_blob.png'  class='menu_btn'  >";
        tmp = tmp + "</a></li>"; 
  
@@ -186,13 +184,13 @@ header.prototype.draw_mainbar = function () {
      } 
 
 
-      tmp = tmp + "<div  id='browse_spot' class='' style=''  >";
-      tmp = tmp + "</div>";
-
       tmp = tmp + "<div id='shop_spot' class='menu_sub' style=''  >";
       tmp = tmp + "</div>";
 
       tmp = tmp + "<div id='sort_spot' class='menu_sub' style=''  >";
+      tmp = tmp + "</div>";
+
+      tmp = tmp + "<div  id='browse_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
       tmp = tmp + "<div id='feed_spot' class='menu_sub' style=''  >";
@@ -214,15 +212,23 @@ header.prototype.draw_mainbar = function () {
 
 }
  
-
-
 header.prototype.set_shapes = function (pshapes) {
    if (pshapes != undefined) {
         this.shapes = pshapes;
    }
-   this.show(); 
 }
 
+header.prototype.toggle_topshape = function (pshape) {
+   if (pshape != undefined) {
+       if ( this.top_shape != pshape ) {
+          this.top_shape = pshape;
+       } else {
+           this.top_shape = "";
+       }
+   }
+   this.set_topshape();
+}
+ 
 header.prototype.set_topshape = function (pshape) {
    if (pshape != undefined) {
         this.top_shape = pshape;
@@ -234,6 +240,9 @@ header.prototype.set_topshape = function (pshape) {
    } else if (this.top_shape == "search") {
      wanda.show();
      nicky.hide();
+   } else {
+     nicky.hide();
+     wanda.hide();
    } 
 
 }
@@ -242,7 +251,6 @@ header.prototype.set_botshape = function (pshape) {
    if (pshape != undefined) {
         this.bot_shape = pshape;
    }
- 
     if (main_shape == "mini") {
       if (this.bot_shape == "") {
         for (var i=0;i<this.shapes.length;i++) {
@@ -267,10 +275,10 @@ header.prototype.set_botshape = function (pshape) {
          es = s[1] + '.hide();';
          if (s[0] == this.bot_shape) {
             es = s[1] + '.show()';
-         }
-         es = " if (" + s[1] + " != null) { "+es+"}";
+        }
+        es = " if (" + s[1] + " != null) { "+es+"}";
         eval(es);
-      }
+     }
 
     $('.mybtns').trigger("create"); 
 }

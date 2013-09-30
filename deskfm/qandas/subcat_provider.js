@@ -38,7 +38,7 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'how  to make your own ' , 'cat':'how','subcat':'diy' });
 //     this.sealist.push({'text':'how do you get a standing desk ? ' , 'cat':'how','subcat':'get' });
 //     this.sealist.push({'text':'how do you to compare standing desks ? ', 'cat':'how','subcat':'compare' });
-     this.sealist.push({'text':'ho do you workout and work ' , 'cat':'how','subcat':'workout' });
+     this.sealist.push({'text':'how do you workout and work ' , 'cat':'how','subcat':'workout' });
 
 }
 

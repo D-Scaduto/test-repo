@@ -179,14 +179,12 @@ header('Content-type: text/html; charset=utf-8 ');
 
   </div>
 
-<div id='footer_spot' style='' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
+<div id='footer_spot' style='min-width:350px;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
       <div id='rail_spot' class='' style=''  >
       </div>
 </div>
 
-
 </div>
-
 
 <script type='text/javascript' >
 
@@ -254,6 +252,7 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_unsorted(dt,true);
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
+       diego.set_botshape("sort");
       dale.show();
     });
 
@@ -263,33 +262,26 @@ header('Content-type: text/html; charset=utf-8 ');
 
             if (main_shape != "mini") {
               main_shape = "mini";
+               daviewer.gridcols=1;
               diego.show();
             }
  
-          if (daviewer.gridcols != 1) {
-               daviewer.set_gridcols(1);
-           }
          } else {
             if ($(window).width() > 900) {
 
               if (main_shape != "wide") {
                 main_shape = "wide";
-                diego.show();
+                daviewer.gridcols=3;
+               diego.show();
               }
- 
-               if (daviewer.gridcols != 3) {
-                 daviewer.set_gridcols(3);
-               }
 
             } else {
  
               if (main_shape != "reg") {
                 main_shape = "reg";
+                daviewer.gridcols=2;
                 diego.show();
               }
-               if (daviewer.gridcols != 2) {
-                 daviewer.set_gridcols(2);
-               }
             }
         }
 

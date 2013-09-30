@@ -33,7 +33,7 @@ function viewer (pscreen,pvarname) {
 
 
 viewer.prototype.draw_view = function() {
-
+//alert("here");
     var tmpstr = "";
     var lbl = "";
     var ocl = "";

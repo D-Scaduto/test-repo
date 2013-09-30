@@ -1,14 +1,6 @@
 
 @media screen and (max-width:599px) {
 
-     #left_spot {
-       width:70%
-     }
-
-     #right_spot {
-       width:30%
-     }
-
      #mainbar_spot {
         background-color:white; 
         width:100%;
@@ -19,6 +11,16 @@
         background-color:white; 
         width:100%;
         float:none;
+     }
+
+     #chip_rail {
+        width:100%;
+        float:none;       
+     }
+
+     #chunk_rail {
+        width:100%;
+        float:none;       
      }
 
      .menu_box {

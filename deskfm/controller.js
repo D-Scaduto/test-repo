@@ -135,9 +135,9 @@ viewer.prototype.update_stat = function(pstat) {
 viewer.prototype.redraw_view = function() { 
    var start = 0;
 
-
     if (this.stats != null) {
-// alert("sl=" + this.stats.listype );
+
+ // alert("sl=" + this.stats.listype + " bs=" + diego.bot_shape );
 
          start = this.stats.last_chunk * da_limit;
 

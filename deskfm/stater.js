@@ -162,12 +162,21 @@ stater.prototype.update_stats = function (statobj) {
 // alert("ir="+ init_run + " gw=" + this.got_webits + " gs="+this.got_stats);
 
      if (init_run == true) {
+          if (buddah == true) {
+	    if (this.got_unsorted == true) {
+                 init_run = false;
+                 this.total_unsorted.last_chunk=0;
+                 daviewer.update_stat(this.total_unsorted);
+                 daviewer.redraw_view();
+            }
+          } else {
             if (this.got_webits == true) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
                  daviewer.redraw_view();
-              }
+             }
+          }
       } else {
         daviewer.redraw_view();
       }
@@ -221,14 +230,16 @@ stater.prototype.update_webits = function(listobj) {
  // alert("ir="+ init_run + " gw=" + this.got_webits + " gs="+this.got_stats);
 
      if (init_run == true) {
+           if (buddah == false)  {
               if (this.got_stats == true) {
 	         init_run = false;
-                  this.total_sorted.last_chunk=0;
-                  daviewer.update_stat(this.total_sorted);
+                 this.total_sorted.last_chunk=0;
+                 daviewer.update_stat(this.total_sorted);
                  daviewer.redraw_view();
-              }
+               }
+           }
       } else {
-          daviewer.redraw_view();
+           daviewer.redraw_view();
       }
     
 }  
@@ -283,6 +294,14 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
 
       var lsts = this.total_unsorted;
       if (init_run == true) {
+            if (buddah == false)  {
+              if (this.got_stats == true) {
+	         init_run = false;
+                 this.total_unsorted.last_chunk=0;
+                 daviewer.update_stat(this.total_unsorted);
+                 daviewer.redraw_view();
+               }
+           }
       } else {
           daviewer.redraw_view();
       }
@@ -320,7 +339,7 @@ stater.prototype.update_people = function(listobj) {
       this.count_lpstats();
       if (init_run == true) {
       } else {
-         daviewer.redraw_view();
+  //       daviewer.redraw_view();
       }
 }  
 

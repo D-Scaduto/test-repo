@@ -18,10 +18,11 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-   tmp = tmp + "<span id='cal_spot' class='' style='vertical-align:middle;display:inline-block;' >";
-   tmp = tmp + "</span>";	
+   tmp = tmp + "<div id='cal_spot' class='' style='min-width:250px;display:inline-block;' >";
+   tmp = tmp + "</div>";	
 
    lbl = this.spotid;
+
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
@@ -29,10 +30,11 @@ sorter.prototype.show = function() {
       this.krono.show();
       $('#sort_spot').trigger('create');
       this.check_local();
+      cater.show();
+      $('#sort_btn').addClass("ui-btn-active");
    } 
 
 }
-
 
 
 sorter.prototype.check_local = function() {
@@ -105,6 +107,10 @@ sorter.prototype.hide = function() {
        this.showing = false;
    }
 
+   if (buddah == true) {
+     cater.hide();
+   }
+   $('sort_btn').removeClass("ui-btn-active");
    
 }
 

@@ -100,17 +100,18 @@ categor.prototype.show_popups = function() {
     var sugs = [];
 
     if (this.subcat != "" ) {
-
 	lbl = 'subcat_btn';
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
-        ocl = "cater.subcat=\"\";cater.show();";
+        ocl = "cater.set_cats(\""+this.cat+"\",\"\");";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"' data-inline='true' data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp +  this.cat + " " + s;
+	tmp = tmp + s;
         tmp=tmp+"</button>";
 
-   } else {
+   } 
 
- 	tmp += "<a href='#who_sog' data-rel='popup' data-role='button' data-theme='e' data-inline='true' style='' >who</a>";
+   if ((this.cat != "who" ) || (this.subcat == "")) {
+
+	tmp += "<a href='#who_sog' data-rel='popup' data-role='button' data-theme='e' data-inline='true' style='' >who</a>";
  	tmp +=  "<div data-role='popup' id='who_sog'>";
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
@@ -120,6 +121,10 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+    }
+
+
+   if ((this.cat != "what" )  || (this.subcat == "")) {
 
         tmp += '<a href="#what_sog" data-rel="popup" data-role="button" data-inline="true"  data-theme="e" data-transition="slideup" style=""  >what</a>';
  	tmp += '<div data-role="popup" id="what_sog" data-theme="d"  style="display:inline-block;"  >';
@@ -131,6 +136,9 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+    }
+
+   if ((this.cat != "why" )  || (this.subcat == "")) {
 
         tmp += '<a href="#why_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"  style=""   >why</a>';
  	tmp += '<div data-role="popup" id="why_sog" data-theme="d" style="display:inline-block;" >';
@@ -142,6 +150,9 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+     }
+
+     if ((this.cat != "how" )  || (this.subcat == "")) {
 
         tmp += '<a href="#how_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  >how</a>';
  	tmp += '<div data-role="popup" id="how_sog" data-theme="d"  style="display:inline-block;" >';
@@ -153,8 +164,8 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
-    }
-
+      }
+ 
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
@@ -321,6 +332,8 @@ categor.prototype.show_nojqm = function() {
 
 categor.prototype.redraw_view = function(pchunk) {
 
+//alert("here");
+
 	var start = 0;
         var p = 0;
 
@@ -345,13 +358,9 @@ categor.prototype.redraw_view = function(pchunk) {
 	    }
 
 	  if (this.cat == "all") {
-
 	    daviewer.load_sorted_list(start);
-
 	  } else {
-
             daviewer.load_category_list(this.cat,this.subcat,start);
-	    
 	  }
 
        }
@@ -382,28 +391,23 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
       }
 
       if (tsubcat != undefined) { 
-        if (this.subcat != tsubcat) {
           this.subcat=tsubcat;
-        }
       }
 
-     // get more if more need be gotten 
-//      this.show();
-
-
-    if (jqm_off == false) {
-
-        if (main_shape != "wide") {
-           var s = this.cat + "_sog"; 
-           $('#'+s).popup();    
-           $('#'+s).popup("close");    
-           $('#'+s).popup("close");    
-       //  $('#'+s).popup("refresh"); 
-       }   
-    }   
-
-      this.redraw_view(); 
-   
+      if (main_shape != "mini") {
+       if (jqm_off == false) {
+          if (main_shape != "wide") {
+            var s = this.cat + "_sog"; 
+            $('#'+s).popup();    
+            $('#'+s).popup("close");    
+            $('#'+s).popup("close");    
+        //  $('#'+s).popup("refresh"); 
+          }   
+       } 
+       this.show();
+      } else {
+        this.redraw_view(); 
+      }
 }
 
 

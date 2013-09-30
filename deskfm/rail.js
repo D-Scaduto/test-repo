@@ -15,14 +15,14 @@ rail.prototype.show = function() {
 
        tmp = tmp + "<div id='' class='ui-grid-a' style='text-align:center;' >";
 	
-        tmp = tmp + "<div id='' class='ui-block-a' style='' >";
+        tmp = tmp + "<div id='chip_rail' class='ui-block-a' style='' >";
         tmp = tmp + "<div id='' class='' style='width:200px;margin:0 auto;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
 
        if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='1' min='1' max='100'  style=''  />";
        } else {
- 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='width:40px;'   data-theme='c' data-track-theme='e' class=''  />";
+ 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
        }
 
         tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline;'  >";
@@ -31,15 +31,14 @@ rail.prototype.show = function() {
       tmp = tmp + "</div>";
       tmp = tmp + "</div>";
 
-
-       tmp = tmp + "<div id='' class='ui-block-b' style='' >";
+       tmp = tmp + "<div id='chunk_rail' class='ui-block-b' style='' >";
        tmp = tmp + "<div id='' class='' style='width:200px;margin:0 auto;' >";
 	tmp = tmp + "<label for='slider-2'></label>";
 
        if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-2' id='slider-2' value='0' min='0' max='10' style=''  />";
        } else {
- 	  tmp = tmp + "<input type='range'   name='slider-2' id='slider-2' value='0' min='0' max='10'  style='width:40px;'   data-theme='c' data-track-theme='e' class=''  />";
+ 	  tmp = tmp + "<input type='range'   name='slider-2' id='slider-2' value='0' min='0' max='10'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
        }
 
         tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;'  >";
