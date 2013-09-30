@@ -384,6 +384,7 @@ viewer.prototype.load_sorted_list = function(pstart) {
    this.dalist = [];
 
    this.stats = amare.total_sorted;
+
    this.cat = "all";
     
    var st = 0;
@@ -450,6 +451,7 @@ viewer.prototype.load_random_list = function() {
    this.darungs = [];
 
    this.stats = amare.total_sorted;
+
    this.dalist = [];
     
    var tls = [];
@@ -479,5 +481,6 @@ viewer.prototype.load_random_list = function() {
 	     
    this.load_rungs(0,"webits");
    this.draw_view();
-
 }
+
+

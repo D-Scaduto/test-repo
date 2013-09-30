@@ -139,8 +139,7 @@ viewer.prototype.draw_view = function() {
    }
 
     if (this.is_mini == false ) {
-	   //  dale.set_rails();
-            dale.draw_raildata();
+	    dale.draw_raildata();
             sal.draw_vman();
     }
 

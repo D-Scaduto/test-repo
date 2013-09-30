@@ -148,6 +148,8 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/grouper.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
+<script src=deskfm/footer.js type="text/javascript" ></script>
+
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
@@ -162,7 +164,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div>
 
-<div data-role='page' class='ui-page'  >
+<div  id='page_spot'  data-role='page' class='ui-page'  >
 
 <div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
@@ -176,6 +178,12 @@ header('Content-type: text/html; charset=utf-8 ');
     </div>
 
   </div>
+
+<div id='footer_spot' style='' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
+      <div id='rail_spot' class='' style=''  >
+      </div>
+</div>
+
 
 </div>
 
@@ -217,7 +225,8 @@ header('Content-type: text/html; charset=utf-8 ');
    }
 
            jesie = new namer("name");
-	   sal = new logoman("rail");
+	   sal = new logoman("logo");
+           ray = new footer("foot");
  	   dale = new rail("rail");
    	   store = new shoper("shop");
 	   mac = new sorter("sort");
@@ -229,9 +238,9 @@ header('Content-type: text/html; charset=utf-8 ');
            robby = new grouper("group");
 
 	   diego = new header();
-           var tshapes = ['search:wanda','share:nicky','browse:cater','feed:louie','sort:mac','group:robby','manage:joe'];
+           var tshapes = ['search:wanda','share:nicky','feed:louie','sort:mac','group:robby','manage:joe'];
            diego.set_shapes(tshapes);
-	   
+
     amare.get_stats();
 
     amare.get_products();
@@ -243,6 +252,10 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.month = "";
     dt.year="";
     amare.get_unsorted(dt,true);
+
+    $( document ).on( "pageinit", "#page_spot", function( event ) {
+      dale.show();
+    });
 
 
    $(window).resize(function(val) {
@@ -267,7 +280,6 @@ header('Content-type: text/html; charset=utf-8 ');
                if (daviewer.gridcols != 3) {
                  daviewer.set_gridcols(3);
                }
-               cater.show();
 
             } else {
  

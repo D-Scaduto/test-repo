@@ -94,6 +94,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var joe = null;    //supplier
   var amare = null;  //stater
   var sal = null;    //logoman
+  var ray = null;    //footer
   var diego = null;  //header
   var louie = null;  //feeder 
   var jesie = null;  //namer
@@ -153,6 +154,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
+<script src=deskfm/footer.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
@@ -165,7 +167,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div> 
 
-<div data-role='page' class='ui-page' >
+<div id='page_spot' data-role='page' class='ui-page' >
 
 <div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
 </div>
@@ -181,6 +183,12 @@ header('Content-type: text/html; charset=utf-8 ');
     </div>
 
   </div>
+
+<div id='footer_spot' style='' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
+      <div id='rail_spot' class='' style=''  >
+      </div>
+</div>
+
 
 </div>
 
@@ -208,7 +216,8 @@ header('Content-type: text/html; charset=utf-8 ');
    do_preload();
 //   init_months();
 
-        sal = new logoman("rail");
+        sal = new logoman("logo");
+        ray = new footer("foot");
 	dale = new rail("rail");
 	jesie = new namer("name");
         store = new shoper("shop");
@@ -232,12 +241,15 @@ header('Content-type: text/html; charset=utf-8 ');
 	diego = new header();
         var tshapes = ['search:wanda','share:nicky'];
         diego.set_shapes(tshapes);
-//        diego.set_shape("rail");
 
     amare.get_stats();
     amare.get_suppliers();
     amare.get_products();
     amare.get_webits();
+
+    $( document ).on( "pageinit", "#page_spot", function( event ) {
+      dale.show();
+    });
 
    $(window).resize(function(val) {
          if ($(window).width() < 600) {
