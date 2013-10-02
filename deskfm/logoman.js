@@ -20,28 +20,35 @@ logoman.prototype.show = function () {
      sty='background-color:white;'
    }
 
+        ocl = "daviewer.toggle_nitro();";
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
    if (this.logo_shape == "deskfm") {
-            cls = 'logo_short';
 
             lbl = this.spotid + '_logo_spot1';
 	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-             tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
+             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "DeskFM";
             tmp=tmp+"</span>";
    } 
    if (this.logo_shape == "freedom") { 
-            cls = 'logo_long';
             lbl = this.spotid + '_logo_spot1';
 	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-             tmp=tmp+"<span onclick='"+ocl+"' class='"+cls+"' style='"+sty+"' >";
+             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
    } 
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmp;
-  }
+       document.getElementById(lbl).innerHTML=tmp;
+     $('#'+lbl).trigger("create");    
+      
+   }
 }
 
 

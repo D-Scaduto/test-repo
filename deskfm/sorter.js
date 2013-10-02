@@ -30,7 +30,6 @@ sorter.prototype.show = function() {
       this.krono.show();
       $('#sort_spot').trigger('create');
       this.check_local();
-      cater.show();
       $('#sort_btn').addClass("ui-btn-active");
    } 
 
@@ -107,9 +106,6 @@ sorter.prototype.hide = function() {
        this.showing = false;
    }
 
-   if (buddah == true) {
-     cater.hide();
-   }
    $('sort_btn').removeClass("ui-btn-active");
    
 }

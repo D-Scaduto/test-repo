@@ -75,12 +75,10 @@ header('Content-type: text/html; charset=utf-8 ');
 </script>
 <?php  } ?>
 
-
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/wide.css' type="text/css" media="screen,print" />
-
 
 <script  type="text/javascript" >
 
@@ -94,7 +92,6 @@ header('Content-type: text/html; charset=utf-8 ');
   var joe = null;    //supplier
   var amare = null;  //stater
   var sal = null;    //logoman
-  var ray = null;    //footer
   var diego = null;  //header
   var louie = null;  //feeder 
   var jesie = null;  //namer
@@ -169,24 +166,27 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='page_spot' data-role='page' class='ui-page' >
 
-<div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
+<div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
 <div style='clear:both;' > </div>
 
-  <div  data-role='content'  class='ui-grid-a' style=''  >
+  <div  data-role='content'  class='' style=''  >
 
-    <div id='mainbar_spot' class='ui-block-a' style=''  >
-    </div>
- 
-    <div id='main_view'  class='ui-block-b' style=''   >
+    <div id='main_view'  class='' style=''   >
     </div>
 
   </div>
 
-<div id='footer_spot' style='min-width:350px;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
-      <div id='rail_spot' class='' style=''  >
-      </div>
+<div id='footer_spot' style='min-width:350px;text-align:center;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
+
+  <div   class='ui-grid-a' style=''  >
+    <div id='rail_btns' class='ui-block-a' style=''  >
+    </div>
+    <div id='rail_spot'  class='ui-block-b' style=''   >
+    </div>
+  </div>
+
 </div>
 
 </div>
@@ -237,18 +237,11 @@ header('Content-type: text/html; charset=utf-8 ');
        }
 
 	diego = new header();
-        var tshapes = ['search:wanda','share:nicky','browse:cater'];
-        diego.set_shapes(tshapes);
 
     amare.get_stats();
 //    amare.get_suppliers();
 //    amare.get_products();
     amare.get_webits();
-
-    $( document ).on( "pageinit", "#page_spot", function( event ) {
-      diego.set_botshape("browse");
-      dale.show();
-    });
 
    $(window).resize(function(val) {
          if ($(window).width() < 600) {
@@ -257,17 +250,25 @@ header('Content-type: text/html; charset=utf-8 ');
               main_shape = "mini";
               daviewer.gridcols=1;
               diego.show();
-            }
+              $('#footer_spot').css('position','static');
+              $('#footer_spot').trigger("create");
+           }
+
+          } else {
+
+             if ($('#footer_spot').css('position') != 'fixed') {
+                $('#footer_spot').css('position','fixed');
+                $('#footer_spot').trigger("create");
+             }
  
-         } else {
             if ($(window).width() > 900) {
 
               if (main_shape != "wide") {
                 main_shape = "wide";
                 daviewer.gridcols=3;
                 daviewer.draw_view();
-                 diego.show();
-              }
+                diego.show();
+            }
  
             } else {
               if (main_shape != "reg") {
@@ -280,7 +281,19 @@ header('Content-type: text/html; charset=utf-8 ');
         }
 
     });
-   $(window).resize();
+
+
+    $( document ).on( "pageinit", "#page_spot", function( event ) {
+      diego.set_botshape("browse");
+      dale.show();
+      $(window).resize();
+   });
+
+
+
+
+
+
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 

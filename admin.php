@@ -150,7 +150,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/header.js type="text/javascript" ></script>
 <script src=deskfm/footer.js type="text/javascript" ></script>
 
-
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
 <script src=deskfm/calendor.js type="text/javascript" ></script>
@@ -166,22 +165,30 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div  id='page_spot'  data-role='page' class='ui-page'  >
 
-<div id='menu_spot' style='' class='menu_box'  data-role='header' data-theme='b'  >
+<div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
   <div  data-role='content'  class='ui-grid-a' style=''  >
 
-    <div id='mainbar_spot' class='ui-block-a' style=''  >
+    <div id='sidebar_spot' class='ui-block-a' style='width:25%'  >
     </div>
  
-    <div id='main_view'  class='ui-block-b' style=''   >
+    <div id='main_view'  class='ui-block-b' style='width:75%'   >
     </div>
 
   </div>
 
-<div id='footer_spot' style='min-width:350px;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
-      <div id='rail_spot' class='' style=''  >
-      </div>
+<div id='foot_spot' data-position='fixed'  data-role='footer' data-theme='b'  >
+  <div   class='ui-grid-a' style=''  >
+
+    <div id='rail_btns' class='ui-block-a' style=''  >
+    </div>
+ 
+    <div id='rail_spot'  class='ui-block-b' style=''   >
+    </div>
+
+  </div>
+
 </div>
 
 </div>
@@ -216,7 +223,6 @@ header('Content-type: text/html; charset=utf-8 ');
    if (is_mobile == true) {
            da_limit = 100;
 	   daviewer.top_end = 25;
-	  
    } else {
            da_limit = 1000;
 	   daviewer.top_end = 100;
@@ -224,7 +230,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
            jesie = new namer("name");
 	   sal = new logoman("logo");
-           ray = new footer("foot");
  	   dale = new rail("rail");
    	   store = new shoper("shop");
 	   mac = new sorter("sort");
@@ -234,10 +239,7 @@ header('Content-type: text/html; charset=utf-8 ');
 	   nicky = new sharer("share");
            joe = new supplier("manage");
            robby = new grouper("group");
-
 	   diego = new header();
-           var tshapes = ['search:wanda','share:nicky','feed:louie','sort:mac','group:robby','manage:joe'];
-           diego.set_shapes(tshapes);
 
     amare.get_stats();
 
@@ -250,9 +252,9 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.month = "";
     dt.year="";
     amare.get_unsorted(dt,true);
-
+ 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
-       diego.set_botshape("sort");
+      diego.set_botshape("sort");
       dale.show();
     });
 
@@ -263,12 +265,19 @@ header('Content-type: text/html; charset=utf-8 ');
             if (main_shape != "mini") {
               main_shape = "mini";
                daviewer.gridcols=1;
-              diego.show();
+               diego.show();
+               $('#footer_spot').css('position','static');
+               $('#footer_spot').trigger("create");
             }
  
          } else {
-            if ($(window).width() > 900) {
 
+             if ($('#footer_spot').css('position') != 'fixed') {
+                $('#footer_spot').css('position','fixed');
+                $('#footer_spot').trigger("create");
+             }
+ 
+            if ($(window).width() > 900) {
               if (main_shape != "wide") {
                 main_shape = "wide";
                 daviewer.gridcols=3;

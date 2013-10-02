@@ -1,16 +1,36 @@
 
 @media screen and (max-width:599px) {
 
-     #mainbar_spot {
-        background-color:white; 
-        width:100%;
-        float:none;
+    #left_spot {
+      width:10%;
      }
 
-     #main_view {
-        background-color:white; 
-        width:100%;
-        float:none;
+    #menu_spot {
+       min-width:400px;
+     }
+
+    #mainbar_spot {
+       text-align:left;
+       width:60%;
+       vertical-align:middle;
+     }
+
+     #right_spot {
+        width:30%;
+     }
+
+     .menu_btn {
+        width:20px;
+       background-color:white;
+     }
+
+     .mybtns .ui-btn-inner  {
+        background:white;
+        padding:0 0 0;
+     }
+
+    .menu_sub {
+        display:inline-block;
      }
 
      #chip_rail {
@@ -23,36 +43,8 @@
         float:none;       
      }
 
-     .menu_box {
-        min-width:350px;
-        width:100%;
-      }
-
-     .menu_sub {
-        width:100%
-     }
-
-     .menu_btn {
-        width:20px;
-       background-color:white;
-     }
-
- .mybtns .ui-btn-inner  {
-   background:white;
-   padding:0 0 0;
- }
-
-
-
- .logo_short {
-    font-size: 1.2em;
-    display:inline-block;
-    vertical-align:middle;
-  }
-
-  .logo_long {
-    font-size: 1.2em;
-    display:inline-block;
+  .logo_talk {
+    font-size: 1.5em;
     vertical-align:middle;
   }
 

@@ -6,17 +6,20 @@ function rail (pspotid) {
    this.showing = false;
 }
 
- 
+   
 rail.prototype.show = function() {
+   this.draw_rail();
+   this.draw_btns();
+}
+
+
+rail.prototype.draw_rail = function() {
    var pobj=null;
    var lbl = "";
    var tmp = "";
    var tsrc = "";
 
-       tmp = tmp + "<div id='' class='ui-grid-a' style='text-align:center;' >";
-	
-        tmp = tmp + "<div id='chip_rail' class='ui-block-a' style='' >";
-        tmp = tmp + "<div id='' class='' style='width:200px;margin:0 auto;' >";
+        tmp = tmp + "<div id='' class='' style='width:300px;display:inline-block;vertical-align:middle;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
 
        if (jqm_off == true) {
@@ -25,36 +28,9 @@ rail.prototype.show = function() {
  	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
        }
 
-        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline;'  >";
-        tmp = tmp + "</div>";
- 
       tmp = tmp + "</div>";
-      tmp = tmp + "</div>";
-
-       tmp = tmp + "<div id='chunk_rail' class='ui-block-b' style='' >";
-       tmp = tmp + "<div id='' class='' style='width:200px;margin:0 auto;' >";
-	tmp = tmp + "<label for='slider-2'></label>";
-
-       if (jqm_off == true) {
- 	  tmp = tmp + "<input type='range' name='slider-2' id='slider-2' value='0' min='0' max='10' style=''  />";
-       } else {
- 	  tmp = tmp + "<input type='range'   name='slider-2' id='slider-2' value='0' min='0' max='10'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
-       }
-
-        tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;'  >";
-        tmp = tmp + "</div>";
- 
-      tmp = tmp + "</div>";
-      tmp = tmp + "</div>";
-
-      tmp = tmp + "</div>";
-
-     if (debug == true) {
-       tmp = tmp + "<div id='rail_debug' class='' style='' >";
-       tmp = tmp + "</div>";
-      }
-   
-   lbl = this.spotid;
+  
+   lbl = 'rail_spot';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
       pobj.innerHTML = tmp;
@@ -64,12 +40,7 @@ rail.prototype.show = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
           });
-          $('#slider-2').on("change",function(event) {
-               var st = "";
-                st = parseInt(event.target.value) * daviewer.top_end;
-                daviewer.goto_listdex(st);
-          });
- 
+
        } else {
            $('#'+lbl).trigger("create");
 
@@ -78,17 +49,65 @@ rail.prototype.show = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
             });
-            $('#slider-2').bind("slidestop",function(event) {
-                var st = "";
-                st = parseInt(event.target.value) * daviewer.top_end;
-                daviewer.goto_listdex(st);
-            });
-
        }
        this.showing = true;
     }
 }
 
+
+rail.prototype.draw_btns = function() {
+   var pobj=null;
+   var lbl = "";
+   var tmp = "";
+   var tsrc = "";
+
+	 lbl = 'prev_chunk'; 
+        ocl = "daviewer.prev_chunk();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/fast-back.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+	 lbl = 'prev_btn'; 
+        ocl = "daviewer.prev();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+	 lbl = 'next_btn'; 
+        ocl = "daviewer.next();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+ 
+	 lbl = 'next_chunk'; 
+        ocl = "daviewer.next_chunk();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/fast-fwd.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+
+        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;'  >";
+        tmp = tmp + "</div>";
+ 
+     if (debug == true) {
+       tmp = tmp + "<div id='rail_debug' class='' style='' >";
+       tmp = tmp + "</div>";
+      }
+  
+   lbl = 'rail_btns';
+   pobj = document.getElementById(lbl);
+   if ( pobj != null) {
+      pobj.innerHTML = tmp;
+   }
+}
 
 
 rail.prototype.draw_raildata = function() {
@@ -103,32 +122,19 @@ rail.prototype.draw_raildata = function() {
   	   var lchunks = Math.floor(daviewer.stats.lnum / daviewer.top_end) -1;
    	   var mchunks = Math.floor(daviewer.stats.cnum / daviewer.top_end);
    	   var lc = lchunk;
-               $('#slider-2').val(lchunk );
-               $('#slider-2').attr("max", lchunks );
-               $('#slider-2').attr("min", 0 );
-               $('#slider-2').slider('refresh');
- 
-           tmp = "sets 0 to " + lchunks;
-           tmp = tmp + " x" + daviewer.top_end;
-           $('#slider-2-detail').html(tmp);
-
 
       if (mchunks > lchunks ) {
       } 
  
-      var st = lchunk * daviewer.top_end;
-      if (st == 0) {st = 1; } 
-      var fn = st + daviewer.top_end -2;
-      if (fn >= daviewer.stats.lnum) {
-          fn = daviewer.stats.lnum -2;
-      }
+      var st = 1;
+      var fn = daviewer.stats.lnum -2;
       var ld = parseInt(daviewer.listdex) + 1;
-
+      var cn = daviewer.stats.cnum;
       $('#slider-1').attr("min", st );
       $('#slider-1').attr("max", fn );
       $('#slider-1').val(ld);
       $('#slider-1').slider('refresh');
-      tmp = "items " + st + " to " + fn + " of " + daviewer.dalist.length;
+      tmp = daviewer.dalist.length + " of " + cn;
       $('#slider-1-detail').html(tmp);
 
    } else {
