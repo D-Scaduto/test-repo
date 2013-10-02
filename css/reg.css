@@ -15,6 +15,16 @@
         width:20%;
      }
 
+    #sidebar_spot {
+       width:100%;
+       float:none;
+     }
+
+    #main_view {
+       width:100%;
+       float:none;
+     }
+
      .menu_btn {
         width:25px;
        background-color:white;
@@ -39,7 +49,7 @@
 
  
   .logo_talk {
-    font-size: 1.7em;
+    font-size: 1.2em;
     display:inline-block;
     vertical-align:middle;
   }

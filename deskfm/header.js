@@ -100,9 +100,9 @@ header.prototype.draw_left = function () {
          tmp = tmp + "<div  id='' class='' style='min-width:150px;'  >";
  
         lbl = 'vman_btn'; 
-        ocl = "daviewer.nitro_stop();";
-        ocl = ocl + 'diego.set_topshape(\"\");'
-         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+        ocl = 'daviewer.toggle_zoom();'
+  //      ocl = ocl + 'diego.set_topshape(\"\");'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";

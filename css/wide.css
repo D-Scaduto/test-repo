@@ -2,17 +2,26 @@
 @media screen and (min-width:900px) {
 
     #left_spot {
-      width:25%;
+      width:35%;
      }
 
     #mainbar_spot {
-       width:60%;
+       width:50%;
         text-align:center;
        vertical-align:middle;
     }
 
      #right_spot {
         width:15%;
+     }
+
+    #sidebar_spot {
+       width:25%;
+     }
+
+
+     #main_view {
+       width:75%;
      }
 
      .menu_btn {

@@ -1,17 +1,14 @@
 
 function rail (pspotid) {
-
    this.spotid = pspotid + "_spot";
    this.varname = "dale";
    this.showing = false;
 }
-
    
 rail.prototype.show = function() {
    this.draw_rail();
    this.draw_btns();
 }
-
 
 rail.prototype.draw_rail = function() {
    var pobj=null;
@@ -19,7 +16,7 @@ rail.prototype.draw_rail = function() {
    var tmp = "";
    var tsrc = "";
 
-        tmp = tmp + "<div id='' class='' style='width:300px;display:inline-block;vertical-align:middle;' >";
+        tmp = tmp + "<div id='' class='' style='width:100%;display:inline-block;vertical-align:middle;' >";
 	tmp = tmp + "<label for='slider-1'></label>";
 
        if (jqm_off == true) {
@@ -61,6 +58,7 @@ rail.prototype.draw_btns = function() {
    var tmp = "";
    var tsrc = "";
 
+/*
 	 lbl = 'prev_chunk'; 
         ocl = "daviewer.prev_chunk();";
          tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
@@ -69,22 +67,7 @@ rail.prototype.draw_btns = function() {
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
 
-	 lbl = 'prev_btn'; 
-        ocl = "daviewer.prev();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
 
-	 lbl = 'next_btn'; 
-        ocl = "daviewer.next();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
- 
 	 lbl = 'next_chunk'; 
         ocl = "daviewer.next_chunk();";
          tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
@@ -93,8 +76,8 @@ rail.prototype.draw_btns = function() {
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
 
-
-        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;'  >";
+*/
+        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
         tmp = tmp + "</div>";
  
      if (debug == true) {

@@ -65,7 +65,7 @@ viewer.prototype.draw_view = function() {
 
    if (jqm_off == false) {
      if (this.gridcols ==1) { 
-       tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='true' >";
+       tmpstr=tmpstr+"<ul id='lv' data-role='listview'  >";
      } else if (this.gridcols == 2) {
         tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-a'  >";
      } else if (this.gridcols == 3) {

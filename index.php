@@ -178,15 +178,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
   </div>
 
-<div id='footer_spot' style='min-width:350px;text-align:center;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
-
-  <div   class='ui-grid-a' style=''  >
-    <div id='rail_btns' class='ui-block-a' style=''  >
-    </div>
-    <div id='rail_spot'  class='ui-block-b' style=''   >
-    </div>
-  </div>
-
+<div id='foot_spot' style='min-width:350px;text-align:center;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
 </div>
 
 </div>
@@ -250,15 +242,15 @@ header('Content-type: text/html; charset=utf-8 ');
               main_shape = "mini";
               daviewer.gridcols=1;
               diego.show();
-              $('#footer_spot').css('position','static');
-              $('#footer_spot').trigger("create");
+              $('#foot_spot').css('position','static');
+              $('#foot_spot').trigger("create");
            }
 
           } else {
 
-             if ($('#footer_spot').css('position') != 'fixed') {
-                $('#footer_spot').css('position','fixed');
-                $('#footer_spot').trigger("create");
+             if ($('#foot_spot').css('position') != 'fixed') {
+                $('#foot_spot').css('position','fixed');
+                $('#foot_spot').trigger("create");
              }
  
             if ($(window).width() > 900) {
@@ -285,7 +277,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
       diego.set_botshape("browse");
-      dale.show();
+      ray.show();
       $(window).resize();
    });
 

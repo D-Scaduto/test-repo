@@ -4,7 +4,7 @@ function logoman (pspot) {
   this.spotid = pspot + "_spot";
   this.varname= "sal";
   this.shape = "shrunk";    //shrunk,full
-  this.logo_shape="deskfm";
+  this.logo_shape="fm";
   this.flip =0;
 }
 
@@ -20,6 +20,45 @@ logoman.prototype.show = function () {
      sty='background-color:white;'
    }
 
+        lbl = this.spotid + '_logo_spot1';
+        ocl = this.varname + ".set_logoshape(\"freedom\");";
+        tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
+        tmp = tmp + "Desk";
+        tmp=tmp+"</span>";
+ 
+   if (this.logo_shape == "fm") {
+
+            lbl = this.spotid + '_logo_spot2';
+	    ocl = this.varname + ".set_logoshape(\"freedom\");";
+            tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
+            tmp = tmp + "FM";
+            tmp=tmp+"</span>";
+
+	 lbl = 'prev_btn'; 
+        ocl = "daviewer.prev();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+	 lbl = 'next_btn'; 
+        ocl = "daviewer.next();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+   }
+ 
+   if (this.logo_shape == "freedom") { 
+            lbl = this.spotid + '_logo_spot2';
+	    ocl = this.varname + ".set_logoshape(\"fm\");";
+            ocl = ocl + "daviewer.nitro_stop()";
+             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
+            tmp = tmp + "FreedoM";
+            tmp=tmp+"</span>";
+
         ocl = "daviewer.toggle_nitro();";
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
@@ -27,20 +66,7 @@ logoman.prototype.show = function () {
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
-   if (this.logo_shape == "deskfm") {
 
-            lbl = this.spotid + '_logo_spot1';
-	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
-            tmp = tmp + "DeskFM";
-            tmp=tmp+"</span>";
-   } 
-   if (this.logo_shape == "freedom") { 
-            lbl = this.spotid + '_logo_spot1';
-	    ocl = this.varname + ".set_logoshape(\"deskfm\");";
-             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
-            tmp = tmp + "FreedoM";
-            tmp=tmp+"</span>";
    } 
 
    lbl = this.spotid;

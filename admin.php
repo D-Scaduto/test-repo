@@ -170,25 +170,15 @@ header('Content-type: text/html; charset=utf-8 ');
 
   <div  data-role='content'  class='ui-grid-a' style=''  >
 
-    <div id='sidebar_spot' class='ui-block-a' style='width:25%'  >
+    <div id='sidebar_spot' class='ui-block-a' style=''  >
     </div>
  
-    <div id='main_view'  class='ui-block-b' style='width:75%'   >
+    <div id='main_view'  class='ui-block-b' style=''   >
     </div>
 
   </div>
 
 <div id='foot_spot' data-position='fixed'  data-role='footer' data-theme='b'  >
-  <div   class='ui-grid-a' style=''  >
-
-    <div id='rail_btns' class='ui-block-a' style=''  >
-    </div>
- 
-    <div id='rail_spot'  class='ui-block-b' style=''   >
-    </div>
-
-  </div>
-
 </div>
 
 </div>
@@ -230,6 +220,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
            jesie = new namer("name");
 	   sal = new logoman("logo");
+           ray = new footer("foot");
  	   dale = new rail("rail");
    	   store = new shoper("shop");
 	   mac = new sorter("sort");
@@ -255,7 +246,7 @@ header('Content-type: text/html; charset=utf-8 ');
  
     $( document ).on( "pageinit", "#page_spot", function( event ) {
       diego.set_botshape("sort");
-      dale.show();
+      ray.show();
     });
 
 
@@ -266,15 +257,15 @@ header('Content-type: text/html; charset=utf-8 ');
               main_shape = "mini";
                daviewer.gridcols=1;
                diego.show();
-               $('#footer_spot').css('position','static');
-               $('#footer_spot').trigger("create");
+               $('#foot_spot').css('position','static');
+               $('#foot_spot').trigger("create");
             }
  
          } else {
 
-             if ($('#footer_spot').css('position') != 'fixed') {
-                $('#footer_spot').css('position','fixed');
-                $('#footer_spot').trigger("create");
+             if ($('#foot_spot').css('position') != 'fixed') {
+                $('#foot_spot').css('position','fixed');
+                $('#foot_spot').trigger("create");
              }
  
             if ($(window).width() > 900) {

@@ -19,6 +19,17 @@
         width:30%;
      }
 
+    #sidebar_spot {
+       width:100%;
+       float:none;
+     }
+
+    #main_view {
+       width:100%;
+       float:none;
+     }
+
+
      .menu_btn {
         width:20px;
        background-color:white;
