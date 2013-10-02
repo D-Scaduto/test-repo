@@ -20,6 +20,15 @@ logoman.prototype.show = function () {
      sty='background-color:white;'
    }
 
+        lbl = 'vman_btn'; 
+        ocl = 'daviewer.toggle_zoom();'
+  //      ocl = ocl + 'diego.set_topshape(\"\");'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
         lbl = this.spotid + '_logo_spot1';
         ocl = this.varname + ".set_logoshape(\"freedom\");";
         tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
@@ -34,21 +43,6 @@ logoman.prototype.show = function () {
             tmp = tmp + "FM";
             tmp=tmp+"</span>";
 
-	 lbl = 'prev_btn'; 
-        ocl = "daviewer.prev();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-
-	 lbl = 'next_btn'; 
-        ocl = "daviewer.next();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
    }
  
    if (this.logo_shape == "freedom") { 
@@ -59,15 +53,9 @@ logoman.prototype.show = function () {
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
 
-        ocl = "daviewer.toggle_nitro();";
-        tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
-
    } 
+
+
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -136,17 +124,15 @@ logoman.prototype.change_vman = function () {
 
 logoman.prototype.waiting = function () {
    var lbl = "";
-   var tmpstr = "";
-   var tmpsrc = "";
+   var tmp = "";
+   var tsrc = "";
 
    tmpsrc = "deskfm/images/random/loading-go.gif";
 
-   tmpstr="<img src='"+tmpsrc+"' class='menu_btn' >";
+   lbl =  "vman_btn";
+      $('#vman_btn').attr('src',tsrc);
+     $('#vman_btn').trigger("create");
 
-   lbl =  "zoom_btn";
-   if (document.getElementById(lbl) !=null) {
-         document.getElementById(lbl).innerHTML=tmpstr;
-   }
 }
 
 

@@ -170,10 +170,10 @@ header('Content-type: text/html; charset=utf-8 ');
 
   <div  data-role='content'  class='ui-grid-a' style=''  >
 
-    <div id='sidebar_spot' class='ui-block-a' style=''  >
+    <div id='side_bar' class='ui-block-a' style=''  >
     </div>
  
-    <div id='main_view'  class='ui-block-b' style=''   >
+    <div id='main_spot'  class='ui-block-b' style=''   >
     </div>
 
   </div>
@@ -208,7 +208,7 @@ header('Content-type: text/html; charset=utf-8 ');
    buddah=true;
 
    amare = new stater();
-   daviewer = new viewer("main_view","daviewer");
+   daviewer = new viewer("main_spot","daviewer");
    
    if (is_mobile == true) {
            da_limit = 100;
@@ -244,49 +244,59 @@ header('Content-type: text/html; charset=utf-8 ');
     dt.year="";
     amare.get_unsorted(dt,true);
  
-    $( document ).on( "pageinit", "#page_spot", function( event ) {
-      diego.set_botshape("sort");
-      ray.show();
-    });
-
-
-   $(window).resize(function(val) {
-         if ($(window).width() < 600) {
-
+      $(window).resize(function(val) {
+         if ($(window).width() < 500) {
             if (main_shape != "mini") {
               main_shape = "mini";
-               daviewer.gridcols=1;
-               diego.show();
-               $('#foot_spot').css('position','static');
-               $('#foot_spot').trigger("create");
-            }
- 
-         } else {
-
+              daviewer.gridcols=1;
+              diego.show();
+              $('#foot_spot').css('position','static');
+              $('#foot_spot').trigger("create");
+           }
+          } else {
              if ($('#foot_spot').css('position') != 'fixed') {
                 $('#foot_spot').css('position','fixed');
                 $('#foot_spot').trigger("create");
              }
- 
-            if ($(window).width() > 900) {
+            if ($(window).width() > 1000) {
               if (main_shape != "wide") {
-                main_shape = "wide";
-                daviewer.gridcols=3;
-               diego.show();
+                 main_shape = "wide";
+                 diego.show();
               }
-
+              if (daviewer.gridcols != 4) {
+                 daviewer.gridcols=4;
+                 daviewer.draw_view();
+              }
             } else {
- 
-              if (main_shape != "reg") {
-                main_shape = "reg";
-                daviewer.gridcols=2;
-                diego.show();
+               if ($(window).width() > 800) {
+                  if (main_shape != "wide") {
+                    main_shape = "wide";
+                    diego.show();
+                  } 
+                  if (daviewer.gridcols != 3) {
+                    daviewer.gridcols=3;
+                    daviewer.draw_view();
+                  }
+              } else {
+                if (main_shape != "reg") {
+                   main_shape = "reg";
+                   daviewer.gridcols=2;
+                   daviewer.draw_view();
+                   diego.show();
+                }
               }
-            }
+           }
         }
-
     });
-   $(window).resize();
+
+
+   $( document ).on( "pageinit", "#page_spot", function( event ) {
+      diego.set_botshape("sort");
+      ray.show();
+      $(window).resize();
+   });
+
+
 
 </script>
 

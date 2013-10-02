@@ -98,17 +98,32 @@ header.prototype.draw_left = function () {
         var tmp = "";
 
          tmp = tmp + "<div  id='' class='' style='min-width:150px;'  >";
- 
-        lbl = 'vman_btn'; 
-        ocl = 'daviewer.toggle_zoom();'
-  //      ocl = ocl + 'diego.set_topshape(\"\");'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+/*
+        ocl = "daviewer.toggle_nitro();";
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+*/
+	 lbl = 'prev_btn'; 
+        ocl = "daviewer.prev();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
 
-     if (main_shape != "mini") {
+	 lbl = 'next_btn'; 
+        ocl = "daviewer.next();";
+         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+
+     if (main_shape == "wide") {
          tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;'  >";
          tmp = tmp + "</div>";
      }
@@ -169,7 +184,7 @@ header.prototype.draw_mainbar = function () {
      var tmp = "";
      var ocl = "";
 
-    if (main_shape == "mini") {
+    if (main_shape != "wide") {
       tmp = tmp + "<div id='logo_spot' class='menu_sub' style=''  >";
       tmp = tmp + "</div>";
     }
@@ -199,19 +214,19 @@ header.prototype.draw_sidebar = function () {
      var tmp = "";
      var ocl = "";
 
-      tmp = tmp + "<div id='sort_spot' class='menu_sub' style=''  >";
+      tmp = tmp + "<div id='sort_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='feed_spot' class='menu_sub' style=''  >";
+      tmp = tmp + "<div id='feed_spot' class='' style=''  >";
       tmp = tmp + "</div>";
   
-      tmp = tmp + "<div id='group_spot' class='menu_sub' style=''  >";
+      tmp = tmp + "<div id='group_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='manage_spot' class='menu_sub' style=''  >";
+      tmp = tmp + "<div id='manage_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-     lbl = 'sidebar_spot';
+     lbl = 'side_bar';
      $('#'+lbl).html(tmp); 
 
 }
@@ -243,7 +258,7 @@ header.prototype.set_topshape = function (pshape) {
         eval(es);
      }
 
-    if (main_shape == "mini") {
+    if (main_shape != "wide") {
       if (this.top_shape == "") {
          sal.show();
       } else {

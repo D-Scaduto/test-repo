@@ -1,5 +1,4 @@
 
-
 poster.prototype.show_mini = function() {
    if (this.mini_viewer != null) {
      this.mini_viewer.draw_view();

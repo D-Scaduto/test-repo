@@ -1,26 +1,43 @@
 
-@media screen and (min-width:600px) and (max-width:899px) {
+@media screen and (min-width:500px) and (max-width:799px) {
+ 
+    .logo_talk {
+       font-size: 1.2em;
+       display:inline-block;
+       vertical-align:middle;
+    }
+
+    .screen_talk {
+       font-size: 1.1em;
+       display:inline-block;
+       vertical-align:middle;
+    }
 
     #left_spot {
-      width:35%;
+      width:20%;
      }
 
     #mainbar_spot {
-       width:45%;
-       text-align:center;
-        vertical-align:middle;
-     }
+       width:60%;
+       text-align:left;
+       vertical-align:middle;
+    }
 
      #right_spot {
         width:20%;
      }
 
-    #sidebar_spot {
+    #side_bar {
        width:100%;
        float:none;
      }
 
-    #main_view {
+     #main_spot {
+       width:100%;
+       float:none;
+     }
+
+     #main_view {
        width:100%;
        float:none;
      }
@@ -46,13 +63,6 @@
      #chunk_rail {
         width:50%;
      }
-
- 
-  .logo_talk {
-    font-size: 1.2em;
-    display:inline-block;
-    vertical-align:middle;
-  }
 
  .my-box {
     padding:5px;

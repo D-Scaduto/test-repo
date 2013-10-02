@@ -31,10 +31,8 @@ feeder.prototype.show = function() {
 
       tmp = tmp + "<div id='feed_btns' style='display:inline-block;vertical-align:middle;'  >";
       tmp = tmp + "</div>";
- 
 
      tmp = tmp + "</div>";
-
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
@@ -42,9 +40,9 @@ feeder.prototype.show = function() {
       this.showing = true;
       $('#'+lbl).trigger("create");
       if (amare.unsavedlist.length ==  0) {
-   //      this.check_feed();
+         this.check_feed();
       } else {
-   //      daviewer.load_unsaved_list(); 
+         daviewer.load_unsaved_list(); 
       } 
    } 
 

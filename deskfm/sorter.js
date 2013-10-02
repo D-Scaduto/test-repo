@@ -5,9 +5,12 @@ function sorter (pspotid) {
    this.varname = "mac";
    this.shape = "";  
    this.showing = false;
+
    this.sterms = "standing desk";
    this.da_date = new Date();
+
    this.krono = null;
+
 }
 
 sorter.prototype.show = function() {
@@ -18,8 +21,51 @@ sorter.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-   tmp = tmp + "<div id='cal_spot' class='' style='min-width:250px;display:inline-block;' >";
-   tmp = tmp + "</div>";	
+     if (main_shape != "wide") { 
+       tmp = tmp + "<div class='ui-grid-b' >";
+
+         tmp += "<div  id='' class='ui-block-a' style=''  >";
+	tmp += "<label for='select-year' class='select'></label>";
+ 	tmp += "<select name='select-year' data-mini='true' data-inline='true' id='select-year'>";
+ 	tmp += "  <option value='2013'>2013</option>";
+ 	tmp += "  <option value='2012'>2012</option>";
+  	tmp += "  <option value='2011'>2011</option>";
+ 	tmp += "</select>";
+         tmp = tmp + "</div>";
+
+         tmp += "<div  id='' class='ui-block-b' style=''  >";
+	
+        tmp=tmp+"<div data-role='collapsible' data-inline='true' style='width:150px;' >";
+     	tmp = tmp +"<h3>monthly</h3>";
+
+     } else {
+
+	tmp += "<label for='select-year' class='select'></label>";
+ 	tmp += "<select name='select-year' data-mini='true' data-inline='true' id='select-year'>";
+ 	tmp += "  <option value='2013'>2013</option>";
+ 	tmp += "  <option value='2012'>2012</option>";
+  	tmp += "  <option value='2011'>2011</option>";
+ 	tmp += "</select>";
+   	tmp = tmp +"<h3></h3>";
+
+     }
+
+   	tmp = tmp +"<ul  data-role='listview' id='' style='width:150px;' data-inline='true'  >";
+        var sugs = amare.monthstats;
+        for (var i=0;i<sugs.length;i++) {
+          ocl = this.varname + ".set_month("+sugs[i].month + ");";
+          var month = this.krono.months[sugs[i].month];
+          var year = sugs[i].year;
+          if (year == this.da_date.getFullYear()) {
+            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"</a></li>";
+          }
+        }
+        tmp = tmp + "</ul>";
+
+      if (main_shape != "wide") { 
+         tmp=tmp+"</div>";
+          tmp=tmp+"</div>";
+       }
 
    lbl = this.spotid;
 
@@ -39,10 +85,9 @@ sorter.prototype.show = function() {
 sorter.prototype.check_local = function() {
 
    var dt = new Object;
-   dt.month="";
-   if (this.krono.showing == true) {
-         dt = this.krono.get_da_month();
-   }
+   dt.month = this.da_date.getMonth();
+   dt.year = this.da_date.getFullYear();
+
    daviewer.load_unsorted_list(dt);
    var lstat = amare.get_monthstat(dt);
    if (lstat != null) {
@@ -54,6 +99,14 @@ sorter.prototype.check_local = function() {
 }
 
 
+sorter.prototype.set_month = function(pmon) {
+   if (pmon != undefined) {
+     this.da_date.setMonth(pmon);
+     this.check_local();
+   }
+}
+
+ 
 sorter.prototype.save_set = function() {
     // loop through daviewer
     // call add on all of em 

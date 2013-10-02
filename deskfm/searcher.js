@@ -23,7 +23,7 @@ searcher.prototype.show = function() {
    var sz = '10';
 
 /*
-      lbl = 'search_central btn';
+      lbl = 'search_unset_btn';
      ocl = this.varname+ ".check_central();";
         tmp = tmp + "<span  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
@@ -36,9 +36,9 @@ searcher.prototype.show = function() {
      ocl = this.varname+ ".check_local();";
      tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
      tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value=''  />";
-    tmp = tmp + "</span>";
+     tmp = tmp + "</span>";
 
- 
+
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;

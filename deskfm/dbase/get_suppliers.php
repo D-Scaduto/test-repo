@@ -2,7 +2,6 @@
 include '../../config/names.php';
 
  class foo { 
- 
    public $pid;
    public $uname;
    public $story;
@@ -10,21 +9,17 @@ include '../../config/names.php';
    public $linkurl;
    public $listype;
    public $stored = true;
-
   }
-
 
   class bar {
    public $dasql;
    public $dalist_len;
    public $dalist;
- }
+  }
 
-
- $rebar = new bar;
+  $rebar = new bar;
  
-
-$con = mysql_connect($Server, $username, $password);
+  $con = mysql_connect($Server, $username, $password);
 
   $where = "";
 
@@ -53,8 +48,8 @@ $con = mysql_connect($Server, $username, $password);
     $foodo = new foo;
  
     $foodo->listype = "suppliers";
-    $foodo->pid =  $row['supplier_id'];
-    $foodo->uname =   $row['name'];
+    $foodo->pid = $row['supplier_id'];
+    $foodo->uname = $row['name'];
     $foodo->picurl = $row['picurl'];
     $foodo->story  = $row['story'];
     $foodo->linkurl = $row['linkurl'];

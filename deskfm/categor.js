@@ -29,21 +29,33 @@ categor.prototype.show_popups = function() {
     var s = "";
     var sugs = [];
 
-   tmp +=  "<div style='width:240px' >";
+
+   tmp +=  "<div style='display:inline-block;' >";
+ 
+      if (main_shape != "wide") {
+        lbl = 'vman_btn'; 
+        ocl = 'daviewer.toggle_zoom();'
+  //       ocl = ocl + 'diego.set_topshape(\"\");'
+         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+         tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+      }
  
     if (this.subcat != "" ) {
 	lbl = 'subcat_btn';
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
         ocl = "cater.set_cats(\""+this.cat+"\",\"\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"' data-inline='true' data-role='button' style='vertical-align:top;'   >";
+        tmp=tmp+"<span id='"+lbl+"' onclick='"+ocl+"' class='screen_talk' style=''   >";
 	tmp = tmp + s;
-        tmp=tmp+"</button>";
+        tmp=tmp+"</span>";
 
    } else { 
 
    if ((this.cat != "who" ) || (this.subcat == "")) {
 
-	tmp += "<a href='#who_sog' data-rel='popup' data-role='button' data-theme='e' data-inline='true' style='' >who</a>";
+	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  > who , </a>";
  	tmp +=  "<div data-role='popup' id='who_sog'>";
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
@@ -53,12 +65,13 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+
     }
 
 
    if ((this.cat != "what" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#what_sog" data-rel="popup" data-role="button" data-inline="true"  data-theme="e" data-transition="slideup" style=""  >what</a>';
+        tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="slideup" style="" class="screen_talk"  > what , </a>';
  	tmp += '<div data-role="popup" id="what_sog" data-theme="d"  style="display:inline-block;"  >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("what");
@@ -68,11 +81,13 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+
     }
+
 
    if ((this.cat != "why" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#why_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"  style=""   >why</a>';
+        tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"  style="" class="screen_talk"  > why , </a>';
  	tmp += '<div data-role="popup" id="why_sog" data-theme="d" style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("why");
@@ -82,11 +97,12 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
+
      }
 
      if ((this.cat != "how" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#how_sog" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  >how</a>';
+        tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  class="screen_talk"  > how  </a>';
  	tmp += '<div data-role="popup" id="how_sog" data-theme="d"  style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("how");
@@ -96,12 +112,23 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
-      }
-  }
 
- 	tmp +=  '</div>';
+      }
+
+  }
+//      if (main_shape == "wide") {
+        lbl = 'browse_btn';
+        ocl = "cater.set_cats(\""+this.cat+"\",\"\");";
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+//      }
+
+     tmp +=  '</div>';
  
-    lbl = this.spotid;
+     lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
 

@@ -9,12 +9,6 @@
        var cls = '';
        var pobj = null;
 
-/*
-		     lbl= this.rungster + "_story_spot";
-	             tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
-	             tmpstr=tmpstr+"</span>";	
-*/
-
           if (debug == true) {
 	    lbl= this.rungster + "_debug_spot";
 	    tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 
@@ -23,33 +17,13 @@
 
            if (this.is_mini == true) {
 
-   	       lbl= this.rungster + "_btns_spot";
-	       tmpstr=tmpstr+"<span id='"+lbl+"' style='' >"; 
-    	       tmpstr=tmpstr+"</span>";
-
-	       tmpstr=tmpstr+"<span id='' style='float:right;' >"; 
-    	
-                    if (this.listype == "products") {
-                      lbl= this.rungster + "_buy_spot";
-                      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='float:right;' >"; 
-                      tmpstr=tmpstr+"</span>";
-                      tmpstr=tmpstr+"<div style='clear:right;' ></div>";
-                  }
-
                 lbl= this.rungster + "_pic_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"' style=''  >"; 
                 tmpstr=tmpstr+"</span>";
  
-                tmpstr=tmpstr+"</span>";
- 
-                tmpstr=tmpstr+"<div style='clear:left;' ></div>";
-
                 lbl= this.rungster + "_story_spot";
 	        tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
 	        tmpstr=tmpstr+"</span>";
-
-                tmpstr=tmpstr+"<div style='clear:right;' ></div>";
-
 
            } else {
 

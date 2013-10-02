@@ -1,5 +1,4 @@
 
-
 function grouper (pspotid) {
  
    this.spotid = pspotid + "_spot";
@@ -9,7 +8,6 @@ function grouper (pspotid) {
    this.groupid="";
 }
 
-
 grouper.prototype.show = function() {
 
      var tmp = "";
@@ -17,38 +15,28 @@ grouper.prototype.show = function() {
      var ocl = "";
      var s = "";
 
-
-    if (this.groupid != "" ) {
-
-        lbl = 'group_all_btn';
-        s = amare.group_set.get_desc(this.groupid);
-	ocl = this.varname + '.set_shape(\"\");';
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' data-inline='true' style='vertical-align:middle;'   >";
-	tmp = tmp +  this.cat + " " + s;
-        tmp=tmp+"</button>";
-
-   } else {
-
-        lbl = 'group_sog';
-        tmp=tmp+"<span style='display:inline-block;vertical-align:middle;' >";
-	tmp = tmp +"<label for='"+lbl+" class='select'  ></label>";
-   	tmp = tmp +"<select name='"+lbl+"' id='"+lbl+"  >";
+     if (main_shape != "wide") { 
+       tmp=tmp+"<div data-role='collapsible' style='width:200px;' >";
+     }
+    	tmp = tmp +"<h3>people groups</h3>";
+   	tmp = tmp +"<ul  data-role='listview' id='' style='width:200px;'  >";
         sugs = amare.group_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<option value='"+sugs[i].subcat+"' ctag='who' ptag='"+this.varname+"' >"+sugs[i].text+"</option>";
+          ocl = this.varname + ".set_group(\""+sugs[i].groupid+"\");";
+          tmp = tmp +"<li onclick='"+ocl+"' ><a href='#' >"+sugs[i].text+"</a></li>";
         }
-        tmp = tmp + "</select>";
-         tmp=tmp+"</span>";
-
-   }
+        tmp = tmp + "</ul>";
+      if (main_shape != "wide") { 
+         tmp=tmp+"</div>";
+       }
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
           this.showing = true;
-          $('#'+lbl).trigger("create");    
-	  daviewer.load_group_list(this.groupid);
+          $('#'+lbl).trigger("create");
+          this.redraw_view();
      }
 }
 
@@ -69,19 +57,12 @@ grouper.prototype.redraw_view = function(pchunk) {
 }
 
 
-grouper.prototype.change = function() {
-
-	this.toggle();
-  
-}
-
 grouper.prototype.set_shape = function(pstr) {
     if (pstr != undefined ) {
       if (pstr != this.shape) {
         this.shape = pstr;
       }
     }
- 
  
     this.show();
 
@@ -92,8 +73,7 @@ grouper.prototype.set_group = function (tgroupid) {
   if (tgroupid != undefined) {
     this.groupid = tgroupid;
   }
-  this.shape = "one";
-  this.show();
+  daviewer.load_group_list(this.groupid);
 }
 
 
@@ -103,6 +83,11 @@ grouper.prototype.toggle = function() {
    } else {
       this.show();
    }
+}
+
+
+grouper.prototype.change = function() {
+	this.toggle();
 }
 
 
@@ -146,7 +131,5 @@ grouper.prototype.hide_btn = function() {
          document.getElementById(lbl).innerHTML=tmp; 
        }
 }
-
-
 
 

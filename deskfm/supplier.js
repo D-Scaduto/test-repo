@@ -6,6 +6,7 @@ function supplier (pspotid) {
    this.varname = "joe";
    this.showing = false;
    this.shape = "all";  //all,one 
+   this.supplier_id = "";
 }
 
 
@@ -15,36 +16,56 @@ supplier.prototype.show = function() {
      var lbl = "";
      var ocl = "";
      var cls = 'spotd_off';
-
-
-     lbl = 'suppliers_btn';
-     ocl = '';
-     tmp = tmp + "<h3  style='vertical-align:top;display:inline-block;'  >";
-     tmp = tmp + "suppliers";
-     tmp = tmp + "</h3>";
-
+/*
       lbl = 'suppliers_new_btn';
        ocl = this.varname + '.new_one();';
         tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='background-color:white;'  >";
        tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
        tmp = tmp + "</button>"; 
+*/
 
+     if (main_shape != "wide") {
+       tmp = tmp + "<div id='' data-role='collapsible' style='width:200px;' >";
+     } 
+        tmp = tmp + "<h3> suppliers </h3>"; 
+        tmp = tmp + "<ul id='' data-role='listview' style='width:200px;' >"; 
+        for (var i=0;i<amare.supplierlist.length;i++) {
+           var osup = amare.supplierlist[i];
+           ocl = this.varname + ".set_supplier(\""+osup.pid+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"' ><a href='#' >"+osup.uname+"</a></li>";
+        }
+      tmp = tmp + "</ul>"; 
+      if (main_shape != "wide") {
+        tmp = tmp + "</div>"; 
+      }
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
           pobj.innerHTML = tmp;
 	  $('#'+lbl).trigger("create");
           this.showing = true;
-	  daviewer.load_supplier_list();
-     }
+          this.set_supplier();
+    }
 }
 
 
+supplier.prototype.set_supplier = function(psuppid) {
+
+   if (psuppid != undefined) {
+     this.supplier_id = psuppid;
+   }
+    if (this.supplier_id != "") {
+       daviewer.load_products_by_supplier(this.supplier_id);
+    } else {
+      daviewer.load_products_by_type();
+    } 
+}
+ 
 supplier.prototype.new_one = function() {
  
      daviewer.new_one("suppliers");
- 
 }
+
 
 supplier.prototype.add_product = function(prung) {
     var g = null;

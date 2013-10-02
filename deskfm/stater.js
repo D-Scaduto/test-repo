@@ -1,7 +1,5 @@
 
-
 function stat () { 
-
     this.cat="";
     this.subcat="";
     this.sterms="";
@@ -152,7 +150,6 @@ stater.prototype.update_stats = function (statobj) {
       amare.total_unsaved.max_chunks = -1;
       amare.total_unsaved.last_chunk = -1;
 
-
       amare.count_lwstats();
       amare.count_lpstats();
       amare.count_lustats();
@@ -168,6 +165,7 @@ stater.prototype.update_stats = function (statobj) {
                  this.total_unsorted.last_chunk=0;
                  daviewer.update_stat(this.total_unsorted);
                  daviewer.redraw_view();
+                 mac.show();
             }
           } else {
             if (this.got_webits == true) {
@@ -299,7 +297,8 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
 	         init_run = false;
                  this.total_unsorted.last_chunk=0;
                  daviewer.update_stat(this.total_unsorted);
-                 daviewer.redraw_view();
+                 daviewer.redraw_view()
+                 mac.show();
                }
            }
       } else {

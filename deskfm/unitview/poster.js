@@ -1,5 +1,4 @@
 
-
 function poster(idtogo,trung,tparvar,tvarname,bmini) { 
 
    this.spotid = idtogo;
@@ -180,7 +179,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
     }
    
 }
-
 
 
 poster.prototype.draw_btns = function() {

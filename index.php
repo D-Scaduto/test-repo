@@ -235,9 +235,8 @@ header('Content-type: text/html; charset=utf-8 ');
 //    amare.get_products();
     amare.get_webits();
 
-   $(window).resize(function(val) {
-         if ($(window).width() < 600) {
-
+      $(window).resize(function(val) {
+         if ($(window).width() < 500) {
             if (main_shape != "mini") {
               main_shape = "mini";
               daviewer.gridcols=1;
@@ -245,33 +244,40 @@ header('Content-type: text/html; charset=utf-8 ');
               $('#foot_spot').css('position','static');
               $('#foot_spot').trigger("create");
            }
-
           } else {
-
              if ($('#foot_spot').css('position') != 'fixed') {
                 $('#foot_spot').css('position','fixed');
                 $('#foot_spot').trigger("create");
              }
- 
-            if ($(window).width() > 900) {
-
+            if ($(window).width() > 1000) {
               if (main_shape != "wide") {
-                main_shape = "wide";
-                daviewer.gridcols=3;
-                daviewer.draw_view();
-                diego.show();
-            }
- 
-            } else {
-              if (main_shape != "reg") {
-                main_shape = "reg";
-                daviewer.gridcols=2;
-                daviewer.draw_view();
-                diego.show();
+                 main_shape = "wide";
+                 diego.show();
               }
-            }
+              if (daviewer.gridcols != 4) {
+                 daviewer.gridcols=4;
+                 daviewer.draw_view();
+              }
+            } else {
+               if ($(window).width() > 800) {
+                  if (main_shape != "wide") {
+                    main_shape = "wide";
+                    diego.show();
+                  } 
+                  if (daviewer.gridcols != 3) {
+                    daviewer.gridcols=3;
+                    daviewer.draw_view();
+                  }
+              } else {
+                if (main_shape != "reg") {
+                   main_shape = "reg";
+                   daviewer.gridcols=2;
+                   daviewer.draw_view();
+                   diego.show();
+                }
+              }
+           }
         }
-
     });
 
 
