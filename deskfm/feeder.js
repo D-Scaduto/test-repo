@@ -138,7 +138,7 @@ feeder.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_shape(\"feed\");'
+       ocl = 'diego.toggle_botshape(\"feed\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' class='menu_btn' >";
        tmp = tmp + "</button>";

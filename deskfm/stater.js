@@ -256,15 +256,6 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
 	       return;
        }
 
-       var lstat = this.get_stat(listobj);
-
-       if (lstat != null) {
-	    lstat.last_chunk = listobj.dachunk;
-            if (brefresh == true) {
-              daviewer.update_stat(lstat);
-            }
-       }
-
        if ( listobj.dalist.length > 0 ) { 
          	       
          for (var j=0;j<listobj.dalist.length;j++) {
@@ -290,9 +281,8 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
       this.got_unsorted = true;
       this.count_lustats();
 
-      var lsts = this.total_unsorted;
       if (init_run == true) {
-            if (buddah == false)  {
+            if (buddah == true)  {
               if (this.got_stats == true) {
 	         init_run = false;
                  this.total_unsorted.last_chunk=0;
@@ -302,6 +292,15 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
                }
            }
       } else {
+          var lstat = this.get_stat(listobj);
+
+          if (lstat != null) {
+	    lstat.last_chunk = listobj.dachunk;
+            if (brefresh == true) {
+              daviewer.update_stat(lstat);
+            }
+          }
+
           daviewer.redraw_view();
       }
 }  
@@ -444,10 +443,11 @@ stater.prototype.get_stat = function (pstat) {
 		     ret = this.get_groupstat(pstat.groupid);
 
 		} else if  (pstat.listype == "unsorted" ) {
-			if ((pstat.month == 'null') || (pstat.month == ""))  {
+
+			if (pstat.month == -1)  {
 	  	             ret = this.total_unsorted;
 			} else {
-		       	     ret = this.get_monthstat(pstat);
+	       	             ret = this.get_monthstat(pstat);
 			}
 
 		} else if  (pstat.listype == "webits" ) {

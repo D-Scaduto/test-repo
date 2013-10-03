@@ -1,5 +1,5 @@
 
-@media screen and (max-width:499px) {
+@media screen and (max-width:549px) {
 
     .logo_talk {
       font-size: 1.5em;
@@ -13,21 +13,16 @@
     }
 
     #menu_spot {
-       min-width:400px;
+       min-width:350px;
      }
 
     #left_spot {
-      width:15%;
-     }
-
-    #mainbar_spot {
-       text-align:left;
-       width:60%;
-       vertical-align:middle;
-     }
+      width:20%;
+   }
 
      #right_spot {
-        width:15%;
+        width:80%;
+         text-align:right;
      }
 
      #main_view {
@@ -57,6 +52,7 @@
 
     .menu_sub {
         display:inline-block;
+        float:left;
      }
 
      #chip_rail {

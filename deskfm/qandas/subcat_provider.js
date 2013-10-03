@@ -9,36 +9,36 @@ function subcat_provider() {
 
 subcat_provider.prototype.init = function () {
 
-     this.sealist.push({'text':'who stands at their desk', 'cat':'who','subcat':'stands' });
-     this.sealist.push({'text':'who dances at their desk', 'cat':'who','subcat':'dances' });
-//     this.sealist.push({'text':'who sits all day at their desk', 'cat':'who','subcat':'sitter' });
-     this.sealist.push({'text':'who wants a standing desk', 'cat':'who','subcat':'wants' });
-     this.sealist.push({'text':'who is trying it out', 'cat':'who','subcat':'newbie' });
-     this.sealist.push({'text':'who likes standing desks', 'cat':'who','subcat':'likes' });
-     this.sealist.push({'text':'who shares about standing', 'cat':'who','subcat':'shares' });
-     this.sealist.push({'text':'who is curious about it', 'cat':'who','subcat':'curious' });
-     this.sealist.push({'text':'who is anti standing','cat':'who','subcat':'anti' });
+     this.sealist.push({'text':'who stands at their desk ?', 'cat':'who','subcat':'stands' });
+     this.sealist.push({'text':'who dances at their desk ?', 'cat':'who','subcat':'dances' });
+//     this.sealist.push({'text':'who sits all day at their desk ?', 'cat':'who','subcat':'sitter' });
+     this.sealist.push({'text':'who wants a standing desk ?', 'cat':'who','subcat':'wants' });
+     this.sealist.push({'text':'who is trying it out ?', 'cat':'who','subcat':'newbie' });
+     this.sealist.push({'text':'who likes standing desks ?', 'cat':'who','subcat':'likes' });
+     this.sealist.push({'text':'who shares about standing ?', 'cat':'who','subcat':'shares' });
+     this.sealist.push({'text':'who is curious about it ?', 'cat':'who','subcat':'curious' });
+     this.sealist.push({'text':'who is anti standing ?','cat':'who','subcat':'anti' });
 
-     this.sealist.push({'text':'what is a standing desk', 'cat':'what','subcat':'standesk' });
-     this.sealist.push({'text':'what is a hutch', 'cat':'what','subcat':'hutch' });
-     this.sealist.push({'text':'what is an adjustable', 'cat':'what','subcat':'adjustable' });
-     this.sealist.push({'text':'what about chairs', 'cat':'what','subcat':'chair' });
-     this.sealist.push({'text':'what about feet pain', 'cat':'what','subcat':'footpad' });
+     this.sealist.push({'text':'what is a standing desk ?', 'cat':'what','subcat':'standesk' });
+     this.sealist.push({'text':'what is a hutch ?', 'cat':'what','subcat':'hutch' });
+     this.sealist.push({'text':'what is an adjustable ?', 'cat':'what','subcat':'adjustable' });
+     this.sealist.push({'text':'what about chairs ?', 'cat':'what','subcat':'chair' });
+     this.sealist.push({'text':'what about feet pain ?', 'cat':'what','subcat':'footpad' });
 
-     this.sealist.push({'text':'why get a standing desk', 'cat':'why','subcat':'' });
-     this.sealist.push({'text':'why is sitting bad', 'cat':'why','subcat':'sitonly' });
-     this.sealist.push({'text':'why is standing healthy', 'cat':'why','subcat':'health' });
-     this.sealist.push({'text':'why back pain', 'cat':'why','subcat':'back' });
-     this.sealist.push({'text':'why not burn calories', 'cat':'why','subcat':'weight' });
-     this.sealist.push({'text':'why is it productive', 'cat':'why','subcat':'productive' });
-     this.sealist.push({'text':'why not stand up' ,'cat':'why','subcat':'anti' });
+     this.sealist.push({'text':'why get a standing desk ?', 'cat':'why','subcat':'' });
+     this.sealist.push({'text':'why is sitting bad ?', 'cat':'why','subcat':'sitonly' });
+     this.sealist.push({'text':'why is standing healthy ?', 'cat':'why','subcat':'health' });
+     this.sealist.push({'text':'why back pain ?', 'cat':'why','subcat':'back' });
+     this.sealist.push({'text':'why not burn calories ?', 'cat':'why','subcat':'weight' });
+     this.sealist.push({'text':'why is it productive ?', 'cat':'why','subcat':'productive' });
+     this.sealist.push({'text':'why not stand up ?' ,'cat':'why','subcat':'anti' });
 
-     this.sealist.push({'text':'how to standup desk', 'cat':'how','subcat':'howto' });
-//     this.sealist.push({'text':'difficult is standing', 'cat':'how','subcat':'difficult' });
-     this.sealist.push({'text':'how  to make your own' , 'cat':'how','subcat':'diy' });
-//     this.sealist.push({'text':'how do you get a standing desk' , 'cat':'how','subcat':'get' });
+     this.sealist.push({'text':'how to standup desk ?', 'cat':'how','subcat':'howto' });
+//     this.sealist.push({'text':'difficult is standing ?', 'cat':'how','subcat':'difficult' });
+     this.sealist.push({'text':'how  to make your own ?' , 'cat':'how','subcat':'diy' });
+//     this.sealist.push({'text':'how do you get a standing desk ?' , 'cat':'how','subcat':'get' });
 //     this.sealist.push({'text':'how do you to compare standing desks', 'cat':'how','subcat':'compare' });
-     this.sealist.push({'text':'how to workout and work' , 'cat':'how','subcat':'workout' });
+     this.sealist.push({'text':'how to workout and work ?' , 'cat':'how','subcat':'workout' });
 
 }
 

@@ -144,7 +144,7 @@ shoper.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_shape(\"shop\");'
+       ocl = 'diego.toggle_topshape(\"shop\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/dollar_circle.png' class='menu_btn' >";
        tmp = tmp + "</button>";

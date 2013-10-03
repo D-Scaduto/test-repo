@@ -22,6 +22,7 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
+
 /*
       lbl = 'search_unset_btn';
      ocl = this.varname+ ".check_central();";
@@ -37,7 +38,6 @@ searcher.prototype.show = function() {
      tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
      tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value=''  />";
      tmp = tmp + "</span>";
-
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
@@ -136,7 +136,7 @@ searcher.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_shape(\"search\");'
+       ocl = 'diego.toggle_topshape(\"search\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</button>";

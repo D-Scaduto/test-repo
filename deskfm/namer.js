@@ -173,7 +173,7 @@ namer.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_shape(\"name\");'
+       ocl = 'diego.toggle_topshape(\"name\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' class='menu_btn' >";
        tmp = tmp + "</button>";

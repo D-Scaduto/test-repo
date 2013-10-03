@@ -28,21 +28,16 @@ categor.prototype.show_popups = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
-
-
-   tmp +=  "<div style='display:inline-block;' >";
- 
-      if (main_shape != "wide") {
-        lbl = 'vman_btn'; 
-        ocl = 'daviewer.toggle_zoom();'
-  //       ocl = ocl + 'diego.set_topshape(\"\");'
-         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+/*
+      lbl = 'vman2_btn'; 
+        ocl =  'diego.set_topshape(\"\");'
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
-         tmp = tmp + "</button>";
+        tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-      }
- 
+*/
+
     if (this.subcat != "" ) {
 	lbl = 'subcat_btn';
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
@@ -55,7 +50,7 @@ categor.prototype.show_popups = function() {
 
    if ((this.cat != "who" ) || (this.subcat == "")) {
 
-	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  > who , </a>";
+	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  > who ? </a>";
  	tmp +=  "<div data-role='popup' id='who_sog'>";
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
@@ -71,7 +66,7 @@ categor.prototype.show_popups = function() {
 
    if ((this.cat != "what" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="slideup" style="" class="screen_talk"  > what , </a>';
+        tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="slideup" style="" class="screen_talk"  > what ? </a>';
  	tmp += '<div data-role="popup" id="what_sog" data-theme="d"  style="display:inline-block;"  >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("what");
@@ -87,7 +82,7 @@ categor.prototype.show_popups = function() {
 
    if ((this.cat != "why" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"  style="" class="screen_talk"  > why , </a>';
+        tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"  style="" class="screen_talk"  > why ? </a>';
  	tmp += '<div data-role="popup" id="why_sog" data-theme="d" style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("why");
@@ -102,7 +97,7 @@ categor.prototype.show_popups = function() {
 
      if ((this.cat != "how" )  || (this.subcat == "")) {
 
-        tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  class="screen_talk"  > how  </a>';
+        tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  class="screen_talk"  > how ?</a>';
  	tmp += '<div data-role="popup" id="how_sog" data-theme="d"  style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("how");
@@ -113,21 +108,10 @@ categor.prototype.show_popups = function() {
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
 
-      }
+     }
 
   }
-//      if (main_shape == "wide") {
-        lbl = 'browse_btn';
-        ocl = "cater.set_cats(\""+this.cat+"\",\"\");";
-        tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-//      }
 
-     tmp +=  '</div>';
- 
      lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
@@ -482,7 +466,7 @@ categor.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_shape(\"browse\");'
+       ocl = 'diego.toggle_topshape(\"browse\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
        tmp = tmp + "</button>";
@@ -497,8 +481,7 @@ categor.prototype.hide_btn = function() {
     var tmp = "";
     var lbl = "";
     var pobj = null;
-
-       lbl = 'browse_btn'; 
+      lbl = 'browse_btn'; 
        if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmp; 
        }

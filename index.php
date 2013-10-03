@@ -236,14 +236,19 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_webits();
 
       $(window).resize(function(val) {
-         if ($(window).width() < 500) {
+         if ($(window).width() < 550) {
             if (main_shape != "mini") {
               main_shape = "mini";
-              daviewer.gridcols=1;
               diego.show();
+            }
+            if ($('#foot_spot').css('position') != 'static') {
               $('#foot_spot').css('position','static');
               $('#foot_spot').trigger("create");
-           }
+            }
+            if (daviewer.gridcols != 1) {
+                 daviewer.gridcols=1;
+                 daviewer.draw_view();
+            }
           } else {
              if ($('#foot_spot').css('position') != 'fixed') {
                 $('#foot_spot').css('position','fixed');
@@ -279,7 +284,6 @@ header('Content-type: text/html; charset=utf-8 ');
            }
         }
     });
-
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
       diego.set_botshape("browse");

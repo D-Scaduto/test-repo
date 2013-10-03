@@ -19,18 +19,19 @@ logoman.prototype.show = function () {
    if (jqm_off == true) {
      sty='background-color:white;'
    }
-
+ 
+      if (main_shape != "wide") {
         lbl = 'vman_btn'; 
-        ocl = 'daviewer.toggle_zoom();'
-  //      ocl = ocl + 'diego.set_topshape(\"\");'
+        ocl =  'diego.set_topshape(\"\");'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
+      }
 
         lbl = this.spotid + '_logo_spot1';
-        ocl = this.varname + ".set_logoshape(\"freedom\");";
+        ocl = this.varname + ".toggle_logoshape();";
         tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
         tmp = tmp + "Desk";
         tmp=tmp+"</span>";
@@ -52,10 +53,7 @@ logoman.prototype.show = function () {
              tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
-
    } 
-
-
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -135,6 +133,16 @@ logoman.prototype.waiting = function () {
 
 }
 
+
+
+logoman.prototype.toggle_logoshape = function () {
+	if (this.logo_shape == "fm") {
+           this.logo_shape = "freedom";
+        } else {
+           this.logo_shape = "fm";
+        }
+	this.show();
+}
 
 
 logoman.prototype.set_logoshape = function (psz) {

@@ -85,6 +85,7 @@ sharer.prototype.show = function() {
         tmp=tmp +"</span>";
      }
 
+
      lbl = this.spotid;
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
@@ -206,7 +207,7 @@ sharer.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-      ocl = 'diego.toggle_shape(\"share\");'
+      ocl = 'diego.toggle_topshape(\"share\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/share.png' class='menu_btn' >";
        tmp = tmp + "</button>";

@@ -112,12 +112,13 @@ rail.prototype.draw_raildata = function() {
       var st = 1;
       var fn = daviewer.stats.lnum -2;
       var ld = parseInt(daviewer.listdex) + 1;
+      var en = ld + daviewer.top_end;
       var cn = daviewer.stats.cnum;
       $('#slider-1').attr("min", st );
       $('#slider-1').attr("max", fn );
       $('#slider-1').val(ld);
       $('#slider-1').slider('refresh');
-      tmp = daviewer.dalist.length + " of " + cn;
+      tmp = ld + " to " + en + " of " + daviewer.dalist.length + " of " + cn;
       $('#slider-1-detail').html(tmp);
 
    } else {
@@ -224,7 +225,7 @@ rail.prototype.show_btn = function() {
     var lbl = "";
     var pobj = null;
     var ocl="";
-       ocl =  'diego.toggle_shape(\"rail\");'
+       ocl =  'diego.toggle_topshape(\"rail\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' class='menu_btn' >";
        tmp = tmp + "</button>";

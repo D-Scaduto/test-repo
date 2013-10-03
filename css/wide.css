@@ -17,14 +17,9 @@
       width:40%;
      }
 
-    #mainbar_spot {
-       width:45%;
-        text-align:center;
-       vertical-align:middle;
-    }
-
      #right_spot {
-        width:15%;
+        width:60%;
+        text-align:right;
      }
 
      #side_bar {
