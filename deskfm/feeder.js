@@ -138,11 +138,11 @@ feeder.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_botshape(\"feed\");'
+       ocl = 'diego.toggle_topshape(\"feeds\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/cloud.png' class='menu_btn' >";
        tmp = tmp + "</button>";
-       lbl = 'feed_btn'; 
+       lbl = 'feeds_btn'; 
        if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmp; 
          $('#'+lbl).trigger("create");
@@ -154,7 +154,7 @@ feeder.prototype.hide_btn = function() {
     var lbl = "";
     var pobj = null;
 
-       lbl = 'feed_btn'; 
+       lbl = 'feeds_btn'; 
        if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmp; 
        }

@@ -1,5 +1,6 @@
 
 function stat () { 
+
     this.cat="";
     this.subcat="";
     this.sterms="";
@@ -165,14 +166,13 @@ stater.prototype.update_stats = function (statobj) {
                  this.total_unsorted.last_chunk=0;
                  daviewer.update_stat(this.total_unsorted);
                  daviewer.redraw_view();
-                 mac.show();
             }
           } else {
             if (this.got_webits == true) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.redraw_view();
+                 daviewer.load_random_list();
              }
           }
       } else {
@@ -288,7 +288,6 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
                  this.total_unsorted.last_chunk=0;
                  daviewer.update_stat(this.total_unsorted);
                  daviewer.redraw_view()
-                 mac.show();
                }
            }
       } else {

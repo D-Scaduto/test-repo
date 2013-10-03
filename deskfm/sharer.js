@@ -85,14 +85,15 @@ sharer.prototype.show = function() {
         tmp=tmp +"</span>";
      }
 
-
      lbl = this.spotid;
      if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
         this.showing = true;
-        daviewer.draw_view();
         $('#'+lbl).trigger("create");
-    } 
+        if (buddah == true) {
+            wanda.hide();
+        }
+     } 
 }
 
 
@@ -208,6 +209,9 @@ sharer.prototype.show_btn = function() {
     var ocl = "";
 
       ocl = 'diego.toggle_topshape(\"share\");'
+      if (buddah == true) {
+        ocl = "nicky.toggle();";
+      }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/share.png' class='menu_btn' >";
        tmp = tmp + "</button>";

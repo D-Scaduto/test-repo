@@ -2,7 +2,7 @@
 @media screen and (min-width:550px) and (max-width:799px) {
  
     .logo_talk {
-       font-size: 1.3em;
+       font-size: 1.1em;
        display:inline-block;
        vertical-align:middle;
     }
@@ -14,11 +14,11 @@
     }
 
     #left_spot {
-      width:45%;
+      width:35%;
      }
 
      #right_spot {
-        width:55%;
+        width:65%;
          text-align:right;
      }
 

@@ -228,7 +228,8 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
        }
 
-	diego = new header();
+        var  tshapes = ['browse:cater','search:wanda','share:nicky'];  
+	diego = new header(tshapes);
 
     amare.get_stats();
 //    amare.get_suppliers();
@@ -240,6 +241,7 @@ header('Content-type: text/html; charset=utf-8 ');
             if (main_shape != "mini") {
               main_shape = "mini";
               diego.show();
+              diego.set_topshape();
             }
             if ($('#foot_spot').css('position') != 'static') {
               $('#foot_spot').css('position','static');
@@ -258,6 +260,7 @@ header('Content-type: text/html; charset=utf-8 ');
               if (main_shape != "wide") {
                  main_shape = "wide";
                  diego.show();
+                 diego.set_topshape();
               }
               if (daviewer.gridcols != 4) {
                  daviewer.gridcols=4;
@@ -268,6 +271,7 @@ header('Content-type: text/html; charset=utf-8 ');
                   if (main_shape != "wide") {
                     main_shape = "wide";
                     diego.show();
+                    diego.set_topshape();
                   } 
                   if (daviewer.gridcols != 3) {
                     daviewer.gridcols=3;
@@ -286,7 +290,7 @@ header('Content-type: text/html; charset=utf-8 ');
     });
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
-      diego.set_botshape("browse");
+      diego.set_topshape();
       ray.show();
       $(window).resize();
    });

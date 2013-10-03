@@ -110,7 +110,7 @@ grouper.prototype.show_btn = function() {
     var lbl = "";
     var pobj = null;
     var ocl = "";
-       ocl = 'diego.toggle_botshape(\"group\");'
+       ocl = 'diego.toggle_topshape(\"group\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' class='menu_btn' >";
        tmp = tmp + "</button>";

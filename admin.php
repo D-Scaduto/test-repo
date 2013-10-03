@@ -230,7 +230,11 @@ header('Content-type: text/html; charset=utf-8 ');
 	   nicky = new sharer("share");
            joe = new supplier("manage");
            robby = new grouper("group");
-	   diego = new header();
+
+   //sort,feed,manage,group  
+	
+           var   tshapes = ['sort:mac','group:robby','manage:joe','feeds:louie','search:wanda','browse:cater','share:nicky']; 
+          diego = new header(tshapes);
 
     amare.get_stats();
 
@@ -249,6 +253,7 @@ header('Content-type: text/html; charset=utf-8 ');
             if (main_shape != "mini") {
               main_shape = "mini";
               diego.show();
+              diego.set_topshape();
             }
             if ($('#foot_spot').css('position') != 'static') {
               $('#foot_spot').css('position','static');
@@ -267,6 +272,7 @@ header('Content-type: text/html; charset=utf-8 ');
               if (main_shape != "wide") {
                  main_shape = "wide";
                  diego.show();
+                 diego.set_topshape();
               }
               if (daviewer.gridcols != 4) {
                  daviewer.gridcols=4;
@@ -277,18 +283,24 @@ header('Content-type: text/html; charset=utf-8 ');
                   if (main_shape != "wide") {
                     main_shape = "wide";
                     diego.show();
+                    diego.set_topshape();
                   } 
                   if (daviewer.gridcols != 3) {
                     daviewer.gridcols=3;
                     daviewer.draw_view();
                   }
               } else {
+ 
                 if (main_shape != "reg") {
-                   main_shape = "reg";
+                    main_shape = "reg";
+                    diego.show();
+                    diego.set_topshape();
+                }
+                if (daviewer.gridcols != 2) {
                    daviewer.gridcols=2;
                    daviewer.draw_view();
-                   diego.show();
                 }
+
               }
            }
         }
@@ -296,7 +308,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 
    $( document ).on( "pageinit", "#page_spot", function( event ) {
-      diego.set_botshape("sort");
+      diego.set_topshape("");
       ray.show();
       $(window).resize();
    });

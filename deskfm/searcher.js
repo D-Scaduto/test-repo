@@ -44,7 +44,11 @@ searcher.prototype.show = function() {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#'+lbl).trigger("create");
+      if (buddah == true) {
+           nicky.hide();
+      }
    } 
+
 }
 
 
@@ -137,6 +141,9 @@ searcher.prototype.show_btn = function() {
     var ocl = "";
 
        ocl = 'diego.toggle_topshape(\"search\");'
+       if (buddah == true) {
+        ocl = "wanda.toggle();";
+      }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</button>";

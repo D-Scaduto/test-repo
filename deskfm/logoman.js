@@ -22,7 +22,7 @@ logoman.prototype.show = function () {
  
       if (main_shape != "wide") {
         lbl = 'vman_btn'; 
-        ocl =  'diego.set_topshape(\"\");'
+        ocl =  'daviewer.randomize_rungs();'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
@@ -30,8 +30,13 @@ logoman.prototype.show = function () {
          tmp = tmp + "</span>";
       }
 
+      if (main_shape == "reg") {
+         this.logo_shape = "fm";
+      }
+
         lbl = this.spotid + '_logo_spot1';
-        ocl = this.varname + ".toggle_logoshape();";
+ //       ocl = this.varname + ".toggle_logoshape();";
+         ocl =  'daviewer.randomize_rungs();'
         tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
         tmp = tmp + "Desk";
         tmp=tmp+"</span>";
@@ -40,6 +45,7 @@ logoman.prototype.show = function () {
 
             lbl = this.spotid + '_logo_spot2';
 	    ocl = this.varname + ".set_logoshape(\"freedom\");";
+            ocl = ocl +  'daviewer.randomize_rungs();'
             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "FM";
             tmp=tmp+"</span>";
@@ -49,7 +55,8 @@ logoman.prototype.show = function () {
    if (this.logo_shape == "freedom") { 
             lbl = this.spotid + '_logo_spot2';
 	    ocl = this.varname + ".set_logoshape(\"fm\");";
-            ocl = ocl + "daviewer.nitro_stop()";
+ //           ocl = ocl + "daviewer.nitro_stop()";
+             ocl = ocl +  'daviewer.randomize_rungs();'
              tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
@@ -58,8 +65,8 @@ logoman.prototype.show = function () {
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
        document.getElementById(lbl).innerHTML=tmp;
-     $('#'+lbl).trigger("create");    
-      
+       $('#'+lbl).trigger("create");  
+       $('#vman2_btn').html(""); 
    }
 }
 

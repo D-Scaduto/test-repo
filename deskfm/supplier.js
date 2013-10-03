@@ -119,7 +119,7 @@ supplier.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_botshape(\"manage\");'
+       ocl = 'diego.toggle_topshape(\"manage\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png' class='menu_btn' >";
        tmp = tmp + "</button>";

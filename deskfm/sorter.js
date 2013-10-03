@@ -9,9 +9,8 @@ function sorter (pspotid) {
    this.sterms = "standing desk";
    this.da_date = new Date();
 
-   this.krono = null;
-
-}
+   this.months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+ }
 
 sorter.prototype.show = function() {
 
@@ -54,7 +53,7 @@ sorter.prototype.show = function() {
         var sugs = amare.monthstats;
         for (var i=0;i<sugs.length;i++) {
           ocl = this.varname + ".set_month("+sugs[i].month + ");";
-          var month = this.krono.months[sugs[i].month];
+          var month = this.months[sugs[i].month];
           var year = sugs[i].year;
           if (year == this.da_date.getFullYear()) {
             tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"</a></li>";
@@ -170,7 +169,7 @@ sorter.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_botshape(\"sort\");'
+       ocl = 'diego.toggle_topshape(\"sort\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/categories.png' class='menu_btn' >";
        tmp = tmp + "</button>";

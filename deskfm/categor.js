@@ -15,8 +15,12 @@ categor.prototype.show = function() {
    if (jqm_off == true) {
        this.show_nojqm();
    } else {
-  //       this.show_collapsers();
+
+      if (buddah == true) {
+         this.show_collapsers();
+      } else {
         this.show_popups();
+      }
    }
 }
 
@@ -115,9 +119,7 @@ categor.prototype.show_popups = function() {
      lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
-
     this.showing = true;
-     this.redraw_view();
 
 }
 
