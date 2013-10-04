@@ -79,7 +79,7 @@ header.prototype.draw_right = function () {
          tmp = tmp + "</div>";
 
      if (buddah == false) {
-         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;;'  >";
+         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;'  >";
          tmp = tmp + "</div>";
      }
 
@@ -87,7 +87,7 @@ header.prototype.draw_right = function () {
 
        if (buddah == true) {
 
-         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;;'  >";
+         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;'  >";
          tmp = tmp + "</div>";
  
         tmp = tmp + "<div id='sort_spot' class='menu_sub' style=''  >";
@@ -105,7 +105,7 @@ header.prototype.draw_right = function () {
       
    }
 
-        tmp = tmp + "<div id='' class='' style='display:inline;margin-right:15px;'  >";
+        tmp = tmp + "<div id='' class='' style='display:inline;margin-right:10px;vertical-align:top;'  >";
 
       if (buddah == false) {
         lbl = 'browse_btn';
@@ -119,7 +119,7 @@ header.prototype.draw_right = function () {
 
       lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
-         if (buddah == true) {
+         if ((buddah == true) && (main_shape != "mini"))  {
            ocl = "wanda.toggle();";
         }
         tmp = tmp + "<span  id='"+lbl+"'  class='mybtns' style=''  >";
@@ -130,7 +130,7 @@ header.prototype.draw_right = function () {
 
         lbl = 'share_btn';
         ocl = 'diego.toggle_topshape(\"share\");'
-        if (buddah == true) {
+         if ((buddah == true) && (main_shape != "mini"))  {
            ocl = "nicky.toggle();";
         }
         tmp = tmp + "<span   id='"+lbl+"' class='mybtns' style=''  >";
@@ -139,11 +139,7 @@ header.prototype.draw_right = function () {
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
-        tmp = tmp + "</div>";
-
-
     if (buddah == true) {
-      tmp = tmp + "<div id='' class='' style='display:inline;margin-right:15px;'  >";
 
         lbl = 'browse_btn';
         ocl = 'diego.toggle_topshape(\"browse\");';
@@ -185,11 +181,10 @@ header.prototype.draw_right = function () {
         tmp = tmp + "<img  src='deskfm/images/icons/people_blob.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
-
-        tmp = tmp + "</div>";
+     }
+    
+    tmp = tmp + "</div>";
  
-   }
-
     lbl = 'right_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
@@ -217,7 +212,7 @@ header.prototype.draw_left = function () {
         tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-
+/*
       if (main_shape == "wide") {
         lbl = 'vman_btn'; 
         ocl =  'daviewer.randomize_rungs();'
@@ -227,21 +222,12 @@ header.prototype.draw_left = function () {
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
       }
-
+*/
        if (main_shape != "mini") {
          tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;'  >";
          tmp = tmp + "</div>";
        } else {
-         if (this.top_shape != "") {
-           lbl = 'vman2_btn'; 
-           ocl =  'diego.set_topshape(\"\");';
-           tmp = tmp + "<span  id='vman2_btn' class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
-           tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-           tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
-           tmp = tmp + "</button>";
-           tmp = tmp + "</span>";
-         }
-       }
+      }
        
     lbl = 'left_spot';
     $('#'+lbl).html(tmp); 
@@ -310,8 +296,8 @@ header.prototype.set_topshape = function (pshape) {
          s = this.top_shapes[i].split(':');
          es = s[1] + '.hide();';
          es = es + s[1] + '.show_btn();';
-        es = " if (" + s[1] + " != null) { "+es+"}";
-       eval(es);
+         es = " if (" + s[1] + " != null) { "+es+"}";
+         eval(es);
       }
       sal.show();
       if ((main_shape == "wide") && (buddah == true)) {

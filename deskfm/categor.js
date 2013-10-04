@@ -16,7 +16,7 @@ categor.prototype.show = function() {
        this.show_nojqm();
    } else {
 
-      if (buddah == true) {
+      if ((buddah == true) && (main_shape == "wide")) {
          this.show_collapsers();
       } else {
         this.show_popups();

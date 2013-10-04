@@ -34,6 +34,9 @@ logoman.prototype.show = function () {
          this.logo_shape = "fm";
       }
 
+      if ((main_shape == "mini") && (buddah == true)) {
+    // no room for logo 
+      } else {
         lbl = this.spotid + '_logo_spot1';
  //       ocl = this.varname + ".toggle_logoshape();";
          ocl =  'daviewer.randomize_rungs();'
@@ -41,7 +44,7 @@ logoman.prototype.show = function () {
         tmp = tmp + "Desk";
         tmp=tmp+"</span>";
  
-   if (this.logo_shape == "fm") {
+         if (this.logo_shape == "fm") {
 
             lbl = this.spotid + '_logo_spot2';
 	    ocl = this.varname + ".set_logoshape(\"freedom\");";
@@ -50,9 +53,9 @@ logoman.prototype.show = function () {
             tmp = tmp + "FM";
             tmp=tmp+"</span>";
 
-   }
+         }
  
-   if (this.logo_shape == "freedom") { 
+        if (this.logo_shape == "freedom") { 
             lbl = this.spotid + '_logo_spot2';
 	    ocl = this.varname + ".set_logoshape(\"fm\");";
  //           ocl = ocl + "daviewer.nitro_stop()";
@@ -60,7 +63,8 @@ logoman.prototype.show = function () {
              tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
-   } 
+         } 
+     }
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {

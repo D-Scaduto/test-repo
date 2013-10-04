@@ -46,6 +46,9 @@ searcher.prototype.show = function() {
       $('#'+lbl).trigger("create");
       if (buddah == true) {
            nicky.hide();
+           if(main_shape == "mini") {
+              sal.hide();
+           }
       }
    } 
 
@@ -141,7 +144,7 @@ searcher.prototype.show_btn = function() {
     var ocl = "";
 
        ocl = 'diego.toggle_topshape(\"search\");'
-       if (buddah == true) {
+      if ((buddah == true) && (main_shape != "mini"))  {
         ocl = "wanda.toggle();";
       }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";

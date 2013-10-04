@@ -118,7 +118,7 @@ rail.prototype.draw_raildata = function() {
       $('#slider-1').attr("max", fn );
       $('#slider-1').val(ld);
       $('#slider-1').slider('refresh');
-      tmp = ld + " to " + en + " of " + daviewer.dalist.length + " of " + cn;
+      tmp = ld + " to " + en + " of " + daviewer.dalist.length;
       $('#slider-1-detail').html(tmp);
 
    } else {

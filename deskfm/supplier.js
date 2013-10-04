@@ -16,28 +16,50 @@ supplier.prototype.show = function() {
      var lbl = "";
      var ocl = "";
      var cls = 'spotd_off';
-/*
-      lbl = 'suppliers_new_btn';
-       ocl = this.varname + '.new_one();';
-        tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='background-color:white;'  >";
-       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
-       tmp = tmp + "</button>"; 
-*/
 
-     if (main_shape != "wide") {
-       tmp = tmp + "<div id='' data-role='collapsible' style='width:200px;' >";
-     } 
+      tmp = tmp + "<div data-role='controlgroup' data-type='horizontal' >";
+
+      lbl = 'new_supply_btn';
+       ocl = this.varname + '.new_one();';
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
+//       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
+         tmp += "add";
+       tmp = tmp + "</button>"; 
+
+	tmp += "<label for='select-supply' class='select'></label>";
+ 	tmp += "<select name='select-supply' data-mini='true' data-inline='true' id='select-supply'>";
+ 	tmp += "  <option value='product' >product</option>";
+  	tmp += "  <option value='supplier' >supplier</option>";
+ 	tmp += "</select>";
+
+ 	tmp += "</div>";
+
+      if (main_shape != "wide") {
+ 
+	tmp += "<label for='select-supplier' class='select'></label>";
+ 	tmp += "<select name='select-supplier' data-mini='true' data-inline='true' id='select-supplier'>";
+        var sugs = amare.supplierlist;
+        for (var i=0;i<sugs.length;i++) {
+          ocl = this.varname + ".set_supplier("+sugs[i].pid + ");";
+          tmp += "  <option value='"+sugs[i].pid+"' >"+sugs[i].uname+"</option>";
+        }
+ 	tmp += "</select>";
+
+     } else {
+
+ //       tmp = tmp + "<div id='' data-role='collapsible' style='width:200px;' >";
         tmp = tmp + "<h3> suppliers </h3>"; 
         tmp = tmp + "<ul id='' data-role='listview' style='width:200px;' >"; 
         for (var i=0;i<amare.supplierlist.length;i++) {
            var osup = amare.supplierlist[i];
+           var cnt = amare.count_products_by_supplier(osup.uname);
            ocl = this.varname + ".set_supplier(\""+osup.pid+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"' ><a href='#' >"+osup.uname+"</a></li>";
+           tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+osup.uname+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
         }
-      tmp = tmp + "</ul>"; 
-      if (main_shape != "wide") {
-        tmp = tmp + "</div>"; 
-      }
+        tmp = tmp + "</ul>"; 
+  //      tmp = tmp + "</div>"; 
+     }
+
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
      if ( pobj != null) {

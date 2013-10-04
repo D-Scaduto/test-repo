@@ -172,7 +172,8 @@ stater.prototype.update_stats = function (statobj) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.load_random_list();
+                 daviewer.load_sorted_list();
+                 daviewer.randomize_rungs();
              }
           }
       } else {
@@ -233,7 +234,8 @@ stater.prototype.update_webits = function(listobj) {
 	         init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.redraw_view();
+                 daviewer.load_sorted_list();
+                 daviewer.randomize_rungs();
                }
            }
       } else {
@@ -708,6 +710,23 @@ stater.prototype.get_groupstat = function(tp) {
 }
 
 
+stater.prototype.count_products_by_supplier = function(tsuppid) {
+  var ret = 0;
+  if (tsuppid != undefined) {
+      for (var r=0; r<amare.productlist.length;r++) {
+       if (amare.productlist[r] != undefined) {
+           var ok = false;
+          if (amare.productlist[r].uname == tsuppid ) {
+             ok = true;
+           }
+           if (ok == true) {
+             ret = ret + 1; 
+           }
+        } 
+      }
+   }
+   return ret;
+}
 
 
 

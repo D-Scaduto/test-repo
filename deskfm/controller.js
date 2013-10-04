@@ -58,6 +58,33 @@ viewer.prototype.more = function() {
 }
 
 
+viewer.prototype.goto_listdex = function(ldex) {
+
+   this.load_rungs(ldex);
+   this.draw_view();
+}
+
+
+viewer.prototype.goto_end = function() {
+   var e = this.dalist.length -2;
+   this.to_top(e);
+}
+
+
+viewer.prototype.to_top = function(trung) {
+	
+   this.redraw_rungs(trung);
+
+   window.scroll(0,0);
+
+   var lbl=this.screen+"_rung_0";
+   if ( document.getElementById(lbl) != null) {
+     document.getElementById(lbl).focus(); 
+   }
+}
+
+
+
 viewer.prototype.prev_chunk = function() {
 
    var chunks = 0;
@@ -170,33 +197,6 @@ viewer.prototype.redraw_view = function() {
          } 
     }
 }
-
-
-viewer.prototype.goto_listdex = function(ldex) {
-
-   this.load_rungs(ldex);
-   this.draw_view();
-}
-
-
-viewer.prototype.goto_end = function() {
-   var e = this.dalist.length -2;
-   this.to_top(e);
-}
-
-
-viewer.prototype.to_top = function(trung) {
-	
-   this.redraw_rungs(trung);
-
-   window.scroll(0,0);
-
-   var lbl=this.screen+"_rung_0";
-   if ( document.getElementById(lbl) != null) {
-     document.getElementById(lbl).focus(); 
-   }
-}
-
 
 
 viewer.prototype.clear_list = function() {
@@ -548,31 +548,25 @@ viewer.prototype.randomize_rungs = function() {
    var tls = [];
    var r = 0;
    var i =0;
-   var mx = this.dalist.length;
+   var mx = 0;
    var mdex = null;
    var ltype = "";
 
    this.darungs = [];
+   var tmplist = this.dalist.slice(0);
 
    while (i<this.top_end) {
+       mx = tmplist.length;
        r = Math.floor((Math.random()*mx));
-       if (this.dalist[r] != undefined) {
-         mdex = this.dalist[r].mdex;
-         ltype = this.dalist[r].ltype;
-         var used = false;
-         for (var z=0;z<=tls.length;z++){
-           if (r == tls[z]) {
-               used = true;
-           }
-         }
-         if (used == false) {
-           tls.push(r);
-           this.darungs[i] = new Object();
-           this.darungs[i].vdex = r;
-         }
-       }
-       i = i+1;
-   }
+       if (tmplist[r] != undefined) {
+         mdex = tmplist[r].mdex;
+         ltype = tmplist[r].ltype;
+         tmplist.splice(r,1);
+         this.darungs[i] = new Object();
+         this.darungs[i].vdex = r;
+      }
+     i = i+1;
+  }
 
     this.draw_view();
 

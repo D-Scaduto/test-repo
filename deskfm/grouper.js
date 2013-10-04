@@ -15,20 +15,30 @@ grouper.prototype.show = function() {
      var ocl = "";
      var s = "";
 
-     if (main_shape != "wide") { 
-       tmp=tmp+"<div data-role='collapsible' style='width:200px;' >";
-     }
-    	tmp = tmp +"<h3>people groups</h3>";
-   	tmp = tmp +"<ul  data-role='listview' id='' style='width:200px;'  >";
+     if (main_shape != "wide") {
+ 
+	tmp += "<label for='select-group' class='select'></label>";
+ 	tmp += "<select name='select-group' data-mini='true' data-inline='true' id='select-group'>";
         sugs = amare.group_set.get_setlist();
         for (var i=0;i<sugs.length;i++) {
           ocl = this.varname + ".set_group(\""+sugs[i].groupid+"\");";
-          tmp = tmp +"<li onclick='"+ocl+"' ><a href='#' >"+sugs[i].text+"</a></li>";
+          tmp += "  <option value='"+sugs[i].groupid+"' >"+sugs[i].text+"</option>";
+        }
+	tmp += "</select>";
+
+     } else {
+ 
+//       tmp=tmp+"<div data-role='collapsible' style='width:200px;' >";
+//   	tmp = tmp +"<h3>people groups</h3>";
+   	tmp = tmp +"<ul  data-role='listview' id='' style='width:200px;'  >";
+        sugs = amare.groupstats;
+        for (var i=0;i<sugs.length;i++) {
+          ocl = this.varname + ".set_group(\""+sugs[i].groupid+"\");";
+          tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+sugs[i].groupid+"<span class='ui-li-count'>"+sugs[i].cnum+"</span></a></li>";
         }
         tmp = tmp + "</ul>";
-      if (main_shape != "wide") { 
-         tmp=tmp+"</div>";
-       }
+//         tmp=tmp+"</div>";
+     }
 
      lbl = this.spotid;
      pobj = document.getElementById(lbl);
@@ -36,6 +46,12 @@ grouper.prototype.show = function() {
           pobj.innerHTML = tmp;
           this.showing = true;
           $('#'+lbl).trigger("create");
+          if (main_shape != "wide") {
+            $('#select-group').bind("change",function(event,ui) {
+                var s = $(this).val();
+                robby.set_group(s); 
+            });
+          }
           this.redraw_view();
      }
 }

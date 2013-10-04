@@ -2,7 +2,7 @@
 @media screen and (max-width:549px) {
 
     .logo_talk {
-      font-size: 1.5em;
+      font-size: 1.2em;
       vertical-align:middle;
     }
 
@@ -13,16 +13,16 @@
     }
 
     #menu_spot {
-       min-width:350px;
+       min-width:400px;
      }
 
     #left_spot {
-      width:25%;
+      width:20%;
    }
 
      #right_spot {
-        width:75%;
-         text-align:right;
+        width:80%;
+        text-align:right;
      }
 
      #main_view {
@@ -45,12 +45,17 @@
        background-color:white;
      }
 
-     .mybtns .ui-btn-inner  {
-        background:white;
+     .mybtns  {
+        padding:0 0 0;
+        border:none;
+     }
+ 
+
+     .mybtns .ui-btn-inner {
         padding:0 0 0;
      }
-
-    .menu_sub {
+ 
+   .menu_sub {
         display:inline-block;
         float:left;
      }

@@ -92,6 +92,9 @@ sharer.prototype.show = function() {
         $('#'+lbl).trigger("create");
         if (buddah == true) {
             wanda.hide();
+            if(main_shape == "mini") {
+              sal.hide();
+            }
         }
      } 
 }
@@ -209,7 +212,7 @@ sharer.prototype.show_btn = function() {
     var ocl = "";
 
       ocl = 'diego.toggle_topshape(\"share\");'
-      if (buddah == true) {
+      if ((buddah == true) && (main_shape != "mini"))  {
         ocl = "nicky.toggle();";
       }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";

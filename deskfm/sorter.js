@@ -21,21 +21,38 @@ sorter.prototype.show = function() {
    var ocl="";
 
      if (main_shape != "wide") { 
-       tmp = tmp + "<div class='ui-grid-b' >";
+
+       tmp = tmp + "<div class='ui-grid-a' data-inline='true'  >";
 
          tmp += "<div  id='' class='ui-block-a' style=''  >";
+
 	tmp += "<label for='select-year' class='select'></label>";
  	tmp += "<select name='select-year' data-mini='true' data-inline='true' id='select-year'>";
  	tmp += "  <option value='2013'>2013</option>";
  	tmp += "  <option value='2012'>2012</option>";
   	tmp += "  <option value='2011'>2011</option>";
  	tmp += "</select>";
-         tmp = tmp + "</div>";
+  
+       tmp = tmp + "</div>";
 
          tmp += "<div  id='' class='ui-block-b' style=''  >";
-	
-        tmp=tmp+"<div data-role='collapsible' data-inline='true' style='width:150px;' >";
-     	tmp = tmp +"<h3>monthly</h3>";
+
+	tmp += "<label for='select-month' class='select'></label>";
+ 	tmp += "<select name='select-month' data-mini='true' data-inline='true' id='select-month'>";
+        var sugs = amare.monthstats;
+        for (var i=0;i<sugs.length;i++) {
+          ocl = this.varname + ".set_month("+sugs[i].month + ");";
+          var month = this.months[sugs[i].month];
+          var year = sugs[i].year;
+          if (year == this.da_date.getFullYear()) {
+        	tmp += "  <option value='"+sugs[i].month+"' >"+month+"</option>";
+          }
+        }
+ 	tmp += "</select>";
+
+        tmp = tmp + "</div>";
+
+        tmp = tmp + "</div>";
 
      } else {
 
@@ -47,7 +64,8 @@ sorter.prototype.show = function() {
  	tmp += "</select>";
    	tmp = tmp +"<h3></h3>";
 
-     }
+ //       tmp=tmp+"<div data-role='collapsible' data-inline='true' style='width:150px;' >";
+ //    	tmp = tmp +"<h3>monthly</h3>";
 
    	tmp = tmp +"<ul  data-role='listview' id='' style='width:150px;' data-inline='true'  >";
         var sugs = amare.monthstats;
@@ -56,26 +74,32 @@ sorter.prototype.show = function() {
           var month = this.months[sugs[i].month];
           var year = sugs[i].year;
           if (year == this.da_date.getFullYear()) {
-            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"</a></li>";
+            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"<span class='ui-li-count'>"+sugs[i].cnum+"</span></a></li>";
           }
         }
         tmp = tmp + "</ul>";
-
-      if (main_shape != "wide") { 
-         tmp=tmp+"</div>";
-          tmp=tmp+"</div>";
-       }
+   //     tmp=tmp+"</div>";
+        tmp=tmp+"</div>";
+    }
 
    lbl = this.spotid;
 
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
-      this.krono = new calendor('cal_spot','mac.krono','mac.check_local()');
-      this.krono.show();
+
       $('#sort_spot').trigger('create');
       this.check_local();
-      $('#sort_btn').addClass("ui-btn-active");
+            $('#select-year').bind("change",function(event,ui) {
+                var s = $(this).val();
+                mac.set_year(s); 
+            });
+         if (main_shape != "wide") {
+            $('#select-month').bind("change",function(event,ui) {
+                var s = $(this).val();
+                mac.set_month(s); 
+            });
+         }
    } 
 
 }
@@ -101,10 +125,18 @@ sorter.prototype.check_local = function() {
 sorter.prototype.set_month = function(pmon) {
    if (pmon != undefined) {
      this.da_date.setMonth(pmon);
-     this.check_local();
+     this.show();
    }
 }
 
+sorter.prototype.set_year = function(pyr) {
+   if (pyr != undefined) {
+     this.da_date.setYear(pyr);
+     this.show();
+   }
+}
+
+ 
  
 sorter.prototype.save_set = function() {
     // loop through daviewer
