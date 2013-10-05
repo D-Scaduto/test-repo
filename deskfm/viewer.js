@@ -65,13 +65,13 @@ viewer.prototype.draw_view = function() {
 
    if (jqm_off == false) {
      if ((this.gridcols ==1) || (this.is_mini == true)) { 
-       tmpstr=tmpstr+"<ul id='lv' data-role='listview'  >";
+       tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='true' data-split-theme='d'  >";
      } else if (this.gridcols == 2) {
-        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-a'  >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='true'  data-split-theme='d'  >";
      } else if (this.gridcols == 3) {
-        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-b'  >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-b'  data-inset='true'  data-split-theme='d'  >";
      } else if (this.gridcols == 4) {
-        tmpstr=tmpstr+"<div  id='gv'  class='ui-grid-c'  >";
+        tmpstr=tmpstr+"<ul  id='lv' data-role='listview' class='ui-grid-c'  data-inset='true'  data-split-theme='d'  >";
      }
      cls = '';
    }
@@ -86,25 +86,21 @@ viewer.prototype.draw_view = function() {
          } else {
 
             if ((this.gridcols == 1) || (this.is_mini == true)) {
-              tmpstr=tmpstr+"<li id='"+lbl+"' style='' >"; 
-              tmpstr=tmpstr+"</li>";
+              cls = '';
             } else {
               cls  = this.next_gridblock(cls);
-              tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+" my-box'  >"; 
-              tmpstr=tmpstr+"</div>";
             }
+              tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+"' style='min-height:100px;vertical-align:top;padding:0;'  >"; 
+ //           tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+" my-box'  >"; 
+              tmpstr=tmpstr+"</li>";
          }
         }
        ct = ct + 1;
       }
 
-
-    if (this.gridcols == 1) {
-       tmpstr=tmpstr+"</ul>";
-    } else {
-       tmpstr=tmpstr+"</div>";
-    }
-     lbl = this.screen;
+    tmpstr=tmpstr+"</ul>";
+ 
+    lbl = this.screen;
  
     if (document.getElementById(lbl)!= null) {
         document.getElementById(lbl).innerHTML=tmpstr;
@@ -131,14 +127,11 @@ viewer.prototype.draw_view = function() {
            }
            ct = ct + 1;
 	 }
-      if (this.gridcols >1) {
-          $('#gv').trigger("create");
-      } else {
+
        if (jqm_off == false) {
           $('#lv').listview();
-         //      $('#lv').listview("refresh");
-          }
-      }
+          $('#lv').listview("refresh");
+       }
    }
 
     if (this.is_mini == false ) {

@@ -27,6 +27,7 @@ header.prototype.show = function () {
 
             this.draw_left();
             this.draw_right();          
+            this.draw_sidenavs();          
 
             if ((main_shape == "wide") && (buddah == true)) {
                 this.draw_sidebar();
@@ -105,7 +106,7 @@ header.prototype.draw_right = function () {
       
    }
 
-        tmp = tmp + "<div id='' class='' style='display:inline;margin-right:10px;vertical-align:top;'  >";
+        tmp = tmp + "<div id='' class='' style='display:inline;margin-right:50px;vertical-align:top;'  >";
 
       if (buddah == false) {
         lbl = 'browse_btn';
@@ -191,20 +192,23 @@ header.prototype.draw_right = function () {
 
 }
 
- 
-header.prototype.draw_left = function () {
+  
+header.prototype.draw_sidenavs = function () {
         var lbl = "";
         var ocl = "";
         var tmp = "";
 
- 	 lbl = 'prev_btn'; 
+	 lbl = 'prev_btn'; 
         ocl = "daviewer.prev();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
+         tmp = tmp + "<span  class='mybtns' style=''  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
 
+      $('#nav_left').html(tmp);
+
+       tmp = "";
 	 lbl = 'next_btn'; 
         ocl = "daviewer.next();";
          tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
@@ -212,19 +216,17 @@ header.prototype.draw_left = function () {
         tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-/*
-      if (main_shape == "wide") {
-        lbl = 'vman_btn'; 
-        ocl =  'daviewer.randomize_rungs();'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-      }
-*/
+     $('#nav_right').html(tmp);
+
+}
+
+header.prototype.draw_left = function () {
+        var lbl = "";
+        var ocl = "";
+        var tmp = "";
+
        if (main_shape != "mini") {
-         tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;margin-left:50px;'  >";
          tmp = tmp + "</div>";
        } else {
       }

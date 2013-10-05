@@ -9,14 +9,10 @@ header('Content-type: text/html; charset=utf-8 ');
 <title>jqm listview test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
-<link rel="stylesheet" href="../css/mini.css">
-<link rel="stylesheet" href="../css/reg.css">
-<link rel="stylesheet" href="../css/wide.css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
 
-
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
 </head>
 
@@ -36,20 +32,25 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script>
 
-
- function do_it () {
+function do_it () {
    var tmp = "";
 
    tmp += "<ul data-role='listview' id='the-listview' >";
-   tmp += "<li class='box' >a</li>";
-   tmp += "<li class='box'  >b</li>";
-   tmp += "<li  class='box' >c</li>";
+   tmp += "<li  ><a href='#' >";
+   tmp += "<h2 class=''  >jimmy</h2>";
+   tmp += "<p class='ui-li-desc'  >jimmy</p>";
+   tmp += "<p class='ui-li-aside'  >jones</p>";
+   tmp += "</a></li>";
+ 
+   tmp += "<li  >b</li>";
+   tmp += "<li  >c</li>";
    tmp += "</ul>";
 
    $('#spot').html(tmp);
    $('#spot').trigger("create");
-
+   $('#the-listview').listview("refresh");
 }
+
 </script>
 
 </body>

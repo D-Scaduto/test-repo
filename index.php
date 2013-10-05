@@ -75,6 +75,7 @@ header('Content-type: text/html; charset=utf-8 ');
 </script>
 <?php  } ?>
 
+<!--link rel=StyleSheet href='css/gridlistview.css' type="text/css" media="screen,print" /-->
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/reg.css' type="text/css" media="screen,print" />
@@ -164,14 +165,17 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div> 
 
-<div id='page_spot' data-role='page' class='ui-page' >
+<div id='page_spot' data-role='page' class='ui-page my-page' >
 
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
 <div style='clear:both;' > </div>
 
-  <div  data-role='content'  class='' style=''  >
+ <div id="nav_left"></div>
+ <div id="nav_right"></div>
+
+  <div  data-role='content'  class='' style='min-width:250px;'  >
 
     <div id='main_view'  class='' style=''   >
     </div>
@@ -280,10 +284,13 @@ header('Content-type: text/html; charset=utf-8 ');
               } else {
                 if (main_shape != "reg") {
                    main_shape = "reg";
+                   diego.show();
+                   diego.set_topshape();
+                }
+                if (daviewer.gridcols != 2) {
                    daviewer.gridcols=2;
                    daviewer.draw_view();
-                   diego.show();
-                }
+                } 
               }
            }
         }

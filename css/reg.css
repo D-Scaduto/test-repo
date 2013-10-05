@@ -1,5 +1,6 @@
 
 @media screen and (min-width:550px) and (max-width:799px) {
+
  
     .logo_talk {
        font-size: 1.1em;
@@ -47,6 +48,11 @@
        background-color:white;
      }
 
+     .mybtns  {
+        padding:0 0 0;
+        border:none;
+     }
+ 
      .mybtns .ui-btn-inner  {
         background:white;
         padding:0 0 0;

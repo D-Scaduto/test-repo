@@ -12,9 +12,9 @@ poster.prototype.draw_link = function() {
 
    if ((this.linkurl != "") && (this.linkurl != undefined)) {
 
-       tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+//       tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
        tmp = tmp + "link" 
-       tmp = tmp + " </a> ";
+//       tmp = tmp + " </a> ";
 	
    }
 

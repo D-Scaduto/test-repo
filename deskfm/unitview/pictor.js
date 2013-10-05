@@ -10,21 +10,19 @@ poster.prototype.draw_pic = function() {
    var ps="";
    var cls = "";
 
-      ps = this.picurl;
-      if (ps != "") {
-
-	  cls = "piclip";
-          if (daviewer.zoom == true)   {
+	cls = "piclip";
+          if (daviewer.zoom == true) {
               cls = "piczoom";
           }
-	  ocl = this.varname + ".toggle_piczoom();";
-          tmp=tmp + "<img src='"+ps+"' onclick='"+ocl+"' class='"+cls+"'  >";
 
+
+      if (this.picurl != "") {
+        ps = this.picurl;
+        tmp += "<img src='"+ps+"' class='"+cls+"' >"; 
+        lbl = this.rungster + '_pic_spot';
+//        $('#'+lbl).attr("src",ps);
+        $('#'+lbl).html(tmp);
      }
-      lbl = this.rungster + '_pic_spot';
-      if (document.getElementById(lbl) != null) {
-        document.getElementById(lbl).innerHTML=tmp;
-      }
 }
 
 
@@ -49,18 +47,14 @@ poster.prototype.get_pic = function() {
      }
      ocl = this.varname + ".toggle_piczoom();";
 
-     if ( (ps != "") && (ps != undefined)) {
-          tmp=tmp + "<img src='"+ps+"'  onclick='"+ocl+"' class='"+cls+"'  >";
-     } else {
-           tmp = tmp + "<img src='deskfm/images/icons/camera.png' onclick='"+ocl+"'  class='"+cls+"' >";
+     if ( (ps == "") || (ps == undefined)) {
+           ps='deskfm/images/icons/camera.png';
      }
 
-      lbl = this.rungster + '_pic_spot';
-      if (document.getElementById(lbl) != null) {
-        document.getElementById(lbl).innerHTML=tmp;
-      }
+        lbl = this.rungster + '_pic_spot';
+        $('#'+lbl).attr("src",ps);
 
-        tmp = "";
+         tmp = "";
         lbl = this.rungster + "_upic_frame_name";
         tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";

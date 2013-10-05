@@ -13,15 +13,15 @@
     }
 
     #menu_spot {
-       min-width:400px;
+       min-width:380px;
      }
 
     #left_spot {
-      width:20%;
+      width:10%;
    }
 
      #right_spot {
-        width:80%;
+        width:90%;
         text-align:right;
      }
 
@@ -50,7 +50,6 @@
         border:none;
      }
  
-
      .mybtns .ui-btn-inner {
         padding:0 0 0;
      }
@@ -106,8 +105,8 @@
     }
 
      .piclip {
-         clip:rect(0px,150px,150px,0px);
-	 width:100px;
+         clip:rect(0px,100px,100px,0px);
+	 width:75px;
      }
  
      .getstory {

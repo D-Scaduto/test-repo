@@ -168,7 +168,10 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
-  <div  data-role='content'  class='ui-grid-a' style=''  >
+   <div id="nav_left"></div>
+   <div id="nav_right"></div>
+
+  <div  data-role='content'  class='ui-grid-a' style='min-width:250px;'  >
 
     <div id='side_bar' class='ui-block-a' style=''  >
     </div>

@@ -20,7 +20,6 @@ logoman.prototype.show = function () {
      sty='background-color:white;'
    }
  
-      if (main_shape != "wide") {
         lbl = 'vman_btn'; 
         ocl =  'daviewer.randomize_rungs();'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
@@ -28,7 +27,7 @@ logoman.prototype.show = function () {
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-      }
+      
 
       if (main_shape == "reg") {
          this.logo_shape = "fm";
