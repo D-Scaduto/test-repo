@@ -65,6 +65,14 @@ logoman.prototype.show = function () {
          } 
      }
 
+        lbl = 'browse_btn';
+        ocl = 'diego.toggle_topshape(\"browse\");';
+        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
        document.getElementById(lbl).innerHTML=tmp;

@@ -10,17 +10,18 @@ function categor (pmenuid) {
    this.subcat ="";
 }
 
-
 categor.prototype.show = function() {
    if (jqm_off == true) {
        this.show_nojqm();
    } else {
-
       if ((buddah == true) && (main_shape == "wide")) {
          this.show_collapsers();
       } else {
         this.show_popups();
       }
+   }
+   if (main_shape != "wide") {
+      sal.hide();
    }
 }
 
@@ -32,15 +33,15 @@ categor.prototype.show_popups = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
-/*
-      lbl = 'vman2_btn'; 
+
+      lbl = 'vman_btn'; 
         ocl =  'diego.set_topshape(\"\");'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-*/
+
 
     if (this.subcat != "" ) {
 	lbl = 'subcat_btn';
@@ -116,7 +117,7 @@ categor.prototype.show_popups = function() {
 
   }
 
-     lbl = this.spotid;
+    lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
     this.showing = true;
@@ -151,7 +152,7 @@ categor.prototype.show_collapsers = function() {
         sugs = amare.subcat_set.get_setlist("what");
   	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
         for (var i=0;i<sugs.length;i++) {
-           ocl = "cater.set_cats(\"who\",\""+sugs[i].subcat+"\");";
+           ocl = "cater.set_cats(\"what\",\""+sugs[i].subcat+"\");";
            tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
         }
    	tmp +=   ' </ul>';
@@ -186,7 +187,7 @@ categor.prototype.show_collapsers = function() {
     $('#'+lbl).trigger("create");    
 
     this.showing = true;
-     this.redraw_view();
+    this.redraw_view();
 }
 
 
@@ -413,7 +414,6 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
             var s = this.cat + "_sog"; 
             $('#'+s).popup();    
             $('#'+s).popup("close");    
-            $('#'+s).popup("close");    
         //  $('#'+s).popup("refresh"); 
        } 
        this.show();
@@ -443,6 +443,9 @@ categor.prototype.hide = function () {
      document.getElementById(lbl).innerHTML=""; 
    }
    this.showing = false;
+   if (main_shape != "wide") {
+      sal.show();
+   }
 }
 
 

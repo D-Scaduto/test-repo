@@ -42,7 +42,7 @@ sorter.prototype.show = function() {
         var sugs = amare.monthstats;
         for (var i=0;i<sugs.length;i++) {
           ocl = this.varname + ".set_month("+sugs[i].month + ");";
-          var month = this.months[sugs[i].month];
+         var month = this.months[sugs[i].month];
           var year = sugs[i].year;
           if (year == this.da_date.getFullYear()) {
         	tmp += "  <option value='"+sugs[i].month+"' >"+month+"</option>";
@@ -71,10 +71,11 @@ sorter.prototype.show = function() {
         var sugs = amare.monthstats;
         for (var i=0;i<sugs.length;i++) {
           ocl = this.varname + ".set_month("+sugs[i].month + ");";
+ //          ocl = "alert(\""+ocl+"\");"; 
           var month = this.months[sugs[i].month];
           var year = sugs[i].year;
           if (year == this.da_date.getFullYear()) {
-            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"<span class='ui-li-count'>"+sugs[i].cnum+"</span></a></li>";
+            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"<span class='ui-li-count'>"+sugs[i].lnum+" / " + sugs[i].cnum + "</span></a></li>";
           }
         }
         tmp = tmp + "</ul>";
@@ -87,9 +88,13 @@ sorter.prototype.show = function() {
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
-
       $('#sort_spot').trigger('create');
-      this.check_local();
+
+//      this.check_local();
+
+      $('#select-year').val(this.da_date.getFullYear());
+      $('#select-year').selectmenu("refresh");
+ 
             $('#select-year').bind("change",function(event,ui) {
                 var s = $(this).val();
                 mac.set_year(s); 
@@ -110,7 +115,6 @@ sorter.prototype.check_local = function() {
    var dt = new Object;
    dt.month = this.da_date.getMonth();
    dt.year = this.da_date.getFullYear();
-
    daviewer.load_unsorted_list(dt);
    var lstat = amare.get_monthstat(dt);
    if (lstat != null) {
@@ -123,9 +127,11 @@ sorter.prototype.check_local = function() {
 
 
 sorter.prototype.set_month = function(pmon) {
-   if (pmon != undefined) {
-     this.da_date.setMonth(pmon);
+  if (pmon != undefined) {
+     var m = parseInt(pmon);
+     this.da_date.setMonth(m);
      this.show();
+     this.check_local();
    }
 }
 
@@ -133,6 +139,7 @@ sorter.prototype.set_year = function(pyr) {
    if (pyr != undefined) {
      this.da_date.setYear(pyr);
      this.show();
+     this.check_local();
    }
 }
 

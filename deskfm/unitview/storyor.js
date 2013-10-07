@@ -80,7 +80,7 @@ poster.prototype.get_story = function() {
    } 
 
          oku = this.varname + ".update_story();";
-         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' class='getstory' onkeyup='"+oku+"' >";
+         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' class='getstory9' onkeyup='"+oku+"' style='display:inline;'  >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
 

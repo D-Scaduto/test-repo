@@ -64,10 +64,12 @@ viewer.prototype.draw_view = function() {
 
 
    if (jqm_off == false) {
-     if ((this.gridcols ==1) || (this.is_mini == true)) { 
-       tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='true' data-split-theme='d'  >";
+     if (this.is_mini == true) { 
+       tmpstr=tmpstr+"<div id='' style=''  >";
+     } else if ((this.gridcols ==1) || (this.zoom == true)) { 
+       tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='false' data-split-theme='d' style=''  >";
      } else if (this.gridcols == 2) {
-        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='true'  data-split-theme='d'  >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='true'  data-split-theme='d' style='' >";
      } else if (this.gridcols == 3) {
         tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-b'  data-inset='true'  data-split-theme='d'  >";
      } else if (this.gridcols == 4) {
@@ -80,26 +82,30 @@ viewer.prototype.draw_view = function() {
         if (this.darungs[ct] != undefined) {
 
          lbl = this.screen+"_rung_"+ct;
-         if (jqm_off == true) {
+         if ((jqm_off == true)  || (this.is_mini == true)) {
               tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"'  >"; 
               tmpstr=tmpstr+"</div>";
          } else {
 
-            if ((this.gridcols == 1) || (this.is_mini == true)) {
+            if ((this.gridcols == 1) || (this.zoom == true)) {
               cls = '';
             } else {
               cls  = this.next_gridblock(cls);
             }
-              tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+"' style='min-height:100px;vertical-align:top;padding:0;'  >"; 
+              tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+"' style='min-height:100px;vertical-align:top;padding:10px;'  >"; 
  //           tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+" my-box'  >"; 
               tmpstr=tmpstr+"</li>";
          }
         }
        ct = ct + 1;
       }
-
-    tmpstr=tmpstr+"</ul>";
  
+    if (this.is_mini == true) {
+      tmpstr=tmpstr+"</div>";
+    } else {
+      tmpstr=tmpstr+"</ul>";
+    }
+
     lbl = this.screen;
  
     if (document.getElementById(lbl)!= null) {
@@ -128,7 +134,7 @@ viewer.prototype.draw_view = function() {
            ct = ct + 1;
 	 }
 
-       if (jqm_off == false) {
+       if ((jqm_off == false) && (this.is_mini == false)) {
           $('#lv').listview();
           $('#lv').listview("refresh");
        }

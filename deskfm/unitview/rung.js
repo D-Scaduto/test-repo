@@ -18,21 +18,36 @@
                 lbl= this.rungster + "_story_spot";
 	        tmpstr=tmpstr+"<p id='"+lbl+"'  class=''   style='' >"; 
 	        tmpstr=tmpstr+"</p>";
+
+
            } else {
-
+//       		   tmpstr=tmpstr+"<div  class='' style='clear:left;' ></div>";
+ 
 //	          tmpstr=tmpstr+"<a href='#'  class='' style='' >";
-       		   tmpstr=tmpstr+"<div  class='' style='clear:left;' ></div>";
-
-	  	  lbl= this.rungster + "_pic_spot";
-// 	          tmpstr=tmpstr+"<img id='"+lbl+"' src=''  >"; 
-	          tmpstr=tmpstr+"<span id='"+lbl+"' src='' style='float:left;'  >"; 
-                  tmpstr=tmpstr+"</span>";
-
+/*
+               if (this.shape == "getstory") {
 		  lbl= this.rungster + "_story_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
 	          tmpstr=tmpstr+"</span>";	
-	
- 
+               }
+*/
+	  	  lbl= this.rungster + "_pic_spot";
+                  var ocl = "";
+                  if (this.rung != 0) {
+                    ocl = this.parvar + ".to_top("+this.rung+");";
+                  }
+	          tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"'  src='' style='float:left;'  >"; 
+                  tmpstr=tmpstr+"</span>";
+
+//               if (this.shape != "getstory") {
+		  lbl= this.rungster + "_story_spot";
+	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
+	          tmpstr=tmpstr+"</span>";	
+  //             }
+
+
+	          tmpstr=tmpstr+"<br>";	
+
                    if (this.listype == "products") {
                       lbl= this.rungster + "_buy_spot";
                       tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='' >"; 
@@ -44,7 +59,8 @@
                     }
 
 
-		  lbl= this.rungster + "_link_spot";
+          tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
+		  lbl= this.rungster + "_link_btn";
                   tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</span>";
   	          
@@ -52,24 +68,38 @@
                   tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</span>";
 	
-  		  lbl= this.rungster + "_date_spot";
-	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='' >"; 
-		  tmpstr=tmpstr+"</span>";	
+	  	  lbl = this.rungster + "_nav_btns";
+         	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 	  tmpstr = tmpstr + "</span>";
 
+	 lbl = this.rungster + "_send_btns";
+         tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 tmpstr = tmpstr + "</span>";
+
+  	    	lbl = this.rungster + "_work_btns";
+         	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 	tmpstr = tmpstr + "</span>";
+
+	 	tmpstr = tmpstr + "</span>";
+
+
+  		  lbl= this.rungster + "_date_spot";
+	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
+		  tmpstr=tmpstr+"</span>";	
 
 //                  tmpstr=tmpstr+"</a>";	
 
 //	          tmpstr=tmpstr+"<a href='#'  class='' style='' ></a>";
-/* 
+ 
+      	          lbl= this.rungster + "_btns_spot";
+   	          tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='' >"; 
+    	          tmpstr=tmpstr+"</span>";
+
                if ((this.listype == "people") || (this.listype == "suppliers"))  {
                   lbl= this.rungster + "_mini";
-                  tmpstr=tmpstr+"<div id='"+lbl+"' class='' style=''  >"; 
-                  tmpstr=tmpstr+"</div>";
+                  tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+                  tmpstr=tmpstr+"</span>";
                }
-
-      	          lbl= this.rungster + "_btns_spot";
-   	          tmpstr=tmpstr+"<div id='"+lbl+"' class='spotd_off' style='' >"; 
-    	          tmpstr=tmpstr+"</div>";
 
                   if ((this.listype == "unsorted") || (this.shape == "getsort")) {
 	            lbl = this.rungster + "_sort_spot";
@@ -89,11 +119,15 @@
                       tmpstr=tmpstr+"<iframe id='"+lbl+"' name='"+lbl+"_name' onload='"+z+"' src='' style='display:none;' >"; 
                       tmpstr=tmpstr+"</iframe>";
                   }
-                
+
+        	  lbl= this.rungster + "_link_spot";
+                  tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style=''  >"; 
+    	          tmpstr=tmpstr+"</div>";
+        
 		  lbl= this.rungster + "_embed_spot";
                   tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</div>";
-*/
+
            if (debug == true) {
   	      lbl= this.rungster + "_debug_spot";
 	      tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 
@@ -113,7 +147,7 @@
 
 poster.prototype.draw_rung = function() {
 
- //         this.draw_btns();
+          this.draw_btns();
 
           if (this.is_mini == true) {
              this.draw_story();
@@ -185,9 +219,9 @@ poster.prototype.draw_rung = function() {
 	      }
 	    }
  
-       //     if ((this.cat == "") || (this.cat = undefined))  {
-              this.draw_date();
-        //    }
+            if ((this.cat == "") || (this.cat = undefined))  {
+                this.draw_date();
+            }
  
             if (buddah == true) {
 //              this.draw_groups();

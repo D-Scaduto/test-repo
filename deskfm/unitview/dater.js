@@ -8,7 +8,6 @@ poster.prototype.draw_date = function() {
     var day = "";
     var arr = null;
 
-
     if ((this.created_at != "")  && (this.created_at != undefined)) { 
         arr =  this.created_at.split(" ");
         var b =  arr[0];
@@ -18,11 +17,9 @@ poster.prototype.draw_date = function() {
         var pi = parseInt(m,10);
         var nic = "";
         var my = "";
-        if (mac.krono != null) {
-          nic = mac.krono.months[pi] + " " + day + " \'" + c[0].substr(2,2);
-          my =  mac.krono.months[pi] + " " + " \'" + c[0].substr(2,2);
-        }
-//        tmpstr=tmpstr+ arr + "<br>";
+        nic = mac.months[pi];
+    //    nic = nic + " " + day;
+        nic =  nic + " \'" + c[0].substr(2,2);
         tmpstr=tmpstr+ nic;
     }
 

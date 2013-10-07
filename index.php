@@ -153,6 +153,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script src=deskfm/header.js type="text/javascript" ></script>
 <script src=deskfm/footer.js type="text/javascript" ></script>
+<script src=deskfm/sizer.js type="text/javascript" ></script>
 
 <script src=deskfm/audio.js type="text/javascript" ></script>
 <script src=deskfm/wheretor.js type="text/javascript" ></script>
@@ -167,15 +168,16 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='page_spot' data-role='page' class='ui-page my-page' >
 
-<div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
-</div>
+  <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
+  </div>
 
-<div style='clear:both;' > </div>
-
- <div id="nav_left"></div>
- <div id="nav_right"></div>
+   <div id="nav_left"></div>
+   <div id="nav_right"></div>
 
   <div  data-role='content'  class='' style='min-width:250px;'  >
+
+    <div id='top_view'  class='' style='text-align:center;'   >
+    </div>
 
     <div id='main_view'  class='' style=''   >
     </div>
@@ -241,60 +243,9 @@ header('Content-type: text/html; charset=utf-8 ');
     amare.get_webits();
 
       $(window).resize(function(val) {
-         if ($(window).width() < 550) {
-            if (main_shape != "mini") {
-              main_shape = "mini";
-              diego.show();
-              diego.set_topshape();
-            }
-            if ($('#foot_spot').css('position') != 'static') {
-              $('#foot_spot').css('position','static');
-              $('#foot_spot').trigger("create");
-            }
-            if (daviewer.gridcols != 1) {
-                 daviewer.gridcols=1;
-                 daviewer.draw_view();
-            }
-          } else {
-             if ($('#foot_spot').css('position') != 'fixed') {
-                $('#foot_spot').css('position','fixed');
-                $('#foot_spot').trigger("create");
-             }
-            if ($(window).width() > 1000) {
-              if (main_shape != "wide") {
-                 main_shape = "wide";
-                 diego.show();
-                 diego.set_topshape();
-              }
-              if (daviewer.gridcols != 4) {
-                 daviewer.gridcols=4;
-                 daviewer.draw_view();
-              }
-            } else {
-               if ($(window).width() > 800) {
-                  if (main_shape != "wide") {
-                    main_shape = "wide";
-                    diego.show();
-                    diego.set_topshape();
-                  } 
-                  if (daviewer.gridcols != 3) {
-                    daviewer.gridcols=3;
-                    daviewer.draw_view();
-                  }
-              } else {
-                if (main_shape != "reg") {
-                   main_shape = "reg";
-                   diego.show();
-                   diego.set_topshape();
-                }
-                if (daviewer.gridcols != 2) {
-                   daviewer.gridcols=2;
-                   daviewer.draw_view();
-                } 
-              }
-           }
-        }
-    });
+          set_header();
+          set_viewer();
+      });
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
       diego.set_topshape();

@@ -7,7 +7,6 @@ function rail (pspotid) {
    
 rail.prototype.show = function() {
    this.draw_rail();
-   this.draw_btns();
 }
 
 rail.prototype.draw_rail = function() {
@@ -16,16 +15,30 @@ rail.prototype.draw_rail = function() {
    var tmp = "";
    var tsrc = "";
 
-        tmp = tmp + "<div id='' class='' style='width:100%;display:inline-block;vertical-align:middle;' >";
-	tmp = tmp + "<label for='slider-1'></label>";
-
-       if (jqm_off == true) {
+      tmp = tmp + "<div id='' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
+      tmp = tmp + "<label for='slider-1'></label>";
+      if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='1' min='1' max='100'  style=''  />";
-       } else {
+      } else {
  	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
-       }
-
+      }
       tmp = tmp + "</div>";
+
+        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
+        tmp = tmp + "</div>";
+
+
+      tmp = tmp + "<div id='chunkslide_box' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
+      tmp = tmp + "<label for='slider-2'></label>";
+      if (jqm_off == true) {
+ 	  tmp = tmp + "<input type='range' name='slider-2' id='slider-2' value='1' min='1' max='100'  style=''  />";
+      } else {
+ 	  tmp = tmp + "<input type='range'   name='slider-2' id='slider-2' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
+      }
+      tmp = tmp + "</div>";
+ 
+        tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
+        tmp = tmp + "</div>";
   
    lbl = 'rail_spot';
    pobj = document.getElementById(lbl);
@@ -37,61 +50,29 @@ rail.prototype.draw_rail = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
           });
-
+         $('#slider-2').on("change",function(event) {
+               var st = "";
+                st = parseInt(event.target.value) * daviewer.top_end;
+                daviewer.goto_listdex(st);
+          });
        } else {
            $('#'+lbl).trigger("create");
-
             $('#slider-1').bind("slidestop",function(event) {
                 var st = "";
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
             });
+           $('#'+lbl).trigger("create");
+            $('#slider-2').bind("slidestop",function(event) {
+                var st = "";
+                st = parseInt(event.target.value) * daviewer.top_end;
+                daviewer.goto_listdex(st);
+            });
        }
+
        this.showing = true;
     }
 }
-
-
-rail.prototype.draw_btns = function() {
-   var pobj=null;
-   var lbl = "";
-   var tmp = "";
-   var tsrc = "";
-
-/*
-	 lbl = 'prev_chunk'; 
-        ocl = "daviewer.prev_chunk();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/fast-back.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-
-
-	 lbl = 'next_chunk'; 
-        ocl = "daviewer.next_chunk();";
-         tmp = tmp + "<span  class='mybtns' style='display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/fast-fwd.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-
-*/
-        tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
-        tmp = tmp + "</div>";
- 
-     if (debug == true) {
-       tmp = tmp + "<div id='rail_debug' class='' style='' >";
-       tmp = tmp + "</div>";
-      }
-  
-   lbl = 'rail_btns';
-   pobj = document.getElementById(lbl);
-   if ( pobj != null) {
-      pobj.innerHTML = tmp;
-   }
-}
-
 
 rail.prototype.draw_raildata = function() {
    var lbl = "";
@@ -101,26 +82,44 @@ rail.prototype.draw_raildata = function() {
 
    if (daviewer.stats != null) {
 
-	   var lchunk = Math.floor(daviewer.listdex/daviewer.top_end);
-  	   var lchunks = Math.floor(daviewer.stats.lnum / daviewer.top_end) -1;
-   	   var mchunks = Math.floor(daviewer.stats.cnum / daviewer.top_end);
-   	   var lc = lchunk;
+      var lchunk = Math.floor(daviewer.listdex/daviewer.top_end);
+      var lchunks = Math.floor(daviewer.stats.lnum / daviewer.top_end);
+      var mchunks = Math.floor(daviewer.stats.cnum / daviewer.top_end);
 
       if (mchunks > lchunks ) {
       } 
  
-      var st = 1;
-      var fn = daviewer.stats.lnum -2;
+      var st = lchunk * daviewer.top_end;
+      var fn = lchunk * daviewer.top_end + daviewer.top_end;
+      if (fn > daviewer.dalist.length) {
+        fn = daviewer.dalist.length;
+      }
       var ld = parseInt(daviewer.listdex) + 1;
-      var en = ld + daviewer.top_end;
       var cn = daviewer.stats.cnum;
+      var ln = daviewer.stats.lnum + 1;
+      var lc = lchunk + 1;
+      var lcs = lchunks;
+
       $('#slider-1').attr("min", st );
       $('#slider-1').attr("max", fn );
       $('#slider-1').val(ld);
       $('#slider-1').slider('refresh');
-      tmp = ld + " to " + en + " of " + daviewer.dalist.length;
+      tmp = "#" + ld + " of " + ln;
       $('#slider-1-detail').html(tmp);
 
+      if (lchunks >=1) {
+         $('#chunkslide_box').show();
+         $('#slider-2').attr("min", 0 );
+         $('#slider-2').attr("max", lchunks );
+         $('#slider-2').val(lchunk);
+         $('#slider-2').slider('refresh');
+         if (st == 0) { st = 1; }
+         tmp = "set " + lc + " of " + lcs;
+         $('#slider-2-detail').html(tmp);
+      } else {
+         $('#slider-2-detail').html("");
+         $('#chunkslide_box').hide();
+      }
    } else {
 //	   alert("no stats");
    }

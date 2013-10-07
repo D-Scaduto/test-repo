@@ -172,14 +172,13 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
     var ok = false;
     var obj = null;
 
-     if (dtmon.month == "") {
-
+     if (dtmon.month == "all") {
        this.stats = amare.total_unsorted;
      } else {
 
-//       alert("month="+dtmon.month);
-       this.stats = amare.get_monthstat(dtmon);
-       if (this.stats != null) {
+      this.stats = amare.get_monthstat(dtmon);
+        if (this.stats != null) {
+      //    alert("month="+this.stats.month);
          //alert(this.stats.listype);
        }
      }

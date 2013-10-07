@@ -17,39 +17,35 @@ supplier.prototype.show = function() {
      var ocl = "";
      var cls = 'spotd_off';
 
-      tmp = tmp + "<div data-role='controlgroup' data-type='horizontal' >";
+      tmp = tmp + "<div data-role='controlgroup' data-type='' style=''  >";
+     tmp = tmp + "<div data-role='controlgroup' data-type='horizontal' style=''  >";
 
-      lbl = 'new_supply_btn';
+      lbl = 'by_supplier_btn';
+       ocl = this.varname + '.setby_supplier();';
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
+         tmp += "suppliers";
+       tmp = tmp + "</button>"; 
+      lbl = 'by_prodtype_btn';
+       ocl = this.varname + '.setby_product();';
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
+         tmp += "products";
+       tmp = tmp + "</button>"; 
+
+        tmp = tmp + "</div>"; 
+
+     lbl = 'new_supply_btn';
        ocl = this.varname + '.new_one();';
         tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
 //       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
-         tmp += "add";
+         tmp += "new one";
        tmp = tmp + "</button>"; 
 
-	tmp += "<label for='select-supply' class='select'></label>";
- 	tmp += "<select name='select-supply' data-mini='true' data-inline='true' id='select-supply'>";
- 	tmp += "  <option value='product' >product</option>";
-  	tmp += "  <option value='supplier' >supplier</option>";
- 	tmp += "</select>";
+        tmp = tmp + "</div>"; 
 
- 	tmp += "</div>";
 
-      if (main_shape != "wide") {
+      if (main_shape == "wide") {
  
-	tmp += "<label for='select-supplier' class='select'></label>";
- 	tmp += "<select name='select-supplier' data-mini='true' data-inline='true' id='select-supplier'>";
-        var sugs = amare.supplierlist;
-        for (var i=0;i<sugs.length;i++) {
-          ocl = this.varname + ".set_supplier("+sugs[i].pid + ");";
-          tmp += "  <option value='"+sugs[i].pid+"' >"+sugs[i].uname+"</option>";
-        }
- 	tmp += "</select>";
-
-     } else {
-
- //       tmp = tmp + "<div id='' data-role='collapsible' style='width:200px;' >";
-        tmp = tmp + "<h3> suppliers </h3>"; 
-        tmp = tmp + "<ul id='' data-role='listview' style='width:200px;' >"; 
+        tmp = tmp + "<ul id='' data-role='listview' style='width:200px;' data-inset='true' >"; 
         for (var i=0;i<amare.supplierlist.length;i++) {
            var osup = amare.supplierlist[i];
            var cnt = amare.count_products_by_supplier(osup.uname);

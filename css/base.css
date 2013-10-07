@@ -10,7 +10,7 @@
 }
 
 #nav_right {
-    right:15px;
+    right:7px;
     top:0px;
     position:fixed;
     z-index:10;
@@ -28,12 +28,12 @@
     white-space:normal;
 }		
 
-input.ui-slider-input {
+ input.ui-slider-input {
       display:none !important;
 }
 
      .piczoom {
-	 width:200px;
+	 width:150px;
      }
 
     .mbox {

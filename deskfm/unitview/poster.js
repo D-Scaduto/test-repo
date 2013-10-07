@@ -81,6 +81,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 
    if (this.dadex == -1) {
       pobj = new webit();
+      this.editing = true;
    } else {
 
     this.stored = true;
@@ -188,21 +189,6 @@ poster.prototype.draw_btns = function() {
        var ocl="";
        var sty = '';
 
-	 lbl = this.rungster + "_nav_btns";
-         tmp = tmp + "<span  id='"+lbl+"' >";  
-	 tmp = tmp + "</span>";
-
-       if (this.is_mini == false) {
-          sty='float:right;';
-       }
-	 lbl = this.rungster + "_work_btns";
-         tmp = tmp + "<span  id='"+lbl+"' style='" + sty+ "' >";  
-	 tmp = tmp + "</span>";
-
-	 lbl = this.rungster + "_send_btns";
-         tmp = tmp + "<span  id='"+lbl+"' style='float:right;' >";  
-	 tmp = tmp + "</span>";
-
      lbl = this.rungster + '_btns_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
@@ -229,13 +215,32 @@ poster.prototype.nav_btns = function() {
             if (this.rung == 0) {
              if (daviewer.zoom == true) {
 
-                 if (nicky.showing == true) {
-                     lbl = this.rungster + '_zoom_btn';
+                    lbl = this.rungster + '_zoom_btn';
                      ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/dot_swirl.png';
+                     src = 'deskfm/images/icons/grey_round.png';
                      tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
                      tmp = tmp + "<img src='"+src+"' height='20px' >";
                      tmp = tmp + "</span>";
+
+                 if (nicky.showing == true) {
+                     lbl = this.rungster + '_share_btn';
+                     ocl = "";
+                     src = 'deskfm/images/icons/share.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+
+                 }
+              } else {
+
+                     lbl = this.rungster + '_zoom_btn';
+                     ocl = this.parvar + ".toggle_zoom();";
+                     src = 'deskfm/images/icons/grey_round.png';
+                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                     tmp = tmp + "<img src='"+src+"' height='20px' >";
+                     tmp = tmp + "</span>";
+ 
+                 if (nicky.showing == true) {
 
                      lbl = this.rungster + '_share_btn';
                      ocl = "";
@@ -244,55 +249,30 @@ poster.prototype.nav_btns = function() {
                      tmp = tmp + "<img src='"+src+"' height='20px' >";
                      tmp = tmp + "</span>";
 
-                 } else {
-
-                     lbl = this.rungster + '_zoom_btn';
-                     ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/dot_swirl.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-
-                }
-
-              } else {
-
-                 if (nicky.showing == true) {
-
-                     lbl = this.rungster + '_zoom_btn';
-                     ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/share.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-
-                 } else {
-
-                     lbl = this.rungster + '_zoom_btn';
-                     ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/dot_swirl.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-                }
+                  }
 
               }
 
-             } else {
+          } else {     // not rung 0
 
               lbl = this.rungster + '_totop_btn';
               ocl = this.parvar + ".to_top("+this.rung+");";
-              ocl = ocl + this.parvar + ".set_zoom();";
+          //    ocl = ocl + this.parvar + ".set_zoom();";
+                 src = 'deskfm/images/icons/grey_round.png';
+              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+              tmp = tmp + "<img src='"+src+"' height='20px' >";
+              tmp = tmp + "</span>";
+
               if (nicky.showing == true) {
+              lbl = this.rungster + '_share_btn';
+              ocl = "";
                  src = 'deskfm/images/icons/share.png';
-              } else {
-                 src = 'deskfm/images/icons/dot_swirl.png';
-              }
               tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
               tmp = tmp + "<img src='"+src+"' height='20px' >";
               tmp = tmp + "</span>";
 
             }
+         }
 
           if (this.stored == false )  {
               ocl = this.parvar + ".del_rung("+this.rung+")";
@@ -327,14 +307,6 @@ poster.prototype.nav_btns = function() {
                 tmp = tmp + "</span>";
            }
 
-           if (buddah == true) {
-              ocl = this.varname + ".toggle_editing();";
-              lbl = this.rungster + "_edit_btn";
-              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"' style='float:right;'   >";
-              tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
-              tmp = tmp + "</span>";
-           }
-
          } else {
 
             if (buddah == true) {
@@ -345,12 +317,7 @@ poster.prototype.nav_btns = function() {
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</span>";
 */
-              ocl = this.varname + ".toggle_editing();";
-              lbl = this.rungster + "_edit_btn";
-              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"' style=''   >";
-              tmp = tmp + "<img src='deskfm/images/icons/cog.png' height='20px' >";
-              tmp = tmp + "</span>";
-           }
+          }
 
          }
 
@@ -367,11 +334,12 @@ poster.prototype.nav_btns = function() {
        var ocl="";
        var cls = "";
 
+/*
 	 ocl = this.varname + ".toggle_getname();";
          tmp = tmp + "<span  onclick='"+ocl+"' style='height:20px;' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
 	 tmp = tmp + "</span>";
-
+*/
        	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getstory();' >";  
          tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
          tmp = tmp + "</span>";  
@@ -379,7 +347,7 @@ poster.prototype.nav_btns = function() {
 	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getpic();' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
 	 tmp = tmp + "</span>"; 
- 
+
       if ((this.listype == "unsorted") || (this.listype == "webits")) {
 	        
   	 ocl = this.varname + ".toggle_getlink();";

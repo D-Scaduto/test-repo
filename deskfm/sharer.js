@@ -5,6 +5,8 @@ function sharer (pspotid) {
    this.varname = "nicky";
    this.showing = false;
    this.shape = "";  
+
+   this.newster = new poster('top_view',0,"nicky","nicky.newster",false);
 }
 
 
@@ -96,13 +98,36 @@ sharer.prototype.show = function() {
               sal.hide();
             }
         }
+        this.show_newster();  
+        daviewer.draw_view();
      } 
 }
 
 
-sharer.prototype.new_one = function() {
+sharer.prototype.show_newster = function() {
+
+    var lbl = "";
+    var tmp = "";
+    
+    tmp += "<div id='top_view_rung_0' class='box' >";
+    tmp += "</div";
+    lbl = "top_view";
+    $('#'+lbl).html(tmp);
+
  
-       daviewer.new_one("unsaved");
+     if (this.newster.ppid == undefined) {
+      this.newster.set_ppid(-1,"unsaved");
+     }
+     this.newster.redraw_rung(); 
+
+}
+
+
+sharer.prototype.del_rung = function(tspot) {
+
+    this.newster.clear();
+    this.hide_newster();
+
 }
 
 
@@ -178,6 +203,14 @@ sharer.prototype.change = function() {
 }
 
 
+sharer.prototype.hide_newster = function() {
+
+   this.newster.hide_rung();
+   lbl = 'top_view';
+   $('#'+lbl).html("");
+
+}
+
 sharer.prototype.hide = function() {
 
    var pobj=null;
@@ -189,6 +222,9 @@ sharer.prototype.hide = function() {
         pobj.innerHTML = tmp;
    }
    this.showing = false; 
+
+   this.hide_newster();
+
    daviewer.draw_view();
 }
 

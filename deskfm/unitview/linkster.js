@@ -12,13 +12,13 @@ poster.prototype.draw_link = function() {
 
    if ((this.linkurl != "") && (this.linkurl != undefined)) {
 
-//       tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
-       tmp = tmp + "link" 
-//       tmp = tmp + " </a> ";
+       tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+ 	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+       tmp = tmp + " </a> ";
 	
    }
 
-     lbl = this.rungster + '_link_spot';
+     lbl = this.rungster + '_link_btn';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
          pobj.innerHTML = tmp;

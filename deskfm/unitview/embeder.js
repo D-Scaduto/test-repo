@@ -14,7 +14,7 @@ poster.prototype.draw_embed = function() {
               elink = this.embedurl;
 		  ocl = this.varname + ".toggle_showembed();";
         	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		  tmp =	tmp + "<img src='deskfm/images/icons/grey_round.png' height='20px' >";
+		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
 		  tmp = tmp + "</button>";
 	          lbl = this.rungster + '_embed_btn';
 	       	  pobj = document.getElementById(lbl);

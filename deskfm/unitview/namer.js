@@ -10,13 +10,14 @@ poster.prototype.draw_name = function() {
    var s = "";
    if (this.uname != "")   {
 
- //     if (this.source == "twitter") {
+      if (this.source == "twitter") {
 //       tlink =  = "http://twitter.com/Support/status/" + this.pid;
          tlink =  "http://twitter.com/" + this.uname;
-//          tmp = "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";
- //      } else {
           tmp = tmp + this.uname;
- //      }
+//          tmp = "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";
+       } else {
+          tmp = tmp + this.uname;
+      }
 
     }
   

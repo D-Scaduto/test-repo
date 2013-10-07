@@ -15,7 +15,6 @@ poster.prototype.draw_pic = function() {
               cls = "piczoom";
           }
 
-
       if (this.picurl != "") {
         ps = this.picurl;
         tmp += "<img src='"+ps+"' class='"+cls+"' >"; 

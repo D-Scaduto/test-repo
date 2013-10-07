@@ -40,8 +40,6 @@ viewer.prototype.more = function() {
 
    if (this.stats != undefined) {
 
-//alert(this.stats.listype);
-
          if (this.stats.listype == "webits") {
             amare.get_cat_list(this.stats);
 

@@ -3,23 +3,23 @@
 
  
     .logo_talk {
-       font-size: 1.1em;
-       display:inline-block;
-       vertical-align:middle;
-    }
-
-    .screen_talk {
        font-size: 1.2em;
        display:inline-block;
        vertical-align:middle;
     }
 
+    .screen_talk {
+       font-size: 1em;
+       display:inline-block;
+       vertical-align:middle;
+    }
+
     #left_spot {
-      width:35%;
+      width:55%;
      }
 
      #right_spot {
-        width:65%;
+        width:45%;
          text-align:right;
      }
 
@@ -66,21 +66,9 @@
         width:50%;
      }
 
- .my-box {
-    padding:5px;
-    border: 5px solid silver;
-  }
-
-
-
-   .zbox {
-       width:550px;
- //      margin:0 auto;
-       background-color:white;
-        padding:5px;
-       border-style:solid;
-       border-color:silver;
-       border-width:5px;
+    .my-box {
+      padding:5px;
+      border: 5px solid silver;
     }
 
 
@@ -91,14 +79,23 @@
        zoom: 1;
        *display: inline;
        overflow:auto;
-
        border-style:solid;
        border-color:silver;
        border-width:4px;
        width:350px;
        padding:5px;
-       min-height:150px;
     }
+
+    .zbox {
+       width:550px;
+ //      margin:0 auto;
+       background-color:white;
+        padding:5px;
+       border-style:solid;
+       border-color:silver;
+       border-width:5px;
+    }
+
 
      .piclip {
          clip:rect(0px,100px,100px,0px);

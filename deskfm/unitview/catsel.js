@@ -31,109 +31,71 @@
 
      var tmp="";
      var lbl = "";
+     var ocl = "";
      var sugs = [];
      var pobj = null;
      tmp = "";
 
-     tmp = tmp + "<div id='"+this.rungster+"_catabs' >";
+        lbl = this.rungster + "_who_sog";
+	tmp += "<a href='#"+lbl+"' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  >who,</a>";
+ 	tmp +=  "<div data-role='popup' id='"+lbl+"'>";
+ 	tmp +=   '<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
+        sugs = amare.subcat_set.get_setlist("who");
+        for (var i=0;i<sugs.length;i++) {
+           ocl = this.varname + ".set_cats(\"who\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   '  </ul>';
+ 	tmp +=  '</div>';
+
+       lbl = this.rungster + "_what_sog";
+       tmp += '<a href="#'+lbl+'" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="slideup" style="" class="screen_talk"  >what,</a>';
+ 	tmp += '<div data-role="popup" id="'+lbl+'" data-theme="d"  style="display:inline-block;"  >';
+ 	tmp +=  ' <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
+        sugs = amare.subcat_set.get_setlist("what");
+        for (var i=0;i<sugs.length;i++) {
+            ocl = this.varname + ".set_cats(\"what\",\""+sugs[i].subcat+"\");";
+          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=   '   </ul>';
+ 	tmp +=  '</div>';
+
+        lbl = this.rungster + "_why_sog";
+      tmp += '<a href="#'+lbl+'" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"  style="" class="screen_talk"  >why,</a>';
+ 	tmp += '<div data-role="popup" id="'+lbl+'" data-theme="d" style="display:inline-block;" >';
+ 	tmp += '  <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
+        sugs = amare.subcat_set.get_setlist("why");
+        for (var i=0;i<sugs.length;i++) {
+            ocl = this.varname + ".set_cats(\"why\",\""+sugs[i].subcat+"\");";
+           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp +=  '  </ul>';
+ 	tmp +=  '</div>';
+
+        lbl = this.rungster + "_how_sog";
+     tmp += '<a href="#'+lbl+'" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  class="screen_talk"  >how,</a>';
+ 	tmp += '<div data-role="popup" id="'+lbl+'" data-theme="d"  style="display:inline-block;" >';
+ 	tmp += ' <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
+        sugs = amare.subcat_set.get_setlist("how");
+        for (var i=0;i<sugs.length;i++) {
+            ocl = this.varname + ".set_cats(\"how\",\""+sugs[i].subcat+"\");";
+          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+        }
+   	tmp += ' </ul>';
+ 	tmp +=  '</div>';
+
+        lbl = this.rungster + "_junk_sog";
+         ocl = "";
+        ocl = this.varname + ".set_cats(\"junk\",\"\");";
+        tmp += "<a href='#"+lbl+"'  class='screen_talk' onclick='"+ocl+"' > junk </a>";
  
-     tmp = tmp + "<ul>";
-     tmp = tmp + "<li><a href='#"+this.rungster + "_who_tab'>who</a></li>";
-     tmp = tmp + "<li><a href='#"+this.rungster + "_what_tab'>what</a></li>";
-     tmp = tmp + "<li><a href='#"+this.rungster + "_why_tab'>why</a></li>";
-     tmp = tmp + "<li><a href='#"+this.rungster + "_how_tab'>how</a></li>";
-     tmp = tmp + "</ul>";
-
-     tmp = tmp + "<div id='"+this.rungster + "_who_tab' >";
-      tmp = tmp + "<ul id='"+this.rungster + "_who_sel' class='items'  >";
-         sugs = amare.subcat_set.get_setlist("who");
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
-        }
-       tmp=tmp + "</ul>";
-     tmp = tmp + "</div>";
-
-     tmp = tmp + "<div id='"+this.rungster + "_what_tab' >";
-      tmp = tmp + "<ul id='"+this.rungster + "_what_sel' class='items'  >";
-         sugs = amare.subcat_set.get_setlist("what");
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
-        }
-       tmp=tmp + "</ul>";
-     tmp = tmp + "</div>";
-
-
-     tmp = tmp + "<div id='"+this.rungster + "_why_tab' >";
-      tmp = tmp + "<ul id='"+this.rungster + "_why_sel' class='items'  >";
-         sugs = amare.subcat_set.get_setlist("why");
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
-        }
-       tmp=tmp + "</ul>";
-     tmp = tmp + "</div>";
-
-     tmp = tmp + "<div id='"+this.rungster + "_how_tab' >";
-      tmp = tmp + "<ul id='"+this.rungster + "_how_sel' class='items'  >";
-         sugs = amare.subcat_set.get_setlist("how");
-        for (var i=0;i<sugs.length;i++) {
-          tmp = tmp +"<li class='list' >"+sugs[i].text+"</li>";
-        }
-       tmp=tmp + "</ul>";
-     tmp = tmp + "</div>";
-
-    tmp = tmp + "</div>";
 
      lbl = this.rungster + '_sort_spot';
      pobj = document.getElementById(lbl);
      if ( pobj != null) {
         pobj.innerHTML = tmp;
-        var s = "";
-  	    $('#' + this.rungster + '_catabs').tabs({ active:false , collapsible:true } );
-
-            $('#' + this.rungster + '_who_sel').selectable({
-                selected: function (event, ui) {
-                        var selected = $("li[class$='ui-selected']").length;
-                        $("#info").html("you selected " + selected + " items!");
-                }
-            });
-
-            $('#' + this.rungster + '_what_sel').selectable({
-                selected: function (event, ui) {
-                        var selected = $("li[class$='ui-selected']").length;
-                        $("#info").html("you selected " + selected + " items!");
-                }
-            });
-
-            $('#' + this.rungster + '_why_sel').selectable({
-                selected: function (event, ui) {
-                        var selected = $("li[class$='ui-selected']").length;
-                        $("#info").html("you selected " + selected + " items!");
-                }
-            });
-
-            $('#' + this.rungster + '_how_sel').selectable({
-                selected: function (event, ui) {
-                        var selected = $("li[class$='ui-selected']").length;
-                        $("#info").html("you selected " + selected + " items!");
-                }
-            });
-
-
-/*
-	    $('#' + this.rungster + '_how_sog').menu();
-	    $('#' + this.rungster + '_how_sog').on( "menuselect", function( event, ui ) {
- 	       var c,s,p = "";
-	       c = ui.item.children().attr('ctag');
-               s = ui.item.children().attr('stag');
-  	       p = ui.item.children().attr('ptag');
-	       if ((c != undefined) && (c!= undefined) && (s != undefined)) {
-	         var exp = p + ".set_cats(\""+ c + "\",\"" + s + "\");";
-	         eval(exp);
-	       }
-             } );
-*/
-
-    }
+        $('#'+lbl).trigger("create");    
+     }
  }
 
 
@@ -175,6 +137,12 @@ poster.prototype.set_cats = function(pcat,psubcat) {
           this.changed = true;
           this.subcat_changed = true;
       }
+
+    
+      var lbl = this.rungster + "_" + this.cat +"_sog"; 
+      $('#'+lbl).popup();    
+      $('#'+lbl).popup("close");    
+ 
       this.draw_catsel();
       this.change_btns();
 }

@@ -68,6 +68,10 @@ header.prototype.draw_right = function () {
      if (main_shape == "mini") {
         tmp = tmp + "<div id='logo_spot' class='menu_sub' style='float:left;'  >";
         tmp = tmp + "</div>";
+
+        tmp = tmp + "<div id='browse_spot' class='menu_sub' style='float:left;'  >";
+        tmp = tmp + "</div>";
+
       }
 
          tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
@@ -79,18 +83,10 @@ header.prototype.draw_right = function () {
          tmp = tmp + "<div id='shop_spot' class='menu_sub' style=''  >";
          tmp = tmp + "</div>";
 
-     if (buddah == false) {
-         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;'  >";
-         tmp = tmp + "</div>";
-     }
-
       if (main_shape != "wide") {
 
        if (buddah == true) {
 
-         tmp = tmp + "<div  id='browse_spot' class='menu_sub' style='margin-top:15px;'  >";
-         tmp = tmp + "</div>";
- 
         tmp = tmp + "<div id='sort_spot' class='menu_sub' style=''  >";
         tmp = tmp + "</div>";
 
@@ -108,17 +104,7 @@ header.prototype.draw_right = function () {
 
         tmp = tmp + "<div id='' class='' style='display:inline;margin-right:50px;vertical-align:top;'  >";
 
-      if (buddah == false) {
-        lbl = 'browse_btn';
-        ocl = 'diego.toggle_topshape(\"browse\");';
-        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-      }
-
-      lbl = 'search_btn';
+       lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
          if ((buddah == true) && (main_shape != "mini"))  {
            ocl = "wanda.toggle();";
@@ -141,15 +127,6 @@ header.prototype.draw_right = function () {
         tmp = tmp + "</span>";
 
     if (buddah == true) {
-
-        lbl = 'browse_btn';
-        ocl = 'diego.toggle_topshape(\"browse\");';
-        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
 
         lbl = 'sort_btn';
        ocl = 'diego.toggle_topshape(\"sort\");'
@@ -226,11 +203,18 @@ header.prototype.draw_left = function () {
         var tmp = "";
 
        if (main_shape != "mini") {
+
          tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;margin-left:50px;'  >";
          tmp = tmp + "</div>";
-       } else {
-      }
-       
+
+         if (main_shape != "wide") {
+
+           tmp = tmp + "<div  id='browse_spot' class='' style='display:inline;'  >";
+           tmp = tmp + "</div>";
+         }
+
+        }
+      
     lbl = 'left_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
@@ -289,10 +273,12 @@ header.prototype.toggle_topshape = function (pshape) {
 }
   
 header.prototype.set_topshape = function (pshape) {
-   if (pshape != undefined) {
+
+     if (pshape != undefined) {
         this.top_shape = pshape;
-   }
-    if (this.top_shape == "") {
+     }
+ 
+     if (this.top_shape == "") {
 
       for (var i=0;i<this.top_shapes.length;i++) {
          s = this.top_shapes[i].split(':');
@@ -302,20 +288,22 @@ header.prototype.set_topshape = function (pshape) {
          eval(es);
       }
       sal.show();
-      if ((main_shape == "wide") && (buddah == true)) {
+
+     if ((main_shape == "wide") && (buddah == true)) {
         $('#side_bar').css('width','0%');
         $('#main_spot').css('width','100%');
       }
 
-    } else {
 
+    } else {
+ 
       if ((main_shape == "wide") && (buddah == true)) {
-        $('#side_bar').css('width','25%');
-        $('#main_spot').css('width','75%');
+        $('#side_bar').css('width','20%');
+        $('#main_spot').css('width','80%');
       } else {
          $('#main_spot').css('width','100%');
       }
-
+ 
       if (main_shape != "mini") {
           sal.show();
       } else {
@@ -337,6 +325,8 @@ header.prototype.set_topshape = function (pshape) {
         eval(es);
      }
     }
+
+    set_viewer();
 
     $('.mybtns').trigger("create"); 
 }
