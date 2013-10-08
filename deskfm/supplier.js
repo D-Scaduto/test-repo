@@ -17,40 +17,35 @@ supplier.prototype.show = function() {
      var ocl = "";
      var cls = 'spotd_off';
 
-      tmp = tmp + "<div data-role='controlgroup' data-type='' style=''  >";
-     tmp = tmp + "<div data-role='controlgroup' data-type='horizontal' style=''  >";
-
+     tmp = tmp + "<fieldset data-role='controlgroup'  data-type='horizontal' style='display:inline;min-width:160px;'  >";
+      tmp += "<legend></legend>";
       lbl = 'by_supplier_btn';
        ocl = this.varname + '.setby_supplier();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
-         tmp += "suppliers";
-       tmp = tmp + "</button>"; 
+        tmp = tmp + "<input  name='manage_setby' id='"+lbl+"' data-mini='true' type='radio'  onclick='"+ocl+"' style='' value='by_supplier' />";
+       tmp += "<label for='"+lbl+"' >suppliers</label>";
+ 
       lbl = 'by_prodtype_btn';
        ocl = this.varname + '.setby_product();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
-         tmp += "products";
-       tmp = tmp + "</button>"; 
+        tmp = tmp + "<input  name='manage_setby' id='"+lbl+"' type='radio' data-mini='true'  onclick='"+ocl+"' style=''  />";
+        tmp += "<label for='"+lbl+"' >products</label>";
 
-        tmp = tmp + "</div>"; 
+         tmp = tmp + "</fieldset>"; 
 
      lbl = 'new_supply_btn';
        ocl = this.varname + '.new_one();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' onclick='"+ocl+"' style='background-color:white;'  >";
-//       tmp = tmp + "<img src='deskfm/images/icons/plus_round.png' class='menu_btn' >";
-         tmp += "new one";
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
+        tmp = tmp + "new one"; 
        tmp = tmp + "</button>"; 
-
-        tmp = tmp + "</div>"; 
 
 
       if (main_shape == "wide") {
  
-        tmp = tmp + "<ul id='' data-role='listview' style='width:200px;' data-inset='true' >"; 
+        tmp = tmp + "<ul id='' data-role='listview' style='min-width:150px;' data-inset='true' >"; 
         for (var i=0;i<amare.supplierlist.length;i++) {
            var osup = amare.supplierlist[i];
            var cnt = amare.count_products_by_supplier(osup.uname);
            ocl = this.varname + ".set_supplier(\""+osup.pid+"\");";
-           tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+osup.uname+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
+           tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+osup.uname+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
         }
         tmp = tmp + "</ul>"; 
   //      tmp = tmp + "</div>"; 

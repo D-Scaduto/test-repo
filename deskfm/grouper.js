@@ -30,11 +30,13 @@ grouper.prototype.show = function() {
  
 //       tmp=tmp+"<div data-role='collapsible' style='width:200px;' >";
 //   	tmp = tmp +"<h3>people groups</h3>";
-   	tmp = tmp +"<ul  data-role='listview' id='' style='width:200px;'  >";
+   	tmp = tmp +"<ul  data-role='listview' id='' style='' data-inset='true'  >";
         sugs = amare.groupstats;
         for (var i=0;i<sugs.length;i++) {
-          ocl = this.varname + ".set_group(\""+sugs[i].groupid+"\");";
-          tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+sugs[i].groupid+"<span class='ui-li-count'>"+sugs[i].cnum+"</span></a></li>";
+          var gid = sugs[i].groupid;
+          ocl = this.varname + ".set_group(\""+gid+"\");";
+          if (gid == "") { gid = "nogroup"; }
+          tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+gid+"<span class='ui-li-count'>"+sugs[i].lnum + " / " + sugs[i].cnum+"</span></a></li>";
         }
         tmp = tmp + "</ul>";
 //         tmp=tmp+"</div>";
@@ -46,32 +48,18 @@ grouper.prototype.show = function() {
           pobj.innerHTML = tmp;
           this.showing = true;
           $('#'+lbl).trigger("create");
+
+          this.check_local();
           if (main_shape != "wide") {
+            $('#select-group').val(this.groupid); 
+            $('#select-group').selectmenu("refresh"); 
             $('#select-group').bind("change",function(event,ui) {
                 var s = $(this).val();
                 robby.set_group(s); 
             });
           }
-          this.redraw_view();
      }
 }
-
-
-grouper.prototype.redraw_view = function(pchunk) {
-	var start = 0;
-        var p =0;
-	this.stats = amare.get_groupstat(this.groupid);
-
-            if (pchunk != undefined) {
-      	          this.stats.last_chunk = pchunk;
-	          if (pchunk > 1) {
-		    p = pchunk - 1;
-		  }
-		 start = p   * da_limit;
-	    }
-        daviewer.load_group_list(this.groupid,start);
-}
-
 
 grouper.prototype.set_shape = function(pstr) {
     if (pstr != undefined ) {
@@ -85,11 +73,27 @@ grouper.prototype.set_shape = function(pstr) {
 }
 
 
+grouper.prototype.check_local = function(bmore) {
+
+    daviewer.load_group_list(this.groupid);
+   var lstat = amare.get_groupstat(this.groupid);
+ 
+   if (lstat != null) {
+     if (bmore == true){
+       if (lstat.cnum > lstat.lnum) {
+         daviewer.more();
+       }
+     }
+   }
+  
+}
+
+
 grouper.prototype.set_group = function (tgroupid) {
-  if (tgroupid != undefined) {
-    this.groupid = tgroupid;
-  }
-  daviewer.load_group_list(this.groupid);
+   if (tgroupid != undefined) {
+     this.groupid = tgroupid;
+   }
+   this.check_local(true);
 }
 
 

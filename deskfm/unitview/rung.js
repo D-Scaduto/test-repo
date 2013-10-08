@@ -16,7 +16,7 @@
                 tmpstr=tmpstr+"</img>";
 
                 lbl= this.rungster + "_story_spot";
-	        tmpstr=tmpstr+"<p id='"+lbl+"'  class=''   style='' >"; 
+	        tmpstr=tmpstr+"<p id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
 	        tmpstr=tmpstr+"</p>";
 
 

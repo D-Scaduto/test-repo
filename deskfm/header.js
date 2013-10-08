@@ -14,13 +14,35 @@ header.prototype.show = function () {
      var lbl = "";
      var ocl = "";
 
-         tmp = tmp + "<div id='top_bar' class='ui-grid-a' >";
-          tmp = tmp + "<div  id='left_spot' class='ui-block-a' style=''  >";
-         tmp = tmp + "</div>";
-         tmp = tmp + "<div id='right_spot' class='ui-block-b' style='' >";
-         tmp = tmp + "</div>";
-       tmp = tmp + "</div>";
+//         tmp = tmp + "<div id='top_bar' class='ui-grid-a' >";
 
+          tmp = tmp + "<span  id='left_spot' class='' style=''  >";
+         tmp = tmp + "</span>";
+ 
+         tmp = tmp + "<span id='' class='' style='float:right;' >";
+        tmp = tmp + "<span id='right_spot' class='' style='' >";
+         tmp = tmp + "</span>";
+
+        tmp = tmp + "<span style='float:right;margin-right:50px;' >";
+        lbl = 'nitro_btn';
+        ocl = 'daviewer.toggle_nitro();';
+        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"' class=''  style='' >";
+      tmp = tmp + "<img  src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+        tmp = tmp + "<span  id='lcount_spot' class='count_talk' style=''  >";
+        tmp = tmp + "</span>";
+        tmp = tmp + "<span  id='' class='count_talk' style=''  >";
+        tmp = tmp + " of ";
+        tmp = tmp + "</span>";
+        tmp = tmp + "<span  id='mcount_spot' class='count_talk' style=''  >";
+        tmp = tmp + "</span>";
+        tmp = tmp + "</span>";
+
+ //      tmp = tmp + "</div>";
+ //        tmp = tmp + "<div id='' class='' style='clear:left;' ></div>";
+ 
       var pobj = document.getElementById('menu_spot');
       if (pobj != null) {
             pobj.innerHTML = tmp;
@@ -44,7 +66,7 @@ header.prototype.show = function () {
                 $('#main_spot').css('width','100%');
             }
 
-            if ((this.top_shape == "") || (main_shape != "mini")) {
+            if ((this.top_shape == "") || (main_shape != "wide")) {
               sal.show();
             } else {
               sal.hide();
@@ -65,14 +87,7 @@ header.prototype.draw_right = function () {
      var tmp = "";
      var ocl = "";
 
-     if (main_shape == "mini") {
-        tmp = tmp + "<div id='logo_spot' class='menu_sub' style='float:left;'  >";
-        tmp = tmp + "</div>";
-
-        tmp = tmp + "<div id='browse_spot' class='menu_sub' style='float:left;'  >";
-        tmp = tmp + "</div>";
-
-      }
+      if (main_shape != "mini") {
 
          tmp = tmp + "<div id='share_spot' class='menu_sub' style=''  >";
          tmp = tmp + "</div>";
@@ -82,11 +97,10 @@ header.prototype.draw_right = function () {
 
          tmp = tmp + "<div id='shop_spot' class='menu_sub' style=''  >";
          tmp = tmp + "</div>";
+      }
 
-      if (main_shape != "wide") {
-
-       if (buddah == true) {
-
+      if (buddah == true) {
+       if (main_shape != "wide") {
         tmp = tmp + "<div id='sort_spot' class='menu_sub' style=''  >";
         tmp = tmp + "</div>";
 
@@ -98,15 +112,14 @@ header.prototype.draw_right = function () {
 
         tmp = tmp + "<div id='manage_spot' class='menu_sub' style=''  >";
         tmp = tmp + "</div>";
+       }     
      }
-      
-   }
 
-        tmp = tmp + "<div id='' class='' style='display:inline;margin-right:50px;vertical-align:top;'  >";
+        tmp = tmp + "<div id='' class='' style='display:inline;vertical-align:top;'  >";
 
        lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
-         if ((buddah == true) && (main_shape != "mini"))  {
+         if ((buddah == true) && (main_shape == "wide"))  {
            ocl = "wanda.toggle();";
         }
         tmp = tmp + "<span  id='"+lbl+"'  class='mybtns' style=''  >";
@@ -117,7 +130,7 @@ header.prototype.draw_right = function () {
 
         lbl = 'share_btn';
         ocl = 'diego.toggle_topshape(\"share\");'
-         if ((buddah == true) && (main_shape != "mini"))  {
+         if ((buddah == true) && (main_shape == "wide"))  {
            ocl = "nicky.toggle();";
         }
         tmp = tmp + "<span   id='"+lbl+"' class='mybtns' style=''  >";
@@ -160,8 +173,12 @@ header.prototype.draw_right = function () {
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
      }
-    
+
+   
     tmp = tmp + "</div>";
+
+
+
  
     lbl = 'right_spot';
     $('#'+lbl).html(tmp); 
@@ -202,19 +219,32 @@ header.prototype.draw_left = function () {
         var ocl = "";
         var tmp = "";
 
-       if (main_shape != "mini") {
-
          tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;margin-left:50px;'  >";
          tmp = tmp + "</div>";
-
-         if (main_shape != "wide") {
-
-           tmp = tmp + "<div  id='browse_spot' class='' style='display:inline;'  >";
-           tmp = tmp + "</div>";
+         
+         if (buddah == true) {
+             if (main_shape != "wide") {
+                tmp = tmp + "<div  id='browse_spot' class='' style='display:inline;'  >";
+                tmp = tmp + "</div>";
+             }
+         } else {
+                tmp = tmp + "<div  id='browse_spot' class='' style='display:inline;'  >";
+                tmp = tmp + "</div>";
          }
 
-        }
-      
+       if (main_shape == "mini") {
+
+         tmp = tmp + "<div id='share_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "</div>";
+
+         tmp = tmp + "<div id='search_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "</div>";
+
+         tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "</div>";
+      }
+
+     
     lbl = 'left_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
@@ -232,7 +262,7 @@ header.prototype.draw_sidebar = function () {
        tmp = tmp + "<div id='browse_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-     tmp = tmp + "<div id='sort_spot' class='' style=''  >";
+     tmp = tmp + "<div id='sort_spot' class='' style='text-align:center;'  >";
       tmp = tmp + "</div>";
 
       tmp = tmp + "<div id='feed_spot' class='' style=''  >";
@@ -277,7 +307,6 @@ header.prototype.set_topshape = function (pshape) {
      if (pshape != undefined) {
         this.top_shape = pshape;
      }
- 
      if (this.top_shape == "") {
 
       for (var i=0;i<this.top_shapes.length;i++) {
@@ -293,7 +322,6 @@ header.prototype.set_topshape = function (pshape) {
         $('#side_bar').css('width','0%');
         $('#main_spot').css('width','100%');
       }
-
 
     } else {
  

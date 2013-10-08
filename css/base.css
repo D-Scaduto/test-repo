@@ -1,4 +1,12 @@
 
+    .count_talk {
+      font-size: 1em;
+      font-weight:normal;
+      color:black; 
+    }
+
+
+
 #nav_left {
     left:0;
     top:0px;
@@ -29,7 +37,7 @@
 }		
 
  input.ui-slider-input {
-      display:none !important;
+//      display:none !important;
 }
 
      .piczoom {

@@ -20,8 +20,12 @@ categor.prototype.show = function() {
         this.show_popups();
       }
    }
-   if (main_shape != "wide") {
-      sal.hide();
+   if (buddah == true) {
+     if (main_shape != "wide") {
+        sal.hide(true);
+     }
+   } else {
+        sal.hide(true);
    }
 }
 
@@ -34,11 +38,11 @@ categor.prototype.show_popups = function() {
     var s = "";
     var sugs = [];
 
-      lbl = 'vman_btn'; 
+      lbl = 'browse_btn'; 
         ocl =  'diego.set_topshape(\"\");'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
 
@@ -443,7 +447,7 @@ categor.prototype.hide = function () {
      document.getElementById(lbl).innerHTML=""; 
    }
    this.showing = false;
-   if (main_shape != "wide") {
+   if ((main_shape != "wide") && (this.top_shape == "")) {
       sal.show();
    }
 }

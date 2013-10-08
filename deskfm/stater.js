@@ -90,7 +90,7 @@ stater.prototype.update_stats = function (statobj) {
 	st.max_chunks = Math.round(st.cnum/da_limit);
         st.desc = tp.get_desc(st.groupid);
         st.listype = "people";
-        st.last_chunk=0;
+        st.last_chunk=-1;
         amare.groupstats.push(st);
      }
 
@@ -343,7 +343,10 @@ stater.prototype.update_people = function(listobj) {
       this.count_lpstats();
       if (init_run == true) {
       } else {
-  //       daviewer.redraw_view();
+         if ((buddah == true) && (diego.top_shape == "group")) {
+           robby.show();
+         }
+         daviewer.redraw_view();
       }
 }  
 
@@ -685,7 +688,7 @@ stater.prototype.get_catstat = function(tcat,tsubcat) {
 stater.prototype.get_monthstat = function(pmon) {
   
     var ret = null;
-    if ((pmon == undefined) || (pmon.month == "")) {
+    if ((pmon == undefined) || (pmon.month == "all")) {
 	ret = this.total_unsorted;
     } else {
   
@@ -758,7 +761,6 @@ stater.prototype.get_person_group = function(tname) {
 }
 
 
-
 stater.prototype.get_people = function(tchunk) {
 
    var url='deskfm/dbase/get_people.php';
@@ -776,20 +778,18 @@ stater.prototype.get_people = function(tchunk) {
 }
 
 
+stater.prototype.get_group = function(pgroupid) {
 
-stater.prototype.get_group_list = function(pgroupid) {
-
-   var url='deskfm/dbase/dfm_people.php';
+   var url='deskfm/dbase/get_people.php';
    url = url + "?lim="+ da_limit;
    url = url + "&groupid="+ pgroupid;
  
    var pstats = this.get_groupstat(pgroupid);
-   var c = -1;
-   if (pstats != null) {
-     c = pstats.last_chunk; 
+   var c = pstats.last_chunk; 
+   if (c != -1) {
+      c = c +1;
+      url = url + "&chunk="+ c;
    }
-   c = c +1;
-   url = url + "&chunk="+ c;
 //  alert(url);
    $.getJSON(url,function(json) {
        amare.update_people(json);
@@ -827,7 +827,6 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
    var m = 0;
 
    var gots = false;
-//alert(dstats.month + "-" + dstats.year);
    if ((dstats.month != undefined) && (dstats.month != "all")) {
        m = dstats.month +1;
        url = url + "&month="+ m;

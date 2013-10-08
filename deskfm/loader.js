@@ -230,10 +230,11 @@ viewer.prototype.load_group_list = function(tgroupid,pstart) {
 	  st = pstart;
    }
 
+
    if (this.groupid == "") {
      this.stats = amare.total_people;
    } else {
-    this.stats  = amare.get_groupstat(this.groupid);
+     this.stats  = amare.get_groupstat(this.groupid);
    }
 
    this.dalist = [];

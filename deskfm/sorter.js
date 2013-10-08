@@ -67,7 +67,7 @@ sorter.prototype.show = function() {
  //       tmp=tmp+"<div data-role='collapsible' data-inline='true' style='width:150px;' >";
  //    	tmp = tmp +"<h3>monthly</h3>";
 
-   	tmp = tmp +"<ul  data-role='listview' id='' style='width:150px;' data-inline='true'  >";
+   	tmp = tmp +"<ul  data-role='listview' id='' style='min-width:150px;' data-inset='true'  >";
         var sugs = amare.monthstats;
         for (var i=0;i<sugs.length;i++) {
           ocl = this.varname + ".set_month("+sugs[i].month + ");";
@@ -75,7 +75,7 @@ sorter.prototype.show = function() {
           var month = this.months[sugs[i].month];
           var year = sugs[i].year;
           if (year == this.da_date.getFullYear()) {
-            tmp = tmp + "<li><a href='#'  onclick='"+ocl+"' >"+month+"<span class='ui-li-count'>"+sugs[i].lnum+" / " + sugs[i].cnum + "</span></a></li>";
+            tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+month+"<span class='ui-li-count'>"+sugs[i].lnum+" / " + sugs[i].cnum + "</span></a></li>";
           }
         }
         tmp = tmp + "</ul>";
@@ -90,16 +90,18 @@ sorter.prototype.show = function() {
       this.showing = true;
       $('#sort_spot').trigger('create');
 
-//      this.check_local();
+       this.check_local();
 
-      $('#select-year').val(this.da_date.getFullYear());
-      $('#select-year').selectmenu("refresh");
- 
-            $('#select-year').bind("change",function(event,ui) {
-                var s = $(this).val();
-                mac.set_year(s); 
-            });
-         if (main_shape != "wide") {
+        $('#select-year').val(this.da_date.getFullYear());
+        $('#select-year').selectmenu("refresh");
+        $('#select-year').bind("change",function(event,ui) {
+             var s = $(this).val();
+             mac.set_year(s); 
+        });
+
+        if (main_shape != "wide") {
+            $('#select-month').val(this.da_date.getMonth()); 
+            $('#select-month').selectmenu("refresh");
             $('#select-month').bind("change",function(event,ui) {
                 var s = $(this).val();
                 mac.set_month(s); 
@@ -110,17 +112,20 @@ sorter.prototype.show = function() {
 }
 
 
-sorter.prototype.check_local = function() {
+sorter.prototype.check_local = function(bmore) {
 
    var dt = new Object;
    dt.month = this.da_date.getMonth();
    dt.year = this.da_date.getFullYear();
    daviewer.load_unsorted_list(dt);
    var lstat = amare.get_monthstat(dt);
+
    if (lstat != null) {
+     if (bmore == true){
        if (lstat.cnum > lstat.lnum) {
          daviewer.more();
        }
+     }
    }
   
 }
@@ -131,7 +136,7 @@ sorter.prototype.set_month = function(pmon) {
      var m = parseInt(pmon);
      this.da_date.setMonth(m);
      this.show();
-     this.check_local();
+     this.check_local(true);
    }
 }
 
@@ -139,7 +144,7 @@ sorter.prototype.set_year = function(pyr) {
    if (pyr != undefined) {
      this.da_date.setYear(pyr);
      this.show();
-     this.check_local();
+     this.check_local(true);
    }
 }
 

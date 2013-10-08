@@ -13,15 +13,13 @@
     }
 
     #menu_spot {
-       min-width:380px;
+       min-width:300px;
      }
 
     #left_spot {
-      width:10%;
    }
 
      #right_spot {
-        width:90%;
         text-align:right;
      }
 

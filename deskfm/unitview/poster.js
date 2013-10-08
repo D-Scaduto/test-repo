@@ -212,119 +212,70 @@ poster.prototype.nav_btns = function() {
 
       if (this.is_mini == false) {
 
+         if (this.listype != "people" ) {
             if (this.rung == 0) {
              if (daviewer.zoom == true) {
-
-                    lbl = this.rungster + '_zoom_btn';
-                     ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/grey_round.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-
-                 if (nicky.showing == true) {
                      lbl = this.rungster + '_share_btn';
-                     ocl = "";
+                     ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
                      src = 'deskfm/images/icons/share.png';
                      tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
                      tmp = tmp + "<img src='"+src+"' height='20px' >";
                      tmp = tmp + "</span>";
-
-                 }
               } else {
-
-                     lbl = this.rungster + '_zoom_btn';
-                     ocl = this.parvar + ".toggle_zoom();";
-                     src = 'deskfm/images/icons/grey_round.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
- 
-                 if (nicky.showing == true) {
-
                      lbl = this.rungster + '_share_btn';
-                     ocl = "";
+                     ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
                      src = 'deskfm/images/icons/share.png';
                      tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
                      tmp = tmp + "<img src='"+src+"' height='20px' >";
                      tmp = tmp + "</span>";
-
-                  }
-
               }
-
-          } else {     // not rung 0
-
-              lbl = this.rungster + '_totop_btn';
-              ocl = this.parvar + ".to_top("+this.rung+");";
-          //    ocl = ocl + this.parvar + ".set_zoom();";
-                 src = 'deskfm/images/icons/grey_round.png';
-              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-              tmp = tmp + "<img src='"+src+"' height='20px' >";
-              tmp = tmp + "</span>";
-
-              if (nicky.showing == true) {
-              lbl = this.rungster + '_share_btn';
-              ocl = "";
-                 src = 'deskfm/images/icons/share.png';
-              tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-              tmp = tmp + "<img src='"+src+"' height='20px' >";
-              tmp = tmp + "</span>";
-
-            }
+           } else {     // not rung 0
+                lbl = this.rungster + '_share_btn';
+                ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
+                src = 'deskfm/images/icons/share.png';
+                tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
+                tmp = tmp + "<img src='"+src+"' height='20px' >";
+                tmp = tmp + "</span>";
+           }
          }
 
-          if (this.stored == false )  {
+         if ((this.stored == false ) || (this.parvar == "nicky"))  {
               ocl = this.parvar + ".del_rung("+this.rung+")";
               lbl = this.rungster + "_del_btn";
               tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</span>";
-          }
+         }
         
-          if (this.listype == "people") {
- 
-               ocl = this.varname + ".toggle_mini();";
-                lbl = this.rungster + "_mini_btn";
-                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
-                tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
-                tmp = tmp + "</span>";
-
-                cls='spotd_off';
-                ocl = "amare.get_cperson_list(\""+this.uname+"\");";
-                lbl = this.rungster + "_refresh_mini";
-                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
-                tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
-                tmp = tmp + "</span>";
-
-           }
-
-           if (this.listype == "suppliers") {
+         if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
                 tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
                 tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
                 tmp = tmp + "</span>";
-           }
 
-         } else {
-
-            if (buddah == true) {
-/*
-              ocl =  this.parvar + ".del_rung("+this.rung+");";
-              lbl = this.rungster + "_delfrom_mini_btn";
-              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
-              tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
-              tmp = tmp + "</span>";
-*/
-          }
-
+                ocl = "amare.get_cperson_list(\""+this.uname+"\");";
+                lbl = this.rungster + "_refresh_mini";
+                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
+                tmp = tmp + "<img src='deskfm/images/icons/refresh.png' height='20px' >";
+                tmp = tmp + "</span>";
          }
 
-         lbl = this.rungster + "_nav_btns";
-         if (document.getElementById(lbl)!= null) {
-             document.getElementById(lbl).innerHTML=tmp;
-         } 
+         if (this.listype == "suppliers") {
+                ocl = this.varname + ".toggle_mini();";
+                lbl = this.rungster + "_mini_btn";
+                tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"'  >";
+                tmp = tmp + "<img src='deskfm/images/icons/layers.png' height='20px' >";
+                tmp = tmp + "</span>";
+         }
+
+      } else {
+      }
+
+      lbl = this.rungster + "_nav_btns";
+      if (document.getElementById(lbl)!= null) {
+            document.getElementById(lbl).innerHTML=tmp;
+      } 
 }
 
 

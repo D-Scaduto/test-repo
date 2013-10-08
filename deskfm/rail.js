@@ -39,7 +39,16 @@ rail.prototype.draw_rail = function() {
  
         tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
         tmp = tmp + "</div>";
-  
+ 
+      lbl = 'uptop_btn';
+      ocl = 'daviewer.end_up();';
+      tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
+      tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+      tmp = tmp + "<img  src='deskfm/images/icons/up_arrow_skiny.png'  class='menu_btn'  >";
+      tmp = tmp + "</button>";
+      tmp = tmp + "</span>";
+
+ 
    lbl = 'rail_spot';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
@@ -104,8 +113,15 @@ rail.prototype.draw_raildata = function() {
       $('#slider-1').attr("max", fn );
       $('#slider-1').val(ld);
       $('#slider-1').slider('refresh');
-      tmp = "#" + ld + " of " + ln;
+
+      tmp =  fn;
       $('#slider-1-detail').html(tmp);
+
+      tmp =  ln;
+      $('#lcount_spot').html(tmp);
+
+      tmp =  cn;
+      $('#mcount_spot').html(tmp);
 
       if (lchunks >=1) {
          $('#chunkslide_box').show();
@@ -114,12 +130,13 @@ rail.prototype.draw_raildata = function() {
          $('#slider-2').val(lchunk);
          $('#slider-2').slider('refresh');
          if (st == 0) { st = 1; }
-         tmp = "set " + lc + " of " + lcs;
+         tmp = "x" + daviewer.top_end;
          $('#slider-2-detail').html(tmp);
       } else {
          $('#slider-2-detail').html("");
          $('#chunkslide_box').hide();
       }
+
    } else {
 //	   alert("no stats");
    }
@@ -214,7 +231,6 @@ rail.prototype.hide = function() {
          pobj.innerHTML = tmp;
          this.showing = false;
      }
-     sal.show();
 
 }
 

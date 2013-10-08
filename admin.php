@@ -168,7 +168,8 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
-
+   <div style="clear:right;" ></div>
+ 
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
@@ -178,7 +179,7 @@ header('Content-type: text/html; charset=utf-8 ');
      </div>
 
      <div  data-role=''  class='ui-grid-a' style='min-width:250px;'  >
-     <div id='side_bar' class='ui-block-a' style=''  >
+     <div id='side_bar' class='ui-block-a' style='background-color:gold;text-align:center;'  >
      </div>
      <div id='main_spot'  class='ui-block-b' style=''   >
      </div>

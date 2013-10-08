@@ -171,6 +171,8 @@ header('Content-type: text/html; charset=utf-8 ');
   <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
   </div>
 
+   <div style="clear:right;" ></div>
+ 
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 

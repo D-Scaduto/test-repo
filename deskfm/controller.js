@@ -39,7 +39,7 @@ viewer.prototype.next = function(px) {
 viewer.prototype.more = function() { 
 
    if (this.stats != undefined) {
-
+	
          if (this.stats.listype == "webits") {
             amare.get_cat_list(this.stats);
 
@@ -49,8 +49,11 @@ viewer.prototype.more = function() {
 
    	 } else if (this.stats.listype == "people") {
 
-	    amare.get_people(this.stats);
-
+            if (this.stats.groupid == "") {;
+	      amare.get_people(this.stats);
+            } else {
+	      amare.get_group(this.stats.groupid);
+            }
          } 
     }
 }
@@ -72,6 +75,20 @@ viewer.prototype.goto_end = function() {
 viewer.prototype.to_top = function(trung) {
 	
    this.redraw_rungs(trung);
+
+   window.scroll(0,0);
+
+   var lbl=this.screen+"_rung_0";
+   if ( document.getElementById(lbl) != null) {
+     document.getElementById(lbl).focus(); 
+   }
+}
+
+
+viewer.prototype.end_up = function(trung) {
+	
+  var e = this.darungs.length - 1;
+   this.redraw_rungs(e);
 
    window.scroll(0,0);
 
@@ -185,7 +202,8 @@ viewer.prototype.redraw_view = function() {
 	     this.load_unsorted_list(dt,start);
 
    	 } else if (this.stats.listype == "people") {
-
+//alert(this.stats.groupid + "-" + this.stats.last_chunk );
+   start = 0;
 	    this.load_group_list(this.stats.groupid,start);
 
          }  else if (this.stats.listype == "unsaved") {

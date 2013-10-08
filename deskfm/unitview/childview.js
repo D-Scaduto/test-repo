@@ -1,10 +1,11 @@
 
 poster.prototype.show_mini = function() {
+
    if (this.mini_viewer != null) {
      this.mini_viewer.draw_view();
      this.mini_showing = true;
    } else {
-     this.set_mini();
+//     this.set_mini();
    }
 }
 

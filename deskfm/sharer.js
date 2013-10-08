@@ -104,6 +104,18 @@ sharer.prototype.show = function() {
 }
 
 
+sharer.prototype.set_webit = function(pdex,ptype) {
+    if (this.showing == false) {
+      this.show();
+    }
+     this.newster.set_ppid(pdex,ptype);
+     this.newster.redraw_rung(); 
+     window.scroll(0,0);
+
+}
+
+
+
 sharer.prototype.show_newster = function() {
 
     var lbl = "";
@@ -113,7 +125,6 @@ sharer.prototype.show_newster = function() {
     tmp += "</div";
     lbl = "top_view";
     $('#'+lbl).html(tmp);
-
  
      if (this.newster.ppid == undefined) {
       this.newster.set_ppid(-1,"unsaved");
@@ -208,6 +219,7 @@ sharer.prototype.hide_newster = function() {
    this.newster.hide_rung();
    lbl = 'top_view';
    $('#'+lbl).html("");
+   this.showing = false;
 
 }
 
@@ -271,9 +283,6 @@ sharer.prototype.hide_btn = function() {
          document.getElementById(lbl).innerHTML=tmp; 
        }
 }
-
-
-
 
 
 
