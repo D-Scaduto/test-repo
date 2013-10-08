@@ -24,13 +24,14 @@
 //       		   tmpstr=tmpstr+"<div  class='' style='clear:left;' ></div>";
  
 //	          tmpstr=tmpstr+"<a href='#'  class='' style='' >";
-/*
-               if (this.shape == "getstory") {
-		  lbl= this.rungster + "_story_spot";
-	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
-	          tmpstr=tmpstr+"</span>";	
-               }
-*/
+
+        if (this.shape == "getstory") {
+	  lbl= this.rungster + "_story_spot";
+          tmpstr=tmpstr+"<div id='"+lbl+"'  class=''   style='' >"; 
+          tmpstr=tmpstr+"</div>";	
+        
+        } 
+
 	  	  lbl= this.rungster + "_pic_spot";
                   var ocl = "";
                   if (this.rung != 0) {
@@ -39,12 +40,19 @@
 	          tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"'  src='' style='float:left;'  >"; 
                   tmpstr=tmpstr+"</span>";
 
-//               if (this.shape != "getstory") {
-		  lbl= this.rungster + "_story_spot";
-	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
-	          tmpstr=tmpstr+"</span>";	
-  //             }
+ 	 lbl = this.rungster + "_send_btns";
+         tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 tmpstr = tmpstr + "</span>";
 
+
+        if (this.shape != "getstory") {
+	  lbl= this.rungster + "_story_spot";
+          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
+          tmpstr=tmpstr+"</span>";	
+        }
+  		  lbl= this.rungster + "_date_spot";
+	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
+		  tmpstr=tmpstr+"</span>";	
 
 	          tmpstr=tmpstr+"<br>";	
 
@@ -59,7 +67,7 @@
                     }
 
 
-          tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
+                  tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
 		  lbl= this.rungster + "_link_btn";
                   tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</span>";
@@ -72,20 +80,11 @@
          	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
 	 	  tmpstr = tmpstr + "</span>";
 
-	 lbl = this.rungster + "_send_btns";
-         tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 tmpstr = tmpstr + "</span>";
-
   	    	lbl = this.rungster + "_work_btns";
          	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
 	 	tmpstr = tmpstr + "</span>";
 
 	 	tmpstr = tmpstr + "</span>";
-
-
-  		  lbl= this.rungster + "_date_spot";
-	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
-		  tmpstr=tmpstr+"</span>";	
 
 //                  tmpstr=tmpstr+"</a>";	
 

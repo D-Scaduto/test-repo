@@ -69,11 +69,11 @@ viewer.prototype.draw_view = function() {
      } else if ((this.gridcols ==1) || (this.zoom == true)) { 
        tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='false' data-split-theme='d' style=''  >";
      } else if (this.gridcols == 2) {
-        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='true'  data-split-theme='d' style='' >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='false'  data-split-theme='d' style='' >";
      } else if (this.gridcols == 3) {
-        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-b'  data-inset='true'  data-split-theme='d'  >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-b'  data-inset='false'  data-split-theme='d'  style=''  >";
      } else if (this.gridcols == 4) {
-        tmpstr=tmpstr+"<ul  id='lv' data-role='listview' class='ui-grid-c'  data-inset='true'  data-split-theme='d'  >";
+        tmpstr=tmpstr+"<ul  id='lv' data-role='listview' class='ui-grid-c'  data-inset='false'  data-split-theme='d'  style=''  >";
      }
      cls = '';
    }

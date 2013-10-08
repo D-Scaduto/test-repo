@@ -2,7 +2,7 @@
 
 poster.prototype.draw_date = function() {
 
-    var tmpstr = "";
+    var tmp = "";
     var mon = "";
     var year = "";
     var day = "";
@@ -20,13 +20,13 @@ poster.prototype.draw_date = function() {
         nic = mac.months[pi];
     //    nic = nic + " " + day;
         nic =  nic + " \'" + c[0].substr(2,2);
-        tmpstr=tmpstr+ nic;
+        tmp= " -" + nic;
     }
 
     var lbl = this.rungster + "_date_spot";
 
     if ( document.getElementById(lbl) != null ) { 
-      document.getElementById(lbl).innerHTML= tmpstr;
+      document.getElementById(lbl).innerHTML= tmp;
     }
 
 }

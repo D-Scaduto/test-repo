@@ -9,8 +9,15 @@ poster.prototype.draw_link = function() {
   var ps = "";
   var pobj=null;
   var lbl = "";
+  var cls = "";
 
-   if ((this.linkurl != "") && (this.linkurl != undefined)) {
+   if ((this.linkurl == "") || (this.linkurl == undefined)) {
+         if (this.editing == true) {
+            ocl = this.varname + ".set_shape(\"getlink\");";
+            ps = "deskfm/images/icons/link-black.jpg";
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='50px'  class='"+cls+"' >"; 
+         } 
+   } else {
 
        tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
  	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";

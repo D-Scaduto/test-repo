@@ -28,7 +28,6 @@
        width:75%;
      }
 
-
      #main_view {
        width:100%;
      }
@@ -73,6 +72,7 @@
        border-width:4px;
        width:300px;
        padding:5px;
+       margin:0 auto;
     }
 
    .zbox {
@@ -97,7 +97,7 @@
        font-weight:normal;
        font-size:medium;
        vertical-align:top;
-       width:250px;
+       width:150px;
        height:100px;
      }
 }

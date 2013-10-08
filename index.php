@@ -176,10 +176,22 @@ header('Content-type: text/html; charset=utf-8 ');
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
-  <div  data-role='content'  class='' style='min-width:250px;'  >
+   <!--span style='margin-left:50px;' >
+       <span  id='lcount_spot' class='count_talk' style=''  >
+        </span>
+        <span  id='' class='count_talk' style=''  >
+         of 
+        </span>
+        <span  id='mcount_spot' class='count_talk' style=''  >
+        </span>
+   </span-->
+ 
+     <div id='top_view' class='' style='float:right;'   >
+     </div>
 
-    <div id='top_view'  class='' style='text-align:center;'   >
-    </div>
+        <div id='' class='' style='clear:right;' ></div>
+
+  <div  data-role='content'  class='' style='min-width:250px;'  >
 
     <div id='main_view'  class='' style=''   >
     </div>

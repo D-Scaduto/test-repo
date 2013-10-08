@@ -168,24 +168,38 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
+
    <div style="clear:right;" ></div>
  
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
-  <div  data-role='content'  class='' style=''  >
+   <!--span style='margin-left:50px;' >
+       <span  id='lcount_spot' class='count_talk' style=''  >
+        </span>
+        <span  id='' class='count_talk' style=''  >
+         of 
+        </span>
+        <span  id='mcount_spot' class='count_talk' style=''  >
+        </span>
+   </span-->
 
-     <div id='top_view' class='' style='text-align:center;'   >
+     <span id='top_view' class='' style='float:right;margin-right:50px;'   >
+     </span>
+
+        <div id='' class='' style='clear:right;' ></div>
+
+
+     <div  data-role='content'  class='ui-grid-a' style='min-width:250px;'  >
+
+     <div id='side_bar' class='ui-block-a' style='background-color:gold;'  >
      </div>
 
-     <div  data-role=''  class='ui-grid-a' style='min-width:250px;'  >
-     <div id='side_bar' class='ui-block-a' style='background-color:gold;text-align:center;'  >
-     </div>
-     <div id='main_spot'  class='ui-block-b' style=''   >
-     </div>
+     <div id='main_spot'  class='ui-block-b'  style=''   >
      </div>
 
-  </div>
+     </div>
+
 
 <div id='foot_spot' data-position='fixed'  data-role='footer' data-theme='b'  >
 </div>

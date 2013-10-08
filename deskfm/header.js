@@ -19,26 +19,8 @@ header.prototype.show = function () {
           tmp = tmp + "<span  id='left_spot' class='' style=''  >";
          tmp = tmp + "</span>";
  
-         tmp = tmp + "<span id='' class='' style='float:right;' >";
-        tmp = tmp + "<span id='right_spot' class='' style='' >";
+        tmp = tmp + "<span id='right_spot' class='' style='float:right;margin-right:50px;' >";
          tmp = tmp + "</span>";
-
-        tmp = tmp + "<span style='float:right;margin-right:50px;' >";
-        lbl = 'nitro_btn';
-        ocl = 'daviewer.toggle_nitro();';
-        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"' class=''  style='' >";
-      tmp = tmp + "<img  src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-        tmp = tmp + "<span  id='lcount_spot' class='count_talk' style=''  >";
-        tmp = tmp + "</span>";
-        tmp = tmp + "<span  id='' class='count_talk' style=''  >";
-        tmp = tmp + " of ";
-        tmp = tmp + "</span>";
-        tmp = tmp + "<span  id='mcount_spot' class='count_talk' style=''  >";
-        tmp = tmp + "</span>";
-        tmp = tmp + "</span>";
 
  //      tmp = tmp + "</div>";
  //        tmp = tmp + "<div id='' class='' style='clear:left;' ></div>";

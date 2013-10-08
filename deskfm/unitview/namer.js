@@ -8,8 +8,17 @@ poster.prototype.draw_name = function() {
    var ocl = "";
    var tlink = "";
    var s = "";
-   if (this.uname != "")   {
+   cls = "";
 
+   if (this.uname == "")   {
+
+         if (this.editing == true) {
+            ocl = this.varname + ".set_shape(\"getname\");";
+            ps = "deskfm/images/icons/people_clay.png";
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='50px'  class='"+cls+"' >"; 
+         } 
+ 
+   } else {
       if (this.source == "twitter") {
 //       tlink =  = "http://twitter.com/Support/status/" + this.pid;
          tlink =  "http://twitter.com/" + this.uname;

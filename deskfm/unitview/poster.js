@@ -71,6 +71,8 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
    var s = "";
    var pobj = null;
 
+   this.editing = false;
+   
    if (pdadex != undefined) {
      this.dadex = pdadex;
    }
@@ -138,11 +140,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
         this.mini_showing = true;
       }
      
-      if (pobj.listype == "unsorted")  {
-//          this.shape="getsort";
-            this.editing = true;
-      }
-       
       if (pobj.listype == "suppliers")  {
          this.set_mini();
          this.mini_showing = true;
@@ -194,9 +191,7 @@ poster.prototype.draw_btns = function() {
      if ( pobj != null) {
           pobj.innerHTML = tmp;
 	  this.nav_btns();
-	  if (this.editing == true) {
-	    this.work_btns();
-	  }
+	  this.work_btns();
 	  this.change_btns();
      }
 
@@ -212,7 +207,7 @@ poster.prototype.nav_btns = function() {
 
       if (this.is_mini == false) {
 
-         if (this.listype != "people" ) {
+         if ((this.listype != "people") && (this.parvar != "nicky") && (this.listype != "unsorted")) {
             if (this.rung == 0) {
              if (daviewer.zoom == true) {
                      lbl = this.rungster + '_share_btn';
@@ -246,7 +241,7 @@ poster.prototype.nav_btns = function() {
               tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
               tmp = tmp + "</span>";
          }
-        
+
          if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
@@ -269,7 +264,7 @@ poster.prototype.nav_btns = function() {
                 tmp = tmp + "</span>";
          }
 
-      } else {
+      } else {  
       }
 
       lbl = this.rungster + "_nav_btns";
@@ -284,35 +279,16 @@ poster.prototype.nav_btns = function() {
        var lbl = "";
        var ocl="";
        var cls = "";
-
-/*
-	 ocl = this.varname + ".toggle_getname();";
-         tmp = tmp + "<span  onclick='"+ocl+"' style='height:20px;' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
-	 tmp = tmp + "</span>";
-*/
-       	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getstory();' >";  
-         tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
-         tmp = tmp + "</span>";  
-
-	 tmp = tmp + "<span  onclick='"+this.varname+".toggle_getpic();' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
-	 tmp = tmp + "</span>"; 
-
-      if ((this.listype == "unsorted") || (this.listype == "webits")) {
-	        
-  	 ocl = this.varname + ".toggle_getlink();";
+ 
+      if (this.shape == "getstory") {
+	 ocl = this.varname + ".toggle_getstory();";
          tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-	 tmp = tmp + "</span>";
-
-	 ocl = this.varname + ".toggle_getembed();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+	 tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
 	 tmp = tmp + "</span>";
       }
-  
-      if ((this.listype == "unsorted") || (this.listype == "webits")) {
+
+
+      if ((this.listype == "unsorted") || (buddah == true)) {
 	 ocl = this.varname + ".toggle_getsort();";
          tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
@@ -323,20 +299,6 @@ poster.prototype.nav_btns = function() {
 	 ocl = this.varname + ".toggle_getgroup();";
          tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if ((this.listype == "people") || (this.listype == "suppliers")) {
-	 ocl = this.varname + ".toggle_getname();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/pen_black.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if (this.listype == "suppliers") {
-	 ocl = "joe.add_product("+this.rung+");";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/shop.png' height='20px' >";
 	 tmp = tmp + "</span>";
       }
 
@@ -512,6 +474,8 @@ poster.prototype.clear = function() {
    this.price = -1;
    this.linkurl ="";
    this.embedurl = "";
+   this.created_at = "";
+   this.change_date = "";
    this.changed = false;
    this.shape="";
    this.redraw_rung();

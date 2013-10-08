@@ -40,7 +40,7 @@ supplier.prototype.show = function() {
 
       if (main_shape == "wide") {
  
-        tmp = tmp + "<ul id='' data-role='listview' style='min-width:150px;' data-inset='true' >"; 
+        tmp = tmp + "<ul id='' data-role='listview' style='width:150px;' data-inset='true' data-inline='true' >"; 
         for (var i=0;i<amare.supplierlist.length;i++) {
            var osup = amare.supplierlist[i];
            var cnt = amare.count_products_by_supplier(osup.uname);

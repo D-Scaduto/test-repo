@@ -12,17 +12,26 @@ poster.prototype.draw_story = function() {
        var tiesto = this.story;
 
        ocl='';
-//       ocl = this.varname + ".set_shape(\"getstory\");";
+       if ((buddah == true) || (this.parvar == "nicky")) {
+         ocl = this.varname + ".set_shape(\"getstory\");";
+       }
        cls = 'story';
        if (this.is_mini == true) {
           cls = '';
        }
 
-       tmp = tmp + "<span onclick='"+ocl+"' class='"+cls+"' onmouseover='' onmouseout='' >";
+        if ((this.story == "") || (this.story == null)) { 
+          if (this.editing == true) {
+            ocl = this.varname + ".set_shape(\"getstory\");";
+            ps = "deskfm/images/icons/pencil_msg.png";
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
+         }
 
-       if ((this.story != "") && (this.story != null)) { 
+ 
+       } else {
+        tmp = tmp + "<span onclick='"+ocl+"' class='"+cls+"' onmouseover='' onmouseout='' >";
 
-         //tiesto = this.story.replace(/<br>/gi,"\n");
+       //tiesto = this.story.replace(/<br>/gi,"\n");
 
           var exp2 = new RegExp(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig);
 
@@ -52,10 +61,8 @@ poster.prototype.draw_story = function() {
           }
 */
           tmp = tmp + ps;
-
+         tmp = tmp + "</span>";
       }
-
-      tmp = tmp + "</span>";
 
       lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
@@ -80,7 +87,7 @@ poster.prototype.get_story = function() {
    } 
 
          oku = this.varname + ".update_story();";
-         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' class='getstory9' onkeyup='"+oku+"' style='display:inline;'  >";
+         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' data-mini='true' class='' onkeyup='"+oku+"' style=''  >";
          tmpstr = tmpstr + tiesto;
          tmpstr = tmpstr + "</textarea>";
 
@@ -88,6 +95,8 @@ poster.prototype.get_story = function() {
       lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
          document.getElementById(lbl).innerHTML= tmpstr;
+         var ta = this.rungster + "_story_area";
+         $('#'+ta).textinput();
       }
    
 }

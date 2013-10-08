@@ -15,11 +15,19 @@ poster.prototype.draw_pic = function() {
               cls = "piczoom";
           }
 
-      if (this.picurl != "") {
+      if (this.picurl == "") {
+         if (this.editing == true) {
+            ocl = this.varname + ".set_shape(\"getpic\");";
+            ps = "deskfm/images/icons/camera.png";
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
+            lbl = this.rungster + '_pic_spot';
+            $('#'+lbl).html(tmp);
+         }
+
+      } else { 
         ps = this.picurl;
         tmp += "<img src='"+ps+"' class='"+cls+"' >"; 
         lbl = this.rungster + '_pic_spot';
-//        $('#'+lbl).attr("src",ps);
         $('#'+lbl).html(tmp);
      }
 }
@@ -44,14 +52,15 @@ poster.prototype.get_pic = function() {
      if (this.piczoom == true)   {
          cls = "piczoom";
      }
-     ocl = this.varname + ".toggle_piczoom();";
-
      if ( (ps == "") || (ps == undefined)) {
-           ps='deskfm/images/icons/camera.png';
+            ps = "deskfm/images/icons/camera.png";
      }
-
+  
+      ocl = this.varname + ".set_shape(\"\");";
+      tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
+ 
         lbl = this.rungster + '_pic_spot';
-        $('#'+lbl).attr("src",ps);
+        $('#'+lbl).html(tmp);
 
          tmp = "";
         lbl = this.rungster + "_upic_frame_name";

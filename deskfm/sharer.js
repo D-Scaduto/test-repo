@@ -14,8 +14,6 @@ sharer.prototype.show = function() {
 
    var tmp = "";
    var lbl = "";
-   var moin = "";
-   var mout = ""
    var cls = "";
    var ocl = "";
 
@@ -105,13 +103,14 @@ sharer.prototype.show = function() {
 
 
 sharer.prototype.set_webit = function(pdex,ptype) {
+
     if (this.showing == false) {
       this.show();
     }
-     this.newster.set_ppid(pdex,ptype);
-     this.newster.redraw_rung(); 
-     window.scroll(0,0);
 
+     this.newster.set_ppid(pdex,ptype);
+    this.newster.redraw_rung(); 
+     window.scroll(0,0);
 }
 
 
@@ -125,11 +124,12 @@ sharer.prototype.show_newster = function() {
     tmp += "</div";
     lbl = "top_view";
     $('#'+lbl).html(tmp);
+
  
-     if (this.newster.ppid == undefined) {
+    if ((this.newster.pid == undefined) || (this.newster.pid == "")) {
       this.newster.set_ppid(-1,"unsaved");
-     }
-     this.newster.redraw_rung(); 
+    }
+    this.newster.redraw_rung(); 
 
 }
 
@@ -137,8 +137,8 @@ sharer.prototype.show_newster = function() {
 sharer.prototype.del_rung = function(tspot) {
 
     this.newster.clear();
-    this.hide_newster();
-
+    diego.set_topshape("");
+    this.hide();
 }
 
 
@@ -219,8 +219,6 @@ sharer.prototype.hide_newster = function() {
    this.newster.hide_rung();
    lbl = 'top_view';
    $('#'+lbl).html("");
-   this.showing = false;
-
 }
 
 sharer.prototype.hide = function() {
@@ -229,13 +227,14 @@ sharer.prototype.hide = function() {
    var lbl = "";
    var tmp = "";
    lbl = this.spotid;
+
+   this.hide_newster();
+
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
         pobj.innerHTML = tmp;
    }
    this.showing = false; 
-
-   this.hide_newster();
 
    daviewer.draw_view();
 }
