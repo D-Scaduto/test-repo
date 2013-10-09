@@ -62,7 +62,10 @@ header.prototype.draw_left = function () {
         var tmp = "";
 
         lbl = 'share_btn';
-        ocl = "nicky.toggle();";
+       ocl = "diego.toggle_topshape(\"share\");";
+        if ((buddah == true) && (main_shape != "mini")) {
+          ocl = "nicky.toggle();";
+        }
         tmp = tmp + "<span   id='"+lbl+"' class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
@@ -106,6 +109,9 @@ header.prototype.draw_right = function () {
  
         lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
+        if ((buddah == true) && (main_shape != "mini")) {
+          ocl = "wanda.toggle();";
+        }
         tmp = tmp + "<span  id='"+lbl+"'  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
@@ -130,6 +136,15 @@ header.prototype.draw_right = function () {
         tmp = tmp + "<img  src='deskfm/images/icons/categories.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
+
+        lbl = 'feed_btn';
+       ocl = 'diego.toggle_botshape(\"feed\");'
+        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img  src='deskfm/images/icons/cloud.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
 
       lbl = 'manage_btn';
        ocl = 'diego.toggle_botshape(\"manage\");'

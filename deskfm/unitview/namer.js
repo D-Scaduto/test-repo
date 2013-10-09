@@ -24,7 +24,7 @@ poster.prototype.draw_name = function() {
          tlink =  "http://twitter.com/" + this.uname;
           tmp = tmp + this.uname;
 //          tmp = "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";
-       } else {
+      } else {
           tmp = tmp + this.uname;
       }
 
@@ -43,8 +43,9 @@ poster.prototype.get_name = function() {
     var lbl = "";
     var ocl = "";
 
-    tmp =tmp + "<span class='spotd_off'  onclick='' > ";
-    tmp = tmp + "id: ";
+    ocl = this.varname + ".update_name();";
+    tmp =tmp + "<span class='spotd_off'  onclick='"+ocl+"' > ";
+    tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
     tmp =tmp + "</span>";
  
     var tval =  "";

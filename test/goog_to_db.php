@@ -15,9 +15,7 @@ $con = mysql_connect("$Server", "$username", "$password");
   }
   mysql_select_db($db_name, $con);
   
-  if(isset($_GET['tableName'])){
-    $tableName = $_GET['tableName'];
-  }else $tableName = 'dfm_posts';
+  $tableName = 'dfm_webits';
   
   /*
   for($i =0;$i<100;$i++){

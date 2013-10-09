@@ -25,21 +25,22 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'what about chairs ?', 'cat':'what','subcat':'chair' });
      this.sealist.push({'text':'what about feet pain ?', 'cat':'what','subcat':'footpad' });
 
-     this.sealist.push({'text':'why get a standing desk ?', 'cat':'why','subcat':'' });
-     this.sealist.push({'text':'why is sitting bad ?', 'cat':'why','subcat':'sitonly' });
-     this.sealist.push({'text':'why is standing healthy ?', 'cat':'why','subcat':'health' });
-     this.sealist.push({'text':'why back pain ?', 'cat':'why','subcat':'back' });
+     this.sealist.push({'text':'why get a standing desk ?', 'cat':'why','subcat':'because' });
+     this.sealist.push({'text':'why is to much sitting bad ?', 'cat':'why','subcat':'sitonly' });
+     this.sealist.push({'text':'why is more standing healthy ?', 'cat':'why','subcat':'health' });
+     this.sealist.push({'text':'why do we have back pain ?', 'cat':'why','subcat':'back' });
      this.sealist.push({'text':'why not burn calories ?', 'cat':'why','subcat':'weight' });
      this.sealist.push({'text':'why is it productive ?', 'cat':'why','subcat':'productive' });
      this.sealist.push({'text':'why not stand up ?' ,'cat':'why','subcat':'anti' });
 
      this.sealist.push({'text':'how to standup desk ?', 'cat':'how','subcat':'howto' });
-//     this.sealist.push({'text':'difficult is standing ?', 'cat':'how','subcat':'difficult' });
-     this.sealist.push({'text':'how  to make your own ?' , 'cat':'how','subcat':'diy' });
-//     this.sealist.push({'text':'how do you get a standing desk ?' , 'cat':'how','subcat':'get' });
-//     this.sealist.push({'text':'how do you to compare standing desks', 'cat':'how','subcat':'compare' });
+     this.sealist.push({'text':'how difficult is standing ?', 'cat':'how','subcat':'difficult' });
+     this.sealist.push({'text':'how to make a standing desk ?' , 'cat':'how','subcat':'diy' });
+     this.sealist.push({'text':'how do you get a standing desk ?' , 'cat':'how','subcat':'get' });
+     this.sealist.push({'text':'how tall are standing desks ?', 'cat':'how','subcat':'tall' });
      this.sealist.push({'text':'how to workout and work ?' , 'cat':'how','subcat':'workout' });
-
+     this.sealist.push({'text':'how to comapre standing desks ?', 'cat':'how','subcat':'compare' });
+ 
 }
 
 

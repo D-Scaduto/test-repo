@@ -19,10 +19,18 @@ poster.prototype.draw_link = function() {
          } 
    } else {
 
-       tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
- 	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-       tmp = tmp + " </a> ";
-	
+       if ((this.editing == true) || (buddah == true)) {
+ 
+            ocl = this.varname + ".set_shape(\"getlink\");";
+            ps = "deskfm/images/icons/link-black.jpg";
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' height='20px'  class='"+cls+"' >"; 
+ 
+       } else {
+          tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+//           tmp = tmp + this.linkurl; 
+          tmp = tmp + " </a> ";
+       }
    }
 
      lbl = this.rungster + '_link_btn';
@@ -37,31 +45,44 @@ poster.prototype.draw_link = function() {
 
 poster.prototype.get_link = function() {
 
-     var tmpstr="";
+     var tmp="";
      var tlink = "";
      var ocl="";
      var ps = "";
      var pobj=null;
      var lbl = "";
 
-	 tmpstr = "";
-       if ((this.linkurl != undefined) || (this.linkurl != "")) {      
+       if ((this.linkurl != undefined) && (this.linkurl != "")) {      
+
+          tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+//           tmp = tmp + this.linkurl; 
+          tmp = tmp + " </a> ";
+
+          lbl = this.rungster + '_link_btn';
+          pobj = document.getElementById(lbl);
+          if ( pobj != null) {
+             pobj.innerHTML = tmp;
+          } 
+ 
          tlink = this.linkurl;
 
        } else {
 
+         tlink = "";
        }
 
+         tmp = ""; 
 	 lbl = this.rungster + "_link_addr"; 
          ocl = this.varname + ".update_link();";
-         tmpstr = tmpstr + "<textarea id='"+lbl+"' style='width:250px;height:50px;' onkeyup='"+ocl+"'  >";    
-         tmpstr = tmpstr + tlink;
-         tmpstr = tmpstr + " </textarea> ";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"'  >";    
 
        lbl = this.rungster + '_link_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
-         pobj.innerHTML = tmpstr;
+         pobj.innerHTML = tmp;
+ 	 var ta = this.rungster + "_link_addr"; 
+         $('#'+ta).textinput();
        }
        
 }
@@ -77,7 +98,7 @@ poster.prototype.update_link = function() {
      pobj = document.getElementById(lbl);
      if (pobj != null ) {
         var tv = pobj.value;
-        if ((tv != null) && (tv != undefined)) {
+       if ((tv != null) && (tv != undefined)) {
            this.linkurl = tv;
            this.changed = true;
 	   this.link_changed = true;

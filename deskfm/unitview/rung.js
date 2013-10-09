@@ -33,16 +33,26 @@
         } 
 
 	  	  lbl= this.rungster + "_pic_spot";
-                  var ocl = "";
-                  if (this.rung != 0) {
-                    ocl = this.parvar + ".to_top("+this.rung+");";
-                  }
-	          tmpstr=tmpstr+"<span id='"+lbl+"' onclick='"+ocl+"'  src='' style='float:left;'  >"; 
+	          tmpstr=tmpstr+"<span id='"+lbl+"'  src='' style='float:left;'  >"; 
                   tmpstr=tmpstr+"</span>";
 
  	 lbl = this.rungster + "_send_btns";
          tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
 	 tmpstr = tmpstr + "</span>";
+
+          if ((this.listype == "people") || (this.listype == "suppliers")) {
+                  tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
+
+	  	  lbl = this.rungster + "_nav_btns";
+         	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 	  tmpstr = tmpstr + "</span>";
+
+  	    	lbl = this.rungster + "_work_btns";
+         	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 	tmpstr = tmpstr + "</span>";
+
+	 	tmpstr = tmpstr + "</span>";
+            }
 
 
         if (this.shape != "getstory") {
@@ -50,7 +60,14 @@
           tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
           tmpstr=tmpstr+"</span>";	
         }
-  		  lbl= this.rungster + "_date_spot";
+ 		  lbl= this.rungster + "_link_btn";
+                  tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
+    	          tmpstr=tmpstr+"</span>";
+  	          
+		  lbl= this.rungster + "_embed_btn";
+                  tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
+    	          tmpstr=tmpstr+"</span>";
+	 		  lbl= this.rungster + "_date_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
 		  tmpstr=tmpstr+"</span>";	
 
@@ -66,16 +83,9 @@
                       tmpstr=tmpstr+"</span>";
                     }
 
-
+          if ((this.listype != "people") && (this.listype != "suppliers")) {
                   tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
-		  lbl= this.rungster + "_link_btn";
-                  tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
-    	          tmpstr=tmpstr+"</span>";
-  	          
-		  lbl= this.rungster + "_embed_btn";
-                  tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
-    	          tmpstr=tmpstr+"</span>";
-	
+
 	  	  lbl = this.rungster + "_nav_btns";
          	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
 	 	  tmpstr = tmpstr + "</span>";
@@ -85,7 +95,7 @@
 	 	tmpstr = tmpstr + "</span>";
 
 	 	tmpstr = tmpstr + "</span>";
-
+            }
 //                  tmpstr=tmpstr+"</a>";	
 
 //	          tmpstr=tmpstr+"<a href='#'  class='' style='' ></a>";

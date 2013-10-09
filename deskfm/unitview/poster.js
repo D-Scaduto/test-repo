@@ -287,8 +287,28 @@ poster.prototype.nav_btns = function() {
 	 tmp = tmp + "</span>";
       }
 
+      if (this.shape == "getlink") {
+	 ocl = this.varname + ".toggle_getlink();";
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+	 tmp = tmp + "</span>";
+      }
 
-      if ((this.listype == "unsorted") || (buddah == true)) {
+      if (this.shape == "getembed") {
+	 ocl = this.varname + ".toggle_getembed();";
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+	 tmp = tmp + "</span>";
+      }
+
+      if (this.shape == "getname") {
+	 ocl = this.varname + ".toggle_getname();";
+         tmp = tmp + "<span  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
+	 tmp = tmp + "</span>";
+      }
+
+      if ((this.listype == "unsorted") && (buddah == true)) {
 	 ocl = this.varname + ".toggle_getsort();";
          tmp = tmp + "<span  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
@@ -301,7 +321,6 @@ poster.prototype.nav_btns = function() {
 	 tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
 	 tmp = tmp + "</span>";
       }
-
 
      lbl = this.rungster + '_work_btns';
      pobj = document.getElementById(lbl);
@@ -501,13 +520,13 @@ poster.prototype.clear = function() {
      }
 
      if (this.link_changed == true) {
-       prams = prams + "&link="+this.link;
+       prams = prams + "&link="+this.linkurl;
      }
      if (this.pic_changed == true) {
 	  prams = prams + "&pic="+ this.picurl;
      }
      if (this.embed_changed == true) {
-       prams = prams + "&embed="+embedurl;
+       prams = prams + "&embed=" + this.embedurl;
      }
      if (this.group_changed == true) {
        prams = prams + "&groupid="+this.groupid;
@@ -523,7 +542,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
- //    alert(url);
+  //   alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });
@@ -534,11 +553,6 @@ poster.prototype.clear = function() {
  poster.prototype.update_webit = function() {
 
      var pcat="";
-     var linkcode = escape(this.linkurl);
-     var storycode = escape(this.story);
-     var embedcode = escape(this.embedurl);
-     var picode = escape(this.picurl);
-
      var prams = "?uname="+this.uname+"&source="+this.source;
      prams = prams + "&listype=" + this.listype;
      prams = prams + "&pid="+this.pid;
@@ -551,24 +565,25 @@ poster.prototype.clear = function() {
        prams = prams + "&cat="+this.cat+"&subcat="+this.subcat;
      }
      if (this.story_changed == true) {
-       prams = prams + "&storycode="+storycode;
+       prams = prams + "&story=" + this.story;
      }
 
      if (this.link_changed == true) {
-       prams = prams + "&linkcode="+linkcode;
+       prams = prams + "&link=" + this.linkurl;
      }
      if (this.pic_changed == true) {
-	  prams = prams + "&picode="+ picode;
+	  prams = prams + "&pic=" + this.picurl;
      }
      if (this.embed_changed == true) {
-       prams = prams + "&embedcode="+embedcode;
+       prams = prams + "&embed=" + this.embedurl;
      }
      if (this.group_changed == true) {
-       prams = prams + "&groupid="+this.groupid;
+       prams = prams + "&groupid=" + this.groupid;
      }
 
      var url = "";
      url = "deskfm/dbase/update_webit.php"+prams;
+     url = encodeURI(url);
      this.changed = false;
      this.story_changed = false;
      this.pic_changed = false;
@@ -576,7 +591,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-//     alert(url);
+  //   alert(url);
      $.getJSON(url,function(json) {
           amare.update_webit(json.pobj);
      });

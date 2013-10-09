@@ -99,6 +99,16 @@ sharer.prototype.show = function() {
 }
 
 
+sharer.prototype.update_one = function(tpid,mdex,ltype) {
+
+         if (this.newster.pid == tpid) {
+            this.newster.set_ppid(mdex,ltype);
+            this.newster.shape= "";
+            this.newster.redraw_rung();
+         }
+}
+
+
 sharer.prototype.set_webit = function(pdex,ptype) {
 
     if (this.showing == false) {
@@ -124,7 +134,7 @@ sharer.prototype.show_newster = function() {
 
  
     if ((this.newster.pid == undefined) || (this.newster.pid == "")) {
-      this.newster.set_ppid(-1,"unsaved");
+       this.newster.set_ppid(-1,"unsaved");
     }
     this.newster.redraw_rung(); 
 
@@ -260,6 +270,9 @@ sharer.prototype.show_btn = function() {
     var ocl = "";
 
        ocl = "diego.toggle_topshape(\"share\");";
+        if ((buddah == true) && (main_shape != "mini")) {
+          ocl = "nicky.toggle();";
+        }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/share.png' class='menu_btn' >";
        tmp = tmp + "</button>";

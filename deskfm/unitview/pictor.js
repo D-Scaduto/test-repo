@@ -15,18 +15,22 @@ poster.prototype.draw_pic = function() {
               cls = "piczoom";
           }
 
-      if (this.picurl == "") {
-         if (this.editing == true) {
-            ocl = this.varname + ".set_shape(\"getpic\");";
+      if ((this.picurl == "") || (this.picurl == undefined)) {
+//         if (this.editing == true) {
+           ocl = this.varname + ".set_shape(\"getpic\");";
             ps = "deskfm/images/icons/camera.png";
             tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
             lbl = this.rungster + '_pic_spot';
             $('#'+lbl).html(tmp);
-         }
+//         }
 
       } else { 
         ps = this.picurl;
-        tmp += "<img src='"+ps+"' class='"+cls+"' >"; 
+        ocl = "";
+        if ((this.editing == true) || (buddah == true)) {
+            ocl = this.varname + ".set_shape(\"getpic\");";
+        }
+        tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
         lbl = this.rungster + '_pic_spot';
         $('#'+lbl).html(tmp);
      }

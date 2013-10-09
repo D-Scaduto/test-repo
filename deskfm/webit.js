@@ -11,6 +11,8 @@ function webit(tpid) {
    this.pid = "";
    if (tpid != undefined) {
       this.pid = tpid;
+   } else {
+      this.pid = randomID(6);
    }
   
    this.listype = "";
@@ -36,6 +38,28 @@ function webit(tpid) {
 }
 
 
+function getRandomNumber(range)
+{
+	return Math.floor(Math.random() * range);
+}
+
+function getRandomChar()
+{
+	var chars = "0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ";
+	return chars.substr( getRandomNumber(62), 1 );
+}
+
+function randomID(size)
+{
+	var str = "";
+	for(var i = 0; i < size; i++)
+	{
+		str += getRandomChar();
+	}
+	return str;
+}
+
+ 
 check_month = function(pobj,dtmon) {
 
     var month = "";

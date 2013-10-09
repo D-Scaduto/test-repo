@@ -169,7 +169,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
-   <!--div style="clear:right;" ></div-->
+   <div style="clear:right;" ></div>
  
    <div id="nav_left"></div>
    <div id="nav_right"></div>
@@ -255,7 +255,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
    //sort,feed,manage,group  
 	
-           var   tshapes = ['sort:mac','group:robby','manage:joe','browse:cater']; 
+           var   tshapes = ['sort:mac','feed:louie','group:robby','manage:joe','browse:cater']; 
           diego = new header(tshapes);
 
     amare.get_stats();

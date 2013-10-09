@@ -22,38 +22,41 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-/*
-      lbl = 'search_unset_btn';
-     ocl = this.varname+ ".check_central();";
-        tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/refresh.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-*/
-
+     tmp += "<form id='searchbox' style='display:inline-block;padding:0px;vertical-align:middle;' >";
+ 
      lbl = this.spotid + "_dasbox";
-     ocl = this.varname+ ".check_local();";
-     tmp += "<span style='display:inline-block;padding:0px;vertical-align:middle;' >";
-     tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=8  data-clear-btn='true' onkeyup='"+ocl+"' value='' type='search'  />";
-     tmp += "</span >";
+     ocl = this.varname+ ".check_central();";
+    tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=8  data-clear-btn='true' onkeyup='"+ocl+"' value='' type='search'  />";
+
+     tmp += "</form >";
  
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#'+lbl).trigger("create");
-      lbl = this.spotid + "_dasbox";
+    //  lbl = this.spotid + "_dasbox";
    //   $('#'+lbl).textinput("refresh");
-   } 
-   cater.hide();
+      $('#searchbox').on('click', '.ui-input-clear', function(e){
+         wanda.clear();
+      });
+   }
+   if (buddah == false) { 
+     cater.hide();
+   }
 
 }
 
 
-searcher.prototype.change = function() {
+searcher.prototype.clear = function() {
 
+   var tmp = "";
+   var pobj = null;
+
+   this.sterms = "";
+   daviewer.load_sorted_list();
 }
+
 
 searcher.prototype.check_local = function() {
 
@@ -141,6 +144,9 @@ searcher.prototype.show_btn = function() {
     var ocl = "";
 
        ocl = "diego.toggle_topshape(\"search\");";
+        if ((buddah == true) && (main_shape != "mini")) {
+          ocl = "wanda.toggle();";
+        }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</button>";

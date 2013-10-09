@@ -41,17 +41,17 @@ if (isset($_GET['subcat'])) {
 }
 
 $linkurl = "null";
-if (isset($_GET['linkcode'])) {
-  $linkurl = $_GET['linkcode'];
+if (isset($_GET['link'])) {
+  $linkurl = $_GET['link'];
 }
 
 $embedurl = "null";
-if (isset($_GET['embedcode'])) {
-  $embedurl = $_GET['embedcode'];
+if (isset($_GET['embed'])) {
+  $embedurl = $_GET['embed'];
 }
 $story = "null";
-if (isset($_GET['storycode'])) {
-  $story = $_GET['storycode'];
+if (isset($_GET['story'])) {
+  $story = $_GET['story'];
 }
 
 $groupid = "null";
@@ -60,8 +60,8 @@ if (isset($_GET['groupid'])) {
 }
 
 $picurl = "null";
-if (isset($_GET['picode'])) {
-  $picurl = $_GET['picode'];
+if (isset($_GET['pic'])) {
+  $picurl = $_GET['pic'];
 }
 
 

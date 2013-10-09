@@ -27,10 +27,10 @@
         "deskfm/images/logos/m-hi.gif",
         "deskfm/images/logos/m-lo.gif",
  
-        "deskfm/images/daoman/cbman-stand-l.png",
-        "deskfm/images/daoman/cbman-stand-r.png",
-        "deskfm/images/daoman/cbman-sit-l.png",
-        "deskfm/images/daoman/cbman-sit-r.png"
+        "deskfm/images/icons/cbman-stand-l.png",
+        "deskfm/images/icons/cbman-stand-r.png",
+        "deskfm/images/icons/cbman-sit-l.png",
+        "deskfm/images/icons/cbman-sit-r.png"
 
    );
 }

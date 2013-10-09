@@ -21,7 +21,7 @@ supplier.prototype.show = function() {
      tmp = tmp + "<fieldset data-role='controlgroup'  data-type='horizontal' style='display:inline;min-width:160px;'  >";
       tmp += "<legend></legend>";
       lbl = 'by_supplier_btn';
-       ocl = this.varname + '.set_shape(\"buy_supplier\");';
+       ocl = this.varname + '.set_shape(\"by_supplier\");';
         tmp = tmp + "<input  name='manage_setby' id='"+lbl+"' data-mini='true' type='radio'  onclick='"+ocl+"' style='' value='by_supplier' />";
        tmp += "<label for='"+lbl+"' >suppliers</label>";
  
@@ -32,22 +32,56 @@ supplier.prototype.show = function() {
 
          tmp = tmp + "</fieldset>"; 
 
-     lbl = 'new_supply_btn';
-       ocl = this.varname + '.new_one();';
+    if (this.shape == "by_supplier") {
+        lbl = 'new_supplier_btn';
+        ocl = this.varname + '.new_one();';
         tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
         tmp = tmp + "new one"; 
-       tmp = tmp + "</button>"; 
+        tmp = tmp + "</button>"; 
+    }
+
+    if (this.shape == "by_product") {
+//         tmp = tmp + "<fieldset data-role='controlgroup'  data-type='horizontal' style='min-width:160px;'  >";
+        lbl = 'new_product_btn';
+        ocl = this.varname + '.new_one();';
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
+        tmp = tmp + "new one"; 
+        tmp = tmp + "</button>"; 
+/*
+        lbl = 'new_prodtype_btn';
+        ocl = this.varname + '.new_one();';
+        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
+        tmp = tmp + "type"; 
+        tmp = tmp + "</button>"; 
+        tmp = tmp + "</fieldset>"; 
+*/
+     }
 
 
       if (main_shape == "wide") {
  
         tmp = tmp + "<ul id='' data-role='listview' style='width:150px;' data-inset='true' data-inline='true' >"; 
-        for (var i=0;i<amare.supplierlist.length;i++) {
-           var osup = amare.supplierlist[i];
-           var cnt = amare.count_products_by_supplier(osup.uname);
-           ocl = this.varname + ".set_supplier(\""+osup.pid+"\");";
-           tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+osup.uname+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
-        }
+
+          if (this.shape == "by_supplier") {
+            for (var i=0;i<amare.supplierlist.length;i++) {
+              var osup = amare.supplierlist[i];
+              var cnt = amare.count_products_by_supplier(osup.uname);
+              ocl = this.varname + ".set_supplier(\""+osup.pid+"\");";
+              tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+osup.uname+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
+            }
+         }
+
+          if (this.shape == "by_product") {
+            var sugs = amare.product_set.get_setlist();
+            for (var i=0;i<sugs.length;i++) {
+              var osup = sugs[i];
+              cnt=0;
+              ocl = this.varname + ".set_product_type(\""+osup.product_type+"\");";
+              tmp = tmp + "<li data-icon='false' ><a href='#'  onclick='"+ocl+"' >"+osup.text+"<span class='ui-li-count'>"+cnt+"</span></a></li>";
+            }
+         }
+
+
         tmp = tmp + "</ul>"; 
   //      tmp = tmp + "</div>"; 
      }
@@ -59,6 +93,12 @@ supplier.prototype.show = function() {
 	  $('#'+lbl).trigger("create");
           this.showing = true;
           this.set_supplier();
+        if (this.shape == "by_product") {
+         $("#by_prodtype_btn").attr("checked",true).checkboxradio("refresh");
+        }
+         if (this.shape == "by_supplier") {
+         $("#by_supplier_btn").attr("checked",true).checkboxradio("refresh");
+       }
     }
 }
 

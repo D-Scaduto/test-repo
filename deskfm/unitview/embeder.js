@@ -53,44 +53,55 @@ poster.prototype.draw_embed = function() {
 
 
 poster.prototype.get_embed = function() {
-     var tspot = this.rung; 
-     var tmpstr="";
+
+     var tmp="";
      var tlink = "";
      var ocl="";
      var ps = "";
      var pobj=null;
      var lbl = "";
   
+       if ((this.embedurl != undefined) && (this.embedurl != "")) {      
 
-       tmpstr = "";
-       if (this.embedurl != "") {      
+          tmp = tmp + "<a href='"+this.embedurl+"' target='_blank' > "; 
+           tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+//           tmp = tmp + this.embedurl; 
+          tmp = tmp + " </a> ";
+
+          lbl = this.rungster + '_embed_btn';
+          pobj = document.getElementById(lbl);
+          if ( pobj != null) {
+             pobj.innerHTML = tmp;
+          } 
+ 
          tlink = this.embedurl;
+
        } else {
+
+         tlink = "";
        }
 
-         tmpstr = tmpstr + " <div> ";
-         lbl = this.spotid+"_"+tspot+"_embed_addr";
+         tmp = ""; 
+	 lbl = this.rungster + "_embed_addr"; 
          ocl = this.varname + ".update_embed();";
-         tmpstr = tmpstr + "<textarea id='"+lbl+"' style='width:250px;height:50px;' onkeyup='"+ocl+"'  >";    
-         tmpstr = tmpstr + tlink;
-         tmpstr = tmpstr + " </textarea> ";
-         tmpstr = tmpstr + " </div> ";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"'  >";    
 
          if (this.embed_show == true ) {
-           tmpstr = tmpstr + " <div style='width:250px;margin:0 auto;' > ";
-           tmpstr = tmpstr + " <iframe src='"+tlink+"' style='width:250px;margin:0 auto;' ";
-           tmpstr = tmpstr + " scrolling='no'  width='250' height='200' > ";
-           tmpstr = tmpstr + " </iframe> ";
-           tmpstr = tmpstr + " </div> ";
+           tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";
+           tmp = tmp + " <iframe src='"+tlink+"' style='width:250px;margin:0 auto;' ";
+           tmp = tmp + " scrolling='no'  width='250' height='200' > ";
+           tmp = tmp + " </iframe> ";
+           tmp = tmp + " </div> ";
          }
 
-       
        lbl = this.rungster + '_embed_spot';
        pobj = document.getElementById(lbl);
        if ( pobj != null) {
-         pobj.innerHTML = tmpstr;
+         pobj.innerHTML = tmp;
+ 	 var ta = this.rungster + "_embed_addr"; 
+         $('#'+ta).textinput();
        }
-
+ 
 }
 
 

@@ -444,8 +444,9 @@ stater.prototype.get_stat = function (pstat) {
 	if (pstat != undefined) {
 
                 if ((pstat.sterms != "") && (pstat.sterms != undefined)) {
-       
-                     ret = this.get_searchstat(pstat.sterms);
+
+//                     ret = this.get_searchstat(pstat.sterms);
+                     ret  = pstat;
 
 		} else if (pstat.listype == "people" ) {
 
@@ -619,6 +620,8 @@ stater.prototype.update_webit = function(pobj) {
 
      daviewer.update_one(pobj.pid,mdex,ltype);
 
+     nicky.update_one(pobj.pid,mdex,ltype);
+
 /*
       if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
         fnd = -1;
@@ -648,7 +651,7 @@ stater.prototype.get_searchstat = function(sterms) {
 
      var ret = null;
 
-     if ( (sterms != "") || (sterm  != undefined))  {
+     if ( (sterms != "") && (sterms  != undefined))  {
 
         for (var i=0; (i < amare.searchstats.length); i++) {
           if (amare.searchstats[i].sterms == sterms) {
@@ -656,6 +659,10 @@ stater.prototype.get_searchstat = function(sterms) {
           }
         }
 
+     }
+     if (ret == null) {
+        ret = new stat();
+        ret.sterms = sterms;
      }
 
      return ret;

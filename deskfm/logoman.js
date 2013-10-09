@@ -25,7 +25,7 @@ logoman.prototype.show = function () {
         ocl = "diego.set_topshape(\"\");";
        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
       
@@ -106,7 +106,7 @@ logoman.prototype.draw_vman = function () {
             vm="stand";
             this.flip = 0;
           } 
-     tmpsrc = "deskfm/images/daoman/cbman-"+vm+".png";
+     tmpsrc = "deskfm/images/icons/cbman-"+vm+".png";
 
       $('#vman_btn').attr('src',tmpsrc);
      $('#vman_btn').trigger("create");
@@ -168,7 +168,7 @@ logoman.prototype.hide = function (bfull) {
         ocl =  'diego.set_topshape(\"\");'
         tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
+        tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
     }
