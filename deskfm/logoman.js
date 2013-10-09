@@ -20,17 +20,10 @@ logoman.prototype.show = function () {
      sty='background-color:white;'
    }
  
-        lbl = 'browse_btn';
-        ocl = 'diego.toggle_topshape(\"browse\");';
-        tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img  src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
 
         lbl = 'vman_btn'; 
-        ocl =  'daviewer.randomize_rungs();'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+        ocl = "diego.set_topshape(\"\");";
+       tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/daoman/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
@@ -41,9 +34,6 @@ logoman.prototype.show = function () {
          this.logo_shape = "fm";
       }
 
-      if ((main_shape == "mini") && (buddah == true)) {
-    // no room for logo 
-      } else {
         lbl = this.spotid + '_logo_spot1';
  //       ocl = this.varname + ".toggle_logoshape();";
          ocl =  'daviewer.randomize_rungs();'
@@ -71,8 +61,6 @@ logoman.prototype.show = function () {
             tmp = tmp + "FreedoM";
             tmp=tmp+"</span>";
          } 
-     }
-
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {

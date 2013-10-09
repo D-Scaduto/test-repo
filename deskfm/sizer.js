@@ -8,6 +8,7 @@ function set_header() {
               main_shape = "mini";
               diego.show();
               diego.set_topshape();
+              diego.set_botshape();
             }
             if ($('#foot_spot').css('position') != 'static') {
               $('#foot_spot').css('position','static');
@@ -25,6 +26,7 @@ function set_header() {
                  main_shape = "wide";
                  diego.show();
                  diego.set_topshape();
+                 diego.set_botshape();
               }
             } else {
                if ($(window).width() > 800) {
@@ -32,12 +34,14 @@ function set_header() {
                     main_shape = "wide";
                     diego.show();
                     diego.set_topshape();
+                    diego.set_botshape();
                   } 
                } else {
                 if (main_shape != "reg") {
                     main_shape = "reg";
                     diego.show();
                     diego.set_topshape();
+                    diego.set_botshape();
                 }
               }
             }

@@ -11,23 +11,28 @@
        font-size: 1em;
        display:inline-block;
        vertical-align:middle;
+       margin-top:15px;
     }
 
     #left_spot {
-     }
+        margin-left:40px; 
+    }
 
      #right_spot {
-         text-align:right;
+         float:right;
+        margin-right:40px; 
      }
 
     .menu_sub {
-        display:inline-block;
+        display:inline;
      }
 
 
     #side_bar {
        width:100%;
        float:none;
+       padding:0 0 10px;
+        text-align:right;
      }
 
      #main_spot {

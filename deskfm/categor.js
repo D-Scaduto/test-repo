@@ -20,13 +20,7 @@ categor.prototype.show = function() {
         this.show_popups();
       }
    }
-   if (buddah == true) {
-     if (main_shape != "wide") {
-        sal.hide(true);
-     }
-   } else {
-        sal.hide(true);
-   }
+   wanda.hide();   
 }
 
 categor.prototype.show_popups = function() {
@@ -38,15 +32,18 @@ categor.prototype.show_popups = function() {
     var s = "";
     var sugs = [];
 
-      lbl = 'browse_btn'; 
-        ocl =  'diego.set_topshape(\"\");'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+  tmp = tmp + "<div  class='' style='display:inline-block;height:40px;vertical-align:top;'  >";
+/* 
+  if (main_shape == "mini") {
+      lbl = 'change_cat_btn'; 
+        ocl =  'cater.change();'
+        tmp = tmp + "<span  class='mybtns' style=''  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img id='"+lbl+"' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-
-
+  }
+*/
     if (this.subcat != "" ) {
 	lbl = 'subcat_btn';
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
@@ -120,6 +117,8 @@ categor.prototype.show_popups = function() {
      }
 
   }
+ 	tmp +=  '</div>';
+
 
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
@@ -426,7 +425,8 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
 
 
 categor.prototype.change = function () {
-   this.toggle();
+    daviewer.randomize_rungs();
+
 }
 
 
@@ -447,9 +447,6 @@ categor.prototype.hide = function () {
      document.getElementById(lbl).innerHTML=""; 
    }
    this.showing = false;
-   if ((main_shape != "wide") && (this.top_shape == "")) {
-      sal.show();
-   }
 }
 
 
@@ -475,7 +472,7 @@ categor.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_topshape(\"browse\");'
+      ocl = 'diego.toggle_botshape(\"browse\");';
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
        tmp = tmp + "</button>";

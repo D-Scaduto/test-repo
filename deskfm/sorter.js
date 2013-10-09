@@ -213,7 +213,7 @@ sorter.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_topshape(\"sort\");'
+       ocl = 'diego.toggle_botshape(\"sort\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/categories.png' class='menu_btn' >";
        tmp = tmp + "</button>";

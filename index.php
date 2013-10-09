@@ -176,7 +176,7 @@ header('Content-type: text/html; charset=utf-8 ');
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
-   <!--span style='margin-left:50px;' >
+   <!--span style='float:right;margin-right:50px;' >
        <span  id='lcount_spot' class='count_talk' style=''  >
         </span>
         <span  id='' class='count_talk' style=''  >
@@ -186,17 +186,20 @@ header('Content-type: text/html; charset=utf-8 ');
         </span>
    </span-->
  
-     <div id='top_view' class='' style='float:right;'   >
+     <div id='top_view' class='' style=''   >
      </div>
 
-        <div id='' class='' style='clear:right;' ></div>
+        <!--div id='' class='' style='clear:right;' ></div-->
 
-  <div  data-role='content'  class='' style='min-width:250px;'  >
+     <div  data-role='content'  class='ui-grid-a' style='min-width:250px;'  >
 
-    <div id='main_view'  class='' style=''   >
-    </div>
+     <div id='side_bar' class='ui-block-a' style=''  >
+     </div>
 
-  </div>
+     <div id='main_spot'  class='ui-block-b'  style=''   >
+     </div>
+
+     </div>
 
 <div id='foot_spot' style='min-width:350px;text-align:center;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
 </div>
@@ -238,7 +241,7 @@ header('Content-type: text/html; charset=utf-8 ');
 	louie = new feeder("feed");
         amare = new stater();
 
-        daviewer = new viewer("main_view","daviewer");
+        daviewer = new viewer("main_spot","daviewer");
 
         if (is_mobile == true) {
            da_limit = 100;
@@ -248,7 +251,7 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
        }
 
-        var  tshapes = ['browse:cater','search:wanda','share:nicky'];  
+        var  tshapes = ['browse:cater'];  
 	diego = new header(tshapes);
 
     amare.get_stats();

@@ -5,7 +5,8 @@ function supplier (pspotid) {
    this.spotid = pspotid + "_spot";
    this.varname = "joe";
    this.showing = false;
-   this.shape = "all";  //all,one 
+
+   this.shape = "by_supplier";  //by_product 
    this.supplier_id = "";
 }
 
@@ -20,12 +21,12 @@ supplier.prototype.show = function() {
      tmp = tmp + "<fieldset data-role='controlgroup'  data-type='horizontal' style='display:inline;min-width:160px;'  >";
       tmp += "<legend></legend>";
       lbl = 'by_supplier_btn';
-       ocl = this.varname + '.setby_supplier();';
+       ocl = this.varname + '.set_shape(\"buy_supplier\");';
         tmp = tmp + "<input  name='manage_setby' id='"+lbl+"' data-mini='true' type='radio'  onclick='"+ocl+"' style='' value='by_supplier' />";
        tmp += "<label for='"+lbl+"' >suppliers</label>";
  
       lbl = 'by_prodtype_btn';
-       ocl = this.varname + '.setby_product();';
+       ocl = this.varname + '.set_shape(\"by_product\");';
         tmp = tmp + "<input  name='manage_setby' id='"+lbl+"' type='radio' data-mini='true'  onclick='"+ocl+"' style=''  />";
         tmp += "<label for='"+lbl+"' >products</label>";
 
@@ -132,7 +133,7 @@ supplier.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_topshape(\"manage\");'
+       ocl = 'diego.toggle_botshape(\"manage\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/molecule.png' class='menu_btn' >";
        tmp = tmp + "</button>";

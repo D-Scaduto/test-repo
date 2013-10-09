@@ -22,7 +22,6 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-
 /*
       lbl = 'search_unset_btn';
      ocl = this.varname+ ".check_central();";
@@ -35,22 +34,19 @@ searcher.prototype.show = function() {
 
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_local();";
-     tmp = tmp + "<span style='display:inline-block;vertical-align:middle;' >";
-     tmp = tmp + "<input id='"+lbl+"' size=15  onkeyup='"+ocl+"' value=''  />";
-     tmp = tmp + "</span>";
-
+     tmp += "<span style='display:inline-block;padding:0px;vertical-align:middle;' >";
+     tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=8  data-clear-btn='true' onkeyup='"+ocl+"' value='' type='search'  />";
+     tmp += "</span >";
+ 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#'+lbl).trigger("create");
-      if (buddah == true) {
-           nicky.hide();
-           if(main_shape == "mini") {
-              sal.hide();
-           }
-      }
+      lbl = this.spotid + "_dasbox";
+   //   $('#'+lbl).textinput("refresh");
    } 
+   cater.hide();
 
 }
 
@@ -95,7 +91,6 @@ searcher.prototype.check_central = function() {
 
 
 searcher.prototype.hide = function() {
-
    var tmpstr = "";
    var pobj = null;
    var lbl = "";
@@ -108,7 +103,9 @@ searcher.prototype.hide = function() {
        pobj.innerHTML=tmpstr; 
        this.showing = false;
    }
-
+   if (main_shape == "mini") {
+     sal.show();
+   }
 }
 
 
@@ -143,10 +140,7 @@ searcher.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-       ocl = 'diego.toggle_topshape(\"search\");'
-      if ((buddah == true) && (main_shape != "mini"))  {
-        ocl = "wanda.toggle();";
-      }
+       ocl = "diego.toggle_topshape(\"search\");";
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</button>";

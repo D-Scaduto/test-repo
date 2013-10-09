@@ -169,12 +169,12 @@ header('Content-type: text/html; charset=utf-8 ');
 <div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
 </div>
 
-   <div style="clear:right;" ></div>
+   <!--div style="clear:right;" ></div-->
  
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
-   <!--span style='margin-left:50px;' >
+   <!--span style='float:right;margin-right:50px;' >
        <span  id='lcount_spot' class='count_talk' style=''  >
         </span>
         <span  id='' class='count_talk' style=''  >
@@ -184,15 +184,14 @@ header('Content-type: text/html; charset=utf-8 ');
         </span>
    </span-->
 
-     <span id='top_view' class='' style='float:right;margin-right:50px;'   >
+     <span id='top_view' class='' style=''   >
      </span>
 
-        <div id='' class='' style='clear:right;' ></div>
+        <!--div id='' class='' style='clear:right;' ></div-->
 
+     <div  data-role='content'  class='ui-grid-a' style=''  >
 
-     <div  data-role='content'  class='ui-grid-a' style='min-width:250px;'  >
-
-     <div id='side_bar' class='ui-block-a' style='background-color:gold;'  >
+     <div id='side_bar' class='ui-block-a' style=''  >
      </div>
 
      <div id='main_spot'  class='ui-block-b'  style=''   >
@@ -256,7 +255,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
    //sort,feed,manage,group  
 	
-           var   tshapes = ['sort:mac','group:robby','manage:joe','feeds:louie','search:wanda','browse:cater','share:nicky']; 
+           var   tshapes = ['sort:mac','group:robby','manage:joe','browse:cater']; 
           diego = new header(tshapes);
 
     amare.get_stats();

@@ -8,19 +8,21 @@
 
     .screen_talk {
        font-size: 1 em;
-       display:inline-block;
-       vertical-align:middle;
+       display:inline;
+    //   margin-top:10px;
     }
 
     #menu_spot {
-       min-width:300px;
+       min-width:375px;
      }
 
     #left_spot {
+         margin-left:30px; 
    }
 
      #right_spot {
-        text-align:right;
+        float:right;
+        margin-right:40px; 
      }
 
      #main_view {
@@ -31,6 +33,8 @@
      #side_bar {
        width:100%;
        float:none;
+       padding: 0 0 10px;
+       text-align:right;
      }
 
      #main_spot {
@@ -53,8 +57,7 @@
      }
  
    .menu_sub {
-        display:inline-block;
-        float:left;
+        display:inline;
      }
 
      #chip_rail {

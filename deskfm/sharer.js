@@ -90,13 +90,10 @@ sharer.prototype.show = function() {
         document.getElementById(lbl).innerHTML= tmp;
         this.showing = true;
         $('#'+lbl).trigger("create");
-        if (buddah == true) {
-            wanda.hide();
-            if(main_shape == "mini") {
-              sal.hide();
-            }
-        }
-        this.show_newster();  
+        this.show_newster(); 
+        if ((buddah == true) && ("mainshape" == "mini")) {
+           sal.hide();
+        } 
         daviewer.draw_view();
      } 
 }
@@ -235,8 +232,12 @@ sharer.prototype.hide = function() {
         pobj.innerHTML = tmp;
    }
    this.showing = false; 
-
    daviewer.draw_view();
+
+   if ((buddah == true) && ("mainshape" == "mini")) {
+       sal.show();
+   } 
+ 
 }
 
 
@@ -258,10 +259,7 @@ sharer.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-      ocl = 'diego.toggle_topshape(\"share\");'
-      if ((buddah == true) && (main_shape != "mini"))  {
-        ocl = "nicky.toggle();";
-      }
+       ocl = "diego.toggle_topshape(\"share\");";
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/share.png' class='menu_btn' >";
        tmp = tmp + "</button>";
