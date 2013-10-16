@@ -24,9 +24,8 @@ poster.prototype.draw_story = function() {
           if (this.editing == true) {
             ocl = this.varname + ".set_shape(\"getstory\");";
             ps = "deskfm/images/icons/pencil_msg.png";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='40px'  class='' >"; 
          }
-
  
        } else {
         tmp = tmp + "<span onclick='"+ocl+"' class='"+cls+"' onmouseover='' onmouseout='' >";

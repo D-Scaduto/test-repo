@@ -11,6 +11,7 @@ function categor (pmenuid) {
 }
 
 categor.prototype.show = function() {
+
    if (jqm_off == true) {
        this.show_nojqm();
    } else {
@@ -31,8 +32,9 @@ categor.prototype.show_popups = function() {
     var ocl = "";
     var s = "";
     var sugs = [];
+    var tstat = null;
 
-  tmp = tmp + "<div  class='' style='display:inline-block;height:40px;vertical-align:top;'  >";
+  tmp = tmp + "<div  class='screen_talk' style='display:inline;'  >";
 /* 
   if (main_shape == "mini") {
       lbl = 'change_cat_btn'; 
@@ -55,70 +57,74 @@ categor.prototype.show_popups = function() {
    } else { 
 
    if ((this.cat != "who" ) || (this.subcat == "")) {
-
-	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  > who ? </a>";
+	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='text-decoration:none;' class='screen_talk'  > who ? </a>";
  	tmp +=  "<div data-role='popup' id='who_sog'>";
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
            ocl = "cater.set_cats(\"who\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+           tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+           if (tstat != null) { 
+            tmp = tmp +"<li onclick='"+ocl+"' data-icon='false'  ><a href='#'>"+sugs[i].text+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+           }
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
-
     }
 
 
    if ((this.cat != "what" )  || (this.subcat == "")) {
-
-        tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="slideup" style="" class="screen_talk"  > what ? </a>';
+        tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="" style="text-decoration:none;" class="screen_talk"  > what ? </a>';
  	tmp += '<div data-role="popup" id="what_sog" data-theme="d"  style="display:inline-block;"  >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("what");
         for (var i=0;i<sugs.length;i++) {
           ocl = "cater.set_cats(\"what\",\""+sugs[i].subcat+"\");";
-          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+          tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+           if (tstat != null) { 
+            tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'  ><a href='#'>"+sugs[i].text+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+           }
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
-
     }
 
 
    if ((this.cat != "why" )  || (this.subcat == "")) {
-
-        tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"  style="" class="screen_talk"  > why ? </a>';
+        tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition=""  data-theme="e"  style="text-decoration:none;" class="screen_talk"  > why ? </a>';
  	tmp += '<div data-role="popup" id="why_sog" data-theme="d" style="display:inline-block;" >';
- 	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
+ 	tmp +=   '  <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("why");
         for (var i=0;i<sugs.length;i++) {
            ocl = "cater.set_cats(\"why\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+            tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+            if (tstat != null) { 
+               tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'  ><a href='#'>"+sugs[i].text+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+            }
         }
-   	tmp +=   '   </ul>';
+   	tmp +=   '  </ul>';
  	tmp +=  '</div>';
-
      }
 
      if ((this.cat != "how" )  || (this.subcat == "")) {
-
-        tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition="slideup"  data-theme="e"   style=""  class="screen_talk"  > how ?</a>';
+        tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition=""  data-theme="e"   style="text-decoration:none;"  class="screen_talk"  > how ?</a>';
  	tmp += '<div data-role="popup" id="how_sog" data-theme="d"  style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("how");
         for (var i=0;i<sugs.length;i++) {
           ocl = "cater.set_cats(\"how\",\""+sugs[i].subcat+"\");";
-          tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+          tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+          if (tstat != null) { 
+            tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'  ><a href='#'>"+sugs[i].text+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+          }
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
-
      }
 
-  }
- 	tmp +=  '</div>';
+    }
 
+    tmp +=  '</div>';
 
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
@@ -135,55 +141,69 @@ categor.prototype.show_collapsers = function() {
     var obj = null;
     var ocl = "";
     var s = "";
+    var cnt = 0;
     var sugs = [];
+    var tstat = null;
 
- 	tmp +=  "<div data-role='collapsible-set' id='' style='' >";
+// 	tmp +=  "<div data-role='collapsible-set' id='' style='' >";
  
- 	tmp +=  "<div data-role='collapsible' id='' style='' >";
+ 	tmp +=  "<div data-role='collapsible' id=''style='width:175px;' >";
   	tmp +=  "<h3>who ?</h3>";
         sugs = amare.subcat_set.get_setlist("who");
   	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
         for (var i=0;i<sugs.length;i++) {
            ocl = "cater.set_cats(\"who\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+           tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+           if (tstat != null) { 
+             tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'  ><a href='#'>"+sugs[i].subcat+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+           }
         }
    	tmp +=   ' </ul>';
  	tmp +=  '</div>';
 
- 	tmp +=  "<div data-role='collapsible' id=''>";
+ 	tmp +=  "<div data-role='collapsible' id='' style='width:175px;'  >";
   	tmp +=  "<h3>what ?</h3>";
         sugs = amare.subcat_set.get_setlist("what");
-  	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
+ 	tmp +=   ' <ul data-role="listview" style="" data-theme="d">';
         for (var i=0;i<sugs.length;i++) {
-           ocl = "cater.set_cats(\"what\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+          ocl = "cater.set_cats(\"what\",\""+sugs[i].subcat+"\");";
+          tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat); 
+           if (tstat != null) { 
+             tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'   ><a href='#'>"+sugs[i].subcat+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+           }
         }
    	tmp +=   ' </ul>';
  	tmp +=  '</div>';
 
- 	tmp +=  "<div data-role='collapsible' id=''>";
+ 	tmp +=  "<div data-role='collapsible' id='' style='width:175px;' >";
   	tmp +=  "<h3>why ?</h3>";
         sugs = amare.subcat_set.get_setlist("why");
-  	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
+	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
         for (var i=0;i<sugs.length;i++) {
            ocl = "cater.set_cats(\"why\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+           tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat);
+           if (tstat != null) { 
+             tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'   ><a href='#'>"+sugs[i].subcat+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+           }
         }
    	tmp +=   ' </ul>';
  	tmp +=  '</div>';
 
- 	tmp +=  "<div data-role='collapsible' id='' style=''  >";
+ 	tmp +=  "<div data-role='collapsible' id='' style='width:175px;'  >";
   	tmp +=  "<h3 >how ?</h3>";
         sugs = amare.subcat_set.get_setlist("how");
-  	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
+	tmp +=   ' <ul data-role="listview"  style="" data-theme="d">';
         for (var i=0;i<sugs.length;i++) {
-           ocl = "cater.set_cats(\"how\",\""+sugs[i].subcat+"\");";
-           tmp = tmp +"<li onclick='"+ocl+"'  ><a href='#'>"+sugs[i].text+"</a></li>";
+          ocl = "cater.set_cats(\"how\",\""+sugs[i].subcat+"\");";
+          tstat = amare.get_catstat(sugs[i].cat,sugs[i].subcat); 
+          if (tstat != null) { 
+            tmp = tmp +"<li onclick='"+ocl+"'  data-icon='false'   ><a href='#'>"+sugs[i].subcat+"<span class='ui-li-count'>"+tstat.lnum+" / " + tstat.cnum + "</span></a></li>";
+          }
         }
    	tmp +=   ' </ul>';
  	tmp +=  '</div>';
 
-    tmp +=  '</div>';
+ //   tmp +=  '</div>';
 
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
@@ -472,7 +492,11 @@ categor.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
+      ocl = 'diego.toggle_topshape(\"browse\");';
+ 
+     if (buddah == true) {
       ocl = 'diego.toggle_botshape(\"browse\");';
+    }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
        tmp = tmp + "</button>";

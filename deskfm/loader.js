@@ -197,7 +197,7 @@ viewer.prototype.load_unsorted_list = function(dtmon,pstart) {
         ro = amare.unsortedlist[r];
         if (ro != undefined) {
             ok = false;
-	    if (dtmon.month == "") {
+	    if (dtmon.month == "all") {
 		ok = true;
 	    } else {
 	//	    alert("m=" + dtmon.month + " y=" + dtmon.year);

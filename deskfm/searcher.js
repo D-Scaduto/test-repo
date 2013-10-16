@@ -22,13 +22,13 @@ searcher.prototype.show = function() {
    var ims = "";
    var sz = '10';
 
-     tmp += "<form id='searchbox' style='display:inline-block;padding:0px;vertical-align:middle;' >";
+     tmp += "<div id='searchbox' style='display:inline-block;padding:0px;vertical-align:middle;' >";
  
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_central();";
-    tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=8  data-clear-btn='true' onkeyup='"+ocl+"' value='' type='search'  />";
+    tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=12  data-clear-btn='true' onkeyup='"+ocl+"' value='"+this.sterms+"' type='search'  />";
 
-     tmp += "</form >";
+     tmp += "</div >";
  
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
@@ -54,6 +54,7 @@ searcher.prototype.clear = function() {
    var pobj = null;
 
    this.sterms = "";
+   daviewer.sterms = "";
    daviewer.load_sorted_list();
 }
 
@@ -106,9 +107,7 @@ searcher.prototype.hide = function() {
        pobj.innerHTML=tmpstr; 
        this.showing = false;
    }
-   if (main_shape == "mini") {
-     sal.show();
-   }
+//   this.clear();
 }
 
 

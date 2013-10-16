@@ -11,91 +11,44 @@ function sharer (pspotid) {
 
 
 sharer.prototype.show = function() {
-
-   var tmp = "";
-   var lbl = "";
-   var cls = "";
-   var ocl = "";
-
-   if (this.shape == "twitter") {
-
-       lbl = this.spotid +  "_unset_btn";
-       ocl = this.varname + ".set_shape(\"\");";
-          tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='menu_btn'  >";
-       tmp=tmp +"</button>";
-
-       lbl = "twitter_spot";
-       tmp=tmp +"<span id='"+lbl+"'  >";
-       tmp=tmp +"</span>";
-
-    }  else if (this.shape == "facebook") {
-
-       lbl = this.spotid +  "_unset_btn";
-       ocl = this.varname + ".set_shape(\"\");";
-          tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
-       tmp=tmp +"</button>";
-        tmp=tmp +"</span>";
+    var lbl = "";
+    var tmp = "";
  
-       lbl = "twitter_spot";
-       tmp=tmp +"<span id='"+lbl+"'  >";
-       tmp=tmp +"</span>";
+     tmp = tmp + "<span id='nets_spot'  class='' style=''  >";
+     tmp = tmp + "</span>";
+  
+    tmp += "<div id='top_view_rung_0' class='box' >";
+    tmp += "</div";
 
-    }  else if (this.shape == "google") {
+    lbl = "top_view";
+    $('#'+lbl).html(tmp);
 
-       lbl = this.spotid +  "_unset_btn";
-       ocl = this.varname + ".set_shape(\"\");";
-          tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
-       tmp=tmp +"</button>";
-        tmp=tmp +"</span>";
- 
-       lbl = "twitter_spot";
-       tmp=tmp +"<span id='"+lbl+"'  >";
-       tmp=tmp +"</span>";
+    $('#'+lbl).popup("open");
 
-     } else if (this.shape == "") {
 
-       lbl = this.spotid +  "_twitter_btn";
-//       ocl = this.varname + ".set_shape(\"twitter\");";
-          tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/twitter.png'  class='menu_btn'  >";
-       tmp=tmp +"</button>";
-        tmp=tmp +"</span>";
- 
-       lbl = this.spotid +  "_facebook_btn";
-//       ocl = this.varname + ".set_shape(\"facebook\");";
-         tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/facebook.png'  class='menu_btn'  >";
-       tmp=tmp +"</button>";
-        tmp=tmp +"</span>";
- 
-       lbl = this.spotid +  "_google_btn";
-//       ocl = this.varname + ".set_shape(\"google\");";
-        tmp = tmp + "<span  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
-       tmp = tmp + "<img src='deskfm/images/icons/googleplus.png'  class='menu_btn'  >";
-       tmp=tmp +"</button>";
-        tmp=tmp +"</span>";
-     }
+    this.showing = true;
 
-     lbl = this.spotid;
-     if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML= tmp;
-        this.showing = true;
-        $('#'+lbl).trigger("create");
         this.show_newster(); 
-        if ((buddah == true) && ("mainshape" == "mini")) {
-           sal.hide();
-        } 
+        this.share_this();
+//        this.show_nets();
         daviewer.draw_view();
-     } 
+}
+
+sharer.prototype.show_newster = function() {
+
+    var lbl = "";
+    var tmp = "";
+    var ocl = "";
+    if (buddah == true) { 
+      if ((this.newster.pid == undefined) || (this.newster.pid == "")) {
+         this.newster.set_ppid(-1,"unsaved");
+      }
+      this.newster.redraw_rung();
+   } else { 
+      if ((this.newster.pid != undefined) && (this.newster.pid != "")) {
+        this.newster.redraw_rung();
+      }
+   }
 }
 
 
@@ -111,33 +64,9 @@ sharer.prototype.update_one = function(tpid,mdex,ltype) {
 
 sharer.prototype.set_webit = function(pdex,ptype) {
 
-    if (this.showing == false) {
-      this.show();
-    }
-
      this.newster.set_ppid(pdex,ptype);
-    this.newster.redraw_rung(); 
-     window.scroll(0,0);
-}
-
-
-
-sharer.prototype.show_newster = function() {
-
-    var lbl = "";
-    var tmp = "";
-    
-    tmp += "<div id='top_view_rung_0' class='box' >";
-    tmp += "</div";
-    lbl = "top_view";
-    $('#'+lbl).html(tmp);
-
- 
-    if ((this.newster.pid == undefined) || (this.newster.pid == "")) {
-       this.newster.set_ppid(-1,"unsaved");
-    }
-    this.newster.redraw_rung(); 
-
+//    window.scroll(0,0);
+     this.show();
 }
 
 
@@ -149,50 +78,62 @@ sharer.prototype.del_rung = function(tspot) {
 }
 
 
+sharer.prototype.share_this = function() {
+
+	var tmp = "";
+	var lbl = "";
+        var ocl = "";
+
+        tmp += "<span class='st_sharethis_large' displayText='ShareThis'></span>";
+	tmp += "<span class='st_facebook_large' displayText='Facebook'></span>";
+	tmp += "<span class='st_twitter_large' displayText='Tweet'></span>";
+	tmp += "<span class='st_linkedin_large' displayText='LinkedIn'></span>";
+	tmp += "<span class='st_pinterest_large' displayText='Pinterest'></span>";
+	tmp += "<span class='st_email_large' displayText='Email'></span>";
+
+        ocl = "$(\"#top_view\").popup(\"close\");";
+        tmp = tmp + "<span  class='mybtns' style='vertical-align:top;'  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  class='' style='' >";
+        tmp = tmp + "<img src='deskfm/images/icons/delete_black.png'  class='menu_btn'  >";
+        tmp=tmp +"</button>";
+        tmp=tmp +"</span>";
+ 
+       lbl = "nets_spot";
+       $('#'+lbl).html(tmp);
+       stButtons.locateElements();
+
+}
+
 sharer.prototype.show_nets = function() {
 
 	var tmp = "";
 	var lbl = "";
-	var moin = "";
-	var mout = ""
         var cls = "";
 
-                var twparams='?count=none';
-                twparams = twparams + "&text="+escape(this.story);
-/*
-                if (this.linkurl != "") {
-                  twparams = twparams + "&url="+escape(this.linkurl);
-                } else {
-                  twparams = twparams + "&url="+escape("http://deskfm.com");
-                }
-*/
-                tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' style='vertical-align:top;' > </a>";
-
-//         tmp = tmp + "<fb:like send='true' width='450' show_faces='true' ></fb:like>";
-//       tmp=tmp +"<span class='fb-send' data-href='http://www.deskfm.com' style='vertical-align:top;'  ></span>";
-       tmp=tmp +"<span class='fb-like' data-send='false' data-layout='button_count' data-width='90' data-show-faces='false' data-href='' ></span>";
-//       tmp=tmp +"<div class='fb-like' data-send='true' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' ></div>";
-//       tmp=tmp +"<img src='deskfm/images/random/facebook-small.png' height='20px' >";
+	tmp += "<div id='social'>";
+ 	tmp += "   <div class='plusone'>";
+ 	tmp += "   <g:plusone size='medium' annotation='none'></g:plusone>"
+ 	tmp += "   </div>";
+ 	tmp += "   <div class='twitter'>";
+ 	tmp += "   <a href='https://twitter.com/share' class='twitter-share-button' data-count='none' data-via='' >Tweet</a>";  
+ 	tmp += "   </div>";
+// 	tmp += "   <div class='fb-like' data-send='false' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' ></div>";
+	tmp += "</div>";
 
 
-       lbl = this.spotid +  "_google_btn";
-//       tmp=tmp +"<g:plusone></g:plusone>";
-       tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' data-width='40'  >";
-       tmp=tmp +"</span>";
-
-     lbl = this.spotid;
+     lbl = "nets_spot";
     if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML= tmp;
 
-	if (netson == true) {
-          this.fb_render();
+//	if (netson == true) {
+  //        this.fb_render();
           this.gplus_render();
           if (twttr != undefined) {
            if (twttr.widgets != undefined) {
               twttr.widgets.load();
            }
           }
-	}
+//	}
 
      } 
 
@@ -242,11 +183,6 @@ sharer.prototype.hide = function() {
         pobj.innerHTML = tmp;
    }
    this.showing = false; 
-   daviewer.draw_view();
-
-   if ((buddah == true) && ("mainshape" == "mini")) {
-       sal.show();
-   } 
  
 }
 
@@ -311,7 +247,7 @@ sharer.prototype.gplus_render = function() {
 
 sharer.prototype.fb_render = function() {
 
-    FB.XFBML.parse();
+//    FB.XFBML.parse();
 
 }
 
@@ -337,50 +273,4 @@ sharer.prototype.tweet_btn = function() {
                 tmp = tmp + "</span>";
 }
               
-
-sharer.prototype.fbsend_btn = function() {
-   var s="script";
-   var id="facebook-jssdk";
-   var js,fjs=document.getElementsByTagName(s)[0];
-
-   if(!document.getElementById(id)) {
-       js=document.createElement(s);
-       js.id=id;
-       js.src="//connect.facebook.net/en_US/all.js#xfbml=l";
-//       js.src="//connect.facebook.net/en_US/all.js#xfbml=l&appId=191528434226668";
-       fjs.parentNode.insertBefore(js,fjs);
-    }
-}
-
-/*
-       lbl = this.spotid + "_facebook_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-
-       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<span class='fb-send' data-href='http://www.deskfm.com'  >";
-//       tmp=tmp +"<div class='fb-like' data-send='true' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' >";
-       tmp=tmp +"<img src='deskfm/images/random/facebook-small.png' height='20px' >";
-       tmp=tmp +"</span>";
-*/
-
-/*
-       lbl = this.spotid +  "_google_btn";
-       moin = "markyd(\""+lbl+"\");";
-       mout = "unmarkyd(\""+lbl+"\");";
-       cls='';
-       ocl ="";
-       tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"'  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-       tmp=tmp +"<img src='deskfm/images/random/google-plus-icon.jpg' height='20px' >";
-       tmp=tmp +"<g:plusone></g:plusone>";
-       tmp=tmp +"<span class='g-plusone' data-size='medium' data-annotation='none' style='display:inline;'>";
-       tmp=tmp +"</span>";
-*/
-
-
-//            this.fbsend_btn();
-//            this.gplus_render();
-
-
-
 

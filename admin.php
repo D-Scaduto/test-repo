@@ -147,7 +147,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/supplier.js type="text/javascript" ></script>
 <script src=deskfm/grouper.js type="text/javascript" ></script>
 
-<script src=deskfm/header.js type="text/javascript" ></script>
+<script src=deskfm/adminer.js type="text/javascript" ></script>
 <script src=deskfm/footer.js type="text/javascript" ></script>
 <script src=deskfm/sizer.js type="text/javascript" ></script>
 
@@ -166,11 +166,17 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div  id='page_spot'  data-role='page' class='ui-page'  >
 
-<div id='menu_spot' style='' class=''  data-role='header' data-theme='b'  >
-</div>
-
+  <div id='' style='' class='' data-position='fixed'  data-role='header' data-theme='b'  >
+ 
+  <div id='menu_spot' style='' class='' >
+   </div>
    <div style="clear:right;" ></div>
  
+     <div id='top_view' class='' style='float:right' data-role='popup'   >
+     </div>
+        <div id='' class='' style='clear:right;' ></div>
+  </div>
+
    <div id="nav_left"></div>
    <div id="nav_right"></div>
 
@@ -184,23 +190,18 @@ header('Content-type: text/html; charset=utf-8 ');
         </span>
    </span-->
 
-     <span id='top_view' class='' style=''   >
-     </span>
-
-        <!--div id='' class='' style='clear:right;' ></div-->
-
      <div  data-role='content'  class='ui-grid-a' style=''  >
 
-     <div id='side_bar' class='ui-block-a' style=''  >
+     <div id='adside_bar' class='ui-block-a' style=''  >
      </div>
 
-     <div id='main_spot'  class='ui-block-b'  style=''   >
+     <div id='admain_spot'  class='ui-block-b'  style=''   >
      </div>
 
      </div>
 
 
-<div id='foot_spot' data-position='fixed'  data-role='footer' data-theme='b'  >
+<div id='foot_spot' style='text-align:center;' data-position='fixed'  data-role='footer' data-theme='b'  >
 </div>
 
 </div>
@@ -230,7 +231,7 @@ header('Content-type: text/html; charset=utf-8 ');
    buddah=true;
 
    amare = new stater();
-   daviewer = new viewer("main_spot","daviewer");
+   daviewer = new viewer("admain_spot","daviewer");
    
    if (is_mobile == true) {
            da_limit = 100;
@@ -256,7 +257,7 @@ header('Content-type: text/html; charset=utf-8 ');
    //sort,feed,manage,group  
 	
            var   tshapes = ['sort:mac','feed:louie','group:robby','manage:joe','browse:cater']; 
-          diego = new header(tshapes);
+          diego = new adminer(tshapes);
 
     amare.get_stats();
 
@@ -277,7 +278,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
 
    $( document ).on( "pageinit", "#page_spot", function( event ) {
-      diego.set_topshape("");
       ray.show();
       $(window).resize();
    });

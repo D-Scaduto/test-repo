@@ -15,7 +15,7 @@ poster.prototype.draw_link = function() {
          if (this.editing == true) {
             ocl = this.varname + ".set_shape(\"getlink\");";
             ps = "deskfm/images/icons/link-black.jpg";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='50px'  class='"+cls+"' >"; 
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='30px'  class='' >"; 
          } 
    } else {
 
@@ -23,12 +23,13 @@ poster.prototype.draw_link = function() {
  
             ocl = this.varname + ".set_shape(\"getlink\");";
             ps = "deskfm/images/icons/link-black.jpg";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' height='20px'  class='"+cls+"' >"; 
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='30px'  class='' >"; 
  
        } else {
           tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
-           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+//           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
 //           tmp = tmp + this.linkurl; 
+            tmp = tmp + "link"; 
           tmp = tmp + " </a> ";
        }
    }
@@ -55,7 +56,7 @@ poster.prototype.get_link = function() {
        if ((this.linkurl != undefined) && (this.linkurl != "")) {      
 
           tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
-           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
 //           tmp = tmp + this.linkurl; 
           tmp = tmp + " </a> ";
 

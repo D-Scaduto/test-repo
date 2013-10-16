@@ -1,26 +1,22 @@
 
-@media screen and (min-width:550px) and (max-width:799px) {
+@media screen and (min-width:600px) and (max-width:799px) {
 
     .logo_talk {
        font-size: 1.2em;
-       display:inline-block;
        vertical-align:middle;
     }
 
     .screen_talk {
        font-size: 1em;
-       display:inline-block;
        vertical-align:middle;
        margin-top:15px;
     }
 
     #left_spot {
-        margin-left:40px; 
     }
 
      #right_spot {
          float:right;
-        margin-right:40px; 
      }
 
     .menu_sub {
@@ -28,24 +24,28 @@
      }
 
 
-    #side_bar {
+    #adside_bar {
        width:100%;
        float:none;
        padding:0 0 10px;
         text-align:right;
      }
 
+     #admain_spot {
+       width:100%;
+       float:none;
+     }
+
+     #side_bar {
+       width:100%;
+     }
+
      #main_spot {
        width:100%;
-       float:none;
      }
 
-     #main_view {
-       width:100%;
-       float:none;
-     }
 
-     .menu_btn {
+       .menu_btn {
         width:25px;
        background-color:white;
      }

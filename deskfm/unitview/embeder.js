@@ -13,7 +13,7 @@ poster.prototype.draw_embed = function() {
             if (this.editing == true) {
 		  ocl = this.varname + ".set_shape(\"getembed\");";
         	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' width='50px' >";
+		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' width='25px' >";
 		  tmp = tmp + "</button>";
 	          lbl = this.rungster + '_embed_btn';
 	       	  pobj = document.getElementById(lbl);
@@ -25,7 +25,7 @@ poster.prototype.draw_embed = function() {
               elink = this.embedurl;
 		  ocl = this.varname + ".toggle_showembed();";
         	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' width='25px' >";
 		  tmp = tmp + "</button>";
 	          lbl = this.rungster + '_embed_btn';
 	       	  pobj = document.getElementById(lbl);
@@ -64,7 +64,7 @@ poster.prototype.get_embed = function() {
        if ((this.embedurl != undefined) && (this.embedurl != "")) {      
 
           tmp = tmp + "<a href='"+this.embedurl+"' target='_blank' > "; 
-           tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+           tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' width='25px' >";
 //           tmp = tmp + this.embedurl; 
           tmp = tmp + " </a> ";
 

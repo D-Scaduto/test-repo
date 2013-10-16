@@ -164,14 +164,6 @@ sorter.prototype.save_set = function() {
 }
 
 
-sorter.prototype.redraw_view = function(psetype) {
-
-	if (psetype == "unsorted") {
-   	  	daviewer.load_unsorted_list();
-	} 
-
-}
-
 sorter.prototype.set_shape = function(pstr) {
 	if (pstr != undefined) {
           this.shape = pstr;

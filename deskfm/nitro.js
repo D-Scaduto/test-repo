@@ -27,7 +27,7 @@ viewer.prototype.nitro_stop = function() {
    this.metro_spd = 0;
    this.flip_card();
 
-         var tsrc='deskfm/images/icons/play.png';
+         var tsrc='deskfm/images/icons/dot_swirl.png';
       $('#nitro_btn').attr('src',tsrc);
 //     $('#nitro_btn').buttonMarkup({icon:""});
      $('#nitro_btn').trigger("create");

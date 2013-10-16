@@ -60,7 +60,7 @@ supplier.prototype.show = function() {
 
       if (main_shape == "wide") {
  
-        tmp = tmp + "<ul id='' data-role='listview' style='width:150px;' data-inset='true' data-inline='true' >"; 
+        tmp = tmp + "<ul id='' data-role='listview' style='width:150px' data-inset='true' data-inline='true' >"; 
 
           if (this.shape == "by_supplier") {
             for (var i=0;i<amare.supplierlist.length;i++) {

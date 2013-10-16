@@ -1,4 +1,12 @@
 
+div .plusone, .twitter, .fb-like {
+    font-size: 1px;
+    display: inline-block;
+  vertical-align:top;
+}
+div .fb_reset {
+    display: inline;
+} 
     .count_talk {
       font-size: 1em;
       font-weight:normal;

@@ -15,10 +15,7 @@ namer.prototype.show = function() {
       var ocl ="";
       var lbl = "";
 
- //    tmp = tmp + "<div style='width:250px;display:inline-block;'  >";
-
     if (pname == "") {
-
  
          var tval =  "";
         if (pname != "") {
@@ -30,13 +27,11 @@ namer.prototype.show = function() {
        tmp =tmp + "<input size=10 value='"+tval+"' data-inline='true'  id='pname_box'  /> ";
       tmp=tmp +"</span>";
 
-
        lbl = this.spotid + "check_btn";
        ocl = this.varname + ".find_me();";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'   >";
         tmp = tmp + "<img src='deskfm/images/icons/right_arrow_circle.png' class='menu_btn' >";
       tmp=tmp +"</button>";
-
 
     } else {
 
@@ -76,7 +71,6 @@ namer.prototype.show = function() {
 
 }
 
-    
 
 namer.prototype.space_me = function() {
      var tmpstr = "";

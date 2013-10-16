@@ -164,10 +164,18 @@ stater.prototype.update_stats = function (statobj) {
 	    if (this.got_unsorted == true) {
                  init_run = false;
                  this.total_unsorted.last_chunk=0;
-                 daviewer.update_stat(this.total_unsorted);
-                 daviewer.redraw_view();
+ 		 var dt = new Object;
+                 var bd = new Date();
+	      //   dt.month = bd.getMonth();
+                 dt.month = "all";
+  		 dt.year = bd.getFullYear();
+                 daviewer.load_unsorted_list(dt);
+              //   daviewer.load_random_list();
             }
           } else {
+            if (main_shape != "mini") {
+              diego.set_topshape("browse");
+            }
             if (this.got_webits == true) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
@@ -289,7 +297,10 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
 	         init_run = false;
                  this.total_unsorted.last_chunk=0;
                  daviewer.update_stat(this.total_unsorted);
-                 daviewer.redraw_view()
+ 		 var dt = new Object;
+		 dt.month = "all";
+                 daviewer.load_unsorted_list(dt);
+  //                daviewer.randomize_rungs();
                }
            }
       } else {
@@ -304,7 +315,7 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
 
           daviewer.redraw_view();
 
-          if ((buddah == true) && (diego.top_shape == "sort")) {
+          if ((buddah == true) && (diego.bot_shape == "sort")) {
             mac.show();
           }
 
@@ -343,7 +354,7 @@ stater.prototype.update_people = function(listobj) {
       this.count_lpstats();
       if (init_run == true) {
       } else {
-         if ((buddah == true) && (diego.top_shape == "group")) {
+         if ((buddah == true) && (diego.bot_shape == "group")) {
            robby.show();
          }
          daviewer.redraw_view();
@@ -614,7 +625,7 @@ stater.prototype.update_webit = function(pobj) {
       amare.count_lwstats();
       amare.count_lustats();
 
-     if ((buddah == true) && (diego.top_shape == "sort")) {
+     if ((buddah == true) && (diego.bot_shape == "sort")) {
         mac.show();
      }
 

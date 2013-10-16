@@ -14,8 +14,8 @@ include("../lib/jquery-insight.js");
 include("../lib/codebird.js");
 include("../lib/sha1.js");
 
-include('http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1');
-include('deskfm/fbooker.js');
+//include('http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1');
+//include('deskfm/fbooker.js');
 
 /*
 include("http://apis.google.com/js/plus.js");

@@ -30,7 +30,7 @@ grouper.prototype.show = function() {
  
 //       tmp=tmp+"<div data-role='collapsible' style='width:200px;' >";
 //   	tmp = tmp +"<h3>people groups</h3>";
-   	tmp = tmp +"<ul  data-role='listview' id='' style='' data-inset='true'  >";
+   	tmp = tmp +"<ul  data-role='listview' id='' style='width:175px;' data-inset='false'  >";
         sugs = amare.groupstats;
         for (var i=0;i<sugs.length;i++) {
           var gid = sugs[i].groupid;

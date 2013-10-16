@@ -15,7 +15,7 @@ poster.prototype.draw_name = function() {
          if (this.editing == true) {
             ocl = this.varname + ".set_shape(\"getname\");";
             ps = "deskfm/images/icons/people_clay.png";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='50px'  class='"+cls+"' >"; 
+            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='40px'  class='' >"; 
          } 
  
    } else {
@@ -43,11 +43,6 @@ poster.prototype.get_name = function() {
     var lbl = "";
     var ocl = "";
 
-    ocl = this.varname + ".update_name();";
-    tmp =tmp + "<span class='spotd_off'  onclick='"+ocl+"' > ";
-    tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
-    tmp =tmp + "</span>";
- 
     var tval =  "";
         if (this.uname != "") {
           tval =  this.uname;
@@ -56,12 +51,13 @@ poster.prototype.get_name = function() {
         }
  
     lbl = this.rungster + '_name_box';
+    tmp =tmp + "<input size=15 value='"+tval+"' id='"+lbl+"' onclick='' type=text' > ";
 
-    tmp =tmp + "<input size=15 value='"+tval+"' id='"+lbl+"' onclick='' > ";
-
-      lbl = this.rungster + '_name_spot';
+    lbl = this.rungster + '_name_spot';
     if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML=tmp; 
+        var ta = this.rungster + '_name_box';
+        $('#'+ta).textinput();
     } 
 }
 
@@ -73,15 +69,12 @@ poster.prototype.update_name = function() {
      var obj = null;
      lbl = this.rungster + '_name_box';
 
-        var tmpstr="";
+       var tmpstr="";
        obj = document.getElementById(lbl);
 
        if (obj != null) {
-          var bill = document.getElementById(lbl).value;
-          this.uname = bill;
-          pname = bill;
-      }
-      this.set_shape("");
+          this.uname = document.getElementById(lbl).value;
+       }
 
 }
 

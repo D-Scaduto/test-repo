@@ -4,7 +4,7 @@ function logoman (pspot) {
   this.spotid = pspot + "_spot";
   this.varname= "sal";
   this.shape = "shrunk";    //shrunk,full
-  this.logo_shape="fm";
+  this.logo_shape="sd";
   this.flip =0;
 }
 
@@ -16,51 +16,26 @@ logoman.prototype.show = function () {
    var ocl = "";
    var cls = "";
    var sty ="";
+
    if (jqm_off == true) {
      sty='background-color:white;'
    }
  
-
         lbl = 'vman_btn'; 
         ocl = "diego.set_topshape(\"\");";
+        ocl = ocl + "daviewer.load_random_list();";
        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
       
-
-      if (main_shape == "reg") {
-         this.logo_shape = "fm";
-      }
-
         lbl = this.spotid + '_logo_spot1';
- //       ocl = this.varname + ".toggle_logoshape();";
-         ocl =  'daviewer.randomize_rungs();'
+        ocl = "diego.toggle_topshape(\"browse\");";
         tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
-        tmp = tmp + "Desk";
+        tmp = tmp + "Standing Desks -- ";
         tmp=tmp+"</span>";
- 
-         if (this.logo_shape == "fm") {
 
-            lbl = this.spotid + '_logo_spot2';
-	    ocl = this.varname + ".set_logoshape(\"freedom\");";
-            ocl = ocl +  'daviewer.randomize_rungs();'
-            tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
-            tmp = tmp + "FM";
-            tmp=tmp+"</span>";
-
-         }
- 
-        if (this.logo_shape == "freedom") { 
-            lbl = this.spotid + '_logo_spot2';
-	    ocl = this.varname + ".set_logoshape(\"fm\");";
- //           ocl = ocl + "daviewer.nitro_stop()";
-             ocl = ocl +  'daviewer.randomize_rungs();'
-             tmp=tmp+"<span onclick='"+ocl+"' class='logo_talk' style='' >";
-            tmp = tmp + "FreedoM";
-            tmp=tmp+"</span>";
-         } 
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -143,10 +118,10 @@ logoman.prototype.waiting = function () {
 
 
 logoman.prototype.toggle_logoshape = function () {
-	if (this.logo_shape == "fm") {
+	if (this.logo_shape == "sd") {
            this.logo_shape = "freedom";
         } else {
-           this.logo_shape = "fm";
+           this.logo_shape = "sd";
         }
 	this.show();
 }

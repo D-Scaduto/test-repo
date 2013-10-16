@@ -234,14 +234,6 @@ poster.prototype.nav_btns = function() {
            }
          }
 
-         if ((this.stored == false ) || (this.parvar == "nicky"))  {
-              ocl = this.parvar + ".del_rung("+this.rung+")";
-              lbl = this.rungster + "_del_btn";
-              tmp = tmp + "<span  id='"+lbl+"'   onclick='"+ocl+"';   >";
-              tmp = tmp + "<img src='deskfm/images/icons/delete_black.png' height='20px' >";
-              tmp = tmp + "</span>";
-         }
-
          if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";

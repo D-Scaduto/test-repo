@@ -21,7 +21,7 @@ footer.prototype.show = function () {
     tmp += "</div>";
 */
 
-    tmp += "<div id='rail_spot'  class='' style='text-align:center;'   >";
+    tmp += "<div id='rail_spot'  class='' style=''   >";
     tmp += "</div>";
 
      $('#foot_spot').html(tmp);

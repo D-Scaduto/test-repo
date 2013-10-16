@@ -2,34 +2,33 @@
 @media screen and (min-width:800px) {
 
     .logo_talk {
-       font-size: 1.3em;
-       display:inline-block;
+       font-size: 1.2em;
        vertical-align:middle;
     }
 
     .screen_talk {
-       font-size: 1.3em;
-       display:inline-block;
+       font-size: 1.2em;
        vertical-align:middle;
-       margin-top:15px;
     }
 
     #left_spot {
-        margin-left:50px; 
      }
 
      #right_spot {
           float:right;
-        margin-right:50px; 
     }
 
-     #side_bar {
+     #adside_bar {
        width:25%;
        padding:10px;
     }
 
-     #main_spot {
+    #admain_spot {
        width:75%;
+     }
+
+     #main_spot {
+       width:100%;
      }
 
      #main_view {

@@ -15,7 +15,8 @@ rail.prototype.draw_rail = function() {
    var tmp = "";
    var tsrc = "";
 
-      tmp = tmp + "<div id='' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
+ 
+      tmp = tmp + "<div id='' class='' style='width:75%;display:inline-block;vertical-align:middle;' >";
       tmp = tmp + "<label for='slider-1'></label>";
       if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='1' min='1' max='100'  style=''  />";
@@ -28,6 +29,17 @@ rail.prototype.draw_rail = function() {
         tmp = tmp + "</div>";
 
 
+/*
+      tmp = tmp + "<div style='display:inline-block;'>";
+ 
+      lbl = 'uptop_btn';
+      ocl = 'daviewer.end_up();';
+      tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
+      tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+      tmp = tmp + "<img  src='deskfm/images/icons/up_arrow_skiny.png'  class='menu_btn'  >";
+      tmp = tmp + "</button>";
+      tmp = tmp + "</span>";
+ 
       tmp = tmp + "<div id='chunkslide_box' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
       tmp = tmp + "<label for='slider-2'></label>";
       if (jqm_off == true) {
@@ -40,15 +52,9 @@ rail.prototype.draw_rail = function() {
         tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
         tmp = tmp + "</div>";
  
-      lbl = 'uptop_btn';
-      ocl = 'daviewer.end_up();';
-      tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-      tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-      tmp = tmp + "<img  src='deskfm/images/icons/up_arrow_skiny.png'  class='menu_btn'  >";
-      tmp = tmp + "</button>";
-      tmp = tmp + "</span>";
+      tmp = tmp + "</div>";
+ */
 
- 
    lbl = 'rail_spot';
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
@@ -59,12 +65,15 @@ rail.prototype.draw_rail = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
           });
+/*
          $('#slider-2').on("change",function(event) {
                var st = "";
                 st = parseInt(event.target.value) * daviewer.top_end;
                 daviewer.goto_listdex(st);
           });
+*/
        } else {
+
            $('#'+lbl).trigger("create");
             $('#slider-1').bind("slidestop",function(event) {
                 var st = "";
@@ -72,11 +81,13 @@ rail.prototype.draw_rail = function() {
                 daviewer.goto_listdex(st);
             });
            $('#'+lbl).trigger("create");
+/*
             $('#slider-2').bind("slidestop",function(event) {
                 var st = "";
                 st = parseInt(event.target.value) * daviewer.top_end;
                 daviewer.goto_listdex(st);
             });
+*/
        }
 
        this.showing = true;
@@ -90,7 +101,6 @@ rail.prototype.draw_raildata = function() {
    var mout = "";
 
    if (daviewer.stats != null) {
-
       var lchunk = Math.floor(daviewer.listdex/daviewer.top_end);
       var lchunks = Math.floor(daviewer.stats.lnum / daviewer.top_end);
       var mchunks = Math.floor(daviewer.stats.cnum / daviewer.top_end);
@@ -109,15 +119,18 @@ rail.prototype.draw_raildata = function() {
       var lc = lchunk + 1;
       var lcs = lchunks;
 
-      $('#slider-1').attr("min", st );
-      $('#slider-1').attr("max", fn );
+      $('#slider-1').attr("min", 0 );
+      $('#slider-1').attr("max", ln );
       $('#slider-1').val(ld);
+
+     if (jqm_off == false) {
       $('#slider-1').slider('refresh');
+     }
 
-      tmp =  fn;
+      tmp =   ln;
       $('#slider-1-detail').html(tmp);
-
-      tmp =  ln;
+/*
+      tmp =  "#" +  ld + " of " + ln;
       $('#lcount_spot').html(tmp);
 
       tmp =  cn;
@@ -128,15 +141,18 @@ rail.prototype.draw_raildata = function() {
          $('#slider-2').attr("min", 0 );
          $('#slider-2').attr("max", lchunks );
          $('#slider-2').val(lchunk);
+
+       if (jqm_off == false) {
          $('#slider-2').slider('refresh');
+       }
          if (st == 0) { st = 1; }
-         tmp = "x" + daviewer.top_end;
+         tmp = lchunks + " x" + daviewer.top_end;
          $('#slider-2-detail').html(tmp);
       } else {
          $('#slider-2-detail').html("");
          $('#chunkslide_box').hide();
       }
-
+*/
    } else {
 //	   alert("no stats");
    }
