@@ -18,6 +18,26 @@ header.prototype.show = function () {
         tmp = tmp + "<span id='right_spot' class='' style='' >";
          tmp = tmp + "</span>";
 
+      if (main_shape == "mini") {
+  //           tmp = tmp + "<div style='text-align:center;' >";
+              tmp = tmp + "<div style='clear:both;' ></div>";
+           tmp = tmp + "<div id='browse_spot' class='' style='text-align:right;'  >";
+            tmp = tmp + "</div>";
+       
+         tmp = tmp + "<div id='shop_spot' class='' style='text-align:right;'  >";
+         tmp = tmp + "</div>";
+ 
+           tmp = tmp + "<div id='browse_spot' class='' style='text-align:right;'  >";
+            tmp = tmp + "</div>";
+        
+            tmp = tmp + "<div id='search_spot' class='' style='text-align:right;'  >";
+            tmp = tmp + "</div>";
+ 
+        tmp = tmp + "<div id='share_spot' class='' style='text-align:right;'  >";
+        tmp = tmp + "</div>";
+//             tmp = tmp + "</div>";
+        }
+
        var pobj = document.getElementById('menu_spot');
       if (pobj != null) {
             pobj.innerHTML = tmp;
@@ -57,18 +77,27 @@ header.prototype.draw_right = function () {
 
     //    tmp = tmp + "<div id='' class='' style='display:inline;vertical-align:top;'  >";
 
-        tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
-         tmp = tmp + "</div>";
-  
+      if (main_shape != "mini") {
+             tmp = tmp + "<div style='clear:both;' ></div>";
            tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
             tmp = tmp + "</div>";
-
+       
+         tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "</div>";
+ 
+           tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
+            tmp = tmp + "</div>";
+        
             tmp = tmp + "<div id='search_spot' class='' style='display:inline;'  >";
             tmp = tmp + "</div>";
  
-        tmp = tmp + "<div id='share_spot' class='' style='display:inline-block;vertical-align:middle;padding-top:5px;'  >";
+        tmp = tmp + "<div id='share_spot' class='' style='display:inline-block;vertical-align:middle;'  >";
         tmp = tmp + "</div>";
- 
+//             tmp = tmp + "</div>";
+        }
+
+
+
         lbl = 'browse_btn'; 
         ocl = "diego.toggle_topshape(\"browse\");";
        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline;'  >";
@@ -125,6 +154,9 @@ header.prototype.set_topshape = function (pshape) {
      if (pshape != undefined) {
         this.top_shape = pshape;
      }
+
+      sal.show();
+
      if (this.top_shape == "") {
 
       for (var i=0;i<this.top_shapes.length;i++) {
@@ -134,15 +166,8 @@ header.prototype.set_topshape = function (pshape) {
          es = " if (" + s[1] + " != null) { "+es+"}";
          eval(es);
       }
-      sal.show();
-
     } else {
  
-      if (main_shape == "mini") {
-          sal.hide();
-       } else {
-          sal.show();
-      }
       var s , es = "";
       for (var i=0;i<this.top_shapes.length;i++) {
          s = this.top_shapes[i].split(':');

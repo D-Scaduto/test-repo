@@ -46,6 +46,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <?php   if (isset($_GET['jqmoff'])) {   ?>
 <script  type="text/javascript" >
    jqm_off = true;
+   main_shape = "mini";
 </script>
 
 <?php  } else {  ?>
@@ -146,10 +147,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 
-    <script type="text/javascript">var switchTo5x=true;</script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "6dfd7174-b092-4b88-938a-1288cdddc134", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
-
 </head>
 
 <body style='background-color:black;' >
@@ -177,27 +174,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script type='text/javascript' >
 
-/*
-  if (netson == true) {
-     FB.init({
-      appId  : '191528434226668',
-      status : true, // check login status
-      cookie : true, // enable cookies to allow the server to access the session
-      xfbml  : true,  // parse XFBML
-      oauth  : true
-     });
-
-     // Load the SDK asynchronously
-     (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  }
-*/
-   do_preload();
+  do_preload();
 
         sal = new logoman("logo");
         ray = new footer("foot");
@@ -228,15 +205,21 @@ header('Content-type: text/html; charset=utf-8 ');
 
 	diego = new header();
 
+    if (jqm_off == false) {
+
       $(window).resize(function(val) {
           set_header();
           set_viewer();
       });
 
-    $( document ).on( "pageinit", "#page_spot", function( event ) {
+      $( document ).on( "pageinit", "#page_spot", function( event ) {
           set_header();
           set_viewer();
-    });
+      });
+    } else {
+       diego.show();
+       diego.set_topshape();
+    }
 
 
 /*

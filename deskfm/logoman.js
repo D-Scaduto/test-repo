@@ -16,10 +16,6 @@ logoman.prototype.show = function () {
    var cls = "";
    var sty ="";
 
-   if (jqm_off == true) {
-     sty='background-color:white;'
-   }
- 
         lbl = 'vman_btn'; 
     //    ocl = "diego.set_topshape(\"\");";
         ocl =  "daviewer.load_random_list();";
@@ -28,12 +24,20 @@ logoman.prototype.show = function () {
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
-      
-        lbl = this.spotid + '_logo_spot1';
+ 
+     
+         lbl = this.spotid + '_logo_spot1';
     //    ocl = "sal.toggle_shape();";
-        tmp=tmp+"<span onclick='"+ocl+"' class='screen_talk' style='' >";
+
+        if (jqm_off == false) {
+         tmp=tmp+"<span onclick='"+ocl+"' class='screen_talk' style='' >";
+        } else {
+         tmp=tmp+"<span onclick='"+ocl+"' class='' style='background-color:white;' >";
+        }
+      
         tmp = tmp + this.shape + " Desks ";
         tmp=tmp+"</span>";
+      
 
    lbl = this.spotid;
    if (document.getElementById(lbl) !=null) {
@@ -105,7 +109,7 @@ logoman.prototype.waiting = function () {
    var tmp = "";
    var tsrc = "";
 
-   tmpsrc = "deskfm/images/random/loading-go.gif";
+   tsrc = "deskfm/images/random/loading-go.gif";
 
    lbl =  "vman_btn";
       $('#vman_btn').attr('src',tsrc);

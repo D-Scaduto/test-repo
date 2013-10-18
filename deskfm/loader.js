@@ -447,7 +447,11 @@ viewer.prototype.load_random_list = function() {
    var ro = null;
    this.darungs = [];
 
-   this.stats = amare.total_sorted;
+   var s = new stat();
+   s.lnum = 99;
+   s.cnum = 99;
+
+   this.stats = s;
 
    this.dalist = [];
     
@@ -461,7 +465,7 @@ viewer.prototype.load_random_list = function() {
    var mx = clone.length;
    var tls = [];
   
-   while (i<999) {
+   while (i<99) {
        mx = clone.length;
        r = Math.floor((Math.random()*mx)+1);
        ro = clone[r];

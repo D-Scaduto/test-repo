@@ -79,7 +79,7 @@ viewer.prototype.draw_view = function() {
 
          lbl = this.screen+"_rung_"+ct;
          if ((jqm_off == true)  || (this.is_mini == true)) {
-              tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"'  >"; 
+              tmpstr=tmpstr+"<div id='"+lbl+"' class='my-box' style=''  >"; 
               tmpstr=tmpstr+"</div>";
          } else {
 

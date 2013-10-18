@@ -48,7 +48,7 @@
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
 		  tmpstr=tmpstr+"</span>";	
 
-	          tmpstr=tmpstr+"<br>";	
+	          tmpstr=tmpstr+"<div style='clear:both;' ></div>";	
 
                    if (this.listype == "products") {
                       lbl= this.rungster + "_buy_spot";

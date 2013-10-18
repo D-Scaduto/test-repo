@@ -245,47 +245,31 @@ categor.prototype.show_nojqm = function() {
     var s = "";
     var sugs = [];
 
-    if (this.subcat != "" ) {
 
-	lbl = 'subcat_btn';
-        s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
-        ocl = "cater.subcat=\"\";cater.show();";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp +  this.cat + " " + s;
-        tmp=tmp+"</button>";
+       if (this.cat == "") {
 
-   } else {
-
-
-       if (this.shape == "all") {
-
-        ocl = "cater.subcat=\"\";cater.set_shape(\"who\");";
+        ocl = "cater.subcat=\"\";cater.set_cats(\"who\",\"\");";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
 	tmp = tmp + "who?";
         tmp=tmp+"</button>";
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"what\");";
+        ocl = "cater.subcat=\"\";cater.set_cats(\"what\",\"\");";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
 	tmp = tmp + "what?";
         tmp=tmp+"</button>";
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"why\");";
+        ocl = "cater.subcat=\"\";cater.set_cats(\"why\",\"\");";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
 	tmp = tmp + "why?";
         tmp=tmp+"</button>";
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"how\");";
+        ocl = "cater.subcat=\"\";cater.set_cats(\"how\",\"\");";
         tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
 	tmp = tmp + "how?";
         tmp=tmp+"</button>";
 
-       } else if (this.shape == "who") {
+       } else if (this.cat == "who") {
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + "who?";
-        tmp=tmp+"</button>";
-      
         lbl = "who_sog";
  	tmp += "<label for='"+lbl+"' class='select' ></label>";
  	tmp += "<select name='"+lbl+"' id='"+lbl+"' >";
@@ -296,13 +280,8 @@ categor.prototype.show_nojqm = function() {
         }
    	tmp +=   '</select>';
      
-      } else if (this.shape == "what") {
+      } else if (this.cat == "what") {
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + "what?";
-        tmp=tmp+"</button>";
-      
         lbl = "what_sog";
  	tmp += "<label for='"+lbl+"' class='select' ></label>";
  	tmp += "<select name='"+lbl+"' id='"+lbl+"' >";
@@ -313,13 +292,8 @@ categor.prototype.show_nojqm = function() {
         }
    	tmp +=   '</select>';
      
-      } else if (this.shape == "why") {
+      } else if (this.cat == "why") {
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + "why?";
-        tmp=tmp+"</button>";
-      
         lbl = "why_sog";
  	tmp += "<label for='"+lbl+"' class='select' ></label>";
  	tmp += "<select name='"+lbl+"' id='"+lbl+"' >";
@@ -330,13 +304,8 @@ categor.prototype.show_nojqm = function() {
         }
    	tmp +=   '</select>';
  
-     } else if (this.shape == "how") {
+     } else if (this.cat == "how") {
 
-        ocl = "cater.subcat=\"\";cater.set_shape(\"all\");";
-        tmp=tmp+"<button id='"+lbl+"' onclick='"+ocl+"'  data-role='button' style='vertical-align:top;'   >";
-	tmp = tmp + "how?";
-        tmp=tmp+"</button>";
-      
         lbl = "how_sog";
  	tmp += "<label for='"+lbl+"' class='select' ></label>";
  	tmp += "<select name='"+lbl+"' id='"+lbl+"' >";
@@ -348,18 +317,17 @@ categor.prototype.show_nojqm = function() {
    	tmp +=   '</select>';
  
      }
-   }
 
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
-     if (this.shape == "who") {
+     if (this.cat == "who") {
        $('#who_sog').on("change",function(event) {
          var $this = $(this);
          var scat = $this.val();
          cater.set_cats("who",scat);
        });
      }
-     if (this.shape == "what") {
+     if (this.cat == "what") {
        $('#what_sog').on("change",function(event) {
          var $this = $(this);
          var scat = $this.val();
@@ -367,7 +335,7 @@ categor.prototype.show_nojqm = function() {
        });
      }
  
-     if (this.shape == "why") {
+     if (this.cat == "why") {
        $('#why_sog').on("change",function(event) {
          var $this = $(this);
          var scat = $this.val();
@@ -375,7 +343,7 @@ categor.prototype.show_nojqm = function() {
        });
      }
  
-     if (this.shape == "how") {
+     if (this.cat == "how") {
        $('#how_sog').on("change",function(event) {
          var $this = $(this);
          var scat = $this.val();
@@ -440,6 +408,7 @@ categor.prototype.set_shape = function(pshape) {
 
 
 categor.prototype.set_cats = function(tcat,tsubcat) {
+
    var s= "";
        if (jqm_off == false) {
             s = "who_sog"; 
@@ -457,13 +426,14 @@ categor.prototype.set_cats = function(tcat,tsubcat) {
             s = "subcat_sog"; 
             $('#'+s).popup();    
             $('#'+s).popup("close");    
-      } 
+      }  
 
-              this.cat=tcat;
-
+          this.cat=tcat;
           this.subcat=tsubcat;
 
-       this.show();
+      if ((jqm_off == false) || (this.subcat == "")) {
+        this.show();
+      }
 
        this.redraw_view(); 
  

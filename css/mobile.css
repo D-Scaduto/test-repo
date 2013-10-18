@@ -72,6 +72,39 @@
         float:none;       
      }
 
+    .my-box {
+        padding:5px;
+        border: 5px solid silver;
+     }
+
+
+    .box {
+       background-color:white;
+       display: -moz-inline-stack;
+       display: inline-block;
+       zoom: 1;
+       *display: inline;
+       overflow:auto;
+
+       border-style:solid;
+       border-color:silver;
+       border-width:4px;
+       min-width:400px;
+       width:100%;
+       padding:5px;
+    }
+
+    .zbox {
+       background-color:white;
+       min-width:250px;
+       width:100%;
+       padding:5px;
+       border-style:solid;
+       border-color:silver;
+       border-width:5px;
+   }
+
+
      .piclip {
          clip:rect(0px,100px,100px,0px);
 	 width:75px;
