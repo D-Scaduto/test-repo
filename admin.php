@@ -18,7 +18,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var pname = "";
 
   var is_mobile = false;
-  var main_shape = "full";
+  var main_shape = "";
 </script>
 
 <?php
@@ -52,26 +52,11 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <?php  }  ?>
 
-
-<?php   if (isset($_GET['netson'])) {   ?>
-<script  type="text/javascript" >
-   netson = true;
-</script>
-    <script src='http://connect.facebook.net/en_US/all.js#appId=191528434226668&xfbml=1'></script>
-    <script src='deskfm/fbooker.js' type='text/javascript' ></script>
-    <script src='http://platform.twitter.com/widgets.js' type='text/javascript'></script>
-    <script src='http://widgets.twimg.com/j/2/widget.js' type='text/javascript'></script>
-    <script src='http://apis.google.com/js/plus.js' ></script>
-    <script src='http://apis.google.com/js/plusone.js' ></script>
-    <script src='http://apis.google.com/js/client:plus.js' ></script>
-<?php } ?>
-
 <?php   if (isset($_GET['debug'])) {   ?>
 <script  type="text/javascript" >
    debug = true;
 </script>
 <?php  } ?>
-
 
 <link rel=StyleSheet href='css/base.css' type="text/css" media="screen,print" />
 <link rel=StyleSheet href='css/mini.css' type="text/css" media="screen,print" />
@@ -157,6 +142,10 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
 <script src=deskfm/preloader.js type="text/javascript" > </script>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "6dfd7174-b092-4b88-938a-1288cdddc134", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
  
 </head>
 
@@ -166,48 +155,30 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div  id='page_spot'  data-role='page' class='ui-page'  >
 
-  <div id='' style='' class='' data-position='fixed'  data-role='header' data-theme='b'  >
- 
-  <div id='menu_spot' style='' class='' >
+     <div id='head_spot' style='' class='' data-position='fixed'  data-role='header' data-theme='b'  >
+       <div id='menu_spot' style='' class='' >
+       </div>
+       <div style="clear:right;" ></div>
+       <div id='top_view' class='' style='float:right' data-role='popup'   >
+       </div>
+       <div id='' class='' style='clear:right;' ></div>
+     </div>
+
+     <div data-role='content'  class='ui-grid-a' style=''  >
+       <div id='adside_bar' class='ui-block-a' style=''  >
+       </div>
+       <div id='admain_spot'  class='ui-block-b'  style=''   >
+       </div>
+     </div>
+
+   <div id='foot_spot' style='text-align:center;' data-position='fixed'  data-role='footer' data-theme='b'  >
    </div>
-   <div style="clear:right;" ></div>
- 
-     <div id='top_view' class='' style='float:right' data-role='popup'   >
-     </div>
-        <div id='' class='' style='clear:right;' ></div>
-  </div>
-
-   <div id="nav_left"></div>
-   <div id="nav_right"></div>
-
-   <!--span style='float:right;margin-right:50px;' >
-       <span  id='lcount_spot' class='count_talk' style=''  >
-        </span>
-        <span  id='' class='count_talk' style=''  >
-         of 
-        </span>
-        <span  id='mcount_spot' class='count_talk' style=''  >
-        </span>
-   </span-->
-
-     <div  data-role='content'  class='ui-grid-a' style=''  >
-
-     <div id='adside_bar' class='ui-block-a' style=''  >
-     </div>
-
-     <div id='admain_spot'  class='ui-block-b'  style=''   >
-     </div>
-
-     </div>
-
-
-<div id='foot_spot' style='text-align:center;' data-position='fixed'  data-role='footer' data-theme='b'  >
-</div>
 
 </div>
 
 <script type='text/javascript' >
 
+/*
   if (netson == true) {
    FB.init({
       appId  : '191528434226668',
@@ -225,7 +196,7 @@ header('Content-type: text/html; charset=utf-8 ');
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
   }
-
+*/
    do_preload();
 
    buddah=true;
@@ -278,11 +249,9 @@ header('Content-type: text/html; charset=utf-8 ');
 
 
    $( document ).on( "pageinit", "#page_spot", function( event ) {
-      ray.show();
-      $(window).resize();
+          set_header();
+          set_viewer();
    });
-
-
 
 </script>
 

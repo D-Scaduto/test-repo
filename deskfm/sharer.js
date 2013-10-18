@@ -14,67 +14,23 @@ sharer.prototype.show = function() {
     var lbl = "";
     var tmp = "";
  
-     tmp = tmp + "<span id='nets_spot'  class='' style=''  >";
-     tmp = tmp + "</span>";
-  
-    tmp += "<div id='top_view_rung_0' class='box' >";
-    tmp += "</div";
+	tmp += "<div id='social' style='display:inline;vertical-align:middle;' >";
+ 	tmp += "   <div class='plusone'>";
+ 	tmp += "   <g:plusone size='medium' annotation='none'></g:plusone>"
+ 	tmp += "   </div>";
+ 	tmp += "   <div class='twitter'>";
+ 	tmp += "   <a href='https://twitter.com/share' class='twitter-share-button' data-count='none' data-via='' >Tweet</a>";  
+ 	tmp += "   </div>";
+ 	tmp += "   <div class='fb-like' data-send='false' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' ></div>";
+	tmp += "</div>";
 
-    lbl = "top_view";
+
+    lbl = "share_spot";
     $('#'+lbl).html(tmp);
-
-    $('#'+lbl).popup("open");
-
-
     this.showing = true;
-
-        this.show_newster(); 
-        this.share_this();
-//        this.show_nets();
-        daviewer.draw_view();
-}
-
-sharer.prototype.show_newster = function() {
-
-    var lbl = "";
-    var tmp = "";
-    var ocl = "";
-    if (buddah == true) { 
-      if ((this.newster.pid == undefined) || (this.newster.pid == "")) {
-         this.newster.set_ppid(-1,"unsaved");
-      }
-      this.newster.redraw_rung();
-   } else { 
-      if ((this.newster.pid != undefined) && (this.newster.pid != "")) {
-        this.newster.redraw_rung();
-      }
-   }
-}
-
-
-sharer.prototype.update_one = function(tpid,mdex,ltype) {
-
-         if (this.newster.pid == tpid) {
-            this.newster.set_ppid(mdex,ltype);
-            this.newster.shape= "";
-            this.newster.redraw_rung();
-         }
-}
-
-
-sharer.prototype.set_webit = function(pdex,ptype) {
-
-     this.newster.set_ppid(pdex,ptype);
-//    window.scroll(0,0);
-     this.show();
-}
-
-
-sharer.prototype.del_rung = function(tspot) {
-
-    this.newster.clear();
-    diego.set_topshape("");
-    this.hide();
+    this.fb_render();
+    this.gplus_render();
+    this.twitter_render();
 }
 
 
@@ -104,42 +60,6 @@ sharer.prototype.share_this = function() {
 
 }
 
-sharer.prototype.show_nets = function() {
-
-	var tmp = "";
-	var lbl = "";
-        var cls = "";
-
-	tmp += "<div id='social'>";
- 	tmp += "   <div class='plusone'>";
- 	tmp += "   <g:plusone size='medium' annotation='none'></g:plusone>"
- 	tmp += "   </div>";
- 	tmp += "   <div class='twitter'>";
- 	tmp += "   <a href='https://twitter.com/share' class='twitter-share-button' data-count='none' data-via='' >Tweet</a>";  
- 	tmp += "   </div>";
-// 	tmp += "   <div class='fb-like' data-send='false' data-layout='button_count' data-width='90' data-show-faces='false' data-href='http://www.deskfm.com' ></div>";
-	tmp += "</div>";
-
-
-     lbl = "nets_spot";
-    if (document.getElementById(lbl)!=null) {
-        document.getElementById(lbl).innerHTML= tmp;
-
-//	if (netson == true) {
-  //        this.fb_render();
-          this.gplus_render();
-          if (twttr != undefined) {
-           if (twttr.widgets != undefined) {
-              twttr.widgets.load();
-           }
-          }
-//	}
-
-     } 
-
-}
-
-
 sharer.prototype.toggle = function() {
    if (this.showing == true) {
       this.hide();
@@ -149,35 +69,12 @@ sharer.prototype.toggle = function() {
 }
 
 
-sharer.prototype.set_shape = function(pshape) {
-	if (pshape != undefined) {
-          this.shape = pshape;
-          this.show();
-        }
-}
-
-
-sharer.prototype.change = function() {
-	this.toggle();
-}
-
-
-sharer.prototype.hide_newster = function() {
-
-   this.newster.hide_rung();
-   lbl = 'top_view';
-   $('#'+lbl).html("");
-}
-
 sharer.prototype.hide = function() {
 
    var pobj=null;
    var lbl = "";
    var tmp = "";
    lbl = this.spotid;
-
-   this.hide_newster();
-
    pobj = document.getElementById(lbl);
    if ( pobj != null) {
         pobj.innerHTML = tmp;
@@ -251,26 +148,20 @@ sharer.prototype.fb_render = function() {
 
 }
 
+ 
+sharer.prototype.twitter_render = function() {   
 
-sharer.prototype.tweet_btn = function() {
-
-                cls='spotd_off';
-                lbl = this.spotid + "_" + tspot + "_tweetbtn";
-                moin = "markyd(\""+lbl+"\");";
-                mout = "unmarkyd(\""+lbl+"\");";
-                ocl='';
-                tmp = tmp + "<span  id='"+lbl+"'  class='"+cls+"' onclick='"+ocl+"';  onmouseover='"+moin+"' onmouseout='"+mout+"'  >";
-                var twparams='?count=none';
-                twparams = twparams + "&text="+escape(this.story);
+$.getScript('http://platform.twitter.com/widgets.js');
 /*
-                if (this.linkurl != "") {
-                  twparams = twparams + "&url="+escape(this.linkurl);
-                } else {
-                  twparams = twparams + "&url="+escape("http://deskfm.com");
-                }
+      !function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;js.src="https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js,fjs);
+       }
+     }(document,"script","twitter-wjs"); 
 */
-                tmp=tmp +"<a href='https://twitter.com.share"+twparams+"' class='twitter-share-button' data-lang='en' > </a>";
-                tmp = tmp + "</span>";
 }
-              
+
 

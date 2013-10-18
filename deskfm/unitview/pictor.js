@@ -12,31 +12,14 @@ poster.prototype.draw_pic = function() {
 
 	cls = "piclip";
           if (daviewer.zoom == true) {
-              cls = "piczoom";
+//              cls = "piczoom";
           }
 
-      if ((this.picurl == "") || (this.picurl == undefined)) {
-//         if (this.editing == true) {
-           ocl = this.varname + ".set_shape(\"getpic\");";
-            ps = "deskfm/images/icons/camera.png";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='40px' class='' >"; 
-            lbl = this.rungster + '_pic_spot';
-            $('#'+lbl).html(tmp);
-//         }
-
-      } else { 
-        ps = this.picurl;
-        ocl = "daviewer.toggle_zoom();";
-        if (this.rung != 0) {
-           ocl = "daviewer.to_top("+this.rung+");";
-        } 
-        if ((this.editing == true) || (buddah == true)) {
-            ocl = this.varname + ".set_shape(\"getpic\");";
-        }
-        tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >"; 
+      ps = this.picurl;
+        tmp += "<img src='"+ps+"' onclick=''  class='"+cls+"' >"; 
         lbl = this.rungster + '_pic_spot';
         $('#'+lbl).html(tmp);
-     }
+     
 }
 
 

@@ -26,6 +26,7 @@ function viewer (pscreen,pvarname) {
    this.gridcols=0;
 
    this.zoom = false;
+   this.editing = false;
    this.metro_spd=0;
    this.metro_dir="fwd";
  
@@ -33,13 +34,11 @@ function viewer (pscreen,pvarname) {
 
 
 viewer.prototype.draw_view = function() {
-//alert("here");
+
     var tmpstr = "";
     var lbl = "";
     var ocl = "";
     var cls='';
-    var moin = "";
-    var mout = "";
     var ct = 0; 
     var st = this.top_end;
     var vdex = "";
@@ -53,16 +52,13 @@ viewer.prototype.draw_view = function() {
       tmpstr=tmpstr+"</div>";
     }
 
-      cls = 'box';
-      if (this.is_mini == true) {
-        cls='mbox';
-      }
+
       if (this.zoom == true) {
-         cls = 'zbox';
          st = 1;
       }
 
-
+       tmpstr=tmpstr+"<div id='' style=''  >";
+ 
    if (jqm_off == false) {
      if (this.is_mini == true) { 
        tmpstr=tmpstr+"<div id='' style=''  >";
@@ -92,19 +88,42 @@ viewer.prototype.draw_view = function() {
             } else {
               cls  = this.next_gridblock(cls);
             }
-              tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+"' style='min-height:100px;vertical-align:top;padding:10px;'  >"; 
- //           tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+" my-box'  >"; 
+              tmpstr=tmpstr+"<li id='"+lbl+"' class='"+cls+"' style='min-height:100px;vertical-align:top;padding:10px;white-space:normal;' data-icon='false'  >"; 
               tmpstr=tmpstr+"</li>";
          }
         }
        ct = ct + 1;
       }
  
-    if (this.is_mini == true) {
+    if ((jqm_off == true)  || (this.is_mini == true)) {
       tmpstr=tmpstr+"</div>";
     } else {
       tmpstr=tmpstr+"</ul>";
     }
+     tmpstr=tmpstr+"</div>";
+ 
+    if (this.zoom == true) {
+      tmpstr=tmpstr+"<br>";
+      tmpstr=tmpstr+"<div style='text-align:center;height:40px;' >";
+
+      if (buddah == true) {
+        ocl = "daviewer.toggle_editing();";
+        tmpstr = tmpstr + "<button  onclick='"+ocl+"' >";  
+        tmpstr = tmpstr + "<img src='deskfm/images/icons/layers.png' height='20px' >";
+        tmpstr = tmpstr + "</button>";
+      }
+
+      lbl = "share_btns";
+      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+      tmpstr=tmpstr+"</span>";
+      lbl = "work_btns";
+      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+      tmpstr=tmpstr+"</span>";
+      lbl = "change_btns";
+      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+      tmpstr=tmpstr+"</span>";
+       tmpstr=tmpstr+"</div>";
+   }
 
     lbl = this.screen;
  
@@ -145,6 +164,13 @@ viewer.prototype.draw_view = function() {
             sal.draw_vman();
     }
 
+    if (this.zoom == true) {
+     if (this.editing == true) {
+      this.work_btns();
+      this.change_btns();
+     }
+      this.share_btns();
+   }
 
     if (debug == true) {
        this.draw_debug();
@@ -188,8 +214,161 @@ viewer.prototype.next_gridblock = function (pstr) {
 }
 
 
-viewer.prototype.toggle_zoom = function () {
+viewer.prototype.share_btns = function() {
+       var tmp = "";
+       var lbl = "";
+       var ocl="";
+       var cls = "";
 
+       var s = this.darungs[0].postman.pid;
+
+//       tmp = tmp + "<span class='screen-talk' >Share</span>";
+       tmp = tmp + "<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://twitter.com/statuses/"+ s +"' data-count='none'></a>";
+ 
+     lbl = 'share_btns';
+     pobj = document.getElementById(lbl);
+    
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+          nicky.twitter_render();
+     }
+  
+
+}
+
+ 
+viewer.prototype.work_btns = function() {
+       var tmp = "";
+       var lbl = "";
+       var ocl="";
+       var cls = "";
+ 
+        var s = this.varname + ".darungs[0].postman";
+ 
+	 ocl = s + ".toggle_getstory();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
+	 tmp = tmp + "</button>";
+
+	 ocl = s + ".toggle_getlink();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
+	 tmp = tmp + "</button>";
+
+	 ocl = s + ".toggle_getembed();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
+	 tmp = tmp + "</button>";
+
+	 ocl = s + ".toggle_getname();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
+	 tmp = tmp + "</button>";
+
+      if (buddah == true) {
+	 ocl = s + ".toggle_getsort();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
+	 tmp = tmp + "</button>";
+      }
+
+      if (this.listype == "people") {
+	 ocl = s + ".toggle_getgroup();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
+	 tmp = tmp + "</button>";
+      }
+
+     lbl = 'work_btns';
+     pobj = document.getElementById(lbl);
+    
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+     }
+}
+
+
+
+viewer.prototype.change_btns = function() {
+     var tmp = "";
+     var lbl = "";
+     var ocl="";
+     var ts = "";
+
+       if (this.changed == true) {
+
+         ocl = this.varname + ".do_undo();";
+         lbl = this.rungster + "_undo_btn";
+         tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
+         tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
+         tmp = tmp + "</span>";
+
+          if (this.listype == "people") {
+
+	      lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".update_person();";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_person();";
+	      }
+              tmp=tmp + "<span onClick='"+ocl+"'    >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
+
+         } else if (this.listype=="product") {
+
+              lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".update_product();";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_product();";
+	      }
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
+
+	 } else if (this.listype == "suppliers") {
+
+              lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".update_supplier();";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_supplier();";
+	      }
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
+
+	 } else  {
+
+       	      lbl = this.rungster + "_save_btn";
+              ocl = this.varname+".update_webit();";
+              if (this.stored == false) {
+ 		ocl = this.varname+".add_webit();";
+	      }
+              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
+              tmp = tmp + "</span>";
+
+ 	  } 
+       } 
+
+     lbl = 'change_btns';
+     pobj = document.getElementById(lbl);
+     if ( pobj != null) {
+          pobj.innerHTML = tmp;
+     }
+}
+
+
+viewer.prototype.toggle_editing = function () {
+   if (this.editing == true ) {
+       this.editing = false;
+   } else {
+       this.editing = true;
+   }
+   this.draw_view();
+}
+
+
+viewer.prototype.toggle_zoom = function () {
    if (this.zoom == true ) {
        this.unset_zoom();
    } else {
@@ -200,13 +379,17 @@ viewer.prototype.toggle_zoom = function () {
 
 viewer.prototype.unset_zoom = function() {
    this.zoom = false;
+
+   var s = this.varname + ".darungs[0].postman.shape=\"\"";
+   eval(s);
+
    this.draw_view();
 }
 
 
-
 viewer.prototype.set_zoom = function() {
    this.zoom = true;
+
    this.draw_view();
 }
 

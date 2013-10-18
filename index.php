@@ -8,7 +8,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <title>deskfm.com</title>
 
-<meta name='viewport' content='initial-scale-1' >
+<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no' >
 
 <script  type="text/javascript" >
   var debug = false;
@@ -20,7 +20,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var pname = "";
 
   var is_mobile = false;
-  var main_shape = "full";
+  var main_shape = "";
 </script>
 
 <?php
@@ -36,7 +36,7 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <?php   if (isset($_GET['mobile'])) {   ?>
 <script  type="text/javascript" >
-   mobile = true;
+     is_mobile = true;
 </script>
 <?php  } ?>
 
@@ -116,7 +116,6 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script src=deskfm/stater.js type="text/javascript" ></script>
 
-<script src=deskfm/suggester.js type="text/javascript" ></script>
 <script src=deskfm/qandas/search_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/cat_provider.js type="text/javascript" ></script>
 <script src=deskfm/qandas/subcat_provider.js type="text/javascript" ></script>
@@ -157,44 +156,27 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id="fb-root"></div> 
 
-<div id='page_spot' data-role='page' class='ui-page my-page' >
-
-  <div id='' style='' class='' data-position='fixed'  data-role='header' data-theme='b'  >
+<div id='page_spot' data-role='page' class='ui-page my-page' style='' >
  
-  <div id='menu_spot' style='' class='' >
-   </div>
-   <div style="clear:right;" ></div>
+    <div id='head_spot' style='' class=''   data-role='header' data-theme='b'  >
+      <div id='menu_spot' style='' class='' >
+      </div>
+      <div style='clear:right;' ></div>
+      <div id='top_view' class='' style='float:right' data-role='popup'   >
+      </div>
+      <div id='' class='' style='clear:right;' ></div>
+    </div>
+
+    <div id='main_spot'  class=''  style=''   >
+    </div>
+
+    <div id='foot_spot' style='min-width:350px;text-align:center;' class=''  data-role='footer' data-theme='b'  >
+    </div>
  
-     <div id='top_view' class='' style='float:right' data-role='popup'   >
-     </div>
-        <div id='' class='' style='clear:right;' ></div>
-  </div>
-
-
-   <div id="nav_left"></div>
-   <div id="nav_right"></div>
-
-   <!--span style='float:right;margin-right:50px;' >
-       <span  id='lcount_spot' class='count_talk' style=''  >
-        </span>
-        <span  id='' class='count_talk' style=''  >
-         of 
-        </span>
-        <span  id='mcount_spot' class='count_talk' style=''  >
-        </span>
-   </span-->
- 
-
-     <div id='main_spot'  class=''  style=''   >
-     </div>
-
-
-<div id='foot_spot' style='min-width:350px;text-align:center;' class=''  data-position='fixed'  data-role='footer' data-theme='b'  >
-</div>
-
 </div>
 
 <script type='text/javascript' >
+
 /*
   if (netson == true) {
      FB.init({
@@ -239,12 +221,12 @@ header('Content-type: text/html; charset=utf-8 ');
 	   daviewer.top_end = 100;
        }
 
-	diego = new header();
-
-    amare.get_stats();
+     amare.get_stats();
 //    amare.get_suppliers();
 //    amare.get_products();
     amare.get_webits();
+
+	diego = new header();
 
       $(window).resize(function(val) {
           set_header();
@@ -252,10 +234,9 @@ header('Content-type: text/html; charset=utf-8 ');
       });
 
     $( document ).on( "pageinit", "#page_spot", function( event ) {
-      ray.show();
-      $(window).resize();
-   });
-
+          set_header();
+          set_viewer();
+    });
 
 
 /*

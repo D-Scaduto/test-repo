@@ -12,26 +12,18 @@ poster.prototype.draw_link = function() {
   var cls = "";
 
    if ((this.linkurl == "") || (this.linkurl == undefined)) {
-         if (this.editing == true) {
-            ocl = this.varname + ".set_shape(\"getlink\");";
-            ps = "deskfm/images/icons/link-black.jpg";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='30px'  class='' >"; 
-         } 
+ 
    } else {
 
-       if ((this.editing == true) || (buddah == true)) {
- 
-            ocl = this.varname + ".set_shape(\"getlink\");";
-            ps = "deskfm/images/icons/link-black.jpg";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='30px'  class='' >"; 
- 
-       } else {
+       if (daviewer.zoom == true) {
           tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+       }
 //           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
 //           tmp = tmp + this.linkurl; 
             tmp = tmp + "link"; 
+        if (daviewer.zoom == true) {
           tmp = tmp + " </a> ";
-       }
+        }      
    }
 
      lbl = this.rungster + '_link_btn';

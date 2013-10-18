@@ -14,7 +14,9 @@ poster.prototype.draw_debug = function() {
       tmpstr=tmpstr +  " source="+this.source;
       tmpstr=tmpstr +  " stored="+this.stored;
       tmpstr=tmpstr +  "<br>";
-      tmpstr=tmpstr +  "uname="+this.uname;
+      tmpstr=tmpstr +  " uname="+this.uname;
+      tmpstr=tmpstr +  " cat="+ this.cat;
+      tmpstr=tmpstr +  " subcat="+this.subcat;
 
       tmpstr=tmpstr +  " pid=[" +this.pid + "]";
 

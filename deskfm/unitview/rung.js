@@ -3,8 +3,6 @@
 
        var tmpstr = "";
        var ocl = "";
-       var moin = "";
-       var mout = "";
        var lbl = "";
        var cls = '';
        var pobj = null;
@@ -21,45 +19,23 @@
 
 
            } else {
-//       		   tmpstr=tmpstr+"<div  class='' style='clear:left;' ></div>";
- 
-//	          tmpstr=tmpstr+"<a href='#'  class='' style='' >";
 
-        if (this.shape == "getstory") {
-	  lbl= this.rungster + "_story_spot";
-          tmpstr=tmpstr+"<div id='"+lbl+"'  class=''   style='' >"; 
-          tmpstr=tmpstr+"</div>";	
-        
-        } 
+
+              if (daviewer.editing != true) {
+                 
+                  ocl = "daviewer.to_top("+this.rung+");";
+                  ocl = ocl + "daviewer.toggle_zoom();";
+	          tmpstr=tmpstr+"<a href='#'  class='' onclick='"+ocl+"' style='white-space:normal;' >";
+              }
 
 	  	  lbl= this.rungster + "_pic_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  src='' style='float:left;'  >"; 
                   tmpstr=tmpstr+"</span>";
 
- 	 lbl = this.rungster + "_send_btns";
-         tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 tmpstr = tmpstr + "</span>";
+	          lbl= this.rungster + "_story_spot";
+                  tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='whitespace:normal;clear:right;font-weight:normal;' >"; 
+                  tmpstr=tmpstr+"</span>";	
 
-          if ((this.listype == "people") || (this.listype == "suppliers")) {
-                  tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
-
-	  	  lbl = this.rungster + "_nav_btns";
-         	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 	  tmpstr = tmpstr + "</span>";
-
-  	    	lbl = this.rungster + "_work_btns";
-         	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 	tmpstr = tmpstr + "</span>";
-
-	 	tmpstr = tmpstr + "</span>";
-            }
-
-
-        if (this.shape != "getstory") {
-	  lbl= this.rungster + "_story_spot";
-          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='clear:right;font-weight:normal;' >"; 
-          tmpstr=tmpstr+"</span>";	
-        }
  		  lbl= this.rungster + "_link_btn";
                   tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</span>";
@@ -67,7 +43,8 @@
 		  lbl= this.rungster + "_embed_btn";
                   tmpstr=tmpstr+"<span id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</span>";
-	 		  lbl= this.rungster + "_date_spot";
+
+ 		  lbl= this.rungster + "_date_spot";
 	          tmpstr=tmpstr+"<span id='"+lbl+"'  class=''   style='font-weight:normal;' >"; 
 		  tmpstr=tmpstr+"</span>";	
 
@@ -83,33 +60,25 @@
                       tmpstr=tmpstr+"</span>";
                     }
 
-          if ((this.listype != "people") && (this.listype != "suppliers")) {
-                  tmpstr = tmpstr + "<span  id='' style='float:right;' >";  
+               if ((this.listype == "people") || (this.listype == "suppliers"))  {
 
-	  	  lbl = this.rungster + "_nav_btns";
-         	  tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 	  tmpstr = tmpstr + "</span>";
-
-  	    	lbl = this.rungster + "_work_btns";
-         	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
-	 	tmpstr = tmpstr + "</span>";
-
-	 	tmpstr = tmpstr + "</span>";
-            }
-//                  tmpstr=tmpstr+"</a>";	
-
-//	          tmpstr=tmpstr+"<a href='#'  class='' style='' ></a>";
- 
-      	          lbl= this.rungster + "_btns_spot";
+       	          lbl= this.rungster + "_nav_btns";
    	          tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='' >"; 
     	          tmpstr=tmpstr+"</span>";
 
-               if ((this.listype == "people") || (this.listype == "suppliers"))  {
-                  lbl= this.rungster + "_mini";
+                 lbl= this.rungster + "_mini";
                   tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
                   tmpstr=tmpstr+"</span>";
                }
 
+               if (daviewer.zoom == true) {
+
+	 	tmpstr = tmpstr + "<br>"; 
+
+  	    	lbl = this.rungster + "_work_btns";
+         	tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
+	 	tmpstr = tmpstr + "</span>";
+ 
                   if ((this.listype == "unsorted") || (this.shape == "getsort")) {
 	            lbl = this.rungster + "_sort_spot";
                     tmpstr = tmpstr + "<span  id='"+lbl+"' style='' >";  
@@ -137,6 +106,12 @@
                   tmpstr=tmpstr+"<div id='"+lbl+"' class=''  style=''  >"; 
     	          tmpstr=tmpstr+"</div>";
 
+            }
+
+            if (daviewer.zoom != true) { 
+                  tmpstr=tmpstr+"</a>";	
+            }
+
            if (debug == true) {
   	      lbl= this.rungster + "_debug_spot";
 	      tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style='' >"; 
@@ -156,11 +131,13 @@
 
 poster.prototype.draw_rung = function() {
 
-          this.draw_btns();
+//          this.draw_btns();
 
           if (this.is_mini == true) {
              this.draw_story();
+
              if (this.listype == 'people') { 
+
               var s= "";
               var se1,se2 = null;
               se1 = eval(this.parvar);
@@ -175,6 +152,7 @@ poster.prototype.draw_rung = function() {
                   this.draw_name();
                 }
               }
+
             } else if (this.listype == 'products') {
                 this.draw_pic();
                 this.draw_price();
@@ -228,7 +206,7 @@ poster.prototype.draw_rung = function() {
 	      }
 	    }
  
-            if ((this.cat == "") || (this.cat = undefined))  {
+            if ((this.cat == "") || (this.cat == undefined))  {
                 this.draw_date();
             }
  

@@ -36,10 +36,10 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'how to standup desk ?', 'cat':'how','subcat':'howto' });
      this.sealist.push({'text':'how difficult is standing ?', 'cat':'how','subcat':'difficult' });
      this.sealist.push({'text':'how to make a standing desk ?' , 'cat':'how','subcat':'diy' });
-     this.sealist.push({'text':'how do you get a standing desk ?' , 'cat':'how','subcat':'get' });
+//     this.sealist.push({'text':'how do you get a standing desk ?' , 'cat':'how','subcat':'get' });
      this.sealist.push({'text':'how tall are standing desks ?', 'cat':'how','subcat':'tall' });
      this.sealist.push({'text':'how to workout and work ?' , 'cat':'how','subcat':'workout' });
-     this.sealist.push({'text':'how to compare standing desks ?', 'cat':'how','subcat':'compare' });
+ //    this.sealist.push({'text':'how to compare standing desks ?', 'cat':'how','subcat':'compare' });
  
 }
 

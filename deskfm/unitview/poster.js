@@ -179,25 +179,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 }
 
 
-poster.prototype.draw_btns = function() {
-
-       var tmp = "";
-       var lbl = "";
-       var ocl="";
-       var sty = '';
-
-     lbl = this.rungster + '_btns_spot';
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-	  this.nav_btns();
-	  this.work_btns();
-	  this.change_btns();
-     }
-
-}
-
-
 poster.prototype.nav_btns = function() {
 
    var tmp = "";
@@ -208,31 +189,10 @@ poster.prototype.nav_btns = function() {
       if (this.is_mini == false) {
 
          if ((this.listype != "people") && (this.parvar != "nicky") && (this.listype != "unsorted")) {
-            if (this.rung == 0) {
              if (daviewer.zoom == true) {
-                     lbl = this.rungster + '_share_btn';
-                     ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
-                     src = 'deskfm/images/icons/share.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-              } else {
-                     lbl = this.rungster + '_share_btn';
-                     ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
-                     src = 'deskfm/images/icons/share.png';
-                     tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                     tmp = tmp + "<img src='"+src+"' height='20px' >";
-                     tmp = tmp + "</span>";
-              }
-           } else {     // not rung 0
-                lbl = this.rungster + '_share_btn';
-                ocl = "nicky.set_webit(" + this.dadex + ",\"" + this.listype + "\");";
-                src = 'deskfm/images/icons/share.png';
-                tmp = tmp + "<span  id='"+lbl+"' onclick='"+ocl+"'  >";
-                tmp = tmp + "<img src='"+src+"' height='20px' >";
-                tmp = tmp + "</span>";
-           }
-         }
+            }
+        }
+      }
 
          if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
@@ -256,140 +216,10 @@ poster.prototype.nav_btns = function() {
                 tmp = tmp + "</span>";
          }
 
-      } else {  
-      }
-
       lbl = this.rungster + "_nav_btns";
       if (document.getElementById(lbl)!= null) {
             document.getElementById(lbl).innerHTML=tmp;
       } 
-}
-
-
- poster.prototype.work_btns = function() {
-       var tmp = "";
-       var lbl = "";
-       var ocl="";
-       var cls = "";
- 
-      if (this.shape == "getstory") {
-	 ocl = this.varname + ".toggle_getstory();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if (this.shape == "getlink") {
-	 ocl = this.varname + ".toggle_getlink();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if (this.shape == "getembed") {
-	 ocl = this.varname + ".toggle_getembed();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/embed.jpg' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if (this.shape == "getname") {
-	 ocl = this.varname + ".toggle_getname();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if ((this.listype == "unsorted") && (buddah == true)) {
-	 ocl = this.varname + ".toggle_getsort();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-      if (this.listype == "people") {
-	 ocl = this.varname + ".toggle_getgroup();";
-         tmp = tmp + "<span  onclick='"+ocl+"' >";  
-	 tmp = tmp + "<img src='deskfm/images/icons/people_blob.png' height='20px' >";
-	 tmp = tmp + "</span>";
-      }
-
-     lbl = this.rungster + '_work_btns';
-     pobj = document.getElementById(lbl);
-    
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-     }
-}
-
-
-
- poster.prototype.change_btns = function() {
-     var tmp = "";
-     var lbl = "";
-     var ocl="";
-     var ts = "";
-
-       if (this.changed == true) {
-
-         ocl = this.varname + ".do_undo();";
-         lbl = this.rungster + "_undo_btn";
-         tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
-         tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
-         tmp = tmp + "</span>";
-
-          if (this.listype == "people") {
-
-	      lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_person();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_person();";
-	      }
-              tmp=tmp + "<span onClick='"+ocl+"'    >";  
-              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
-
-         } else if (this.listype=="product") {
-
-              lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_product();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_product();";
-	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
-              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
-
-	 } else if (this.listype == "suppliers") {
-
-              lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_supplier();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_supplier();";
-	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
-              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
-
-	 } else  {
-
-       	      lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_webit();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_webit();";
-	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
-              tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
-
- 	  } 
-       } 
-
-     lbl = this.rungster + '_send_btns';
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-          pobj.innerHTML = tmp;
-     }
 }
 
 

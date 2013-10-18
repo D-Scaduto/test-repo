@@ -11,24 +11,13 @@ poster.prototype.draw_story = function() {
 
        var tiesto = this.story;
 
-       ocl='';
-       if ((buddah == true) || (this.parvar == "nicky")) {
-         ocl = this.varname + ".set_shape(\"getstory\");";
-       }
        cls = 'story';
        if (this.is_mini == true) {
           cls = '';
        }
 
-        if ((this.story == "") || (this.story == null)) { 
-          if (this.editing == true) {
-            ocl = this.varname + ".set_shape(\"getstory\");";
-            ps = "deskfm/images/icons/pencil_msg.png";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='40px'  class='' >"; 
-         }
- 
-       } else {
-        tmp = tmp + "<span onclick='"+ocl+"' class='"+cls+"' onmouseover='' onmouseout='' >";
+    if ((this.story != "") && (this.story != null)) {
+       tmp = tmp + "<span onclick='' class='"+cls+"' >";
 
        //tiesto = this.story.replace(/<br>/gi,"\n");
 
@@ -61,7 +50,7 @@ poster.prototype.draw_story = function() {
 */
           tmp = tmp + ps;
          tmp = tmp + "</span>";
-      }
+     }
 
       lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {

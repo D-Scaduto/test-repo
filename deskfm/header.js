@@ -1,6 +1,6 @@
 
 function header (pshapes) {
-    this.top_shapes = ['search:wanda','browse:cater'];
+    this.top_shapes = ['search:wanda','browse:cater', 'share:nicky' ];
     this.top_shape = "";
 
     this.varname = "diego";
@@ -41,20 +41,6 @@ header.prototype.draw_left = function () {
 
      tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;'  >";
         tmp = tmp + "</div>";
- 
-/*
-        lbl = 'browse_btn'; 
-        ocl = "diego.toggle_topshape(\"browse\");";
-       tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='browse_btn' src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-*/
- 
-           tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
-            tmp = tmp + "</div>";
-
 
     lbl = 'left_spot';
     $('#'+lbl).html(tmp); 
@@ -69,15 +55,29 @@ header.prototype.draw_right = function () {
      var tmp = "";
      var ocl = "";
 
-        tmp = tmp + "<div id='' class='' style='display:inline;vertical-align:top;'  >";
+    //    tmp = tmp + "<div id='' class='' style='display:inline;vertical-align:top;'  >";
 
-        tmp = tmp + "<div id='shop_spot' class='menu_sub' style=''  >";
+        tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
          tmp = tmp + "</div>";
+  
+           tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
+            tmp = tmp + "</div>";
 
             tmp = tmp + "<div id='search_spot' class='' style='display:inline;'  >";
             tmp = tmp + "</div>";
  
-        lbl = 'search_btn';
+        tmp = tmp + "<div id='share_spot' class='' style='display:inline-block;vertical-align:middle;padding-top:5px;'  >";
+        tmp = tmp + "</div>";
+ 
+        lbl = 'browse_btn'; 
+        ocl = "diego.toggle_topshape(\"browse\");";
+       tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline;'  >";
+         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img id='browse_btn' src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+         tmp = tmp + "</span>";
+
+            lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
         tmp = tmp + "<span  id='"+lbl+"'  class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
@@ -85,14 +85,18 @@ header.prototype.draw_right = function () {
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
+
         lbl = 'share_btn';
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline;margin-right:8px;'  >";
-        tmp = tmp + "<a href='#top_view' data-role='button' data-rel='popup' data-inline='true' onclick='nicky.show();' > ";
+       ocl = 'diego.toggle_topshape(\"share\");'
+      //  ocl = "nicky.toggle();";
+        tmp = tmp + "<span  id='"+lbl+"'  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
-        tmp = tmp + "</a>";
+        tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
-    tmp = tmp + "</div>";
+
+  //  tmp = tmp + "</div>";
 
     lbl = 'right_spot';
     $('#'+lbl).html(tmp); 
@@ -105,11 +109,16 @@ header.prototype.toggle_topshape = function (pshape) {
    if (pshape != undefined) {
        if ( this.top_shape != pshape ) {
           this.top_shape = pshape;
+          this.set_topshape();
        } else {
+           if (this.top_shape == "browse") {
+               cater.change();
+           } else {
              this.top_shape = "";
+             this.set_topshape();
+           }
        }
    }
-   this.set_topshape();
 }
    
 header.prototype.set_topshape = function (pshape) {
