@@ -173,9 +173,6 @@ stater.prototype.update_stats = function (statobj) {
               //   daviewer.load_random_list();
             }
           } else {
-            if (main_shape != "mini") {
-              diego.set_topshape("browse");
-            }
             if (this.got_webits == true) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;

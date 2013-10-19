@@ -8,22 +8,14 @@ function set_header() {
             if (main_shape != "mini") {
               main_shape = "mini";
               diego.show();
-              diego.set_topshape();
-               if (buddah == true) {
-                diego.set_botshape();
-              }
-            }
+           }
           } else {
 
            if ($(window).width() > 1000) {
               if (main_shape != "wide") {
                  main_shape = "wide";
                  diego.show();
-                 diego.set_topshape();
-                 if (buddah == true) {
-                   diego.set_botshape();
-                 }
-              }
+             }
 
             } else {
 
@@ -31,22 +23,14 @@ function set_header() {
                   if (main_shape != "wide") {
                     main_shape = "wide";
                     diego.show();
-                    diego.set_topshape();
-                    if (buddah == true) {
-                      diego.set_botshape();
-                    }
-                  } 
+                 } 
 
                } else {
 
                 if (main_shape != "reg") {
                     main_shape = "reg";
                     diego.show();
-                    diego.set_topshape();
-                    if (buddah == true) {
-                      diego.set_botshape();
-                   }
-                }
+               }
               }
             }
           }

@@ -492,11 +492,8 @@ categor.prototype.show_btn = function() {
     var pobj = null;
     var ocl = "";
 
-      ocl = 'diego.toggle_topshape(\"browse\");';
+      ocl = 'diego.set_botshape(\"browse\");';
  
-     if (buddah == true) {
-      ocl = 'diego.toggle_botshape(\"browse\");';
-    }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/browse.png' class='menu_btn' >";
        tmp = tmp + "</button>";

@@ -14,17 +14,8 @@ rail.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
    var tsrc = "";
-    /*
-        lbl = 'nitro_btn';
-       ocl = 'daviewer.toggle_nitro();'
-        tmp = tmp + "<span  id=''  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-*/
-
-      tmp = tmp + "<div id='' class='' style='width:110px;display:inline-block;vertical-align:middle;' >";
+    
+      tmp = tmp + "<div id='' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
       tmp = tmp + "<label for='slider-1' class='ui-hidden-accessible'   ></label>";
       if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='1' min='1' max='100'  style=''  />";
@@ -34,36 +25,19 @@ rail.prototype.draw_rail = function() {
       }
 
       tmp = tmp + "</div>";
+
+        lbl = 'nitro_btn';
+       ocl = 'daviewer.toggle_nitro();'
+        tmp = tmp + "<span  id=''  class='mybtns' style=''  >";
+        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
+        tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
+        tmp = tmp + "</button>";
+        tmp = tmp + "</span>";
+
 /*
         tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
         tmp = tmp + "</div>";
 */
-
-/*
-      tmp = tmp + "<div style='display:inline-block;'>";
- 
-      lbl = 'uptop_btn';
-      ocl = 'daviewer.end_up();';
-      tmp = tmp + "<span id='"+lbl+"' class='mybtns' style=''  >";
-      tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-      tmp = tmp + "<img  src='deskfm/images/icons/up_arrow_skiny.png'  class='menu_btn'  >";
-      tmp = tmp + "</button>";
-      tmp = tmp + "</span>";
- 
-      tmp = tmp + "<div id='chunkslide_box' class='' style='width:200px;display:inline-block;vertical-align:middle;' >";
-      tmp = tmp + "<label for='slider-2'></label>";
-      if (jqm_off == true) {
- 	  tmp = tmp + "<input type='range' name='slider-2' id='slider-2' value='1' min='1' max='100'  style=''  />";
-      } else {
- 	  tmp = tmp + "<input type='range'   name='slider-2' id='slider-2' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
-      }
-      tmp = tmp + "</div>";
- 
-        tmp = tmp + "<div  id='slider-2-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
-        tmp = tmp + "</div>";
- 
-      tmp = tmp + "</div>";
- */
 
    lbl = 'rail_spot';
   pobj = document.getElementById(lbl);
@@ -75,13 +49,6 @@ rail.prototype.draw_rail = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
           });
-/*
-         $('#slider-2').on("change",function(event) {
-               var st = "";
-                st = parseInt(event.target.value) * daviewer.top_end;
-                daviewer.goto_listdex(st);
-          });
-*/
        } else {
 
            $('#'+lbl).trigger("create");
@@ -93,13 +60,6 @@ rail.prototype.draw_rail = function() {
            $('#slider-1').hide(); 
 
            $('#'+lbl).trigger("create");
-/*      
-            $('#slider-2').bind("slidestop",function(event) {
-                var st = "";
-                st = parseInt(event.target.value) * daviewer.top_end;
-                daviewer.goto_listdex(st);
-            });
-*/
        }
 
        this.showing = true;
@@ -269,11 +229,11 @@ rail.prototype.show_btn = function() {
     var lbl = "";
     var pobj = null;
     var ocl="";
-       ocl =  'diego.toggle_topshape(\"rail\");'
+       ocl =  'diego.set_botshape(\"slide\");'
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/dot_swirl.png' class='menu_btn' >";
        tmp = tmp + "</button>";
-       lbl = 'rail_btn'; 
+       lbl = 'slide_btn'; 
 
        if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmp; 
@@ -286,7 +246,7 @@ rail.prototype.hide_btn = function() {
     var lbl = "";
     var pobj = null;
 
-       lbl = 'rail_btn'; 
+       lbl = 'slide_btn'; 
        if (document.getElementById(lbl)!=null) {
          document.getElementById(lbl).innerHTML=tmp; 
        }

@@ -207,6 +207,7 @@ header('Content-type: text/html; charset=utf-8 ');
 	diego = new header();
 
     if (jqm_off == false) {
+      $.mobile.popup.prototype.options.history = false;
 
       $(window).resize(function(val) {
           set_header();
