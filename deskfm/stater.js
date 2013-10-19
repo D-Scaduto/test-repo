@@ -180,8 +180,7 @@ stater.prototype.update_stats = function (statobj) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.load_sorted_list();
-                 daviewer.randomize_rungs();
+                 daviewer.load_random_list();
              }
           }
       } else {
@@ -242,8 +241,7 @@ stater.prototype.update_webits = function(listobj) {
 	         init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.load_sorted_list();
-                 daviewer.randomize_rungs();
+                 daviewer.load_random_list();
                }
            }
       } else {

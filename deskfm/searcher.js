@@ -26,7 +26,7 @@ searcher.prototype.show = function() {
  
      lbl = this.spotid + "_dasbox";
      ocl = this.varname+ ".check_central();";
-    tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=12  data-clear-btn='true' onkeyup='"+ocl+"' value='"+this.sterms+"' type='search'  />";
+    tmp = tmp + "<input id='"+lbl+"' data-mini='true' size=8  data-clear-btn='true' onkeyup='"+ocl+"' value='"+this.sterms+"' type='search'  />";
 
      tmp += "</div >";
  
@@ -41,10 +41,6 @@ searcher.prototype.show = function() {
          wanda.clear();
       });
    }
-   if (buddah == false) { 
-     cater.hide();
-   }
-
 }
 
 

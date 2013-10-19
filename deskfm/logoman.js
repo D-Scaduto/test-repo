@@ -16,18 +16,17 @@ logoman.prototype.show = function () {
    var cls = "";
    var sty ="";
 
-        lbl = 'vman_btn'; 
-    //    ocl = "diego.set_topshape(\"\");";
-        ocl =  "daviewer.load_random_list();";
+         lbl = 'vman_btn'; 
+      //  ocl =  'diego.set_topshape(\"\");'
+         ocl = "cater.set_cats(\"\",\"\")";
        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
- 
-     
+    
          lbl = this.spotid + '_logo_spot1';
-    //    ocl = "sal.toggle_shape();";
+        ocl = "cater.set_cats(\"\",\"\")";
 
         if (jqm_off == false) {
          tmp=tmp+"<span onclick='"+ocl+"' class='screen_talk' style='' >";
@@ -105,10 +104,10 @@ logoman.prototype.change_vman = function () {
 
 
 logoman.prototype.waiting = function () {
+return;
    var lbl = "";
    var tmp = "";
    var tsrc = "";
-
    tsrc = "deskfm/images/random/loading-go.gif";
 
    lbl =  "vman_btn";
@@ -135,14 +134,7 @@ logoman.prototype.hide = function (bfull) {
    var tmp = "";
 
    if (bfull == undefined) {
-        lbl = 'vman_btn'; 
-        ocl =  'diego.set_topshape(\"\");'
-        tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
-        tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
-    }
+   }
 
    lbl = this.spotid;
  

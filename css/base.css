@@ -49,12 +49,17 @@ div .fb_reset {
 }
 
 
+.ui-btn {
+    margin-top:5px;
+    margin-bottom:0px;
+}	
+
 .ui-btn-inner {
     white-space:normal;
 }		
 
  input.ui-slider-input {
-//      display:none !important;
+      display:none !important;
 }
 
      .piczoom {

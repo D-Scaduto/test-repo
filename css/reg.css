@@ -1,23 +1,11 @@
 
 @media screen and (min-width:600px) and (max-width:799px) {
 
-    .logo_talk {
-       font-size: 1.2em;
-       vertical-align:middle;
-    }
-
     .screen_talk {
-       font-size: 1em;
+       font-size: 1.1em;
        vertical-align:middle;
        margin-top:15px;
     }
-
-    #left_spot {
-    }
-
-     #right_spot {
-         float:right;
-     }
 
     .menu_sub {
         display:inline;

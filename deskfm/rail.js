@@ -14,15 +14,7 @@ rail.prototype.draw_rail = function() {
    var lbl = "";
    var tmp = "";
    var tsrc = "";
-    
-        lbl = 'prev_btn';
-       ocl = 'daviewer.prev();'
-        tmp = tmp + "<span  id=''  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/prev.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
+    /*
         lbl = 'nitro_btn';
        ocl = 'daviewer.toggle_nitro();'
         tmp = tmp + "<span  id=''  class='mybtns' style=''  >";
@@ -30,20 +22,22 @@ rail.prototype.draw_rail = function() {
         tmp = tmp + "<img id='nitro_btn' src='deskfm/images/icons/dot_swirl.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
+*/
 
-
-      tmp = tmp + "<div id='' class='' style='width:60%;display:inline-block;vertical-align:middle;' >";
-      tmp = tmp + "<label for='slider-1'></label>";
+      tmp = tmp + "<div id='' class='' style='width:110px;display:inline-block;vertical-align:middle;' >";
+      tmp = tmp + "<label for='slider-1' class='ui-hidden-accessible'   ></label>";
       if (jqm_off == true) {
  	  tmp = tmp + "<input type='range' name='slider-1' id='slider-1' value='1' min='1' max='100'  style=''  />";
-      } else {
- 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='' data-mini='false'  data-theme='c' data-track-theme='e' class=''  />";
-      }
-      tmp = tmp + "</div>";
 
+      } else {
+ 	  tmp = tmp + "<input type='range'   name='slider-1' id='slider-1' value='1' min='1' max='100'  style='' data-mini='true'  data-theme='c' data-track-theme='e' class='ui-hidden-accessible'  />";
+      }
+
+      tmp = tmp + "</div>";
+/*
         tmp = tmp + "<div  id='slider-1-detail' class='' style='display:inline-block;padding:10px 10px;'  >";
         tmp = tmp + "</div>";
-
+*/
 
 /*
       tmp = tmp + "<div style='display:inline-block;'>";
@@ -71,20 +65,8 @@ rail.prototype.draw_rail = function() {
       tmp = tmp + "</div>";
  */
 
-
-        lbl = 'next_btn';
-       ocl = 'daviewer.next();'
-        tmp = tmp + "<span  id=''  class='mybtns' style=''  >";
-        tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='' src='deskfm/images/icons/play.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-        tmp = tmp + "</span>";
-
-
-
-
    lbl = 'rail_spot';
-   pobj = document.getElementById(lbl);
+  pobj = document.getElementById(lbl);
    if ( pobj != null) {
       pobj.innerHTML = tmp;
        if (jqm_off == true) {
@@ -108,8 +90,10 @@ rail.prototype.draw_rail = function() {
                 st = parseInt(event.target.value);
                 daviewer.goto_listdex(st);
             });
+           $('#slider-1').hide(); 
+
            $('#'+lbl).trigger("create");
-/*
+/*      
             $('#slider-2').bind("slidestop",function(event) {
                 var st = "";
                 st = parseInt(event.target.value) * daviewer.top_end;
@@ -255,6 +239,7 @@ rail.prototype.draw_debug = function() {
 
 
 rail.prototype.toggle = function () {
+ 
    if (this.showing == true ) {
        this.hide();
    } else {

@@ -155,7 +155,8 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='page_spot' data-role='page' class='ui-page my-page' style='' >
  
-    <div id='head_spot' style='' class=''   data-role='header' data-theme='b'  >
+    <div id='head_spot' style='' class=''  data-position='fixed'  data-role='header' data-theme='b'  >
+
       <div id='menu_spot' style='' class='' >
       </div>
       <div style='clear:right;' ></div>

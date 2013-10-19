@@ -1,6 +1,6 @@
 
 function header (pshapes) {
-    this.top_shapes = ['search:wanda','browse:cater', 'share:nicky' ];
+    this.top_shapes = ['search:wanda', 'share:nicky' ];
     this.top_shape = "";
 
     this.varname = "diego";
@@ -12,31 +12,20 @@ header.prototype.show = function () {
      var lbl = "";
      var ocl = "";
 
-          tmp = tmp + "<span  id='left_spot' class='' style=''  >";
+          tmp = tmp + "<span  id='tleft_spot' class='' style=''  >";
          tmp = tmp + "</span>";
  
-        tmp = tmp + "<span id='right_spot' class='' style='' >";
+        tmp = tmp + "<span id='tright_spot' class='' style='float:right;' >";
          tmp = tmp + "</span>";
 
-      if (main_shape == "mini") {
-  //           tmp = tmp + "<div style='text-align:center;' >";
               tmp = tmp + "<div style='clear:both;' ></div>";
-           tmp = tmp + "<div id='browse_spot' class='' style='text-align:right;'  >";
-            tmp = tmp + "</div>";
-       
-         tmp = tmp + "<div id='shop_spot' class='' style='text-align:right;'  >";
-         tmp = tmp + "</div>";
+
+          tmp = tmp + "<span  id='bleft_spot' class='' style=''  >";
+         tmp = tmp + "</span>";
  
-           tmp = tmp + "<div id='browse_spot' class='' style='text-align:right;'  >";
-            tmp = tmp + "</div>";
-        
-            tmp = tmp + "<div id='search_spot' class='' style='text-align:right;'  >";
-            tmp = tmp + "</div>";
- 
-        tmp = tmp + "<div id='share_spot' class='' style='text-align:right;'  >";
-        tmp = tmp + "</div>";
-//             tmp = tmp + "</div>";
-        }
+        tmp = tmp + "<span id='bright_spot' class='' style='float:right;' >";
+         tmp = tmp + "</span>";
+
 
        var pobj = document.getElementById('menu_spot');
       if (pobj != null) {
@@ -46,6 +35,11 @@ header.prototype.show = function () {
             this.draw_right();          
   
             $('#menu_spot').trigger("create");
+
+     sal.show();
+   //   dale.show();
+      cater.show();
+
 
             if (debug == true) {
                this.draw_debug();
@@ -62,9 +56,23 @@ header.prototype.draw_left = function () {
      tmp = tmp + "<div  id='logo_spot' class='' style='display:inline;'  >";
         tmp = tmp + "</div>";
 
-    lbl = 'left_spot';
+    lbl = 'tleft_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
+
+     tmp = "";
+
+        ocl = 'daviewer.next();'
+	tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true' data-icon='arrow-l' data-iconpos='notext'>Delete</a>";
+
+
+     tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
+     tmp = tmp + "</div>";
+ 
+    lbl = 'bleft_spot';
+    $('#'+lbl).html(tmp); 
+    $('#'+lbl).trigger("create");
+
 
 }
 
@@ -75,36 +83,11 @@ header.prototype.draw_right = function () {
      var tmp = "";
      var ocl = "";
 
-    //    tmp = tmp + "<div id='' class='' style='display:inline;vertical-align:top;'  >";
-
-      if (main_shape != "mini") {
-             tmp = tmp + "<div style='clear:both;' ></div>";
-           tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
-            tmp = tmp + "</div>";
-       
-         tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
-         tmp = tmp + "</div>";
- 
-           tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
-            tmp = tmp + "</div>";
-        
             tmp = tmp + "<div id='search_spot' class='' style='display:inline;'  >";
             tmp = tmp + "</div>";
  
         tmp = tmp + "<div id='share_spot' class='' style='display:inline-block;vertical-align:middle;'  >";
         tmp = tmp + "</div>";
-//             tmp = tmp + "</div>";
-        }
-
-
-
-        lbl = 'browse_btn'; 
-        ocl = "diego.toggle_topshape(\"browse\");";
-       tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline;'  >";
-         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
-        tmp = tmp + "<img id='browse_btn' src='deskfm/images/icons/browse.png'  class='menu_btn'  >";
-        tmp = tmp + "</button>";
-         tmp = tmp + "</span>";
 
             lbl = 'search_btn';
        ocl = 'diego.toggle_topshape(\"search\");'
@@ -113,7 +96,6 @@ header.prototype.draw_right = function () {
         tmp = tmp + "<img  src='deskfm/images/icons/search.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
-
 
         lbl = 'share_btn';
        ocl = 'diego.toggle_topshape(\"share\");'
@@ -124,12 +106,25 @@ header.prototype.draw_right = function () {
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
 
-
-  //  tmp = tmp + "</div>";
-
-    lbl = 'right_spot';
+    lbl = 'tright_spot';
     $('#'+lbl).html(tmp); 
     $('#'+lbl).trigger("create");
+
+    tmp = "";
+
+           tmp = tmp + "<div id='rail_spot' class='' style='display:inline;'  >";
+            tmp = tmp + "</div>";
+/*      
+         tmp = tmp + "<div id='shop_spot' class='' style='display:inline;'  >";
+         tmp = tmp + "</div>";
+*/        
+        ocl = 'daviewer.prev();'
+	tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true'  data-icon='arrow-r' data-iconpos='notext'>Delete</a>";
+
+    lbl = 'bright_spot';
+    $('#'+lbl).html(tmp); 
+    $('#'+lbl).trigger("create");
+
 }
 
  
@@ -155,9 +150,7 @@ header.prototype.set_topshape = function (pshape) {
         this.top_shape = pshape;
      }
 
-      sal.show();
-
-     if (this.top_shape == "") {
+      if (this.top_shape == "") {
 
       for (var i=0;i<this.top_shapes.length;i++) {
          s = this.top_shapes[i].split(':');

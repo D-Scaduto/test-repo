@@ -1,21 +1,9 @@
 
 @media screen and (min-width:800px) {
 
-    .logo_talk {
-       font-size: 1.2em;
-       vertical-align:middle;
-    }
-
     .screen_talk {
-       font-size: 1.2em;
+       font-size: 1.1em;
        vertical-align:middle;
-    }
-
-    #left_spot {
-     }
-
-     #right_spot {
-          float:right;
     }
 
      #adside_bar {
@@ -36,7 +24,7 @@
      }
 
      .menu_btn {
-        width:30px;
+        width:25px;
         background-color:white;
      }
 
