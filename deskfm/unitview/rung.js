@@ -7,8 +7,11 @@
        var cls = '';
        var pobj = null;
 
-      if ((this.source == "twitter") && (daviewer.zoom == true) && (twittr != null)) {
-         tmpstr += " <blockquote class='twitter-tweet'><a href='http://twitter.com/"+this.uname+"/status/"+this.pid+"' >link</a></blockquote>";
+//      if ((this.source == "twitter") && (daviewer.zoom == true) && (twittr != null)) {
+      if ((this.source == "twitter") && (daviewer.zoom == true)) {
+//         tmpstr += " <blockquote class='twitter-tweet'><a href='http://twitter.com/"+this.uname+"/status/"+this.pid+"' >link</a></blockquote>";
+           tmpstr=tmpstr+"<div id='twembed_spot'  src='' style=''  >"; 
+           tmpstr=tmpstr+"</div>";
 
       } else {
 
@@ -151,7 +154,11 @@
 
 poster.prototype.draw_rung = function() {
 
-      if ((this.source == "twitter") && (daviewer.zoom == true) && (twittr != null)) {
+      if ((this.source == "twitter") && (daviewer.zoom == true)) {
+          $.getJSON("https://api.twitter.com/1/statuses/oembed.json?id="+this.pid+"&align=center&callback=?", function(data)
+           {$('#twembed_spot').html(data.html);
+          });
+ 
          return;
       } 
 

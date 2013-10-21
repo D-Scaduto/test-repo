@@ -5,8 +5,6 @@ function sharer (pspotid) {
    this.varname = "nicky";
    this.showing = false;
    this.shape = "";  
-
-   this.newster = new poster('top_view',0,"nicky","nicky.newster",false);
 }
 
 
@@ -30,7 +28,7 @@ sharer.prototype.show = function() {
     this.showing = true;
     this.fb_render();
     this.gplus_render();
-    this.twitter_render();
+//    this.twitter_render();
 }
 
 
@@ -151,7 +149,7 @@ sharer.prototype.fb_render = function() {
  
 sharer.prototype.twitter_render = function() {   
 
-$.getScript('http://platform.twitter.com/widgets.js');
+//$.getScript('http://platform.twitter.com/widgets.js');
 /*
       !function(d,s,id){
       var js,fjs=d.getElementsByTagName(s)[0];
