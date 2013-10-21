@@ -11,27 +11,31 @@ poster.prototype.draw_link = function() {
   var lbl = "";
   var cls = "";
 
-   if ((this.linkurl == "") || (this.linkurl == undefined)) {
+   if ((this.linkurl == "") || (this.linkurl == undefined) || (this.linkurl == "undefined")) {
  
    } else {
 
+//        tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
+        tmp = tmp + " link "; 
+        lbl = this.rungster + '_link_btn';
+        pobj = document.getElementById(lbl);
+        if ( pobj != null) {
+          pobj.innerHTML = tmp;
+        } 
+ 
        if (daviewer.zoom == true) {
+//         tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
           tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
-       }
-//           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
-//           tmp = tmp + this.linkurl; 
-            tmp = tmp + "link"; 
-        if (daviewer.zoom == true) {
+          tmp = tmp + this.linkurl; 
           tmp = tmp + " </a> ";
-        }      
-   }
 
-     lbl = this.rungster + '_link_btn';
-     pobj = document.getElementById(lbl);
-     if ( pobj != null) {
-         pobj.innerHTML = tmp;
-     } 
-   
+        lbl = this.rungster + '_link_spot';
+        pobj = document.getElementById(lbl);
+        if ( pobj != null) {
+          pobj.innerHTML = tmp;
+        } 
+       } 
+   }
 }
 
 
@@ -47,10 +51,10 @@ poster.prototype.get_link = function() {
 
        if ((this.linkurl != undefined) && (this.linkurl != "")) {      
 
-          tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
-           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
+//          tmp = tmp + "<a href='"+this.linkurl+"' target='_blank' > "; 
+//           tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' width='30px' >";
 //           tmp = tmp + this.linkurl; 
-          tmp = tmp + " </a> ";
+//          tmp = tmp + " </a> ";
 
           lbl = this.rungster + '_link_btn';
           pobj = document.getElementById(lbl);
@@ -68,7 +72,8 @@ poster.prototype.get_link = function() {
          tmp = ""; 
 	 lbl = this.rungster + "_link_addr"; 
          ocl = this.varname + ".update_link();";
-         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"'  >";    
+         tmp += "<label for='"+lbl+"' > Link: </label>";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"'  />";    
 
        lbl = this.rungster + '_link_spot';
        pobj = document.getElementById(lbl);

@@ -54,7 +54,6 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
    this.piczoom = false;
    this.color = "black";
 
-   this.editing = false;
    this.changed = false;
    this.name_changed = false;
    this.story_changed = false;
@@ -71,7 +70,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
    var s = "";
    var pobj = null;
 
-   this.editing = false;
    
    if (pdadex != undefined) {
      this.dadex = pdadex;
@@ -83,7 +81,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
 
    if (this.dadex == -1) {
       pobj = new webit();
-      this.editing = true;
    } else {
 
     this.stored = true;
@@ -110,7 +107,8 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.uname=pobj.uname;
       this.listype=pobj.listype;
       this.stored=pobj.stored;
-
+      this.source=pobj.source;
+ 
       this.created_at=pobj.created_at;
       this.change_date=pobj.change_date;
 
@@ -121,8 +119,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       if (pobj.listype == "webits") {
         this.cat=pobj.cat;
         this.subcat=pobj.subcat;
-        this.source=pobj.source;
- 
+
         if (buddah == true) {
           this.groupid = amare.get_person_group(this.uname);
         }
@@ -186,14 +183,6 @@ poster.prototype.nav_btns = function() {
    var ocl = "";
    var src = "";
 
-      if (this.is_mini == false) {
-
-         if ((this.listype != "people") && (this.parvar != "nicky") && (this.listype != "unsorted")) {
-             if (daviewer.zoom == true) {
-            }
-        }
-      }
-
          if (this.listype == "people") {
                 ocl = this.varname + ".toggle_mini();";
                 lbl = this.rungster + "_mini_btn";
@@ -220,17 +209,6 @@ poster.prototype.nav_btns = function() {
       if (document.getElementById(lbl)!= null) {
             document.getElementById(lbl).innerHTML=tmp;
       } 
-}
-
-
-poster.prototype.toggle_editing = function(tshape) {
-     if (this.editing == true) {
-       this.editing = false;
-     } else {
-       this.editing = true;
-     }
-     this.shape = "";
-     this.redraw_rung();
 }
 
 
@@ -366,6 +344,7 @@ poster.prototype.clear = function() {
      this.group_changed = false;
   //   alert(url);
      $.getJSON(url,function(json) {
+          daviewer.editing = false;
           amare.update_webit(json.pobj);
      });
      sal.waiting();
@@ -415,6 +394,7 @@ poster.prototype.clear = function() {
      this.group_changed = false;
   //   alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_webit(json.pobj);
      });
      sal.waiting();
@@ -435,6 +415,7 @@ poster.prototype.clear = function() {
      var url = "deskfm/dbase/update_person.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_one(json.pobj);
      });
      sal.waiting();
@@ -477,6 +458,7 @@ poster.prototype.add_product = function() {
      this.embed_changed = false;   
  //    alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_product(json.pobj);
      });
      sal.waiting();
@@ -504,6 +486,7 @@ poster.prototype.update_product = function() {
      var url = "deskfm/dbase/update_product.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_one(json.pobj);
      });
      sal.waiting();
@@ -548,6 +531,7 @@ poster.prototype.update_product = function() {
      this.embed_changed = false;   
      alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_supplier(json.pobj);
      });
      sal.waiting();
@@ -584,6 +568,7 @@ poster.prototype.update_supplier = function() {
      var url = "deskfm/dbase/update_supplier.php"+prams;
 //     alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
           amare.update_supplier(json.pobj);
      });
      sal.waiting();
@@ -601,6 +586,7 @@ poster.prototype.update_supplier = function() {
 
 //     alert(url);
      $.getJSON(url,function(json) {
+           daviewer.editing = false;
            amare.del_one(json.pid);
      });
     sal.waiting();

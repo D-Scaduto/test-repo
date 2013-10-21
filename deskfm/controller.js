@@ -275,7 +275,6 @@ viewer.prototype.update_one = function(tpid,mdex,ltype) {
          }
   }
   if (fnd_rung != -1) {
-
         // remove if no longer matches 
         if (this.check_match(mdex,ltype) == false) {
             this.del_rung(fnd_rung);
@@ -333,6 +332,8 @@ viewer.prototype.new_one = function(ltype) {
    o.mdex = -1;
    o.ltype = ltype;  
    this.dalist.unshift(o);
+   this.zoom=true;
+   this.editing=true;
    this.load_rungs();  
    this.draw_view(); 
 

@@ -17,17 +17,18 @@ logoman.prototype.show = function () {
    var sty ="";
 
          lbl = 'vman_btn'; 
-      //  ocl =  'diego.set_topshape(\"\");'
-         ocl = "cater.set_cats(\"\",\"\")";
-       tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
+       ocl =  'diego.set_botshape(\"browse\");'
+           ocl = ocl + "cater.set_cats(\"\",\"\")";
+      tmp = tmp + "<span  class='mybtns' style='vertical-align:middle;display:inline-block;'  >";
          tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='background-color:white;' >";
         tmp = tmp + "<img id='vman_btn' src='deskfm/images/icons/cbman-stand-r.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
          tmp = tmp + "</span>";
     
          lbl = this.spotid + '_logo_spot1';
-        ocl = "cater.set_cats(\"\",\"\")";
-
+        ocl =  'diego.set_botshape(\"browse\");'
+         ocl = ocl + "cater.set_cats(\"\",\"\")";
+ 
         if (jqm_off == false) {
          tmp=tmp+"<span onclick='"+ocl+"' class='screen_talk' style='' >";
         } else {

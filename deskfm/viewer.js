@@ -47,22 +47,56 @@ viewer.prototype.draw_view = function() {
 
     if (debug == true) {
       lbl = this.screen+"_debug";
-      cls='spotd_off'
-      tmpstr=tmpstr+"<div id='"+lbl+"' class='"+cls+"' style=''  >"; 
+      tmpstr=tmpstr+"<div id='"+lbl+"' class='' style=''  >"; 
       tmpstr=tmpstr+"</div>";
+      tmpstr=tmpstr+"<br>";
     }
-
 
       if (this.zoom == true) {
          st = 1;
-      }
+         tmpstr=tmpstr+"<div style='clear:both;' ></div>";
 
-       tmpstr=tmpstr+"<div id='' style=''  >";
+         tmpstr=tmpstr+"<div id='zoom_btns' style='max-width:400px;margin:0 auto;' >";
+
+         tmpstr += "<a href='#' data-role='button' onclick='daviewer.unset_zoom();' style='' data-inline='true' >";
+         tmpstr += "unzoom";
+         tmpstr += "</a>";
+
+         if (buddah == true) {
+           ocl = "daviewer.toggle_editing();";
+           tmpstr = tmpstr + "<button  onclick='"+ocl+"' data-inline='true' >";  
+           tmpstr = tmpstr + "edit";
+           tmpstr = tmpstr + "</button>";
+
+           tmpstr = tmpstr + "<br>";
+
+           lbl = "work_btns";
+           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+           tmpstr=tmpstr+"</span>";
+ 
+           lbl = "change_btns";
+           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+           tmpstr=tmpstr+"</span>";
+ 
+         }
+/*
+         lbl = "share_btns";
+         tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='display:inline-block;vertical-align:bottom;'  >"; 
+         tmpstr=tmpstr+"</span>";
+*/
+
+
+        tmpstr=tmpstr+"</div>";
+
+     }
+
  
    if (jqm_off == false) {
      if (this.is_mini == true) { 
        tmpstr=tmpstr+"<div id='' style=''  >";
-     } else if ((this.gridcols ==1) || (this.zoom == true)) { 
+     } else if (this.zoom == true) { 
+       tmpstr=tmpstr+"<div style='max-width:400px;margin:0 auto;'  >";
+     } else if (this.gridcols ==1)  { 
        tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='false' data-split-theme='d' style=''  >";
      } else if (this.gridcols == 2) {
         tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='false'  data-split-theme='d' style='' >";
@@ -78,12 +112,12 @@ viewer.prototype.draw_view = function() {
         if (this.darungs[ct] != undefined) {
 
          lbl = this.screen+"_rung_"+ct;
-         if ((jqm_off == true)  || (this.is_mini == true)) {
+         if ((jqm_off == true)  || (this.is_mini == true) || (daviewer.zoom == true)) {
               tmpstr=tmpstr+"<div id='"+lbl+"' class='my-box' style=''  >"; 
               tmpstr=tmpstr+"</div>";
          } else {
 
-            if ((this.gridcols == 1) || (this.zoom == true)) {
+            if (this.gridcols == 1) {
               cls = '';
             } else {
               cls  = this.next_gridblock(cls);
@@ -95,40 +129,17 @@ viewer.prototype.draw_view = function() {
        ct = ct + 1;
       }
  
-    if ((jqm_off == true)  || (this.is_mini == true)) {
+    if ((jqm_off == true)  || (this.is_mini == true) || (daviewer.zoom==true)) {
       tmpstr=tmpstr+"</div>";
     } else {
       tmpstr=tmpstr+"</ul>";
     }
-     tmpstr=tmpstr+"</div>";
  
-    if (this.zoom == true) {
-      tmpstr=tmpstr+"<br>";
-      tmpstr=tmpstr+"<div style='text-align:center;height:40px;' >";
-
-      if (buddah == true) {
-        ocl = "daviewer.toggle_editing();";
-        tmpstr = tmpstr + "<button  onclick='"+ocl+"' >";  
-        tmpstr = tmpstr + "<img src='deskfm/images/icons/layers.png' height='20px' >";
-        tmpstr = tmpstr + "</button>";
-      }
-
-      lbl = "share_btns";
-      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
-      tmpstr=tmpstr+"</span>";
-      lbl = "work_btns";
-      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
-      tmpstr=tmpstr+"</span>";
-      lbl = "change_btns";
-      tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
-      tmpstr=tmpstr+"</span>";
-       tmpstr=tmpstr+"</div>";
-   }
-
     lbl = this.screen;
  
     if (document.getElementById(lbl)!= null) {
         document.getElementById(lbl).innerHTML=tmpstr;
+        $('#zoom_btns').trigger("create");
 
         ct = 0;
          while (ct <= st) {
@@ -168,9 +179,17 @@ viewer.prototype.draw_view = function() {
      if (this.editing == true) {
       this.work_btns();
       this.change_btns();
-     }
+     } else {
       this.share_btns();
+     }
    }
+
+    if (this.zoom == true) {
+      if (twittr != null) {
+alert("here");
+        twittr.widgets.load();
+      }
+    }
 
     if (debug == true) {
        this.draw_debug();
@@ -219,10 +238,14 @@ viewer.prototype.share_btns = function() {
        var lbl = "";
        var ocl="";
        var cls = "";
+       var s = "";
 
-       var s = this.darungs[0].postman.pid;
+       if (this.darungs[0] != undefined) {
+          if (this.darungs[0].postman != undefined) {
+            s =  this.darungs[0].postman.pid;
+          }
+       }
 
-//       tmp = tmp + "<span class='screen-talk' >Share</span>";
        tmp = tmp + "<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://twitter.com/statuses/"+ s +"' data-count='none'></a>";
  
      lbl = 'share_btns';
@@ -250,6 +273,11 @@ viewer.prototype.work_btns = function() {
 	 tmp = tmp + "<img src='deskfm/images/icons/pencil_msg.png' height='20px' >";
 	 tmp = tmp + "</button>";
 
+	 ocl = s + ".toggle_getpic();";
+         tmp = tmp + "<button  onclick='"+ocl+"' >";  
+	 tmp = tmp + "<img src='deskfm/images/icons/camera.png' height='20px' >";
+	 tmp = tmp + "</button>";
+
 	 ocl = s + ".toggle_getlink();";
          tmp = tmp + "<button  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/link-black.jpg' height='20px' >";
@@ -265,12 +293,10 @@ viewer.prototype.work_btns = function() {
 	 tmp = tmp + "<img src='deskfm/images/icons/people_clay.png' height='20px' >";
 	 tmp = tmp + "</button>";
 
-      if (buddah == true) {
 	 ocl = s + ".toggle_getsort();";
          tmp = tmp + "<button  onclick='"+ocl+"' >";  
 	 tmp = tmp + "<img src='deskfm/images/icons/sort.png' height='20px' >";
 	 tmp = tmp + "</button>";
-      }
 
       if (this.listype == "people") {
 	 ocl = s + ".toggle_getgroup();";
@@ -287,6 +313,16 @@ viewer.prototype.work_btns = function() {
      }
 }
 
+ 
+viewer.prototype.hide_zoombtns = function() {
+       var tmp = "";
+       var lbl = "";
+ 
+     lbl = 'zoom_btns';
+     $('#'+lbl).html("");
+
+}
+
 
 
 viewer.prototype.change_btns = function() {
@@ -295,20 +331,20 @@ viewer.prototype.change_btns = function() {
      var ocl="";
      var ts = "";
 
-       if (this.changed == true) {
+      var s = "daviewer.darungs[0].postman";
+     
+       if (eval(s + ".changed") == true) {
 
-         ocl = this.varname + ".do_undo();";
-         lbl = this.rungster + "_undo_btn";
-         tmp = tmp + "<span  id='"+lbl+"'  onclick='"+ocl+"' >";
+         ocl = s + ".do_undo();";
+         tmp = tmp + "<span  id=''  onclick='"+ocl+"' >";
          tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
          tmp = tmp + "</span>";
 
           if (this.listype == "people") {
 
-	      lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_person();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_person();";
+              ocl = s+".update_person();";
+              if (eval(s + ".stored") == false) {
+ 		ocl = s+".add_person();";
 	      }
               tmp=tmp + "<span onClick='"+ocl+"'    >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
@@ -316,34 +352,31 @@ viewer.prototype.change_btns = function() {
 
          } else if (this.listype=="product") {
 
-              lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_product();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_product();";
+              ocl = s+".update_product();";
+              if (eval(s + ".stored") == false) {
+ 		ocl = s+".add_product();";
 	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
               tmp = tmp + "</span>";
 
 	 } else if (this.listype == "suppliers") {
 
-              lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_supplier();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_supplier();";
+              ocl = s+".update_supplier();";
+              if (eval(s + ".stored") == false) {
+ 		ocl = s+".add_supplier();";
 	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
               tmp = tmp + "</span>";
 
 	 } else  {
 
-       	      lbl = this.rungster + "_save_btn";
-              ocl = this.varname+".update_webit();";
-              if (this.stored == false) {
- 		ocl = this.varname+".add_webit();";
+              ocl = s+".update_webit();";
+              if (eval(s + ".stored") == false) {
+ 		ocl = s +".add_webit();";
 	      }
-              tmp=tmp + "<span id='"+lbl+"' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
               tmp = tmp + "</span>";
 
@@ -371,6 +404,7 @@ viewer.prototype.toggle_editing = function () {
 viewer.prototype.toggle_zoom = function () {
    if (this.zoom == true ) {
        this.unset_zoom();
+
    } else {
        this.set_zoom();
    }

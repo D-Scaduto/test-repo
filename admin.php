@@ -2,23 +2,22 @@
 header('Content-type: text/html; charset=utf-8 ');
 //header('X-Frame-Options: SAMEORIGIN');
 ?>
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" >
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<title>deskfm.com</title>
+<title>deskfm admin</title>
 
 <script  type="text/javascript" >
   var debug = false;
   var netson = false;
   var jqm_off = false;
-  var is_ie = false;
-
   var buddah = false;
-  var pname = "";
-
   var is_mobile = false;
   var main_shape = "";
+  var pname = "";
+  var twittr = null;
 </script>
 
 <?php
@@ -80,6 +79,7 @@ header('Content-type: text/html; charset=utf-8 ');
   var mac = null;    //farmer
   var louie = null;  //feeder 
   var jesie = null;  //namer 
+  var adoni = null;  //creator 
 
   var init_run = true;
   var got_stats = false;
@@ -131,6 +131,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/feeder.js type="text/javascript" ></script>
 <script src=deskfm/supplier.js type="text/javascript" ></script>
 <script src=deskfm/grouper.js type="text/javascript" ></script>
+<script src=deskfm/creator.js type="text/javascript" ></script>
 
 <script src=deskfm/adminer.js type="text/javascript" ></script>
 <script src=deskfm/footer.js type="text/javascript" ></script>
@@ -143,13 +144,12 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 
-    <script type="text/javascript">var switchTo5x=true;</script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "6dfd7174-b092-4b88-938a-1288cdddc134", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
- 
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
 </head>
 
 <body style='background-color:black;' >
+<!--script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script-->
 
 <div id="fb-root"></div>
 
@@ -159,19 +159,22 @@ header('Content-type: text/html; charset=utf-8 ');
        <div id='menu_spot' style='' class='' >
        </div>
        <div style="clear:right;" ></div>
-       <div id='top_view' class='' style='float:right' data-role='popup'   >
-       </div>
-       <div id='' class='' style='clear:right;' ></div>
      </div>
 
-     <div data-role='content'  class='ui-grid-a' style=''  >
-       <div id='adside_bar' class='ui-block-a' style=''  >
+     <div data-role='content'  class='' style=''  >
+
+       <div id='create_spot'  class=''  style=''   >
        </div>
-       <div id='admain_spot'  class='ui-block-b'  style=''   >
+ 
+       <div data-role=''  class='ui-grid-a' style=''  >
+         <div id='adside_bar' class='ui-block-a' style=''  >
+         </div>
+         <div id='admain_spot'  class='ui-block-b'  style=''   >
+         </div>
        </div>
      </div>
 
-   <div id='foot_spot' style='text-align:center;' data-position='fixed'  data-role='footer' data-theme='b'  >
+   <div id='foot_spot' style='text-align:center;' data-position=''  data-role='footer' data-theme='b'  >
    </div>
 
 </div>
@@ -224,11 +227,10 @@ header('Content-type: text/html; charset=utf-8 ');
 	   nicky = new sharer("share");
            joe = new supplier("manage");
            robby = new grouper("group");
+           adoni = new creator("create");
 
-   //sort,feed,manage,group  
 	
-           var   tshapes = ['sort:mac','feed:louie','group:robby','manage:joe','browse:cater']; 
-          diego = new adminer(tshapes);
+     diego = new adminer();
 
     amare.get_stats();
 
@@ -248,7 +250,9 @@ header('Content-type: text/html; charset=utf-8 ');
       });
 
 
-   $( document ).on( "pageinit", "#page_spot", function( event ) {
+//   $( document ).on( "pageinit", "#page_spot", function( event ) {
+   $( document).ready(function() {
+//alert(window.TWTR ? 'loaded' : 'not loaded');
           set_header();
           set_viewer();
    });

@@ -12,7 +12,7 @@ poster.prototype.draw_pic = function() {
 
 	cls = "piclip";
           if (daviewer.zoom == true) {
-//              cls = "piczoom";
+              cls = "piczoom";
           }
 
       ps = this.picurl;
@@ -35,32 +35,31 @@ poster.prototype.get_pic = function() {
      tmp = "";
 
      cls = "piclip";
-     if (is_mobile == true) {
-         cls = "picmobile";
-     }
-     if (this.piczoom == true)   {
+     if (daviewer.zoom == true)   {
          cls = "piczoom";
      }
 
      ps = this.picurl;
      if ( (ps == "") || (ps == undefined)) {
-            ps = "deskfm/images/icons/camera.png";
-          ocl = this.varname + ".set_shape(\"\");";
-          tmp += "<img src='"+ps+"' onclick='"+ocl+"'  width='40px' >"; 
      }  else {
-          ocl = this.varname + ".set_shape(\"\");";
-          tmp += "<img src='"+ps+"' onclick='"+ocl+"'  class='"+cls+"' >";  
+          tmp += "<img src='"+ps+"' onclick=''  class='"+cls+"' >";  
      }
   
 
         lbl = this.rungster + '_pic_spot';
         $('#'+lbl).html(tmp);
 
-         tmp = "";
+        tmp = "";
         lbl = this.rungster + "_upic_frame_name";
         tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";
         tmp = tmp + "</form>";   
+
+	 lbl = this.rungster + "_pic_url"; 
+         ocl = this.varname + ".update_picurl();";
+         tmp += "<label for='"+lbl+"' > Picture Url: </label>";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+ps+"' style='' onkeyup='"+ocl+"'  />";    
+
 
         lbl = this.rungster + '_getpic';
         if (document.getElementById(lbl) != null) {  

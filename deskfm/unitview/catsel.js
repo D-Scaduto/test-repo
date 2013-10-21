@@ -38,7 +38,7 @@
 
         lbl = this.rungster + "_who_sog";
 	tmp += "<a href='#"+lbl+"' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='' class='screen_talk'  >who,</a>";
- 	tmp +=  "<div data-role='popup' id='"+lbl+"'>";
+ 	tmp +=  "<div data-role='popup' id='"+lbl+"' style='display:inline-block;'  >";
  	tmp +=   '<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
         sugs = amare.subcat_set.get_setlist("who");
         for (var i=0;i<sugs.length;i++) {
@@ -144,7 +144,7 @@ poster.prototype.set_cats = function(pcat,psubcat) {
       $('#'+lbl).popup("close");    
  
       this.draw_catsel();
-      this.change_btns();
+      daviewer.change_btns();
 }
 
 

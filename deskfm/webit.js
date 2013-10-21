@@ -16,7 +16,7 @@ function webit(tpid) {
    }
   
    this.listype = "";
-   this.source = "deskfm";
+   this.source = "";
    this.stored = false;
 
    this.created_at = "";

@@ -32,31 +32,6 @@ supplier.prototype.show = function() {
 
          tmp = tmp + "</fieldset>"; 
 
-    if (this.shape == "by_supplier") {
-        lbl = 'new_supplier_btn';
-        ocl = this.varname + '.new_one();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
-        tmp = tmp + "new one"; 
-        tmp = tmp + "</button>"; 
-    }
-
-    if (this.shape == "by_product") {
-//         tmp = tmp + "<fieldset data-role='controlgroup'  data-type='horizontal' style='min-width:160px;'  >";
-        lbl = 'new_product_btn';
-        ocl = this.varname + '.new_one();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
-        tmp = tmp + "new one"; 
-        tmp = tmp + "</button>"; 
-/*
-        lbl = 'new_prodtype_btn';
-        ocl = this.varname + '.new_one();';
-        tmp = tmp + "<button  data-role='button' data-inline='true' data-mini='true' data-icon='plus' onclick='"+ocl+"' style=''  >";
-        tmp = tmp + "type"; 
-        tmp = tmp + "</button>"; 
-        tmp = tmp + "</fieldset>"; 
-*/
-     }
-
 
       if (main_shape == "wide") {
  
@@ -115,25 +90,6 @@ supplier.prototype.set_supplier = function(psuppid) {
     } 
 }
  
-supplier.prototype.new_one = function() {
- 
-     daviewer.new_one("suppliers");
-}
-
-
-supplier.prototype.add_product = function(prung) {
-    var g = null;
-    var t=0;
-     if (daviewer.darungs[prung].postman != null) { 
-       g = new webit();
-       g.supplier_id = daviewer.darungs[prung].postman.pid;
-       t = amare.productlist.push(g);
-       daviewer.darungs[prung].postman.mini_viewer.add_one(t-1,"suppliers");
-       daviewer.darungs[prung].postman.redraw_rung();
-     }
- 
-}
-
 
 supplier.prototype.set_shape = function(pstr) {
     if (pstr != undefined ) {

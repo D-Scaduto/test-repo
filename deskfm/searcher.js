@@ -139,9 +139,9 @@ searcher.prototype.show_btn = function() {
     var ocl = "";
 
        ocl = "diego.toggle_topshape(\"search\");";
-        if ((buddah == true) && (main_shape != "mini")) {
-          ocl = "wanda.toggle();";
-        }
+       if (buddah == true) {
+         ocl = "diego.toggle_botshape(\"search\");";
+       }
        tmp = tmp + "<button  data-role='button' data-inline='true' onclick='"+ocl+"'  style='background:white;' >";
        tmp = tmp + "<img src='deskfm/images/icons/search.png' class='menu_btn' >";
        tmp = tmp + "</button>";

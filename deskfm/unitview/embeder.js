@@ -10,17 +10,7 @@ poster.prototype.draw_embed = function() {
   var lbl = "";
 
        if ((this.embedurl == "") || (this.embedurl == undefined)) {
-            if (this.editing == true) {
-		  ocl = this.varname + ".set_shape(\"getembed\");";
-        	  tmp = tmp + "<button  onclick='"+ocl+"' >";  
-		  tmp =	tmp + "<img src='deskfm/images/icons/embed.jpg' width='25px' >";
-		  tmp = tmp + "</button>";
-	          lbl = this.rungster + '_embed_btn';
-	       	  pobj = document.getElementById(lbl);
-	          if ( pobj != null) {
-	            pobj.innerHTML = tmp;
-        	  }
-            }
+
        } else { 
               elink = this.embedurl;
 		  ocl = this.varname + ".toggle_showembed();";
@@ -84,7 +74,8 @@ poster.prototype.get_embed = function() {
          tmp = ""; 
 	 lbl = this.rungster + "_embed_addr"; 
          ocl = this.varname + ".update_embed();";
-         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"'  >";    
+         tmp += "<label for='"+lbl+"' > Embeded Media: </label>";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+tlink+"' style='' onkeyup='"+ocl+"' />";    
 
          if (this.embed_show == true ) {
            tmp = tmp + " <div style='width:250px;margin:0 auto;' > ";

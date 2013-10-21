@@ -22,9 +22,7 @@ sorter.prototype.show = function() {
 
      if (main_shape != "wide") { 
 
-       tmp = tmp + "<div class='ui-grid-a' data-inline='true'  >";
-
-         tmp += "<div  id='' class='ui-block-a' style=''  >";
+         tmp += "<div  id='' class='' style='display:inline-block;'  >";
 
 	tmp += "<label for='select-year' class='select'></label>";
  	tmp += "<select name='select-year' data-mini='true' data-inline='true' id='select-year'>";
@@ -35,7 +33,7 @@ sorter.prototype.show = function() {
   
        tmp = tmp + "</div>";
 
-         tmp += "<div  id='' class='ui-block-b' style=''  >";
+         tmp += "<div  id='' class='' style='display:inline-block;'  >";
 
 	tmp += "<label for='select-month' class='select'></label>";
  	tmp += "<select name='select-month' data-mini='true' data-inline='true' id='select-month'>";
@@ -49,9 +47,6 @@ sorter.prototype.show = function() {
           }
         }
  	tmp += "</select>";
-
-        tmp = tmp + "</div>";
-
         tmp = tmp + "</div>";
 
      } else {
@@ -63,9 +58,6 @@ sorter.prototype.show = function() {
   	tmp += "  <option value='2011'>2011</option>";
  	tmp += "</select>";
    	tmp = tmp +"<h3></h3>";
-
- //       tmp=tmp+"<div data-role='collapsible' data-inline='true' style='width:150px;' >";
- //    	tmp = tmp +"<h3>monthly</h3>";
 
    	tmp = tmp +"<ul  data-role='listview' id='' style='min-width:150px;' data-inset='true'  >";
         var sugs = amare.monthstats;
@@ -79,7 +71,6 @@ sorter.prototype.show = function() {
           }
         }
         tmp = tmp + "</ul>";
-   //     tmp=tmp+"</div>";
         tmp=tmp+"</div>";
     }
 
@@ -108,7 +99,6 @@ sorter.prototype.show = function() {
             });
          }
    } 
-
 }
 
 

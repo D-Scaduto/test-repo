@@ -11,13 +11,7 @@ poster.prototype.draw_story = function() {
 
        var tiesto = this.story;
 
-       cls = 'story';
-       if (this.is_mini == true) {
-          cls = '';
-       }
-
     if ((this.story != "") && (this.story != null)) {
-       tmp = tmp + "<span onclick='' class='"+cls+"' >";
 
        //tiesto = this.story.replace(/<br>/gi,"\n");
 
@@ -42,14 +36,7 @@ poster.prototype.draw_story = function() {
              this.changed = true;
           }
           var ps = pg;
-/*
-          if (pg.length > 75) {
-             ps = pg.substring(0,75);
-             ps = ps + " ... ";
-          }
-*/
           tmp = tmp + ps;
-         tmp = tmp + "</span>";
      }
 
       lbl = this.rungster + '_story_spot';
@@ -60,7 +47,7 @@ poster.prototype.draw_story = function() {
 
 
 poster.prototype.get_story = function() {
-   var tmpstr="";
+   var tmp="";
    var pobj=null;
    var lbl = "";
    var ocl = "";
@@ -68,21 +55,23 @@ poster.prototype.get_story = function() {
    var urlts= null;
    var tiesto = "";
 
-   tmpstr = "";
+   tmp = "";
    if (this.story != null) {
 	tiesto = this.story;
         tiesto = this.story.replace(/<br>/gi,"\n");
    } 
 
+	lbl = this.rungster + "_story_area";
          oku = this.varname + ".update_story();";
-         tmpstr = tmpstr + "<textarea id='"+this.rungster + "_story_area' data-mini='true' class='' onkeyup='"+oku+"' style=''  >";
-         tmpstr = tmpstr + tiesto;
-         tmpstr = tmpstr + "</textarea>";
+         tmp += "<label for='"+lbl+"' > Story: </label>";
+        tmp = tmp + "<textarea id='"+lbl+"' data-mini='true' class='' onkeyup='"+oku+"' style=''  >";
+         tmp = tmp + tiesto;
+         tmp = tmp + "</textarea>";
 
 
       lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
-         document.getElementById(lbl).innerHTML= tmpstr;
+         document.getElementById(lbl).innerHTML= tmp;
          var ta = this.rungster + "_story_area";
          $('#'+ta).textinput();
       }

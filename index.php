@@ -15,12 +15,11 @@ header('Content-type: text/html; charset=utf-8 ');
   var netson = false;
   var is_ie = false;
   var jqm_off = false;
-
   var buddah = false;
   var pname = "";
-
   var is_mobile = false;
   var main_shape = "";
+  var twittr = null;
 </script>
 
 <?php
@@ -146,6 +145,7 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
 </head>
 
@@ -214,7 +214,8 @@ header('Content-type: text/html; charset=utf-8 ');
           set_viewer();
       });
 
-      $( document ).on( "pageinit", "#page_spot", function( event ) {
+//      $( document ).on( "pageinit", "#page_spot", function( event ) {
+      $( document).ready(function() {
           set_header();
           set_viewer();
       });

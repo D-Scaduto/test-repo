@@ -626,8 +626,6 @@ stater.prototype.update_webit = function(pobj) {
 
      daviewer.update_one(pobj.pid,mdex,ltype);
 
-     nicky.update_one(pobj.pid,mdex,ltype);
-
 /*
       if ((pobj.groupid != "") && (pobj.groupid != undefined)) {
         fnd = -1;

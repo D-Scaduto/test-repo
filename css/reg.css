@@ -7,16 +7,11 @@
        margin-top:15px;
     }
 
-    .menu_sub {
-        display:inline;
-     }
-
-
     #adside_bar {
        width:100%;
        float:none;
-       padding:0 0 10px;
-        text-align:right;
+       padding-bottom:10px;
+       text-align:right;
      }
 
      #admain_spot {
@@ -24,17 +19,13 @@
        float:none;
      }
 
-     #side_bar {
-       width:100%;
-     }
-
      #main_spot {
        width:100%;
      }
 
 
-       .menu_btn {
-        width:25px;
+     .menu_btn {
+       width:25px;
        background-color:white;
      }
 

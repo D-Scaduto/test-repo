@@ -2,7 +2,6 @@
 
 function set_header() {
 
-
           if ($(window).width() < 600) {
 
             if (main_shape != "mini") {
@@ -46,10 +45,17 @@ function set_viewer() {
           } else {
 
            if ($(window).width() > 1000) {
-             if ((buddah == false) || (diego.top_shape == "")) {
-                if (daviewer.gridcols != 4) {
-                  daviewer.gridcols=4;
-                  daviewer.draw_view();
+              if (buddah == true) {
+                if (diego.bot_shape == "") {
+                  if (daviewer.gridcols != 4) {
+                    daviewer.gridcols=4;
+                    daviewer.draw_view();
+                  }
+                } else {
+                  if (daviewer.gridcols != 3) {
+                    daviewer.gridcols=3;
+                    daviewer.draw_view();
+                  }
                 }
               } else {
                  if (daviewer.gridcols != 3) {
@@ -60,10 +66,17 @@ function set_viewer() {
 
             } else {
                if ($(window).width() > 800) {
-                  if ((buddah == false) || (diego.top_shape == "")) {
-                    if (daviewer.gridcols != 3) {
-                      daviewer.gridcols=3;
-                      daviewer.draw_view();
+                  if (buddah == true) {
+                    if (diego.bot_shape == "") {
+                      if (daviewer.gridcols != 3) {
+                        daviewer.gridcols=3;
+                        daviewer.draw_view();
+                      }
+                    } else {
+                      if (daviewer.gridcols != 2) {
+                        daviewer.gridcols=2;
+                        daviewer.draw_view();
+                      }
                     }
                   } else {
                     if (daviewer.gridcols != 2) {

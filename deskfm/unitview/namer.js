@@ -11,19 +11,14 @@ poster.prototype.draw_name = function() {
    cls = "";
 
    if (this.uname == "")   {
-
-         if (this.editing == true) {
-            ocl = this.varname + ".set_shape(\"getname\");";
-            ps = "deskfm/images/icons/people_clay.png";
-            tmp += "<img src='"+ps+"' onclick='"+ocl+"' width='40px'  class='' >"; 
-         } 
  
    } else {
-      if (this.source == "twitter") {
-//       tlink =  = "http://twitter.com/Support/status/" + this.pid;
-         tlink =  "http://twitter.com/" + this.uname;
-          tmp = tmp + this.uname;
-//          tmp = "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";
+      if ((this.source == "twitter") && (daviewer.zoom == true)) {
+
+          tlink =  "http://twitter.com/Support/status/" + this.pid;
+ //        tlink =  "http://twitter.com/" + this.uname;
+          tmp += "<a href='"+tlink+"' target='_blank' >"+this.uname+"</a>";
+
       } else {
           tmp = tmp + this.uname;
       }

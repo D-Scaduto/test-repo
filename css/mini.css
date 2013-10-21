@@ -18,17 +18,13 @@
      #adside_bar {
        width:100%;
        float:none;
-       padding: 0 0 10px;
+       padding-bottom:10px;
        text-align:right;
      }
 
      #admain_spot {
        width:100%;
        float:none;
-     }
-
-     #side_bar {
-       width:100%;
      }
 
      #main_spot {
@@ -46,10 +42,6 @@
         padding:0 0 0;
     }
  
-   .menu_sub {
-        display:inline;
-     }
-
      #chip_rail {
         width:100%;
         float:none;       
