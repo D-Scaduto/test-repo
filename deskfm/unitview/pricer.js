@@ -70,7 +70,7 @@ poster.prototype.update_price = function() {
           }
      }
      this.get_price();
-     this.change_btns(); 
+     daviewer.change_btns(); 
 }
 
 

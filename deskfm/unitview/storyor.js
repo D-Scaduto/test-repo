@@ -37,6 +37,12 @@ poster.prototype.draw_story = function() {
           }
           var ps = pg;
           tmp = tmp + ps;
+     } else {
+
+        if (this.listype == "newbie") {
+          tmp += "new one";
+        }
+
      }
 
       lbl = this.rungster + '_story_spot';
@@ -62,18 +68,20 @@ poster.prototype.get_story = function() {
    } 
 
 	lbl = this.rungster + "_story_area";
-         oku = this.varname + ".update_story();";
-         tmp += "<label for='"+lbl+"' > Story: </label>";
-        tmp = tmp + "<textarea id='"+lbl+"' data-mini='true' class='' onkeyup='"+oku+"' style=''  >";
-         tmp = tmp + tiesto;
-         tmp = tmp + "</textarea>";
+        oku = this.varname + ".update_story();";
+        tmp += "<label for='"+lbl+"' > Story: </label>";
+        tmp = tmp + "<textarea id='"+lbl+"' data-mini='true' class='' onkeyup='"+oku+"' style='height:125px;width:225px;' data-inline='true'  >";
+        tmp = tmp + tiesto;
+        tmp = tmp + "</textarea>";
 
 
       lbl = this.rungster + '_story_spot';
       if ( document.getElementById(lbl) != null ) {
          document.getElementById(lbl).innerHTML= tmp;
          var ta = this.rungster + "_story_area";
-         $('#'+ta).textinput();
+         if (jqm_off == false) {
+           $('#'+ta).textinput();
+         }
       }
    
 }
@@ -95,7 +103,10 @@ poster.prototype.update_story = function() {
           this.story = bill.replace(/[\n]{1}/gi,"<br>");
           this.changed = true;
 	  this.story_changed = true;
-          this.change_btns(); 
+          if (this.listype == "newbie") {
+             amare.newbielist[this.dadex].story = this.story;
+          }
+          daviewer.change_btns(); 
           obj.focus();
       }
 

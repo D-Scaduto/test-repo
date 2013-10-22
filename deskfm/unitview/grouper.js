@@ -49,7 +49,7 @@ poster.prototype.set_group = function(pgroupid) {
            this.changed = true;
 	   this.group_changed = false;
            this.draw_groups();
-           this.change_btns();
+           daviewer.change_btns();
       } 
 }
 

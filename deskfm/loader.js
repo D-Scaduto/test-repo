@@ -1,4 +1,32 @@
 
+viewer.prototype.load_newbie_list = function() {
+
+    var lgo = true;
+    var d = 0;
+    var mx = 0;
+    var ro = null;
+    var ok = false;
+    var obj = null;
+    this.stats = amare.total_newbies;
+    var st = 0;
+    this.dalist = [];
+    mx = amare.newbielist.length;
+      for (var r=d; r<mx;r++) {
+        ro = amare.newbielist[r];
+        if (ro != undefined) {
+              obj = new listdex();
+              obj.mdex = r;
+	      obj.ltype = "newbie";
+              this.dalist.push(obj);
+              d = d+1 
+        }
+    } 
+    this.load_rungs(st);
+    this.draw_view();
+}
+
+
+
 viewer.prototype.load_search_list = function(pterms) {
 
    this.sterms = "";

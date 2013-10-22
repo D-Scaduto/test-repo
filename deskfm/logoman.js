@@ -34,8 +34,13 @@ logoman.prototype.show = function () {
         } else {
          tmp=tmp+"<span onclick='"+ocl+"' class='' style='background-color:white;' >";
         }
-      
-        tmp = tmp + this.shape + " Desks ";
+
+        if (buddah == true) {      
+          tmp = tmp + "DeskFM  ";
+        } else {
+           tmp = tmp + this.shape + " Desks ";
+        }
+ 
         tmp=tmp+"</span>";
       
 

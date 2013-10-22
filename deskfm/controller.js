@@ -73,7 +73,6 @@ viewer.prototype.goto_end = function() {
 
 
 viewer.prototype.to_top = function(trung) {
-	
    this.redraw_rungs(trung);
 
    window.scroll(0,0);
@@ -207,18 +206,23 @@ viewer.prototype.redraw_view = function() {
 	    this.load_group_list(this.stats.groupid,start);
 
          }  else if (this.stats.listype == "unsaved") {
-
 	    this.load_unsaved_list();
-
+         }   else if (this.stats.listype == "newbie") {
+	    this.load_newbie_list();
          } 
     }
 }
 
 
 viewer.prototype.clear_list = function() {
+
+    this.stats = new stat();
+    this.stats.lnum = 0;
+    this.stats.cnum = 0;
+
     this.dalist = [];
     this.darungs= [];
-    this.hide_screen();
+    this.draw_view();
 }
 
 
@@ -311,33 +315,6 @@ viewer.prototype.update_person = function(pname) {
   } 
 }
 
-
-viewer.prototype.add_one = function(mdex,ltype) {
-
-   var t = null;
-   var o = new Object();
-   o.mdex = mdex;
-   o.ltype = ltype;  
-   this.dalist.unshift(o);
-   this.load_rungs();  
-   this.draw_view(); 
-
-}
-
-
-viewer.prototype.new_one = function(ltype) {
-
-   var t = null;
-   var o = new Object();
-   o.mdex = -1;
-   o.ltype = ltype;  
-   this.dalist.unshift(o);
-   this.zoom=true;
-   this.editing=true;
-   this.load_rungs();  
-   this.draw_view(); 
-
-}
 
 
 
@@ -467,7 +444,6 @@ viewer.prototype.redraw_rungs = function(trungdex) {
              rd = this.darungs[c].vdex;
 	     if (this.dalist[rd] != undefined) {
 	       lt = this.dalist[rd].ltype;
-
                if (lt == "webits") {
                  if (amare.webitlist[rd] != null) {
                    darungs2[a].vdex = rd;
@@ -498,6 +474,13 @@ viewer.prototype.redraw_rungs = function(trungdex) {
                    a = a+1;
                  }
                }
+	       if (lt == "newbie") {
+                 if (amare.newbielist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
+               }
+
 	     } else {
 //		     alert(rd);
 	     }
@@ -538,6 +521,12 @@ viewer.prototype.redraw_rungs = function(trungdex) {
                }
 	       if (lt == "unsaved") {
                  if (amare.unsavedlist[rd] != null) {
+                   darungs2[a].vdex = rd;
+                   a = a+1;
+                 }
+               }
+	       if (lt == "newbie") {
+                 if (amare.newbielist[rd] != null) {
                    darungs2[a].vdex = rd;
                    a = a+1;
                  }

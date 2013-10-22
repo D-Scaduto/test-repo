@@ -161,10 +161,7 @@ header('Content-type: text/html; charset=utf-8 ');
        <div style="clear:right;" ></div>
      </div>
 
-     <div data-role='content'  class='' style=''  >
-
-       <div id='create_spot'  class=''  style=''   >
-       </div>
+     <div data-role='content'  class='' style='padding:0;'  >
  
        <div data-role=''  class='ui-grid-a' style=''  >
          <div id='adside_bar' class='ui-block-a' style=''  >
@@ -229,7 +226,6 @@ header('Content-type: text/html; charset=utf-8 ');
            robby = new grouper("group");
            adoni = new creator("create");
 
-	
      diego = new adminer();
 
     amare.get_stats();

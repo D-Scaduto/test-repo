@@ -16,7 +16,7 @@ grouper.prototype.show = function() {
      var s = "";
 
      if (main_shape != "wide") {
- 
+ 	tmp += "<div>";
 	tmp += "<label for='select-group' class='select'></label>";
  	tmp += "<select name='select-group' data-mini='true' data-inline='true' id='select-group'>";
         sugs = amare.group_set.get_setlist();
@@ -25,6 +25,7 @@ grouper.prototype.show = function() {
           tmp += "  <option value='"+sugs[i].groupid+"' >"+sugs[i].text+"</option>";
         }
 	tmp += "</select>";
+	tmp += "</div>";
 
      } else {
  

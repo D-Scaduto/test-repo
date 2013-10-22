@@ -80,7 +80,9 @@ poster.prototype.get_link = function() {
        if ( pobj != null) {
          pobj.innerHTML = tmp;
  	 var ta = this.rungster + "_link_addr"; 
-         $('#'+ta).textinput();
+         if (jqm_off == false) {
+           $('#'+ta).textinput();
+         }
        }
        
 }
@@ -100,7 +102,10 @@ poster.prototype.update_link = function() {
            this.linkurl = tv;
            this.changed = true;
 	   this.link_changed = true;
-           this.change_btns();
+           if (this.listype == "newbie") {
+              amare.newbielist[this.dadex].linkurl = this.linkurl;
+           }
+           daviewer.change_btns();
         }
         pobj.focus();
      }

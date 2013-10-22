@@ -10,8 +10,8 @@ function stat () {
     this.year;
     this.desc="";
     this.listype="";
-    this.lnum;
-    this.cnum;
+    this.lnum =0;
+    this.cnum =0;
     this.last_chunk = -1;
     this.max_chunks;
 }
@@ -25,6 +25,7 @@ function stater () {
    this.supplierlist = [];
    this.unsortedlist = [];
    this.unsavedlist = [];
+   this.newbielist = [];
 
    this.substats = [];
    this.prodstats = [];
@@ -38,6 +39,9 @@ function stater () {
    this.total_suppliers = new stat();
    this.total_unsorted = new stat();
    this.total_unsaved = new stat();
+
+   this.total_newbies = new stat();
+   this.total_newbies.listype="newbie";
 
    this.cat_set = new cat_provider();
    this.subcat_set = new subcat_provider();
@@ -170,7 +174,7 @@ stater.prototype.update_stats = function (statobj) {
                  dt.month = "all";
   		 dt.year = bd.getFullYear();
                  daviewer.load_unsorted_list(dt);
-              //   daviewer.load_random_list();
+//                 daviewer.load_random_list();
             }
           } else {
             if (this.got_webits == true) {
@@ -248,6 +252,17 @@ stater.prototype.update_webits = function(listobj) {
 }  
 
 
+stater.prototype.del_newbie = function(ndex) {
+
+    // splice dex, redraw_view
+    
+    this.newbielist.splice(ndex,1);
+    daviewer.redraw_view(); 
+
+}
+
+
+ 
 stater.prototype.add_unsorted = function(listobj,bgrnd) {
        var r = 0;
        var found = false;
@@ -295,7 +310,6 @@ stater.prototype.add_unsorted = function(listobj,bgrnd) {
  		 var dt = new Object;
 		 dt.month = "all";
                  daviewer.load_unsorted_list(dt);
-  //                daviewer.randomize_rungs();
                }
            }
       } else {

@@ -8,7 +8,7 @@
        var pobj = null;
 
 //      if ((this.source == "twitter") && (daviewer.zoom == true) && (twittr != null)) {
-      if ((this.source == "twitter") && (daviewer.zoom == true)) {
+      if ((this.source == "twitter") && (daviewer.zoom == true) && (false)) {
 //         tmpstr += " <blockquote class='twitter-tweet'><a href='http://twitter.com/"+this.uname+"/status/"+this.pid+"' >link</a></blockquote>";
            tmpstr=tmpstr+"<div id='twembed_spot'  src='' style=''  >"; 
            tmpstr=tmpstr+"</div>";
@@ -25,9 +25,8 @@
 	        tmpstr=tmpstr+"</p>";
            } else {
 
-              if ((this.varname != "adoni.postman") && (daviewer.zoom == false))  {
-                  ocl = "daviewer.to_top("+this.rung+");";
-                  ocl = ocl + "daviewer.toggle_zoom();";
+              if (daviewer.zoom == false)  {
+                  ocl = "daviewer.zoom=true;daviewer.to_top("+this.rung+");";
 	          tmpstr=tmpstr+"<a href='#'  class='' onclick='"+ocl+"' style='white-space:normal;' >";
               }
 
@@ -40,7 +39,7 @@
                     cls = "storyzoom";
                   }
 	          lbl= this.rungster + "_story_spot";
-                  tmpstr=tmpstr+"<div id='"+lbl+"'  class='"+cls+"'   style='' >"; 
+                  tmpstr=tmpstr+"<div id='"+lbl+"'  class='"+cls+"'   style='display:inline;' >"; 
                   tmpstr=tmpstr+"</div>";	
 
  		  lbl= this.rungster + "_link_btn";
@@ -57,7 +56,7 @@
 
 	          tmpstr=tmpstr+"<div style='clear:both;' ></div>";	
 
-               if ((this.varname != "adoni.postman") && (daviewer.zoom == false))  {
+               if (daviewer.zoom == false)  {
                     if (this.listype == "products") {
                       lbl= this.rungster + "_buy_spot";
                       tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='' >"; 
@@ -67,12 +66,8 @@
 	              tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='' >";
                       tmpstr=tmpstr+"</span>";
                     }
-
                  tmpstr=tmpstr+"</a>";	
                } 
-
-
-              
 
                if ((this.listype == "people") || (this.listype == "suppliers"))  {
 
@@ -85,7 +80,7 @@
                   tmpstr=tmpstr+"</span>";
                }
 
-               if ((daviewer.zoom == true) || (this.varname =="adoni.postman")) {
+               if (daviewer.zoom == true) {
 
                     if (this.listype == "products") {
                       lbl= this.rungster + "_buy_spot";
@@ -115,9 +110,9 @@
 
                   if (this.shape == "getpic") {
   	              lbl= this.rungster + "_getpic";
-	              tmpstr=tmpstr+"<div  id='"+lbl+"' style='float:right;' >";
+	              tmpstr=tmpstr+"<div  id='"+lbl+"' style='' >";
                       tmpstr=tmpstr+"</div>";
-                      tmpstr=tmpstr+"<div style='clear:right;' ></div>";
+//                      tmpstr=tmpstr+"<div style='clear:right;' ></div>";
 
   	              lbl= this.rungster + "_upic_frame";
 		      var z = "";
@@ -154,8 +149,10 @@
 
 poster.prototype.draw_rung = function() {
 
-      if ((this.source == "twitter") && (daviewer.zoom == true)) {
-          $.getJSON("https://api.twitter.com/1/statuses/oembed.json?id="+this.pid+"&align=center&callback=?", function(data)
+      if ((this.source == "twitter") && (daviewer.zoom == true) && (false)) {
+        var s = "https://api.twitter.com/1/statuses/oembed.json?id="+this.pid+"&align=center&callback=?";
+       //   alert(s);
+          $.getJSON(s, function(data)
            {$('#twembed_spot').html(data.html);
           });
  
@@ -244,10 +241,6 @@ poster.prototype.draw_rung = function() {
           }
 
       $('#'+this.rungster).trigger("create");
-
-        if (this.varname == "adoni.postman") {
-           adoni.change_btns();
-        }
    
         if (debug == true) {
           this.draw_debug();

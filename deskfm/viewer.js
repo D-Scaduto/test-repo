@@ -54,43 +54,8 @@ viewer.prototype.draw_view = function() {
 
       if (this.zoom == true) {
          st = 1;
-         tmpstr=tmpstr+"<div style='clear:both;' ></div>";
+      } 
 
-         tmpstr=tmpstr+"<div id='zoom_btns' style='max-width:400px;margin:0 auto;' >";
-
-         tmpstr += "<a href='#' data-role='button' onclick='daviewer.unset_zoom();' style='' data-inline='true' >";
-         tmpstr += "unzoom";
-         tmpstr += "</a>";
-
-         if (buddah == true) {
-           ocl = "daviewer.toggle_editing();";
-           tmpstr = tmpstr + "<button  onclick='"+ocl+"' data-inline='true' >";  
-           tmpstr = tmpstr + "edit";
-           tmpstr = tmpstr + "</button>";
-
-           tmpstr = tmpstr + "<br>";
-
-           lbl = "work_btns";
-           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
-           tmpstr=tmpstr+"</span>";
- 
-           lbl = "change_btns";
-           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
-           tmpstr=tmpstr+"</span>";
- 
-         }
-/*
-         lbl = "share_btns";
-         tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='display:inline-block;vertical-align:bottom;'  >"; 
-         tmpstr=tmpstr+"</span>";
-*/
-
-
-        tmpstr=tmpstr+"</div>";
-
-     }
-
- 
    if (jqm_off == false) {
      if (this.is_mini == true) { 
        tmpstr=tmpstr+"<div id='' style=''  >";
@@ -99,7 +64,7 @@ viewer.prototype.draw_view = function() {
      } else if (this.gridcols ==1)  { 
        tmpstr=tmpstr+"<ul id='lv' data-role='listview' data-inset='false' data-split-theme='d' style=''  >";
      } else if (this.gridcols == 2) {
-        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='false'  data-split-theme='d' style='' >";
+        tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-a' data-inset='false'  data-split-theme='d' style='' data-corners='' >";
      } else if (this.gridcols == 3) {
         tmpstr=tmpstr+"<ul  id='lv'  data-role='listview'  class='ui-grid-b'  data-inset='false'  data-split-theme='d'  style=''  >";
      } else if (this.gridcols == 4) {
@@ -134,6 +99,42 @@ viewer.prototype.draw_view = function() {
     } else {
       tmpstr=tmpstr+"</ul>";
     }
+ 
+      if (this.zoom == true) {
+         st = 1;
+         tmpstr=tmpstr+"<div style='clear:both;' ></div>";
+
+         tmpstr=tmpstr+"<div id='zoom_btns' style='max-width:400px;margin:0 auto;' >";
+
+         tmpstr += "<a href='#' data-role='button' onclick='daviewer.unset_zoom();' style='' data-inline='true' >";
+         tmpstr += "unzoom";
+         tmpstr += "</a>";
+
+         if (buddah == true) {
+           ocl = "daviewer.toggle_editing();";
+           tmpstr = tmpstr + "<button  onclick='"+ocl+"' data-inline='true' >";  
+           tmpstr = tmpstr + "edit";
+           tmpstr = tmpstr + "</button>";
+
+           tmpstr = tmpstr + "<br>";
+
+           lbl = "work_btns";
+           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+           tmpstr=tmpstr+"</span>";
+ 
+           lbl = "change_btns";
+           tmpstr=tmpstr+"<span id='"+lbl+"' class='' style=''  >"; 
+           tmpstr=tmpstr+"</span>";
+ 
+         }
+/*
+         lbl = "share_btns";
+         tmpstr=tmpstr+"<span id='"+lbl+"' class='' style='display:inline-block;vertical-align:bottom;'  >"; 
+         tmpstr=tmpstr+"</span>";
+*/
+
+        tmpstr=tmpstr+"</div>";
+     }
  
     lbl = this.screen;
  
@@ -331,57 +332,69 @@ viewer.prototype.change_btns = function() {
      var ocl="";
      var ts = "";
 
-      var s = "daviewer.darungs[0].postman";
-     
-       if (eval(s + ".changed") == true) {
+      var e = eval("daviewer.darungs[0]");
+      if (e == undefined) {
+          return;
+      }
 
-         ocl = s + ".do_undo();";
-         tmp = tmp + "<span  id=''  onclick='"+ocl+"' >";
-         tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
-         tmp = tmp + "</span>";
+      e = eval("daviewer.darungs[0].postman");
+      if (e == undefined) {
+          return;
+      }
+     
+          if (e.listype == "newbie") {
+            ocl =  "amare.del_newbie();";
+            tmp = tmp + "<button  id=''  onclick='"+ocl+"' >";
+            tmp = tmp + "delete";
+            tmp = tmp + "</button>";
+          } else {
+            ocl = s + ".do_undo();";
+            tmp = tmp + "<button  id=''  onclick='"+ocl+"' >";
+            tmp = tmp + "<img src='deskfm/images/icons/black_undo.png' height='20px' >";
+            tmp = tmp + "</button>";
+          }
 
           if (this.listype == "people") {
 
               ocl = s+".update_person();";
-              if (eval(s + ".stored") == false) {
+              if (e.stored == false) {
  		ocl = s+".add_person();";
 	      }
-              tmp=tmp + "<span onClick='"+ocl+"'    >";  
+              tmp=tmp + "<button onClick='"+ocl+"'    >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
          } else if (this.listype=="product") {
 
               ocl = s+".update_product();";
-              if (eval(s + ".stored") == false) {
+              if (e.stored == false) {
  		ocl = s+".add_product();";
 	      }
-              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<button id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
 	 } else if (this.listype == "suppliers") {
 
               ocl = s+".update_supplier();";
-              if (eval(s + ".stored") == false) {
+              if (e.stored == false) {
  		ocl = s+".add_supplier();";
 	      }
-              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<button id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
 	 } else  {
 
               ocl = s+".update_webit();";
-              if (eval(s + ".stored") == false) {
+              if (e.stored == false) {
  		ocl = s +".add_webit();";
 	      }
-              tmp=tmp + "<span id='' onClick='"+ocl+"'  >";  
+              tmp=tmp + "<button id='' onClick='"+ocl+"'  >";  
               tmp = tmp + "<img src='deskfm/images/icons/up_arrow_circle.png' height='20px' >";
-              tmp = tmp + "</span>";
+              tmp = tmp + "</button>";
 
  	  } 
-       } 
 
      lbl = 'change_btns';
      pobj = document.getElementById(lbl);
@@ -413,10 +426,6 @@ viewer.prototype.toggle_zoom = function () {
 
 viewer.prototype.unset_zoom = function() {
    this.zoom = false;
-
-   var s = this.varname + ".darungs[0].postman.shape=\"\"";
-   eval(s);
-
    this.draw_view();
 }
 

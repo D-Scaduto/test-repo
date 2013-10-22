@@ -46,13 +46,16 @@ poster.prototype.get_name = function() {
         }
  
     lbl = this.rungster + '_name_box';
+    tmp += "<label for='"+lbl+"' > Name: </label>";
     tmp =tmp + "<input size=15 value='"+tval+"' id='"+lbl+"' onclick='' type=text' > ";
 
     lbl = this.rungster + '_name_spot';
     if (document.getElementById(lbl)!=null) {
         document.getElementById(lbl).innerHTML=tmp; 
         var ta = this.rungster + '_name_box';
-        $('#'+ta).textinput();
+        if (jqm_off == false) {
+          $('#'+ta).textinput();
+        }
     } 
 }
 

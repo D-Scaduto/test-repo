@@ -1,10 +1,10 @@
 
 function adminer () {
 
-   this.bot_shapes = ['search:wanda','sort:mac','feed:louie','group:robby','manage:joe','browse:cater']; 
+   this.bot_shapes = ['search:wanda','sort:mac','feed:louie','group:robby','manage:joe','browse:cater','create:adoni']; 
    this.bot_shape = "";
-
    this.varname = "diego";
+
 }	
 
 adminer.prototype.show = function () {
@@ -127,20 +127,20 @@ adminer.prototype.draw_right = function () {
         tmp = tmp + "<img  src='deskfm/images/icons/people_blob.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
- 
-     lbl = 'share_btn';
-       ocl = 'adoni.toggle();'
+
+      lbl = 'create_btn';
+       ocl = 'diego.toggle_botshape(\"create\");'
         tmp = tmp + "<span   id='"+lbl+"' class='mybtns' style=''  >";
         tmp = tmp + "<button data-role='button' data-inline='true' onclick='"+ocl+"'  style='' >";
         tmp = tmp + "<img  src='deskfm/images/icons/share.png'  class='menu_btn'  >";
         tmp = tmp + "</button>";
         tmp = tmp + "</span>";
-   
-    tmp = tmp + "</div>";
 
-    lbl = 'right_spot';
-    $('#'+lbl).html(tmp); 
-    $('#'+lbl).trigger("create");
+       tmp = tmp + "</div>";
+
+     lbl = 'right_spot';
+     $('#'+lbl).html(tmp); 
+     $('#'+lbl).trigger("create");
 }
 
 adminer.prototype.draw_bot = function () {
@@ -149,13 +149,13 @@ adminer.prototype.draw_bot = function () {
     var tmp = "";
  
     ocl = 'daviewer.prev();'
-    tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true'  data-icon='arrow-d' data-iconpos='notext'>prev</a>";
+    tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true'  data-icon='arrow-l' data-iconpos='notext'>prev</a>";
 
     tmp = tmp + "<div id='rail_spot' class='' style='display:inline;text-align:center;'  >";
     tmp = tmp + "</div>";
  
     ocl = 'daviewer.next();'
-    tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true'  data-icon='arrow-u' data-iconpos='notext'  style='float:right;'  >next</a>";
+    tmp += "<a href='#' onclick='"+ocl+"' data-role='button' data-inline='true'  data-icon='arrow-r' data-iconpos='notext'  style='float:right;'  >next</a>";
  
     lbl = 'bot_spot';
     $('#'+lbl).html(tmp); 
@@ -163,6 +163,7 @@ adminer.prototype.draw_bot = function () {
     dale.show();
 
 }
+
  
 adminer.prototype.draw_sidebar = function () {
 
@@ -170,26 +171,26 @@ adminer.prototype.draw_sidebar = function () {
      var tmp = "";
      var ocl = "";
 
-      tmp = tmp + "<div id='search_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='search_spot' class='' style=''  >";
       tmp = tmp + "</div>";
  
-      tmp = tmp + "<div id='browse_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='browse_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='sort_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='sort_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='feed_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='feed_spot' class='' style=''  >";
       tmp = tmp + "</div>";
   
-      tmp = tmp + "<div id='group_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='group_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-      tmp = tmp + "<div id='manage_spot' class='' style='display:inline;'  >";
+      tmp = tmp + "<div id='manage_spot' class='' style=''  >";
       tmp = tmp + "</div>";
 
-   //   tmp = tmp + "<div  id='' class='' style='clear:both;'  ></div>";
-   //   tmp = tmp + "<br>";
+      tmp = tmp + "<div id='create_spot' class='' style=''  >";
+      tmp = tmp + "</div>";
 
      lbl = 'adside_bar';
      $('#'+lbl).html(tmp); 

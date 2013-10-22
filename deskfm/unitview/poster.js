@@ -69,7 +69,6 @@ function poster(idtogo,trung,tparvar,tvarname,bmini) {
 poster.prototype.set_ppid = function(pdadex,plistype) {
    var s = "";
    var pobj = null;
-
    
    if (pdadex != undefined) {
      this.dadex = pdadex;
@@ -78,10 +77,6 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
    if (plistype != undefined) {
        this.listype = plistype;
    } 
-
-   if (this.dadex == -1) {
-      pobj = new webit();
-   } else {
 
     this.stored = true;
     if (this.listype == "webits") {
@@ -97,10 +92,13 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
     } else if (this.listype == "unsaved") {
         s =  "amare.unsavedlist[" + pdadex + "]";
 	this.stored = false;
+    } else if (this.listype == "newbie") {
+        s =  "amare.newbielist[" + pdadex + "]";
+	this.stored = false;
     } 
 
     pobj = eval(s);
-  }
+  
     if (pobj != null) {
 
       this.pid=pobj.pid;
@@ -116,7 +114,7 @@ poster.prototype.set_ppid = function(pdadex,plistype) {
       this.linkurl=pobj.linkurl;
       this.story=pobj.story;         
 
-      if (pobj.listype == "webits") {
+      if ((pobj.listype == "webits") || (pobj.listype == "newbie") || (pobj.listype == "unsaved")) {
         this.cat=pobj.cat;
         this.subcat=pobj.subcat;
 
@@ -342,13 +340,14 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-  //   alert(url);
+     alert(url);
      $.getJSON(url,function(json) {
           daviewer.editing = false;
           amare.update_webit(json.pobj);
      });
      sal.waiting();
 }
+
 
 
  poster.prototype.update_webit = function() {
@@ -392,7 +391,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-  //   alert(url);
+     alert(url);
      $.getJSON(url,function(json) {
            daviewer.editing = false;
           amare.update_webit(json.pobj);
@@ -529,7 +528,7 @@ poster.prototype.update_product = function() {
      this.pic_changed = false;
      this.link_changed = false;
      this.embed_changed = false;   
-     alert(url);
+//     alert(url);
      $.getJSON(url,function(json) {
            daviewer.editing = false;
           amare.update_supplier(json.pobj);

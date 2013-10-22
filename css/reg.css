@@ -10,14 +10,18 @@
     #adside_bar {
        width:100%;
        float:none;
-       padding-bottom:10px;
        text-align:right;
+       vertical-align:center;
+       border:3px;
+       padding-bottom:10px;
+       background-color:cyan;
      }
 
      #admain_spot {
        width:100%;
        float:none;
-     }
+      border:5px; 
+    }
 
      #main_spot {
        width:100%;

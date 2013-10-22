@@ -33,7 +33,6 @@ categor.prototype.show_popups = function() {
     var sugs = [];
     var tstat = null;
 
-  tmp = tmp + "<div  class='screen_talk' style='display:inline;'  >";
      if (this.subcat != "" ) {
         s  = amare.subcat_set.get_desc(this.cat,this.subcat); 
         var w = this.cat + "_sog";
@@ -57,7 +56,6 @@ categor.prototype.show_popups = function() {
 
    } else { 
 
-//   if ((this.cat != "who" ) || (this.subcat == "")) {
 	tmp += "<a href='#who_sog' data-rel='popup' data-role='' data-theme='e' data-inline='true' style='text-decoration:none;' class='screen_talk'  > who ? </a>";
  	tmp +=  "<div data-role='popup' id='who_sog' style='display:inline;' >";
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d" data-inline="true" >';
@@ -75,10 +73,7 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
- //   }
 
-
-//   if ((this.cat != "what" )  || (this.subcat == "")) {
         tmp += '<a href="#what_sog" data-rel="popup" data-role="" data-inline="true"  data-theme="e" data-transition="" style="text-decoration:none;" class="screen_talk"  > what ? </a>';
  	tmp += '<div data-role="popup" id="what_sog" data-theme="d"  style="display:inline;"  >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
@@ -97,10 +92,7 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '   </ul>';
  	tmp +=  '</div>';
- //   }
 
-
- //  if ((this.cat != "why" )  || (this.subcat == "")) {
         tmp += '<a href="#why_sog" data-rel="popup" data-role="" data-inline="true" data-transition=""  data-theme="e"  style="text-decoration:none;" class="screen_talk"  > why ? </a>';
  	tmp += '<div data-role="popup" id="why_sog" data-theme="d" style="display:inline-block;" >';
  	tmp +=   '  <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
@@ -119,9 +111,7 @@ categor.prototype.show_popups = function() {
         }
    	tmp +=   '  </ul>';
  	tmp +=  '</div>';
- //    }
 
-//     if ((this.cat != "how" )  || (this.subcat == "")) {
         tmp += '<a href="#how_sog" data-rel="popup" data-role="" data-inline="true" data-transition=""  data-theme="e"   style="text-decoration:none;"  class="screen_talk"  > how ?</a>';
  	tmp += '<div data-role="popup" id="how_sog" data-theme="d"  style="display:inline-block;" >';
  	tmp +=   '     <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">';
@@ -141,16 +131,12 @@ categor.prototype.show_popups = function() {
  	tmp +=  '</div>';
      }
 
-//    }
-
-    tmp +=  '</div>';
-
     lbl = this.spotid;
     $('#'+lbl).html(tmp);
     $('#'+lbl).trigger("create");    
     this.showing = true;
-            s = "subcat_sog"; 
-            $('#'+s).trigger("create");    
+    s = "subcat_sog"; 
+    $('#'+s).trigger("create");    
  
 }
 

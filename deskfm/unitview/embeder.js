@@ -90,7 +90,9 @@ poster.prototype.get_embed = function() {
        if ( pobj != null) {
          pobj.innerHTML = tmp;
  	 var ta = this.rungster + "_embed_addr"; 
-         $('#'+ta).textinput();
+         if (jqm_off == false) {
+           $('#'+ta).textinput();
+         }
        }
  
 }
@@ -109,7 +111,10 @@ poster.prototype.update_embed = function() {
           this.embedurl = tv;
           this.changed = true;
 	  this.embed_changed = true;
-          this.change_btns();
+          if (this.listype == "newbie") {
+              amare.newbielist[this.dadex].embedurl = this.embedurl;
+          }
+          daviewer.change_btns();
         }
         pobj.focus();
      }

@@ -44,28 +44,54 @@ poster.prototype.get_pic = function() {
      }  else {
           tmp += "<img src='"+ps+"' onclick=''  class='"+cls+"' >";  
      }
-  
 
         lbl = this.rungster + '_pic_spot';
         $('#'+lbl).html(tmp);
 
         tmp = "";
-        lbl = this.rungster + "_upic_frame_name";
+ 	 lbl = this.rungster + "_pic_url"; 
+         ocl = this.varname + ".update_picurl();";
+         tmp += "<label for='"+lbl+"' > Picture URL: </label>";
+         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+ps+"' style='' onkeyup='"+ocl+"'  />";    
+
+       lbl = this.rungster + "_upic_frame_name";
         tmp = tmp + "<form id='"+this.spotid+"_upload_form' name='"+this.spotid+"_upload_form_name' method='post' enctype='multipart/form-data' action='uploader.php' target='"+lbl+"' style='display:inline;' >";
         tmp = tmp + "<input name='it' id='it' size='1' type='file' onChange='document."+this.spotid+"_upload_form_name.submit();"+this.varname+".pic_progress();'  >";
         tmp = tmp + "</form>";   
-
-	 lbl = this.rungster + "_pic_url"; 
-         ocl = this.varname + ".update_picurl();";
-         tmp += "<label for='"+lbl+"' > Picture Url: </label>";
-         tmp = tmp + "<input id='"+lbl+"' data-clear-btn='true' name='"+lbl+"' type='text' value='"+ps+"' style='' onkeyup='"+ocl+"'  />";    
 
 
         lbl = this.rungster + '_getpic';
         if (document.getElementById(lbl) != null) {  
           document.getElementById(lbl).innerHTML=tmp;
+    	  var ta = this.rungster + "_pic_url"; 
+          if (jqm_off == false) {
+            $('#'+ta).textinput();
+          }
         }
 
+}
+
+
+poster.prototype.update_picurl = function() {
+
+     var tmp="";
+     var pobj=null;
+     var lbl = "";
+     lbl = this.rungster + '_pic_url';
+     pobj = document.getElementById(lbl);
+     if (pobj != null ) {
+        var tv = pobj.value;
+       if ((tv != null) && (tv != undefined)) {
+           this.picurl = tv;
+           this.changed = true;
+	   this.pic_changed = true;
+           if (this.listype == "newbie") {
+              amare.newbielist[this.dadex].picurl = this.picurl;
+           }
+           daviewer.change_btns();
+        }
+        pobj.focus();
+     }
 }
 
 
@@ -84,7 +110,7 @@ poster.prototype.get_pic = function() {
         this.draw_pic();
         this.changed = true;
 	this.pic_changed = true;
-        this.change_btns();
+        daviewer.change_btns();
      }
    }
 }
