@@ -142,6 +142,9 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
+<script src=deskfm/google/google_feeder.js type="text/javascript" ></script>
+
+
 <script src=deskfm/preloader.js type="text/javascript" > </script>
 
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>

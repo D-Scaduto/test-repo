@@ -41,11 +41,13 @@ $con = mysql_connect("$Server", "$username", "$password");
       
       //echo $content->$i->link;
       $picURL = $content->$i->link;      
-      $story = $content->$i->image->contextLink;
+      $story = $content->$i->title;
+      $linkURL = $content->$i->image->contextLink;
       $ownerID = $content->$i->displayLink;
+
       $query = 'insert into `' . $tableName .'` ';
-      $query .= '(picurl, story, owner_id, change_date, webit_id) ';
-      $query .= "values ('$picURL' , '$story' , '$ownerID' , NOW(), UUID() )";
+      $query .= '(source,picurl, story, linkurl,owner_id, created_at, change_date, webit_id) ';
+      $query .= "values ('google','$picURL' , '$story' , '$linkURL', '$ownerID' , NOW(), NOW(), UUID() )";
       
       echo $query;
       mysql_query($query);

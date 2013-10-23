@@ -7,7 +7,8 @@ function feeder (pmenuid) {
    this.showing = false;
    this.menued = false;
    this.sterms = "standing desk";
-   this.twfeed = new tw_feeder();
+   this.twitter_feed = new tw_feeder();
+   this.google_feed = new google_feeder();
 }
 
 feeder.prototype.show = function() {
@@ -18,39 +19,51 @@ feeder.prototype.show = function() {
    var lbl = "";
    var ocl="";
 
-     tmp = tmp + "<div style='width:300px;display:inline-block;'  >";
-
       tmp = tmp + "<span style='width:150px;display:inline-block;vertical-align:middle;'  >";
       tmp = tmp + "<input type='text' name='s' data-inline='true' size=10 id='feed_string'  value='standing desk' style=''  >";
       tmp = tmp + "</span>";
 
-        ocl='louie.check_feed();';
+      if (main_shape == "wide") {
+         tmp += "<br>";
+      }
+
+      ocl='louie.check_twitter();';
       tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
       tmp = tmp + "<img src='deskfm/images/icons/twitter.png' class='' width='20px'  >";
       tmp = tmp + "</button>";
 
+      ocl='louie.check_google_images();';
+      tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+      tmp = tmp + "gimages";
+      tmp = tmp + "</button>";
+
+      ocl='louie.check_google_links();';
+      tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
+      tmp = tmp + "glinks";
+      tmp = tmp + "</button>";
+
+
+      if (main_shape == "wide") {
+         tmp += "<br>";
+      }
+ 
       tmp = tmp + "<div id='feed_btns' style='display:inline-block;vertical-align:middle;'  >";
       tmp = tmp + "</div>";
 
-     tmp = tmp + "</div>";
 
    lbl = this.spotid;
    if (document.getElementById(lbl) != null) {
       document.getElementById(lbl).innerHTML=tmp;
       this.showing = true;
       $('#'+lbl).trigger("create");
-      if (amare.unsavedlist.length ==  0) {
-         this.check_feed();
-      } else {
-         daviewer.load_unsaved_list(); 
-      } 
+      daviewer.load_unsaved_list(); 
    } 
 
 }
 
 
 
-feeder.prototype.check_feed = function() {
+feeder.prototype.check_twitter = function() {
 
    var lbl = "";
    var tmp = "";
@@ -58,7 +71,34 @@ feeder.prototype.check_feed = function() {
    lbl = 'feed_string';
    if (document.getElementById(lbl)!= null) {
       s = document.getElementById(lbl).value;
-      this.twfeed.get_live_tweets(s); 
+      this.twitter_feed.get_live_tweets(s); 
+   }
+
+}
+
+feeder.prototype.check_google_images = function() {
+
+   var lbl = "";
+   var tmp = "";
+   var s="";
+   lbl = 'feed_string';
+   if (document.getElementById(lbl)!= null) {
+      s = document.getElementById(lbl).value;
+      this.google_feed.get_images(s); 
+   }
+
+}
+
+
+feeder.prototype.check_google_links = function() {
+
+   var lbl = "";
+   var tmp = "";
+   var s="";
+   lbl = 'feed_string';
+   if (document.getElementById(lbl)!= null) {
+      s = document.getElementById(lbl).value;
+      this.google_feed.get_links(s); 
    }
 
 }

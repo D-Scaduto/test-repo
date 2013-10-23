@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <title>jquery-oembed explicit insert example</title>
+        <!--meta http-equiv="content-type" content="text/html; charset=utf-8"/-->    
+        
+        <script src="../lib/jquery-1.9.1.min.js" ></script>
+        <script type="text/javascript" src="../lib/jquery/jquery.oembed.js"></script>
+	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+  
+</head>
+<body>
+
+<!--blockquote class="twitter-tweet"><a href="http://twitter.com/coffee_dad/status/287348974577385474">link</a></blockquote-->
+
+<!--blockquote class="twitter-tweet"><a href="http://twitter.com/duchessbelle/status/381051540577873924">link</a></blockquote-->
+
+
+ 
+
+<script type="text/javascript">
+
+ 
+
+        $(document).ready(function() {
+ //               $("#container").oembed("http://www.flickr.com/photos/14516334@N00/345009210/");
+     //            $("#container").oembed("https://api.twitter.com/1/statuses/oembed.json?id=99987117811302400");
+
+              $.getJSON("https://api.twitter.com/1/statuses/oembed.json?id=133640144317198338&align=center&callback=?", function(data)
+           {$('#container').html(data.html);
+          });
+
+//           twittr.widgets.load();
+        });
+</script>
+
+<!--script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script-->
+
+
+<div id="container"></div>
+</body>
+</html>

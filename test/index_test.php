@@ -15,11 +15,12 @@ header('Content-type: text/html; charset=utf-8 ');
   var netson = false;
   var is_ie = false;
   var jqm_off = false;
+
   var buddah = false;
   var pname = "";
+
   var is_mobile = false;
   var main_shape = "";
-  var twittr = null;
 </script>
 
 <?php
@@ -45,7 +46,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <?php   if (isset($_GET['jqmoff'])) {   ?>
 <script  type="text/javascript" >
    jqm_off = true;
-   main_shape = "mini";
 </script>
 
 <?php  } else {  ?>
@@ -135,7 +135,6 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/manager.js type="text/javascript" ></script>
 
 <script src=deskfm/twitter/tws_feeder.js type="text/javascript" ></script>
-<script src=deskfm/google/google_feeder.js type="text/javascript" ></script>
 
 <script src=deskfm/header.js type="text/javascript" ></script>
 <script src=deskfm/footer.js type="text/javascript" ></script>
@@ -146,7 +145,10 @@ header('Content-type: text/html; charset=utf-8 ');
 <script src=deskfm/calendor.js type="text/javascript" ></script>
 
 <script src=deskfm/preloader.js type="text/javascript" > </script>
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "6dfd7174-b092-4b88-938a-1288cdddc134", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
 
 </head>
 
@@ -156,15 +158,35 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <div id='page_spot' data-role='page' class='ui-page my-page' style='' >
  
-    <div id='head_spot' style='' class=''  data-position='fixed'  data-role='header' data-theme='b'  >
+    <div id='head_spot' style='' class=''   data-role='header'   >
 
-      <div id='menu_spot' style='' class='' >
-      </div>
-      <div style='clear:right;' ></div>
-      <div id='top_view' class='' style='float:right' data-role='popup'   >
-      </div>
-      <div id='' class='' style='clear:right;' ></div>
-    </div>
+        <ul id="menu-left" data-role="menu">
+            <li>
+               <span data-role="button" data-icon="arrow-d" data-iconpos="left"></span>
+               <ul data-role="listview" data-inset="true">
+                   <li data-icon="false"><a href="#A1">A1</a></li>
+                   <li data-icon="false"><a href="#A2">Option A2 is really long</a></li>
+                   <li data-icon="false"><a href="#logoutDialog" data-rel="dialog">Logout</a></li>
+               </ul>
+            </li>
+        </ul>
+        <ul id="menu-right" data-role="menu">
+            <li>
+                <span data-role="button" data-icon="arrow-d" data-iconpos="right">Actions</span>
+                <ul data-role="listview" data-inset="true">
+                    <li data-icon="false"><a href="#a1">Option B1</a></li>
+                       <li data-icon="false"><a href="#a1">Option B2</a></li>
+                </ul>
+            </li>
+        </ul>        
+        <h1>
+            <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true"></a>
+            <p id="txtSpan">Page One</p>
+            <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-inline="true"></a>
+        </h1>
+        <h2>second line of text</h2>
+    
+   </div>
 
     <div id='main_spot'  class=''  style=''   >
     </div>
@@ -176,7 +198,27 @@ header('Content-type: text/html; charset=utf-8 ');
 
 <script type='text/javascript' >
 
-  do_preload();
+/*
+  if (netson == true) {
+     FB.init({
+      appId  : '191528434226668',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true,  // parse XFBML
+      oauth  : true
+     });
+
+     // Load the SDK asynchronously
+     (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  }
+*/
+   do_preload();
 
         sal = new logoman("logo");
         ray = new footer("foot");
@@ -207,23 +249,16 @@ header('Content-type: text/html; charset=utf-8 ');
 
 	diego = new header();
 
-    if (jqm_off == false) {
-      $.mobile.popup.prototype.options.history = false;
-
       $(window).resize(function(val) {
           set_header();
           set_viewer();
       });
 
-//      $( document ).on( "pageinit", "#page_spot", function( event ) {
-      $( document).ready(function() {
+    $( document ).on( "pageinit", "#page_spot", function( event ) {
+          diego.show();
           set_header();
           set_viewer();
-      });
-    } else {
-       diego.show();
-       diego.set_topshape();
-    }
+    });
 
 
 /*

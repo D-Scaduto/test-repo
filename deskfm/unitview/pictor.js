@@ -106,10 +106,9 @@ poster.prototype.update_picurl = function() {
 
       if (doctmp.getElementById('tmp_extra') != null) {
         this.picurl = doctmp.getElementById('tmp_extra').innerHTML;
-
-        this.draw_pic();
-        this.changed = true;
+       this.changed = true;
 	this.pic_changed = true;
+         this.get_pic();
         daviewer.change_btns();
      }
    }

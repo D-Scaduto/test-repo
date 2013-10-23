@@ -340,7 +340,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-     alert(url);
+//     alert(url);
      $.getJSON(url,function(json) {
           daviewer.editing = false;
           amare.update_webit(json.pobj);
@@ -391,7 +391,7 @@ poster.prototype.clear = function() {
      this.embed_changed = false;   
      this.cat_changed = false;
      this.group_changed = false;
-     alert(url);
+//     alert(url);
      $.getJSON(url,function(json) {
            daviewer.editing = false;
           amare.update_webit(json.pobj);

@@ -27,6 +27,7 @@ function viewer (pscreen,pvarname) {
 
    this.zoom = false;
    this.editing = false;
+
    this.metro_spd=0;
    this.metro_dir="fwd";
  
@@ -143,7 +144,7 @@ viewer.prototype.draw_view = function() {
         $('#zoom_btns').trigger("create");
 
         ct = 0;
-         while (ct <= st) {
+         while (ct < st) {
            if (this.darungs[ct] != undefined) {
              vdex = this.darungs[ct].vdex;
 
@@ -184,13 +185,6 @@ viewer.prototype.draw_view = function() {
       this.share_btns();
      }
    }
-
-    if (this.zoom == true) {
-      if (twittr != null) {
-alert("here");
-        twittr.widgets.load();
-      }
-    }
 
     if (debug == true) {
        this.draw_debug();
@@ -330,7 +324,7 @@ viewer.prototype.change_btns = function() {
      var tmp = "";
      var lbl = "";
      var ocl="";
-     var ts = "";
+     var s = "";
 
       var e = eval("daviewer.darungs[0]");
       if (e == undefined) {
@@ -341,7 +335,9 @@ viewer.prototype.change_btns = function() {
       if (e == undefined) {
           return;
       }
-     
+    
+       s = "daviewer.darungs[0].postman";
+ 
           if (e.listype == "newbie") {
             ocl =  "amare.del_newbie();";
             tmp = tmp + "<button  id=''  onclick='"+ocl+"' >";
@@ -354,7 +350,7 @@ viewer.prototype.change_btns = function() {
             tmp = tmp + "</button>";
           }
 
-          if (this.listype == "people") {
+          if (e.listype == "people") {
 
               ocl = s+".update_person();";
               if (e.stored == false) {
@@ -401,6 +397,16 @@ viewer.prototype.change_btns = function() {
      if ( pobj != null) {
           pobj.innerHTML = tmp;
      }
+}
+
+
+viewer.prototype.toggle_oembed = function () {
+   if (this.oembed == true ) {
+       this.oembed = false;
+   } else {
+       this.oembed = true;
+   }
+   this.draw_view();
 }
 
 
