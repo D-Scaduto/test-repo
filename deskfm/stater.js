@@ -181,7 +181,8 @@ stater.prototype.update_stats = function (statobj) {
                 init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.load_random_list();
+//                 daviewer.load_random_list();
+                 daviewer.load_sorted_list();
              }
           }
       } else {
@@ -200,10 +201,8 @@ stater.prototype.update_webits = function(listobj) {
        if (listobj == undefined) {
 	       return;
        }
-
        var lstat = this.get_stat(listobj);
-
-       if (lstat != null) {
+      if (lstat != null) {
           lstat.last_chunk = listobj.dachunk;
           daviewer.update_stat(lstat);
        } 
@@ -242,11 +241,17 @@ stater.prototype.update_webits = function(listobj) {
 	         init_run = false;
                  this.total_sorted.last_chunk=0;
                  daviewer.update_stat(this.total_sorted);
-                 daviewer.load_random_list();
+               //  daviewer.load_random_list();
+                 daviewer.load_sorted_list();
                }
            }
       } else {
            daviewer.redraw_view();
+          if ((buddah == true) && (diego.bot_shape == "browse")) {
+            cater.show();
+          }
+
+
       }
     
 }  
@@ -692,7 +697,6 @@ stater.prototype.get_searchstat = function(sterms) {
 stater.prototype.get_catstat = function(tcat,tsubcat) {
 
      var ret = null;
-
      if ( (tcat == "all") || (tcat == ""))  {
 
 	  return this.total_sorted;
@@ -827,7 +831,7 @@ stater.prototype.get_webits = function() {
 
    var url='deskfm/dbase/get_webits.php';
    url = url + "?lim="+ da_limit;
-   var c = this.total_sorted.last_chunk; 
+   var c = parseInt(this.total_sorted.last_chunk); 
    if (c != -1) {
       c = c +1;
       url = url + "&chunk="+ c;
@@ -892,6 +896,11 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
    var url='deskfm/dbase/get_webits.php';
     url = url + "?lim="+ da_limit;
 
+    if (pstats.cat == "all") {
+       this.get_webits();      
+       return;
+    }
+
     if (pstats.cat != undefined ) {
        url = url + "&cat="+ pstats.cat;
     }
@@ -902,7 +911,7 @@ stater.prototype.get_unsorted = function(pstats,bgrnd) {
    var c = pstats.last_chunk;
       c = parseInt(c) +1;
       url = url + "&chunk="+ c;
- // alert(url);
+//  alert(url);
     $.getJSON(url,function(json) {
       amare.update_webits(json);
     });   

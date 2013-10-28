@@ -468,18 +468,12 @@ viewer.prototype.load_unsaved_list = function() {
 }
 
 
-
-
 viewer.prototype.load_random_list = function() {
 
    var ro = null;
    this.darungs = [];
 
-   var s = new stat();
-   s.lnum = 99;
-   s.cnum = 99;
-
-   this.stats = s;
+   this.stats = amare.total_webits;
 
    this.dalist = [];
     
@@ -493,7 +487,7 @@ viewer.prototype.load_random_list = function() {
    var mx = clone.length;
    var tls = [];
   
-   while (i<99) {
+   while (i<daviewer.top_end) {
        mx = clone.length;
        r = Math.floor((Math.random()*mx)+1);
        ro = clone[r];

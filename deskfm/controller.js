@@ -178,10 +178,8 @@ viewer.prototype.redraw_view = function() {
 
     if (this.stats != null) {
 
- // alert("sl=" + this.stats.listype + " bs=" + diego.bot_shape );
-
-         start = this.stats.last_chunk * da_limit;
-
+      var j =  parseInt(this.stats.last_chunk); 
+         start = j * da_limit;
          if (this.stats.listype == "webits" )  {
 
 	         if (this.stats.cat == "all") {
@@ -191,9 +189,8 @@ viewer.prototype.redraw_view = function() {
 		 }
 
          } else if (this.stats.listype == "unsorted") {
-
              var dt = new Object();
-             dt.month = "";
+             dt.month = "all";
              if (this.stats.month != undefined) {
 	       dt.month = this.stats.month;
 	       dt.year = this.stats.year;

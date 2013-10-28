@@ -30,7 +30,7 @@ subcat_provider.prototype.init = function () {
      this.sealist.push({'text':'why is more standing healthy ?', 'cat':'why','subcat':'health' });
      this.sealist.push({'text':'why do we have back pain ?', 'cat':'why','subcat':'back' });
      this.sealist.push({'text':'why not burn calories ?', 'cat':'why','subcat':'weight' });
-     this.sealist.push({'text':'why is it productive ?', 'cat':'why','subcat':'productive' });
+     this.sealist.push({'text':'why is it productive ?', 'cat':'why','subcat':'productivity' });
      this.sealist.push({'text':'why not stand up ?' ,'cat':'why','subcat':'anti' });
 
      this.sealist.push({'text':'how to standup desk ?', 'cat':'how','subcat':'howto' });

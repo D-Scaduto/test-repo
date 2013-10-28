@@ -110,7 +110,6 @@ logoman.prototype.change_vman = function () {
 
 
 logoman.prototype.waiting = function () {
-return;
    var lbl = "";
    var tmp = "";
    var tsrc = "";

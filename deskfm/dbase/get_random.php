@@ -20,8 +20,7 @@ include '../../config/names.php';
 }
 
   class bar {
-   public $dasql1;
-   public $dasql2;
+   public $dasql;
    public $dalist_len;
    public $dalist;
  }
@@ -43,9 +42,7 @@ $where = "";
 
    $some = false;
    $sql = "";
-   $sql= $sql . " ( SELECT  SQL_CALC_FOUND_ROWS *,'twitter' FROM dfm_tweets where cat != 'deleted' ) ";
-   $sql= $sql . " union ";
-   $sql= $sql .  "( SELECT *,'deskfm' FROM dfm_posts  ) order by rand() ";
+   $sql= $sql . " SELECT  SQL_CALC_FOUND_ROWS * FROM dfm_webits where cat != 'junk' and cat != '' order by rand() ";
   
    $sql= $sql . " LIMIT " . 0 . " , " . $limit;
  

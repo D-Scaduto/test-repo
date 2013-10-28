@@ -225,7 +225,7 @@ header('Content-type: text/html; charset=utf-8 ');
        diego.set_topshape();
     }
 
-
+    ray.show();
 /*
   var audiochannels = new Array();
   if (is_ie == false) { 

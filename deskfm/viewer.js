@@ -35,7 +35,6 @@ function viewer (pscreen,pvarname) {
 
 
 viewer.prototype.draw_view = function() {
-
     var tmpstr = "";
     var lbl = "";
     var ocl = "";
@@ -94,7 +93,48 @@ viewer.prototype.draw_view = function() {
         }
        ct = ct + 1;
       }
+
+    if ((this.stats != null) && (this.zoom == false))  {
+        if ((jqm_off == true)  || (this.is_mini == true) || (daviewer.zoom == true)) {
+           tmpstr += "<div>";
+        } else {
+            if (this.gridcols == 1) {
+              cls = '';
+            } else {
+              cls  = this.next_gridblock(cls);
+            }
+           tmpstr += "<li class='"+cls+"'  style='min-height:100px;vertical-align:top;padding:10px;white-space:normal;'  >";
+        }
+
+        var to = this.listdex + this.top_end;
+        var nomore = false;
+        ocl = "";
+        if (to < this.stats.lnum) {
+          ocl = "daviewer.goto_listdex("+to+");"
+        } else {
+          if (this.stats.lnum < this.stats.cnum) {
+              ocl = "daviewer.more();";
+          }
+          else { nomore = true; }
+        }
+        
+       if (nomore == false) {
+         tmpstr += "<a href='#' onclick='"+ocl+"' data-inline='true' data-role='button' data-mini='true' >";
+         tmpstr += "more </a>";
+       }
+       if (debug == true) {
+         tmpstr += "lnum= " + this.stats.lnum + "<br>";
+         tmpstr += "cnum= " + this.stats.cnum + "<br>";
+         tmpstr += "ldex= " + this.listdex ;
+       }
+        if ((jqm_off == true)  || (this.is_mini == true) || (daviewer.zoom == true)) {
+           tmpstr += "</div>";
+        } else {
+           tmpstr += "</li>";
+        }
+    }
  
+
     if ((jqm_off == true)  || (this.is_mini == true) || (daviewer.zoom==true)) {
       tmpstr=tmpstr+"</div>";
     } else {
@@ -136,6 +176,7 @@ viewer.prototype.draw_view = function() {
 
         tmpstr=tmpstr+"</div>";
      }
+
  
     lbl = this.screen;
  

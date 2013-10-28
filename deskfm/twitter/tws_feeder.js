@@ -2,7 +2,7 @@
 
 function tw_feeder () { 
 
-   this.varname = "louie.twfeed";
+   this.varname = "louie.twitter_feed";
    this.sterms = "standing desk";
 
    this.newest_date = "";
@@ -21,7 +21,7 @@ tw_feeder.prototype.draw_btns = function() {
    var dt = null;
       
      if (this.oldest_date != "") {
-        ocl='louie.twfeed.prev_set();';
+        ocl='louie.twitter_feed.prev_set();';
        tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
          tmp = tmp + "<img id='' src='deskfm/images/icons/left_arrow_circle.png'  class='menu_btn' >";
          tmp = tmp + "</button>";
@@ -51,7 +51,7 @@ tw_feeder.prototype.draw_btns = function() {
          tmp = tmp + dt.getMinutes();
          tmp = tmp + "</span>";
        }
-          ocl='louie.twfeed.next_set();';
+          ocl='louie.twitter_feed.next_set();';
           tmp = tmp + "<button  data-role='button' data-inline='true'  onclick='"+ocl+"' style='vertical-align:top;' data-mini='true'  >";
           tmp = tmp + "<img id='' src='deskfm/images/icons/right_arrow_circle.png'  class='menu_btn' >";
           tmp = tmp + "</button>";
@@ -94,17 +94,15 @@ tw_feeder.prototype.get_live_tweets  = function (qry_str) {
 
 
      $.getJSON(url,function(json) {
-        louie.twfeed.newest_twid = json.newest_twid;
-	louie.twfeed.newest_date = json.newest_date;
-        louie.twfeed.oldest_twid = json.oldest_twid;
-	louie.twfeed.oldest_date = json.oldest_date;
-	louie.twfeed.draw_btns();
+        louie.twitter_feed.newest_twid = json.newest_twid;
+	louie.twitter_feed.newest_date = json.newest_date;
+        louie.twitter_feed.oldest_twid = json.oldest_twid;
+	louie.twitter_feed.oldest_date = json.oldest_date;
+	louie.twitter_feed.draw_btns();
         amare.add_unsaved(json);
      }); 
 
 }
-
-
 
 
 
@@ -132,12 +130,12 @@ tw_feeder.prototype.next_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        louie.twfeed.newest_twid = json.newest_twid;
-	louie.twfeed.newest_date = json.newest_date;
-        louie.twfeed.oldest_twid = json.oldest_twid;
-	louie.twfeed.oldest_date = json.oldest_date;
+        louie.twitter_feed.newest_twid = json.newest_twid;
+	louie.twitter_feed.newest_date = json.newest_date;
+        louie.twitter_feed.oldest_twid = json.oldest_twid;
+	louie.twitter_feed.oldest_date = json.oldest_date;
 
-	louie.twfeed.draw_btns();
+	louie.twitter_feed.draw_btns();
 
         amare.add_unsaved(json);
 
@@ -169,12 +167,12 @@ tw_feeder.prototype.prev_set  = function () {
  
      $.getJSON(url,function(json) {
 
-        louie.twfeed.newest_twid = json.newest_twid;
-	louie.twfeed.newest_date = json.newest_date;
-        louie.twfeed.oldest_twid = json.oldest_twid;
-	louie.twfeed.oldest_date = json.oldest_date;
+        louie.twitter_feed.newest_twid = json.newest_twid;
+	louie.twitter_feed.newest_date = json.newest_date;
+        louie.twitter_feed.oldest_twid = json.oldest_twid;
+	louie.twitter_feed.oldest_date = json.oldest_date;
 
-	louie.twfeed.draw_btns();
+	louie.twitter_feed.draw_btns();
 
         amare.add_unsaved(json);
 

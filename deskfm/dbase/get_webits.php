@@ -99,6 +99,7 @@ $con = mysql_connect("$Server", "$username", "$password");
       if ($cat == "null") {
         $where = " where cat != '' and subcat != ''  ";
         $where = $where . " and cat != 'deleted' and cat != 'junk' ";
+        $rebar->cat = "all";
       } else {
         $where = " where cat = '" . $cat . "'";
         $rebar->cat = $cat;

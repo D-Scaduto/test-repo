@@ -106,14 +106,24 @@ rail.prototype.draw_raildata = function() {
       $('#slider-1').slider('refresh');
      }
 
-      tmp =   ln;
-      $('#slider-1-detail').html(tmp);
-/*
-      tmp =  "#" +  ld + " of " + ln;
-      $('#lcount_spot').html(tmp);
+     tmp =   ln;
+     $('#slider-1-detail').html(tmp);
 
-      tmp =  cn;
-      $('#mcount_spot').html(tmp);
+/*
+     if (daviewer.zoom == true) {
+       tmp =  "#" +  ld;
+     } else {
+       tmp =   st + " to " + fn;
+     }
+     $('#lcount_spot').html(tmp);
+
+     tmp = "";
+     tmp = " of " + ln;
+     if (ln < cn ) { 
+       tmp = tmp + "<a href='#' onclick='daviewer.more();' data-inline='true' data-role='button' data-mini='true' >more</a>";
+     }
+     $('#mcount_spot').html(tmp);
+     $('#mcount_spot').trigger("create");
 
       if (lchunks >=1) {
          $('#chunkslide_box').show();
@@ -132,6 +142,7 @@ rail.prototype.draw_raildata = function() {
          $('#chunkslide_box').hide();
       }
 */
+
    } else {
 //	   alert("no stats");
    }
